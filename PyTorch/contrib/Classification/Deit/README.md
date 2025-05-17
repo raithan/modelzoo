@@ -52,7 +52,7 @@ export ROOTDIR=<ModelZoo_path>/PyTorch/contrib/Classification/Deit
 
 1. 在构建好的环境中，进入训练脚本所在目录。
     ```
-    cd <ModelZoo_path>/PyTorch/contrib/Classification/deit/run_scripts
+    cd <ModelZoo_path>/PyTorch/contrib/Classification/Deit/run_scripts
     ```
 
 2. 运行训练。该模型支持单机单卡，或多机多卡训练
