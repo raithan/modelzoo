@@ -38,13 +38,14 @@ Deit 使用 ImageNet 数据集，该数据集为开源数据集，可从 [ImageN
     ```
     pip install -r requirements.txt
     ```
-> 请不要再requirements.txt中添加paddle和torch，添加其他x86上的依赖即可。
+> 请不要在requirements.txt中添加paddle和torch，添加其他x86上的依赖即可。
 3. 添加环境变量
 
 ```
 export TORCH_SDAA_AUTOLOAD=cuda_migrate
 export LD_LIBRARY_PATH=/root/miniconda3/envs/deit/lib/python3.10/site-packages/torch_sdaa/lib:$LD_LIBRARY_PATH
 export USER=your_user_name
+export ROOTDIR=/workspace/PyTorch/Classification/Cait
 ```
 
 ### 2.4 启动训练
