@@ -45,7 +45,7 @@ Deit 使用 ImageNet 数据集，该数据集为开源数据集，可从 [ImageN
 export TORCH_SDAA_AUTOLOAD=cuda_migrate
 export LD_LIBRARY_PATH=/root/miniconda3/envs/deit/lib/python3.10/site-packages/torch_sdaa/lib:$LD_LIBRARY_PATH
 export USER=your_user_name
-export ROOTDIR=/workspace/modelzoo/PyTorch/contrib/Classification/Deit
+export ROOTDIR=<ModelZoo_path>/PyTorch/contrib/Classification/Deit
 ```
 
 ### 2.4 启动训练
