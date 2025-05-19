@@ -45,7 +45,7 @@ cd <ModelZoo_path>/PyTorch/contrib/Classification/ResNeXt50_32x4d/run_scripts
 ```
 2. 运行训练. 该模型支持单机单卡, 或多机多卡训练
 ```shell
-python run_demo.py \
+python run_resnext50_32_4d.py \
 --dataset_path /data/teco-data/imagenet \
 --batch_size 32 \
 --epochs 1 \
@@ -57,7 +57,7 @@ python run_demo.py \
 ```
 或者使用:
 ```shell
-# cuda.sh 中的内容
+# 使用 cuad 进行训练
 python ../train.py \
     --dataset_path /root/data/imagenet \
     --batch_size 16 \
@@ -68,7 +68,7 @@ python ../train.py \
     --max_step 100 \
     --device cuda
 
-# sdaa.sh 中的内容
+# 使用 sdaa 设备进行训练
 python ../train.py \
     --dataset_path /data/teco-data/imagenet \
     --batch_size 32 \
