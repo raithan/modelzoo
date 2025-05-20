@@ -19,33 +19,28 @@ DeiT(Data-efficient image Transformers)是由Facebook AI Research于2021年提�
 
 ### 2.2 准备数据集
 #### 2.2.1 获取数据集
-Deit 使用 ImageNet 数据集，该数据集为开源数据集，可从 [ImageNet](https://image-net.org/) 下载
+Deit 使用 ImageNet 数据集，该数据集为开源数据集，可从 [ImageNet](https://image-net.org/) 下载。
 
 #### 2.2.2 处理数据集
-具体配置方式可参考：https://blog.csdn.net/xzxg001/article/details/142465729
+具体配置方式可参考：https://blog.csdn.net/xzxg001/article/details/142465729。
 
 
 ### 2.3 构建环境
 
-所使用的环境下已经包含PyTorch框架虚拟环境
+所使用的环境下已经包含PyTorch框架虚拟环境。
 1. 执行以下命令，启动虚拟环境。
     ```
     conda activate torch_env
     ```
-
->  当前提供给生态用户的环境已经包含paddle和torch框架，启动即可以使用。
-2. 安装python依赖
+2. 安装python依赖。
     ```
     pip install -r requirements.txt
+    pip install -e .
     ```
-> 请不要在requirements.txt中添加paddle和torch，添加其他x86上的依赖即可。
-3. 添加环境变量
+3. 添加环境变量。
 
 ```
 export TORCH_SDAA_AUTOLOAD=cuda_migrate
-export LD_LIBRARY_PATH=/root/miniconda3/envs/deit/lib/python3.10/site-packages/torch_sdaa/lib:$LD_LIBRARY_PATH
-export USER=your_user_name
-export ROOTDIR=<ModelZoo_path>/PyTorch/contrib/Classification/Deit
 ```
 
 ### 2.4 启动训练
@@ -55,7 +50,7 @@ export ROOTDIR=<ModelZoo_path>/PyTorch/contrib/Classification/Deit
     cd <ModelZoo_path>/PyTorch/contrib/Classification/Deit/run_scripts
     ```
 
-2. 运行训练。该模型支持单机单卡，或多机多卡训练
+2. 运行训练。该模型支持单机单卡。
 
     ```
     python run_demo.py \
