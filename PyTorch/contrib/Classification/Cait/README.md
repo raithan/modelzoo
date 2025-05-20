@@ -1,5 +1,5 @@
 
-# Deit
+# Cait
 ## 1. 模型概述
 CaiT (Class-Attention in Image Transformers) 是由Facebook AI Research于2021年提出的一种改进型视觉Transformer模型，专注于提升Transformer在图像分类任务中的训练稳定性和精度表现。通过引入类注意力机制（Class-Attention）与分层的训练深度策略（LayerScale 和 Talking-Heads Attention），CaiT能够有效地训练更深层的Transformer架构，在无需卷积结构的情况下实现与CNN竞争的性能表现。
 
@@ -57,13 +57,11 @@ export USER=your_user_name
 2. 运行训练。该模型支持单机单卡，或多机多卡训练
 
     ```
-    python run_demo.py \
+    python run_cait.py \
       --model cait_S24_224 \
       --data-path /data/teco-data/imagenet \
       --device sdaa\
       --epochs 100\
-      --ngpus 1 \
-      --nodes 1
    ```
     更多训练参数参考 run_scripts/argument.py 和 run_scripts/argument0.py
 

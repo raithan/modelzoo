@@ -24,23 +24,24 @@
 # WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
 # OF SUCH DAMAGE.
 
-from argument import parse_args
+from argument import get_args_parser
 import os
+import argparse
 from pathlib import Path
 
 if __name__ == "__main__":
-    args = parse_args()
+    parser = argparse.ArgumentParser('DeiT training and evaluation script', parents=[get_args_parser()])
+    args = parser.parse_args()
+    if args.output_dir:
+        Path(args.output_dir).mkdir(parents=True, exist_ok=True)
 
     os.chdir("..")
-    cmd = f"python run_with_submitit.py \
+    cmd = f"python train_demo.py \
         --model {args.model} \
         --data-path {args.data_path} \
         --device {args.device} \
         --epochs {args.epochs} \
-        --ngpus {args.ngpus} \
-        --nodes {args.nodes}"
-    
-    print(cmd)
+        --steps {args.steps}"
     
     import subprocess
     try:
