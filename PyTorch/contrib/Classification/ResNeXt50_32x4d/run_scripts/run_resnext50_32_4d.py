@@ -38,7 +38,7 @@ if __name__ == "__main__":
     --dataset_path {args.dataset_path} \
     --batch_size {args.batch_size} \
     --epochs {args.epochs} \ 
-    --lr {args.ls} \
+    --lr {args.lr} \
     --save_path {args.checkpoints} \
     --max_step {args.max_step} \
     --device {args.device}

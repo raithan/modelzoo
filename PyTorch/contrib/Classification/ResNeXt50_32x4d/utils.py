@@ -38,7 +38,7 @@ from tqdm import tqdm
 
 json_logger = Logger([
     StdOutBackend(Verbosity.DEFAULT),
-    JSONStreamBackend(Verbosity.VERBOSE, "cuda.log"),
+    JSONStreamBackend(Verbosity.VERBOSE, "log.json"),
 ])
 json_logger.metadata("train.loss", {"unit": "", "GOAL": "MINIMIZE", "STAGE": "TRAIN"})
 json_logger.metadata("train.ips", {"unit": "imgs/s", "format": ":.3f", "GOAL": "MAXIMIZE", "STAGE": "TRAIN"})

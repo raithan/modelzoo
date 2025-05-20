@@ -63,33 +63,33 @@ def compare_loss(benchmark_loss_array, sdaa_loss_array):
         return False, print_str
 
 
-# def parse_string(string):
-#     # 默认取rank 0 进行对比，这里根据情况修改
-#     pattern = r"rank : 0  train.loss : ([\d\.e-]+)"
-#     pattern1 = r"loss ([\d\.e-]+)"
-#     match = re.findall(pattern, string) or re.findall(pattern1, string)
-#     print("xxxxx", match)
-#     return match
-
-
 def parse_string(string):
-    # 提取 data 字段的 JSON 字符串
-    pattern = r'"data": "({.*?})"'
-    # 解析 JSON
-    data_match: List[str] = re.findall(pattern, string)
+    # 默认取rank 0 进行对比，这里根据情况修改
+    pattern = r"rank : 0  train.loss : ([\d\.e-]+)"
+    pattern1 = r"loss ([\d\.e-]+)"
+    match = re.findall(pattern, string) or re.findall(pattern1, string)
+    print("xxxxx", match)
+    return match
 
-    result = []
-    for data_str in data_match:
-        # 提取 rank
-        rank = re.search(r"'rank':\s*'([^']+)'", data_str).group(1)
-        # 提取 loss 值
-        loss_value = re.search(r"tensor\(([0-9.]+)", data_str).group(1)
 
-        rank = int(rank)
-        if rank == -1 or rank == 0:
-            result.append(float(loss_value))
+# def parse_string(string):
+#     # 提取 data 字段的 JSON 字符串
+#     pattern = r'"data": "({.*?})"'
+#     # 解析 JSON
+#     data_match: List[str] = re.findall(pattern, string)
 
-    return result
+#     result = []
+#     for data_str in data_match:
+#         # 提取 rank
+#         rank = re.search(r"'rank':\s*'([^']+)'", data_str).group(1)
+#         # 提取 loss 值
+#         loss_value = re.search(r"tensor\(([0-9.]+)", data_str).group(1)
+
+#         rank = int(rank)
+#         if rank == -1 or rank == 0:
+#             result.append(float(loss_value))
+
+#     return result
 
 
 def parse_loss(ret_list):
