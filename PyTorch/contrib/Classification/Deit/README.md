@@ -53,13 +53,11 @@ export TORCH_SDAA_AUTOLOAD=cuda_migrate
 2. 运行训练。该模型支持单机单卡。
 
     ```
-    python run_demo.py \
+    python run_deit.py \
      --model deit_base_patch16_224 \
      --data-path /data/teco-data/imagenet \
      --device sdaa\
      --epochs 100\
-     --ngpus 1 \
-     --nodes 1
    ```
     更多训练参数参考 run_scripts/argument.py 和 run_scripts/argument0.py
 
