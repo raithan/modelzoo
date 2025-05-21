@@ -38,7 +38,8 @@ def train_one_epoch(model: torch.nn.Module, criterion: DistillationLoss,
                     model_ema: Optional[ModelEma] = None, mixup_fn: Optional[Mixup] = None,
                     set_training_mode=True, args = None):
     model.train(set_training_mode)
-    
+    # metric_logger = utils.MetricLogger(delimiter="  ")
+    # metric_logger.add_meter('lr', utils.SmoothedValue(window_size=1, fmt='{value:.6f}'))
     if args.cosub:
         criterion = torch.nn.BCEWithLogitsLoss()
 
@@ -46,6 +47,9 @@ def train_one_epoch(model: torch.nn.Module, criterion: DistillationLoss,
     _time = time()
         
     for step, (samples, targets) in enumerate(data_loader):
+        if step > args.steps:
+            break
+        
         samples = samples.to(device, non_blocking=True)
         targets = targets.to(device, non_blocking=True)
 
@@ -57,7 +61,7 @@ def train_one_epoch(model: torch.nn.Module, criterion: DistillationLoss,
             
         if args.bce_loss:
             targets = targets.gt(0.0).type(targets.dtype)
-         
+        
         with amp.autocast():
             outputs = model(samples)
             if not args.cosub:
