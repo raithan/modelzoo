@@ -22,7 +22,7 @@ export TORCH_SDAA_AUTOLOAD=cuda_migrate
 
 #示例1: python run_resnet.py --nproc_per_node 4 --model_name resnet50 --epoch 1 --batch_size 32 --device sdaa --step 100 --datasets $dataset 2>&1 | tee sdaa.log
 #由于demo无需下载数据集及数据集太小所以未做step适配，正常场景参考示例1即可
-python run_deit.py --model deit_base_patch16_LS --data-path /data/teco-data/imagenet --device sdaa --batch-size 8 --lr 0.1 --epochs 1 --steps 100 2>&1 | tee sdaa.log
+python run_deit_III.py --model deit_base_patch16_LS --data-path /data/teco-data/imagenet --device sdaa --batch-size 8 --lr 0.1 --epochs 1 --steps 100 2>&1 | tee sdaa.log
 
 #生成loss对比图
 python loss.py --sdaa-log sdaa.log --cuda-log cuda.log
