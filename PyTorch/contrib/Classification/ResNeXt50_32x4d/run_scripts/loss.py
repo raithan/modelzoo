@@ -65,7 +65,7 @@ def compare_loss(benchmark_loss_array, sdaa_loss_array):
 
 def parse_string(string):
     # 默认取rank 0 进行对比，这里根据情况修改
-    pattern = r"rank : 0  train.loss : ([\d\.e-]+)"
+    pattern = r"rank : -1  train.loss : ([\d\.e-]+)"
     pattern1 = r"loss ([\d\.e-]+)"
     match = re.findall(pattern, string) or re.findall(pattern1, string)
     print("xxxxx", match)

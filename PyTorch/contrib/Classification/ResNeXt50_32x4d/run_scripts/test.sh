@@ -13,7 +13,7 @@ python run_resnext50_32_4d.py \
 --lr 0.01 \
 --amp \
 --save_path ../checkpoints \
---max_step 100
+--max_step 100 \
 --device sdaa \
 2>&1 | tee sdaa.log
 

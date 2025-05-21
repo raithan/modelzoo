@@ -33,21 +33,16 @@ if __name__ == "__main__":
     args = parse_args()
 
     os.chdir("..")
-    cmd = f"""
-    python train.py \
-    --dataset_path {args.dataset_path} \
-    --batch_size {args.batch_size} \
-    --epochs {args.epochs} \ 
-    --lr {args.lr} \
-    --save_path {args.checkpoints} \
-    --max_step {args.max_step} \
-    --device {args.device}
-    """
-    if args.get("amp", False):
-        cmd += "\ --amp"
+    cmd = (
+        f"python train.py --dataset_path {args.dataset_path} --batch_size {args.batch_size} --epochs {args.epochs} "
+        f"--lr {args.lr} --save_path {args.save_path} --max_step {args.max_step} --device {args.device} "
+    )
+    amp = getattr(args, "amp", False)
+    if amp:
+        cmd += "--amp"
 
     loguru.logger.info(f"将执行以下命令")
-    print(cmd)
+    loguru.logger.info(cmd)
 
     import subprocess
 
