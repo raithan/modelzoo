@@ -10,7 +10,7 @@ DeiT(Data-efficient image Transformers)是由Facebook AI Research于2021年提�
 使用本模型执行训练的主要流程如下：
 1. 基础环境安装：介绍训练前需要完成的基础环境检查和安装。
 2. 获取数据集：介绍如何获取训练所需的数据集。
-3. 构建环境：介绍如何构建模型运行所需要的环境
+3. 构建环境：介绍如何构建模型运行所需要的环境。
 4. 启动训练：介绍如何运行训练。
 
 ### 2.1 基础环境安装
@@ -38,10 +38,9 @@ Deit 使用 ImageNet 数据集，该数据集为开源数据集，可从 [ImageN
     pip install -e .
     ```
 3. 添加环境变量。
-
-```
-export TORCH_SDAA_AUTOLOAD=cuda_migrate
-```
+    ```
+    export TORCH_SDAA_AUTOLOAD=cuda_migrate
+    ```
 
 ### 2.4 启动训练
 
@@ -51,7 +50,6 @@ export TORCH_SDAA_AUTOLOAD=cuda_migrate
     ```
 
 2. 运行训练。该模型支持单机单卡。
-
     ```
     python run_deit.py \
      --model deit_base_patch16_224 \
@@ -59,7 +57,7 @@ export TORCH_SDAA_AUTOLOAD=cuda_migrate
      --device sdaa\
      --epochs 100\
    ```
-    更多训练参数参考 run_scripts/argument.py 和 run_scripts/argument0.py
+    更多训练参数参考 run_scripts/argument.py
 
 ### 2.5 训练结果
 输出训练loss曲线及结果（参考使用[loss.py](./run_scripts/loss.py)）: 
