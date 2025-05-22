@@ -37,7 +37,7 @@ from torch.utils.data.distributed import DistributedSampler
 
 # 加载模型
 from ResNeXt import create_ResNeXt50_32x4d
-from utils import collate_fn, evaluate, get_datasets, train_one_epoch, plot_training_curves
+from utils import collate_fn, evaluate, get_datasets, train_one_epoch
 
 
 def init_distributed_device(args):
@@ -153,8 +153,6 @@ def main(args):
     best_acc = 0.0
     global_step = 0
 
-    train_losses = []
-    train_accuracies = []
     val_losses = []
     val_accuracies = []
 
@@ -164,8 +162,7 @@ def main(args):
             train_sampler.set_epoch(epoch)
         # 记录训练时间
         start_time = time.time()
-        train_throughput = len(train_loader.dataset)  # 计算训练吞吐量
-        train_loss, train_acc = train_one_epoch(
+        train_one_epoch(
             model=model, optimizer=optimizer, scaler=scaler, data_loader=train_loader, device=device, epoch=epoch, args=args
         )
         scheduler.step()
@@ -185,8 +182,6 @@ def main(args):
             best_model_name = f"best_model_batchsize{batch_size}_lr{args.str_lr}.pth"
             latest_model_name = f"latest_model_batchsize{batch_size}_lr{args.str_lr}.pth"
 
-            train_losses.append(train_loss)
-            train_accuracies.append(train_acc)
             val_losses.append(val_loss)
             val_accuracies.append(val_acc)
 
@@ -200,11 +195,6 @@ def main(args):
                     best_acc = val_acc
                     torch.save(model.state_dict(), os.path.join(args.path, best_model_name))
                 torch.save(model.state_dict(), os.path.join(args.path, latest_model_name))
-
-    if args.local_rank == 0 and args.step < 0:
-        plot_training_curves(
-            train_losses, train_accuracies, val_losses, val_accuracies, epoch, args.save_path, batch_size, args.lr
-        )
 
 
 if __name__ == "__main__":
