@@ -64,7 +64,6 @@ def parse_string(string):
     pattern=r"rank : 0  train.loss : ([\d\.e-]+)"
     pattern1=r"loss ([\d\.e-]+)"
     match = re.findall(pattern, string)  or re.findall(pattern1, string)
-    print("xxxxx",match)
     return match
 
 def parse_loss(ret_list):
