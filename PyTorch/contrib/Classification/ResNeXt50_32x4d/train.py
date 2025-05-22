@@ -66,6 +66,8 @@ def init_distributed_device(args):
             device = torch.device("cuda")
         elif args.device == "sdaa":
             device = torch.device("sdaa")
+        elif args.device == "cpu":
+            device = torch.device("cpu")
         else:
             loguru.logger.error("This device type is not supported.")
             sys.exit(0)
