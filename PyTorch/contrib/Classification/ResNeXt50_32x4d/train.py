@@ -158,6 +158,9 @@ def main(args):
     val_losses = []
     val_accuracies = []
 
+    loss_function = torch.nn.CrossEntropyLoss(label_smoothing=0.1)
+    loss_function.to(device)
+
     loguru.logger.info(f"开始训练")
     for epoch in range(args.epochs):
         if args.local_rank != -1:
@@ -165,7 +168,7 @@ def main(args):
         # 记录训练时间
         start_time = time.time()
         train_one_epoch(
-            model=model, optimizer=optimizer, scaler=scaler, data_loader=train_loader, device=device, epoch=epoch, args=args
+            model=model, loss_function=loss_function, optimizer=optimizer, scaler=scaler, data_loader=train_loader, device=device, epoch=epoch, args=args
         )
         scheduler.step()
 

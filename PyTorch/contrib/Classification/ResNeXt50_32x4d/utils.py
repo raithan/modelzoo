@@ -73,12 +73,10 @@ def collate_fn(batch):
 
 
 
-def train_one_epoch(model, optimizer, scaler, data_loader, device, epoch, args):
+def train_one_epoch(model, loss_function, optimizer, scaler, data_loader, device, epoch, args):
     model.train()
-    loss_function = torch.nn.CrossEntropyLoss(label_smoothing=0.1)
     optimizer.zero_grad()
 
-    sample_num = 0
     global_step = 0
 
     _time = time()
@@ -95,11 +93,9 @@ def train_one_epoch(model, optimizer, scaler, data_loader, device, epoch, args):
 
         if args.amp and "sdaa" in args.device:
             with torch.sdaa.amp.autocast():
-                sample_num += images.shape[0]
                 pred = model(images)
                 loss = loss_function(pred, labels)
         else:
-            sample_num += images.shape[0]
             pred = model(images)
             loss = loss_function(pred, labels)
 
