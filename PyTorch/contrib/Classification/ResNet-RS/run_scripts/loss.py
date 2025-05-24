@@ -71,26 +71,6 @@ def parse_string(string):
     return match
 
 
-# def parse_string(string):
-#     # 提取 data 字段的 JSON 字符串
-#     pattern = r'"data": "({.*?})"'
-#     # 解析 JSON
-#     data_match: List[str] = re.findall(pattern, string)
-
-#     result = []
-#     for data_str in data_match:
-#         # 提取 rank
-#         rank = re.search(r"'rank':\s*'([^']+)'", data_str).group(1)
-#         # 提取 loss 值
-#         loss_value = re.search(r"tensor\(([0-9.]+)", data_str).group(1)
-
-#         rank = int(rank)
-#         if rank == -1 or rank == 0:
-#             result.append(float(loss_value))
-
-#     return result
-
-
 def parse_loss(ret_list):
     step_num = len(ret_list)
     loss_arr = np.zeros(shape=(step_num,))
