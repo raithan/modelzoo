@@ -2,8 +2,8 @@
 # NAFNet
 ## 1. 模型概述
 NAFNet（Nonlinear Activation Free Network for Image Restoration）是MEGVII Research与清华大学团队开发的一个计算机视觉（CV）领域的Transformer模型。该模型的核心思想为提出非线性激活函数自由网络（Nonlinear Activation Free Network, NAFNet），通过简化网络结构（如移除传统ReLU/GELU激活）实现高效计算，同时保持高性能。适用于通用图像复原任务，包括去噪（Denoising）、去模糊（Deblurring）、超分辨率（Super-Resolution）等。
-> **论文链接**：[Nonlinear Activation Free Network for Image Restoration](https://arxiv.org/abs/2204.04676)
-> **仓库链接**：https://github.com/megvii-research/NAFNet 
+> **论文链接**：[Nonlinear Activation Free Network for Image Restoration](https://arxiv.org/abs/2204.04676)  
+> **仓库链接**： https://github.com/megvii-research/NAFNet
 
 ## 2. 快速开始
 使用本模型执行训练的主要流程如下：
