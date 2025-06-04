@@ -35,8 +35,6 @@ PoolFormer 使用 ImageNet 数据集，该数据集为开源数据集，可从 [
 2. 安装python依赖。
     ```
     pip install -r requirements.txt
-    pip install git+https://github.com/rwightman/pytorch-image-models.git@9d6aad44f8fd32e89e5cca503efe3ada5071cc2a
-    pip install git+https://gitee.com/xiwei777/tcap_dllogger.git
     ```
 3. 添加环境变量。
 

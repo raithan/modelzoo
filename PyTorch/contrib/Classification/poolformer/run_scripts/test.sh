@@ -5,8 +5,6 @@ echo $script_path
 #安装依赖
 pip3 install -r ../requirements.txt
 cd ../
-pip install git+https://github.com/rwightman/pytorch-image-models.git@9d6aad44f8fd32e89e5cca503efe3ada5071cc2a
-pip install git+https://gitee.com/xiwei777/tcap_dllogger.git
 cd $script_path
 # 数据集路径,保持默认统一根目录即可
 data_path="/data/teco-data/imagenet"
