@@ -1,113 +1,83 @@
 # Vision Transformer
-Pytorch reimplementation of [Google's repository for the ViT model](https://github.com/google-research/vision_transformer) that was released with the paper [An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale](https://arxiv.org/abs/2010.11929) by Alexey Dosovitskiy, Lucas Beyer, Alexander Kolesnikov, Dirk Weissenborn, Xiaohua Zhai, Thomas Unterthiner, Mostafa Dehghani, Matthias Minderer, Georg Heigold, Sylvain Gelly, Jakob Uszkoreit, Neil Houlsby.
 
-This paper show that Transformers applied directly to image patches and pre-trained on large datasets work really well on image recognition task.
+## 1. 模型概述
+Vision Transformer（ViT）是2020年提出的一种将Transformer架构直接应用于图像分类任务的模型，旨在打破传统卷积神经网络（CNN）在视觉领域的主导地位。ViT将图像划分为固定大小的图像块（patch），并将其序列化后输入Transformer结构进行建模，从而捕捉全局依赖关系。通过完全基于注意力机制而非卷积操作，ViT展现出在大规模数据集上出色的性能，开创了视觉Transformer发展的新方向。
 
-![fig1](./img/figure1.png)
+- 论文链接：[[2010.11929\] An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale](https://arxiv.org/abs/2010.11929)
+- 仓库链接：[jeonsworld/ViT-pytorch: Pytorch reimplementation of the Vision Transformer (An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale)](https://github.com/jeonsworld/ViT-pytorch)
 
-Vision Transformer achieve State-of-the-Art in image recognition task with standard Transformer encoder and fixed-size patches. In order to perform classification, author use the standard approach of adding an extra learnable "classification token" to the sequence.
+## 2. 快速开始
+使用本模型执行训练的主要流程如下：
+1. 基础环境安装：介绍训练前需要完成的基础环境检查和安装。
+2. 获取数据集：介绍如何获取训练所需的数据集。
+3. 构建环境：介绍如何构建模型运行所需要的环境。
+4. 启动训练：介绍如何运行训练。
 
-![fig2](./img/figure2.png)
+### 2.1 基础环境安装
+
+请参考基础环境安装章节，完成训练前的基础环境检查和安装。
+
+### 2.2 准备数据集
+#### 2.2.1 获取数据集
+Vision Transformer 使用 Cifar 数据集，该数据集为开源数据集，可从 http://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz 下载。
+
+#### 2.2.2 处理数据集
+具体配置方式可参考：[CIFAR-10数据集（介绍、下载读取、可视化显示、另存为图片）_cifar10数据集-CSDN博客](https://blog.csdn.net/qq_40755283/article/details/125209463?ops_request_misc=%7B%22request%5Fid%22%3A%223aab7ab8bf44a13c53ce39786533e422%22%2C%22scm%22%3A%2220140713.130102334..%22%7D&request_id=3aab7ab8bf44a13c53ce39786533e422&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-125209463-null-null.142^v102^pc_search_result_base6&utm_term=Cifar &spm=1018.2226.3001.4187)。
 
 
-## Usage
-### 1. Download Pre-trained model (Google's Official Checkpoint)
-* [Available models](https://console.cloud.google.com/storage/vit_models/): ViT-B_16(**85.8M**), R50+ViT-B_16(**97.96M**), ViT-B_32(**87.5M**), ViT-L_16(**303.4M**), ViT-L_32(**305.5M**), ViT-H_14(**630.8M**)
-  * imagenet21k pre-train models
-    * ViT-B_16, ViT-B_32, ViT-L_16, ViT-L_32, ViT-H_14
-  * imagenet21k pre-train + imagenet2012 fine-tuned models
-    * ViT-B_16-224, ViT-B_16, ViT-B_32, ViT-L_16-224, ViT-L_16, ViT-L_32
-  * Hybrid Model([Resnet50](https://github.com/google-research/big_transfer) + Transformer)
-    * R50-ViT-B_16
+### 2.3 构建环境
+
+所使用的环境下已经包含PyTorch框架虚拟环境。
+1. 执行以下命令，启动虚拟环境。
+    ```
+    conda activate torch_env
+    ```
+2. 安装python依赖。
+    ```
+    pip install -r requirements.txt
+    ```
+3. 添加环境变量。
+
 ```
-# imagenet21k pre-train
-wget https://storage.googleapis.com/vit_models/imagenet21k/{MODEL_NAME}.npz
-
-# imagenet21k pre-train + imagenet2012 fine-tuning
-wget https://storage.googleapis.com/vit_models/imagenet21k+imagenet2012/{MODEL_NAME}.npz
+export TORCH_SDAA_AUTOLOAD=cuda_migrate
+```
+4. 下载预训练权重。
 
 ```
-
-### 2. Train Model
-```
-python3 train.py --name cifar10-100_500 --dataset cifar10 --model_type ViT-B_16 --pretrained_dir checkpoint/ViT-B_16.npz
-```
-CIFAR-10 and CIFAR-100 are automatically download and train. In order to use a different dataset you need to customize [data_utils.py](./utils/data_utils.py).
-
-The default batch size is 512. When GPU memory is insufficient, you can proceed with training by adjusting the value of `--gradient_accumulation_steps`.
-
-Also can use [Automatic Mixed Precision(Amp)](https://nvidia.github.io/apex/amp.html) to reduce memory usage and train faster
-```
-python3 train.py --name cifar10-100_500 --dataset cifar10 --model_type ViT-B_16 --pretrained_dir checkpoint/ViT-B_16.npz --fp16 --fp16_opt_level O2
+cd checkpoint
+wget https://storage.googleapis.com/vit_models/imagenet21k/ViT-B_16.npz
 ```
 
+### 2.4 启动训练
 
+1. 在构建好的环境中，进入训练脚本所在目录。
+    ```
+    cd <ModelZoo_path>/PyTorch/contrib/Classification/ViT-pytorch/run_scripts
+    ```
 
-## Results
-To verify that the converted model weight is correct, we simply compare it with the author's experimental results. We trained using mixed precision, and `--fp16_opt_level` was set to O2.
+2. 运行训练。该模型支持单机单卡。
 
-### imagenet-21k
-* [**tensorboard**](https://tensorboard.dev/experiment/Oz9GmmQIQCOEr4xbdr8O3Q)
+    ```
+    python train.py \
+     --name cifar10-100_500 \
+     --dataset cifar10 \
+     --model_type ViT-B_16 \
+     --pretrained_dir checkpoint/ViT-B_16.npz \
+     --train_batch_size 64 \
+     --fp16_opt_level 01 \
+    --num_steps 100
+   ```
+    更多训练参数参考 run_scripts/argument.py，数据集路径设置参考 utils/data_utils.py。
 
-|    model     |  dataset  | resolution | acc(official) | acc(this repo) |  time   |
-|:------------:|:---------:|:----------:|:-------------:|:--------------:|:-------:|
-|   ViT-B_16   | CIFAR-10  |  224x224   |       -       |     0.9908     | 3h 13m  |
-|   ViT-B_16   | CIFAR-10  |  384x384   |    0.9903     |     0.9906     | 12h 25m |
-|   ViT_B_16   | CIFAR-100 |  224x224   |       -       |     0.923      |  3h 9m  |
-|   ViT_B_16   | CIFAR-100 |  384x384   |    0.9264     |     0.9228     | 12h 31m |
-| R50-ViT-B_16 | CIFAR-10  |  224x224   |       -       |     0.9892     | 4h 23m  |
-| R50-ViT-B_16 | CIFAR-10  |  384x384   |     0.99      |     0.9904     | 15h 40m |
-| R50-ViT-B_16 | CIFAR-100 |  224x224   |       -       |     0.9231     | 4h 18m  |
-| R50-ViT-B_16 | CIFAR-100 |  384x384   |    0.9231     |     0.9197     | 15h 53m |
-|   ViT_L_32   | CIFAR-10  |  224x224   |       -       |     0.9903     | 2h 11m  |
-|   ViT_L_32   | CIFAR-100 |  224x224   |       -       |     0.9276     |  2h 9m  |
-|   ViT_H_14   | CIFAR-100 |  224x224   |       -       |      WIP       |         |
+### 2.5 训练结果
+输出训练loss曲线及结果（参考使用[loss.py](./run_scripts/loss.py)）: 
 
+![loss](./images/loss.jpg)
 
-### imagenet-21k + imagenet2012
-* [**tensorboard**](https://tensorboard.dev/experiment/CXOzjFRqTM6aLCk0jNXgAw/#scalars)
+MeanRelativeError: 0.0013006236212555371
 
-|    model     |  dataset  | resolution |  acc   |
-|:------------:|:---------:|:----------:|:------:|
-| ViT-B_16-224 | CIFAR-10  |  224x224   |  0.99  |
-| ViT_B_16-224 | CIFAR-100 |  224x224   | 0.9245 |
-|   ViT-L_32   | CIFAR-10  |  224x224   | 0.9903 |
-|   ViT-L_32   | CIFAR-100 |  224x224   | 0.9285 |
+MeanAbsoluteError: 0.0018261265754699707
 
+Rule,mean_relative_error 0.0013006236212555371
 
-### shorter train
-* In the experiment below, we used a resolution size (224x224).
-* [**tensorboard**](https://tensorboard.dev/experiment/lpknnMpHRT2qpVrSZi10Ag/#scalars)
-
-|  upstream   |  model   |  dataset  | total_steps /warmup_steps | acc(official) | acc(this repo) |
-|:-----------:|:--------:|:---------:|:-------------------------:|:-------------:|:--------------:|
-| imagenet21k | ViT-B_16 | CIFAR-10  |          500/100          |    0.9859     |     0.9859     |
-| imagenet21k | ViT-B_16 | CIFAR-10  |         1000/100          |    0.9886     |     0.9878     |
-| imagenet21k | ViT-B_16 | CIFAR-100 |          500/100          |    0.8917     |     0.9072     |
-| imagenet21k | ViT-B_16 | CIFAR-100 |         1000/100          |    0.9115     |     0.9216     |
-
-
-## Visualization
-The ViT consists of a Standard Transformer Encoder, and the encoder consists of Self-Attention and MLP module.
-The attention map for the input image can be visualized through the attention score of self-attention.
-
-Visualization code can be found at [visualize_attention_map](./visualize_attention_map.ipynb).
-
-![fig3](./img/figure3.png)
-
-
-## Reference
-* [Google ViT](https://github.com/google-research/vision_transformer)
-* [Pytorch Image Models(timm)](https://github.com/rwightman/pytorch-image-models)
-
-
-## Citations
-
-```bibtex
-@article{dosovitskiy2020,
-  title={An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale},
-  author={Dosovitskiy, Alexey and Beyer, Lucas and Kolesnikov, Alexander and Weissenborn, Dirk and Zhai, Xiaohua and Unterthiner, Thomas and  Dehghani, Mostafa and Minderer, Matthias and Heigold, Georg and Gelly, Sylvain and Uszkoreit, Jakob and Houlsby, Neil},
-  journal={arXiv preprint arXiv:2010.11929},
-  year={2020}
-}
-```
+pass mean_relative_error=0.0013006236212555371 <= 0.05 or mean_absolute_error=0.0018261265754699707 <= 0.0002

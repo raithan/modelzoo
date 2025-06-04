@@ -1,6 +1,8 @@
 # coding=utf-8
+# Adapted to tecorigin hardware。
 from __future__ import absolute_import, division, print_function
 
+import time
 import logging
 import argparse
 import os
@@ -14,8 +16,8 @@ import torch.distributed as dist
 
 from tqdm import tqdm
 from torch.utils.tensorboard import SummaryWriter
-from apex import amp
-from apex.parallel import DistributedDataParallel as DDP
+from torch.sdaa import amp
+from torch.nn.parallel import DistributedDataParallel as DDP
 
 from models.modeling import VisionTransformer, CONFIGS
 from utils.scheduler import WarmupLinearSchedule, WarmupCosineSchedule
@@ -25,6 +27,16 @@ from utils.dist_util import get_world_size
 from torch_sdaa.utils import cuda_migrate  # 使用torch_sdaa自动迁移方法
 
 logger = logging.getLogger(__name__)
+from tcap_dllogger import Logger, StdOutBackend, JSONStreamBackend, Verbosity
+
+json_logger = Logger(
+    [
+        StdOutBackend(Verbosity.DEFAULT),
+        JSONStreamBackend(Verbosity.VERBOSE,    'dlloger_example.json'),
+    ]
+)
+json_logger.metadata("train.loss", {"unit": "", "GOAL":    "MINIMIZE", "STAGE": "TRAIN"})
+json_logger.metadata("train.ips",{"unit": "imgs/s",    "format": ":.3f", "GOAL": "MAXIMIZE", "STAGE": "TRAIN"})
 
 
 class AverageMeter(object):
@@ -183,15 +195,17 @@ def train(args, model):
     model.zero_grad()
     set_seed(args)  # Added here for reproducibility (even between python 2 and 3)
     losses = AverageMeter()
+    batch_time_m = AverageMeter()
     global_step, best_acc = 0, 0
     while True:
         model.train()
-        epoch_iterator = tqdm(train_loader,
-                              desc="Training (X / X Steps) (loss=X.X)",
-                              bar_format="{l_bar}{r_bar}",
-                              dynamic_ncols=True,
-                              disable=args.local_rank not in [-1, 0])
-        for step, batch in enumerate(epoch_iterator):
+        # epoch_iterator = tqdm(train_loader,
+        #                       desc="Training (X / X Steps) (loss=X.X)",
+        #                       bar_format="{l_bar}{r_bar}",
+        #                       dynamic_ncols=True,
+        #                       disable=args.local_rank not in [-1, 0])
+        for step, batch in enumerate(train_loader):
+            batch_start_time = time.time()
             batch = tuple(t.to(args.device) for t in batch)
             x, y = batch
             loss = model(x, y)
@@ -215,18 +229,30 @@ def train(args, model):
                 optimizer.zero_grad()
                 global_step += 1
 
-                epoch_iterator.set_description(
-                    "Training (%d / %d Steps) (loss=%2.5f)" % (global_step, t_total, losses.val)
-                )
+                batch_time = time.time() - batch_start_time
+                batch_time_m.update(batch_time)
+
+                # epoch_iterator.set_description(
+                #     "Training (%d / %d Steps) (loss=%2.5f)" % (global_step, t_total, losses.val)
+                # )
                 if args.local_rank in [-1, 0]:
                     writer.add_scalar("train/loss", scalar_value=losses.val, global_step=global_step)
                     writer.add_scalar("train/lr", scalar_value=scheduler.get_lr()[0], global_step=global_step)
-                if global_step % args.eval_every == 0 and args.local_rank in [-1, 0]:
-                    accuracy = valid(args, model, writer, test_loader, global_step)
-                    if best_acc < accuracy:
-                        save_model(args, model)
-                        best_acc = accuracy
-                    model.train()
+                    json_logger.log(
+                        step=(int((global_step - 1) / t_total) + 1, step),
+                        data={
+                            "rank": os.environ.get("LOCAL_RANK", "0"),
+                            "train.loss": losses.val,
+                            "train.ips": x.size(0) * getattr(args, 'world_size', 1) / batch_time_m.val,
+                        },
+                        verbosity=Verbosity.DEFAULT,
+                    )
+                # if global_step % args.eval_every == 0 and args.local_rank in [-1, 0]:
+                #     accuracy = valid(args, model, writer, test_loader, global_step)
+                #     if best_acc < accuracy:
+                #         save_model(args, model)
+                #         best_acc = accuracy
+                #     model.train()
 
                 if global_step % t_total == 0:
                     break
@@ -309,11 +335,11 @@ def main():
     args.device = device
 
     # Setup logging
-    logging.basicConfig(format='%(asctime)s - %(levelname)s - %(name)s - %(message)s',
-                        datefmt='%m/%d/%Y %H:%M:%S',
-                        level=logging.INFO if args.local_rank in [-1, 0] else logging.WARN)
-    logger.warning("Process rank: %s, device: %s, n_gpu: %s, distributed training: %s, 16-bits training: %s" %
-                   (args.local_rank, args.device, args.n_gpu, bool(args.local_rank != -1), args.fp16))
+    # logging.basicConfig(format='%(asctime)s - %(levelname)s - %(name)s - %(message)s',
+    #                     datefmt='%m/%d/%Y %H:%M:%S',
+    #                     level=logging.INFO if args.local_rank in [-1, 0] else logging.WARN)
+    # logger.warning("Process rank: %s, device: %s, n_gpu: %s, distributed training: %s, 16-bits training: %s" %
+    #                (args.local_rank, args.device, args.n_gpu, bool(args.local_rank != -1), args.fp16))
 
     # Set seed
     set_seed(args)

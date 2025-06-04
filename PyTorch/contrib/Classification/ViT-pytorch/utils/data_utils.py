@@ -25,7 +25,6 @@ def get_loader(args):
         transforms.Normalize(mean=[0.5, 0.5, 0.5], std=[0.5, 0.5, 0.5]),
     ])
 
-    print(f"1111:{arg.dataset}")
     if args.dataset == "cifar10":
         trainset = datasets.CIFAR10(root="/data/teco-data/cifar10",
                                     train=True,
