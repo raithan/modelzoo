@@ -60,5 +60,8 @@ python run_resnest.py \
 ![loss](./run_scripts/loss.jpg)
 
 ```text
-
+MeanRelativeError: -0.20796918147870638
+MeanAbsoluteError: -2.525646529197693
+Rule,mean_absolute_error -2.525646529197693
+pass mean_relative_error=-0.20796918147870638 <= 0.05 or mean_absolute_error=-2.525646529197693 <= 0.0002
 ```
