@@ -1,4 +1,4 @@
-# ShiftViT
+# MultiTaskNet
 
 ## 1. 模型概述
 本目录包含了论文 PAMTRI: 使用高度随机化合成数据的姿态感知多任务学习用于车辆重识别（ICCV 2019）中多任务网络的官方 PyTorch 实现，主要对PAMTRI中MultiTaskNet进行部分修改。
