@@ -61,7 +61,7 @@ Deit 使用 ImageNet 数据集，该数据集为开源数据集，可从 [ImageN
 ### 2.5 训练结果
 输出训练loss曲线及结果（参考使用[loss.py](./run_scripts/loss.py)）: 
 
-![loss](./image/loss.jpg)
+![Loss](https://github.com/Tecorigin/modelzoo/blob/main/PyTorch/contrib/Classification/hivit/image/loss.jpg "Loss")
 
 MeanRelativeError:0.0012770268123607896
 MeanAbsoluteError:0.008181694710608756
