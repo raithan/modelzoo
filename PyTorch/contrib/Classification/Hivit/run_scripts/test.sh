@@ -3,7 +3,6 @@ script_path=$(dirname $(readlink -f "$0"))
 echo "当前脚本路径: $script_path"
 
 data_path="/data/teco-data/imagenet"
-data_path="/data02/imagenet"
 
 #安装依赖
 cd .. 
