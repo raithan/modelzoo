@@ -39,9 +39,11 @@ def train_one_epoch(model: torch.nn.Module, criterion: torch.nn.Module,
     step_in_epoch = 0   # [MOD] epoch内步数计数
     batch_start = time.time()  # [LOG] 用于第一个batch计时  
     for samples, targets in metric_logger.log_every(data_loader, print_freq, header):
+        #================================一百步迭代测试=============================
         if max_steps > 0 and (global_step + step_in_epoch) >= max_steps:
             print(f"Stopping at step {global_step + step_in_epoch} due to max_steps setting.")
             break
+        #==========================================================================
         samples = samples.to(device)
         targets = [{k: v.to(device) for k, v in t.items()} for t in targets]
 
