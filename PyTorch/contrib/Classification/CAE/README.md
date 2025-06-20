@@ -1,9 +1,10 @@
 # CAE
 ## 1. 模型概述
-Context Autoencoder（CAE）是一种面向下游任务设计的掩码图像建模（MIM）方法，通过重建图像上下文特征，提升模型对图像语义结构的理解能力。
+CAE 是一种基于 掩码图像建模（Masked Image Modeling, MIM） 的自监督学习方法，通过重建被随机掩码（遮挡）的图像区域，学习图像数据的通用表征。其核心目标是让模型从可见上下文（context）中推断缺失部分，从而捕捉高层语义特征。
 
-- 论文链接：[[2202.03026 \]]Context Autoencoder for Self-Supervised Representation Learning(https://arxiv.org/abs/2202.03026)
-- 仓库链接：https://github.com/open-mmlab/mmpretrain/tree/main/configs/CAE
+- 论文链接：[[2202.03026]]Context Autoencoder for Self-Supervised Representation Learning(https://arxiv.org/abs/2202.03026)
+- 仓库链接：https://github.com/open-mmlab/mmpretrain/tree/main/configs/cae
+
 
 ## 2. 快速开始
 使用本模型执行训练的主要流程如下：
@@ -18,11 +19,10 @@ Context Autoencoder（CAE）是一种面向下游任务设计的掩码图像建�
 
 ### 2.2 准备数据集
 #### 2.2.1 获取数据集
-Res2Net使用 ImageNet 数据集，该数据集为开源数据集，可从 [ImageNet](https://image-net.org/) 下载。
+CAE使用 ImageNet 数据集，该数据集为开源数据集，可从 [ImageNet](https://image-net.org/) 下载。
 
 #### 2.2.2 处理数据集
 具体配置方式可参考：https://blog.csdn.net/xzxg001/article/details/142465729。
-
 
 ### 2.3 构建环境
 
@@ -33,36 +33,31 @@ Res2Net使用 ImageNet 数据集，该数据集为开源数据集，可从 [Imag
     ```
 2. 安装python依赖。
     ```
-    git clone https://gitee.com/xiwei777/mmengine_sdaa.git 
-    cd mmengine_sdaa 
-    pip3 install -r requirements.txt 
+    pip3 install  -U openmim 
+    pip3 install git+https://gitee.com/xiwei777/mmengine_sdaa.git 
     pip3 install opencv_python mmcv --no-deps
-    python setup.py install 
-    cd .. 
-    git clone https://github.com/open-mmlab/mmpretrain
+    mim install -e .
     pip install -r requirements.txt
-    pip install -e .
     ```
-
 ### 2.4 启动训练
 
 1. 在构建好的环境中，进入训练脚本所在目录。
     ```
-    cd <ModelZoo_path>/PyTorch/contrib/Classification/Res2Net/run_scripts
+    cd <ModelZoo_path>/PyTorch/contrib/Classification/CAE/run_scripts
     ```
 
 2. 运行训练。该模型支持单机单卡。
     ```
-   torchrun --master_port=29500 ./run_cae.py ./cae/cae_beit-base-p16_8xb256-amp-coslr-300e_in1k.py --launcher pytorch --amp | tee sdaa.log
+   python run_cae.py --config ../configs/cae/cae_beit-base-p16_8xb256-amp-coslr-300e_in1k.py \
+    --launcher pytorch --nproc-per-node 4 --amp \
+    --cfg-options "train_dataloader.dataset.data_root=$data_path" 2>&1 | tee sdaa.log
    ```
     更多训练参数参考 run_scripts/argument.py
 
 ### 2.5 训练结果
 输出训练loss曲线及结果（参考使用[loss.py](./run_scripts/loss.py)）: 
 
-![loss_compare](./image/loss.jpg)
-
-MeanRelativeError: -0.0027313013092655825
-MeanAbsoluteError: -0.03529393196105957
-Rule,mean_absolute_error -0.03529393196105957
-pass mean_relative_error=-0.0027313013092655825 <= 0.05 or mean_absolute_error=-0.03529393196105957 <= 0.0002
+MeanRelativeError: -0.0027315133142877834
+MeanAbsoluteError: -0.035296697616577145
+Rule,mean_absolute_error -0.035296697616577145
+pass mean_relative_error=-0.0027315133142877834 <= 0.05 or mean_absolute_error=-0.035296697616577145 <= 0.0002
