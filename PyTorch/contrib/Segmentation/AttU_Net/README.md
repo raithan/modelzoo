@@ -2,7 +2,7 @@
 # **R2U-Net**
 ## 1. 模型概述  
 Attention U-Net针对医学图像中小目标器官（如胰腺）分割难题，在U-Net基础上引入门控注意力机制。其核心通过门控信号（Gating Signal） 控制跳跃连接中的特征权重，使解码器自适应聚焦目标区域，抑制无关背景噪声。创新点在于门控注意力模块，通过Softmax生成空间注意力权重图，精准定位目标器官的细微结构。该模型在胰腺CT分割任务中Dice系数比原U-Net提升4.1%，并扩展至多器官分割（心脏、肿瘤）与细胞图像处理，显著提升复杂背景下小目标的分割鲁棒性。 
-> **论文链接**：[Recurrent Residual Convolutional Neural Network based on U-Net (R2U-Net) for Medical Image Segmentation](https://arxiv.org/abs/1804.03999)  
+> **论文链接**：[Attention U-Net: Learning Where to Look for the Pancreas](https://arxiv.org/abs/1804.03999)  
 > **仓库链接**：https://github.com/LeeJunHyun/Image_Segmentation   
 
 ## 2. 快速开始  
