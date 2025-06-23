@@ -1,9 +1,9 @@
 # ConditionalDETR
 ## 1. 模型概述
-  DETR方法将Transformer编码器和解码器架构应用于目标检测，并取得了良好的性能。
+Conditional DETR 是为了加速原始 DETR 收敛而提出的一种改进方法,更快收敛、结构上仍端到端、无需 anchor/NMS、性能基本不打折，很适合想省训练时间的用户。
 
 - 论文链接：https://arxiv.org/abs/2108.06152
-- 仓库链接：https://github.com/Atten4Vis/ConditionalDETR
+- 仓库链接：https://github.com/open-mmlab/mmdetection/tree/main/configs/conditional_detr
 
 ## 2. 快速开始
 使用本模型执行训练的主要流程如下：
@@ -18,10 +18,10 @@
 
 ### 2.2 准备数据集
 #### 2.2.1 获取数据集
-ConditionalDETR 使用 COCO 数据集，该数据集为开源数据集，可从 [COCO](https://cocodataset.org/#download) 下载。
+<MODLE ConditionalDETR>使用 COCO2017 数据集，该数据集为开源数据集，可从 [COCO](https://cocodataset.org/#download) 下载。
 
 #### 2.2.2 处理数据集
-具体配置方式可参考：https://github.com/Atten4Vis/ConditionalDETR/blob/main/README.md。
+具体配置方式可参考：https://blog.csdn.net/xzxg001/article/details/142465729。
 
 
 ### 2.3 构建环境
@@ -33,25 +33,26 @@ ConditionalDETR 使用 COCO 数据集，该数据集为开源数据集，可从 
     ```
 2. 安装python依赖。
     ```
-    pip install -r requirements.txt
+    pip3 install  -U openmim 
+    pip3 install git+https://gitee.com/xiwei777/mmengine_sdaa.git 
+    pip3 install opencv_python mmcv --no-deps
+    mim install -e .
+    pip install -r requirements.txt 
     ```
-
 ### 2.4 启动训练
 1. 在构建好的环境中，进入训练脚本所在目录。
-    ```
-    cd <ModelZoo_path>/PyTorch/contrib/Detection/ConditoinalDETR/run_scripts
-    ```
-2. 运行训练。该模型支持单机单卡训练,支持分布式训练
-   ```
-     python -m torch.distributed.launch --nproc_per_node=4 --use_env run_ConditionalDETR.py --coco_path /data/teco-data/COCO --output_dir output/conddetr_r50_epoch50 2>&1 | tee sdaa.log
-   ```
+  ```
+  cd <ModelZoo_path>/PyTorch/contrib/Detection/ConditionalDETR/run_scripts
+  ```
+2. 运行训练。该模型支持单机单卡。
+  ```
+  python run_ConditionalDETR.py --config ../configs/conditional_detr/conditional-detr_r50_8xb2-50e_coco.py --launcher pytorch --nproc-per-node 1 --amp --cfg-options "train_dataloader.dataset.data_root=/data/teco-data/coco" "val_dataloader.dataset.data_root=/data/teco-data/coco"
+  ```
     更多训练参数参考 run_scripts/argument.py
-
 ### 2.5 训练结果
-输出训练结果（参考使用[loss.py](./run_scripts/loss.py)）: 
+输出训练loss曲线及结果（参考使用[loss.py](./run_scripts/loss.py)）: 
 
-
-MeanRelativeError: 0.009474825174738601
-MeanAbsoluteError: 0.2481804084777832
-Rule,mean_relative_error 0.009474825174738601
-pass mean_relative_error=0.009474825174738601 <= 0.05 or mean_absolute_error=0.2481804084777832 <= 0.0002
+MeanRelativeError: -0.0006055733387035155
+MeanAbsoluteError: -0.004272635620419342
+Rule,mean_absolute_error -0.004272635620419342
+pass mean_relative_error=-0.0006055733387035155 <= 0.05 or mean_absolute_error=-0.004272635620419342 <= 0.0002
