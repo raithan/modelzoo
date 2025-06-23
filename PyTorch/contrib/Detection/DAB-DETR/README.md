@@ -2,8 +2,8 @@
 ## 1. 模型概述
 DAB‑DETR 是对 DETR 的升级版本，提出用**动态锚框（dynamic anchor boxes）**作为 Transformer decoder 的 queries，目标是解决 DETR 收敛慢、需要大量训练轮次的问题。
 
-- 论文链接：
-- 仓库链接：
+- 论文链接：https://arxiv.org/abs/2201.12329
+- 仓库链接：https://github.com/open-mmlab/mmdetection/tree/main/configs/dab_detr
 
 ## 2. 快速开始
 使用本模型执行训练的主要流程如下：
