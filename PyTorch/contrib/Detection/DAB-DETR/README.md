@@ -1,9 +1,9 @@
-# ConditionalDETR
+# DAB-DETR
 ## 1. 模型概述
-Conditional DETR 是为了加速原始 DETR 收敛而提出的一种改进方法,更快收敛、结构上仍端到端、无需 anchor/NMS、性能基本不打折，很适合想省训练时间的用户。
+DAB‑DETR 是对 DETR 的升级版本，提出用**动态锚框（dynamic anchor boxes）**作为 Transformer decoder 的 queries，目标是解决 DETR 收敛慢、需要大量训练轮次的问题。
 
-- 论文链接：https://arxiv.org/abs/2108.06152
-- 仓库链接：https://github.com/open-mmlab/mmdetection/tree/main/configs/conditional_detr
+- 论文链接：
+- 仓库链接：
 
 ## 2. 快速开始
 使用本模型执行训练的主要流程如下：
@@ -18,7 +18,7 @@ Conditional DETR 是为了加速原始 DETR 收敛而提出的一种改进�
 
 ### 2.2 准备数据集
 #### 2.2.1 获取数据集
-<MODLE ConditionalDETR>使用 COCO2017 数据集，该数据集为开源数据集，可从 [COCO](https://cocodataset.org/#download) 下载。
+<MODLE DAB-DETR>使用 COCO2017 数据集，该数据集为开源数据集，可从 [COCO](https://cocodataset.org/#download) 下载。
 
 #### 2.2.2 处理数据集
 具体配置方式可参考：https://blog.csdn.net/xzxg001/article/details/142465729。
@@ -42,17 +42,17 @@ Conditional DETR 是为了加速原始 DETR 收敛而提出的一种改进�
 ### 2.4 启动训练
 1. 在构建好的环境中，进入训练脚本所在目录。
   ```
-  cd <ModelZoo_path>/PyTorch/contrib/Detection/ConditionalDETR/run_scripts
+  cd <ModelZoo_path>/PyTorch/contrib/Detection/DAB-DETR/run_scripts
   ```
 2. 运行训练。该模型支持单机单卡。
   ```
-  python run_ConditionalDETR.py --config ../configs/conditional_detr/conditional-detr_r50_8xb2-50e_coco.py --launcher pytorch --nproc-per-node 1 --amp --cfg-options "train_dataloader.dataset.data_root=/data/teco-data/coco" "val_dataloader.dataset.data_root=/data/teco-data/coco"
+  python run_DAB_DETR.py --config ../configs/dab_detr/dab-detr_r50_8xb2-50e_coco.py --launcher pytorch --nproc-per-node 1 --amp --cfg-options "train_dataloader.dataset.data_root=/data/teco-data/coco/" "val_dataloader.dataset.data_root=/data/teco-data/coco/" 2>&1 | tee sdaa.log
   ```
     更多训练参数参考 run_scripts/argument.py
 ### 2.5 训练结果
 输出训练loss曲线及结果（参考使用[loss.py](./run_scripts/loss.py)）: 
 
-MeanRelativeError: -0.0006055733387035155
-MeanAbsoluteError: -0.004272635620419342
-Rule,mean_absolute_error -0.004272635620419342
-pass mean_relative_error=-0.0006055733387035155 <= 0.05 or mean_absolute_error=-0.004272635620419342 <= 0.0002
+MeanRelativeError: 0.004901122376169345
+MeanAbsoluteError: -0.3235403251647949
+Rule,mean_absolute_error -0.3235403251647949
+pass mean_relative_error=0.004901122376169345 <= 0.05 or mean_absolute_error=-0.3235403251647949 <= 0.0002

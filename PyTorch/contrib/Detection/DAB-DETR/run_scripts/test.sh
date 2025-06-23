@@ -16,7 +16,7 @@ cd ..
 cd $script_path
 
 #执行训练
-python run_ConditionalDETR.py --config ../configs/conditional_detr/conditional-detr_r50_8xb2-50e_coco.py \
+python run_DAB_DETR.py --config ../configs/dab_detr/dab-detr_r50_8xb2-50e_coco.py \
     --launcher pytorch --nproc-per-node 1 --amp \
     --cfg-options "train_dataloader.dataset.data_root=$data_path" "val_dataloader.dataset.data_root=$data_path" 2>&1 | tee sdaa.log
 
