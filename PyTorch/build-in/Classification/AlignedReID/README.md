@@ -148,5 +148,13 @@ elif name == 'combined':
     --model_weight_file THE_DOWNLOADED_MODEL_WEIGHT_FILE
     ```
 
-    更多训练参数参考[README](README.md)
+### 2.5 训练结果
+
+输出训练loss曲线及结果(代码参考[get_loss.py](./get_loss.py))
+
+MeanRelativeError: 3.607480755653065
+MeanAbsoluteError: 0.016081666666666664
+Rule,mean_absolute_error 0.016081666666666664
+fail mean_relative_error=3.607480755653065 <= 0.05 or mean_absolute_error=0.016081666666666664 <= 0.0002
+
 
