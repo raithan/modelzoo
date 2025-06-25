@@ -1,9 +1,9 @@
-# ViTDet
+# DiffusioinDet
 ## 1. 模型概述
-ViTDet 是一种基于视觉Transformer（Vision Transformer，简称ViT）的检测模型，主要用于目标检测任务。它将传统的卷积神经网络（CNN）与Transformer架构结合起来，以充分利用两者的优势
+DiffusionDet 引入了**扩散模型（Diffusion Model）**思想，借助生成式模型强大的表达能力，采用反向扩散过程逐步“生成”检测框，提供了一种新的检测思路。
 
-- 论文链接：https://arxiv.org/abs/2203.16527
-- 仓库链接：https://github.com/open-mmlab/mmdetection/tree/main/projects/ViTDet
+- 论文链接：https://arxiv.org/abs/2211.09788
+- 仓库链接：https://github.com/open-mmlab/mmdetection/tree/main/projects/DiffusionDet
 
 ## 2. 快速开始
 使用本模型执行训练的主要流程如下：
@@ -18,7 +18,7 @@ ViTDet 是一种基于视觉Transformer（Vision Transformer，简称ViT）的�
 
 ### 2.2 准备数据集
 #### 2.2.1 获取数据集
-<MODLE ViTDet>使用 COCO2017 数据集，该数据集为开源数据集，可从 [COCO](https://cocodataset.org/#download) 下载。
+<MODLE DiffusionDet>使用 COCO2017 数据集，该数据集为开源数据集，可从 [COCO](https://cocodataset.org/#download) 下载。
 
 #### 2.2.2 处理数据集
 具体配置方式可参考：https://blog.csdn.net/xzxg001/article/details/142465729。
@@ -39,25 +39,20 @@ ViTDet 是一种基于视觉Transformer（Vision Transformer，简称ViT）的�
     mim install -e .
     pip install -r requirements.txt
     ```
-3. 下载预训练权重
-   ```
-   wget https://dl.fbaipublicfiles.com/mae/pretrain/vit_base_patch16_224.pth -O mae_pretrain_vit_base.pth 
-   ```
-
 ### 2.4 启动训练
 1. 在构建好的环境中，进入训练脚本所在目录。
   ```
-  cd <ModelZoo_path>/PyTorch/contrib/Detection/ViTDet/run_scripts
+  cd <ModelZoo_path>/PyTorch/contrib/Detection/DiffusioinDet/run_scripts
   ```
 2. 运行训练。该模型支持单机单卡。
   ```
-  python run_ViTDet.py --config ../projects/ViTDet/configs/vitdet_mask-rcnn_vit-b-mae_lsj-100e.py --launcher pytorch --nproc-per-node 1 --amp --cfg-options "train_dataloader.dataset.data_root=/data/teco-data/coco" "val_dataloader.dataset.data_root=/data/teco-data/coco"
+  python run_DiffusioinDet.py --config ../projects/DiffusioinDet/configs/diffusiondet_r50_fpn_500-proposals_1-step_crop-ms-480-800-450k_coco.py --launcher pytorch --nproc-per-node 1 --amp --cfg-options "train_dataloader.dataset.data_root=/data/teco-data/coco" "val_dataloader.dataset.data_root=/data/teco-data/coco"
   ```
     更多训练参数参考 run_scripts/argument.py
 ### 2.5 训练结果
 输出训练loss曲线及结果（参考使用[loss.py](./run_scripts/loss.py)）: 
 
-MeanRelativeError: -0.019998730426817938
-MeanAbsoluteError: -0.14312899947166444
-Rule,mean_absolute_error -0.14312899947166444
-pass mean_relative_error=-0.019998730426817938 <= 0.05 or mean_absolute_error=-0.14312899947166444 <= 0.0002
+MeanRelativeError: -0.012601468443809495
+MeanAbsoluteError: -0.9119894218444824
+Rule,mean_absolute_error -0.9119894218444824
+pass mean_relative_error=-0.012601468443809495 <= 0.05 or mean_absolute_error=-0.9119894218444824 <= 0.0002

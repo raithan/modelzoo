@@ -16,7 +16,7 @@ cd ..
 cd $script_path
 
 #执行训练
-python run_ViTDet.py --config ../projects/ViTDet/configs/vitdet_mask-rcnn_vit-b-mae_lsj-100e.py \
+python run_DiffusionDet.py --config ../projects/DiffusionDet/configs/diffusiondet_r50_fpn_500-proposals_1-step_crop-ms-480-800-450k_coco.py \
     --launcher pytorch --nproc-per-node 1 --amp \
     --cfg-options "train_dataloader.dataset.data_root=$data_path" "val_dataloader.dataset.data_root=$data_path" 2>&1 | tee sdaa.log
 

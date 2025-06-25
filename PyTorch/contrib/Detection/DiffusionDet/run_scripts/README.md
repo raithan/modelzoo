@@ -2,9 +2,9 @@
 
 参数名 | 解释 | 样例
 -----------------|-----------------|-----------------
-config | 配置文件。 | --config  ../projects/ViTDet/configs/vitdet_mask-rcnn_vit-b-mae_lsj-100e.py
+config | 配置文件。 | --config  ../projects/DiffusionDet/configs/diffusiondet_r50_fpn_500-proposals_1-step_crop-ms-480-800-450k_coco.py
 cfg-options | 动态覆盖配置文件。 | --cfg-options train_dataloader.dataset.data_root=xxx
-work-dir | 工作目录。 | --work-dir ./work_dirs/vitdet_mask-rcnn_vit-b-mae_lsj-100e
+work-dir | 工作目录。 | --work-dir ./work_dirs/diffusiondet_r50_fpn_500-proposals_1-step_crop-ms-480-800-450k_coco
 resume | 恢复训练。 | --resume auto
 amp | 是否使用amp。 | --amp
 no-validate | 是否验证。 | --no-validate
