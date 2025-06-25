@@ -16,7 +16,7 @@ cd ..
 cd $script_path
 
 #执行训练
-python run_EfficientDet.py --config ../projects/EfficientDet/configs/efficientdet_effb0_bifpn_8xb16-crop512-300e_coco.py \
+python run_ViTDet.py --config ../projects/ViTDet/configs/vitdet_mask-rcnn_vit-b-mae_lsj-100e.py \
     --launcher pytorch --nproc-per-node 1 --amp \
     --cfg-options "train_dataloader.dataset.data_root=$data_path" "val_dataloader.dataset.data_root=$data_path" 2>&1 | tee sdaa.log
 

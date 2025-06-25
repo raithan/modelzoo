@@ -2,9 +2,9 @@
 
 参数名 | 解释 | 样例
 -----------------|-----------------|-----------------
-config | 配置文件。 | --config  ../projects/EfficientDet/configs/efficientdet_effb0_bifpn_8xb16-crop512-300e_coco.py
+config | 配置文件。 | --config  ../projects/ViTDet/configs/vitdet_mask-rcnn_vit-b-mae_lsj-100e.py
 cfg-options | 动态覆盖配置文件。 | --cfg-options train_dataloader.dataset.data_root=xxx
-work-dir | 工作目录。 | --work-dir ./work_dirs/efficientdet_effb0_bifpn_8xb16-crop512-300e_coco
+work-dir | 工作目录。 | --work-dir ./work_dirs/vitdet_mask-rcnn_vit-b-mae_lsj-100e
 resume | 恢复训练。 | --resume auto
 amp | 是否使用amp。 | --amp
 no-validate | 是否验证。 | --no-validate

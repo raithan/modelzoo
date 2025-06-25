@@ -1,9 +1,9 @@
-# EfficientDet
+# ViTDet
 ## 1. 模型概述
-EfficientDet 是一种高效且轻量级的目标检测模型，最早由 Google Brain 在 2020 年提出。它的设计理念是在保证高精度的同时大幅降低模型参数量和计算量，非常适合边缘设备和对实时性有要求的场景。
+ViTDet 是一种基于视觉Transformer（Vision Transformer，简称ViT）的检测模型，主要用于目标检测任务。它将传统的卷积神经网络（CNN）与Transformer架构结合起来，以充分利用两者的优势
 
-- 论文链接：https://arxiv.org/pdf/1911.09070
-- 仓库链接：https://github.com/open-mmlab/mmdetection/tree/main/projects/EfficientDet
+- 论文链接：https://arxiv.org/abs/2203.16527
+- 仓库链接：https://github.com/open-mmlab/mmdetection/tree/main/projects/ViTDet
 
 ## 2. 快速开始
 使用本模型执行训练的主要流程如下：
@@ -18,7 +18,7 @@ EfficientDet 是一种高效且轻量级的目标检测模型，最早由 Google
 
 ### 2.2 准备数据集
 #### 2.2.1 获取数据集
-<MODLE EfficientDet>使用 COCO2017 数据集，该数据集为开源数据集，可从 [COCO](https://cocodataset.org/#download) 下载。
+<MODLE ViTDet>使用 COCO2017 数据集，该数据集为开源数据集，可从 [COCO](https://cocodataset.org/#download) 下载。
 
 #### 2.2.2 处理数据集
 具体配置方式可参考：https://blog.csdn.net/xzxg001/article/details/142465729。
@@ -39,20 +39,25 @@ EfficientDet 是一种高效且轻量级的目标检测模型，最早由 Google
     mim install -e .
     pip install -r requirements.txt
     ```
+3. 下载预训练权重
+   ```
+   wget https://dl.fbaipublicfiles.com/mae/pretrain/vit_base_patch16_224.pth -O mae_pretrain_vit_base.pth 
+   ```
+
 ### 2.4 启动训练
 1. 在构建好的环境中，进入训练脚本所在目录。
   ```
-  cd <ModelZoo_path>/PyTorch/contrib/Detection/EfficientDet/run_scripts
+  cd <ModelZoo_path>/PyTorch/contrib/Detection/ViTDet/run_scripts
   ```
 2. 运行训练。该模型支持单机单卡。
   ```
-  python run_EfficientDet.py --config ../projects/EfficientDet/configs/efficientdet_effb0_bifpn_8xb16-crop512-300e_coco.py --launcher pytorch --nproc-per-node 1 --amp --cfg-options "train_dataloader.dataset.data_root=/data/teco-data/coco" "val_dataloader.dataset.data_root=/data/teco-data/coco"
+  python run_ViTDet.py --config ../projects/ViTDet/configs/vitdet_mask-rcnn_vit-b-mae_lsj-100e.py --launcher pytorch --nproc-per-node 1 --amp --cfg-options "train_dataloader.dataset.data_root=/data/teco-data/coco" "val_dataloader.dataset.data_root=/data/teco-data/coco"
   ```
     更多训练参数参考 run_scripts/argument.py
 ### 2.5 训练结果
 输出训练loss曲线及结果（参考使用[loss.py](./run_scripts/loss.py)）: 
 
-MeanRelativeError: 0.2210767410210036
-MeanAbsoluteError: -0.10302028477191925
-Rule,mean_absolute_error -0.10302028477191925
-pass mean_relative_error=0.2210767410210036 <= 0.05 or mean_absolute_error=-0.10302028477191925 <= 0.0002
+MeanRelativeError: -0.019998730426817938
+MeanAbsoluteError: -0.14312899947166444
+Rule,mean_absolute_error -0.14312899947166444
+pass mean_relative_error=-0.019998730426817938 <= 0.05 or mean_absolute_error=-0.14312899947166444 <= 0.0002
