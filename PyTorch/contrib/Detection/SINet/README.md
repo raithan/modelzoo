@@ -50,7 +50,7 @@ SINet针对伪装目标检测（如与环境高度相似的生物/物体），�
 
     -  单机单卡
     ```
-   python run_SINet.py --epoch 2 --batchsize 36 --gpu 0 --train_img_dir /data/teco-data/COD10K_CAMO/TrainDataset/Image/ --train_gt_dir /data/teco-data/COD10K_CAMO/TrainDataset/GT/
+   python run_SINet.py --epoch 2 --batchsize 36 --gpu 0 --train_img_dir /data/teco-data/COD10K_CAMO/TrainDataset/Image/ --train_gt_dir /data/teco-data/COD10K_CAMO/TrainDataset/GT/ 2>&1 | tee sdaa.log
     
    ```
     更多训练参数参考[README](run_scripts/README.md)
