@@ -49,7 +49,7 @@ datasets.MNIST('../data', train=True, download=True, transform=transforms.ToTens
     -  单机单卡
     ```
    python run_vae.py \
-    2>&1 | tee $log_file
+    2>&1 | tee sdaa.log
     
    ```
     更多训练参数参考[README](run_scripts/README.md)
