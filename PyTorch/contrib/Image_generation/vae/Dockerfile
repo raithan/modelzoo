@@ -4,5 +4,5 @@ WORKDIR /workspace/
 ADD requirements.txt /workspace/
 RUN rm -rf /bin/sh && ln -s /bin/bash /bin/sh
 RUN source activate torch_env && pip install --no-cache-dir -r requirements.txt
-ADD . /workspace/Super_resulotion/vae/
-WORKDIR /workspace/Super_resulotion/vae/
+ADD . /workspace/Image_generation/vae/
+WORKDIR /workspace/Image_generation/vae/
