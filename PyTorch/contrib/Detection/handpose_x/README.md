@@ -48,7 +48,7 @@ handpose_x是一个轻量级实时手部关键点检测开源项目，基于PyTo
     --model resnet_50 \
     --epochs 1 \
     --train_path /data/teco-data/handpose_datasets_v1/ \
-    2>&1 | tee $log_file
+    2>&1 | tee sdaa.log
     
    ```
     更多训练参数参考[README](run_scripts/README.md)
