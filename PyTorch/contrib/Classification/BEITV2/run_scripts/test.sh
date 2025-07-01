@@ -16,8 +16,8 @@ pip3 install numpy==1.24.3
 cd $script_path
 
 
-python run_cae.py --config ../configs/cae/cae_beit-base-p16_8xb256-amp-coslr-300e_in1k.py \
+python run_beitv2.py --config ../configs/beitv2/beitv2_beit-base-p16_8xb256-amp-coslr-300e_in1k.py \
     --launcher pytorch --nproc-per-node 1 --amp \
-    --cfg-options "train_dataloader.dataset.data_root=$data_path"  2>&1 | tee sdaa.log
+    --cfg-options "train_dataloader.dataset.data_root=$data_path" 2>&1 | tee sdaa.log
 # 生成loss对比图
 python loss.py --sdaa-log sdaa.log --cuda-log cuda.log
