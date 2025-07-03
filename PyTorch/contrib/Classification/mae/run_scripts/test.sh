@@ -16,8 +16,8 @@ pip3 install numpy==1.24.3
 cd $script_path
 
 #执行训练
-python run_hivit.py --config ../configs/hivit/hivit-base-p16_16xb64_in1k.py \
-       --launcher pytorch --nproc-per-node 1 --amp \
-       --cfg-options "train_dataloader.dataset.data_root=/data/teco-data/imagenet" "val_dataloader.dataset.data_root=/data/teco-data/imagenet" 2>&1 | tee sdaa.log
+python run_mae.py --config ../configs/mae/mae_hivit-base-p16_8xb512-amp-coslr-400e_in1k.py \
+    --launcher pytorch --nproc-per-node 1 --amp \
+    --cfg-options "train_dataloader.dataset.data_root=$data_path"  2>&1 | tee sdaa.log
 # 生成loss对比图
 python loss.py --sdaa-log sdaa.log --cuda-log cuda.log
