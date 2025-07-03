@@ -1,9 +1,9 @@
-# Vgg
+# ResNext
 ## 1. 模型概述
-Vgg(Visual Geometry Group Network)是由牛津大学视觉几何组（Visual Geometry Group）提出的一种深度卷积神经网络（CNN），其核心思想是通过堆叠多个3×3小卷积核来构建深层网络，证明了网络深度对模型性能的重要性。VGG在2014年ImageNet图像分类竞赛（ILSVRC）中取得了优异成绩，成为深度学习领域的重要基准模型之一。
+ResNeXt（Residual Next）是由微软研究院于2016年提出的一种卷积神经网络架构，属于ResNet（残差网络）的改进版本。其核心思想是通过引入“分组卷积”和“基数（Cardinality）”的概念，在保持模型复杂度的同时显著提升特征表达能力，同时避免了传统增加深度或宽度带来的计算成本激增问题。
 
-- 论文链接：[[1409.1556v6\]]Very Deep Convolutional Networks for Large-Scale Image Recognition(https://arxiv.org/abs/1409.1556)
-- 仓库链接：https://github.com/open-mmlab/mmpretrain/tree/main/configs/vgg
+- 论文链接：[[1611.05431\]]Aggregated Residual Transformations for Deep Neural Networks(https://doi.org/10.48550/arXiv.1611.05431)
+- 仓库链接：https://github.com/open-mmlab/mmpretrain/tree/main/configs/resnext
 
 ## 2. 快速开始
 使用本模型执行训练的主要流程如下：
@@ -18,7 +18,7 @@ Vgg(Visual Geometry Group Network)是由牛津大学视觉几何组（Visual Geo
 
 ### 2.2 准备数据集
 #### 2.2.1 获取数据集
-Vgg 使用 ImageNet 数据集，该数据集为开源数据集，可从 [ImageNet](https://image-net.org/) 下载。
+ResNext 使用 ImageNet 数据集，该数据集为开源数据集，可从 [ImageNet](https://image-net.org/) 下载。
 
 #### 2.2.2 处理数据集
 具体配置方式可参考：https://blog.csdn.net/xzxg001/article/details/142465729。
@@ -45,12 +45,12 @@ Vgg 使用 ImageNet 数据集，该数据集为开源数据集，可从 [ImageNe
 
 1. 在构建好的环境中，进入训练脚本所在目录。
   ```
-  cd <ModelZoo_path>/PyTorch/contrib/Classification/VGG/run_scripts
+  cd <ModelZoo_path>/PyTorch/contrib/Classification/ResNext/run_scripts
   ```
 
 2. 运行训练。该模型支持单机单卡。
   ```
-  python run_vgg.py --config ../configs/vgg/vgg11_8xb32_in1k.py --launcher pytorch --nproc-per-node 1 --amp --cfg-options "train_dataloader.dataset.data_root=/data/teco-data/imagenet" "val_dataloader.dataset.data_root=/data/teco-data/imagenet"
+  python run_resnext.py --config ../configs/resnext/resnext50-32x4d_8xb32_in1k.py --launcher pytorch --nproc-per-node 1 --amp --cfg-options "train_dataloader.dataset.data_root=/data/teco-data/imagenet" "val_dataloader.dataset.data_root=/data/teco-data/imagenet"
   ```
     更多训练参数参考 run_scripts/argument.py
 

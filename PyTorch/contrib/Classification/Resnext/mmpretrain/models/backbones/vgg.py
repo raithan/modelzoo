@@ -158,7 +158,7 @@ class VGG(BaseBackbone):
             if i in self.out_indices:
                 outs.append(x)
         if self.num_classes > 0:
-            x = x.reshape(x.size(0), -1)
+            x = x.view(x.size(0), -1)
             x = self.classifier(x)
             outs.append(x)
 

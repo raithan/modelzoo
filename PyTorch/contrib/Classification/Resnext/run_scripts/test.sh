@@ -17,8 +17,8 @@ cd ..
 cd $script_path
 
 #执行训练
-python run_vgg.py --config ../configs/vgg/vgg11_8xb32_in1k.py \
-    --launcher pytorch --nproc-per-node 4 --amp \
+python run_resnext.py --config ../configs/resnext/resnext50-32x4d_8xb32_in1k.py \
+    --launcher pytorch --nproc-per-node 1 --amp \
     --cfg-options "train_dataloader.dataset.data_root=$data_path" "val_dataloader.dataset.data_root=$data_path" 2>&1 | tee sdaa.log
 
 # 生成loss对比图
