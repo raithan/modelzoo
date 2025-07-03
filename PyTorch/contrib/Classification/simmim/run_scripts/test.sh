@@ -16,8 +16,8 @@ pip3 install numpy==1.24.3
 cd $script_path
 
 #执行训练
-python run_beit.py --config ../configs/beit/benchmarks/beit-base-p16_8xb64_in1k.py \
+python run_simmim.py --config ../configs/simmim/simmim_swin-base-w6_8xb256-amp-coslr-100e_in1k-192px.py \
        --launcher pytorch --nproc-per-node 1 --amp \
-       --cfg-options "train_dataloader.dataset.data_root=/data/teco-data/imagenet" "val_dataloader.dataset.data_root=/data/teco-data/imagenet" 2>&1 | tee sdaa.log
+       --cfg-options "train_dataloader.dataset.data_root=/data/teco-data/imagenet" 2>&1 | tee sdaa.log
 # 生成loss对比图
 python loss.py --sdaa-log sdaa.log --cuda-log cuda.log

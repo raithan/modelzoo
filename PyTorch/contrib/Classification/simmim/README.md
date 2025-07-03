@@ -1,11 +1,10 @@
 
-# Beit
+# Simmim
 ## 1. 模型概述
-自监督视觉表征模型 BEiT，即双向编码器表征，它源自图像变换器 (Image Transformers)。借鉴自然语言处理领域中发展的 BERT，提出了一个带掩码的图像建模任务来预训练视觉变换器 (Vision Transformers)。在对 BEiT 进行预训练后，通过在预训练的编码器上附加任务层，直接在下游任务中微调模型参数。图像分类和语义分割的实验结果表明，这个模型取得了与以往预训练方法相当的成果。
+SimMIM，一个用于蒙版图像建模的简单框架，无需进行诸如分块蒙版和通过离散 VAE 或聚类进行标记化等特殊设计。使用 ViT-B，法通过在该数据集上进行预训练，在 ImageNet-1K 数据集上实现了 83.8% 的 top-1 微调准确率，比之前的最佳方法高出 0.6%。当将其应用于拥有约 6.5 亿个参数的更大规模模型 SwinV2H 时，仅使用 ImageNet-1K 数据，即可在 ImageNet-1K 上实现 87.1% 的 Top-1 准确率。
 
-
-- 论文链接：[2106.08254\]BEiT: BERT Pre-Training of Image Transformers Modeling(https://arxiv.org/abs/2106.08254)
-- 仓库链接：https://github.com/open-mmlab/mmpretrain/tree/main/configs/beit
+- 论文链接：[2111.09886\]SimMIM: A Simple Framework for Masked Image Modeling(https://arxiv.org/abs/2111.09886)
+- 仓库链接：https://github.com/open-mmlab/mmpretrain/tree/main/configs/simmim
 
 ## 2. 快速开始
 使用本模型执行训练的主要流程如下：
@@ -47,14 +46,14 @@ Deit 使用 ImageNet 数据集，该数据集为开源数据集，可从 [ImageN
 
 1. 在构建好的环境中，进入训练脚本所在目录。
     ```
-    cd <ModelZoo_path>/PyTorch/contrib/Classification/beit/run_scripts
+    cd <ModelZoo_path>/PyTorch/contrib/Classification/simmim/run_scripts
     ```
 
 2. 运行训练。该模型支持单机单卡。
     ```
-python run_beit.py --config ../configs/beit/benchmarks/beit-base-p16_8xb64_in1k.py \
+python run_simmim.py --config ../configs/simmim/simmim_swin-base-w6_8xb256-amp-coslr-100e_in1k-192px.py \
        --launcher pytorch --nproc-per-node 1 --amp \
-       --cfg-options "train_dataloader.dataset.data_root=/data/teco-data/imagenet" "val_dataloader.dataset.data_root=/data/teco-data/imagenet" 2>&1 | tee sdaa.log
+       --cfg-options "train_dataloader.dataset.data_root=/data/teco-data/imagenet" 2>&1 | tee sdaa.log
    ```
     更多训练参数参考 run_scripts/argument.py
 
@@ -63,9 +62,9 @@ python run_beit.py --config ../configs/beit/benchmarks/beit-base-p16_8xb64_in1k.
 
 ![loss](./image/loss.jpg)
 
-MeanRelativeError:-0.00012557125954236584
-MeanAbsoluteError:-0.001080687683407623
-Rule,mean_absolute_error：-0.001080687683407623
-passmean_relative_error=-0.00012557125954236584 <=0.05ormean_absolute_error=-0.001080687683407623<=0.0002
+MeanRelativeError:0.0019742962462511566
+MeanAbsoluteError:0.000976111629221699
+Rule,mean_absolute_error 0.000976111629221699
+passmean_relative_error=0.0019742962462511566 <=0.05 or mean_absolute_error=0.000976111629221699 <=0.0002
 
 
