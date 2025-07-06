@@ -1,0 +1,10 @@
+python main.py \
+  --model convnext_base \
+  --resume https://dl.fbaipublicfiles.com/convnext/convnext_base_22k_1k_224.pth \
+  --input_size 224 --drop_path 0.2 \
+  --data_path /data/teco-data/imagenet \
+  --device sdaa \
+  --batch_size 8 \
+  --num_workers 0 --pin_mem false \
+  --mixup 0 --cutmix 0 --reprob 0 \
+  --max_steps 10 --use_amp false
