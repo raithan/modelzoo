@@ -15,7 +15,7 @@ Before beginning, ensure your system meets the basic requirements outlined in th
 
 ### 2.2 Dataset Preparation
 ### 2.2.1 Download CIFAR-10 Dataset
-Resnet 使用 CIFAR-10 数据集，该数据集为开源数据集，可从 [CIFAR-10]https://www.cs.toronto.edu/~kriz/cifar.html 下载。
+The ResNet model uses the CIFAR-10 dataset, which is an open-source dataset available for download at [CIFAR-10](https://www.cs.toronto.edu/~kriz/cifar.html) 
 
 ### 2.3 Environment Setup
 The following steps assume you have a PyTorch-compatible environment
