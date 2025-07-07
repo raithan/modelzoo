@@ -22,7 +22,7 @@ ResNet（Residual Neural Network）是由微软研究院提出的一种深度残
 
 ### 2.2 准备数据集
 ### 2.2.1 准备数据集
-Resnet 使用 CIFAR-10 数据集，该数据集为开源数据集，可从 [CIFAR-10]https://www.cs.toronto.edu/~kriz/cifar.html 下载。
+Resnet 使用 CIFAR-10 数据集，该数据集为开源数据集，可从 [CIFAR-10](https://www.cs.toronto.edu/~kriz/cifar.html) 下载。
 
 ### 2.3 构建环境
 所使用的环境下已经包含PyTorch框架虚拟环境。
