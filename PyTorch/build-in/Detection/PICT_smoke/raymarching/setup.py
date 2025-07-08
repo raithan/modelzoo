@@ -8,7 +8,7 @@ USE_SDAA = os.environ.get("USE_SDAA", "0") == "1"
 if USE_SDAA:
     import torch, torch_sdaa
     from torch_sdaa.utils.cpp_extension import TecoExtension, BuildExtension, CleanExtension
-    print("***  SDAA  ****")
+    print("***  SDAA  ***")
     print(torch.utils.cpp_extension.include_paths())
     ext_name = '_raymarching_mob'
     setup(
@@ -32,7 +32,7 @@ if USE_SDAA:
     )
 
 else:
-    print("xxx  cuda  xxxx")
+    print("***  CUDA  ***")
     from torch.utils.cpp_extension import BuildExtension, CUDAExtension
 
     nvcc_flags = [
