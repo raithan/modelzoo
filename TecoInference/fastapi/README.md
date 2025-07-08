@@ -6,7 +6,7 @@ FastAPI 是一个现代、快速（高性能）的 Web 框架，用于构建 API
 ## 环境准备
 
 1. 请参考[基础环境安装](../../doc/Environment.md)，完成使用前的基础环境安装和检查。
-2. 安装FastAPI依赖
+2. 安装FastAPI依赖。
 
     ```bash
     conda activate tvm-build_py310
@@ -26,7 +26,7 @@ FastAPI 是一个现代、快速（高性能）的 Web 框架，用于构建 API
 
 ## 启动FastAPI推理服务
 
-请参考[模型支持列表](#模型支持列表)对应的README文档提前准备onnx权重和模型配置文件, 
+请参考[模型支持列表](#模型支持列表)对应的README文档提前准备ONNX权重和模型配置文件。
 
 1. 启动FastAPI服务
 
@@ -64,7 +64,7 @@ FastAPI 是一个现代、快速（高性能）的 Web 框架，用于构建 API
     | ------------- | ------------- |
     | model_name    | 模型名称, 参考模型支持列表 |
     | config_path   | 模型配置文件路径 |
-    | ip            | 启动服务的机器ip  |
+    | ip            | 启动服务的机器IP |
     | port          | 启动服务的端口号  |
-    | sentences_list   | 测试的句子列表, 可以参考模型支持列表对应README中的demo |
+    | sentences_list   | 测试的句子列表, 可以参考模型支持列表对应README中的demo示例 |
     | max_length   | 最大序列长度 |
