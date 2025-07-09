@@ -17,7 +17,7 @@ cd $script_path
 
 #执行训练
 python run_SCNet.py --config ../configs/scnet/scnet_r50_fpn_1x_coco.py \
-    --launcher pytorch --nproc-per-node 1  \
+    --launcher pytorch --nproc-per-node 1   \
     --cfg-options "train_dataloader.dataset.data_root=$data_path" "val_dataloader.dataset.data_root=$data_path" 2>&1 | tee sdaa.log
 
 # 生成loss对比图
