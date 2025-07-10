@@ -1,0 +1,956 @@
+| distributed init (rank 0): env://, gpu 0
+[07:33:19.867333] job dir: /home/01/raithan/mae
+[07:33:19.867440] Namespace(accum_iter=1,
+batch_size=64,
+blr=0.00015,
+data_path='/home/01/imagenet',
+device='cuda',
+dist_backend='nccl',
+dist_on_itp=False,
+dist_url='env://',
+distributed=True,
+epochs=800,
+gpu=0,
+input_size=224,
+local_rank=0,
+log_dir='./output_dir',
+lr=None,
+mask_ratio=0.75,
+min_lr=0.0,
+model='mae_vit_large_patch16',
+norm_pix_loss=True,
+num_workers=10,
+output_dir='./output_dir',
+pin_mem=True,
+rank=0,
+resume='',
+seed=0,
+start_epoch=0,
+warmup_epochs=40,
+weight_decay=0.05,
+world_size=1)
+/root/miniconda3/envs/vae/lib/python3.8/site-packages/torchvision/transforms/transforms.py:890: UserWarning: Argument interpolation should be of type InterpolationMode instead of int. Please, use InterpolationMode enum.
+  warnings.warn(
+[07:33:28.370900] Dataset ImageFolder
+    Number of datapoints: 1281167
+    Root location: /home/01/imagenet/train
+    StandardTransform
+Transform: Compose(
+               RandomResizedCrop(size=(224, 224), scale=(0.2, 1.0), ratio=(0.75, 1.3333), interpolation=bicubic)
+               RandomHorizontalFlip(p=0.5)
+               ToTensor()
+               Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
+           )
+[07:33:28.371676] Sampler_train = <torch.utils.data.distributed.DistributedSampler object at 0x7f0531c5e8e0>
+[07:33:34.225608] Model = MaskedAutoencoderViT(
+  (patch_embed): PatchEmbed(
+    (proj): Conv2d(3, 1024, kernel_size=(16, 16), stride=(16, 16))
+  )
+  (blocks): ModuleList(
+    (0): Block(
+      (norm1): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+      (attn): Attention(
+        (qkv): Linear(in_features=1024, out_features=3072, bias=True)
+        (attn_drop): Dropout(p=0.0, inplace=False)
+        (proj): Linear(in_features=1024, out_features=1024, bias=True)
+        (proj_drop): Dropout(p=0.0, inplace=False)
+      )
+      (drop_path): Identity()
+      (norm2): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+      (mlp): Mlp(
+        (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+        (act): GELU()
+        (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+        (drop): Dropout(p=0.0, inplace=False)
+      )
+    )
+    (1): Block(
+      (norm1): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+      (attn): Attention(
+        (qkv): Linear(in_features=1024, out_features=3072, bias=True)
+        (attn_drop): Dropout(p=0.0, inplace=False)
+        (proj): Linear(in_features=1024, out_features=1024, bias=True)
+        (proj_drop): Dropout(p=0.0, inplace=False)
+      )
+      (drop_path): Identity()
+      (norm2): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+      (mlp): Mlp(
+        (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+        (act): GELU()
+        (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+        (drop): Dropout(p=0.0, inplace=False)
+      )
+    )
+    (2): Block(
+      (norm1): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+      (attn): Attention(
+        (qkv): Linear(in_features=1024, out_features=3072, bias=True)
+        (attn_drop): Dropout(p=0.0, inplace=False)
+        (proj): Linear(in_features=1024, out_features=1024, bias=True)
+        (proj_drop): Dropout(p=0.0, inplace=False)
+      )
+      (drop_path): Identity()
+      (norm2): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+      (mlp): Mlp(
+        (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+        (act): GELU()
+        (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+        (drop): Dropout(p=0.0, inplace=False)
+      )
+    )
+    (3): Block(
+      (norm1): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+      (attn): Attention(
+        (qkv): Linear(in_features=1024, out_features=3072, bias=True)
+        (attn_drop): Dropout(p=0.0, inplace=False)
+        (proj): Linear(in_features=1024, out_features=1024, bias=True)
+        (proj_drop): Dropout(p=0.0, inplace=False)
+      )
+      (drop_path): Identity()
+      (norm2): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+      (mlp): Mlp(
+        (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+        (act): GELU()
+        (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+        (drop): Dropout(p=0.0, inplace=False)
+      )
+    )
+    (4): Block(
+      (norm1): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+      (attn): Attention(
+        (qkv): Linear(in_features=1024, out_features=3072, bias=True)
+        (attn_drop): Dropout(p=0.0, inplace=False)
+        (proj): Linear(in_features=1024, out_features=1024, bias=True)
+        (proj_drop): Dropout(p=0.0, inplace=False)
+      )
+      (drop_path): Identity()
+      (norm2): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+      (mlp): Mlp(
+        (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+        (act): GELU()
+        (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+        (drop): Dropout(p=0.0, inplace=False)
+      )
+    )
+    (5): Block(
+      (norm1): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+      (attn): Attention(
+        (qkv): Linear(in_features=1024, out_features=3072, bias=True)
+        (attn_drop): Dropout(p=0.0, inplace=False)
+        (proj): Linear(in_features=1024, out_features=1024, bias=True)
+        (proj_drop): Dropout(p=0.0, inplace=False)
+      )
+      (drop_path): Identity()
+      (norm2): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+      (mlp): Mlp(
+        (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+        (act): GELU()
+        (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+        (drop): Dropout(p=0.0, inplace=False)
+      )
+    )
+    (6): Block(
+      (norm1): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+      (attn): Attention(
+        (qkv): Linear(in_features=1024, out_features=3072, bias=True)
+        (attn_drop): Dropout(p=0.0, inplace=False)
+        (proj): Linear(in_features=1024, out_features=1024, bias=True)
+        (proj_drop): Dropout(p=0.0, inplace=False)
+      )
+      (drop_path): Identity()
+      (norm2): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+      (mlp): Mlp(
+        (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+        (act): GELU()
+        (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+        (drop): Dropout(p=0.0, inplace=False)
+      )
+    )
+    (7): Block(
+      (norm1): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+      (attn): Attention(
+        (qkv): Linear(in_features=1024, out_features=3072, bias=True)
+        (attn_drop): Dropout(p=0.0, inplace=False)
+        (proj): Linear(in_features=1024, out_features=1024, bias=True)
+        (proj_drop): Dropout(p=0.0, inplace=False)
+      )
+      (drop_path): Identity()
+      (norm2): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+      (mlp): Mlp(
+        (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+        (act): GELU()
+        (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+        (drop): Dropout(p=0.0, inplace=False)
+      )
+    )
+    (8): Block(
+      (norm1): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+      (attn): Attention(
+        (qkv): Linear(in_features=1024, out_features=3072, bias=True)
+        (attn_drop): Dropout(p=0.0, inplace=False)
+        (proj): Linear(in_features=1024, out_features=1024, bias=True)
+        (proj_drop): Dropout(p=0.0, inplace=False)
+      )
+      (drop_path): Identity()
+      (norm2): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+      (mlp): Mlp(
+        (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+        (act): GELU()
+        (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+        (drop): Dropout(p=0.0, inplace=False)
+      )
+    )
+    (9): Block(
+      (norm1): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+      (attn): Attention(
+        (qkv): Linear(in_features=1024, out_features=3072, bias=True)
+        (attn_drop): Dropout(p=0.0, inplace=False)
+        (proj): Linear(in_features=1024, out_features=1024, bias=True)
+        (proj_drop): Dropout(p=0.0, inplace=False)
+      )
+      (drop_path): Identity()
+      (norm2): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+      (mlp): Mlp(
+        (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+        (act): GELU()
+        (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+        (drop): Dropout(p=0.0, inplace=False)
+      )
+    )
+    (10): Block(
+      (norm1): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+      (attn): Attention(
+        (qkv): Linear(in_features=1024, out_features=3072, bias=True)
+        (attn_drop): Dropout(p=0.0, inplace=False)
+        (proj): Linear(in_features=1024, out_features=1024, bias=True)
+        (proj_drop): Dropout(p=0.0, inplace=False)
+      )
+      (drop_path): Identity()
+      (norm2): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+      (mlp): Mlp(
+        (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+        (act): GELU()
+        (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+        (drop): Dropout(p=0.0, inplace=False)
+      )
+    )
+    (11): Block(
+      (norm1): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+      (attn): Attention(
+        (qkv): Linear(in_features=1024, out_features=3072, bias=True)
+        (attn_drop): Dropout(p=0.0, inplace=False)
+        (proj): Linear(in_features=1024, out_features=1024, bias=True)
+        (proj_drop): Dropout(p=0.0, inplace=False)
+      )
+      (drop_path): Identity()
+      (norm2): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+      (mlp): Mlp(
+        (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+        (act): GELU()
+        (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+        (drop): Dropout(p=0.0, inplace=False)
+      )
+    )
+    (12): Block(
+      (norm1): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+      (attn): Attention(
+        (qkv): Linear(in_features=1024, out_features=3072, bias=True)
+        (attn_drop): Dropout(p=0.0, inplace=False)
+        (proj): Linear(in_features=1024, out_features=1024, bias=True)
+        (proj_drop): Dropout(p=0.0, inplace=False)
+      )
+      (drop_path): Identity()
+      (norm2): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+      (mlp): Mlp(
+        (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+        (act): GELU()
+        (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+        (drop): Dropout(p=0.0, inplace=False)
+      )
+    )
+    (13): Block(
+      (norm1): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+      (attn): Attention(
+        (qkv): Linear(in_features=1024, out_features=3072, bias=True)
+        (attn_drop): Dropout(p=0.0, inplace=False)
+        (proj): Linear(in_features=1024, out_features=1024, bias=True)
+        (proj_drop): Dropout(p=0.0, inplace=False)
+      )
+      (drop_path): Identity()
+      (norm2): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+      (mlp): Mlp(
+        (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+        (act): GELU()
+        (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+        (drop): Dropout(p=0.0, inplace=False)
+      )
+    )
+    (14): Block(
+      (norm1): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+      (attn): Attention(
+        (qkv): Linear(in_features=1024, out_features=3072, bias=True)
+        (attn_drop): Dropout(p=0.0, inplace=False)
+        (proj): Linear(in_features=1024, out_features=1024, bias=True)
+        (proj_drop): Dropout(p=0.0, inplace=False)
+      )
+      (drop_path): Identity()
+      (norm2): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+      (mlp): Mlp(
+        (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+        (act): GELU()
+        (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+        (drop): Dropout(p=0.0, inplace=False)
+      )
+    )
+    (15): Block(
+      (norm1): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+      (attn): Attention(
+        (qkv): Linear(in_features=1024, out_features=3072, bias=True)
+        (attn_drop): Dropout(p=0.0, inplace=False)
+        (proj): Linear(in_features=1024, out_features=1024, bias=True)
+        (proj_drop): Dropout(p=0.0, inplace=False)
+      )
+      (drop_path): Identity()
+      (norm2): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+      (mlp): Mlp(
+        (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+        (act): GELU()
+        (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+        (drop): Dropout(p=0.0, inplace=False)
+      )
+    )
+    (16): Block(
+      (norm1): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+      (attn): Attention(
+        (qkv): Linear(in_features=1024, out_features=3072, bias=True)
+        (attn_drop): Dropout(p=0.0, inplace=False)
+        (proj): Linear(in_features=1024, out_features=1024, bias=True)
+        (proj_drop): Dropout(p=0.0, inplace=False)
+      )
+      (drop_path): Identity()
+      (norm2): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+      (mlp): Mlp(
+        (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+        (act): GELU()
+        (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+        (drop): Dropout(p=0.0, inplace=False)
+      )
+    )
+    (17): Block(
+      (norm1): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+      (attn): Attention(
+        (qkv): Linear(in_features=1024, out_features=3072, bias=True)
+        (attn_drop): Dropout(p=0.0, inplace=False)
+        (proj): Linear(in_features=1024, out_features=1024, bias=True)
+        (proj_drop): Dropout(p=0.0, inplace=False)
+      )
+      (drop_path): Identity()
+      (norm2): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+      (mlp): Mlp(
+        (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+        (act): GELU()
+        (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+        (drop): Dropout(p=0.0, inplace=False)
+      )
+    )
+    (18): Block(
+      (norm1): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+      (attn): Attention(
+        (qkv): Linear(in_features=1024, out_features=3072, bias=True)
+        (attn_drop): Dropout(p=0.0, inplace=False)
+        (proj): Linear(in_features=1024, out_features=1024, bias=True)
+        (proj_drop): Dropout(p=0.0, inplace=False)
+      )
+      (drop_path): Identity()
+      (norm2): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+      (mlp): Mlp(
+        (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+        (act): GELU()
+        (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+        (drop): Dropout(p=0.0, inplace=False)
+      )
+    )
+    (19): Block(
+      (norm1): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+      (attn): Attention(
+        (qkv): Linear(in_features=1024, out_features=3072, bias=True)
+        (attn_drop): Dropout(p=0.0, inplace=False)
+        (proj): Linear(in_features=1024, out_features=1024, bias=True)
+        (proj_drop): Dropout(p=0.0, inplace=False)
+      )
+      (drop_path): Identity()
+      (norm2): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+      (mlp): Mlp(
+        (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+        (act): GELU()
+        (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+        (drop): Dropout(p=0.0, inplace=False)
+      )
+    )
+    (20): Block(
+      (norm1): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+      (attn): Attention(
+        (qkv): Linear(in_features=1024, out_features=3072, bias=True)
+        (attn_drop): Dropout(p=0.0, inplace=False)
+        (proj): Linear(in_features=1024, out_features=1024, bias=True)
+        (proj_drop): Dropout(p=0.0, inplace=False)
+      )
+      (drop_path): Identity()
+      (norm2): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+      (mlp): Mlp(
+        (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+        (act): GELU()
+        (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+        (drop): Dropout(p=0.0, inplace=False)
+      )
+    )
+    (21): Block(
+      (norm1): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+      (attn): Attention(
+        (qkv): Linear(in_features=1024, out_features=3072, bias=True)
+        (attn_drop): Dropout(p=0.0, inplace=False)
+        (proj): Linear(in_features=1024, out_features=1024, bias=True)
+        (proj_drop): Dropout(p=0.0, inplace=False)
+      )
+      (drop_path): Identity()
+      (norm2): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+      (mlp): Mlp(
+        (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+        (act): GELU()
+        (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+        (drop): Dropout(p=0.0, inplace=False)
+      )
+    )
+    (22): Block(
+      (norm1): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+      (attn): Attention(
+        (qkv): Linear(in_features=1024, out_features=3072, bias=True)
+        (attn_drop): Dropout(p=0.0, inplace=False)
+        (proj): Linear(in_features=1024, out_features=1024, bias=True)
+        (proj_drop): Dropout(p=0.0, inplace=False)
+      )
+      (drop_path): Identity()
+      (norm2): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+      (mlp): Mlp(
+        (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+        (act): GELU()
+        (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+        (drop): Dropout(p=0.0, inplace=False)
+      )
+    )
+    (23): Block(
+      (norm1): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+      (attn): Attention(
+        (qkv): Linear(in_features=1024, out_features=3072, bias=True)
+        (attn_drop): Dropout(p=0.0, inplace=False)
+        (proj): Linear(in_features=1024, out_features=1024, bias=True)
+        (proj_drop): Dropout(p=0.0, inplace=False)
+      )
+      (drop_path): Identity()
+      (norm2): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+      (mlp): Mlp(
+        (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+        (act): GELU()
+        (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+        (drop): Dropout(p=0.0, inplace=False)
+      )
+    )
+  )
+  (norm): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+  (decoder_embed): Linear(in_features=1024, out_features=512, bias=True)
+  (decoder_blocks): ModuleList(
+    (0): Block(
+      (norm1): LayerNorm((512,), eps=1e-06, elementwise_affine=True)
+      (attn): Attention(
+        (qkv): Linear(in_features=512, out_features=1536, bias=True)
+        (attn_drop): Dropout(p=0.0, inplace=False)
+        (proj): Linear(in_features=512, out_features=512, bias=True)
+        (proj_drop): Dropout(p=0.0, inplace=False)
+      )
+      (drop_path): Identity()
+      (norm2): LayerNorm((512,), eps=1e-06, elementwise_affine=True)
+      (mlp): Mlp(
+        (fc1): Linear(in_features=512, out_features=2048, bias=True)
+        (act): GELU()
+        (fc2): Linear(in_features=2048, out_features=512, bias=True)
+        (drop): Dropout(p=0.0, inplace=False)
+      )
+    )
+    (1): Block(
+      (norm1): LayerNorm((512,), eps=1e-06, elementwise_affine=True)
+      (attn): Attention(
+        (qkv): Linear(in_features=512, out_features=1536, bias=True)
+        (attn_drop): Dropout(p=0.0, inplace=False)
+        (proj): Linear(in_features=512, out_features=512, bias=True)
+        (proj_drop): Dropout(p=0.0, inplace=False)
+      )
+      (drop_path): Identity()
+      (norm2): LayerNorm((512,), eps=1e-06, elementwise_affine=True)
+      (mlp): Mlp(
+        (fc1): Linear(in_features=512, out_features=2048, bias=True)
+        (act): GELU()
+        (fc2): Linear(in_features=2048, out_features=512, bias=True)
+        (drop): Dropout(p=0.0, inplace=False)
+      )
+    )
+    (2): Block(
+      (norm1): LayerNorm((512,), eps=1e-06, elementwise_affine=True)
+      (attn): Attention(
+        (qkv): Linear(in_features=512, out_features=1536, bias=True)
+        (attn_drop): Dropout(p=0.0, inplace=False)
+        (proj): Linear(in_features=512, out_features=512, bias=True)
+        (proj_drop): Dropout(p=0.0, inplace=False)
+      )
+      (drop_path): Identity()
+      (norm2): LayerNorm((512,), eps=1e-06, elementwise_affine=True)
+      (mlp): Mlp(
+        (fc1): Linear(in_features=512, out_features=2048, bias=True)
+        (act): GELU()
+        (fc2): Linear(in_features=2048, out_features=512, bias=True)
+        (drop): Dropout(p=0.0, inplace=False)
+      )
+    )
+    (3): Block(
+      (norm1): LayerNorm((512,), eps=1e-06, elementwise_affine=True)
+      (attn): Attention(
+        (qkv): Linear(in_features=512, out_features=1536, bias=True)
+        (attn_drop): Dropout(p=0.0, inplace=False)
+        (proj): Linear(in_features=512, out_features=512, bias=True)
+        (proj_drop): Dropout(p=0.0, inplace=False)
+      )
+      (drop_path): Identity()
+      (norm2): LayerNorm((512,), eps=1e-06, elementwise_affine=True)
+      (mlp): Mlp(
+        (fc1): Linear(in_features=512, out_features=2048, bias=True)
+        (act): GELU()
+        (fc2): Linear(in_features=2048, out_features=512, bias=True)
+        (drop): Dropout(p=0.0, inplace=False)
+      )
+    )
+    (4): Block(
+      (norm1): LayerNorm((512,), eps=1e-06, elementwise_affine=True)
+      (attn): Attention(
+        (qkv): Linear(in_features=512, out_features=1536, bias=True)
+        (attn_drop): Dropout(p=0.0, inplace=False)
+        (proj): Linear(in_features=512, out_features=512, bias=True)
+        (proj_drop): Dropout(p=0.0, inplace=False)
+      )
+      (drop_path): Identity()
+      (norm2): LayerNorm((512,), eps=1e-06, elementwise_affine=True)
+      (mlp): Mlp(
+        (fc1): Linear(in_features=512, out_features=2048, bias=True)
+        (act): GELU()
+        (fc2): Linear(in_features=2048, out_features=512, bias=True)
+        (drop): Dropout(p=0.0, inplace=False)
+      )
+    )
+    (5): Block(
+      (norm1): LayerNorm((512,), eps=1e-06, elementwise_affine=True)
+      (attn): Attention(
+        (qkv): Linear(in_features=512, out_features=1536, bias=True)
+        (attn_drop): Dropout(p=0.0, inplace=False)
+        (proj): Linear(in_features=512, out_features=512, bias=True)
+        (proj_drop): Dropout(p=0.0, inplace=False)
+      )
+      (drop_path): Identity()
+      (norm2): LayerNorm((512,), eps=1e-06, elementwise_affine=True)
+      (mlp): Mlp(
+        (fc1): Linear(in_features=512, out_features=2048, bias=True)
+        (act): GELU()
+        (fc2): Linear(in_features=2048, out_features=512, bias=True)
+        (drop): Dropout(p=0.0, inplace=False)
+      )
+    )
+    (6): Block(
+      (norm1): LayerNorm((512,), eps=1e-06, elementwise_affine=True)
+      (attn): Attention(
+        (qkv): Linear(in_features=512, out_features=1536, bias=True)
+        (attn_drop): Dropout(p=0.0, inplace=False)
+        (proj): Linear(in_features=512, out_features=512, bias=True)
+        (proj_drop): Dropout(p=0.0, inplace=False)
+      )
+      (drop_path): Identity()
+      (norm2): LayerNorm((512,), eps=1e-06, elementwise_affine=True)
+      (mlp): Mlp(
+        (fc1): Linear(in_features=512, out_features=2048, bias=True)
+        (act): GELU()
+        (fc2): Linear(in_features=2048, out_features=512, bias=True)
+        (drop): Dropout(p=0.0, inplace=False)
+      )
+    )
+    (7): Block(
+      (norm1): LayerNorm((512,), eps=1e-06, elementwise_affine=True)
+      (attn): Attention(
+        (qkv): Linear(in_features=512, out_features=1536, bias=True)
+        (attn_drop): Dropout(p=0.0, inplace=False)
+        (proj): Linear(in_features=512, out_features=512, bias=True)
+        (proj_drop): Dropout(p=0.0, inplace=False)
+      )
+      (drop_path): Identity()
+      (norm2): LayerNorm((512,), eps=1e-06, elementwise_affine=True)
+      (mlp): Mlp(
+        (fc1): Linear(in_features=512, out_features=2048, bias=True)
+        (act): GELU()
+        (fc2): Linear(in_features=2048, out_features=512, bias=True)
+        (drop): Dropout(p=0.0, inplace=False)
+      )
+    )
+  )
+  (decoder_norm): LayerNorm((512,), eps=1e-06, elementwise_affine=True)
+  (decoder_pred): Linear(in_features=512, out_features=768, bias=True)
+)
+[07:33:34.225718] base lr: 1.50e-04
+[07:33:34.225732] actual lr: 3.75e-05
+[07:33:34.225744] accumulate grad iterations: 1
+[07:33:34.225756] effective batch size: 64
+[07:33:34.253643] AdamW (
+Parameter Group 0
+    amsgrad: False
+    betas: (0.9, 0.95)
+    eps: 1e-08
+    lr: 3.75e-05
+    maximize: False
+    weight_decay: 0.0
+
+Parameter Group 1
+    amsgrad: False
+    betas: (0.9, 0.95)
+    eps: 1e-08
+    lr: 3.75e-05
+    maximize: False
+    weight_decay: 0.05
+)
+[07:33:34.253781] Start training for 800 epochs
+[07:33:34.255582] log_dir: ./output_dir
+[W reducer.cpp:1289] Warning: find_unused_parameters=True was specified in DDP constructor, but did not find any unused parameters in the forward pass. This flag results in an extra traversal of the autograd graph every iteration,  which can adversely affect performance. If your model indeed never has any unused parameters in the forward pass, consider turning this flag off. Note that this warning may be a false positive if your model has flow control causing later iterations to have unused parameters. (function operator())
+[07:33:42.054211] TCAPPDLL 2025-07-10 07:33:42.054109 - Epoch: 0 Iteration: 0  rank : 0  train.loss : 1.7196811437606812  train.ips : 8.206813990500613 imgs/s
+[07:33:42.055792] Epoch: [0]  [    0/20018]  eta: 1 day, 19:22:03  lr: 0.000000  loss: 1.7197 (1.7197)  time: 7.7992  data: 6.2352  max mem: 10315
+[07:33:42.254368] TCAPPDLL 2025-07-10 07:33:42.254316 - Epoch: 0 Iteration: 1  rank : 0  train.loss : 1.716156005859375  train.ips : 16.00262971223096 imgs/s
+[07:33:42.255218] Epoch: [0]  [    1/20018]  eta: 22:14:07  lr: 0.000000  loss: 1.7162 (1.7179)  time: 3.9990  data: 3.1177  max mem: 14098
+[07:33:42.428682] TCAPPDLL 2025-07-10 07:33:42.428632 - Epoch: 0 Iteration: 2  rank : 0  train.loss : 1.72014319896698  train.ips : 23.491982100843956 imgs/s
+[07:33:42.429592] Epoch: [0]  [    2/20018]  eta: 15:08:40  lr: 0.000000  loss: 1.7197 (1.7187)  time: 2.7239  data: 2.0785  max mem: 14098
+[07:33:42.605360] TCAPPDLL 2025-07-10 07:33:42.605308 - Epoch: 0 Iteration: 3  rank : 0  train.loss : 1.7215888500213623  train.ips : 30.659864822018093 imgs/s
+[07:33:42.606252] Epoch: [0]  [    3/20018]  eta: 11:36:09  lr: 0.000000  loss: 1.7197 (1.7194)  time: 2.0869  data: 1.5589  max mem: 14098
+[07:33:42.782157] TCAPPDLL 2025-07-10 07:33:42.782098 - Epoch: 0 Iteration: 4  rank : 0  train.loss : 1.7207952737808228  train.ips : 37.53020139032428 imgs/s
+[07:33:42.783166] Epoch: [0]  [    4/20018]  eta: 9:28:38  lr: 0.000000  loss: 1.7201 (1.7197)  time: 1.7047  data: 1.2471  max mem: 14098
+[07:33:42.956543] TCAPPDLL 2025-07-10 07:33:42.956479 - Epoch: 0 Iteration: 5  rank : 0  train.loss : 1.7208901643753052  train.ips : 44.13362754422966 imgs/s
+[07:33:42.957352] Epoch: [0]  [    5/20018]  eta: 8:03:29  lr: 0.000000  loss: 1.7201 (1.7199)  time: 1.4495  data: 1.0393  max mem: 14098
+[07:33:43.646983] TCAPPDLL 2025-07-10 07:33:43.646926 - Epoch: 0 Iteration: 6  rank : 0  train.loss : 1.7180531024932861  train.ips : 47.70375140905245 imgs/s
+[07:33:43.648030] Epoch: [0]  [    6/20018]  eta: 7:27:16  lr: 0.000000  loss: 1.7201 (1.7196)  time: 1.3410  data: 0.9640  max mem: 14098
+[07:33:43.823765] TCAPPDLL 2025-07-10 07:33:43.823692 - Epoch: 0 Iteration: 7  rank : 0  train.loss : 1.718242883682251  train.ips : 53.5113878956294 imgs/s
+[07:33:43.824912] Epoch: [0]  [    7/20018]  eta: 6:38:40  lr: 0.000000  loss: 1.7197 (1.7194)  time: 1.1954  data: 0.8435  max mem: 14098
+[07:33:44.006115] TCAPPDLL 2025-07-10 07:33:44.006046 - Epoch: 0 Iteration: 8  rank : 0  train.loss : 1.7209604978561401  train.ips : 59.07443265861356 imgs/s
+[07:33:44.007293] Epoch: [0]  [    8/20018]  eta: 6:01:05  lr: 0.000000  loss: 1.7201 (1.7196)  time: 1.0827  data: 0.7498  max mem: 14098
+[07:33:44.181730] TCAPPDLL 2025-07-10 07:33:44.181676 - Epoch: 0 Iteration: 9  rank : 0  train.loss : 1.7212116718292236  train.ips : 64.47683574500253 imgs/s
+[07:33:44.182664] Epoch: [0]  [    9/20018]  eta: 5:30:46  lr: 0.000000  loss: 1.7201 (1.7198)  time: 0.9919  data: 0.6748  max mem: 14098
+[07:33:44.719386] TCAPPDLL 2025-07-10 07:33:44.719333 - Epoch: 0 Iteration: 10  rank : 0  train.loss : 1.7181531190872192  train.ips : 67.28020220949952 imgs/s
+[07:33:44.720296] Epoch: [0]  [   10/20018]  eta: 5:16:58  lr: 0.000000  loss: 1.7201 (1.7196)  time: 0.9505  data: 0.6456  max mem: 14098
+[07:33:44.921697] TCAPPDLL 2025-07-10 07:33:44.921642 - Epoch: 0 Iteration: 11  rank : 0  train.loss : 1.7205678224563599  train.ips : 72.00443181850949 imgs/s
+[07:33:44.922539] Epoch: [0]  [   11/20018]  eta: 4:56:08  lr: 0.000000  loss: 1.7201 (1.7197)  time: 0.8881  data: 0.5941  max mem: 14098
+[07:33:46.762853] TCAPPDLL 2025-07-10 07:33:46.762798 - Epoch: 0 Iteration: 12  rank : 0  train.loss : 1.7197527885437012  train.ips : 66.52186483060171 imgs/s
+[07:33:46.763777] Epoch: [0]  [   12/20018]  eta: 5:20:33  lr: 0.000000  loss: 1.7201 (1.7197)  time: 0.9614  data: 0.6765  max mem: 14098
+[07:33:46.938625] TCAPPDLL 2025-07-10 07:33:46.938567 - Epoch: 0 Iteration: 13  rank : 0  train.loss : 1.7200846672058105  train.ips : 70.64611099279622 imgs/s
+[07:33:46.939554] Epoch: [0]  [   13/20018]  eta: 5:01:48  lr: 0.000000  loss: 1.7201 (1.7197)  time: 0.9052  data: 0.6282  max mem: 14098
+[07:33:47.115064] TCAPPDLL 2025-07-10 07:33:47.115006 - Epoch: 0 Iteration: 14  rank : 0  train.loss : 1.7207244634628296  train.ips : 74.65370872205393 imgs/s
+[07:33:47.115961] Epoch: [0]  [   14/20018]  eta: 4:45:35  lr: 0.000000  loss: 1.7201 (1.7198)  time: 0.8566  data: 0.5863  max mem: 14098
+[07:33:47.290262] TCAPPDLL 2025-07-10 07:33:47.290205 - Epoch: 0 Iteration: 15  rank : 0  train.loss : 1.7217992544174194  train.ips : 78.56029213603293 imgs/s
+[07:33:47.291117] Epoch: [0]  [   15/20018]  eta: 4:31:21  lr: 0.000000  loss: 1.7201 (1.7199)  time: 0.8140  data: 0.5497  max mem: 14098
+[07:33:47.823099] TCAPPDLL 2025-07-10 07:33:47.823045 - Epoch: 0 Iteration: 16  rank : 0  train.loss : 1.720909595489502  train.ips : 80.19214528304178 imgs/s
+[07:33:47.823960] Epoch: [0]  [   16/20018]  eta: 4:25:49  lr: 0.000000  loss: 1.7206 (1.7200)  time: 0.7974  data: 0.5384  max mem: 14098
+[07:33:48.001602] TCAPPDLL 2025-07-10 07:33:48.001545 - Epoch: 0 Iteration: 17  rank : 0  train.loss : 1.7194418907165527  train.ips : 83.80673132119215 imgs/s
+[07:33:48.002569] Epoch: [0]  [   17/20018]  eta: 4:14:19  lr: 0.000000  loss: 1.7201 (1.7200)  time: 0.7630  data: 0.5085  max mem: 14098
+[07:33:48.179086] TCAPPDLL 2025-07-10 07:33:48.179024 - Epoch: 0 Iteration: 18  rank : 0  train.loss : 1.7210041284561157  train.ips : 87.3350562873346 imgs/s
+[07:33:48.180095] Epoch: [0]  [   18/20018]  eta: 4:04:02  lr: 0.000000  loss: 1.7206 (1.7200)  time: 0.7321  data: 0.4817  max mem: 14098
+[07:33:48.354866] TCAPPDLL 2025-07-10 07:33:48.354813 - Epoch: 0 Iteration: 19  rank : 0  train.loss : 1.7204034328460693  train.ips : 90.78540171461638 imgs/s
+[07:33:48.355695] Epoch: [0]  [   19/20018]  eta: 3:54:44  lr: 0.000000  loss: 1.7204 (1.7200)  time: 0.7042  data: 0.4576  max mem: 14098
+[07:33:49.609552] TCAPPDLL 2025-07-10 07:33:49.609493 - Epoch: 0 Iteration: 20  rank : 0  train.loss : 1.7206121683120728  train.ips : 87.53499040361912 imgs/s
+[07:33:49.610493] Epoch: [0]  [   20/20018]  eta: 4:03:27  lr: 0.000000  loss: 1.7206 (1.7201)  time: 0.3770  data: 0.1998  max mem: 14098
+[07:33:49.784771] TCAPPDLL 2025-07-10 07:33:49.784714 - Epoch: 0 Iteration: 21  rank : 0  train.loss : 1.7208726406097412  train.ips : 90.66859582709334 imgs/s
+[07:33:49.785629] Epoch: [0]  [   21/20018]  eta: 3:55:01  lr: 0.000000  loss: 1.7206 (1.7201)  time: 0.3758  data: 0.1998  max mem: 14098
+[07:33:51.349833] TCAPPDLL 2025-07-10 07:33:51.349777 - Epoch: 0 Iteration: 22  rank : 0  train.loss : 1.7201943397521973  train.ips : 86.1113505675085 imgs/s
+[07:33:51.350721] Epoch: [0]  [   22/20018]  eta: 4:07:27  lr: 0.000000  loss: 1.7206 (1.7201)  time: 0.4453  data: 0.2693  max mem: 14098
+[07:33:51.526090] TCAPPDLL 2025-07-10 07:33:51.526037 - Epoch: 0 Iteration: 23  rank : 0  train.loss : 1.7200313806533813  train.ips : 88.93826688872895 imgs/s
+[07:33:51.526929] Epoch: [0]  [   23/20018]  eta: 3:59:34  lr: 0.000000  loss: 1.7206 (1.7201)  time: 0.4453  data: 0.2693  max mem: 14098
+[07:33:51.702043] TCAPPDLL 2025-07-10 07:33:51.701985 - Epoch: 0 Iteration: 24  rank : 0  train.loss : 1.7210677862167358  train.ips : 91.7097267361925 imgs/s
+[07:33:51.702933] Epoch: [0]  [   24/20018]  eta: 3:52:18  lr: 0.000000  loss: 1.7206 (1.7201)  time: 0.4453  data: 0.2693  max mem: 14098
+[07:33:51.877164] TCAPPDLL 2025-07-10 07:33:51.877109 - Epoch: 0 Iteration: 25  rank : 0  train.loss : 1.7197173833847046  train.ips : 94.43022472112303 imgs/s
+[07:33:51.877997] Epoch: [0]  [   25/20018]  eta: 3:45:36  lr: 0.000000  loss: 1.7204 (1.7201)  time: 0.4453  data: 0.2693  max mem: 14098
+[07:33:52.053366] TCAPPDLL 2025-07-10 07:33:52.053311 - Epoch: 0 Iteration: 26  rank : 0  train.loss : 1.723191738128662  train.ips : 97.09130292009861 imgs/s
+[07:33:52.054253] Epoch: [0]  [   26/20018]  eta: 3:39:24  lr: 0.000000  loss: 1.7206 (1.7202)  time: 0.4196  data: 0.2437  max mem: 14098
+[07:33:52.227943] TCAPPDLL 2025-07-10 07:33:52.227891 - Epoch: 0 Iteration: 27  rank : 0  train.loss : 1.7206432819366455  train.ips : 99.7092079675643 imgs/s
+[07:33:52.228749] Epoch: [0]  [   27/20018]  eta: 3:33:37  lr: 0.000000  loss: 1.7206 (1.7202)  time: 0.4195  data: 0.2437  max mem: 14098
+[07:33:52.402724] TCAPPDLL 2025-07-10 07:33:52.402673 - Epoch: 0 Iteration: 28  rank : 0  train.loss : 1.7205803394317627  train.ips : 102.27561329311185 imgs/s
+[07:33:52.403597] Epoch: [0]  [   28/20018]  eta: 3:28:14  lr: 0.000000  loss: 1.7206 (1.7203)  time: 0.4191  data: 0.2437  max mem: 14098
+[07:33:52.577840] TCAPPDLL 2025-07-10 07:33:52.577783 - Epoch: 0 Iteration: 29  rank : 0  train.loss : 1.7197887897491455  train.ips : 104.79118449342165 imgs/s
+[07:33:52.578724] Epoch: [0]  [   29/20018]  eta: 3:23:14  lr: 0.000000  loss: 1.7206 (1.7202)  time: 0.4191  data: 0.2437  max mem: 14098
+[07:33:54.620616] TCAPPDLL 2025-07-10 07:33:54.620555 - Epoch: 0 Iteration: 30  rank : 0  train.loss : 1.7209668159484863  train.ips : 97.42247643242753 imgs/s
+[07:33:54.621701] Epoch: [0]  [   30/20018]  eta: 3:38:36  lr: 0.000000  loss: 1.7206 (1.7203)  time: 0.4944  data: 0.3191  max mem: 14098
+[07:33:54.798500] TCAPPDLL 2025-07-10 07:33:54.798417 - Epoch: 0 Iteration: 31  rank : 0  train.loss : 1.7179349660873413  train.ips : 99.69446711572692 imgs/s
+[07:33:54.799595] Epoch: [0]  [   31/20018]  eta: 3:33:36  lr: 0.000000  loss: 1.7206 (1.7202)  time: 0.4931  data: 0.3178  max mem: 14098
+[07:33:56.661162] TCAPPDLL 2025-07-10 07:33:56.661102 - Epoch: 0 Iteration: 32  rank : 0  train.loss : 1.718174934387207  train.ips : 94.26272219582404 imgs/s
+[07:33:56.662110] Epoch: [0]  [   32/20018]  eta: 3:45:55  lr: 0.000000  loss: 1.7206 (1.7201)  time: 0.4942  data: 0.3189  max mem: 14098
+[07:33:56.836659] TCAPPDLL 2025-07-10 07:33:56.836603 - Epoch: 0 Iteration: 33  rank : 0  train.loss : 1.7193399667739868  train.ips : 96.36431865026009 imgs/s
+[07:33:56.837551] Epoch: [0]  [   33/20018]  eta: 3:40:59  lr: 0.000000  loss: 1.7206 (1.7201)  time: 0.4942  data: 0.3189  max mem: 14098
+[07:33:57.013814] TCAPPDLL 2025-07-10 07:33:57.013753 - Epoch: 0 Iteration: 34  rank : 0  train.loss : 1.7225830554962158  train.ips : 98.42640239019062 imgs/s
+[07:33:57.014697] Epoch: [0]  [   34/20018]  eta: 3:36:20  lr: 0.000000  loss: 1.7206 (1.7202)  time: 0.4942  data: 0.3189  max mem: 14098
+[07:33:57.188466] TCAPPDLL 2025-07-10 07:33:57.188410 - Epoch: 0 Iteration: 35  rank : 0  train.loss : 1.7183376550674438  train.ips : 100.46754858655963 imgs/s
+[07:33:57.189264] Epoch: [0]  [   35/20018]  eta: 3:31:55  lr: 0.000000  loss: 1.7204 (1.7201)  time: 0.4942  data: 0.3189  max mem: 14098
+[07:33:57.366283] TCAPPDLL 2025-07-10 07:33:57.366228 - Epoch: 0 Iteration: 36  rank : 0  train.loss : 1.7191005945205688  train.ips : 102.46381931049436 imgs/s
+[07:33:57.367234] Epoch: [0]  [   36/20018]  eta: 3:27:47  lr: 0.000000  loss: 1.7202 (1.7201)  time: 0.4765  data: 0.3010  max mem: 14098
+[07:33:57.541288] TCAPPDLL 2025-07-10 07:33:57.541235 - Epoch: 0 Iteration: 37  rank : 0  train.loss : 1.7193245887756348  train.ips : 104.44221244982256 imgs/s
+[07:33:57.542096] Epoch: [0]  [   37/20018]  eta: 3:23:50  lr: 0.000000  loss: 1.7202 (1.7201)  time: 0.4763  data: 0.3010  max mem: 14098
+[07:33:57.717015] TCAPPDLL 2025-07-10 07:33:57.716956 - Epoch: 0 Iteration: 38  rank : 0  train.loss : 1.720358967781067  train.ips : 106.38785892318684 imgs/s
+[07:33:57.717889] Epoch: [0]  [   38/20018]  eta: 3:20:05  lr: 0.000000  loss: 1.7202 (1.7201)  time: 0.4762  data: 0.3010  max mem: 14098
+[07:33:57.892527] TCAPPDLL 2025-07-10 07:33:57.892465 - Epoch: 0 Iteration: 39  rank : 0  train.loss : 1.7180954217910767  train.ips : 108.30553636497405 imgs/s
+[07:33:57.893380] Epoch: [0]  [   39/20018]  eta: 3:16:32  lr: 0.000000  loss: 1.7200 (1.7200)  time: 0.4762  data: 0.3010  max mem: 14098
+[07:33:58.926513] TCAPPDLL 2025-07-10 07:33:58.926458 - Epoch: 0 Iteration: 40  rank : 0  train.loss : 1.7174280881881714  train.ips : 106.36043258134141 imgs/s
+[07:33:58.927312] Epoch: [0]  [   40/20018]  eta: 3:20:07  lr: 0.000000  loss: 1.7198 (1.7200)  time: 0.4652  data: 0.2900  max mem: 14098
+[07:33:59.101581] TCAPPDLL 2025-07-10 07:33:59.101513 - Epoch: 0 Iteration: 41  rank : 0  train.loss : 1.716058611869812  train.ips : 108.18694662486206 imgs/s
+[07:33:59.102564] Epoch: [0]  [   41/20018]  eta: 3:16:43  lr: 0.000000  loss: 1.7197 (1.7199)  time: 0.4652  data: 0.2900  max mem: 14098
+[07:34:01.092060] TCAPPDLL 2025-07-10 07:34:01.092006 - Epoch: 0 Iteration: 42  rank : 0  train.loss : 1.7179322242736816  train.ips : 102.547383880796 imgs/s
+[07:34:01.092959] Epoch: [0]  [   42/20018]  eta: 3:27:33  lr: 0.000000  loss: 1.7193 (1.7198)  time: 0.4864  data: 0.3104  max mem: 14098
+[07:34:01.268667] TCAPPDLL 2025-07-10 07:34:01.268608 - Epoch: 0 Iteration: 43  rank : 0  train.loss : 1.7195719480514526  train.ips : 104.24619661215839 imgs/s
+[07:34:01.269556] Epoch: [0]  [   43/20018]  eta: 3:24:09  lr: 0.000000  loss: 1.7193 (1.7198)  time: 0.4864  data: 0.3104  max mem: 14098
+[07:34:01.443749] TCAPPDLL 2025-07-10 07:34:01.443692 - Epoch: 0 Iteration: 44  rank : 0  train.loss : 1.7197693586349487  train.ips : 105.9288431264861 imgs/s
+[07:34:01.444642] Epoch: [0]  [   44/20018]  eta: 3:20:53  lr: 0.000000  loss: 1.7193 (1.7198)  time: 0.4864  data: 0.3104  max mem: 14098
+[07:34:01.619743] TCAPPDLL 2025-07-10 07:34:01.619685 - Epoch: 0 Iteration: 45  rank : 0  train.loss : 1.7171528339385986  train.ips : 107.58640172283489 imgs/s
+[07:34:01.620753] Epoch: [0]  [   45/20018]  eta: 3:17:47  lr: 0.000000  loss: 1.7193 (1.7198)  time: 0.4864  data: 0.3104  max mem: 14098
+[07:34:01.795292] TCAPPDLL 2025-07-10 07:34:01.795238 - Epoch: 0 Iteration: 46  rank : 0  train.loss : 1.7176586389541626  train.ips : 109.22450406173131 imgs/s
+[07:34:01.796144] Epoch: [0]  [   46/20018]  eta: 3:14:48  lr: 0.000000  loss: 1.7191 (1.7197)  time: 0.4864  data: 0.3104  max mem: 14098
+[07:34:01.987539] TCAPPDLL 2025-07-10 07:34:01.987484 - Epoch: 0 Iteration: 47  rank : 0  train.loss : 1.7155321836471558  train.ips : 110.77514172104391 imgs/s
+[07:34:01.988514] Epoch: [0]  [   47/20018]  eta: 3:12:04  lr: 0.000000  loss: 1.7183 (1.7196)  time: 0.4873  data: 0.3104  max mem: 14098
+[07:34:02.163428] TCAPPDLL 2025-07-10 07:34:02.163357 - Epoch: 0 Iteration: 48  rank : 0  train.loss : 1.7223937511444092  train.ips : 112.37032097857627 imgs/s
+[07:34:02.164393] Epoch: [0]  [   48/20018]  eta: 3:09:19  lr: 0.000000  loss: 1.7183 (1.7197)  time: 0.4873  data: 0.3104  max mem: 14098
+[07:34:02.338411] TCAPPDLL 2025-07-10 07:34:02.338353 - Epoch: 0 Iteration: 49  rank : 0  train.loss : 1.7202510833740234  train.ips : 113.94907018591137 imgs/s
+[07:34:02.339519] Epoch: [0]  [   49/20018]  eta: 3:06:41  lr: 0.000000  loss: 1.7183 (1.7197)  time: 0.4873  data: 0.3104  max mem: 14098
+[07:34:03.084995] TCAPPDLL 2025-07-10 07:34:03.084935 - Epoch: 0 Iteration: 50  rank : 0  train.loss : 1.7180792093276978  train.ips : 113.218136770093 imgs/s
+[07:34:03.085951] Epoch: [0]  [   50/20018]  eta: 3:07:53  lr: 0.000000  loss: 1.7182 (1.7197)  time: 0.4225  data: 0.2444  max mem: 14098
+[07:34:03.260639] TCAPPDLL 2025-07-10 07:34:03.260583 - Epoch: 0 Iteration: 51  rank : 0  train.loss : 1.7201272249221802  train.ips : 114.73902819390472 imgs/s
+[07:34:03.261482] Epoch: [0]  [   51/20018]  eta: 3:05:23  lr: 0.000000  loss: 1.7183 (1.7197)  time: 0.4224  data: 0.2444  max mem: 14098
+[07:34:05.330668] TCAPPDLL 2025-07-10 07:34:05.330606 - Epoch: 0 Iteration: 52  rank : 0  train.loss : 1.715569257736206  train.ips : 109.15536816430779 imgs/s
+[07:34:05.331666] Epoch: [0]  [   52/20018]  eta: 3:14:52  lr: 0.000000  loss: 1.7183 (1.7196)  time: 0.4327  data: 0.2544  max mem: 14098
+[07:34:05.512311] TCAPPDLL 2025-07-10 07:34:05.512236 - Epoch: 0 Iteration: 53  rank : 0  train.loss : 1.7202177047729492  train.ips : 110.5686507744996 imgs/s
+[07:34:05.513610] Epoch: [0]  [   53/20018]  eta: 3:12:22  lr: 0.000000  loss: 1.7183 (1.7196)  time: 0.4331  data: 0.2544  max mem: 14098
+[07:34:05.692132] TCAPPDLL 2025-07-10 07:34:05.692073 - Epoch: 0 Iteration: 54  rank : 0  train.loss : 1.7184467315673828  train.ips : 111.97196632341475 imgs/s
+[07:34:05.693163] Epoch: [0]  [   54/20018]  eta: 3:09:56  lr: 0.000000  loss: 1.7183 (1.7196)  time: 0.4332  data: 0.2544  max mem: 14098
+[07:34:05.874568] TCAPPDLL 2025-07-10 07:34:05.874498 - Epoch: 0 Iteration: 55  rank : 0  train.loss : 1.715224266052246  train.ips : 113.3500667381169 imgs/s
+[07:34:05.875806] Epoch: [0]  [   55/20018]  eta: 3:07:37  lr: 0.000000  loss: 1.7181 (1.7195)  time: 0.4336  data: 0.2544  max mem: 14098
+[07:34:06.051433] TCAPPDLL 2025-07-10 07:34:06.051373 - Epoch: 0 Iteration: 56  rank : 0  train.loss : 1.7185771465301514  train.ips : 114.73235219790422 imgs/s
+[07:34:06.052580] Epoch: [0]  [   56/20018]  eta: 3:05:20  lr: 0.000000  loss: 1.7181 (1.7195)  time: 0.4335  data: 0.2544  max mem: 14098
+[07:34:06.234303] TCAPPDLL 2025-07-10 07:34:06.234244 - Epoch: 0 Iteration: 57  rank : 0  train.loss : 1.7184929847717285  train.ips : 116.07758701209745 imgs/s
+[07:34:06.235304] Epoch: [0]  [   57/20018]  eta: 3:03:11  lr: 0.000000  loss: 1.7181 (1.7195)  time: 0.4339  data: 0.2544  max mem: 14098
+[07:34:06.417596] TCAPPDLL 2025-07-10 07:34:06.417519 - Epoch: 0 Iteration: 58  rank : 0  train.loss : 1.720372200012207  train.ips : 117.4060728438422 imgs/s
+[07:34:06.418781] Epoch: [0]  [   58/20018]  eta: 3:01:06  lr: 0.000000  loss: 1.7181 (1.7195)  time: 0.4342  data: 0.2544  max mem: 14098
+[07:34:06.604806] TCAPPDLL 2025-07-10 07:34:06.604747 - Epoch: 0 Iteration: 59  rank : 0  train.loss : 1.7190595865249634  train.ips : 118.70494970520043 imgs/s
+[07:34:06.605778] Epoch: [0]  [   59/20018]  eta: 2:59:06  lr: 0.000000  loss: 1.7184 (1.7195)  time: 0.4348  data: 0.2545  max mem: 14098
+[07:34:07.365426] TCAPPDLL 2025-07-10 07:34:07.365355 - Epoch: 0 Iteration: 60  rank : 0  train.loss : 1.7174879312515259  train.ips : 117.91099753876634 imgs/s
+[07:34:07.366558] Epoch: [0]  [   60/20018]  eta: 3:00:18  lr: 0.000000  loss: 1.7184 (1.7195)  time: 0.4211  data: 0.2404  max mem: 14098
+[07:34:07.541581] TCAPPDLL 2025-07-10 07:34:07.541494 - Epoch: 0 Iteration: 61  rank : 0  train.loss : 1.7169185876846313  train.ips : 119.20980652360281 imgs/s
+[07:34:07.542720] Epoch: [0]  [   61/20018]  eta: 2:58:19  lr: 0.000000  loss: 1.7184 (1.7194)  time: 0.4212  data: 0.2404  max mem: 14098
+[07:34:09.434431] TCAPPDLL 2025-07-10 07:34:09.434367 - Epoch: 0 Iteration: 62  rank : 0  train.loss : 1.719892144203186  train.ips : 114.61475913554507 imgs/s
+[07:34:09.435501] Epoch: [0]  [   62/20018]  eta: 3:05:28  lr: 0.000000  loss: 1.7185 (1.7194)  time: 0.4163  data: 0.2362  max mem: 14098
+[07:34:09.613719] TCAPPDLL 2025-07-10 07:34:09.613662 - Epoch: 0 Iteration: 63  rank : 0  train.loss : 1.7185593843460083  train.ips : 115.84355932383393 imgs/s
+[07:34:09.614616] Epoch: [0]  [   63/20018]  eta: 3:03:29  lr: 0.000000  loss: 1.7185 (1.7194)  time: 0.4164  data: 0.2362  max mem: 14098
+[07:34:09.788962] TCAPPDLL 2025-07-10 07:34:09.788908 - Epoch: 0 Iteration: 64  rank : 0  train.loss : 1.719167947769165  train.ips : 117.07335857787554 imgs/s
+[07:34:09.789882] Epoch: [0]  [   64/20018]  eta: 3:01:33  lr: 0.000000  loss: 1.7185 (1.7194)  time: 0.4164  data: 0.2362  max mem: 14098
+[07:34:09.964868] TCAPPDLL 2025-07-10 07:34:09.964814 - Epoch: 0 Iteration: 65  rank : 0  train.loss : 1.7177869081497192  train.ips : 118.28890466779926 imgs/s
+[07:34:09.965773] Epoch: [0]  [   65/20018]  eta: 2:59:40  lr: 0.000000  loss: 1.7185 (1.7194)  time: 0.4164  data: 0.2362  max mem: 14098
+[07:34:10.282249] TCAPPDLL 2025-07-10 07:34:10.282179 - Epoch: 0 Iteration: 66  rank : 0  train.loss : 1.7200051546096802  train.ips : 119.0233485529301 imgs/s
+[07:34:10.297314] Epoch: [0]  [   66/20018]  eta: 2:58:33  lr: 0.000000  loss: 1.7186 (1.7194)  time: 0.4235  data: 0.2424  max mem: 14098
+[07:34:11.528394] TCAPPDLL 2025-07-10 07:34:11.528338 - Epoch: 0 Iteration: 67  rank : 0  train.loss : 1.717555046081543  train.ips : 116.76103990874918 imgs/s
+[07:34:11.529332] Epoch: [0]  [   67/20018]  eta: 3:01:56  lr: 0.000000  loss: 1.7186 (1.7194)  time: 0.4754  data: 0.2951  max mem: 14098
+[07:34:11.707630] TCAPPDLL 2025-07-10 07:34:11.707558 - Epoch: 0 Iteration: 68  rank : 0  train.loss : 1.717663049697876  train.ips : 117.9111709935784 imgs/s
+[07:34:11.708758] Epoch: [0]  [   68/20018]  eta: 3:00:09  lr: 0.000000  loss: 1.7185 (1.7193)  time: 0.4756  data: 0.2951  max mem: 14098
+[07:34:11.896290] TCAPPDLL 2025-07-10 07:34:11.896238 - Epoch: 0 Iteration: 69  rank : 0  train.loss : 1.718200922012329  train.ips : 119.02039316209844 imgs/s
+[07:34:11.897122] Epoch: [0]  [   69/20018]  eta: 2:58:27  lr: 0.000000  loss: 1.7184 (1.7193)  time: 0.4762  data: 0.2951  max mem: 14098
+[07:34:12.086248] TCAPPDLL 2025-07-10 07:34:12.086195 - Epoch: 0 Iteration: 70  rank : 0  train.loss : 1.7158328294754028  train.ips : 120.11451821633523 imgs/s
+[07:34:12.087044] Epoch: [0]  [   70/20018]  eta: 2:56:49  lr: 0.000000  loss: 1.7184 (1.7193)  time: 0.4484  data: 0.2679  max mem: 14098
+[07:34:12.262449] TCAPPDLL 2025-07-10 07:34:12.262395 - Epoch: 0 Iteration: 71  rank : 0  train.loss : 1.7194328308105469  train.ips : 121.24158014333659 imgs/s
+[07:34:12.263330] Epoch: [0]  [   71/20018]  eta: 2:55:10  lr: 0.000000  loss: 1.7184 (1.7193)  time: 0.4484  data: 0.2679  max mem: 14098
+[07:34:13.902571] TCAPPDLL 2025-07-10 07:34:13.902502 - Epoch: 0 Iteration: 72  rank : 0  train.loss : 1.7191182374954224  train.ips : 117.84032201665143 imgs/s
+[07:34:13.903622] Epoch: [0]  [   72/20018]  eta: 3:00:13  lr: 0.000000  loss: 1.7185 (1.7193)  time: 0.4270  data: 0.2467  max mem: 14098
+[07:34:14.090210] TCAPPDLL 2025-07-10 07:34:14.090156 - Epoch: 0 Iteration: 73  rank : 0  train.loss : 1.7153393030166626  train.ips : 118.89184036007877 imgs/s
+[07:34:14.091062] Epoch: [0]  [   73/20018]  eta: 2:58:37  lr: 0.000000  loss: 1.7184 (1.7192)  time: 0.4272  data: 0.2467  max mem: 14098
+[07:34:14.279428] TCAPPDLL 2025-07-10 07:34:14.279375 - Epoch: 0 Iteration: 74  rank : 0  train.loss : 1.7175674438476562  train.ips : 119.9288070821015 imgs/s
+[07:34:14.280325] Epoch: [0]  [   74/20018]  eta: 2:57:03  lr: 0.000000  loss: 1.7182 (1.7192)  time: 0.4277  data: 0.2467  max mem: 14098
+[07:34:14.468494] TCAPPDLL 2025-07-10 07:34:14.468442 - Epoch: 0 Iteration: 75  rank : 0  train.loss : 1.7156983613967896  train.ips : 120.95647040447363 imgs/s
+[07:34:14.469296] Epoch: [0]  [   75/20018]  eta: 2:55:33  lr: 0.000000  loss: 1.7182 (1.7192)  time: 0.4281  data: 0.2467  max mem: 14098
+[07:34:14.659525] TCAPPDLL 2025-07-10 07:34:14.659468 - Epoch: 0 Iteration: 76  rank : 0  train.loss : 1.7135884761810303  train.ips : 121.96861988224455 imgs/s
+[07:34:14.660437] Epoch: [0]  [   76/20018]  eta: 2:54:05  lr: 0.000000  loss: 1.7178 (1.7191)  time: 0.4288  data: 0.2467  max mem: 14098
+[07:34:16.008131] TCAPPDLL 2025-07-10 07:34:16.008065 - Epoch: 0 Iteration: 77  rank : 0  train.loss : 1.7186427116394043  train.ips : 119.5618932104739 imgs/s
+[07:34:16.009059] Epoch: [0]  [   77/20018]  eta: 2:57:35  lr: 0.000000  loss: 1.7178 (1.7191)  time: 0.4871  data: 0.3040  max mem: 14098
+[07:34:16.222723] TCAPPDLL 2025-07-10 07:34:16.222662 - Epoch: 0 Iteration: 78  rank : 0  train.loss : 1.7157175540924072  train.ips : 120.47553511180175 imgs/s
+[07:34:16.223680] Epoch: [0]  [   78/20018]  eta: 2:56:13  lr: 0.000000  loss: 1.7177 (1.7190)  time: 0.4887  data: 0.3040  max mem: 14098
+[07:34:16.425292] TCAPPDLL 2025-07-10 07:34:16.425239 - Epoch: 0 Iteration: 79  rank : 0  train.loss : 1.7157433032989502  train.ips : 121.41445668151924 imgs/s
+[07:34:16.426180] Epoch: [0]  [   79/20018]  eta: 2:54:51  lr: 0.000000  loss: 1.7176 (1.7190)  time: 0.4894  data: 0.3040  max mem: 14098
+[07:34:17.239065] TCAPPDLL 2025-07-10 07:34:17.239003 - Epoch: 0 Iteration: 80  rank : 0  train.loss : 1.7181404829025269  train.ips : 120.6047771973725 imgs/s
+[07:34:17.240073] Epoch: [0]  [   80/20018]  eta: 2:56:01  lr: 0.000000  loss: 1.7177 (1.7190)  time: 0.4921  data: 0.3051  max mem: 14098
+[07:34:17.438008] TCAPPDLL 2025-07-10 07:34:17.437932 - Epoch: 0 Iteration: 81  rank : 0  train.loss : 1.7130398750305176  train.ips : 121.53129072324784 imgs/s
+[07:34:17.446932] Epoch: [0]  [   81/20018]  eta: 2:54:42  lr: 0.000000  loss: 1.7177 (1.7189)  time: 0.4936  data: 0.3051  max mem: 14098
+[07:34:19.963971] TCAPPDLL 2025-07-10 07:34:19.963916 - Epoch: 0 Iteration: 82  rank : 0  train.loss : 1.7163666486740112  train.ips : 116.21525786179964 imgs/s
+[07:34:19.964923] Epoch: [0]  [   82/20018]  eta: 3:02:40  lr: 0.000000  loss: 1.7176 (1.7189)  time: 0.5249  data: 0.3346  max mem: 14098
+[07:34:20.230249] TCAPPDLL 2025-07-10 07:34:20.230178 - Epoch: 0 Iteration: 83  rank : 0  train.loss : 1.7200827598571777  train.ips : 116.93429187883389 imgs/s
+[07:34:20.231241] Epoch: [0]  [   83/20018]  eta: 3:01:32  lr: 0.000000  loss: 1.7176 (1.7189)  time: 0.5293  data: 0.3346  max mem: 14098
+[07:34:20.501471] TCAPPDLL 2025-07-10 07:34:20.501399 - Epoch: 0 Iteration: 84  rank : 0  train.loss : 1.7167531251907349  train.ips : 117.6324542595265 imgs/s
+[07:34:20.502595] Epoch: [0]  [   84/20018]  eta: 3:00:26  lr: 0.000000  loss: 1.7176 (1.7189)  time: 0.5341  data: 0.3346  max mem: 14098
+[07:34:20.778798] TCAPPDLL 2025-07-10 07:34:20.778735 - Epoch: 0 Iteration: 85  rank : 0  train.loss : 1.716395378112793  train.ips : 118.30682351678442 imgs/s
+[07:34:20.779865] Epoch: [0]  [   85/20018]  eta: 2:59:24  lr: 0.000000  loss: 1.7168 (1.7188)  time: 0.5391  data: 0.3346  max mem: 14098
+[07:34:21.020796] TCAPPDLL 2025-07-10 07:34:21.020736 - Epoch: 0 Iteration: 86  rank : 0  train.loss : 1.7149780988693237  train.ips : 119.0631335510805 imgs/s
+[07:34:21.021696] Epoch: [0]  [   86/20018]  eta: 2:58:15  lr: 0.000000  loss: 1.7164 (1.7188)  time: 0.5353  data: 0.3284  max mem: 14098
+[07:34:21.751806] TCAPPDLL 2025-07-10 07:34:21.751750 - Epoch: 0 Iteration: 87  rank : 0  train.loss : 1.7166029214859009  train.ips : 118.5781118333559 imgs/s
+[07:34:21.752838] Epoch: [0]  [   87/20018]  eta: 2:58:58  lr: 0.000000  loss: 1.7164 (1.7188)  time: 0.5104  data: 0.2986  max mem: 14098
+[07:34:22.011380] TCAPPDLL 2025-07-10 07:34:22.011323 - Epoch: 0 Iteration: 88  rank : 0  train.loss : 1.718863844871521  train.ips : 119.27374315024544 imgs/s
+[07:34:22.012379] Epoch: [0]  [   88/20018]  eta: 2:57:55  lr: 0.000000  loss: 1.7164 (1.7188)  time: 0.5144  data: 0.2986  max mem: 14098
+[07:34:22.267709] TCAPPDLL 2025-07-10 07:34:22.267653 - Epoch: 0 Iteration: 89  rank : 0  train.loss : 1.7172478437423706  train.ips : 119.96995367107787 imgs/s
+[07:34:22.268675] Epoch: [0]  [   89/20018]  eta: 2:56:53  lr: 0.000000  loss: 1.7164 (1.7188)  time: 0.5178  data: 0.2986  max mem: 14098
+[07:34:22.583671] TCAPPDLL 2025-07-10 07:34:22.583612 - Epoch: 0 Iteration: 90  rank : 0  train.loss : 1.7164760828018188  train.ips : 120.50989794182938 imgs/s
+[07:34:22.584743] Epoch: [0]  [   90/20018]  eta: 2:56:04  lr: 0.000000  loss: 1.7165 (1.7187)  time: 0.5241  data: 0.3032  max mem: 14098
+[07:34:22.892009] TCAPPDLL 2025-07-10 07:34:22.891949 - Epoch: 0 Iteration: 91  rank : 0  train.loss : 1.7179176807403564  train.ips : 121.06180185069088 imgs/s
+[07:34:22.892995] Epoch: [0]  [   91/20018]  eta: 2:55:16  lr: 0.000000  loss: 1.7165 (1.7187)  time: 0.5307  data: 0.3055  max mem: 14098
+[07:34:25.299501] TCAPPDLL 2025-07-10 07:34:25.299427 - Epoch: 0 Iteration: 92  rank : 0  train.loss : 1.713291883468628  train.ips : 116.60576066754935 imgs/s
+[07:34:25.300679] Epoch: [0]  [   92/20018]  eta: 3:01:58  lr: 0.000000  loss: 1.7164 (1.7187)  time: 0.5691  data: 0.3393  max mem: 14098
+[07:34:25.546997] TCAPPDLL 2025-07-10 07:34:25.546936 - Epoch: 0 Iteration: 93  rank : 0  train.loss : 1.7157063484191895  train.ips : 117.29083991988018 imgs/s
+[07:34:25.548032] Epoch: [0]  [   93/20018]  eta: 3:00:53  lr: 0.000000  loss: 1.7164 (1.7186)  time: 0.5721  data: 0.3393  max mem: 14098
+[07:34:25.826083] TCAPPDLL 2025-07-10 07:34:25.826021 - Epoch: 0 Iteration: 94  rank : 0  train.loss : 1.7171659469604492  train.ips : 117.89711768618416 imgs/s
+[07:34:25.827231] Epoch: [0]  [   94/20018]  eta: 2:59:57  lr: 0.000000  loss: 1.7164 (1.7186)  time: 0.5766  data: 0.3393  max mem: 14098
+[07:34:26.082755] TCAPPDLL 2025-07-10 07:34:26.082691 - Epoch: 0 Iteration: 95  rank : 0  train.loss : 1.712912678718567  train.ips : 118.54811529947762 imgs/s
+[07:34:26.083718] Epoch: [0]  [   95/20018]  eta: 2:58:57  lr: 0.000000  loss: 1.7164 (1.7186)  time: 0.5799  data: 0.3393  max mem: 14098
+[07:34:26.339219] TCAPPDLL 2025-07-10 07:34:26.339150 - Epoch: 0 Iteration: 96  rank : 0  train.loss : 1.7132761478424072  train.ips : 119.19317950648343 imgs/s
+[07:34:26.340348] Epoch: [0]  [   96/20018]  eta: 2:57:58  lr: 0.000000  loss: 1.7164 (1.7185)  time: 0.5832  data: 0.3393  max mem: 14098
+[07:34:26.584957] TCAPPDLL 2025-07-10 07:34:26.584897 - Epoch: 0 Iteration: 97  rank : 0  train.loss : 1.7142692804336548  train.ips : 119.85645044552894 imgs/s
+[07:34:26.585995] Epoch: [0]  [   97/20018]  eta: 2:56:58  lr: 0.000000  loss: 1.7164 (1.7185)  time: 0.5280  data: 0.2820  max mem: 14098
+[07:34:26.832991] TCAPPDLL 2025-07-10 07:34:26.832932 - Epoch: 0 Iteration: 98  rank : 0  train.loss : 1.7158455848693848  train.ips : 120.5082827572861 imgs/s
+[07:34:26.833900] Epoch: [0]  [   98/20018]  eta: 2:56:00  lr: 0.000000  loss: 1.7164 (1.7184)  time: 0.5297  data: 0.2820  max mem: 14098
+[07:34:27.040315] TCAPPDLL 2025-07-10 07:34:27.040242 - Epoch: 0 Iteration: 99  rank : 0  train.loss : 1.715836524963379  train.ips : 121.24747023060888 imgs/s
+[07:34:27.041237] Epoch: [0]  [   99/20018]  eta: 2:54:55  lr: 0.000000  loss: 1.7164 (1.7184)  time: 0.5300  data: 0.2820  max mem: 14098
+[07:34:27.684664] TCAPPDLL 2025-07-10 07:34:27.684601 - Epoch: 0 Iteration: 100  rank : 0  train.loss : 1.715096354484558  train.ips : 120.98306473307106 imgs/s
+[07:34:27.685660] Epoch: [0]  [  100/20018]  eta: 2:55:18  lr: 0.000000  loss: 1.7158 (1.7184)  time: 0.5215  data: 0.2694  max mem: 14098
+[07:34:28.016558] TCAPPDLL 2025-07-10 07:34:28.016430 - Epoch: 0 Iteration: 101  rank : 0  train.loss : 1.713919758796692  train.ips : 121.42686867420485 imgs/s
+[07:34:28.018285] Epoch: [0]  [  101/20018]  eta: 2:54:39  lr: 0.000000  loss: 1.7158 (1.7183)  time: 0.5277  data: 0.2739  max mem: 14098
+[07:34:30.886562] TCAPPDLL 2025-07-10 07:34:30.886501 - Epoch: 0 Iteration: 102  rank : 0  train.loss : 1.7143200635910034  train.ips : 116.40294838639785 imgs/s
+[07:34:30.887621] Epoch: [0]  [  102/20018]  eta: 3:02:11  lr: 0.000000  loss: 1.7158 (1.7183)  time: 0.5453  data: 0.2894  max mem: 14098
+[07:34:31.119996] TCAPPDLL 2025-07-10 07:34:31.119937 - Epoch: 0 Iteration: 103  rank : 0  train.loss : 1.7166844606399536  train.ips : 117.05058155242877 imgs/s
+[07:34:31.120909] Epoch: [0]  [  103/20018]  eta: 3:01:10  lr: 0.000000  loss: 1.7158 (1.7183)  time: 0.5437  data: 0.2894  max mem: 14098
+[07:34:31.398848] TCAPPDLL 2025-07-10 07:34:31.398792 - Epoch: 0 Iteration: 104  rank : 0  train.loss : 1.7197322845458984  train.ips : 117.59937552640643 imgs/s
+[07:34:31.399751] Epoch: [0]  [  104/20018]  eta: 3:00:19  lr: 0.000000  loss: 1.7158 (1.7183)  time: 0.5440  data: 0.2894  max mem: 14098
+[07:34:31.673129] TCAPPDLL 2025-07-10 07:34:31.673068 - Epoch: 0 Iteration: 105  rank : 0  train.loss : 1.7134685516357422  train.ips : 118.15226276352294 imgs/s
+[07:34:31.674239] Epoch: [0]  [  105/20018]  eta: 2:59:28  lr: 0.000000  loss: 1.7157 (1.7182)  time: 0.5439  data: 0.2894  max mem: 14098
+[07:34:31.962131] TCAPPDLL 2025-07-10 07:34:31.962071 - Epoch: 0 Iteration: 106  rank : 0  train.loss : 1.7093937397003174  train.ips : 118.66960036158899 imgs/s
+[07:34:31.963101] Epoch: [0]  [  106/20018]  eta: 2:58:40  lr: 0.000000  loss: 1.7157 (1.7182)  time: 0.5462  data: 0.2894  max mem: 14098
+[07:34:32.202205] TCAPPDLL 2025-07-10 07:34:32.202145 - Epoch: 0 Iteration: 107  rank : 0  train.loss : 1.7159796953201294  train.ips : 119.28241345829144 imgs/s
+[07:34:32.203114] Epoch: [0]  [  107/20018]  eta: 2:57:44  lr: 0.000000  loss: 1.7157 (1.7181)  time: 0.5217  data: 0.2666  max mem: 14098
+[07:34:32.472342] TCAPPDLL 2025-07-10 07:34:32.472284 - Epoch: 0 Iteration: 108  rank : 0  train.loss : 1.7140681743621826  train.ips : 119.82825922630794 imgs/s
+[07:34:32.473227] Epoch: [0]  [  108/20018]  eta: 2:56:55  lr: 0.000000  loss: 1.7151 (1.7181)  time: 0.5222  data: 0.2666  max mem: 14098
+[07:34:32.743861] TCAPPDLL 2025-07-10 07:34:32.743803 - Epoch: 0 Iteration: 109  rank : 0  train.loss : 1.7148970365524292  train.ips : 120.3662202735286 imgs/s
+[07:34:32.744753] Epoch: [0]  [  109/20018]  eta: 2:56:07  lr: 0.000000  loss: 1.7149 (1.7181)  time: 0.5230  data: 0.2666  max mem: 14098
+[07:34:33.009271] TCAPPDLL 2025-07-10 07:34:33.009220 - Epoch: 0 Iteration: 110  rank : 0  train.loss : 1.715563178062439  train.ips : 120.91175974504998 imgs/s
+[07:34:33.010035] Epoch: [0]  [  110/20018]  eta: 2:55:19  lr: 0.000000  loss: 1.7149 (1.7181)  time: 0.5205  data: 0.2619  max mem: 14098
+[07:34:33.397343] TCAPPDLL 2025-07-10 07:34:33.397279 - Epoch: 0 Iteration: 111  rank : 0  train.loss : 1.7130523920059204  train.ips : 121.20054881993667 imgs/s
+[07:34:33.398310] Epoch: [0]  [  111/20018]  eta: 2:54:53  lr: 0.000000  loss: 1.7143 (1.7180)  time: 0.5245  data: 0.2655  max mem: 14098
+[07:34:36.051470] TCAPPDLL 2025-07-10 07:34:36.051409 - Epoch: 0 Iteration: 112  rank : 0  train.loss : 1.7126655578613281  train.ips : 117.03065833593175 imgs/s
+[07:34:36.052377] Epoch: [0]  [  112/20018]  eta: 3:01:07  lr: 0.000000  loss: 1.7143 (1.7180)  time: 0.5368  data: 0.2784  max mem: 14098
+[07:34:36.231664] TCAPPDLL 2025-07-10 07:34:36.231609 - Epoch: 0 Iteration: 113  rank : 0  train.loss : 1.7132585048675537  train.ips : 117.72303243337878 imgs/s
+[07:34:36.232531] Epoch: [0]  [  113/20018]  eta: 3:00:03  lr: 0.000000  loss: 1.7143 (1.7179)  time: 0.5334  data: 0.2784  max mem: 14098
+[07:34:36.492827] TCAPPDLL 2025-07-10 07:34:36.492769 - Epoch: 0 Iteration: 114  rank : 0  train.loss : 1.7126078605651855  train.ips : 118.25736763292015 imgs/s
+[07:34:36.493807] Epoch: [0]  [  114/20018]  eta: 2:59:14  lr: 0.000000  loss: 1.7141 (1.7179)  time: 0.5326  data: 0.2784  max mem: 14098
+[07:34:36.756090] TCAPPDLL 2025-07-10 07:34:36.756021 - Epoch: 0 Iteration: 115  rank : 0  train.loss : 1.7166978120803833  train.ips : 118.78326775451396 imgs/s
+[07:34:36.757430] Epoch: [0]  [  115/20018]  eta: 2:58:25  lr: 0.000000  loss: 1.7143 (1.7179)  time: 0.5329  data: 0.2784  max mem: 14098
+[07:34:37.017737] TCAPPDLL 2025-07-10 07:34:37.017658 - Epoch: 0 Iteration: 116  rank : 0  train.loss : 1.714856743812561  train.ips : 119.30787306909974 imgs/s
+[07:34:37.018953] Epoch: [0]  [  116/20018]  eta: 2:57:38  lr: 0.000000  loss: 1.7143 (1.7178)  time: 0.5331  data: 0.2784  max mem: 14098
+[07:34:37.276005] TCAPPDLL 2025-07-10 07:34:37.275946 - Epoch: 0 Iteration: 117  rank : 0  train.loss : 1.711335301399231  train.ips : 119.83438686628612 imgs/s
+[07:34:37.277001] Epoch: [0]  [  117/20018]  eta: 2:56:50  lr: 0.000000  loss: 1.7143 (1.7178)  time: 0.5338  data: 0.2784  max mem: 14098
+[07:34:37.557820] TCAPPDLL 2025-07-10 07:34:37.557761 - Epoch: 0 Iteration: 118  rank : 0  train.loss : 1.7147060632705688  train.ips : 120.31190919918748 imgs/s
+[07:34:37.558745] Epoch: [0]  [  118/20018]  eta: 2:56:07  lr: 0.000000  loss: 1.7143 (1.7178)  time: 0.5354  data: 0.2784  max mem: 14098
+[07:34:37.835073] TCAPPDLL 2025-07-10 07:34:37.835015 - Epoch: 0 Iteration: 119  rank : 0  train.loss : 1.7156747579574585  train.ips : 120.79387316660363 imgs/s
+[07:34:37.835969] Epoch: [0]  [  119/20018]  eta: 2:55:25  lr: 0.000000  loss: 1.7143 (1.7177)  time: 0.5389  data: 0.2784  max mem: 14098
+[07:34:38.126045] TCAPPDLL 2025-07-10 07:34:38.125973 - Epoch: 0 Iteration: 120  rank : 0  train.loss : 1.7125740051269531  train.ips : 121.24563723195223 imgs/s
+[07:34:38.127163] Epoch: [0]  [  120/20018]  eta: 2:54:45  lr: 0.000000  loss: 1.7141 (1.7177)  time: 0.5213  data: 0.2610  max mem: 14098
+[07:34:38.577719] TCAPPDLL 2025-07-10 07:34:38.577661 - Epoch: 0 Iteration: 121  rank : 0  train.loss : 1.709746241569519  train.ips : 121.38920579030629 imgs/s
+[07:34:38.578678] Epoch: [0]  [  121/20018]  eta: 2:54:32  lr: 0.000000  loss: 1.7141 (1.7176)  time: 0.5272  data: 0.2649  max mem: 14098
+[07:34:40.848694] TCAPPDLL 2025-07-10 07:34:40.848638 - Epoch: 0 Iteration: 122  rank : 0  train.loss : 1.713730812072754  train.ips : 118.21061100303298 imgs/s
+[07:34:40.849595] Epoch: [0]  [  122/20018]  eta: 2:59:14  lr: 0.000000  loss: 1.7137 (1.7176)  time: 0.4973  data: 0.2373  max mem: 14098
+[07:34:41.133965] TCAPPDLL 2025-07-10 07:34:41.133908 - Epoch: 0 Iteration: 123  rank : 0  train.loss : 1.713663101196289  train.ips : 118.66334404040244 imgs/s
+[07:34:41.134921] Epoch: [0]  [  123/20018]  eta: 2:58:32  lr: 0.000000  loss: 1.7137 (1.7176)  time: 0.4999  data: 0.2373  max mem: 14098
+[07:34:41.394054] TCAPPDLL 2025-07-10 07:34:41.393996 - Epoch: 0 Iteration: 124  rank : 0  train.loss : 1.7114297151565552  train.ips : 119.15691118268136 imgs/s
+[07:34:41.395004] Epoch: [0]  [  124/20018]  eta: 2:57:47  lr: 0.000000  loss: 1.7135 (1.7175)  time: 0.4990  data: 0.2373  max mem: 14098
+[07:34:41.684567] TCAPPDLL 2025-07-10 07:34:41.684495 - Epoch: 0 Iteration: 125  rank : 0  train.loss : 1.7075676918029785  train.ips : 119.5927052300878 imgs/s
+[07:34:41.685760] Epoch: [0]  [  125/20018]  eta: 2:57:08  lr: 0.000000  loss: 1.7133 (1.7174)  time: 0.4998  data: 0.2373  max mem: 14098
+[07:34:41.939881] TCAPPDLL 2025-07-10 07:34:41.939823 - Epoch: 0 Iteration: 126  rank : 0  train.loss : 1.7131949663162231  train.ips : 120.08712726784493 imgs/s
+[07:34:41.940958] Epoch: [0]  [  126/20018]  eta: 2:56:23  lr: 0.000000  loss: 1.7133 (1.7174)  time: 0.4981  data: 0.2373  max mem: 14098
+[07:34:42.117507] TCAPPDLL 2025-07-10 07:34:42.117449 - Epoch: 0 Iteration: 127  rank : 0  train.loss : 1.7132259607315063  train.ips : 120.71589472105373 imgs/s
+[07:34:42.118554] Epoch: [0]  [  127/20018]  eta: 2:55:27  lr: 0.000000  loss: 1.7132 (1.7174)  time: 0.4950  data: 0.2373  max mem: 14098
+[07:34:42.415311] TCAPPDLL 2025-07-10 07:34:42.415251 - Epoch: 0 Iteration: 128  rank : 0  train.loss : 1.71356999874115  train.ips : 121.12744849112416 imgs/s
+[07:34:42.416235] Epoch: [0]  [  128/20018]  eta: 2:54:51  lr: 0.000000  loss: 1.7132 (1.7173)  time: 0.4963  data: 0.2373  max mem: 14098
+[07:34:42.666917] TCAPPDLL 2025-07-10 07:34:42.666855 - Epoch: 0 Iteration: 129  rank : 0  train.loss : 1.711412787437439  train.ips : 121.61747384522415 imgs/s
+[07:34:42.667920] Epoch: [0]  [  129/20018]  eta: 2:54:08  lr: 0.000000  loss: 1.7132 (1.7173)  time: 0.4953  data: 0.2373  max mem: 14098
+[07:34:42.966381] TCAPPDLL 2025-07-10 07:34:42.966323 - Epoch: 0 Iteration: 130  rank : 0  train.loss : 1.7103668451309204  train.ips : 122.01885903597791 imgs/s
+[07:34:42.967377] Epoch: [0]  [  130/20018]  eta: 2:53:33  lr: 0.000000  loss: 1.7131 (1.7172)  time: 0.4970  data: 0.2373  max mem: 14098
+[07:34:43.848028] TCAPPDLL 2025-07-10 07:34:43.847952 - Epoch: 0 Iteration: 131  rank : 0  train.loss : 1.7125229835510254  train.ips : 121.39271419594262 imgs/s
+[07:34:43.851264] Epoch: [0]  [  131/20018]  eta: 2:54:27  lr: 0.000000  loss: 1.7127 (1.7172)  time: 0.5217  data: 0.2633  max mem: 14098
+[07:34:46.935139] TCAPPDLL 2025-07-10 07:34:46.935069 - Epoch: 0 Iteration: 132  rank : 0  train.loss : 1.710518717765808  train.ips : 117.1170685589495 imgs/s
+[07:34:46.936226] Epoch: [0]  [  132/20018]  eta: 3:00:49  lr: 0.000000  loss: 1.7126 (1.7172)  time: 0.5433  data: 0.2880  max mem: 14098
+[07:34:47.201052] TCAPPDLL 2025-07-10 07:34:47.200992 - Epoch: 0 Iteration: 133  rank : 0  train.loss : 1.7094658613204956  train.ips : 117.56745364850329 imgs/s
+[07:34:47.201997] Epoch: [0]  [  133/20018]  eta: 3:00:06  lr: 0.000000  loss: 1.7126 (1.7171)  time: 0.5475  data: 0.2880  max mem: 14098
+[07:34:47.450996] TCAPPDLL 2025-07-10 07:34:47.450936 - Epoch: 0 Iteration: 134  rank : 0  train.loss : 1.7119674682617188  train.ips : 118.04035850956275 imgs/s
+[07:34:47.452003] Epoch: [0]  [  134/20018]  eta: 2:59:22  lr: 0.000000  loss: 1.7125 (1.7171)  time: 0.5470  data: 0.2880  max mem: 14098
+[07:34:47.725736] TCAPPDLL 2025-07-10 07:34:47.725677 - Epoch: 0 Iteration: 135  rank : 0  train.loss : 1.7109822034835815  train.ips : 118.47005153755016 imgs/s
+[07:34:47.726693] Epoch: [0]  [  135/20018]  eta: 2:58:43  lr: 0.000000  loss: 1.7120 (1.7170)  time: 0.5476  data: 0.2880  max mem: 14098
+[07:34:47.950820] TCAPPDLL 2025-07-10 07:34:47.950765 - Epoch: 0 Iteration: 136  rank : 0  train.loss : 1.7126604318618774  train.ips : 118.97664634845007 imgs/s
+[07:34:47.951623] Epoch: [0]  [  136/20018]  eta: 2:57:57  lr: 0.000000  loss: 1.7120 (1.7170)  time: 0.5457  data: 0.2880  max mem: 14098
+[07:34:48.161014] TCAPPDLL 2025-07-10 07:34:48.160953 - Epoch: 0 Iteration: 137  rank : 0  train.loss : 1.708760142326355  train.ips : 119.50425539604443 imgs/s
+[07:34:48.161924] Epoch: [0]  [  137/20018]  eta: 2:57:09  lr: 0.000000  loss: 1.7120 (1.7169)  time: 0.5434  data: 0.2880  max mem: 14098
+[07:34:48.417459] TCAPPDLL 2025-07-10 07:34:48.417391 - Epoch: 0 Iteration: 138  rank : 0  train.loss : 1.7090609073638916  train.ips : 119.95400965643108 imgs/s
+[07:34:48.418765] Epoch: [0]  [  138/20018]  eta: 2:56:28  lr: 0.000000  loss: 1.7114 (1.7169)  time: 0.5421  data: 0.2880  max mem: 14098
+[07:34:48.655246] TCAPPDLL 2025-07-10 07:34:48.655184 - Epoch: 0 Iteration: 139  rank : 0  train.loss : 1.7085602283477783  train.ips : 120.43083484439231 imgs/s
+[07:34:48.656317] Epoch: [0]  [  139/20018]  eta: 2:55:46  lr: 0.000000  loss: 1.7114 (1.7168)  time: 0.5401  data: 0.2880  max mem: 14098
+[07:34:48.920528] TCAPPDLL 2025-07-10 07:34:48.920434 - Epoch: 0 Iteration: 140  rank : 0  train.loss : 1.71198308467865  train.ips : 120.86016987972754 imgs/s
+[07:34:48.921542] Epoch: [0]  [  140/20018]  eta: 2:55:08  lr: 0.000000  loss: 1.7114 (1.7168)  time: 0.5388  data: 0.2880  max mem: 14098
+[07:34:49.209028] TCAPPDLL 2025-07-10 07:34:49.208967 - Epoch: 0 Iteration: 141  rank : 0  train.loss : 1.7069717645645142  train.ips : 121.24877964457323 imgs/s
+[07:34:49.210137] Epoch: [0]  [  141/20018]  eta: 2:54:34  lr: 0.000000  loss: 1.7114 (1.7167)  time: 0.5307  data: 0.2796  max mem: 14098
+[07:34:51.957352] TCAPPDLL 2025-07-10 07:34:51.957291 - Epoch: 0 Iteration: 142  rank : 0  train.loss : 1.7101669311523438  train.ips : 117.7838462491313 imgs/s
+[07:34:51.958366] Epoch: [0]  [  142/20018]  eta: 2:59:42  lr: 0.000000  loss: 1.7110 (1.7167)  time: 0.5545  data: 0.3035  max mem: 14098
+[07:34:52.227873] TCAPPDLL 2025-07-10 07:34:52.227807 - Epoch: 0 Iteration: 143  rank : 0  train.loss : 1.7117317914962769  train.ips : 118.19601409917493 imgs/s
+[07:34:52.229050] Epoch: [0]  [  143/20018]  eta: 2:59:03  lr: 0.000000  loss: 1.7110 (1.7166)  time: 0.5538  data: 0.3035  max mem: 14098
+[07:34:52.485198] TCAPPDLL 2025-07-10 07:34:52.485142 - Epoch: 0 Iteration: 144  rank : 0  train.loss : 1.7110663652420044  train.ips : 118.62531113316467 imgs/s
+[07:34:52.486072] Epoch: [0]  [  144/20018]  eta: 2:58:24  lr: 0.000000  loss: 1.7110 (1.7166)  time: 0.5536  data: 0.3035  max mem: 14098
+[07:34:52.723069] TCAPPDLL 2025-07-10 07:34:52.723011 - Epoch: 0 Iteration: 145  rank : 0  train.loss : 1.7097792625427246  train.ips : 119.08133137101433 imgs/s
+[07:34:52.724151] Epoch: [0]  [  145/20018]  eta: 2:57:42  lr: 0.000000  loss: 1.7110 (1.7165)  time: 0.5510  data: 0.3035  max mem: 14098
+[07:34:52.995743] TCAPPDLL 2025-07-10 07:34:52.995672 - Epoch: 0 Iteration: 146  rank : 0  train.loss : 1.7121959924697876  train.ips : 119.48182158368806 imgs/s
+[07:34:52.996974] Epoch: [0]  [  146/20018]  eta: 2:57:06  lr: 0.000000  loss: 1.7110 (1.7165)  time: 0.5519  data: 0.3035  max mem: 14098
+[07:34:53.240316] TCAPPDLL 2025-07-10 07:34:53.240259 - Epoch: 0 Iteration: 147  rank : 0  train.loss : 1.7118533849716187  train.ips : 119.9220801658364 imgs/s
+[07:34:53.241309] Epoch: [0]  [  147/20018]  eta: 2:56:26  lr: 0.000000  loss: 1.7110 (1.7165)  time: 0.5552  data: 0.3035  max mem: 14098
+[07:34:53.531486] TCAPPDLL 2025-07-10 07:34:53.531414 - Epoch: 0 Iteration: 148  rank : 0  train.loss : 1.7099534273147583  train.ips : 120.2889425546364 imgs/s
+[07:34:53.533026] Epoch: [0]  [  148/20018]  eta: 2:55:54  lr: 0.000000  loss: 1.7105 (1.7164)  time: 0.5549  data: 0.3035  max mem: 14098
+[07:34:53.824687] TCAPPDLL 2025-07-10 07:34:53.824627 - Epoch: 0 Iteration: 149  rank : 0  train.loss : 1.7097387313842773  train.ips : 120.65001163732298 imgs/s
+[07:34:53.825724] Epoch: [0]  [  149/20018]  eta: 2:55:21  lr: 0.000000  loss: 1.7104 (1.7164)  time: 0.5569  data: 0.3035  max mem: 14098
+[07:34:53.894387] 150iters stop!
+ERROR:torch.distributed.elastic.multiprocessing.api:failed (exitcode: 1) local_rank: 0 (pid: 1837057) of binary: /root/miniconda3/envs/vae/bin/python
+Traceback (most recent call last):
+  File "/root/miniconda3/envs/vae/bin/torchrun", line 33, in <module>
+    sys.exit(load_entry_point('torch==1.11.0', 'console_scripts', 'torchrun')())
+  File "/root/miniconda3/envs/vae/lib/python3.8/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 345, in wrapper
+    return f(*args, **kwargs)
+  File "/root/miniconda3/envs/vae/lib/python3.8/site-packages/torch/distributed/run.py", line 724, in main
+    run(args)
+  File "/root/miniconda3/envs/vae/lib/python3.8/site-packages/torch/distributed/run.py", line 715, in run
+    elastic_launch(
+  File "/root/miniconda3/envs/vae/lib/python3.8/site-packages/torch/distributed/launcher/api.py", line 131, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+  File "/root/miniconda3/envs/vae/lib/python3.8/site-packages/torch/distributed/launcher/api.py", line 245, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+============================================================
+main_pretrain.py FAILED
+------------------------------------------------------------
+Failures:
+  <NO_OTHER_FAILURES>
+------------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2025-07-10_07:34:59
+  host      : c0e57fb37bd2
+  rank      : 0 (local_rank: 0)
+  exitcode  : 1 (pid: 1837057)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+============================================================
