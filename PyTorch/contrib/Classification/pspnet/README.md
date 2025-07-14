@@ -51,7 +51,7 @@ PSPNet（Pyramid Scene Parsing Network）是一种通过引入金字塔池化模
 
 2. 运行训练。该模型支持单机单卡。
     ```
-python run_pspnet.py --config ../configs/pspnet/pspnet_r50-d8_4xb2-40k_cityscapes-512x1024.py \
+    python run_pspnet.py --config ../configs/pspnet/pspnet_r50-d8_4xb2-40k_cityscapes-512x1024.py \
        --launcher pytorch --nproc-per-node 1 --amp 2>&1 | tee sdaa.log
    ```
     更多训练参数参考 run_scripts/argument.py
@@ -59,7 +59,7 @@ python run_pspnet.py --config ../configs/pspnet/pspnet_r50-d8_4xb2-40k_cityscape
 ### 2.5 训练结果
 输出训练loss曲线及结果（参考使用[loss.py](./run_scripts/loss.py)）: 
 
-![loss](./image/loss.jpg)
+
 
 MeanRelativeError: -0.030885391620088486
 MeanAbsoluteError: -0.21746979432530922
