@@ -48,7 +48,7 @@ CAE使用 ImageNet 数据集，该数据集为开源数据集，可从 [ImageNet
 
 2. 运行训练。该模型支持单机单卡。
     ```
-   python run_beitv2.py --config ../configs/beitv2/beitv2_beit-base-p16_8xb256-amp-coslr-300e_in1k\
+    python run_beitv2.py --config ../configs/beitv2/beitv2_beit-base-p16_8xb256-amp-coslr-300e_in1k\
     --launcher pytorch --nproc-per-node 4 --amp \
     --cfg-options "train_dataloader.dataset.data_root=$data_path" 2>&1 | tee sdaa.log
    ```
