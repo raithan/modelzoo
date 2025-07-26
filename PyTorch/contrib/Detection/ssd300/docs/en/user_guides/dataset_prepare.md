@@ -1,364 +1,310 @@
-# Prepare Dataset
+# Dataset Prepare
 
-## CustomDataset
+### Basic Detection Dataset Preparation
 
-[`CustomDataset`](mmpretrain.datasets.CustomDataset) is a general dataset class for you to use your own datasets. To use `CustomDataset`, you need to organize your dataset files according to the following two formats:
+MMDetection supports multiple public datasets including COCO, Pascal VOC, CityScapes, and [more](../../../configs/_base_/datasets).
 
-### Subfolder Format
+Public datasets like [Pascal VOC](http://host.robots.ox.ac.uk/pascal/VOC/index.html) or mirror and [COCO](https://cocodataset.org/#download) are available from official websites or mirrors. Note: In the detection task, Pascal VOC 2012 is an extension of Pascal VOC 2007 without overlap, and we usually use them together.
+It is recommended to download and extract the dataset somewhere outside the project directory and symlink the dataset root to `$MMDETECTION/data` as below.
+If your folder structure is different, you may need to change the corresponding paths in config files.
 
-In this format, you only need to re-organize your dataset folder and place all samples in one folder without
-creating any annotation files.
+We provide a script to download datasets such as COCO, you can run `python tools/misc/download_dataset.py --dataset-name coco2017` to download COCO dataset.
+For users in China, more datasets can be downloaded from the opensource dataset platform: [OpenDataLab](https://opendatalab.com/?source=OpenMMLab%20GitHub).
 
-For supervised tasks (with `with_label=True`), we use the name of sub-folders as the categories names, as
-shown in the below example, `class_x` and `class_y` will be recognized as the categories names.
-
-```text
-data_prefix/
-├── class_x
-│   ├── xxx.png
-│   ├── xxy.png
-│   └── ...
-│       └── xxz.png
-└── class_y
-    ├── 123.png
-    ├── nsdf3.png
-    ├── ...
-    └── asd932_.png
-```
-
-For unsupervised tasks (with `with_label=False`), we directly load all sample files under the specified folder:
+For more usage please refer to [dataset-download](./useful_tools.md#dataset-download)
 
 ```text
-data_prefix/
-├── folder_1
-│   ├── xxx.png
-│   ├── xxy.png
-│   └── ...
-├── 123.png
-├── nsdf3.png
-└── ...
+mmdetection
+├── mmdet
+├── tools
+├── configs
+├── data
+│   ├── coco
+│   │   ├── annotations
+│   │   ├── train2017
+│   │   ├── val2017
+│   │   ├── test2017
+│   ├── cityscapes
+│   │   ├── annotations
+│   │   ├── leftImg8bit
+│   │   │   ├── train
+│   │   │   ├── val
+│   │   ├── gtFine
+│   │   │   ├── train
+│   │   │   ├── val
+│   ├── VOCdevkit
+│   │   ├── VOC2007
+│   │   ├── VOC2012
 ```
 
-Assume you want to use it as the training dataset, and the below is the configurations in your config file.
-
-```python
-train_dataloader = dict(
-    ...
-    # Training dataset configurations
-    dataset=dict(
-        type='CustomDataset',
-        data_prefix='path/to/data_prefix',
-        with_label=True,   # or False for unsupervised tasks
-        pipeline=...
-    )
-)
-```
-
-```{note}
-If you want to use this format, do not specify `ann_file`, or specify `ann_file=''`.
-
-And please note that the subfolder format requires a folder scanning which may cause a slower initialization,
-especially for large datasets or slow file IO.
-```
-
-### Text Annotation File Format
-
-In this format, we use a text annotation file to store image file paths and the corespondding category
-indices.
-
-For supervised tasks (with `with_label=True`), the annotation file should include the file path and the
-category index of one sample in one line and split them by a space, as below:
-
-All these file paths can be absolute paths, or paths relative to the `data_prefix`.
+Some models require additional [COCO-stuff](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/stuffthingmaps_trainval2017.zip) datasets, such as HTC, DetectoRS and SCNet, you can download, unzip, and then move them to the coco folder. The directory should be like this.
 
 ```text
-folder_1/xxx.png 0
-folder_1/xxy.png 1
-123.png 4
-nsdf3.png 3
-...
+mmdetection
+├── data
+│   ├── coco
+│   │   ├── annotations
+│   │   ├── train2017
+│   │   ├── val2017
+│   │   ├── test2017
+│   │   ├── stuffthingmaps
 ```
 
-```{note}
-The index numbers of categories start from 0. And the value of ground-truth labels should fall in range `[0, num_classes - 1]`.
-
-In addition, please use the `classes` field in the dataset settings to specify the name of every category.
-```
-
-For unsupervised tasks (with `with_label=False`), the annotation file only need to include the file path of
-one sample in one line, as below:
+Panoptic segmentation models like PanopticFPN require additional [COCO Panoptic](http://images.cocodataset.org/annotations/panoptic_annotations_trainval2017.zip) datasets, you can download, unzip, and then move them to the coco annotation folder. The directory should be like this.
 
 ```text
-folder_1/xxx.png
-folder_1/xxy.png
-123.png
-nsdf3.png
-...
+mmdetection
+├── data
+│   ├── coco
+│   │   ├── annotations
+│   │   │   ├── panoptic_train2017.json
+│   │   │   ├── panoptic_train2017
+│   │   │   ├── panoptic_val2017.json
+│   │   │   ├── panoptic_val2017
+│   │   ├── train2017
+│   │   ├── val2017
+│   │   ├── test2017
 ```
 
-Assume the entire dataset folder is as below:
+The [cityscapes](https://www.cityscapes-dataset.com/) annotations need to be converted into the coco format using `tools/dataset_converters/cityscapes.py`:
+
+```shell
+pip install cityscapesscripts
+
+python tools/dataset_converters/cityscapes.py \
+    ./data/cityscapes \
+    --nproc 8 \
+    --out-dir ./data/cityscapes/annotations
+```
+
+### COCO Caption Dataset Preparation
+
+COCO Caption uses the COCO2014 dataset image and uses the annotation of karpathy.
+
+At first, you need to download the COCO2014 dataset.
+
+```shell
+python tools/misc/download_dataset.py --dataset-name coco2014 --unzip
+```
+
+The dataset will be downloaded to `data/coco` under the current path. Then download the annotation of karpathy.
+
+```shell
+cd data/coco/annotations
+wget https://storage.googleapis.com/sfr-vision-language-research/datasets/coco_karpathy_train.json
+wget https://storage.googleapis.com/sfr-vision-language-research/datasets/coco_karpathy_val.json
+wget https://storage.googleapis.com/sfr-vision-language-research/datasets/coco_karpathy_test.json
+wget https://storage.googleapis.com/sfr-vision-language-research/datasets/coco_karpathy_val_gt.json
+wget https://storage.googleapis.com/sfr-vision-language-research/datasets/coco_karpathy_test_gt.json
+```
+
+The final directory structure of the dataset folder that can be directly used for training and testing is as follows:
 
 ```text
-data_root
-├── meta
-│   ├── test.txt     # The annotation file for the test dataset
-│   ├── train.txt    # The annotation file for the training dataset
-│   └── val.txt      # The annotation file for the validation dataset.
-├── train
-│   ├── 123.png
-│   ├── folder_1
-│   │   ├── xxx.png
-│   │   └── xxy.png
-│   └── nsdf3.png
-├── test
-└── val
+mmdetection
+├── data
+│   ├── coco
+│   │   ├── annotations
+│   │   │   ├── coco_karpathy_train.json
+│   │   │   ├── coco_karpathy_test.json
+│   │   │   ├── coco_karpathy_val.json
+│   │   │   ├── coco_karpathy_val_gt.json
+│   │   │   ├── coco_karpathy_test_gt.json
+│   │   ├── train2014
+│   │   ├── val2014
+│   │   ├── test2014
 ```
 
-Here is an example dataset settings in config files:
+### COCO Semantic Dataset Preparation
 
-```python
-# Training dataloader configurations
-train_dataloader = dict(
-    dataset=dict(
-        type='CustomDataset',
-        data_root='path/to/data_root',  # The common prefix of both `ann_flie` and `data_prefix`.
-        ann_file='meta/train.txt',      # The path of annotation file relative to the data_root.
-        data_prefix='train',            # The prefix of file paths in the `ann_file`, relative to the data_root.
-        with_label=True,                # or False for unsupervised tasks
-        classes=['A', 'B', 'C', 'D', ...],  # The name of every category.
-        pipeline=...,    # The transformations to process the dataset samples.
-    )
-    ...
-)
-```
+There are two types of annotations for COCO semantic segmentation, which differ mainly in the definition of category names, so there are two ways to handle them. The first is to directly use the stuffthingmaps dataset, and the second is to use the panoptic dataset.
 
-```{note}
-For a complete example about how to use the `CustomDataset`, please see [How to Pretrain with Custom Dataset](../notes/pretrain_custom_dataset.md)
-```
+**(1) Use stuffthingmaps dataset**
 
-## ImageNet
-
-ImageNet has multiple versions, but the most commonly used one is [ILSVRC 2012](http://www.image-net.org/challenges/LSVRC/2012/). It can be accessed with the following steps.
-
-`````{tabs}
-
-````{group-tab} Download by MIM
-
-MIM supports downloading from [OpenXlab](https://openxlab.org.cn/datasets) and preprocessing ImageNet dataset with one command line.
-
-_You need to register an account at [OpenXlab official website](https://openxlab.org.cn/datasets) and login by CLI._
-
-```Bash
-# install OpenXlab CLI tools
-pip install -U openxlab
-# log in OpenXLab
-openxlab login
-# download and preprocess by MIM, better to execute in $MMPreTrain directory.
-mim download mmpretrain --dataset imagenet1k
-```
-
-````
-
-````{group-tab} Download form Official Source
-
-1. Register an account and login to the [download page](http://www.image-net.org/download-images).
-2. Find download links for ILSVRC2012 and download the following two files
-   - ILSVRC2012_img_train.tar (~138GB)
-   - ILSVRC2012_img_val.tar (~6.3GB)
-3. Untar the downloaded files
-
-````
-
-`````
-
-### The Directory Structrue of the ImageNet dataset
-
-We support two ways of organizing the ImageNet dataset: Subfolder Format and Text Annotation File Format.
-
-#### Subfolder Format
-
-We have provided a sample, which you can download and extract from this [link](https://download.openmmlab.com/mmpretrain/datasets/imagenet_1k.zip). The directory structure of the dataset should be as below:
+The download link for this dataset is [stuffthingmaps_trainval2017](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/stuffthingmaps_trainval2017.zip). Please download and extract it to the `data/coco` folder.
 
 ```text
-data/imagenet/
-├── train/
-│   ├── n01440764
-│   │   ├── n01440764_10026.JPEG
-│   │   ├── n01440764_10027.JPEG
-│   │   ├── n01440764_10029.JPEG
-│   │   ├── n01440764_10040.JPEG
-│   │   ├── n01440764_10042.JPEG
-│   │   ├── n01440764_10043.JPEG
-│   │   └── n01440764_10048.JPEG
-│   ├── ...
-├── val/
-│   ├── n01440764
-│   │   ├── ILSVRC2012_val_00000293.JPEG
-│   │   ├── ILSVRC2012_val_00002138.JPEG
-│   │   ├── ILSVRC2012_val_00003014.JPEG
-│   │   └── ...
-│   ├── ...
+mmdetection
+├── data
+│   ├── coco
+│   │   ├── annotations
+│   │   ├── train2017
+│   │   ├── val2017
+│   │   ├── test2017
+│   │   ├── stuffthingmaps
 ```
 
-#### Text Annotation File Format
+This dataset is different from the standard COCO category annotation in that it includes 172 classes: 80 "thing" classes, 91 "stuff" classes, and 1 "unlabeled" class. The description of each class can be found at https://github.com/nightrome/cocostuff/blob/master/labels.md.
 
-You can download and untar the meta data from this [link](https://download.openmmlab.com/mmclassification/datasets/imagenet/meta/caffe_ilsvrc12.tar.gz). And re-organize the dataset as below:
+Although only 172 categories are annotated, the maximum label ID in `stuffthingmaps` is 182, and some categories in the middle are not annotated. In addition, the "unlabeled" category of class 0 is removed. Therefore, the relationship between the value at each position in the final `stuffthingmaps` image can be found at https://github.com/kazuto1011/deeplab-pytorch/blob/master/data/datasets/cocostuff/labels.txt.
+
+To train efficiently and conveniently for users, we need to remove 12 unannotated classes before starting training or evaluation. The names of these 12 classes are: `street sign, hat, shoe, eye glasses, plate, mirror, window, desk, door, blender, hair brush`. The category information that can be used for training and evaluation can be found in `mmdet/datasets/coco_semantic.py`.
+
+You can use `tools/dataset_converters/coco_stuff164k.py` to convert the downloaded `stuffthingmaps` to a dataset that can be directly used for training and evaluation. The directory structure of the converted dataset is as follows:
 
 ```text
-data/imagenet/
-├── meta/
-│   ├── train.txt
-│   ├── test.txt
-│   └── val.txt
-├── train/
-│   ├── n01440764
-│   │   ├── n01440764_10026.JPEG
-│   │   ├── n01440764_10027.JPEG
-│   │   ├── n01440764_10029.JPEG
-│   │   ├── n01440764_10040.JPEG
-│   │   ├── n01440764_10042.JPEG
-│   │   ├── n01440764_10043.JPEG
-│   │   └── n01440764_10048.JPEG
-│   ├── ...
-├── val/
-│   ├── ILSVRC2012_val_00000001.JPEG
-│   ├── ILSVRC2012_val_00000002.JPEG
-│   ├── ILSVRC2012_val_00000003.JPEG
-│   ├── ILSVRC2012_val_00000004.JPEG
-│   ├── ...
+mmdetection
+├── data
+│   ├── coco
+│   │   ├── annotations
+│   │   ├── train2017
+│   │   ├── val2017
+│   │   ├── test2017
+│   │   ├── stuffthingmaps
+│   │   ├── stuffthingmaps_semseg
 ```
 
-### Configuration
+`stuffthingmaps_semseg` is the newly generated COCO semantic segmentation dataset that can be directly used for training and testing.
 
-Once your dataset is organized in the way described above, you can use the [`ImageNet`](mmpretrain.datasets.ImageNet) dataset with the below configurations:
+**(2) use panoptic dataset**
 
-```python
-train_dataloader = dict(
-    ...
-    # Training dataset configurations
-    dataset=dict(
-        type='ImageNet',
-        data_root='data/imagenet',
-        split='train',
-        pipeline=...,
-    )
-)
+The number of categories in the semantic segmentation dataset generated through panoptic annotation will be less than that generated using the `stuffthingmaps` dataset. First, you need to prepare the panoptic segmentation annotations, and then use the following script to complete the conversion.
 
-val_dataloader = dict(
-    ...
-    # Validation dataset configurations
-    dataset=dict(
-        type='ImageNet',
-        data_root='data/imagenet',
-        split='val',
-        pipeline=...,
-    )
-)
-
-test_dataloader = val_dataloader
+```shell
+python tools/dataset_converters/prepare_coco_semantic_annos_from_panoptic_annos.py data/coco
 ```
 
-## Supported Image Classification Datasets
+The directory structure of the converted dataset is as follows:
 
-| Datasets                                                                           | split                               | HomePage                                                                            |
-| ---------------------------------------------------------------------------------- | :---------------------------------- | ----------------------------------------------------------------------------------- |
-| [`Calthch101`](mmpretrain.datasets.Caltech101)(data_root[, split, pipeline, ...])  | ["train", "test"]                   | [Caltech 101](https://data.caltech.edu/records/mzrjq-6wc02) Dataset.                |
-| [`CIFAR10`](mmpretrain.datasets.CIFAR10)(data_root[, split, pipeline, ...])        | ["train", "test"]                   | [CIFAR10](https://www.cs.toronto.edu/~kriz/cifar.html) Dataset.                     |
-| [`CIFAR100`](mmpretrain.datasets.CIFAR100)(data_root[, split, pipeline, ...])      | ["train", "test"]                   | [CIFAR100](https://www.cs.toronto.edu/~kriz/cifar.html) Dataset.                    |
-| [`CUB`](mmpretrain.datasets.CUB)(data_root[, split, pipeline, ...])                | ["train", "test"]                   | [CUB-200-2011](http://www.vision.caltech.edu/datasets/cub_200_2011/) Dataset.       |
-| [`DTD`](mmpretrain.datasets.DTD)(data_root[, split, pipeline, ...])                | ["train", "val", "tranval", "test"] | [Describable Texture Dataset (DTD)](https://www.robots.ox.ac.uk/~vgg/data/dtd/) Dataset. |
-| [`FashionMNIST`](mmpretrain.datasets.FashionMNIST) (data_root[, split, pipeline, ...]) | ["train", "test"]                   | [Fashion-MNIST](https://github.com/zalandoresearch/fashion-mnist) Dataset.          |
-| [`FGVCAircraft`](mmpretrain.datasets.FGVCAircraft)(data_root[, split, pipeline, ...]) | ["train", "val", "tranval", "test"] | [FGVC Aircraft](https://www.robots.ox.ac.uk/~vgg/data/fgvc-aircraft/) Dataset.      |
-| [`Flowers102`](mmpretrain.datasets.Flowers102)(data_root[, split, pipeline, ...])  | ["train", "val", "tranval", "test"] | [Oxford 102 Flower](https://www.robots.ox.ac.uk/~vgg/data/flowers/102/) Dataset.    |
-| [`Food101`](mmpretrain.datasets.Food101)(data_root[, split, pipeline, ...])        | ["train", "test"]                   | [Food101](https://data.vision.ee.ethz.ch/cvl/datasets_extra/food-101/) Dataset.     |
-| [`MNIST`](mmpretrain.datasets.MNIST) (data_root[, split, pipeline, ...])           | ["train", "test"]                   | [MNIST](http://yann.lecun.com/exdb/mnist/) Dataset.                                 |
-| [`OxfordIIITPet`](mmpretrain.datasets.OxfordIIITPet)(data_root[, split, pipeline, ...]) | ["tranval", test"]                  | [Oxford-IIIT Pets](https://www.robots.ox.ac.uk/~vgg/data/pets/) Dataset.            |
-| [`Places205`](mmpretrain.datasets.Places205)(data_root[, pipeline, ...])           | -                                   | [Places205](http://places.csail.mit.edu/downloadData.html) Dataset.                 |
-| [`StanfordCars`](mmpretrain.datasets.StanfordCars)(data_root[, split, pipeline, ...]) | ["train", "test"]                   | [Stanford Cars](https://ai.stanford.edu/~jkrause/cars/car_dataset.html) Dataset.    |
-| [`SUN397`](mmpretrain.datasets.SUN397)(data_root[, split, pipeline, ...])          | ["train", "test"]                   | [SUN397](https://vision.princeton.edu/projects/2010/SUN/) Dataset.                  |
-| [`VOC`](mmpretrain.datasets.VOC)(data_root[, image_set_path, pipeline, ...])       | ["train", "val", "tranval", "test"] | [Pascal VOC](http://host.robots.ox.ac.uk/pascal/VOC/) Dataset.                      |
-
-Some dataset homepage links may be unavailable, and you can download datasets through [OpenXLab](https://openxlab.org.cn/datasets), such as [Stanford Cars](https://openxlab.org.cn/datasets/OpenDataLab/Stanford_Cars).
-
-## Supported Multi-modality Datasets
-
-| Datasets                                                                                      | split                    | HomePage                                                                            |
-| --------------------------------------------------------------------------------------------- | :----------------------- | ----------------------------------------------------------------------------------- |
-| [`RefCOCO`](mmpretrain.datasets.RefCOCO)(data_root, ann_file, data_prefix, split_file[, split, ...]) | ["train", "val", "test"] | [RefCOCO](https://bvisionweb1.cs.unc.edu/licheng/referit/data/refcoco.zip) Dataset. |
-
-Some dataset homepage links may be unavailable, and you can download datasets through [OpenDataLab](https://opendatalab.com/), such as [RefCOCO](https://opendatalab.com/RefCOCO/download).
-
-## OpenMMLab 2.0 Standard Dataset
-
-In order to facilitate the training of multi-task algorithm models, we unify the dataset interfaces of different tasks. OpenMMLab has formulated the **OpenMMLab 2.0 Dataset Format Specification**. When starting a trainning task, the users can choose to convert their dataset annotation into the specified format, and use the algorithm library of OpenMMLab to perform algorithm training and testing based on the data annotation file.
-
-The OpenMMLab 2.0 Dataset Format Specification stipulates that the annotation file must be in `json` or `yaml`, `yml`, `pickle` or `pkl` format; the dictionary stored in the annotation file must contain `metainfo` and `data_list` fields, The value of `metainfo` is a dictionary, which contains the meta information of the dataset; and the value of `data_list` is a list, each element in the list is a dictionary, the dictionary defines a raw data, each raw data contains a or several training/testing samples.
-
-The following is an example of a JSON annotation file (in this example each raw data contains only one train/test sample):
-
-```
-{
-    'metainfo':
-        {
-            'classes': ('cat', 'dog'), # the category index of 'cat' is 0 and 'dog' is 1.
-            ...
-        },
-    'data_list':
-        [
-            {
-                'img_path': "xxx/xxx_0.jpg",
-                'gt_label': 0,
-                ...
-            },
-            {
-                'img_path': "xxx/xxx_1.jpg",
-                'gt_label': 1,
-                ...
-            },
-            ...
-        ]
-}
+```text
+mmdetection
+├── data
+│   ├── coco
+│   │   ├── annotations
+│   │   │   ├── panoptic_train2017.json
+│   │   │   ├── panoptic_train2017
+│   │   │   ├── panoptic_val2017.json
+│   │   │   ├── panoptic_val2017
+│   │   │   ├── panoptic_semseg_train2017
+│   │   │   ├── panoptic_semseg_val2017
+│   │   ├── train2017
+│   │   ├── val2017
+│   │   ├── test2017
 ```
 
-Assume you want to use the training dataset and the dataset is stored as the below structure:
+`panoptic_semseg_train2017` and `panoptic_semseg_val2017` are the newly generated COCO semantic segmentation datasets that can be directly used for training and testing. Note that their category information is the same as that of COCO panoptic segmentation, including both "thing" and "stuff" categories.
+
+### RefCOCO Dataset Preparation
+
+The images and annotations of [RefCOCO](https://github.com/lichengunc/refer) series datasets can be download by running `tools/misc/download_dataset.py`:
+
+```shell
+python tools/misc/download_dataset.py --dataset-name refcoco --save-dir data/coco --unzip
+```
+
+Then the directory should be like this:
 
 ```text
 data
-├── annotations
-│   ├── train.json
-├── train
-│   ├── xxx/xxx_0.jpg
-│   ├── xxx/xxx_1.jpg
-│   ├── ...
+├── coco
+│   ├── refcoco
+│   │   ├── instances.json
+│   │   ├── refs(google).p
+│   │   └── refs(unc).p
+│   ├── refcoco+
+│   │   ├── instances.json
+│   │   └── refs(unc).p
+│   ├── refcocog
+│   │   ├── instances.json
+│   │   ├── refs(google).p
+│   │   └── refs(umd).p
+│   │── train2014
 ```
 
-Build from the following dictionaries:
+### ADE20K 2016 Dataset Preparation
 
-```python
-train_dataloader = dict(
-    ...
-    dataset=dict(
-        type='BaseDataset',
-        data_root='data',
-        ann_file='annotations/train.json',
-        data_prefix='train/',
-        pipeline=...,
-    )
-)
+The images and annotations of [ADE20K](https://groups.csail.mit.edu/vision/datasets/ADE20K/) dataset can be download by running `tools/misc/download_dataset.py`:
+
+```shell
+python tools/misc/download_dataset.py --dataset-name ade20k_2016 --save-dir data --unzip
 ```
 
-## Other Datasets
+Then move the annotations to the `data/ADEChallengeData2016` directory and run the preprocess script to produce the coco format annotations:
 
-To find more datasets supported by MMPretrain, and get more configurations of the above datasets, please see the [dataset documentation](mmpretrain.datasets).
+```shell
+mv data/annotations_instance data/ADEChallengeData2016/
+mv data/categoryMapping.txt data/ADEChallengeData2016/
+mv data/imgCatIds.json data/ADEChallengeData2016/
+python tools/dataset_converters/ade20k2coco.py data/ADEChallengeData2016 --task panoptic
+python tools/dataset_converters/ade20k2coco.py data/ADEChallengeData2016 --task instance
+```
 
-To implement your own dataset class for some special formats, please see the [Adding New Dataset](../advanced_guides/datasets.md).
+The directory should be like this.
 
-## Dataset Wrappers
+```text
+data
+├── ADEChallengeData2016
+│   ├── ade20k_instance_train.json
+│   ├── ade20k_instance_val.json
+│   ├── ade20k_panoptic_train
+│   │   ├── ADE_train_00000001.png
+│   │   ├── ADE_train_00000002.png
+│   │   ├── ...
+│   ├── ade20k_panoptic_train.json
+│   ├── ade20k_panoptic_val
+│   │   ├── ADE_val_00000001.png
+│   │   ├── ADE_val_00000002.png
+│   │   ├── ...
+│   ├── ade20k_panoptic_val.json
+│   ├── annotations
+│   │   ├── training
+│   │   │   ├── ADE_train_00000001.png
+│   │   │   ├── ADE_train_00000002.png
+│   │   │   ├── ...
+│   │   ├── validation
+│   │   │   ├── ADE_val_00000001.png
+│   │   │   ├── ADE_val_00000002.png
+│   │   │   ├── ...
+│   ├── annotations_instance
+│   │   ├── training
+│   │   │   ├── ADE_train_00000001.png
+│   │   │   ├── ADE_train_00000002.png
+│   │   │   ├── ...
+│   │   ├── validation
+│   │   │   ├── ADE_val_00000001.png
+│   │   │   ├── ADE_val_00000002.png
+│   │   │   ├── ...
+│   ├── categoryMapping.txt
+│   ├── images
+│   │   ├── training
+│   │   │   ├── ADE_train_00000001.jpg
+│   │   │   ├── ADE_train_00000002.jpg
+│   │   │   ├── ...
+│   │   ├── validation
+│   │   │   ├── ADE_val_00000001.jpg
+│   │   │   ├── ADE_val_00000002.jpg
+│   │   │   ├── ...
+│   ├── imgCatIds.json
+│   ├── objectInfo150.txt
+│   │── sceneCategories.txt
+```
 
-The following datawrappers are supported in MMEngine, you can refer to {external+mmengine:doc}`MMEngine tutorial <advanced_tutorials/basedataset>` to learn how to use it.
+The above folders include all data of ADE20K's semantic segmentation, instance segmentation, and panoptic segmentation.
 
-- {external:py:class}`~mmengine.dataset.ConcatDataset`
-- {external:py:class}`~mmengine.dataset.RepeatDataset`
-- {external:py:class}`~mmengine.dataset.ClassBalancedDataset`
+### Download from OpenDataLab
 
-The MMPretrain also support [KFoldDataset](mmpretrain.datasets.KFoldDataset), please use it with `tools/kfold-cross-valid.py`.
+By using [OpenDataLab](https://opendatalab.com/), researchers can obtain free formatted datasets in various fields. Through the search function of the platform, researchers may address the dataset they look for quickly and easily. Using the formatted datasets from the platform, researchers can efficiently conduct tasks across datasets.
+
+Currently, MIM supports downloading VOC and COCO datasets from OpenDataLab with one command line. More datasets will be supported in the future. You can also directly download the datasets you need from the OpenDataLab platform and then convert them to the format required by MMDetection.
+
+If you use MIM to download, make sure that the version is greater than v0.3.8. You can use the following command to update:
+
+```Bash
+pip install -U openmim
+```
+
+```Bash
+# install OpenXLab CLI tools
+pip install -U openxlab
+# log in OpenXLab, registry
+openxlab login
+
+# download voc2007 and preprocess by MIM
+mim download mmdet --dataset voc2007
+
+# download voc2012 and preprocess by MIM
+mim download mmdet --dataset voc2012
+
+# download coco2017 and preprocess by MIM
+mim download mmdet --dataset coco2017
+```

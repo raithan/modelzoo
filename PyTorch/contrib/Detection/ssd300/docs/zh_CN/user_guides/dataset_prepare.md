@@ -1,351 +1,362 @@
-# 准备数据集
+## 数据集准备
 
-## CustomDataset
+### 基础检测数据集准备
 
-[`CustomDataset`](mmpretrain.datasets.CustomDataset) 是一个通用的数据集类，供您使用自己的数据集。目前 `CustomDataset` 支持以下两种方式组织你的数据集文件：
+MMDetection 支持多个公共数据集，包括 [COCO](https://cocodataset.org/)， [Pascal VOC](http://host.robots.ox.ac.uk/pascal/VOC)， [Cityscapes](https://www.cityscapes-dataset.com/) 和 [其他更多数据集](https://github.com/open-mmlab/mmdetection/tree/main/configs/_base_/datasets)。
 
-### 子文件夹方式
+一些公共数据集，比如 Pascal VOC 及其镜像数据集，或者 COCO 等数据集都可以从官方网站或者镜像网站获取。注意：在检测任务中，Pascal VOC 2012 是 Pascal VOC 2007 的无交集扩展，我们通常将两者一起使用。 我们建议将数据集下载，然后解压到项目外部的某个文件夹内，然后通过符号链接的方式，将数据集根目录链接到 `$MMDETECTION/data` 文件夹下， 如果你的文件夹结构和下方不同的话，你需要在配置文件中改变对应的路径。
 
-在这种格式下，您只需要重新组织您的数据集文件夹并将所有样本放在一个文件夹中，而无需创建任何标注文件。
+我们提供了下载 COCO 等数据集的脚本，你可以运行 `python tools/misc/download_dataset.py --dataset-name coco2017` 下载 COCO 数据集。 对于中国境内的用户，我们也推荐通过开源数据平台 [OpenDataLab](https://opendatalab.com/?source=OpenMMLab%20GitHub) 来下载数据，以获得更好的下载体验。
 
-对于监督任务（使用 `with_label=true`），我们使用子文件夹的名称作为类别名称，如下例所示，`class_x` 和 `class_y` 将被识别为类别名称。
-
-```text
-data_prefix/
-├── class_x
-│   ├── xxx.png
-│   ├── xxy.png
-│   └── ...
-│       └── xxz.png
-└── class_y
-    ├── 123.png
-    ├── nsdf3.png
-    ├── ...
-    └── asd932_.png
-```
-
-对于无监督任务（使用 `with_label=false`），我们直接加载指定文件夹下的所有样本文件：
-
-```
-data_prefix/
-├── folder_1
-│   ├── xxx.png
-│   ├── xxy.png
-│   └── ...
-├── 123.png
-├── nsdf3.png
-└── ...
-```
-
-假如你希望将之用于训练，那么配置文件中需要添加以下配置：
-
-```python
-train_dataloader = dict(
-    ...
-    # 训练数据集配置
-    dataset=dict(
-        type='CustomDataset',
-        data_prefix='path/to/data_prefix',
-        with_label=True,  # 对于无监督任务，使用 False
-        pipeline=...
-    )
-)
-```
-
-```{note}
-如果要使用此格式，请不要指定 `ann_file`，或指定 `ann_file=''`。
-
-请注意，子文件夹格式需要对文件夹进行扫描，这可能会导致初始化速度变慢，尤其是对于大型数据集或慢速文件 IO。
-```
-
-### 标注文件方式
-
-标注文件格式主要使用文本文件来保存类别信息，`data_prefix` 存放图片，`ann_file` 存放标注类别信息。
-
-如下案例，dataset 目录如下：
-
-在这种格式中，我们使用文本标注文件来存储图像文件路径和对应的类别索引。
-
-对于监督任务（`with_label=true`），注释文件应在一行中包含一个样本的文件路径和类别索引，并用空格分隔，如下所示：
-
-所有这些文件路径都可以是绝对路径，也可以是相对于 `data_prefix` 的相对路径。
+更多用法请参考[数据集下载](./useful_tools.md#dataset-download)
 
 ```text
-folder_1/xxx.png 0
-folder_1/xxy.png 1
-123.png 4
-nsdf3.png 3
-...
+mmdetection
+├── mmdet
+├── tools
+├── configs
+├── data
+│   ├── coco
+│   │   ├── annotations
+│   │   ├── train2017
+│   │   ├── val2017
+│   │   ├── test2017
+│   ├── cityscapes
+│   │   ├── annotations
+│   │   ├── leftImg8bit
+│   │   │   ├── train
+│   │   │   ├── val
+│   │   ├── gtFine
+│   │   │   ├── train
+│   │   │   ├── val
+│   ├── VOCdevkit
+│   │   ├── VOC2007
+│   │   ├── VOC2012
 ```
 
-```{note}
-类别的索引号从 0 开始。真实标签的值应在`[0, num_classes - 1]`范围内。
-
-此外，请使用数据集设置中的 `classes` 字段来指定每个类别的名称
-```
-
-对于无监督任务（`with_label=false`），标注文件只需要在一行中包含一个样本的文件路径，如下：
+有些模型需要额外的 [COCO-stuff](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/stuffthingmaps_trainval2017.zip) 数据集，比如 HTC，DetectoRS 和 SCNet，你可以下载并解压它们到 `coco` 文件夹下。文件夹会是如下结构：
 
 ```text
-folder_1/xxx.png
-folder_1/xxy.png
-123.png
-nsdf3.png
-...
+mmdetection
+├── data
+│   ├── coco
+│   │   ├── annotations
+│   │   ├── train2017
+│   │   ├── val2017
+│   │   ├── test2017
+│   │   ├── stuffthingmaps
 ```
 
-假设整个数据集文件夹如下：
+PanopticFPN 等全景分割模型需要额外的 [COCO Panoptic](http://images.cocodataset.org/annotations/panoptic_annotations_trainval2017.zip) 数据集，你可以下载并解压它们到 `coco/annotations` 文件夹下。文件夹会是如下结构：
 
 ```text
-data_root
-├── meta
-│   ├── test.txt     # 测试数据集的标注文件
-│   ├── train.txt    # 训练数据集的标注文件
-│   └── val.txt      # 验证数据集的标注文件
-
-├── train
-│   ├── 123.png
-│   ├── folder_1
-│   │   ├── xxx.png
-│   │   └── xxy.png
-│   └── nsdf3.png
-├── test
-└── val
+mmdetection
+├── data
+│   ├── coco
+│   │   ├── annotations
+│   │   │   ├── panoptic_train2017.json
+│   │   │   ├── panoptic_train2017
+│   │   │   ├── panoptic_val2017.json
+│   │   │   ├── panoptic_val2017
+│   │   ├── train2017
+│   │   ├── val2017
+│   │   ├── test2017
 ```
 
-这是配置文件中的数据集设置的示例：
+Cityscape 数据集的标注格式需要转换，以与 COCO 数据集标注格式保持一致，使用 `tools/dataset_converters/cityscapes.py` 来完成转换：
 
-```python
-# 训练数据设置
-train_dataloader = dict(
-    dataset=dict(
-        type='CustomDataset',
-        data_root='path/to/data_root',  # `ann_flie` 和 `data_prefix` 共同的文件路径前缀
-        ann_file='meta/train.txt',      # 相对于 `data_root` 的标注文件路径
-        data_prefix='train',            # `ann_file` 中文件路径的前缀，相对于 `data_root`
-        classes=['A', 'B', 'C', 'D', ...],  # 每个类别的名称
-        pipeline=...,    # 处理数据集样本的一系列变换操作
-    )
-    ...
-)
+```shell
+pip install cityscapesscripts
+
+python tools/dataset_converters/cityscapes.py \
+    ./data/cityscapes \
+    --nproc 8 \
+    --out-dir ./data/cityscapes/annotations
 ```
 
-```{note}
-有关如何使用 `CustomDataset` 的完整示例，请参阅[如何使用自定义数据集进行预训练](../notes/pretrain_custom_dataset.md)
+### COCO Caption 数据集准备
+
+COCO Caption 采用的是 COCO2014 数据集作为图片，并且使用了 karpathy 的标注，
+
+首先你需要下载 COCO2014 数据集
+
+```shell
+python tools/misc/download_dataset.py --dataset-name coco2014 --unzip
 ```
 
-## ImageNet
+数据集会下载到当前路径的 `data/coco` 下。然后下载 karpathy 的标注
 
-ImageNet 有多个版本，但最常用的一个是 [ILSVRC 2012](http://www.image-net.org/challenges/LSVRC/2012/)。 可以通过以下步骤使用它。
-
-`````{tabs}
-
-````{group-tab} MIM 下载
-
-MIM支持使用一条命令行从 [OpenXLab](https://openxlab.org.cn/datasets?lang=zh-CN) 下载并预处理 ImageNet 数据集。
-
-_需要在 [OpenXLab 官网](https://openxlab.org.cn/datasets?lang=zh-CN) 注册账号并命令行登录_。
-
-```Bash
-# 安装 OpenXLab CLI 工具
-pip install -U openxlab
-# 登录 OpenXLab
-openxlab login
-# 使用 MIM 下载数据集, 最好在 $MMPreTrain 目录执行
-mim download mmpretrain --dataset imagenet1k
+```shell
+cd data/coco/annotations
+wget https://storage.googleapis.com/sfr-vision-language-research/datasets/coco_karpathy_train.json
+wget https://storage.googleapis.com/sfr-vision-language-research/datasets/coco_karpathy_val.json
+wget https://storage.googleapis.com/sfr-vision-language-research/datasets/coco_karpathy_test.json
+wget https://storage.googleapis.com/sfr-vision-language-research/datasets/coco_karpathy_val_gt.json
+wget https://storage.googleapis.com/sfr-vision-language-research/datasets/coco_karpathy_test_gt.json
 ```
 
-````
-
-````{group-tab} 从官网下载
-
-
-1. 注册一个帐户并登录到[下载页面](http://www.image-net.org/download-images)。
-2. 找到 ILSVRC2012 的下载链接，下载以下两个文件：
-   - ILSVRC2012_img_train.tar (~138GB)
-   - ILSVRC2012_img_val.tar (~6.3GB)
-3. 解压已下载的图片。
-
-````
-`````
-
-### ImageNet数据集目录结构
-
-我们支持两种方式组织ImageNet数据集，子目录格式和文本注释文件格式。
-
-#### 子文件夹格式
-
-我们提供了一个样例，您可以从这个[链接](https://download.openmmlab.com/mmpretrain/datasets/imagenet_1k.zip)下载和解压。数据集的目录结构应如下所示：
+最终直接可用于训练和测试的数据集文件夹结构如下：
 
 ```text
-data/imagenet/
-├── train/
-│   ├── n01440764
-│   │   ├── n01440764_10026.JPEG
-│   │   ├── n01440764_10027.JPEG
-│   │   ├── n01440764_10029.JPEG
-│   │   ├── n01440764_10040.JPEG
-│   │   ├── n01440764_10042.JPEG
-│   │   ├── n01440764_10043.JPEG
-│   │   └── n01440764_10048.JPEG
-│   ├── ...
-├── val/
-│   ├── n01440764
-│   │   ├── ILSVRC2012_val_00000293.JPEG
-│   │   ├── ILSVRC2012_val_00002138.JPEG
-│   │   ├── ILSVRC2012_val_00003014.JPEG
-│   │   └── ...
-│   ├── ...
+mmdetection
+├── data
+│   ├── coco
+│   │   ├── annotations
+│   │   │   ├── coco_karpathy_train.json
+│   │   │   ├── coco_karpathy_test.json
+│   │   │   ├── coco_karpathy_val.json
+│   │   │   ├── coco_karpathy_val_gt.json
+│   │   │   ├── coco_karpathy_test_gt.json
+│   │   ├── train2014
+│   │   ├── val2014
+│   │   ├── test2014
 ```
 
-#### 文本标注文件格式
+### COCO semantic 数据集准备
 
-您可以从[此链接](https://download.openmmlab.com/mmclassification/datasets/imagenet/meta/caffe_ilsvrc12.tar.gz)下载并解压元数据，然后组织文件夹如下：
+COCO 语义分割有两种类型标注，主要差别在于类别名定义不一样，因此处理方式也有两种，第一种是直接使用 stuffthingmaps 数据集，第二种是使用 panoptic 数据集。
+
+**(1) 使用 stuffthingmaps 数据集**
+
+该数据集的下载地址为 [stuffthingmaps_trainval2017](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/stuffthingmaps_trainval2017.zip)，请下载后解压到 `data/coco` 文件夹下。
 
 ```text
-data/imagenet/
-├── meta/
-│   ├── train.txt
-│   ├── test.txt
-│   └── val.txt
-├── train/
-│   ├── n01440764
-│   │   ├── n01440764_10026.JPEG
-│   │   ├── n01440764_10027.JPEG
-│   │   ├── n01440764_10029.JPEG
-│   │   ├── n01440764_10040.JPEG
-│   │   ├── n01440764_10042.JPEG
-│   │   ├── n01440764_10043.JPEG
-│   │   └── n01440764_10048.JPEG
-│   ├── ...
-├── val/
-│   ├── ILSVRC2012_val_00000001.JPEG
-│   ├── ILSVRC2012_val_00000002.JPEG
-│   ├── ILSVRC2012_val_00000003.JPEG
-│   ├── ILSVRC2012_val_00000004.JPEG
-│   ├── ...
+mmdetection
+├── data
+│   ├── coco
+│   │   ├── annotations
+│   │   ├── train2017
+│   │   ├── val2017
+│   │   ├── test2017
+│   │   ├── stuffthingmaps
 ```
 
-### 配置
+该数据集不同于标准的 COCO 类别标注，其包括 172 个类： 80 thing 类、91 stuff 类和 1 个 'unlabeled'，其每个类别的说明见 https://github.com/nightrome/cocostuff/blob/master/labels.md
 
-当您的数据集以上述方式组织时，您可以使用具有以下配置的 [`ImageNet`](mmpretrain.datasets.ImageNet) 数据集：
+虽然只标注了 172 个类别，但是 `stuffthingmaps` 中最大标签 id 是 182，中间有些类别是没有标注的，并且第 0 类的 `unlabeled` 类别被移除。因此最终的 `stuffthingmaps` 图片中每个位置的值对应的类别关系见 https://github.com/kazuto1011/deeplab-pytorch/blob/master/data/datasets/cocostuff/labels.txt
 
-```python
-train_dataloader = dict(
-    ...
-    # 训练数据集配置
-    dataset=dict(
-        type='ImageNet',
-        data_root='data/imagenet/',
-        split='train',
-        pipeline=...,
-    )
-)
+考虑到训练高效和方便用户，在开启训练或者评估前，我们需要将没有标注的 12 个类移除，这 12 个类的名字为： `street sign、hat、shoe、eye glasses、plate、mirror、window、desk、door、blender、hair brush`，最终可用于训练和评估的类别信息见 `mmdet/datasets/coco_semantic.py`
 
-val_dataloader = dict(
-    ...
-    # 验证数据集配置
-    dataset=dict(
-        type='ImageNet',
-        data_root='data/imagenet/',
-        split='val',
-        pipeline=...,
-    )
-)
+你可以使用 `tools/dataset_converters/coco_stuff164k.py` 来完成将下载的 `stuffthingmaps` 转换为直接可以训练和评估的数据集，转换后的数据集文件夹结构如下：
 
-test_dataloader = val_dataloader
+```text
+mmdetection
+├── data
+│   ├── coco
+│   │   ├── annotations
+│   │   ├── train2017
+│   │   ├── val2017
+│   │   ├── test2017
+│   │   ├── stuffthingmaps
+│   │   ├── stuffthingmaps_semseg
 ```
 
-## 支持的图像分类数据集
+`stuffthingmaps_semseg` 即为新生成的可以直接训练和测试的 COCO 语义分割数据集。
 
-| 数据集                                                                              | split                               | 主页                                                                               |
-| ----------------------------------------------------------------------------------- | ----------------------------------- | ---------------------------------------------------------------------------------- |
-| [`Calthch101`](mmpretrain.datasets.Caltech101)(data_root[, split, pipeline, ...])   | ["train", "test"]                   | [Caltech 101](https://data.caltech.edu/records/mzrjq-6wc02) 数据集                 |
-| [`CIFAR10`](mmpretrain.datasets.CIFAR10)(data_root[, split, pipeline, ...])         | ["train", "test"]                   | [CIFAR10](https://www.cs.toronto.edu/~kriz/cifar.html) 数据集                      |
-| [`CIFAR100`](mmpretrain.datasets.CIFAR100)(data_root[, split, pipeline, ...])       | ["train", "test"]                   | [CIFAR100](https://www.cs.toronto.edu/~kriz/cifar.html) 数据集                     |
-| [`CUB`](mmpretrain.datasets.CUB)(data_root[, split, pipeline, ...])                 | ["train", "test"]                   | [CUB-200-2011](http://www.vision.caltech.edu/datasets/cub_200_2011/) 数据集        |
-| [`DTD`](mmpretrain.datasets.DTD)(data_root[, split, pipeline, ...])                 | ["train", "val", "tranval", "test"] | [Describable Texture Dataset (DTD)](https://www.robots.ox.ac.uk/~vgg/data/dtd/) 数据集 |
-| [`FashionMNIST`](mmpretrain.datasets.FashionMNIST) (data_root[, split, pipeline, ...]) | ["train", "test"]                   | [Fashion-MNIST](https://github.com/zalandoresearch/fashion-mnist) 数据集           |
-| [`FGVCAircraft`](mmpretrain.datasets.FGVCAircraft)(data_root[, split, pipeline, ...]) | ["train", "val", "tranval", "test"] | [FGVC Aircraft](https://www.robots.ox.ac.uk/~vgg/data/fgvc-aircraft/) 数据集       |
-| [`Flowers102`](mmpretrain.datasets.Flowers102)(data_root[, split, pipeline, ...])   | ["train", "val", "tranval", "test"] | [Oxford 102 Flower](https://www.robots.ox.ac.uk/~vgg/data/flowers/102/) 数据集     |
-| [`Food101`](mmpretrain.datasets.Food101)(data_root[, split, pipeline, ...])         | ["train", "test"]                   | [Food101](https://data.vision.ee.ethz.ch/cvl/datasets_extra/food-101/) 数据集      |
-| [`MNIST`](mmpretrain.datasets.MNIST) (data_root[, split, pipeline, ...])            | ["train", "test"]                   | [MNIST](http://yann.lecun.com/exdb/mnist/) 数据集                                  |
-| [`OxfordIIITPet`](mmpretrain.datasets.OxfordIIITPet)(data_root[, split, pipeline, ...]) | ["tranval", test"]                  | [Oxford-IIIT Pets](https://www.robots.ox.ac.uk/~vgg/data/pets/) 数据集             |
-| [`Places205`](mmpretrain.datasets.Places205)(data_root[, pipeline, ...])            | -                                   | [Places205](http://places.csail.mit.edu/downloadData.html) 数据集                  |
-| [`StanfordCars`](mmpretrain.datasets.StanfordCars)(data_root[, split, pipeline, ...]) | ["train", "test"]                   | [StanfordCars](https://ai.stanford.edu/~jkrause/cars/car_dataset.html) 数据集      |
-| [`SUN397`](mmpretrain.datasets.SUN397)(data_root[, split, pipeline, ...])           | ["train", "test"]                   | [SUN397](https://vision.princeton.edu/projects/2010/SUN/) 数据集                   |
-| [`VOC`](mmpretrain.datasets.VOC)(data_root[, image_set_path, pipeline, ...])        | ["train", "val", "tranval", "test"] | [Pascal VOC](http://host.robots.ox.ac.uk/pascal/VOC/) 数据集                       |
+**(2) 使用 panoptic 数据集**
 
-有些数据集主页链接可能已经失效，您可以通过[OpenXLab](https://openxlab.org.cn/datasets?lang=zh-CN)下载数据集，例如 [Stanford Cars](https://openxlab.org.cn/datasets/OpenDataLab/Stanford_Cars)数据集。
+通过 panoptic 标注生成的语义分割数据集类别数相比使用 `stuffthingmaps` 数据集生成的会少一些。首先你需要准备全景分割标注，然后使用如下脚本完成转换
 
-## OpenMMLab 2.0 标准数据集
-
-为了统一不同任务的数据集接口，便于多任务的算法模型训练，OpenMMLab 制定了 **OpenMMLab 2.0 数据集格式规范**， 数据集标注文件需符合该规范，数据集基类基于该规范去读取与解析数据标注文件。如果用户提供的数据标注文件不符合规定格式，用户可以选择将其转化为规定格式，并使用 OpenMMLab 的算法库基于该数据标注文件进行算法训练和测试。
-
-OpenMMLab 2.0 数据集格式规范规定，标注文件必须为 `json` 或 `yaml`，`yml` 或 `pickle`，`pkl` 格式；标注文件中存储的字典必须包含 `metainfo` 和 `data_list` 两个字段。其中 `metainfo` 是一个字典，里面包含数据集的元信息；`data_list` 是一个列表，列表中每个元素是一个字典，该字典定义了一个原始数据（raw data），每个原始数据包含一个或若干个训练/测试样本。
-
-假设您要使用训练数据集，那么配置文件如下所示：
-
+```shell
+python tools/dataset_converters/prepare_coco_semantic_annos_from_panoptic_annos.py data/coco
 ```
 
-{
-    'metainfo':
-        {
-            'classes': ('cat', 'dog'), # 'cat' 的类别序号为 0，'dog' 为 1。
-            ...
-        },
-    'data_list':
-        [
-            {
-                'img_path': "xxx/xxx_0.jpg",
-                'gt_label': 0,
-                ...
-            },
-            {
-                'img_path': "xxx/xxx_1.jpg",
-                'gt_label': 1,
-                ...
-            },
-            ...
-        ]
-}
+转换后的数据集文件夹结构如下：
+
+```text
+mmdetection
+├── data
+│   ├── coco
+│   │   ├── annotations
+│   │   │   ├── panoptic_train2017.json
+│   │   │   ├── panoptic_train2017
+│   │   │   ├── panoptic_val2017.json
+│   │   │   ├── panoptic_val2017
+│   │   │   ├── panoptic_semseg_train2017
+│   │   │   ├── panoptic_semseg_val2017
+│   │   ├── train2017
+│   │   ├── val2017
+│   │   ├── test2017
 ```
 
-同时假设数据集存放路径如下：
+`panoptic_semseg_train2017` 和 `panoptic_semseg_val2017` 即为新生成的可以直接训练和测试的 COCO 语义分割数据集。注意其类别信息就是 COCO 全景分割的类别信息，包括 thing 和 stuff。
+
+### RefCOCO 数据集准备
+
+[RefCOCO](https://github.com/lichengunc/refer)系列数据集的图像和注释可以通过运行 `tools/misc/download_dataset.py` 下载:
+
+```shell
+python tools/misc/download_dataset.py --dataset-name refcoco --save-dir data/coco --unzip
+```
+
+然后，目录应该是这样的：
 
 ```text
 data
-├── annotations
-│   ├── train.json
-│   └── ...
-├── train
-│   ├── xxx/xxx_0.jpg
-│   ├── xxx/xxx_1.jpg
-│   ├── ...
+├── coco
+│   ├── refcoco
+│   │   ├── instances.json
+│   │   ├── refs(google).p
+│   │   └── refs(unc).p
+│   ├── refcoco+
+│   │   ├── instances.json
+│   │   └── refs(unc).p
+│   ├── refcocog
+│   │   ├── instances.json
+│   │   ├── refs(google).p
+│   │   └── refs(umd).p
+|   |── train2014
 ```
 
-通过以下字典构建：
+### ADE20K 数据集准备
 
-```python
-dataset_cfg=dict(
-    type='CustomDataset',
-    ann_file='path/to/ann_file_path',
-    data_prefix='path/to/images_folder',
-    pipeline=transfrom_list)
+[ADE20K](http://groups.csail.mit.edu/vision/datasets/ADE20K/)数据集的图像和注释可以通过运行 `tools/misc/download_dataset.py` 下载:
+
+```shell
+python tools/misc/download_dataset.py --dataset-name ade20k_2016 --save-dir data --unzip
 ```
 
-## 其他数据集
+然后将注释移至`data/ADEChallengeData2016`目录，并运行预处理脚本以产生coco格式注释：
 
-MMPretrain 还支持更多其他的数据集，可以通过查阅[数据集文档](mmpretrain.datasets)获取它们的配置信息。
+```shell
+mv data/annotations_instance data/ADEChallengeData2016/
+mv data/categoryMapping.txt data/ADEChallengeData2016/
+mv data/imgCatIds.json data/ADEChallengeData2016/
+python tools/dataset_converters/ade20k2coco.py data/ADEChallengeData2016 --task panoptic
+python tools/dataset_converters/ade20k2coco.py data/ADEChallengeData2016 --task instance
+```
 
-如果需要使用一些特殊格式的数据集，您需要实现您自己的数据集类，请参阅[添加新数据集](../advanced_guides/datasets.md)。
+然后，目录应该是这样的：
 
-## 数据集包装
+```text
+data
+├── ADEChallengeData2016
+│   ├── ade20k_instance_train.json
+│   ├── ade20k_instance_val.json
+│   ├── ade20k_panoptic_train
+|   |   ├── ADE_train_00000001.png
+|   |   ├── ADE_train_00000002.png
+|   |   ├── ...
+│   ├── ade20k_panoptic_train.json
+│   ├── ade20k_panoptic_val
+|   |   ├── ADE_val_00000001.png
+|   |   ├── ADE_val_00000002.png
+|   |   ├── ...
+│   ├── ade20k_panoptic_val.json
+│   ├── annotations
+|   |   ├── training
+|   |   |   ├── ADE_train_00000001.png
+|   |   |   ├── ADE_train_00000002.png
+|   |   |   ├── ...
+|   |   ├── validation
+|   |   |   ├── ADE_val_00000001.png
+|   |   |   ├── ADE_val_00000002.png
+|   |   |   ├── ...
+│   ├── annotations_instance
+|   |   ├── training
+|   |   |   ├── ADE_train_00000001.png
+|   |   |   ├── ADE_train_00000002.png
+|   |   |   ├── ...
+|   |   ├── validation
+|   |   |   ├── ADE_val_00000001.png
+|   |   |   ├── ADE_val_00000002.png
+|   |   |   ├── ...
+│   ├── categoryMapping.txt
+│   ├── images
+│   |   ├── training
+|   |   |   ├── ADE_train_00000001.jpg
+|   |   |   ├── ADE_train_00000002.jpg
+|   |   |   ├── ...
+|   |   ├── validation
+|   |   |   ├── ADE_val_00000001.jpg
+|   |   |   ├── ADE_val_00000002.jpg
+|   |   |   ├── ...
+│   ├── imgCatIds.json
+│   ├── objectInfo150.txt
+|   |── sceneCategories.txt
+```
 
-MMEngine 中支持以下数据包装器，您可以参考 {external+mmengine:doc}`MMEngine 教程 <advanced_tutorials/basedataset>` 了解如何使用它。
+上述文件夹包括ADE20K的语义分割、实例分割和泛在分割的所有数据。
 
-- {external:py:class}`~mmengine.dataset.ConcatDataset`
-- {external:py:class}`~mmengine.dataset.RepeatDataset`
-- {external:py:class}`~mmengine.dataset.ClassBalancedDataset`
+### 从 OpenDataLab 中下载
 
-除上述之外，MMPretrain 还支持了[KFoldDataset](mmpretrain.datasets.KFoldDataset)，需用通过使用 `tools/kfold-cross-valid.py` 来使用它。
+[OpenDataLab](https://opendatalab.com/) 为人工智能研究者提供免费开源的数据集，通过 OpenDataLab，研究者可以获得格式统一的各领域经典数据集。通过平台的搜索功能，研究者可以迅速便捷地找到自己所需数据集；通过平台的统一格式，研究者可以便捷地对跨数据集任务进行开发。
+
+目前，MIM 支持使用一条命令行从 OpenDataLab 中下载 VOC 和 COCO 数据集，后续将支持更多数据集。你也可以直接访问 OpenDataLab 平台下载你所需的数据集，然后将其转化为 MMDetection 所要求的格式。
+
+如果使用 MIM 下载，请确保版本大于 v0.3.8，你可以使用如下命令更新:
+
+```Bash
+pip install -U openmim
+```
+
+```Bash
+# install OpenXLab CLI tools
+pip install -U openxlab
+# log in OpenXLab, registry
+openxlab login
+
+# download voc2007 and preprocess by MIM
+mim download mmdet --dataset voc2007
+
+# download voc2012 and preprocess by MIM
+mim download mmdet --dataset voc2012
+
+# download coco2017 and preprocess by MIM
+mim download mmdet --dataset coco2017
+```
+
+### ODinW 数据集准备
+
+ODinW 数据集来自 GLIP 论文，用于评估预训练模型泛化性能。一共包括 ODinW-13 和 ODinW-35 两个版本，其中 ODinW-35 包括了 ODinW-13 的所有数据。 目前数据托管在 [huggingface](https://huggingface.co/GLIPModel/GLIP)
+
+请确保你提前安装好了 [git lfs](https://git-lfs.com), 然后按照如下命令下载
+
+```shell
+cd mmdetection
+
+git lfs install
+# 我们不需要下载权重
+GIT_LFS_SKIP_SMUDGE=1 git clone https://huggingface.co/GLIPModel/GLIP
+
+cd GLIP
+git lfs pull --include="odinw_35"
+```
+
+下载完成后，目录结构如下所示：
+
+```text
+mmdetection
+├── GLIP
+|     ├── odinw_35
+|     |   ├── AerialMaritimeDrone.zip
+|     |   ├── AmericanSignLanguageLetters.zip
+...
+```
+
+你可以采用如下命令全部解压并移动到 `mmdetection/data` 路径下：
+
+```shell
+#!/bin/bash
+
+folder="./GLIP/odinw_35/"
+
+find "$folder" -type f -name "*.zip" | while read -r file; do
+    unzip "$file" -d "$(dirname "$file")"
+done
+
+mv GLIP/odinw_35 data/
+```
+
+最终结构如下所示：
+
+```text
+mmdetection
+├── tools
+├── configs
+├── data
+|   ├── odinw_35
+|   |   ├── AerialMaritimeDrone
+...
+│   ├── coco
+```

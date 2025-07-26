@@ -2,7 +2,7 @@
 import pytest
 import torch
 
-from mmpretrain.models.backbones import RegNet
+from mmdet.models.backbones import RegNet
 
 regnet_test_data = [
     ('regnetx_400mf',
@@ -38,57 +38,21 @@ def test_regnet_backbone(arch_name, arch, out_channels):
         # ResNeXt depth should be in [50, 101, 152]
         RegNet(arch_name + '233')
 
-    # output the last feature map
+    # Test RegNet with arch_name
     model = RegNet(arch_name)
-    model.init_weights()
     model.train()
 
-    imgs = torch.randn(1, 3, 224, 224)
-    feat = model(imgs)
-    assert len(feat) == 1
-    assert isinstance(feat[0], torch.Tensor)
-    assert feat[0].shape == (1, out_channels[-1], 7, 7)
-
-    # output feature map of all stages
-    model = RegNet(arch_name, out_indices=(0, 1, 2, 3))
-    model.init_weights()
-    model.train()
-
-    imgs = torch.randn(1, 3, 224, 224)
+    imgs = torch.randn(1, 3, 32, 32)
     feat = model(imgs)
     assert len(feat) == 4
-    assert feat[0].shape == (1, out_channels[0], 56, 56)
-    assert feat[1].shape == (1, out_channels[1], 28, 28)
-    assert feat[2].shape == (1, out_channels[2], 14, 14)
-    assert feat[3].shape == (1, out_channels[3], 7, 7)
+    assert feat[0].shape == torch.Size([1, out_channels[0], 8, 8])
+    assert feat[1].shape == torch.Size([1, out_channels[1], 4, 4])
+    assert feat[2].shape == torch.Size([1, out_channels[2], 2, 2])
+    assert feat[3].shape == torch.Size([1, out_channels[3], 1, 1])
 
-
-@pytest.mark.parametrize('arch_name,arch,out_channels', regnet_test_data)
-def test_custom_arch(arch_name, arch, out_channels):
-    # output the last feature map
+    # Test RegNet with arch
     model = RegNet(arch)
-    model.init_weights()
-
-    imgs = torch.randn(1, 3, 224, 224)
-    feat = model(imgs)
-    assert len(feat) == 1
-    assert isinstance(feat[0], torch.Tensor)
-    assert feat[0].shape == (1, out_channels[-1], 7, 7)
-
-    # output feature map of all stages
-    model = RegNet(arch, out_indices=(0, 1, 2, 3))
-    model.init_weights()
-
-    imgs = torch.randn(1, 3, 224, 224)
-    feat = model(imgs)
-    assert len(feat) == 4
-    assert feat[0].shape == (1, out_channels[0], 56, 56)
-    assert feat[1].shape == (1, out_channels[1], 28, 28)
-    assert feat[2].shape == (1, out_channels[2], 14, 14)
-    assert feat[3].shape == (1, out_channels[3], 7, 7)
-
-
-def test_exception():
-    # arch must be a str or dict
-    with pytest.raises(TypeError):
-        _ = RegNet(50)
+    assert feat[0].shape == torch.Size([1, out_channels[0], 8, 8])
+    assert feat[1].shape == torch.Size([1, out_channels[1], 4, 4])
+    assert feat[2].shape == torch.Size([1, out_channels[2], 2, 2])
+    assert feat[3].shape == torch.Size([1, out_channels[3], 1, 1])

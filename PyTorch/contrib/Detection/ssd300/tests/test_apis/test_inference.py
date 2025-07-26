@@ -1,116 +1,76 @@
-# Copyright (c) OpenMMLab. All rights reserved.
-import os.path as osp
-from tempfile import TemporaryDirectory
-from unittest import TestCase
-from unittest.mock import ANY, MagicMock, patch
+import os
+from pathlib import Path
 
-from mmcv.image import imread
+import numpy as np
+import pytest
+import torch
 
-from mmpretrain.apis import (ImageClassificationInferencer, ModelHub,
-                             get_model, inference_model)
-from mmpretrain.models import MobileNetV3
-from mmpretrain.structures import DataSample
-from mmpretrain.visualization import UniversalVisualizer
+from mmdet.apis import inference_detector, init_detector
+from mmdet.structures import DetDataSample
+from mmdet.utils import register_all_modules
 
-MODEL = 'mobilenet-v3-small-050_3rdparty_in1k'
-WEIGHT = 'https://download.openmmlab.com/mmclassification/v0/mobilenet_v3/mobilenet-v3-small-050_3rdparty_in1k_20221114-e0b86be1.pth'  # noqa: E501
-CONFIG = ModelHub.get(MODEL).config
+# TODO: Waiting to fix multiple call error bug
+register_all_modules()
 
 
-class TestImageClassificationInferencer(TestCase):
+@pytest.mark.parametrize('config,devices',
+                         [('configs/retinanet/retinanet_r18_fpn_1x_coco.py',
+                           ('cpu', 'cuda'))])
+def test_init_detector(config, devices):
+    assert all([device in ['cpu', 'cuda'] for device in devices])
 
-    def test_init(self):
-        # test input BaseModel
-        model = get_model(MODEL)
-        inferencer = ImageClassificationInferencer(model)
-        self.assertEqual(model._config, inferencer.config)
-        self.assertIsInstance(inferencer.model.backbone, MobileNetV3)
+    project_dir = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
+    project_dir = os.path.join(project_dir, '..')
 
-        # test input model name
-        with patch('mmengine.runner.load_checkpoint') as mock:
-            inferencer = ImageClassificationInferencer(MODEL)
-            self.assertIsInstance(inferencer.model.backbone, MobileNetV3)
-            mock.assert_called_once_with(ANY, WEIGHT, map_location='cpu')
+    config_file = os.path.join(project_dir, config)
 
-        # test input config path
-        inferencer = ImageClassificationInferencer(CONFIG.filename)
-        self.assertIsInstance(inferencer.model.backbone, MobileNetV3)
+    # test init_detector with config_file: str and cfg_options
+    cfg_options = dict(
+        model=dict(
+            backbone=dict(
+                depth=18,
+                init_cfg=dict(
+                    type='Pretrained', checkpoint='torchvision://resnet18'))))
 
-        # test input config object
-        inferencer = ImageClassificationInferencer(CONFIG)
-        self.assertIsInstance(inferencer.model.backbone, MobileNetV3)
+    for device in devices:
+        if device == 'cuda' and not torch.cuda.is_available():
+            pytest.skip('test requires GPU and torch+cuda')
 
-        # test specify weights
-        with patch('mmengine.runner.load_checkpoint') as mock:
-            ImageClassificationInferencer(MODEL, pretrained='custom.pth')
-            mock.assert_called_once_with(ANY, 'custom.pth', map_location='cpu')
+        model = init_detector(
+            config_file, device=device, cfg_options=cfg_options)
 
-    def test_call(self):
-        img_path = osp.join(osp.dirname(__file__), '../data/color.jpg')
-        img = imread(img_path)
+        # test init_detector with :obj:`Path`
+        config_path_object = Path(config_file)
+        model = init_detector(config_path_object, device=device)
 
-        # test inference classification model
-        inferencer = ImageClassificationInferencer(MODEL)
-        results = inferencer(img_path)[0]
-        self.assertEqual(
-            results.keys(),
-            {'pred_score', 'pred_scores', 'pred_label', 'pred_class'})
-
-        # test return_datasample=True
-        results = inferencer(img, return_datasamples=True)[0]
-        self.assertIsInstance(results, DataSample)
-
-    def test_visualize(self):
-        img_path = osp.join(osp.dirname(__file__), '../data/color.jpg')
-        img = imread(img_path)
-
-        inferencer = ImageClassificationInferencer(MODEL)
-        self.assertIsNone(inferencer.visualizer)
-
-        with TemporaryDirectory() as tmpdir:
-            inferencer(img, show_dir=tmpdir)
-            self.assertIsInstance(inferencer.visualizer, UniversalVisualizer)
-            self.assertTrue(osp.exists(osp.join(tmpdir, '0.png')))
-
-            inferencer.visualizer = MagicMock(wraps=inferencer.visualizer)
-            inferencer(
-                img_path, rescale_factor=2., draw_score=False, show_dir=tmpdir)
-            self.assertTrue(osp.exists(osp.join(tmpdir, 'color.png')))
-            inferencer.visualizer.visualize_cls.assert_called_once_with(
-                ANY,
-                ANY,
-                classes=inferencer.classes,
-                resize=None,
-                show=False,
-                wait_time=0,
-                rescale_factor=2.,
-                draw_gt=False,
-                draw_pred=True,
-                draw_score=False,
-                name='color',
-                out_file=osp.join(tmpdir, 'color.png'))
+        # test init_detector with undesirable type
+        with pytest.raises(TypeError):
+            config_list = [config_file]
+            model = init_detector(config_list)  # noqa: F841
 
 
-class TestInferenceAPIs(TestCase):
+@pytest.mark.parametrize('config,devices',
+                         [('configs/retinanet/retinanet_r18_fpn_1x_coco.py',
+                           ('cpu', 'cuda'))])
+def test_inference_detector(config, devices):
+    assert all([device in ['cpu', 'cuda'] for device in devices])
 
-    def test_inference_model(self):
-        # test backward compatibility
-        img_path = osp.join(osp.dirname(__file__), '../data/color.jpg')
-        img = imread(img_path)
+    project_dir = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
+    project_dir = os.path.join(project_dir, '..')
 
-        model = get_model(MODEL, pretrained=True)
-        results = inference_model(model, img_path)
-        self.assertEqual(
-            results.keys(),
-            {'pred_score', 'pred_scores', 'pred_label', 'pred_class'})
+    config_file = os.path.join(project_dir, config)
 
-        results = inference_model(model, img)
-        self.assertEqual(
-            results.keys(),
-            {'pred_score', 'pred_scores', 'pred_label', 'pred_class'})
+    # test init_detector with config_file: str and cfg_options
+    rng = np.random.RandomState(0)
+    img1 = rng.randint(0, 255, (32, 32, 3), dtype=np.uint8)
+    img2 = rng.randint(0, 255, (32, 32, 3), dtype=np.uint8)
 
-        # test input model name
-        results = inference_model(MODEL, img)
-        self.assertEqual(
-            results.keys(),
-            {'pred_score', 'pred_scores', 'pred_label', 'pred_class'})
+    for device in devices:
+        if device == 'cuda' and not torch.cuda.is_available():
+            pytest.skip('test requires GPU and torch+cuda')
+
+        model = init_detector(config_file, device=device)
+        result = inference_detector(model, img1)
+        assert isinstance(result, DetDataSample)
+        result = inference_detector(model, [img1, img2])
+        assert isinstance(result, list) and len(result) == 2

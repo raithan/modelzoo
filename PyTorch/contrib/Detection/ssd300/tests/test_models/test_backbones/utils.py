@@ -1,31 +1,32 @@
 # Copyright (c) OpenMMLab. All rights reserved.
-import math
+from torch.nn.modules import GroupNorm
+from torch.nn.modules.batchnorm import _BatchNorm
 
-import torch
-import torch.nn.functional as F
+from mmdet.models.backbones.res2net import Bottle2neck
+from mmdet.models.backbones.resnet import BasicBlock, Bottleneck
+from mmdet.models.backbones.resnext import Bottleneck as BottleneckX
+from mmdet.models.layers import SimplifiedBasicBlock
 
 
-def timm_resize_pos_embed(posemb, posemb_new, num_tokens=1, gs_new=()):
-    """Timm version pos embed resize function.
+def is_block(modules):
+    """Check if is ResNet building block."""
+    if isinstance(modules, (BasicBlock, Bottleneck, BottleneckX, Bottle2neck,
+                            SimplifiedBasicBlock)):
+        return True
+    return False
 
-    copied from https://github.com/rwightman/pytorch-image-models/blob/master/timm/models/vision_transformer.py
-    """  # noqa:E501
-    ntok_new = posemb_new.shape[1]
-    if num_tokens:
-        posemb_tok, posemb_grid = posemb[:, :num_tokens], posemb[0,
-                                                                 num_tokens:]
-        ntok_new -= num_tokens
-    else:
-        posemb_tok, posemb_grid = posemb[:, :0], posemb[0]
-    gs_old = int(math.sqrt(len(posemb_grid)))
-    if not len(gs_new):  # backwards compatibility
-        gs_new = [int(math.sqrt(ntok_new))] * 2
-    assert len(gs_new) >= 2
-    posemb_grid = posemb_grid.reshape(1, gs_old, gs_old,
-                                      -1).permute(0, 3, 1, 2)
-    posemb_grid = F.interpolate(
-        posemb_grid, size=gs_new, mode='bicubic', align_corners=False)
-    posemb_grid = posemb_grid.permute(0, 2, 3,
-                                      1).reshape(1, gs_new[0] * gs_new[1], -1)
-    posemb = torch.cat([posemb_tok, posemb_grid], dim=1)
-    return posemb
+
+def is_norm(modules):
+    """Check if is one of the norms."""
+    if isinstance(modules, (GroupNorm, _BatchNorm)):
+        return True
+    return False
+
+
+def check_norm_state(modules, train_state):
+    """Check if norm layer is in correct train state."""
+    for mod in modules:
+        if isinstance(mod, _BatchNorm):
+            if mod.training != train_state:
+                return False
+    return True

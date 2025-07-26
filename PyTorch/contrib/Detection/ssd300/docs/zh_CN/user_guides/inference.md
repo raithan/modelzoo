@@ -1,176 +1,438 @@
-# 使用现有模型进行推理
+# 使用已有模型在标准数据集上进行推理
 
-本文将展示如何使用以下API：
+MMDetection 提供了许多预训练好的检测模型，可以在 [Model Zoo](https://mmdetection.readthedocs.io/zh_CN/latest/model_zoo.html) 查看具体有哪些模型。
 
-- [**`list_models`**](mmpretrain.apis.list_models): 列举 MMPretrain 中所有可用模型名称
-- [**`get_model`**](mmpretrain.apis.get_model): 通过模型名称或模型配置文件获取模型
-- [**`inference_model`**](mmpretrain.apis.inference_model): 使用与模型相对应任务的推理器进行推理。主要用作快速
-  展示。如需配置进阶用法，还需要直接使用下列推理器。
-- 推理器:
-  1. [**`ImageClassificationInferencer`**](mmpretrain.apis.ImageClassificationInferencer):
-     对给定图像执行图像分类。
-  2. [**`ImageRetrievalInferencer`**](mmpretrain.apis.ImageRetrievalInferencer):
-     从给定的一系列图像中，检索与给定图像最相似的图像。
-  3. [**`ImageCaptionInferencer`**](mmpretrain.apis.ImageCaptionInferencer):
-     生成给定图像的一段描述。
-  4. [**`VisualQuestionAnsweringInferencer`**](mmpretrain.apis.VisualQuestionAnsweringInferencer):
-     根据给定的图像回答问题。
-  5. [**`VisualGroundingInferencer`**](mmpretrain.apis.VisualGroundingInferencer):
-     根据一段描述，从给定图像中找到一个与描述对应的对象。
-  6. [**`TextToImageRetrievalInferencer`**](mmpretrain.apis.TextToImageRetrievalInferencer):
-     从给定的一系列图像中，检索与给定文本最相似的图像。
-  7. [**`ImageToTextRetrievalInferencer`**](mmpretrain.apis.ImageToTextRetrievalInferencer):
-     从给定的一系列文本中，检索与给定图像最相似的文本。
-  8. [**`NLVRInferencer`**](mmpretrain.apis.NLVRInferencer):
-     对给定的一对图像和一段文本进行自然语言视觉推理（NLVR 任务）。
-  9. [**`FeatureExtractor`**](mmpretrain.apis.FeatureExtractor):
-     通过视觉主干网络从图像文件提取特征。
+推理具体指使用训练好的模型来检测图像上的目标，本文将会展示具体步骤。
 
-## 列举可用模型
+在 MMDetection 中，一个模型被定义为一个[配置文件](https://mmdetection.readthedocs.io/zh_CN/latest/user_guides/config.html) 和对应被存储在 checkpoint 文件内的模型参数的集合。
 
-列出 MMPreTrain 中的所有已支持的模型。
+首先，我们建议从 [RTMDet](https://github.com/open-mmlab/mmdetection/tree/main/configs/rtmdet) 开始，其 [配置](https://github.com/open-mmlab/mmdetection/blob/main/configs/rtmdet/rtmdet_l_8xb32-300e_coco.py) 文件和 [checkpoint](https://download.openmmlab.com/mmdetection/v3.0/rtmdet/rtmdet_l_8xb32-300e_coco/rtmdet_l_8xb32-300e_coco_20220719_112030-5a0be7c4.pth) 文件在此。
+我们建议将 checkpoint 文件下载到 `checkpoints` 文件夹内。
+
+## 推理的高层编程接口——推理器
+
+在 OpenMMLab 中，所有的推理操作都被统一到了推理器 `Inferencer` 中。推理器被设计成为一个简洁易用的 API，它在不同的 OpenMMLab 库中都有着非常相似的接口。
+下面介绍的演示样例都放在 [demo/inference_demo.ipynb](https://github.com/open-mmlab/mmdetection/blob/main/demo/inference_demo.ipynb) 中方便大家尝试。
+
+### 基础用法
+
+使用 `DetInferencer`，您只需 3 行代码就可以获得推理结果。
 
 ```python
->>> from mmpretrain import list_models
->>> list_models()
-['barlowtwins_resnet50_8xb256-coslr-300e_in1k',
- 'beit-base-p16_beit-in21k-pre_3rdparty_in1k',
- ...]
+from mmdet.apis import DetInferencer
+
+# 初始化模型
+inferencer = DetInferencer('rtmdet_tiny_8xb32-300e_coco')
+
+# 推理示例图片
+inferencer('demo/demo.jpg', show=True)
 ```
 
-`list_models` 支持 Unix 文件名风格的模式匹配，你可以使用 \*\* * \*\* 匹配任意字符。
+可视化结果将被显示在一个新窗口中：
+
+<div align="center">
+    <img src='https://github.com/open-mmlab/mmdetection/assets/27466624/311df42d-640a-4a5b-9ad9-9ba7f3ec3a2f' />
+</div>
+
+```{note}
+如果你在没有 GUI 的服务器上，或者通过禁用 X11 转发的 SSH 隧道运行以上命令，`show` 选项将不起作用。然而，你仍然可以通过设置 `out_dir` 参数将可视化数据保存到文件。阅读 [储存结果](#储存结果) 了解详情。
+```
+
+### 初始化
+
+每个推理器必须使用一个模型进行初始化。初始化时，可以手动选择推理设备。
+
+#### 模型初始化
+
+- 要用 MMDetection 的预训练模型进行推理，只需要把它的名字传给参数 `model`，权重将自动从 OpenMMLab 的模型库中下载和加载。
+
+  ```python
+  inferencer = DetInferencer(model='rtmdet_tiny_8xb32-300e_coco')
+  ```
+
+  在 MMDetection 中有一个非常容易的方法，可以列出所有模型名称。
+
+  ```python
+  # models 是一个模型名称列表，它们将自动打印
+  models = DetInferencer.list_models('mmdet')
+  ```
+
+  你可以通过将权重的路径或 URL 传递给 `weights` 来让推理器加载自定义的权重。
+
+  ```python
+  inferencer = DetInferencer(model='rtmdet_tiny_8xb32-300e_coco', weights='path/to/rtmdet.pth')
+  ```
+
+- 要加载自定义的配置和权重，你可以把配置文件的路径传给 `model`，把权重的路径传给 `weights`。
+
+  ```python
+  inferencer = DetInferencer(model='path/to/rtmdet_config.py', weights='path/to/rtmdet.pth')
+  ```
+
+- 默认情况下，[MMEngine](https://github.com/open-mmlab/mmengine/) 会在训练模型时自动将配置文件转储到权重文件中。如果你有一个在 MMEngine 上训练的权重，你也可以将权重文件的路径传递给 `weights`，而不需要指定 `model`：
+
+  ```python
+  # 如果无法在权重中找到配置文件，则会引发错误。目前 MMDetection 模型库中只有 ddq-detr-4scale_r50 的权重可以这样加载。
+  inferencer = DetInferencer(weights='https://download.openmmlab.com/mmdetection/v3.0/ddq/ddq-detr-4scale_r50_8xb2-12e_coco/ddq-detr-4scale_r50_8xb2-12e_coco_20230809_170711-42528127.pth')
+  ```
+
+- 传递配置文件到 `model` 而不指定 `weights` 则会产生一个随机初始化的模型。
+
+#### 推理设备
+
+每个推理器实例都会跟一个设备绑定。默认情况下，最佳设备是由 [MMEngine](https://github.com/open-mmlab/mmengine/) 自动决定的。你也可以通过指定 `device` 参数来改变设备。例如，你可以使用以下代码在 GPU 1 上创建一个推理器。
 
 ```python
->>> from mmpretrain import list_models
->>> list_models("*convnext-b*21k")
-['convnext-base_3rdparty_in21k',
- 'convnext-base_in21k-pre-3rdparty_in1k-384px',
- 'convnext-base_in21k-pre_3rdparty_in1k']
+inferencer = DetInferencer(model='rtmdet_tiny_8xb32-300e_coco', device='cuda:1')
 ```
 
-你还可以使用推理器的 `list_models` 方法获取对应任务可用的所有模型。
+如要在 CPU 上创建一个推理器：
 
 ```python
->>> from mmpretrain import ImageCaptionInferencer
->>> ImageCaptionInferencer.list_models()
-['blip-base_3rdparty_caption',
- 'blip2-opt2.7b_3rdparty-zeroshot_caption',
- 'flamingo_3rdparty-zeroshot_caption',
- 'ofa-base_3rdparty-finetuned_caption']
+inferencer = DetInferencer(model='rtmdet_tiny_8xb32-300e_coco', device='cpu')
 ```
 
-## 获取模型
+请参考 [torch.device](https://pytorch.org/docs/stable/tensor_attributes.html#torch.device) 了解 `device` 参数支持的所有形式。
 
-选定需要的模型后，你可以使用 `get_model` 获取特定模型。
+### 推理
 
-```python
->>> from mmpretrain import get_model
+当推理器初始化后，你可以直接传入要推理的原始数据，从返回值中获取推理结果。
 
-# 不加载预训练权重的模型
->>> model = get_model("convnext-base_in21k-pre_3rdparty_in1k")
+#### 输入
 
-# 加载默认的权重文件
->>> model = get_model("convnext-base_in21k-pre_3rdparty_in1k", pretrained=True)
+输入可以是以下任意一种格式：
 
-# 加载制定的权重文件
->>> model = get_model("convnext-base_in21k-pre_3rdparty_in1k", pretrained="your_local_checkpoint_path")
+- str: 图像的路径/URL。
 
-# 指定额外的模型初始化参数，例如修改 head 中的 num_classes。
->>> model = get_model("convnext-base_in21k-pre_3rdparty_in1k", head=dict(num_classes=10))
+  ```python
+  inferencer('demo/demo.jpg')
+  ```
 
-# 另外一个例子：移除模型的 neck，head 模块，直接从 backbone 中的 stage 1, 2, 3 输出
->>> model_headless = get_model("resnet18_8xb32_in1k", head=None, neck=None, backbone=dict(out_indices=(1, 2, 3)))
-```
+- array: 图像的 numpy 数组。它应该是 BGR 格式。
 
-获得的模型是一个通常的 PyTorch Module
+  ```python
+  import mmcv
+  array = mmcv.imread('demo/demo.jpg')
+  inferencer(array)
+  ```
 
-```python
->>> import torch
->>> from mmpretrain import get_model
->>> model = get_model('convnext-base_in21k-pre_3rdparty_in1k', pretrained=True)
->>> x = torch.rand((1, 3, 224, 224))
->>> y = model(x)
->>> print(type(y), y.shape)
-<class 'torch.Tensor'> torch.Size([1, 1000])
-```
+- list: 基本类型的列表。列表中的每个元素都将单独处理。
 
-## 在给定图像上进行推理
+  ```python
+  inferencer(['img_1.jpg', 'img_2.jpg])
+  # 列表内混合类型也是允许的
+  inferencer(['img_1.jpg', array])
+  ```
 
-这里是一个例子，我们将使用 ResNet-50 预训练模型对给定的 [图像](https://github.com/open-mmlab/mmpretrain/raw/main/demo/demo.JPEG) 进行分类。
+- str: 目录的路径。目录中的所有图像都将被处理。
 
-```python
->>> from mmpretrain import inference_model
->>> image = 'https://github.com/open-mmlab/mmpretrain/raw/main/demo/demo.JPEG'
->>> # 如果你没有图形界面，请设置 `show=False`
->>> result = inference_model('resnet50_8xb32_in1k', image, show=True)
->>> print(result['pred_class'])
-sea snake
-```
+  ```python
+  inferencer('path/to/your_imgs/')
+  ```
 
-上述 `inference_model` 接口可以快速进行模型推理，但它每次调用都需要重新初始化模型，也无法进行多个样本的推理。
-因此我们需要使用推理器来进行多次调用。
+#### 输出
 
-```python
->>> from mmpretrain import ImageClassificationInferencer
->>> image = 'https://github.com/open-mmlab/mmpretrain/raw/main/demo/demo.JPEG'
->>> inferencer = ImageClassificationInferencer('resnet50_8xb32_in1k')
->>> # 注意推理器的输出始终为一个结果列表，即使输入只有一个样本
->>> result = inferencer('https://github.com/open-mmlab/mmpretrain/raw/main/demo/demo.JPEG')[0]
->>> print(result['pred_class'])
-sea snake
->>>
->>> # 你可以对多张图像进行批量推理
->>> image_list = ['demo/demo.JPEG', 'demo/bird.JPEG'] * 16
->>> results = inferencer(image_list, batch_size=8)
->>> print(len(results))
-32
->>> print(results[1]['pred_class'])
-house finch, linnet, Carpodacus mexicanus
-```
+默认情况下，每个推理器都以字典格式返回预测结果。
 
-通常，每个样本的结果都是一个字典。比如图像分类的结果是一个包含了 `pred_label`、`pred_score`、`pred_scores`、`pred_class` 等字段的字典：
+- `visualization` 包含可视化的预测结果。但默认情况下，它是一个空列表，除非 `return_vis=True`。
+
+- `predictions` 包含以 json-可序列化格式返回的预测结果。
 
 ```python
 {
-    "pred_label": 65,
-    "pred_score": 0.6649366617202759,
-    "pred_class":"sea snake",
-    "pred_scores": array([..., 0.6649366617202759, ...], dtype=float32)
-}
+      'predictions' : [
+        # 每个实例都对应于一个输入图像
+        {
+          'labels': [...],  # 整数列表，长度为 (N, )
+          'scores': [...],  # 浮点列表，长度为 (N, )
+          'bboxes': [...],  # 2d 列表，形状为 (N, 4)，格式为 [min_x, min_y, max_x, max_y]
+        },
+        ...
+      ],
+      'visualization' : [
+        array(..., dtype=uint8),
+      ]
+  }
 ```
 
-你可以为推理器配置额外的参数，比如使用你自己的配置文件和权重文件，在 CUDA 上进行推理：
+如果你想要从模型中获取原始输出，可以将 `return_datasamples` 设置为 `True` 来获取原始的 [DataSample](advanced_guides/structures.md)，它将存储在 `predictions` 中。
+
+#### 储存结果
+
+除了从返回值中获取预测结果，你还可以通过设置 `out_dir` 和 `no_save_pred`/`no_save_vis` 参数将预测结果和可视化结果导出到文件中。
 
 ```python
->>> from mmpretrain import ImageClassificationInferencer
->>> image = 'https://github.com/open-mmlab/mmpretrain/raw/main/demo/demo.JPEG'
->>> config = 'configs/resnet/resnet50_8xb32_in1k.py'
->>> checkpoint = 'https://download.openmmlab.com/mmclassification/v0/resnet/resnet50_8xb32_in1k_20210831-ea4938fc.pth'
->>> inferencer = ImageClassificationInferencer(model=config, pretrained=checkpoint, device='cuda')
->>> result = inferencer(image)[0]
->>> print(result['pred_class'])
-sea snake
+inferencer('demo/demo.jpg', out_dir='outputs/', no_save_pred=False)
 ```
 
-## 使用 Gradio 推理示例
+结果目录结构如下：
 
-我们还提供了一个基于 gradio 的推理示例，提供了 MMPretrain 所支持的所有任务的推理展示功能，你可以在 [projects/gradio_demo/launch.py](https://github.com/open-mmlab/mmpretrain/blob/main/projects/gradio_demo/launch.py) 找到这一例程。
+```text
+outputs
+├── preds
+│   └── demo.json
+└── vis
+    └── demo.jpg
+```
 
-请首先使用 `pip install -U gradio` 安装 `gradio` 库。
+#### 批量推理
 
-这里是界面效果预览：
+你可以通过设置 `batch_size` 来自定义批量推理的批大小。默认批大小为 1。
 
-<img src="https://user-images.githubusercontent.com/26739999/236147750-90ccb517-92c0-44e9-905e-1473677023b1.jpg" width="100%"/>
+### API
 
-## 从图像中提取特征
+这里列出了推理器详尽的参数列表。
 
-与 `model.extract_feat` 相比，`FeatureExtractor` 用于直接从图像文件中提取特征，而不是从一批张量中提取特征。简单说，`model.extract_feat` 的输入是 `torch.Tensor`，`FeatureExtractor` 的输入是图像。
+- **DetInferencer.\_\_init\_\_():**
+
+| 参数            | 类型       | 默认值  | 描述                                                                                                                                                                                                                        |
+| --------------- | ---------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `model`         | str , 可选 | None    | 配置文件的路径或 metafile 中定义的模型名称。例如，可以是 'rtmdet-s' 或 'rtmdet_s_8xb32-300e_coco' 或 'configs/rtmdet/rtmdet_s_8xb32-300e_coco.py'。如果未指定模型，用户必须提供 MMEngine 保存的包含配置字符串的 "weights"。 |
+| `weights`       | str, 可选  | None    | 模型权重文件的路径。如果未指定且 `model` 是 metafile 中的模型名称，权重将从 metafile 中加载。                                                                                                                               |
+| `device`        | str, 可选  | None    | 推理使用的设备，接受 `torch.device` 允许的所有字符串。例如，'cuda:0' 或 'cpu'。如果为 None，将自动使用可用设备。 默认为 None。                                                                                              |
+| `scope`         | str, 可选  | 'mmdet' | 模型的”域名“。                                                                                                                                                                                                              |
+| `palette`       | str        | 'none'  | 用于可视化的配色。优先顺序为 palette -> config -> checkpoint。                                                                                                                                                              |
+| `show_progress` | bool       | True    | 控制是否在推理过程中显示进度条。                                                                                                                                                                                            |
+
+- **DetInferencer.\_\_call\_\_()**
+
+| 参数                 | 类型                    | 默认值   | 描述                                                                                                                                                                                                                            |
+| -------------------- | ----------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `inputs`             | str/list/tuple/np.array | **必需** | 它可以是一个图片/文件夹的路径，一个 numpy 数组，或者是一个包含图片路径或 numpy 数组的列表/元组                                                                                                                                  |
+| `batch_size`         | int                     | 1        | 推理的批大小。                                                                                                                                                                                                                  |
+| `return_vis`         | bool                    | False    | 是否返回可视化结果。                                                                                                                                                                                                            |
+| `show`               | bool                    | False    | 是否在弹出窗口中显示可视化结果。                                                                                                                                                                                                |
+| `wait_time`          | float                   | 0        | 弹窗展示可视化结果的时间间隔。                                                                                                                                                                                                  |
+| `no_save_vis`        | bool                    | False    | 是否将可视化结果保存到 `out_dir`。默认为保存。                                                                                                                                                                                  |
+| `draw_pred`          | bool                    | True     | 是否绘制预测的边界框。                                                                                                                                                                                                          |
+| `pred_score_thr`     | float                   | 0.3      | 显示预测框的最低置信度。                                                                                                                                                                                                        |
+| `return_datasamples` | bool                    | False    | 是否将结果作为 `DetDataSample` 返回。 如果为 False，则结果将被打包到一个 dict 中。                                                                                                                                              |
+| `print_result`       | bool                    | False    | 是否将推理结果打印到控制台。                                                                                                                                                                                                    |
+| `no_save_pred`       | bool                    | True     | 是否将推理结果保存到 `out_dir`。默认为不保存。                                                                                                                                                                                  |
+| `out_dir`            | str                     | ''       | 结果的输出目录。                                                                                                                                                                                                                |
+| `texts`              | str/list\[str\]，可选   | None     | 文本提示词。                                                                                                                                                                                                                    |
+| `stuff_texts`        | str/list\[str\]，可选   | None     | 物体文本提示词。                                                                                                                                                                                                                |
+| `custom_entities`    | bool                    | False    | 是否使用自定义实体。只用于 GLIP 算法。                                                                                                                                                                                          |
+| \*\*kwargs           |                         |          | 传递给 :meth:`preprocess`、:meth:`forward`、:meth:`visualize` 和 :meth:`postprocess` 的其他关键字参数。kwargs 中的每个关键字都应在相应的 `preprocess_kwargs`、`forward_kwargs`、`visualize_kwargs` 和 `postprocess_kwargs` 中。 |
+
+## 演示脚本样例
+
+我们还提供了四个演示脚本，它们是使用高层编程接口实现的。[源码在此](https://github.com/open-mmlab/mmdetection/blob/main/demo) 。
+
+### 图片样例
+
+这是在单张图片上进行推理的脚本。
+
+```shell
+python demo/image_demo.py \
+    ${IMAGE_FILE} \
+    ${CONFIG_FILE} \
+    [--weights ${WEIGHTS}] \
+    [--device ${GPU_ID}] \
+    [--pred-score-thr ${SCORE_THR}]
+```
+
+运行样例：
+
+```shell
+python demo/image_demo.py demo/demo.jpg \
+    configs/rtmdet/rtmdet_l_8xb32-300e_coco.py \
+    --weights checkpoints/rtmdet_l_8xb32-300e_coco_20220719_112030-5a0be7c4.pth \
+    --device cpu
+```
+
+### 摄像头样例
+
+这是使用摄像头实时图片的推理脚本。
+
+```shell
+python demo/webcam_demo.py \
+    ${CONFIG_FILE} \
+    ${CHECKPOINT_FILE} \
+    [--device ${GPU_ID}] \
+    [--camera-id ${CAMERA-ID}] \
+    [--score-thr ${SCORE_THR}]
+```
+
+运行样例：
+
+```shell
+python demo/webcam_demo.py \
+    configs/rtmdet/rtmdet_l_8xb32-300e_coco.py \
+    checkpoints/rtmdet_l_8xb32-300e_coco_20220719_112030-5a0be7c4.pth
+```
+
+### 视频样例
+
+这是在视频样例上进行推理的脚本。
+
+```shell
+python demo/video_demo.py \
+    ${VIDEO_FILE} \
+    ${CONFIG_FILE} \
+    ${CHECKPOINT_FILE} \
+    [--device ${GPU_ID}] \
+    [--score-thr ${SCORE_THR}] \
+    [--out ${OUT_FILE}] \
+    [--show] \
+    [--wait-time ${WAIT_TIME}]
+```
+
+运行样例：
+
+```shell
+python demo/video_demo.py demo/demo.mp4 \
+    configs/rtmdet/rtmdet_l_8xb32-300e_coco.py \
+    checkpoints/rtmdet_l_8xb32-300e_coco_20220719_112030-5a0be7c4.pth \
+    --out result.mp4
+```
+
+#### 视频样例，显卡加速版本
+
+这是在视频样例上进行推理的脚本，使用显卡加速。
+
+```shell
+python demo/video_gpuaccel_demo.py \
+     ${VIDEO_FILE} \
+     ${CONFIG_FILE} \
+     ${CHECKPOINT_FILE} \
+     [--device ${GPU_ID}] \
+     [--score-thr ${SCORE_THR}] \
+     [--nvdecode] \
+     [--out ${OUT_FILE}] \
+     [--show] \
+     [--wait-time ${WAIT_TIME}]
 
 ```
->>> from mmpretrain import FeatureExtractor, get_model
->>> model = get_model('resnet50_8xb32_in1k', backbone=dict(out_indices=(0, 1, 2, 3)))
->>> extractor = FeatureExtractor(model)
->>> features = extractor('https://github.com/open-mmlab/mmpretrain/raw/main/demo/demo.JPEG')[0]
->>> features[0].shape, features[1].shape, features[2].shape, features[3].shape
-(torch.Size([256]), torch.Size([512]), torch.Size([1024]), torch.Size([2048]))
+
+运行样例：
+
+```shell
+python demo/video_gpuaccel_demo.py demo/demo.mp4 \
+    configs/rtmdet/rtmdet_l_8xb32-300e_coco.py \
+    checkpoints/rtmdet_l_8xb32-300e_coco_20220719_112030-5a0be7c4.pth \
+    --nvdecode --out result.mp4
+```
+
+### 大图推理样例
+
+这是在大图上进行切片推理的脚本。
+
+```shell
+python demo/large_image_demo.py \
+	${IMG_PATH} \
+	${CONFIG_FILE} \
+	${CHECKPOINT_FILE} \
+	--device ${GPU_ID}  \
+	--show \
+	--tta  \
+	--score-thr ${SCORE_THR} \
+	--patch-size ${PATCH_SIZE} \
+	--patch-overlap-ratio ${PATCH_OVERLAP_RATIO} \
+	--merge-iou-thr ${MERGE_IOU_THR} \
+	--merge-nms-type ${MERGE_NMS_TYPE} \
+	--batch-size ${BATCH_SIZE} \
+	--debug \
+	--save-patch
+```
+
+运行样例:
+
+```shell
+# inferecnce without tta
+wget -P checkpoint https://download.openmmlab.com/mmdetection/v2.0/faster_rcnn/faster_rcnn_r101_fpn_2x_coco/faster_rcnn_r101_fpn_2x_coco_bbox_mAP-0.398_20200504_210455-1d2dac9c.pth
+
+python demo/large_image_demo.py \
+    demo/large_image.jpg \
+    configs/faster_rcnn/faster-rcnn_r101_fpn_2x_coco.py \
+    checkpoint/faster_rcnn_r101_fpn_2x_coco_bbox_mAP-0.398_20200504_210455-1d2dac9c.pth
+
+# inference with tta
+wget -P checkpoint https://download.openmmlab.com/mmdetection/v2.0/retinanet/retinanet_r50_fpn_1x_coco/retinanet_r50_fpn_1x_coco_20200130-c2398f9e.pth
+
+python demo/large_image_demo.py \
+    demo/large_image.jpg \
+    configs/retinanet/retinanet_r50_fpn_1x_coco.py \
+    checkpoint/retinanet_r50_fpn_1x_coco_20200130-c2398f9e.pth --tta
+```
+
+## 多模态算法的推理和验证
+
+随着多模态视觉算法的不断发展，MMDetection 也完成了对这类算法的支持。这一小节我们通过 GLIP 算法和模型来演示如何使用对应多模态算法的 demo 和 eval 脚本。同时 MMDetection 也在 projects 下完成了 [gradio_demo 项目](../../../projects/gradio_demo/)，用户可以参照[文档](../../../projects/gradio_demo/README.md)在本地快速体验 MMDetection 中支持的各类图片输入的任务。
+
+### 模型准备
+
+首先需要安装多模态依赖：
+
+```shell
+# if source
+pip install -r requirements/multimodal.txt
+
+# if wheel
+mim install mmdet[multimodal]
+```
+
+MMDetection 已经集成了 glip 算法和模型，可以直接使用链接下载使用：
+
+```shell
+cd mmdetection
+wget https://download.openmmlab.com/mmdetection/v3.0/glip/glip_tiny_a_mmdet-b3654169.pth
+```
+
+### 推理演示
+
+下载完成后我们就可以利用 `demo` 下的多模态推理脚本完成推理：
+
+```shell
+python demo/image_demo.py demo/demo.jpg glip_tiny_a_mmdet-b3654169.pth --texts bench
+```
+
+demo 效果如下图所示：
+
+<div align=center>
+<img src="https://user-images.githubusercontent.com/17425982/234547841-266476c8-f987-4832-8642-34357be621c6.png" height="300"/>
+</div>
+
+如果想进行多种类型的识别，需要使用 `xx. xx` 的格式在 `--texts` 字段后声明目标类型:
+
+```shell
+python demo/image_demo.py demo/demo.jpg glip_tiny_a_mmdet-b3654169.pth --texts 'bench. car'
+```
+
+结果如下图所示：
+
+<div align=center>
+<img src="https://user-images.githubusercontent.com/17425982/234548156-ef9bbc2e-7605-4867-abe6-048b8578893d.png" height="300"/>
+</div>
+
+推理脚本还支持输入一个句子作为 `--texts` 字段的输入：
+
+```shell
+python demo/image_demo.py demo/demo.jpg glip_tiny_a_mmdet-b3654169.pth --texts 'There are a lot of cars here.'
+```
+
+结果可以参考下图：
+
+<div align=center>
+<img src="https://user-images.githubusercontent.com/17425982/234548490-d2e0a16d-1aad-4708-aea0-c829634fabbd.png" height="300"/>
+</div>
+
+### 验证演示
+
+MMDetection 支持后的 GLIP 算法对比官方版本没有精度上的损失， benchmark 如下所示：
+
+| Model                   | official mAP | mmdet mAP |
+| ----------------------- | :----------: | :-------: |
+| glip_A_Swin_T_O365.yaml |     42.9     |   43.0    |
+| glip_Swin_T_O365.yaml   |     44.9     |   44.9    |
+| glip_Swin_L.yaml        |     51.4     |   51.3    |
+
+用户可以使用 `test.py` 脚本对模型精度进行验证，使用如下所示：
+
+```shell
+# 1 gpu
+python tools/test.py configs/glip/glip_atss_swin-t_fpn_dyhead_pretrain_obj365.py glip_tiny_a_mmdet-b3654169.pth
+
+# 8 GPU
+./tools/dist_test.sh configs/glip/glip_atss_swin-t_fpn_dyhead_pretrain_obj365.py glip_tiny_a_mmdet-b3654169.pth 8
 ```

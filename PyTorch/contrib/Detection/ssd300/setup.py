@@ -1,9 +1,16 @@
+#!/usr/bin/env python
+# Copyright (c) OpenMMLab. All rights reserved.
 import os
 import os.path as osp
+import platform
 import shutil
 import sys
 import warnings
 from setuptools import find_packages, setup
+
+import torch
+from torch.utils.cpp_extension import (BuildExtension, CppExtension,
+                                       CUDAExtension)
 
 
 def readme():
@@ -12,11 +19,38 @@ def readme():
     return content
 
 
+version_file = 'mmdet/version.py'
+
+
 def get_version():
-    version_file = 'mmpretrain/version.py'
-    with open(version_file, 'r', encoding='utf-8') as f:
+    with open(version_file, 'r') as f:
         exec(compile(f.read(), version_file, 'exec'))
     return locals()['__version__']
+
+
+def make_cuda_ext(name, module, sources, sources_cuda=[]):
+
+    define_macros = []
+    extra_compile_args = {'cxx': []}
+
+    if torch.cuda.is_available() or os.getenv('FORCE_CUDA', '0') == '1':
+        define_macros += [('WITH_CUDA', None)]
+        extension = CUDAExtension
+        extra_compile_args['nvcc'] = [
+            '-D__CUDA_NO_HALF_OPERATORS__',
+            '-D__CUDA_NO_HALF_CONVERSIONS__',
+            '-D__CUDA_NO_HALF2_OPERATORS__',
+        ]
+        sources += sources_cuda
+    else:
+        print(f'Compiling {name} without CUDA')
+        extension = CppExtension
+
+    return extension(
+        name=f'{module}.{name}',
+        sources=[os.path.join(*module.split('.'), p) for p in sources],
+        define_macros=define_macros,
+        extra_compile_args=extra_compile_args)
 
 
 def parse_requirements(fname='requirements.txt', with_version=True):
@@ -49,6 +83,8 @@ def parse_requirements(fname='requirements.txt', with_version=True):
             info = {'line': line}
             if line.startswith('-e '):
                 info['package'] = line.split('#egg=')[1]
+            elif '@git+' in line:
+                info['package'] = line
             else:
                 # Remove versioning from the package
                 pat = '(' + '|'.join(['>=', '==', '>']) + ')'
@@ -66,9 +102,6 @@ def parse_requirements(fname='requirements.txt', with_version=True):
                         info['platform_deps'] = platform_deps
                     else:
                         version = rest  # NOQA
-                    if '--' in version:
-                        # the `extras_require` doesn't accept options.
-                        version = version.split('--')[0].strip()
                     info['version'] = (op, version)
             yield info
 
@@ -109,7 +142,11 @@ def add_mim_extension():
     # parse installment mode
     if 'develop' in sys.argv:
         # installed by `pip install -e .`
-        mode = 'symlink'
+        if platform.system() == 'Windows':
+            # set `copy` mode here since symlink fails on Windows.
+            mode = 'copy'
+        else:
+            mode = 'symlink'
     elif 'sdist' in sys.argv or 'bdist_wheel' in sys.argv:
         # installed by `pip install .`
         # or create source distribution by `python setup.py sdist`
@@ -117,9 +154,11 @@ def add_mim_extension():
     else:
         return
 
-    filenames = ['tools', 'configs', 'model-index.yml', 'dataset-index.yml']
+    filenames = [
+        'tools', 'configs', 'demo', 'model-index.yml', 'dataset-index.yml'
+    ]
     repo_path = osp.dirname(__file__)
-    mim_path = osp.join(repo_path, 'mmpretrain', '.mim')
+    mim_path = osp.join(repo_path, 'mmdet', '.mim')
     os.makedirs(mim_path, exist_ok=True)
 
     for filename in filenames:
@@ -134,20 +173,8 @@ def add_mim_extension():
 
             if mode == 'symlink':
                 src_relpath = osp.relpath(src_path, osp.dirname(tar_path))
-                try:
-                    os.symlink(src_relpath, tar_path)
-                except OSError:
-                    # Creating a symbolic link on windows may raise an
-                    # `OSError: [WinError 1314]` due to privilege. If
-                    # the error happens, the src file will be copied
-                    mode = 'copy'
-                    warnings.warn(
-                        f'Failed to create a symbolic link for {src_relpath}, '
-                        f'and it will be copied to {tar_path}')
-                else:
-                    continue
-
-            if mode == 'copy':
+                os.symlink(src_relpath, tar_path)
+            elif mode == 'copy':
                 if osp.isfile(src_path):
                     shutil.copyfile(src_path, tar_path)
                 elif osp.isdir(src_path):
@@ -161,38 +188,37 @@ def add_mim_extension():
 if __name__ == '__main__':
     add_mim_extension()
     setup(
-        name='mmpretrain',
+        name='mmdet',
         version=get_version(),
-        description='OpenMMLab Model Pretraining Toolbox and Benchmark',
+        description='OpenMMLab Detection Toolbox and Benchmark',
         long_description=readme(),
         long_description_content_type='text/markdown',
-        keywords='computer vision, image classification, '
-        'unsupervised learning, self-supervised learning',
-        packages=find_packages(exclude=('configs', 'tools', 'demo', 'tests')),
+        author='MMDetection Contributors',
+        author_email='openmmlab@gmail.com',
+        keywords='computer vision, object detection',
+        url='https://github.com/open-mmlab/mmdetection',
+        packages=find_packages(exclude=('configs', 'tools', 'demo')),
         include_package_data=True,
-        python_requires='>=3.7',
         classifiers=[
-            'Development Status :: 4 - Beta',
+            'Development Status :: 5 - Production/Stable',
             'License :: OSI Approved :: Apache Software License',
             'Operating System :: OS Independent',
             'Programming Language :: Python :: 3',
             'Programming Language :: Python :: 3.7',
             'Programming Language :: Python :: 3.8',
             'Programming Language :: Python :: 3.9',
-            'Programming Language :: Python :: 3.10',
-            'Programming Language :: Python :: 3.11',
-            'Topic :: Scientific/Engineering :: Artificial Intelligence',
         ],
-        url='https://github.com/open-mmlab/mmpretrain',
-        author='MMPretrain Contributors',
-        author_email='openmmlab@gmail.com',
         license='Apache License 2.0',
         install_requires=parse_requirements('requirements/runtime.txt'),
         extras_require={
             'all': parse_requirements('requirements.txt'),
             'tests': parse_requirements('requirements/tests.txt'),
+            'build': parse_requirements('requirements/build.txt'),
             'optional': parse_requirements('requirements/optional.txt'),
             'mim': parse_requirements('requirements/mminstall.txt'),
+            'tracking': parse_requirements('requirements/tracking.txt'),
             'multimodal': parse_requirements('requirements/multimodal.txt'),
         },
+        ext_modules=[],
+        cmdclass={'build_ext': BuildExtension},
         zip_safe=False)

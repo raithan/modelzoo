@@ -1,5 +1,3 @@
-# Use the latest 2.1 version of CircleCI pipeline process engine.
-# See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
 
 # the default pipeline parameters, which will be updated according to
@@ -9,14 +7,10 @@ parameters:
     type: boolean
     default: true
 
-# Define a job to be invoked later in a workflow.
-# See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
   lint:
     docker:
       - image: cimg/python:3.7.4
-    # Add steps to the job
-    # See: https://circleci.com/docs/2.0/configuration-reference/#steps
     steps:
       - checkout
       - run:
@@ -31,57 +25,7 @@ jobs:
           name: Check docstring coverage
           command: |
             pip install interrogate
-            interrogate -v --ignore-init-method --ignore-module --ignore-nested-functions --ignore-magic --ignore-regex "__repr__" --fail-under 60 mmpretrain
-  build_cpu_with_3rdparty:
-    parameters:
-      # The python version must match available image tags in
-      # https://circleci.com/developer/images/image/cimg/python
-      python:
-        type: string
-      torch:
-        type: string
-      torchvision:
-        type: string
-    docker:
-      - image: cimg/python:<< parameters.python >>
-    resource_class: large
-    steps:
-      - checkout
-      - run:
-          name: Install Libraries
-          command: |
-            sudo apt-get update
-            sudo apt-get install -y libjpeg8-dev zlib1g-dev
-      - run:
-          name: Configure Python & pip
-          command: |
-            pip install --upgrade pip
-            pip install wheel
-      - run:
-          name: Install PyTorch
-          command: |
-            python -V
-            pip install torch==<< parameters.torch >>+cpu torchvision==<< parameters.torchvision >>+cpu -f https://download.pytorch.org/whl/torch_stable.html
-      - run:
-          name: Install mmpretrain dependencies
-          command: |
-            pip install git+https://github.com/open-mmlab/mmengine.git@main
-            pip install -U openmim
-            mim install 'mmcv >= 2.0.0rc4'
-            pip install timm
-            pip install transformers
-            pip install -r requirements.txt
-            python -c 'import mmcv; print(mmcv.__version__)'
-      - run:
-          name: Build and install
-          command: |
-            pip install -e .
-      - run:
-          name: Run unittests
-          command: |
-            coverage run --branch --source mmpretrain -m pytest tests/
-            coverage xml
-            coverage report -m
+            interrogate -v --ignore-init-method --ignore-module --ignore-nested-functions --ignore-magic --ignore-regex "__repr__" --fail-under 85 mmdet
 
   build_cpu:
     parameters:
@@ -102,7 +46,7 @@ jobs:
           name: Install Libraries
           command: |
             sudo apt-get update
-            sudo apt-get install -y libjpeg8-dev zlib1g-dev
+            sudo apt-get install -y ninja-build libglib2.0-0 libsm6 libxrender-dev libxext6 libgl1-mesa-glx libjpeg-dev zlib1g-dev libtinfo-dev libncurses5
       - run:
           name: Configure Python & pip
           command: |
@@ -112,15 +56,27 @@ jobs:
           name: Install PyTorch
           command: |
             python -V
-            pip install torch==<< parameters.torch >>+cpu torchvision==<< parameters.torchvision >>+cpu -f https://download.pytorch.org/whl/torch_stable.html
+            python -m pip install torch==<< parameters.torch >>+cpu torchvision==<< parameters.torchvision >>+cpu -f https://download.pytorch.org/whl/torch_stable.html
+      - when:
+          condition:
+            equal: ["3.9.0", << parameters.python >>]
+          steps:
+            - run: pip install "protobuf <= 3.20.1" && sudo apt-get update && sudo apt-get -y install libprotobuf-dev protobuf-compiler cmake
+            - run: pip install dsdl
       - run:
-          name: Install mmpretrain dependencies
+          name: Install mmdet dependencies
+          # numpy may be downgraded after building pycocotools, which causes `ImportError: numpy.core.multiarray failed to import`
+          # force reinstall pycocotools to ensure pycocotools being built under the currenct numpy
           command: |
-            pip install git+https://github.com/open-mmlab/mmengine.git@main
+            python -m pip install git+ssh://git@github.com/open-mmlab/mmengine.git@main
             pip install -U openmim
             mim install 'mmcv >= 2.0.0rc4'
-            pip install -r requirements.txt
-            python -c 'import mmcv; print(mmcv.__version__)'
+            pip install -r requirements/tests.txt -r requirements/optional.txt
+            pip install --force-reinstall pycocotools
+            pip install albumentations>=0.3.2 --no-binary imgaug,albumentations
+            pip install -r requirements/tracking.txt
+            pip install git+https://github.com/cocodataset/panopticapi.git
+            pip install git+https://github.com/JonathonLuiten/TrackEval.git
       - run:
           name: Build and install
           command: |
@@ -128,56 +84,65 @@ jobs:
       - run:
           name: Run unittests
           command: |
-            coverage run --branch --source mmpretrain -m pytest tests/
-            coverage xml
-            coverage report -m
+            python -m coverage run --branch --source mmdet -m pytest tests/
+            python -m coverage xml
+            python -m coverage report -m
 
   build_cuda:
-    machine:
-      image: ubuntu-2004-cuda-11.4:202110-01
-    resource_class: gpu.nvidia.small
-    environment:
-      MKL_SERVICE_FORCE_INTEL: 1
     parameters:
       torch:
         type: string
       cuda:
         type: enum
-        enum: ["11.1", "11.7"]
+        enum: ["11.1", "11.7", "11.8"]
       cudnn:
         type: integer
         default: 8
+    machine:
+      image: linux-cuda-11:default
+      # docker_layer_caching: true
+    resource_class: gpu.nvidia.small.multi
     steps:
       - checkout
       - run:
-          # Cloning repos in VM since Docker doesn't have access to the private key
+          # CLoning repos in VM since Docker doesn't have access to the private key
           name: Clone Repos
           command: |
-            git clone -b main --depth 1 https://github.com/open-mmlab/mmengine.git /home/circleci/mmengine
+            git clone -b main --depth 1 ssh://git@github.com/open-mmlab/mmengine.git /home/circleci/mmengine
+      - run:
+          name: Install nvidia-container-toolkit and Restart Docker
+          command: |
+            sudo apt-get update
+            sudo apt-get install -y nvidia-container-toolkit
+            sudo systemctl restart docker
       - run:
           name: Build Docker image
           command: |
-            docker build .circleci/docker -t mmpretrain:gpu --build-arg PYTORCH=<< parameters.torch >> --build-arg CUDA=<< parameters.cuda >> --build-arg CUDNN=<< parameters.cudnn >>
-            docker run --gpus all -t -d -v /home/circleci/project:/mmpretrain -v /home/circleci/mmengine:/mmengine -w /mmpretrain --name mmpretrain mmpretrain:gpu
+            docker build .circleci/docker -t mmdetection:gpu --build-arg PYTORCH=<< parameters.torch >> --build-arg CUDA=<< parameters.cuda >> --build-arg CUDNN=<< parameters.cudnn >>
+            docker run --gpus all -t -d -v /home/circleci/project:/mmdetection -v /home/circleci/mmengine:/mmengine -w /mmdetection --name mmdetection mmdetection:gpu
+            docker exec mmdetection apt-get install -y git
       - run:
-          name: Install mmpretrain dependencies
+          name: Install mmdet dependencies
           command: |
-            docker exec mmpretrain pip install -e /mmengine
-            docker exec mmpretrain pip install -U openmim
-            docker exec mmpretrain mim install 'mmcv >= 2.0.0rc4'
-            docker exec mmpretrain pip install -r requirements.txt
-            docker exec mmpretrain python -c 'import mmcv; print(mmcv.__version__)'
+            docker exec mmdetection pip install -e /mmengine
+            docker exec mmdetection pip install -U openmim
+            docker exec mmdetection mim install 'mmcv >= 2.0.0rc4'
+            docker exec mmdetection pip install -r requirements/tests.txt -r requirements/optional.txt
+            docker exec mmdetection pip install pycocotools
+            docker exec mmdetection pip install albumentations>=0.3.2 --no-binary imgaug,albumentations
+            docker exec mmdetection pip install -r requirements/tracking.txt
+            docker exec mmdetection pip install git+https://github.com/cocodataset/panopticapi.git
+            docker exec mmdetection pip install git+https://github.com/JonathonLuiten/TrackEval.git
+            docker exec mmdetection python -c 'import mmcv; print(mmcv.__version__)'
       - run:
           name: Build and install
           command: |
-            docker exec mmpretrain pip install -e .
+            docker exec mmdetection pip install -e .
       - run:
           name: Run unittests
           command: |
-            docker exec mmpretrain python -m pytest tests/
+            docker exec mmdetection python -m pytest tests/
 
-# Invoke jobs via workflows
-# See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
   pr_stage_lint:
     when: << pipeline.parameters.lint_only >>
@@ -187,19 +152,17 @@ workflows:
           filters:
             branches:
               ignore:
-                - dev
-                - main
+                - dev-3.x
   pr_stage_test:
     when:
-      not:
-        << pipeline.parameters.lint_only >>
+      not: << pipeline.parameters.lint_only >>
     jobs:
       - lint:
           name: lint
           filters:
             branches:
               ignore:
-                - dev
+                - dev-3.x
       - build_cpu:
           name: minimum_version_cpu
           torch: 1.8.0
@@ -207,11 +170,11 @@ workflows:
           python: 3.7.16
           requires:
             - lint
-      - build_cpu_with_3rdparty:
+      - build_cpu:
           name: maximum_version_cpu
           torch: 2.0.0
           torchvision: 0.15.1
-          python: 3.10.0
+          python: 3.9.0
           requires:
             - minimum_version_cpu
       - hold:
@@ -235,16 +198,13 @@ workflows:
             - hold
   merge_stage_test:
     when:
-      not:
-        << pipeline.parameters.lint_only >>
+      not: << pipeline.parameters.lint_only >>
     jobs:
       - build_cuda:
           name: minimum_version_gpu
           torch: 1.8.0
-          # Use double quotation mark to explicitly specify its type
-          # as string instead of number
           cuda: "11.1"
           filters:
             branches:
               only:
-                - pretrain
+                - dev-3.x
