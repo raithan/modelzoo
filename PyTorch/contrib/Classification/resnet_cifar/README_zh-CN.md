@@ -47,7 +47,7 @@ cd <ModelZoo_path>/PyTorch/contrib/Classification/resnet_cifar/run_scripts
 
 2. 运行训练。该模型支持单机单卡
 ```
-python run_resnet.py --config ../configs/resnet18_8xb16_cifar10.py --launcher pytorch --nproc-per-node 4 --amp --cfg-options "train_dataloader.dataset.data_root=<cifar10_path>" "val_dataloader.dataset.data_root=<cifar10_path>"
+python run_resnet.py --config ../configs/resnet/resnet18_8xb16_cifar10.py --launcher pytorch --nproc-per-node 4 --amp --cfg-options "train_dataloader.dataset.data_root=<cifar10_path>" "val_dataloader.dataset.data_root=<cifar10_path>"
 ```
 
 ### 2.5 训练结果
