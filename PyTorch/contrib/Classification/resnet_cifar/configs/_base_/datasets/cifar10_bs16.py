@@ -9,7 +9,7 @@ data_preprocessor = dict(
     to_rgb=False)
 
 train_pipeline = [
-    dict(type='RandomCrop', crop_size=128, padding=4),
+    dict(type='RandomCrop', crop_size=32, padding=4),
     dict(type='RandomFlip', prob=0.5, direction='horizontal'),
     dict(type='PackInputs'),
 ]
@@ -19,7 +19,7 @@ test_pipeline = [
 ]
 
 train_dataloader = dict(
-    batch_size=128,
+    batch_size=32,
     num_workers=2,
     dataset=dict(
         type=dataset_type,
