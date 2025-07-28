@@ -31,6 +31,7 @@ pip3 install git+https://gitee.com/xiwei777/mmengine_sdaa.git
 pip3 install opencv_python mmcv --no-deps
 mim install -e .
 pip install -r requirements.txt
+pip install git+https://gitee.com/xiwei777/tcap_dllogger.git
 ```
 ### 2.4 Training Execution
 1. Navigate to the training script directory
