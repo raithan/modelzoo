@@ -42,7 +42,7 @@ pip install -r requirements.txt
 ### 2.4 启动训练
 1. 在构建好的环境中，进入训练脚本所在目录。
 ```
-cd <ModelZoo_path>/PyTorch/contrib/Classification/resnet/run_scripts
+cd <ModelZoo_path>/PyTorch/contrib/Classification/resnet_cifar/run_scripts
 ```
 
 2. 运行训练。该模型支持单机单卡
