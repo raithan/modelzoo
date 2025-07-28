@@ -1,83 +1,59 @@
-from mmengine.config import Config
-from mmengine.runner import Runner
-from mmengine.registry import RUNNERS
-
 from argument import parse_args
 
-def merge_args(cfg, args):
-    """将命令行参数合并进 config"""
-    if args.no_validate:
-        cfg.val_cfg = None
-        cfg.val_dataloader = None
-        cfg.val_evaluator = None
 
-    cfg.launcher = args.launcher
+def build_hyper_parameters(args):
+    # 提取并存储参数
+    launcher = args.launcher
+    amp = args.amp
+    config = args.config
+    cfg_options = args.cfg_options
 
-    if args.work_dir is not None:
-        cfg.work_dir = args.work_dir
-    elif cfg.get('work_dir', None) is None:
-        cfg.work_dir = osp.join('./work_dirs', osp.splitext(osp.basename(args.config))[0])
+    hyper_parameters = f"{config} --launcher {launcher} "
 
-    if args.amp is True:
-        cfg.optim_wrapper.type = 'AmpOptimWrapper'
-        cfg.optim_wrapper.setdefault('loss_scale', 'dynamic')
+    if args.amp:
+        hyper_parameters += f" --amp"
+    if args.cfg_options:
+        cfg_str = ""
+        for k, v in args.cfg_options.items():
+            # 确保值被正确格式化
+            if isinstance(v, str) and ' ' in v:
+                # 如果值包含空格，用引号包裹
+                cfg_str += f"{k}='{v}' "
+            else:
+                cfg_str += f"{k}={v} "       
+        hyper_parameters += f" --cfg-options {cfg_str.strip()} "
 
-    if args.resume == 'auto':
-        cfg.resume = True
-        cfg.load_from = None
-    elif args.resume is not None:
-        cfg.resume = True
-        cfg.load_from = args.resume
+    return hyper_parameters
 
-    if args.auto_scale_lr:
-        cfg.auto_scale_lr.enable = True
+def build_command(args,hyper_parameters):
 
-    default_dataloader_cfg = ConfigDict(
-        pin_memory=True,
-        persistent_workers=True,
-        collate_fn=dict(type='default_collate'),
-    )
-    if digit_version(TORCH_VERSION) < digit_version('1.8.0'):
-        default_dataloader_cfg.persistent_workers = False
+    nnodesx = args.nnodes
+    node_rank = args.node_rank
+    master_addr = args.master_addr
+    master_port = args.master_port
+    nproc_per_node = args.nproc_per_node
+    cmd = ""
+    cmd = f'python -m torch.distributed.launch --nnodes={nnodesx} \
+        --node_rank={node_rank} \
+        --master_addr={master_addr} \
+        --nproc_per_node={nproc_per_node} \
+        --master_port={master_port} \
+        ../tools/train.py {hyper_parameters}'
+    print("cmd--->>>>>:\n{}\n".format(cmd))
+    return cmd
 
-    def set_default_dataloader_cfg(cfg, field):
-        if cfg.get(field, None) is None:
-            return
-        dataloader_cfg = deepcopy(default_dataloader_cfg)
-        dataloader_cfg.update(cfg[field])
-        cfg[field] = dataloader_cfg
-        if args.no_pin_memory:
-            cfg[field]['pin_memory'] = False
-        if args.no_persistent_workers:
-            cfg[field]['persistent_workers'] = False
+def excute_command(cmd):
+    import subprocess
+    try:
+        subprocess.check_call(cmd, shell=True)
+    except subprocess.CalledProcessError as e:
+        exit_code = e.returncode
+        print("Command failed with exit code:", exit_code)
+        exit(exit_code)
 
-    set_default_dataloader_cfg(cfg, 'train_dataloader')
-    set_default_dataloader_cfg(cfg, 'val_dataloader')
-    set_default_dataloader_cfg(cfg, 'test_dataloader')
-
-    if args.cfg_options is not None:
-        cfg.merge_from_dict(args.cfg_options)
-
-    return cfg
-
-def main():
+if __name__ == "__main__":
     args = parse_args()
+    hyper_parameters = build_hyper_parameters(args)
+    cmd = build_command(args,hyper_parameters)
+    excute_command(cmd)
 
-    # 加载 config 文件
-    cfg = Config.fromfile(args.config)
-
-    # 合并命令行参数
-    cfg = merge_args(cfg, args)
-
-    # 构建 runner
-    if 'runner_type' not in cfg:
-        runner = Runner.from_cfg(cfg)
-    else:
-        runner = RUNNERS.build(cfg)
-
-    # 启动训练
-    runner.train()
-
-
-if __name__ == '__main__':
-    main()
