@@ -52,7 +52,7 @@ csra 使用 VOC2007 数据集，该数据集为开源数据集，
 
 2. 运行训练。该模型支持单机单卡。
   ```
-  python run_csra.py --config ../configs/csra/resnet101-csra_1xb16_voc07-448px.py --launcher pytorch --nproc-per-node 4 --amp --cfg-options "train_dataloader.dataset.data_root=<imagenet_path>" "val_dataloader.dataset.data_root=<imagenet_path>"
+  python run_csra.py --config ../configs/csra/resnet101-csra_1xb16_voc07-448px.py --launcher pytorch --nproc-per-node 4 --amp --cfg-options "train_dataloader.dataset.data_root=<voc_path>" "val_dataloader.dataset.data_root=<voc_path>"
   ```
     更多训练参数参考 run_scripts/argument.py
 
