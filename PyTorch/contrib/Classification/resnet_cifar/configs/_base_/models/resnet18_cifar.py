@@ -13,14 +13,3 @@ model = dict(
         type='LinearClsHead'),
     neck=dict(type='GlobalAveragePooling'),
     type='ImageClassifier')
-optim_wrapper = dict(
-    loss_scale='dynamic',
-    optimizer=dict(lr=0.1, momentum=0.9, type='SGD', weight_decay=0.0001),
-    type='AmpOptimWrapper')
-param_scheduler = dict(
-    by_epoch=True, gamma=0.1, milestones=[
-        100,
-        150,
-    ], type='MultiStepLR')
-randomness = dict(deterministic=False, seed=None)
-resume = False
