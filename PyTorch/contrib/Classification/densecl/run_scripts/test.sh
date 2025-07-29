@@ -20,7 +20,7 @@ cd $script_path
 
 #执行训练
 python run_densecl.py --config ../configs/densecl/benchmarks/resnet50_8xb32-linear-steplr-100e_in1k.py \
-    --launcher pytorch --nproc-per-node 4 --amp --resume \
+    --launcher pytorch --nproc-per-node 4 --amp \
     --cfg-options "train_dataloader.dataset.data_root=$data_path" "val_dataloader.dataset.data_root=$data_path" "randomness.seed=42" "randomness.deterministic=True" 2>&1 | tee sdaa.log
 
 # 生成loss对比图
