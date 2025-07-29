@@ -51,7 +51,7 @@ SSD300 常用 COCO 数据集：COCO 数据集可从 COCO官网 下载。
 
 2. 运行训练。该模型支持单机单卡。
   ```
-  python run_ssd300.py --config ../configs/ssd300/ssd300_coco.py --launcher pytorch --nproc-per-node 4 --amp --cfg-options "train_dataloader.dataset.data_root=<coco_path>" "val_dataloader.dataset.data_root=<coco_path>"
+  python run_ssd300.py --config ../configs/ssd/ssd300_coco.py --launcher pytorch --nproc-per-node 4 --amp
 
   ```
     更多训练参数参考 run_scripts/argument.py

@@ -2,8 +2,8 @@
 script_path=$(dirname $(readlink -f "$0"))
 echo "当前脚本路径: $script_path"
 
-data_path="/data/teco-data/imagenet"
-data_path="/data02/imagenet"
+data_path="/data/teco-data/coco"
+#该模型数据集路径需要修改configs/_base_/datasets/coco_detection.py中的data_root
 
 #安装依赖
 cd .. 
@@ -17,9 +17,5 @@ pip3 install numpy==1.24.3
 cd $script_path
 
 #执行训练
-python run_ssd300.py --config ../configs/ssd300/ssd300_coco.py \
-    --launcher pytorch --nproc-per-node 4 --amp \
-    --cfg-options "train_dataloader.dataset.data_root=$data_path" "val_dataloader.dataset.data_root=$data_path" 2>&1 | tee sdaa.log
-
-# 生成loss对比图
-python loss.py --sdaa-log sdaa.log --cuda-log cuda.log
+python run_ssd300.py --config ../configs/ssd/ssd300_coco.py \
+    --launcher pytorch --nproc-per-node 4 --amp 2>&1 | tee sdaa.log
