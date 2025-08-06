@@ -1,6 +1,6 @@
 # dataset settings
 dataset_type = 'CityscapesDataset'
-data_root = '/data/teco-data/Cityscapes/'
+data_root = 'data/cityscapes/'
 crop_size = (512, 1024)
 train_pipeline = [
     dict(type='LoadImageFromFile'),
@@ -42,6 +42,7 @@ tta_pipeline = [
 train_dataloader = dict(
     batch_size=2,
     num_workers=2,
+    persistent_workers=True,
     sampler=dict(type='InfiniteSampler', shuffle=True),
     dataset=dict(
         type=dataset_type,
@@ -52,6 +53,7 @@ train_dataloader = dict(
 val_dataloader = dict(
     batch_size=1,
     num_workers=4,
+    persistent_workers=True,
     sampler=dict(type='DefaultSampler', shuffle=False),
     dataset=dict(
         type=dataset_type,
