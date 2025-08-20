@@ -1,5 +1,3 @@
-
-# Demo
 ## 1. 模型概述
 基于 CNN 的 PyTorch 实现，用于面部表情识别（FER2013 和 CK+），在 FER2013 数据集上达到 72.112%（当前最佳水平），在 CK+ 数据集上达到 94.64%。
 https://github.com/WuJie1010/Facial-Expression-Recognition.Pytorch?tab=readme-ov-file
@@ -42,14 +40,14 @@ python preprocess_fer2013.py
 ### 2.4 启动训练
 1. 在构建好的环境中，进入训练脚本所在目录。
     ```
-    cd <ModelZoo_path>/PyTorch/contrib/Classification/Demo/run_scripts
+    cd <ModelZoo_path>/PyTorch/contrib/Face/Facial-Expression-Recognition/run_scripts
     ```
 
 2. 运行训练。该模型支持单机单卡.
 
     -  单机单卡
     ```
-   python run_demo.py 
+   python run_fer.py 
     ```
 
     
