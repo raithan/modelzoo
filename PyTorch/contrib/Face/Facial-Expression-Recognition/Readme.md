@@ -61,5 +61,3 @@ best_PublicTest_acc_epoch: 148
 best_PrivateTest_acc: 72.471
 best_PrivateTest_acc_epoch: 155
 
-> 如果为完整的训练或微调任务，请提供最终的metric结果。
-> 如果为短训，请提供loss曲线图和最终的loss结果。
