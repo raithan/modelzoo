@@ -1,0 +1,379 @@
+--------------+------------------------------------------------
+ Host IP      | 100.10.19.236
+ PyTorch      | 2.4.0a0+git4451b0e
+ Torch-SDAA   | 20250616.14.30.dev0+git35328dc
+--------------+------------------------------------------------
+ SDAA Driver  | 2.1.0 (N/A)
+ SDAA Runtime | 2.1.0 (/opt/tecoai/lib64/libsdaart.so)
+ SDPTI        | 1.4.0b0 (/opt/tecoai/lib64/libsdpti.so)
+ TecoDNN      | 2.2.0b0 (/opt/tecoai/lib64/libtecodnn.so)
+ TecoBLAS     | 2.2.0b0 (/opt/tecoai/lib64/libtecoblas.so)
+ CustomDNN    | 1.20.0a0 (/opt/tecoai/lib64/libtecodnn_ext.so)
+ TecoRAND     | 2.0.1 (/opt/tecoai/lib64/libtecorand.so)
+ TCCL         | 1.23.0 (/opt/tecoai/lib64/libtccl.so)
+--------------+------------------------------------------------
+--------------+------------------------------------------------
+ Host IP      | 100.10.19.236
+ PyTorch      | 2.4.0a0+git4451b0e
+ Torch-SDAA   | 20250616.14.30.dev0+git35328dc
+--------------+------------------------------------------------
+ SDAA Driver  | 2.1.0 (N/A)
+ SDAA Runtime | 2.1.0 (/opt/tecoai/lib64/libsdaart.so)
+ SDPTI        | 1.4.0b0 (/opt/tecoai/lib64/libsdpti.so)
+ TecoDNN      | 2.2.0b0 (/opt/tecoai/lib64/libtecodnn.so)
+ TecoBLAS     | 2.2.0b0 (/opt/tecoai/lib64/libtecoblas.so)
+ CustomDNN    | 1.20.0a0 (/opt/tecoai/lib64/libtecodnn_ext.so)
+ TecoRAND     | 2.0.1 (/opt/tecoai/lib64/libtecorand.so)
+ TCCL         | 1.23.0 (/opt/tecoai/lib64/libtccl.so)
+--------------+------------------------------------------------
+/data/bigc-data/lsq/yolo_new/lib/python3.10/site-packages/requests/__init__.py:86: RequestsDependencyWarning: Unable to find acceptable character detection dependency (chardet or charset_normalizer).
+  warnings.warn(
+/data/bigc-data/lsq/yolo_new/lib/python3.10/site-packages/timm/models/hub.py:4: FutureWarning: Importing from timm.models.hub is deprecated, please import via timm.models
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.models", FutureWarning)
+| distributed init (rank 0, world 1): env://
+2025-10-22 02:01:06,732 [INFO] 
+=====  Running Parameters    =====
+2025-10-22 02:01:06,737 [INFO] {
+    "accum_grad_iters": 16,
+    "amp": true,
+    "batch_size_eval": 4,
+    "batch_size_train": 1,
+    "device": "sdaa",
+    "dist_backend": "tccl",
+    "dist_url": "env://",
+    "distributed": true,
+    "evaluate": false,
+    "extra_log_freq": 0,
+    "gpu": 0,
+    "init_lr": 1e-05,
+    "log_freq": 0,
+    "lr_sched": "linear_warmup_cosine_lr",
+    "max_epoch": 5,
+    "max_len": 30,
+    "min_len": 8,
+    "min_lr": 0,
+    "num_beams": 5,
+    "num_workers": 0,
+    "output_dir": "output/BLIP2/Caption_coco",
+    "rank": 0,
+    "resume_ckpt_path": null,
+    "seed": 42,
+    "task": "captioning",
+    "test_splits": [
+        "test"
+    ],
+    "train_splits": [
+        "train"
+    ],
+    "valid_splits": [
+        "val"
+    ],
+    "warmup_lr": 1e-08,
+    "warmup_steps": 1000,
+    "weight_decay": 0.05,
+    "world_size": 1
+}
+2025-10-22 02:01:06,737 [INFO] 
+======  Dataset Attributes  ======
+2025-10-22 02:01:06,738 [INFO] 
+======== coco_caption =======
+2025-10-22 02:01:06,740 [INFO] {
+    "build_info": {
+        "annotations": {
+            "test": {
+                "md5": "3ff34b0ef2db02d01c37399f6a2a6cd1",
+                "storage": "coco/annotations/coco_karpathy_test.json",
+                "url": "https://storage.googleapis.com/sfr-vision-language-research/datasets/coco_karpathy_test.json"
+            },
+            "train": {
+                "md5": "aa31ac474cf6250ebb81d18348a07ed8",
+                "storage": "coco/annotations/coco_karpathy_train.json",
+                "url": "https://storage.googleapis.com/sfr-vision-language-research/datasets/coco_karpathy_train.json"
+            },
+            "val": {
+                "md5": "b273847456ef5580e33713b1f7de52a0",
+                "storage": "coco/annotations/coco_karpathy_val.json",
+                "url": "https://storage.googleapis.com/sfr-vision-language-research/datasets/coco_karpathy_val.json"
+            }
+        },
+        "images": {
+            "storage": "/data/teco-data/coco2014/images"
+        }
+    },
+    "data_type": "images",
+    "dataset_card": "dataset_card/coco_caption.md",
+    "text_processor": {
+        "eval": {
+            "name": "blip_caption"
+        },
+        "train": {
+            "name": "blip_caption",
+            "prompt": "a photo of "
+        }
+    },
+    "vis_processor": {
+        "eval": {
+            "image_size": 364,
+            "name": "blip_image_eval"
+        },
+        "train": {
+            "image_size": 364,
+            "name": "blip2_image_train"
+        }
+    }
+}
+2025-10-22 02:01:06,740 [INFO] 
+======  Model Attributes  ======
+2025-10-22 02:01:06,741 [INFO] {
+    "arch": "blip2_opt",
+    "drop_path_rate": 0,
+    "finetuned": "https://storage.googleapis.com/sfr-vision-language-research/LAVIS/models/BLIP2/blip2_caption_opt2.7b.pth",
+    "freeze_vit": true,
+    "image_size": 364,
+    "load_finetuned": false,
+    "local_files_only": true,
+    "model_type": "caption_coco_opt2.7b",
+    "num_query_token": 32,
+    "opt_model": "/data/teco-data/opt-2.7b",
+    "pretrained": "https://storage.googleapis.com/sfr-vision-language-research/LAVIS/models/BLIP2/blip2_pretrained_opt2.7b.pth",
+    "prompt": "a photo of",
+    "use_grad_checkpoint": true,
+    "vit_precision": "fp32"
+}
+Using downloaded and verified file: /export/home/.cache/lavis/coco/annotations/coco_karpathy_train.json
+Using downloaded and verified file: /export/home/.cache/lavis/coco/annotations/coco_karpathy_val.json
+Using downloaded and verified file: /export/home/.cache/lavis/coco/annotations/coco_karpathy_test.json
+2025-10-22 02:01:06,756 [INFO] Building datasets...
+2025-10-22 02:01:53,130 [WARNING] /data/bigc-data/lsq/LAVIS/lavis/models/eva_vit.py:446: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  state_dict = torch.load(cached_file, map_location="cpu")
+
+Position interpolate from 16x16 to 26x26
+2025-10-22 02:02:09,364 [INFO] freeze vision encoder
+2025-10-22 02:02:59,192 [INFO] Loading OPT tokenizer/model from '/data/teco-data/opt-2.7b' (local_files_only=True, cache_dir=None)
+2025-10-22 02:02:59,434 [WARNING] /data/bigc-data/lsq/yolo_new/lib/python3.10/site-packages/transformers/modeling_utils.py:463: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  return torch.load(checkpoint_file, map_location="cpu")
+
+2025-10-22 02:04:09,143 [WARNING] /data/bigc-data/lsq/LAVIS/lavis/models/blip2_models/blip2.py:99: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  checkpoint = torch.load(cached_file, map_location="cpu")
+
+2025-10-22 02:04:11,836 [INFO] load checkpoint from https://storage.googleapis.com/sfr-vision-language-research/LAVIS/models/BLIP2/blip2_pretrained_opt2.7b.pth
+2025-10-22 02:04:12,039 [INFO] Start training
+2025-10-22 02:04:21,788 [INFO] dataset_ratios not specified, datasets will be concatenated (map-style datasets) or chained (webdataset.DataPipeline).
+2025-10-22 02:04:21,792 [INFO] Loaded 566747 records for train split from the dataset.
+2025-10-22 02:04:21,793 [INFO] Loaded 5000 records for val split from the dataset.
+2025-10-22 02:04:21,793 [INFO] Loaded 5000 records for test split from the dataset.
+2025-10-22 02:04:21,809 [INFO] number of trainable parameters: 107133696
+2025-10-22 02:04:21,813 [INFO] Start training epoch 0, 566747 iters per inner epoch.
+2025-10-22 02:04:22,838 [WARNING] /data/bigc-data/lsq/LAVIS/lavis/models/blip2_models/blip2.py:51: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  return torch.cuda.amp.autocast(dtype=dtype)
+
+2025-10-22 02:04:22,936 [WARNING] /data/bigc-data/lsq/yolo_new/lib/python3.10/site-packages/torch/amp/autocast_mode.py:265: UserWarning: User provided device_type of 'cuda', but CUDA is not available. Disabling
+  warnings.warn(
+
+2025-10-22 02:04:22,965 [WARNING] /data/bigc-data/lsq/yolo_new/lib/python3.10/site-packages/torch/_dynamo/eval_frame.py:600: UserWarning: torch.utils.checkpoint: the use_reentrant parameter should be passed explicitly. In version 2.4 we will raise an exception if use_reentrant is not passed. use_reentrant=False is recommended, but if you need to preserve the current default behavior, you can pass use_reentrant=True. Refer to docs for more details on the differences between the two variants.
+  return fn(*args, **kwargs)
+
+2025-10-22 02:04:22,990 [WARNING] /data/bigc-data/lsq/yolo_new/lib/python3.10/site-packages/torch/utils/checkpoint.py:92: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
+  warnings.warn(
+
+2025-10-22 02:04:24,184 [INFO] TCAPPDLL 2025-10-22 02:04:24.182661 - Epoch: 0 Iteration: 1 rank : 0 train.loss : 1.857826948 train.ips : 6.76 imgs/s train.total_time : 2.368432 step_time : 2.368432
+Train: data epoch: [0]  [     0/566747]  eta: 15 days, 11:42:40  lr: 0.000000  loss: 1.8578  time: 2.3611  data: 0.0002
+2025-10-22 02:04:25,558 [INFO] TCAPPDLL 2025-10-22 02:04:25.558459 - Epoch: 0 Iteration: 2 rank : 0 train.loss : 2.154853821 train.ips : 11.63 imgs/s train.total_time : 3.744250 step_time : 1.375818
+2025-10-22 02:04:26,908 [INFO] TCAPPDLL 2025-10-22 02:04:26.908127 - Epoch: 0 Iteration: 3 rank : 0 train.loss : 1.544540405 train.ips : 11.85 imgs/s train.total_time : 5.093927 step_time : 1.349677
+2025-10-22 02:04:28,267 [INFO] TCAPPDLL 2025-10-22 02:04:28.267158 - Epoch: 0 Iteration: 4 rank : 0 train.loss : 3.592517138 train.ips : 11.77 imgs/s train.total_time : 6.452928 step_time : 1.359001
+2025-10-22 02:04:29,660 [INFO] TCAPPDLL 2025-10-22 02:04:29.659539 - Epoch: 0 Iteration: 5 rank : 0 train.loss : 2.903949976 train.ips : 11.49 imgs/s train.total_time : 7.845335 step_time : 1.392406
+2025-10-22 02:04:30,997 [INFO] TCAPPDLL 2025-10-22 02:04:30.996449 - Epoch: 0 Iteration: 6 rank : 0 train.loss : 1.257873535 train.ips : 11.97 imgs/s train.total_time : 9.182233 step_time : 1.336898
+2025-10-22 02:04:32,340 [INFO] TCAPPDLL 2025-10-22 02:04:32.339743 - Epoch: 0 Iteration: 7 rank : 0 train.loss : 3.165428162 train.ips : 11.91 imgs/s train.total_time : 10.525170 step_time : 1.342937
+2025-10-22 02:04:33,702 [INFO] TCAPPDLL 2025-10-22 02:04:33.701392 - Epoch: 0 Iteration: 8 rank : 0 train.loss : 2.482996702 train.ips : 11.75 imgs/s train.total_time : 11.887183 step_time : 1.362014
+2025-10-22 02:04:35,053 [INFO] TCAPPDLL 2025-10-22 02:04:35.052410 - Epoch: 0 Iteration: 9 rank : 0 train.loss : 2.149050236 train.ips : 11.84 imgs/s train.total_time : 13.238218 step_time : 1.351035
+2025-10-22 02:04:36,600 [INFO] TCAPPDLL 2025-10-22 02:04:36.599445 - Epoch: 0 Iteration: 10 rank : 0 train.loss : 2.724792480 train.ips : 10.34 imgs/s train.total_time : 14.785239 step_time : 1.547021
+2025-10-22 02:04:37,938 [INFO] TCAPPDLL 2025-10-22 02:04:37.937454 - Epoch: 0 Iteration: 11 rank : 0 train.loss : 2.865437746 train.ips : 11.96 imgs/s train.total_time : 16.123250 step_time : 1.338011
+2025-10-22 02:04:39,292 [INFO] TCAPPDLL 2025-10-22 02:04:39.290956 - Epoch: 0 Iteration: 12 rank : 0 train.loss : 1.931091309 train.ips : 11.82 imgs/s train.total_time : 17.476754 step_time : 1.353504
+2025-10-22 02:04:40,636 [INFO] TCAPPDLL 2025-10-22 02:04:40.635729 - Epoch: 0 Iteration: 13 rank : 0 train.loss : 2.824435949 train.ips : 11.90 imgs/s train.total_time : 18.821533 step_time : 1.344779
+2025-10-22 02:04:41,979 [INFO] TCAPPDLL 2025-10-22 02:04:41.978227 - Epoch: 0 Iteration: 14 rank : 0 train.loss : 2.389569283 train.ips : 11.92 imgs/s train.total_time : 20.164030 step_time : 1.342497
+2025-10-22 02:04:43,388 [INFO] TCAPPDLL 2025-10-22 02:04:43.387353 - Epoch: 0 Iteration: 15 rank : 0 train.loss : 1.531485438 train.ips : 11.35 imgs/s train.total_time : 21.573162 step_time : 1.409132
+2025-10-22 02:04:44,905 [INFO] TCAPPDLL 2025-10-22 02:04:44.905043 - Epoch: 0 Iteration: 16 rank : 0 train.loss : 1.442214966 train.ips : 10.54 imgs/s train.total_time : 23.090861 step_time : 1.517699
+2025-10-22 02:04:46,308 [INFO] TCAPPDLL 2025-10-22 02:04:46.307773 - Epoch: 0 Iteration: 17 rank : 0 train.loss : 1.127061725 train.ips : 11.41 imgs/s train.total_time : 24.493550 step_time : 1.402689
+2025-10-22 02:04:47,647 [INFO] TCAPPDLL 2025-10-22 02:04:47.646305 - Epoch: 0 Iteration: 18 rank : 0 train.loss : 1.823166966 train.ips : 11.95 imgs/s train.total_time : 25.832121 step_time : 1.338571
+2025-10-22 02:04:49,250 [INFO] TCAPPDLL 2025-10-22 02:04:49.249378 - Epoch: 0 Iteration: 19 rank : 0 train.loss : 1.914375305 train.ips : 9.98 imgs/s train.total_time : 27.435174 step_time : 1.603053
+2025-10-22 02:04:50,606 [INFO] TCAPPDLL 2025-10-22 02:04:50.605083 - Epoch: 0 Iteration: 20 rank : 0 train.loss : 2.806791544 train.ips : 11.80 imgs/s train.total_time : 28.790886 step_time : 1.355712
+2025-10-22 02:04:51,934 [INFO] TCAPPDLL 2025-10-22 02:04:51.932807 - Epoch: 0 Iteration: 21 rank : 0 train.loss : 1.411232710 train.ips : 12.05 imgs/s train.total_time : 30.118606 step_time : 1.327720
+2025-10-22 02:04:53,384 [INFO] TCAPPDLL 2025-10-22 02:04:53.383783 - Epoch: 0 Iteration: 22 rank : 0 train.loss : 0.756098390 train.ips : 11.03 imgs/s train.total_time : 31.569590 step_time : 1.450985
+2025-10-22 02:04:54,772 [INFO] TCAPPDLL 2025-10-22 02:04:54.771624 - Epoch: 0 Iteration: 23 rank : 0 train.loss : 1.058266997 train.ips : 11.53 imgs/s train.total_time : 32.957416 step_time : 1.387825
+2025-10-22 02:04:56,182 [INFO] TCAPPDLL 2025-10-22 02:04:56.180864 - Epoch: 0 Iteration: 24 rank : 0 train.loss : 2.442347527 train.ips : 11.35 imgs/s train.total_time : 34.366570 step_time : 1.409155
+2025-10-22 02:04:57,531 [INFO] TCAPPDLL 2025-10-22 02:04:57.530443 - Epoch: 0 Iteration: 25 rank : 0 train.loss : 1.424860477 train.ips : 11.85 imgs/s train.total_time : 35.716259 step_time : 1.349689
+2025-10-22 02:04:58,864 [INFO] TCAPPDLL 2025-10-22 02:04:58.862902 - Epoch: 0 Iteration: 26 rank : 0 train.loss : 1.666942835 train.ips : 12.01 imgs/s train.total_time : 37.048103 step_time : 1.331844
+2025-10-22 02:05:00,287 [INFO] TCAPPDLL 2025-10-22 02:05:00.285568 - Epoch: 0 Iteration: 27 rank : 0 train.loss : 1.515209198 train.ips : 11.24 imgs/s train.total_time : 38.471319 step_time : 1.423216
+2025-10-22 02:05:01,691 [INFO] TCAPPDLL 2025-10-22 02:05:01.690221 - Epoch: 0 Iteration: 28 rank : 0 train.loss : 2.543204069 train.ips : 11.39 imgs/s train.total_time : 39.876033 step_time : 1.404714
+2025-10-22 02:05:03,049 [INFO] TCAPPDLL 2025-10-22 02:05:03.048296 - Epoch: 0 Iteration: 29 rank : 0 train.loss : 2.887878418 train.ips : 11.78 imgs/s train.total_time : 41.234107 step_time : 1.358074
+2025-10-22 02:05:04,429 [INFO] TCAPPDLL 2025-10-22 02:05:04.427859 - Epoch: 0 Iteration: 30 rank : 0 train.loss : 1.308558583 train.ips : 11.60 imgs/s train.total_time : 42.613671 step_time : 1.379564
+2025-10-22 02:05:05,781 [INFO] TCAPPDLL 2025-10-22 02:05:05.780802 - Epoch: 0 Iteration: 31 rank : 0 train.loss : 2.050109863 train.ips : 11.83 imgs/s train.total_time : 43.966618 step_time : 1.352947
+2025-10-22 02:05:07,234 [INFO] TCAPPDLL 2025-10-22 02:05:07.234366 - Epoch: 0 Iteration: 32 rank : 0 train.loss : 1.904436350 train.ips : 11.01 imgs/s train.total_time : 45.420211 step_time : 1.453593
+2025-10-22 02:05:08,643 [INFO] TCAPPDLL 2025-10-22 02:05:08.642560 - Epoch: 0 Iteration: 33 rank : 0 train.loss : 2.804399490 train.ips : 11.36 imgs/s train.total_time : 46.828372 step_time : 1.408161
+2025-10-22 02:05:09,973 [INFO] TCAPPDLL 2025-10-22 02:05:09.972688 - Epoch: 0 Iteration: 34 rank : 0 train.loss : 1.276117921 train.ips : 12.03 imgs/s train.total_time : 48.158507 step_time : 1.330136
+2025-10-22 02:05:11,280 [INFO] TCAPPDLL 2025-10-22 02:05:11.279605 - Epoch: 0 Iteration: 35 rank : 0 train.loss : 2.917773485 train.ips : 12.24 imgs/s train.total_time : 49.465419 step_time : 1.306912
+2025-10-22 02:05:12,686 [INFO] TCAPPDLL 2025-10-22 02:05:12.685068 - Epoch: 0 Iteration: 36 rank : 0 train.loss : 1.938723207 train.ips : 11.38 imgs/s train.total_time : 50.870882 step_time : 1.405463
+2025-10-22 02:05:13,998 [INFO] TCAPPDLL 2025-10-22 02:05:13.997049 - Epoch: 0 Iteration: 37 rank : 0 train.loss : 1.370928049 train.ips : 12.20 imgs/s train.total_time : 52.182863 step_time : 1.311980
+2025-10-22 02:05:15,393 [INFO] TCAPPDLL 2025-10-22 02:05:15.392623 - Epoch: 0 Iteration: 38 rank : 0 train.loss : 0.586818516 train.ips : 11.46 imgs/s train.total_time : 53.578434 step_time : 1.395572
+2025-10-22 02:05:16,712 [INFO] TCAPPDLL 2025-10-22 02:05:16.711356 - Epoch: 0 Iteration: 39 rank : 0 train.loss : 2.214027405 train.ips : 12.13 imgs/s train.total_time : 54.897143 step_time : 1.318708
+2025-10-22 02:05:18,054 [INFO] TCAPPDLL 2025-10-22 02:05:18.053318 - Epoch: 0 Iteration: 40 rank : 0 train.loss : 2.832731724 train.ips : 11.92 imgs/s train.total_time : 56.239051 step_time : 1.341908
+2025-10-22 02:05:19,401 [INFO] TCAPPDLL 2025-10-22 02:05:19.400244 - Epoch: 0 Iteration: 41 rank : 0 train.loss : 1.324731469 train.ips : 11.88 imgs/s train.total_time : 57.586056 step_time : 1.347004
+2025-10-22 02:05:20,781 [INFO] TCAPPDLL 2025-10-22 02:05:20.780809 - Epoch: 0 Iteration: 42 rank : 0 train.loss : 0.699710310 train.ips : 11.59 imgs/s train.total_time : 58.966629 step_time : 1.380574
+2025-10-22 02:05:22,166 [INFO] TCAPPDLL 2025-10-22 02:05:22.165966 - Epoch: 0 Iteration: 43 rank : 0 train.loss : 1.761995316 train.ips : 11.55 imgs/s train.total_time : 60.351781 step_time : 1.385152
+2025-10-22 02:05:23,564 [INFO] TCAPPDLL 2025-10-22 02:05:23.563970 - Epoch: 0 Iteration: 44 rank : 0 train.loss : 2.249489546 train.ips : 11.44 imgs/s train.total_time : 61.749781 step_time : 1.398000
+2025-10-22 02:05:24,851 [INFO] TCAPPDLL 2025-10-22 02:05:24.850390 - Epoch: 0 Iteration: 45 rank : 0 train.loss : 0.974073768 train.ips : 12.44 imgs/s train.total_time : 63.036209 step_time : 1.286428
+2025-10-22 02:05:26,136 [INFO] TCAPPDLL 2025-10-22 02:05:26.135477 - Epoch: 0 Iteration: 46 rank : 0 train.loss : 2.033962727 train.ips : 12.45 imgs/s train.total_time : 64.321295 step_time : 1.285086
+2025-10-22 02:05:27,412 [INFO] TCAPPDLL 2025-10-22 02:05:27.411339 - Epoch: 0 Iteration: 47 rank : 0 train.loss : 1.955571890 train.ips : 12.54 imgs/s train.total_time : 65.597157 step_time : 1.275862
+2025-10-22 02:05:28,812 [INFO] TCAPPDLL 2025-10-22 02:05:28.812624 - Epoch: 0 Iteration: 48 rank : 0 train.loss : 2.168370962 train.ips : 11.42 imgs/s train.total_time : 66.998479 step_time : 1.401322
+2025-10-22 02:05:30,190 [INFO] TCAPPDLL 2025-10-22 02:05:30.189783 - Epoch: 0 Iteration: 49 rank : 0 train.loss : 1.790608764 train.ips : 11.62 imgs/s train.total_time : 68.375602 step_time : 1.377124
+2025-10-22 02:05:31,565 [INFO] TCAPPDLL 2025-10-22 02:05:31.564625 - Epoch: 0 Iteration: 50 rank : 0 train.loss : 1.717795610 train.ips : 11.64 imgs/s train.total_time : 69.750437 step_time : 1.374835
+2025-10-22 02:05:32,808 [INFO] TCAPPDLL 2025-10-22 02:05:32.807122 - Epoch: 0 Iteration: 51 rank : 0 train.loss : 1.244941473 train.ips : 12.88 imgs/s train.total_time : 70.992929 step_time : 1.242491
+2025-10-22 02:05:34,167 [INFO] TCAPPDLL 2025-10-22 02:05:34.166787 - Epoch: 0 Iteration: 52 rank : 0 train.loss : 1.786308885 train.ips : 11.77 imgs/s train.total_time : 72.352600 step_time : 1.359671
+2025-10-22 02:05:35,474 [INFO] TCAPPDLL 2025-10-22 02:05:35.473872 - Epoch: 0 Iteration: 53 rank : 0 train.loss : 2.293686390 train.ips : 12.24 imgs/s train.total_time : 73.659692 step_time : 1.307093
+2025-10-22 02:05:36,794 [INFO] TCAPPDLL 2025-10-22 02:05:36.792860 - Epoch: 0 Iteration: 54 rank : 0 train.loss : 1.398596168 train.ips : 12.13 imgs/s train.total_time : 74.978571 step_time : 1.318879
+2025-10-22 02:05:38,211 [INFO] TCAPPDLL 2025-10-22 02:05:38.210915 - Epoch: 0 Iteration: 55 rank : 0 train.loss : 1.408988357 train.ips : 11.28 imgs/s train.total_time : 76.396733 step_time : 1.418162
+2025-10-22 02:05:39,546 [INFO] TCAPPDLL 2025-10-22 02:05:39.545769 - Epoch: 0 Iteration: 56 rank : 0 train.loss : 3.954622030 train.ips : 11.99 imgs/s train.total_time : 77.731586 step_time : 1.334852
+2025-10-22 02:05:40,807 [INFO] TCAPPDLL 2025-10-22 02:05:40.806242 - Epoch: 0 Iteration: 57 rank : 0 train.loss : 1.152879000 train.ips : 12.69 imgs/s train.total_time : 78.992058 step_time : 1.260472
+2025-10-22 02:05:42,202 [INFO] TCAPPDLL 2025-10-22 02:05:42.201681 - Epoch: 0 Iteration: 58 rank : 0 train.loss : 1.206038117 train.ips : 11.47 imgs/s train.total_time : 80.387388 step_time : 1.395331
+2025-10-22 02:05:43,579 [INFO] TCAPPDLL 2025-10-22 02:05:43.578790 - Epoch: 0 Iteration: 59 rank : 0 train.loss : 1.199419856 train.ips : 11.62 imgs/s train.total_time : 81.764607 step_time : 1.377219
+2025-10-22 02:05:44,835 [INFO] TCAPPDLL 2025-10-22 02:05:44.834491 - Epoch: 0 Iteration: 60 rank : 0 train.loss : 1.811000228 train.ips : 12.74 imgs/s train.total_time : 83.020216 step_time : 1.255608
+2025-10-22 02:05:46,178 [INFO] TCAPPDLL 2025-10-22 02:05:46.177285 - Epoch: 0 Iteration: 61 rank : 0 train.loss : 1.396727800 train.ips : 11.91 imgs/s train.total_time : 84.363103 step_time : 1.342887
+2025-10-22 02:05:47,474 [INFO] TCAPPDLL 2025-10-22 02:05:47.473924 - Epoch: 0 Iteration: 62 rank : 0 train.loss : 2.098747253 train.ips : 12.34 imgs/s train.total_time : 85.659744 step_time : 1.296641
+2025-10-22 02:05:48,902 [INFO] TCAPPDLL 2025-10-22 02:05:48.901613 - Epoch: 0 Iteration: 63 rank : 0 train.loss : 2.858378172 train.ips : 11.21 imgs/s train.total_time : 87.087424 step_time : 1.427680
+2025-10-22 02:05:50,400 [INFO] TCAPPDLL 2025-10-22 02:05:50.400276 - Epoch: 0 Iteration: 64 rank : 0 train.loss : 0.977172852 train.ips : 10.68 imgs/s train.total_time : 88.586125 step_time : 1.498702
+2025-10-22 02:05:51,724 [INFO] TCAPPDLL 2025-10-22 02:05:51.723403 - Epoch: 0 Iteration: 65 rank : 0 train.loss : 2.580826998 train.ips : 12.09 imgs/s train.total_time : 89.909226 step_time : 1.323101
+2025-10-22 02:05:53,001 [INFO] TCAPPDLL 2025-10-22 02:05:53.000615 - Epoch: 0 Iteration: 66 rank : 0 train.loss : 3.064805746 train.ips : 12.53 imgs/s train.total_time : 91.186427 step_time : 1.277201
+2025-10-22 02:05:54,322 [INFO] TCAPPDLL 2025-10-22 02:05:54.321154 - Epoch: 0 Iteration: 67 rank : 0 train.loss : 2.014188528 train.ips : 12.12 imgs/s train.total_time : 92.506972 step_time : 1.320545
+2025-10-22 02:05:55,656 [INFO] TCAPPDLL 2025-10-22 02:05:55.655098 - Epoch: 0 Iteration: 68 rank : 0 train.loss : 1.007354736 train.ips : 11.99 imgs/s train.total_time : 93.840915 step_time : 1.333943
+2025-10-22 02:05:56,900 [INFO] TCAPPDLL 2025-10-22 02:05:56.899309 - Epoch: 0 Iteration: 69 rank : 0 train.loss : 2.649159670 train.ips : 12.86 imgs/s train.total_time : 95.085126 step_time : 1.244212
+2025-10-22 02:05:58,309 [INFO] TCAPPDLL 2025-10-22 02:05:58.308544 - Epoch: 0 Iteration: 70 rank : 0 train.loss : 1.007598877 train.ips : 11.35 imgs/s train.total_time : 96.494360 step_time : 1.409234
+2025-10-22 02:05:59,675 [INFO] TCAPPDLL 2025-10-22 02:05:59.674381 - Epoch: 0 Iteration: 71 rank : 0 train.loss : 2.442754030 train.ips : 11.71 imgs/s train.total_time : 97.860192 step_time : 1.365831
+2025-10-22 02:06:01,057 [INFO] TCAPPDLL 2025-10-22 02:06:01.056516 - Epoch: 0 Iteration: 72 rank : 0 train.loss : 3.417047739 train.ips : 11.58 imgs/s train.total_time : 99.242329 step_time : 1.382137
+2025-10-22 02:06:02,483 [INFO] TCAPPDLL 2025-10-22 02:06:02.482149 - Epoch: 0 Iteration: 73 rank : 0 train.loss : 2.355134249 train.ips : 11.22 imgs/s train.total_time : 100.667968 step_time : 1.425639
+2025-10-22 02:06:03,849 [INFO] TCAPPDLL 2025-10-22 02:06:03.848381 - Epoch: 0 Iteration: 74 rank : 0 train.loss : 2.792007446 train.ips : 11.71 imgs/s train.total_time : 102.034194 step_time : 1.366226
+2025-10-22 02:06:05,100 [INFO] TCAPPDLL 2025-10-22 02:06:05.099564 - Epoch: 0 Iteration: 75 rank : 0 train.loss : 0.914955497 train.ips : 12.79 imgs/s train.total_time : 103.285376 step_time : 1.251183
+2025-10-22 02:06:06,503 [INFO] TCAPPDLL 2025-10-22 02:06:06.502869 - Epoch: 0 Iteration: 76 rank : 0 train.loss : 2.539062500 train.ips : 11.40 imgs/s train.total_time : 104.688690 step_time : 1.403314
+2025-10-22 02:06:07,828 [INFO] TCAPPDLL 2025-10-22 02:06:07.827670 - Epoch: 0 Iteration: 77 rank : 0 train.loss : 2.161696911 train.ips : 12.08 imgs/s train.total_time : 106.013442 step_time : 1.324752
+2025-10-22 02:06:09,176 [INFO] TCAPPDLL 2025-10-22 02:06:09.175705 - Epoch: 0 Iteration: 78 rank : 0 train.loss : 3.333184242 train.ips : 11.87 imgs/s train.total_time : 107.361516 step_time : 1.348074
+2025-10-22 02:06:10,550 [INFO] TCAPPDLL 2025-10-22 02:06:10.549233 - Epoch: 0 Iteration: 79 rank : 0 train.loss : 1.298923850 train.ips : 11.65 imgs/s train.total_time : 108.735049 step_time : 1.373533
+2025-10-22 02:06:11,995 [INFO] TCAPPDLL 2025-10-22 02:06:11.995126 - Epoch: 0 Iteration: 80 rank : 0 train.loss : 1.587314010 train.ips : 11.07 imgs/s train.total_time : 110.180964 step_time : 1.445915
+2025-10-22 02:06:13,324 [INFO] TCAPPDLL 2025-10-22 02:06:13.323325 - Epoch: 0 Iteration: 81 rank : 0 train.loss : 1.158462882 train.ips : 12.05 imgs/s train.total_time : 111.509142 step_time : 1.328178
+2025-10-22 02:06:14,646 [INFO] TCAPPDLL 2025-10-22 02:06:14.645390 - Epoch: 0 Iteration: 82 rank : 0 train.loss : 1.603927612 train.ips : 12.10 imgs/s train.total_time : 112.831204 step_time : 1.322062
+2025-10-22 02:06:15,908 [INFO] TCAPPDLL 2025-10-22 02:06:15.907287 - Epoch: 0 Iteration: 83 rank : 0 train.loss : 4.264050484 train.ips : 12.68 imgs/s train.total_time : 114.093100 step_time : 1.261895
+2025-10-22 02:06:17,217 [INFO] TCAPPDLL 2025-10-22 02:06:17.216607 - Epoch: 0 Iteration: 84 rank : 0 train.loss : 1.289947510 train.ips : 12.22 imgs/s train.total_time : 115.402424 step_time : 1.309325
+2025-10-22 02:06:18,569 [INFO] TCAPPDLL 2025-10-22 02:06:18.568968 - Epoch: 0 Iteration: 85 rank : 0 train.loss : 1.075675249 train.ips : 11.83 imgs/s train.total_time : 116.754783 step_time : 1.352359
+2025-10-22 02:06:19,900 [INFO] TCAPPDLL 2025-10-22 02:06:19.900046 - Epoch: 0 Iteration: 86 rank : 0 train.loss : 1.886853576 train.ips : 12.02 imgs/s train.total_time : 118.085859 step_time : 1.331076
+2025-10-22 02:06:21,264 [INFO] TCAPPDLL 2025-10-22 02:06:21.263649 - Epoch: 0 Iteration: 87 rank : 0 train.loss : 2.135836363 train.ips : 11.73 imgs/s train.total_time : 119.449476 step_time : 1.363618
+2025-10-22 02:06:22,490 [INFO] TCAPPDLL 2025-10-22 02:06:22.489999 - Epoch: 0 Iteration: 88 rank : 0 train.loss : 1.822937012 train.ips : 13.05 imgs/s train.total_time : 120.675821 step_time : 1.226345
+2025-10-22 02:06:23,876 [INFO] TCAPPDLL 2025-10-22 02:06:23.875513 - Epoch: 0 Iteration: 89 rank : 0 train.loss : 1.999928832 train.ips : 11.55 imgs/s train.total_time : 122.061323 step_time : 1.385502
+2025-10-22 02:06:25,110 [INFO] TCAPPDLL 2025-10-22 02:06:25.109488 - Epoch: 0 Iteration: 90 rank : 0 train.loss : 2.336858511 train.ips : 12.97 imgs/s train.total_time : 123.295307 step_time : 1.233984
+2025-10-22 02:06:26,446 [INFO] TCAPPDLL 2025-10-22 02:06:26.445289 - Epoch: 0 Iteration: 91 rank : 0 train.loss : 2.856676340 train.ips : 11.98 imgs/s train.total_time : 124.631106 step_time : 1.335799
+2025-10-22 02:06:27,708 [INFO] TCAPPDLL 2025-10-22 02:06:27.707391 - Epoch: 0 Iteration: 92 rank : 0 train.loss : 3.123867989 train.ips : 12.68 imgs/s train.total_time : 125.893205 step_time : 1.262099
+2025-10-22 02:06:29,052 [INFO] TCAPPDLL 2025-10-22 02:06:29.051726 - Epoch: 0 Iteration: 93 rank : 0 train.loss : 2.307732582 train.ips : 11.90 imgs/s train.total_time : 127.237542 step_time : 1.344337
+2025-10-22 02:06:30,411 [INFO] TCAPPDLL 2025-10-22 02:06:30.410266 - Epoch: 0 Iteration: 94 rank : 0 train.loss : 1.584207177 train.ips : 11.78 imgs/s train.total_time : 128.596079 step_time : 1.358536
+2025-10-22 02:06:31,734 [INFO] TCAPPDLL 2025-10-22 02:06:31.733189 - Epoch: 0 Iteration: 95 rank : 0 train.loss : 3.596566677 train.ips : 12.09 imgs/s train.total_time : 129.919008 step_time : 1.322929
+2025-10-22 02:06:33,221 [INFO] TCAPPDLL 2025-10-22 02:06:33.221538 - Epoch: 0 Iteration: 96 rank : 0 train.loss : 2.527660608 train.ips : 10.75 imgs/s train.total_time : 131.407389 step_time : 1.488381
+2025-10-22 02:06:34,595 [INFO] TCAPPDLL 2025-10-22 02:06:34.594499 - Epoch: 0 Iteration: 97 rank : 0 train.loss : 2.239128113 train.ips : 11.65 imgs/s train.total_time : 132.780311 step_time : 1.372923
+2025-10-22 02:06:35,950 [INFO] TCAPPDLL 2025-10-22 02:06:35.949603 - Epoch: 0 Iteration: 98 rank : 0 train.loss : 2.093506098 train.ips : 11.81 imgs/s train.total_time : 134.135418 step_time : 1.355107
+2025-10-22 02:06:37,290 [INFO] TCAPPDLL 2025-10-22 02:06:37.289976 - Epoch: 0 Iteration: 99 rank : 0 train.loss : 1.766862988 train.ips : 11.94 imgs/s train.total_time : 135.475793 step_time : 1.340375
+2025-10-22 02:06:38,698 [INFO] TCAPPDLL 2025-10-22 02:06:38.697713 - Epoch: 0 Iteration: 100 rank : 0 train.loss : 2.401864529 train.ips : 11.37 imgs/s train.total_time : 136.883523 step_time : 1.407731
+2025-10-22 02:06:40,065 [INFO] TCAPPDLL 2025-10-22 02:06:40.064349 - Epoch: 0 Iteration: 101 rank : 0 train.loss : 3.616158247 train.ips : 11.71 imgs/s train.total_time : 138.250168 step_time : 1.366645
+2025-10-22 02:06:41,370 [INFO] TCAPPDLL 2025-10-22 02:06:41.369913 - Epoch: 0 Iteration: 102 rank : 0 train.loss : 2.013375998 train.ips : 12.26 imgs/s train.total_time : 139.555733 step_time : 1.305565
+2025-10-22 02:06:42,632 [INFO] TCAPPDLL 2025-10-22 02:06:42.631083 - Epoch: 0 Iteration: 103 rank : 0 train.loss : 0.818556190 train.ips : 12.69 imgs/s train.total_time : 140.816898 step_time : 1.261164
+2025-10-22 02:06:43,958 [INFO] TCAPPDLL 2025-10-22 02:06:43.957373 - Epoch: 0 Iteration: 104 rank : 0 train.loss : 0.974004388 train.ips : 12.06 imgs/s train.total_time : 142.143187 step_time : 1.326289
+2025-10-22 02:06:45,315 [INFO] TCAPPDLL 2025-10-22 02:06:45.314652 - Epoch: 0 Iteration: 105 rank : 0 train.loss : 1.636144638 train.ips : 11.79 imgs/s train.total_time : 143.500468 step_time : 1.357281
+2025-10-22 02:06:46,635 [INFO] TCAPPDLL 2025-10-22 02:06:46.634660 - Epoch: 0 Iteration: 106 rank : 0 train.loss : 2.241924047 train.ips : 12.12 imgs/s train.total_time : 144.820474 step_time : 1.320006
+2025-10-22 02:06:47,949 [INFO] TCAPPDLL 2025-10-22 02:06:47.948414 - Epoch: 0 Iteration: 107 rank : 0 train.loss : 3.730737209 train.ips : 12.18 imgs/s train.total_time : 146.134173 step_time : 1.313699
+2025-10-22 02:06:49,345 [INFO] TCAPPDLL 2025-10-22 02:06:49.344780 - Epoch: 0 Iteration: 108 rank : 0 train.loss : 1.349081159 train.ips : 11.46 imgs/s train.total_time : 147.530499 step_time : 1.396326
+2025-10-22 02:06:50,666 [INFO] TCAPPDLL 2025-10-22 02:06:50.665051 - Epoch: 0 Iteration: 109 rank : 0 train.loss : 3.451129675 train.ips : 12.12 imgs/s train.total_time : 148.850872 step_time : 1.320374
+2025-10-22 02:06:51,994 [INFO] TCAPPDLL 2025-10-22 02:06:51.993039 - Epoch: 0 Iteration: 110 rank : 0 train.loss : 1.898038626 train.ips : 12.05 imgs/s train.total_time : 150.178738 step_time : 1.327865
+2025-10-22 02:06:53,367 [INFO] TCAPPDLL 2025-10-22 02:06:53.366745 - Epoch: 0 Iteration: 111 rank : 0 train.loss : 2.092398167 train.ips : 11.65 imgs/s train.total_time : 151.552559 step_time : 1.373821
+2025-10-22 02:06:54,805 [INFO] TCAPPDLL 2025-10-22 02:06:54.805354 - Epoch: 0 Iteration: 112 rank : 0 train.loss : 1.864327073 train.ips : 11.12 imgs/s train.total_time : 152.991209 step_time : 1.438650
+2025-10-22 02:06:56,142 [INFO] TCAPPDLL 2025-10-22 02:06:56.141165 - Epoch: 0 Iteration: 113 rank : 0 train.loss : 1.457815170 train.ips : 11.98 imgs/s train.total_time : 154.326977 step_time : 1.335768
+2025-10-22 02:06:57,450 [INFO] TCAPPDLL 2025-10-22 02:06:57.449115 - Epoch: 0 Iteration: 114 rank : 0 train.loss : 1.344624877 train.ips : 12.23 imgs/s train.total_time : 155.634925 step_time : 1.307949
+2025-10-22 02:06:58,806 [INFO] TCAPPDLL 2025-10-22 02:06:58.805860 - Epoch: 0 Iteration: 115 rank : 0 train.loss : 1.907669067 train.ips : 11.79 imgs/s train.total_time : 156.991677 step_time : 1.356752
+2025-10-22 02:07:00,195 [INFO] TCAPPDLL 2025-10-22 02:07:00.194666 - Epoch: 0 Iteration: 116 rank : 0 train.loss : 2.380213261 train.ips : 11.52 imgs/s train.total_time : 158.380478 step_time : 1.388801
+2025-10-22 02:07:01,599 [INFO] TCAPPDLL 2025-10-22 02:07:01.598345 - Epoch: 0 Iteration: 117 rank : 0 train.loss : 0.811895192 train.ips : 11.40 imgs/s train.total_time : 159.784158 step_time : 1.403680
+2025-10-22 02:07:02,942 [INFO] TCAPPDLL 2025-10-22 02:07:02.941428 - Epoch: 0 Iteration: 118 rank : 0 train.loss : 2.592396975 train.ips : 11.91 imgs/s train.total_time : 161.127246 step_time : 1.343089
+2025-10-22 02:07:04,256 [INFO] TCAPPDLL 2025-10-22 02:07:04.255703 - Epoch: 0 Iteration: 119 rank : 0 train.loss : 2.088354349 train.ips : 12.17 imgs/s train.total_time : 162.441515 step_time : 1.314269
+2025-10-22 02:07:05,554 [INFO] TCAPPDLL 2025-10-22 02:07:05.553825 - Epoch: 0 Iteration: 120 rank : 0 train.loss : 1.313908815 train.ips : 12.33 imgs/s train.total_time : 163.739637 step_time : 1.298122
+2025-10-22 02:07:06,866 [INFO] TCAPPDLL 2025-10-22 02:07:06.865329 - Epoch: 0 Iteration: 121 rank : 0 train.loss : 1.863104939 train.ips : 12.20 imgs/s train.total_time : 165.051147 step_time : 1.311510
+2025-10-22 02:07:08,262 [INFO] TCAPPDLL 2025-10-22 02:07:08.261175 - Epoch: 0 Iteration: 122 rank : 0 train.loss : 1.734454393 train.ips : 11.46 imgs/s train.total_time : 166.446983 step_time : 1.395836
+2025-10-22 02:07:09,571 [INFO] TCAPPDLL 2025-10-22 02:07:09.570340 - Epoch: 0 Iteration: 123 rank : 0 train.loss : 2.549963474 train.ips : 12.22 imgs/s train.total_time : 167.756153 step_time : 1.309170
+2025-10-22 02:07:10,930 [INFO] TCAPPDLL 2025-10-22 02:07:10.930007 - Epoch: 0 Iteration: 124 rank : 0 train.loss : 2.200673342 train.ips : 11.77 imgs/s train.total_time : 169.115829 step_time : 1.359676
+2025-10-22 02:07:12,288 [INFO] TCAPPDLL 2025-10-22 02:07:12.287612 - Epoch: 0 Iteration: 125 rank : 0 train.loss : 2.846849442 train.ips : 11.79 imgs/s train.total_time : 170.473426 step_time : 1.357598
+2025-10-22 02:07:13,687 [INFO] TCAPPDLL 2025-10-22 02:07:13.686877 - Epoch: 0 Iteration: 126 rank : 0 train.loss : 2.239633322 train.ips : 11.43 imgs/s train.total_time : 171.872688 step_time : 1.399261
+2025-10-22 02:07:15,018 [INFO] TCAPPDLL 2025-10-22 02:07:15.017573 - Epoch: 0 Iteration: 127 rank : 0 train.loss : 1.640556335 train.ips : 12.02 imgs/s train.total_time : 173.203389 step_time : 1.330702
+2025-10-22 02:07:16,494 [INFO] TCAPPDLL 2025-10-22 02:07:16.494414 - Epoch: 0 Iteration: 128 rank : 0 train.loss : 2.667588949 train.ips : 10.83 imgs/s train.total_time : 174.680266 step_time : 1.476877
+2025-10-22 02:07:17,821 [INFO] TCAPPDLL 2025-10-22 02:07:17.820868 - Epoch: 0 Iteration: 129 rank : 0 train.loss : 1.886239171 train.ips : 12.06 imgs/s train.total_time : 176.006678 step_time : 1.326412
+2025-10-22 02:07:19,155 [INFO] TCAPPDLL 2025-10-22 02:07:19.154109 - Epoch: 0 Iteration: 130 rank : 0 train.loss : 2.356942892 train.ips : 12.00 imgs/s train.total_time : 177.339922 step_time : 1.333244
+2025-10-22 02:07:20,485 [INFO] TCAPPDLL 2025-10-22 02:07:20.484597 - Epoch: 0 Iteration: 131 rank : 0 train.loss : 2.116375208 train.ips : 12.03 imgs/s train.total_time : 178.670412 step_time : 1.330489
+2025-10-22 02:07:21,941 [INFO] TCAPPDLL 2025-10-22 02:07:21.940004 - Epoch: 0 Iteration: 132 rank : 0 train.loss : 1.262176514 train.ips : 10.99 imgs/s train.total_time : 180.125817 step_time : 1.455405
+2025-10-22 02:07:23,223 [INFO] TCAPPDLL 2025-10-22 02:07:23.222789 - Epoch: 0 Iteration: 133 rank : 0 train.loss : 2.775858641 train.ips : 12.47 imgs/s train.total_time : 181.408602 step_time : 1.282784
+2025-10-22 02:07:24,584 [INFO] TCAPPDLL 2025-10-22 02:07:24.583098 - Epoch: 0 Iteration: 134 rank : 0 train.loss : 1.066265106 train.ips : 11.76 imgs/s train.total_time : 182.768913 step_time : 1.360311
+2025-10-22 02:07:25,979 [INFO] TCAPPDLL 2025-10-22 02:07:25.978532 - Epoch: 0 Iteration: 135 rank : 0 train.loss : 1.719135284 train.ips : 11.47 imgs/s train.total_time : 184.164306 step_time : 1.395393
+2025-10-22 02:07:27,503 [INFO] TCAPPDLL 2025-10-22 02:07:27.502705 - Epoch: 0 Iteration: 136 rank : 0 train.loss : 1.239572167 train.ips : 10.50 imgs/s train.total_time : 185.688519 step_time : 1.524213
+2025-10-22 02:07:28,871 [INFO] TCAPPDLL 2025-10-22 02:07:28.870410 - Epoch: 0 Iteration: 137 rank : 0 train.loss : 1.561811328 train.ips : 11.70 imgs/s train.total_time : 187.056224 step_time : 1.367705
+2025-10-22 02:07:30,280 [INFO] TCAPPDLL 2025-10-22 02:07:30.279608 - Epoch: 0 Iteration: 138 rank : 0 train.loss : 1.434986472 train.ips : 11.35 imgs/s train.total_time : 188.465420 step_time : 1.409196
+2025-10-22 02:07:31,653 [INFO] TCAPPDLL 2025-10-22 02:07:31.652608 - Epoch: 0 Iteration: 139 rank : 0 train.loss : 1.408137441 train.ips : 11.65 imgs/s train.total_time : 189.838423 step_time : 1.373003
+2025-10-22 02:07:33,013 [INFO] TCAPPDLL 2025-10-22 02:07:33.012012 - Epoch: 0 Iteration: 140 rank : 0 train.loss : 2.483693838 train.ips : 11.77 imgs/s train.total_time : 191.197823 step_time : 1.359400
+2025-10-22 02:07:34,351 [INFO] TCAPPDLL 2025-10-22 02:07:34.350692 - Epoch: 0 Iteration: 141 rank : 0 train.loss : 2.457673788 train.ips : 11.95 imgs/s train.total_time : 192.536508 step_time : 1.338685
+2025-10-22 02:07:35,897 [INFO] TCAPPDLL 2025-10-22 02:07:35.896285 - Epoch: 0 Iteration: 142 rank : 0 train.loss : 1.234354496 train.ips : 10.35 imgs/s train.total_time : 194.082099 step_time : 1.545590
+2025-10-22 02:07:37,262 [INFO] TCAPPDLL 2025-10-22 02:07:37.261225 - Epoch: 0 Iteration: 143 rank : 0 train.loss : 2.786183596 train.ips : 11.72 imgs/s train.total_time : 195.447037 step_time : 1.364938
+2025-10-22 02:07:38,606 [INFO] TCAPPDLL 2025-10-22 02:07:38.606687 - Epoch: 0 Iteration: 144 rank : 0 train.loss : 1.286828637 train.ips : 11.89 imgs/s train.total_time : 196.792536 step_time : 1.345498
+2025-10-22 02:07:39,911 [INFO] TCAPPDLL 2025-10-22 02:07:39.910240 - Epoch: 0 Iteration: 145 rank : 0 train.loss : 1.007336378 train.ips : 12.27 imgs/s train.total_time : 198.096056 step_time : 1.303521
+2025-10-22 02:07:41,224 [INFO] TCAPPDLL 2025-10-22 02:07:41.223765 - Epoch: 0 Iteration: 146 rank : 0 train.loss : 1.598668456 train.ips : 12.18 imgs/s train.total_time : 199.409578 step_time : 1.313522
+2025-10-22 02:07:42,533 [INFO] TCAPPDLL 2025-10-22 02:07:42.532882 - Epoch: 0 Iteration: 147 rank : 0 train.loss : 1.543697357 train.ips : 12.22 imgs/s train.total_time : 200.718699 step_time : 1.309121
+2025-10-22 02:07:43,895 [INFO] TCAPPDLL 2025-10-22 02:07:43.894902 - Epoch: 0 Iteration: 148 rank : 0 train.loss : 1.381644130 train.ips : 11.75 imgs/s train.total_time : 202.080716 step_time : 1.362016
+2025-10-22 02:07:45,274 [INFO] TCAPPDLL 2025-10-22 02:07:45.273037 - Epoch: 0 Iteration: 149 rank : 0 train.loss : 1.282362700 train.ips : 11.61 imgs/s train.total_time : 203.458849 step_time : 1.378133
+2025-10-22 02:07:46,677 [INFO] TCAPPDLL 2025-10-22 02:07:46.676279 - Epoch: 0 Iteration: 150 rank : 0 train.loss : 1.331438661 train.ips : 11.40 imgs/s train.total_time : 204.861818 step_time : 1.402969
+2025-10-22 02:07:48,032 [INFO] TCAPPDLL 2025-10-22 02:07:48.031172 - Epoch: 0 Iteration: 151 rank : 0 train.loss : 2.357994080 train.ips : 11.81 imgs/s train.total_time : 206.216967 step_time : 1.355149
+2025-10-22 02:07:49,390 [INFO] TCAPPDLL 2025-10-22 02:07:49.389455 - Epoch: 0 Iteration: 152 rank : 0 train.loss : 1.843293548 train.ips : 11.78 imgs/s train.total_time : 207.575267 step_time : 1.358299
+2025-10-22 02:07:50,795 [INFO] TCAPPDLL 2025-10-22 02:07:50.794184 - Epoch: 0 Iteration: 153 rank : 0 train.loss : 1.234517336 train.ips : 11.39 imgs/s train.total_time : 208.980005 step_time : 1.404738
+2025-10-22 02:07:52,096 [INFO] TCAPPDLL 2025-10-22 02:07:52.095508 - Epoch: 0 Iteration: 154 rank : 0 train.loss : 3.499951124 train.ips : 12.30 imgs/s train.total_time : 210.281228 step_time : 1.301223
+2025-10-22 02:07:53,488 [INFO] TCAPPDLL 2025-10-22 02:07:53.487056 - Epoch: 0 Iteration: 155 rank : 0 train.loss : 3.764069080 train.ips : 11.50 imgs/s train.total_time : 211.672870 step_time : 1.391642
+2025-10-22 02:07:54,842 [INFO] TCAPPDLL 2025-10-22 02:07:54.841830 - Epoch: 0 Iteration: 156 rank : 0 train.loss : 1.174146891 train.ips : 11.81 imgs/s train.total_time : 213.027647 step_time : 1.354777
+2025-10-22 02:07:56,116 [INFO] TCAPPDLL 2025-10-22 02:07:56.115765 - Epoch: 0 Iteration: 157 rank : 0 train.loss : 2.471965075 train.ips : 12.56 imgs/s train.total_time : 214.301573 step_time : 1.273926
+2025-10-22 02:07:57,449 [INFO] TCAPPDLL 2025-10-22 02:07:57.448447 - Epoch: 0 Iteration: 158 rank : 0 train.loss : 2.665870190 train.ips : 12.01 imgs/s train.total_time : 215.634263 step_time : 1.332690
+2025-10-22 02:07:58,757 [INFO] TCAPPDLL 2025-10-22 02:07:58.756364 - Epoch: 0 Iteration: 159 rank : 0 train.loss : 1.925736904 train.ips : 12.23 imgs/s train.total_time : 216.942158 step_time : 1.307894
+2025-10-22 02:08:00,143 [INFO] TCAPPDLL 2025-10-22 02:08:00.143494 - Epoch: 0 Iteration: 160 rank : 0 train.loss : 2.254193068 train.ips : 11.53 imgs/s train.total_time : 218.329333 step_time : 1.387176
+2025-10-22 02:08:01,450 [INFO] TCAPPDLL 2025-10-22 02:08:01.449189 - Epoch: 0 Iteration: 161 rank : 0 train.loss : 0.908716857 train.ips : 12.25 imgs/s train.total_time : 219.635004 step_time : 1.305671
+2025-10-22 02:08:02,756 [INFO] TCAPPDLL 2025-10-22 02:08:02.755069 - Epoch: 0 Iteration: 162 rank : 0 train.loss : 1.692231178 train.ips : 12.25 imgs/s train.total_time : 220.940879 step_time : 1.305876
+2025-10-22 02:08:04,083 [INFO] TCAPPDLL 2025-10-22 02:08:04.082651 - Epoch: 0 Iteration: 163 rank : 0 train.loss : 1.904259920 train.ips : 12.05 imgs/s train.total_time : 222.268462 step_time : 1.327583
+2025-10-22 02:08:05,476 [INFO] TCAPPDLL 2025-10-22 02:08:05.475753 - Epoch: 0 Iteration: 164 rank : 0 train.loss : 0.935196817 train.ips : 11.49 imgs/s train.total_time : 223.661568 step_time : 1.393106
+2025-10-22 02:08:06,859 [INFO] TCAPPDLL 2025-10-22 02:08:06.858018 - Epoch: 0 Iteration: 165 rank : 0 train.loss : 2.558924437 train.ips : 11.58 imgs/s train.total_time : 225.043832 step_time : 1.382264
+2025-10-22 02:08:08,126 [INFO] TCAPPDLL 2025-10-22 02:08:08.125297 - Epoch: 0 Iteration: 166 rank : 0 train.loss : 2.830961227 train.ips : 12.63 imgs/s train.total_time : 226.311110 step_time : 1.267278
+2025-10-22 02:08:09,399 [INFO] TCAPPDLL 2025-10-22 02:08:09.398892 - Epoch: 0 Iteration: 167 rank : 0 train.loss : 2.060910702 train.ips : 12.56 imgs/s train.total_time : 227.584712 step_time : 1.273602
+2025-10-22 02:08:10,776 [INFO] TCAPPDLL 2025-10-22 02:08:10.775001 - Epoch: 0 Iteration: 168 rank : 0 train.loss : 1.642115235 train.ips : 11.63 imgs/s train.total_time : 228.960813 step_time : 1.376101
+2025-10-22 02:08:12,177 [INFO] TCAPPDLL 2025-10-22 02:08:12.175853 - Epoch: 0 Iteration: 169 rank : 0 train.loss : 2.055121660 train.ips : 11.42 imgs/s train.total_time : 230.361666 step_time : 1.400853
+2025-10-22 02:08:13,514 [INFO] TCAPPDLL 2025-10-22 02:08:13.513605 - Epoch: 0 Iteration: 170 rank : 0 train.loss : 1.833625436 train.ips : 11.96 imgs/s train.total_time : 231.699420 step_time : 1.337754
+2025-10-22 02:08:14,849 [INFO] TCAPPDLL 2025-10-22 02:08:14.848738 - Epoch: 0 Iteration: 171 rank : 0 train.loss : 2.088989258 train.ips : 11.98 imgs/s train.total_time : 233.034552 step_time : 1.335132
+2025-10-22 02:08:16,102 [INFO] TCAPPDLL 2025-10-22 02:08:16.101967 - Epoch: 0 Iteration: 172 rank : 0 train.loss : 2.544567823 train.ips : 12.77 imgs/s train.total_time : 234.287786 step_time : 1.253234
+2025-10-22 02:08:17,456 [INFO] TCAPPDLL 2025-10-22 02:08:17.455183 - Epoch: 0 Iteration: 173 rank : 0 train.loss : 1.620858431 train.ips : 11.82 imgs/s train.total_time : 235.640975 step_time : 1.353188
+2025-10-22 02:08:18,778 [INFO] TCAPPDLL 2025-10-22 02:08:18.777890 - Epoch: 0 Iteration: 174 rank : 0 train.loss : 1.074764252 train.ips : 12.10 imgs/s train.total_time : 236.963700 step_time : 1.322726
+2025-10-22 02:08:20,197 [INFO] TCAPPDLL 2025-10-22 02:08:20.196314 - Epoch: 0 Iteration: 175 rank : 0 train.loss : 2.628815174 train.ips : 11.28 imgs/s train.total_time : 238.382130 step_time : 1.418429
+2025-10-22 02:08:21,691 [INFO] TCAPPDLL 2025-10-22 02:08:21.691394 - Epoch: 0 Iteration: 176 rank : 0 train.loss : 2.084745884 train.ips : 10.70 imgs/s train.total_time : 239.877247 step_time : 1.495117
+2025-10-22 02:08:23,097 [INFO] TCAPPDLL 2025-10-22 02:08:23.096557 - Epoch: 0 Iteration: 177 rank : 0 train.loss : 1.994691253 train.ips : 11.39 imgs/s train.total_time : 241.282368 step_time : 1.405121
+2025-10-22 02:08:24,454 [INFO] TCAPPDLL 2025-10-22 02:08:24.453493 - Epoch: 0 Iteration: 178 rank : 0 train.loss : 1.358337402 train.ips : 11.79 imgs/s train.total_time : 242.639314 step_time : 1.356946
+2025-10-22 02:08:25,826 [INFO] TCAPPDLL 2025-10-22 02:08:25.825995 - Epoch: 0 Iteration: 179 rank : 0 train.loss : 2.027153969 train.ips : 11.66 imgs/s train.total_time : 244.011813 step_time : 1.372500
+2025-10-22 02:08:27,187 [INFO] TCAPPDLL 2025-10-22 02:08:27.186043 - Epoch: 0 Iteration: 180 rank : 0 train.loss : 1.488160253 train.ips : 11.76 imgs/s train.total_time : 245.371857 step_time : 1.360043
+2025-10-22 02:08:28,559 [INFO] TCAPPDLL 2025-10-22 02:08:28.558733 - Epoch: 0 Iteration: 181 rank : 0 train.loss : 2.174817324 train.ips : 11.66 imgs/s train.total_time : 246.744556 step_time : 1.372699
+2025-10-22 02:08:29,901 [INFO] TCAPPDLL 2025-10-22 02:08:29.900662 - Epoch: 0 Iteration: 182 rank : 0 train.loss : 1.958509684 train.ips : 11.92 imgs/s train.total_time : 248.086481 step_time : 1.341925
+2025-10-22 02:08:31,257 [INFO] TCAPPDLL 2025-10-22 02:08:31.256202 - Epoch: 0 Iteration: 183 rank : 0 train.loss : 1.719179273 train.ips : 11.80 imgs/s train.total_time : 249.442022 step_time : 1.355541
+2025-10-22 02:08:32,506 [INFO] TCAPPDLL 2025-10-22 02:08:32.505160 - Epoch: 0 Iteration: 184 rank : 0 train.loss : 2.102816820 train.ips : 12.81 imgs/s train.total_time : 250.690955 step_time : 1.248933
+2025-10-22 02:08:33,879 [INFO] TCAPPDLL 2025-10-22 02:08:33.878413 - Epoch: 0 Iteration: 185 rank : 0 train.loss : 2.683776855 train.ips : 11.65 imgs/s train.total_time : 252.064236 step_time : 1.373281
+2025-10-22 02:08:35,252 [INFO] TCAPPDLL 2025-10-22 02:08:35.251836 - Epoch: 0 Iteration: 186 rank : 0 train.loss : 1.649836183 train.ips : 11.65 imgs/s train.total_time : 253.437652 step_time : 1.373416
+2025-10-22 02:08:36,557 [INFO] TCAPPDLL 2025-10-22 02:08:36.556978 - Epoch: 0 Iteration: 187 rank : 0 train.loss : 1.197376966 train.ips : 12.26 imgs/s train.total_time : 254.742801 step_time : 1.305150
+2025-10-22 02:08:37,986 [INFO] TCAPPDLL 2025-10-22 02:08:37.985873 - Epoch: 0 Iteration: 188 rank : 0 train.loss : 2.813332319 train.ips : 11.20 imgs/s train.total_time : 256.171689 step_time : 1.428887
+2025-10-22 02:08:39,398 [INFO] TCAPPDLL 2025-10-22 02:08:39.397884 - Epoch: 0 Iteration: 189 rank : 0 train.loss : 1.944177270 train.ips : 11.33 imgs/s train.total_time : 257.583698 step_time : 1.412010
+2025-10-22 02:08:40,820 [INFO] TCAPPDLL 2025-10-22 02:08:40.819596 - Epoch: 0 Iteration: 190 rank : 0 train.loss : 2.133088589 train.ips : 11.25 imgs/s train.total_time : 259.005413 step_time : 1.421715
+2025-10-22 02:08:42,151 [INFO] TCAPPDLL 2025-10-22 02:08:42.150329 - Epoch: 0 Iteration: 191 rank : 0 train.loss : 2.189575195 train.ips : 12.02 imgs/s train.total_time : 260.336145 step_time : 1.330732
+2025-10-22 02:08:43,625 [INFO] TCAPPDLL 2025-10-22 02:08:43.625523 - Epoch: 0 Iteration: 192 rank : 0 train.loss : 2.982599974 train.ips : 10.85 imgs/s train.total_time : 261.811372 step_time : 1.475227
+2025-10-22 02:08:44,990 [INFO] TCAPPDLL 2025-10-22 02:08:44.989214 - Epoch: 0 Iteration: 193 rank : 0 train.loss : 3.464446545 train.ips : 11.73 imgs/s train.total_time : 263.175034 step_time : 1.363662
+2025-10-22 02:08:46,390 [INFO] TCAPPDLL 2025-10-22 02:08:46.389616 - Epoch: 0 Iteration: 194 rank : 0 train.loss : 1.689686894 train.ips : 11.43 imgs/s train.total_time : 264.575431 step_time : 1.400397
+2025-10-22 02:08:47,746 [INFO] TCAPPDLL 2025-10-22 02:08:47.745678 - Epoch: 0 Iteration: 195 rank : 0 train.loss : 1.596984863 train.ips : 11.80 imgs/s train.total_time : 265.931495 step_time : 1.356064
+2025-10-22 02:08:49,051 [INFO] TCAPPDLL 2025-10-22 02:08:49.050192 - Epoch: 0 Iteration: 196 rank : 0 train.loss : 2.009642124 train.ips : 12.27 imgs/s train.total_time : 267.236011 step_time : 1.304516
+2025-10-22 02:08:50,385 [INFO] TCAPPDLL 2025-10-22 02:08:50.384438 - Epoch: 0 Iteration: 197 rank : 0 train.loss : 1.946548462 train.ips : 11.99 imgs/s train.total_time : 268.570257 step_time : 1.334246
+2025-10-22 02:08:51,723 [INFO] TCAPPDLL 2025-10-22 02:08:51.722278 - Epoch: 0 Iteration: 198 rank : 0 train.loss : 2.974340916 train.ips : 11.96 imgs/s train.total_time : 269.908095 step_time : 1.337838
+2025-10-22 02:08:53,036 [INFO] TCAPPDLL 2025-10-22 02:08:53.035646 - Epoch: 0 Iteration: 199 rank : 0 train.loss : 2.737072706 train.ips : 12.18 imgs/s train.total_time : 271.221461 step_time : 1.313366
+2025-10-22 02:08:54,382 [INFO] TCAPPDLL 2025-10-22 02:08:54.382281 - Epoch: 0 Iteration: 200 rank : 0 train.loss : 1.498228431 train.ips : 11.88 imgs/s train.total_time : 272.568097 step_time : 1.346636
