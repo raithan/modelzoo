@@ -1,9 +1,9 @@
-# CAE
+# BEITV2
 ## 1. 模型概述
-CAE 是一种基于 掩码图像建模（Masked Image Modeling, MIM） 的自监督学习方法，通过重建被随机掩码（遮挡）的图像区域，学习图像数据的通用表征。其核心目标是让模型从可见上下文（context）中推断缺失部分，从而捕捉高层语义特征。
+BEiT v2是一种基于视觉Transformer的多任务预训练模型，通过引入视觉标记器、对比学习和知识蒸馏等技术，显著提升了图像分类、分割等下游任务的性能。
 
-- 论文链接：[[2202.03026]]Context Autoencoder for Self-Supervised Representation Learning(https://arxiv.org/abs/2202.03026)
-- 仓库链接：https://github.com/open-mmlab/mmpretrain/tree/main/configs/cae
+- 论文链接：[[2202.03026]]BEiT v2: Masked Image Modeling with Vector-Quantized Visual Tokenizers(https://arxiv.org/abs/2208.06366)
+- 仓库链接：https://github.com/open-mmlab/mmpretrain/tree/main/configs/beitv2
 
 
 ## 2. 快速开始
@@ -43,12 +43,12 @@ CAE使用 ImageNet 数据集，该数据集为开源数据集，可从 [ImageNet
 
 1. 在构建好的环境中，进入训练脚本所在目录。
     ```
-    cd <ModelZoo_path>/PyTorch/contrib/Classification/CAE/run_scripts
+    cd <ModelZoo_path>/PyTorch/contrib/Classification/BEITV2/run_scripts
     ```
 
 2. 运行训练。该模型支持单机单卡。
     ```
-   python run_cae.py --config ../configs/cae/cae_beit-base-p16_8xb256-amp-coslr-300e_in1k.py \
+    python run_beitv2.py --config ../configs/beitv2/beitv2_beit-base-p16_8xb256-amp-coslr-300e_in1k\
     --launcher pytorch --nproc-per-node 4 --amp \
     --cfg-options "train_dataloader.dataset.data_root=$data_path" 2>&1 | tee sdaa.log
    ```
@@ -57,7 +57,7 @@ CAE使用 ImageNet 数据集，该数据集为开源数据集，可从 [ImageNet
 ### 2.5 训练结果
 输出训练loss曲线及结果（参考使用[loss.py](./run_scripts/loss.py)）: 
 
-MeanRelativeError: -0.0027315133142877834
-MeanAbsoluteError: -0.035296697616577145
-Rule,mean_absolute_error -0.035296697616577145
-pass mean_relative_error=-0.0027315133142877834 <= 0.05 or mean_absolute_error=-0.035296697616577145 <= 0.0002
+MeanRelativeError: 0.00034843389109141066
+MeanAbsoluteError: 0.006062233802115563
+Rule,mean_relative_error 0.00034843389109141066
+pass mean_relative_error=0.00034843389109141066 <= 0.05 or mean_absolute_error=0.006062233802115563 <= 0.0002
