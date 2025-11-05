@@ -1,0 +1,1017 @@
+--------------+------------------------------------------------
+ Host IP      | 100.10.19.129
+ PyTorch      | 2.4.0a0+git4451b0e
+ Torch-SDAA   | 20250616.14.30.dev0+git35328dc
+--------------+------------------------------------------------
+ SDAA Driver  | 2.1.0 (N/A)
+ SDAA Runtime | 2.1.0 (/opt/tecoai/lib64/libsdaart.so)
+ SDPTI        | 1.4.0b0 (/opt/tecoai/lib64/libsdpti.so)
+ TecoDNN      | 2.2.0b0 (/opt/tecoai/lib64/libtecodnn.so)
+ TecoBLAS     | 2.2.0b0 (/opt/tecoai/lib64/libtecoblas.so)
+ CustomDNN    | 1.20.0a0 (/opt/tecoai/lib64/libtecodnn_ext.so)
+ TecoRAND     | 2.0.1 (/opt/tecoai/lib64/libtecorand.so)
+ TCCL         | 1.23.0 (/opt/tecoai/lib64/libtccl.so)
+--------------+------------------------------------------------
+--------------+------------------------------------------------
+ Host IP      | 100.10.19.129
+ PyTorch      | 2.4.0a0+git4451b0e
+ Torch-SDAA   | 20250616.14.30.dev0+git35328dc
+--------------+------------------------------------------------
+ SDAA Driver  | 2.1.0 (N/A)
+ SDAA Runtime | 2.1.0 (/opt/tecoai/lib64/libsdaart.so)
+ SDPTI        | 1.4.0b0 (/opt/tecoai/lib64/libsdpti.so)
+ TecoDNN      | 2.2.0b0 (/opt/tecoai/lib64/libtecodnn.so)
+ TecoBLAS     | 2.2.0b0 (/opt/tecoai/lib64/libtecoblas.so)
+ CustomDNN    | 1.20.0a0 (/opt/tecoai/lib64/libtecodnn_ext.so)
+ TecoRAND     | 2.0.1 (/opt/tecoai/lib64/libtecorand.so)
+ TCCL         | 1.23.0 (/opt/tecoai/lib64/libtccl.so)
+--------------+------------------------------------------------
+Using 1 GPU for training... 
+training args are: Namespace(data_path='data/coco.yaml', conf_file='configs/yolov6s.py', img_size=640, batch_size=4, epochs=400, workers=8, device='0', eval_interval=20, eval_final_only=False, heavy_eval_range=50, check_images=False, check_labels=False, output_dir='./runs/train', name='exp', dist_url='env://', gpu_count=0, local_rank=0, resume=False, write_trainbatch_tb=False, stop_aug_last_n_epoch=15, save_ckpt_on_last_n_epoch=-1, distill=False, distill_feat=False, quant=False, calib=False, teacher_model_path=None, temperature=20, fuse_ab=False, bs_per_gpu=32, rank=0, world_size=1, save_dir='runs/train/exp1')
+
+Initializing process group... 
+Train: Final numbers of valid images: 118287/ labels: 118287. 
+355.9s for dataset initialization.
+Val: Final numbers of valid images: 5000/ labels: 5000. 
+13.6s for dataset initialization.
+Model: Model(
+  (backbone): EfficientRep(
+    (stem): RepVGGBlock(
+      (nonlinearity): ReLU(inplace=True)
+      (se): Identity()
+      (rbr_dense): Sequential(
+        (conv): Conv2d(3, 32, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(32, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+      )
+      (rbr_1x1): Sequential(
+        (conv): Conv2d(3, 32, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (bn): BatchNorm2d(32, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+      )
+    )
+    (ERBlock_2): Sequential(
+      (0): RepVGGBlock(
+        (nonlinearity): ReLU(inplace=True)
+        (se): Identity()
+        (rbr_dense): Sequential(
+          (conv): Conv2d(32, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+          (bn): BatchNorm2d(64, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+        )
+        (rbr_1x1): Sequential(
+          (conv): Conv2d(32, 64, kernel_size=(1, 1), stride=(2, 2), bias=False)
+          (bn): BatchNorm2d(64, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+        )
+      )
+      (1): RepBlock(
+        (conv1): RepVGGBlock(
+          (nonlinearity): ReLU(inplace=True)
+          (se): Identity()
+          (rbr_identity): BatchNorm2d(64, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+          (rbr_dense): Sequential(
+            (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn): BatchNorm2d(64, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+          )
+          (rbr_1x1): Sequential(
+            (conv): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNorm2d(64, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+          )
+        )
+        (block): Sequential(
+          (0): RepVGGBlock(
+            (nonlinearity): ReLU(inplace=True)
+            (se): Identity()
+            (rbr_identity): BatchNorm2d(64, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+            (rbr_dense): Sequential(
+              (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+              (bn): BatchNorm2d(64, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+            )
+            (rbr_1x1): Sequential(
+              (conv): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+              (bn): BatchNorm2d(64, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+            )
+          )
+        )
+      )
+    )
+    (ERBlock_3): Sequential(
+      (0): RepVGGBlock(
+        (nonlinearity): ReLU(inplace=True)
+        (se): Identity()
+        (rbr_dense): Sequential(
+          (conv): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+          (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+        )
+        (rbr_1x1): Sequential(
+          (conv): Conv2d(64, 128, kernel_size=(1, 1), stride=(2, 2), bias=False)
+          (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+        )
+      )
+      (1): RepBlock(
+        (conv1): RepVGGBlock(
+          (nonlinearity): ReLU(inplace=True)
+          (se): Identity()
+          (rbr_identity): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+          (rbr_dense): Sequential(
+            (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+          )
+          (rbr_1x1): Sequential(
+            (conv): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+          )
+        )
+        (block): Sequential(
+          (0): RepVGGBlock(
+            (nonlinearity): ReLU(inplace=True)
+            (se): Identity()
+            (rbr_identity): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+            (rbr_dense): Sequential(
+              (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+              (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+            )
+            (rbr_1x1): Sequential(
+              (conv): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+              (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+            )
+          )
+          (1): RepVGGBlock(
+            (nonlinearity): ReLU(inplace=True)
+            (se): Identity()
+            (rbr_identity): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+            (rbr_dense): Sequential(
+              (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+              (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+            )
+            (rbr_1x1): Sequential(
+              (conv): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+              (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+            )
+          )
+          (2): RepVGGBlock(
+            (nonlinearity): ReLU(inplace=True)
+            (se): Identity()
+            (rbr_identity): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+            (rbr_dense): Sequential(
+              (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+              (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+            )
+            (rbr_1x1): Sequential(
+              (conv): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+              (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+            )
+          )
+        )
+      )
+    )
+    (ERBlock_4): Sequential(
+      (0): RepVGGBlock(
+        (nonlinearity): ReLU(inplace=True)
+        (se): Identity()
+        (rbr_dense): Sequential(
+          (conv): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+          (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+        )
+        (rbr_1x1): Sequential(
+          (conv): Conv2d(128, 256, kernel_size=(1, 1), stride=(2, 2), bias=False)
+          (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+        )
+      )
+      (1): RepBlock(
+        (conv1): RepVGGBlock(
+          (nonlinearity): ReLU(inplace=True)
+          (se): Identity()
+          (rbr_identity): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+          (rbr_dense): Sequential(
+            (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+          )
+          (rbr_1x1): Sequential(
+            (conv): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+          )
+        )
+        (block): Sequential(
+          (0): RepVGGBlock(
+            (nonlinearity): ReLU(inplace=True)
+            (se): Identity()
+            (rbr_identity): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+            (rbr_dense): Sequential(
+              (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+              (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+            )
+            (rbr_1x1): Sequential(
+              (conv): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+              (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+            )
+          )
+          (1): RepVGGBlock(
+            (nonlinearity): ReLU(inplace=True)
+            (se): Identity()
+            (rbr_identity): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+            (rbr_dense): Sequential(
+              (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+              (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+            )
+            (rbr_1x1): Sequential(
+              (conv): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+              (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+            )
+          )
+          (2): RepVGGBlock(
+            (nonlinearity): ReLU(inplace=True)
+            (se): Identity()
+            (rbr_identity): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+            (rbr_dense): Sequential(
+              (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+              (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+            )
+            (rbr_1x1): Sequential(
+              (conv): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+              (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+            )
+          )
+          (3): RepVGGBlock(
+            (nonlinearity): ReLU(inplace=True)
+            (se): Identity()
+            (rbr_identity): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+            (rbr_dense): Sequential(
+              (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+              (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+            )
+            (rbr_1x1): Sequential(
+              (conv): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+              (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+            )
+          )
+          (4): RepVGGBlock(
+            (nonlinearity): ReLU(inplace=True)
+            (se): Identity()
+            (rbr_identity): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+            (rbr_dense): Sequential(
+              (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+              (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+            )
+            (rbr_1x1): Sequential(
+              (conv): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+              (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+            )
+          )
+        )
+      )
+    )
+    (ERBlock_5): Sequential(
+      (0): RepVGGBlock(
+        (nonlinearity): ReLU(inplace=True)
+        (se): Identity()
+        (rbr_dense): Sequential(
+          (conv): Conv2d(256, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+          (bn): BatchNorm2d(512, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+        )
+        (rbr_1x1): Sequential(
+          (conv): Conv2d(256, 512, kernel_size=(1, 1), stride=(2, 2), bias=False)
+          (bn): BatchNorm2d(512, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+        )
+      )
+      (1): RepBlock(
+        (conv1): RepVGGBlock(
+          (nonlinearity): ReLU(inplace=True)
+          (se): Identity()
+          (rbr_identity): BatchNorm2d(512, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+          (rbr_dense): Sequential(
+            (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn): BatchNorm2d(512, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+          )
+          (rbr_1x1): Sequential(
+            (conv): Conv2d(512, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNorm2d(512, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+          )
+        )
+        (block): Sequential(
+          (0): RepVGGBlock(
+            (nonlinearity): ReLU(inplace=True)
+            (se): Identity()
+            (rbr_identity): BatchNorm2d(512, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+            (rbr_dense): Sequential(
+              (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+              (bn): BatchNorm2d(512, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+            )
+            (rbr_1x1): Sequential(
+              (conv): Conv2d(512, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+              (bn): BatchNorm2d(512, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+            )
+          )
+        )
+      )
+      (2): SimCSPSPPF(
+        (cv1): SimConv(
+          (conv): Conv2d(512, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+          (act): ReLU(inplace=True)
+        )
+        (cv2): SimConv(
+          (conv): Conv2d(512, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+          (act): ReLU(inplace=True)
+        )
+        (cv3): SimConv(
+          (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+          (act): ReLU(inplace=True)
+        )
+        (cv4): SimConv(
+          (conv): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+          (act): ReLU(inplace=True)
+        )
+        (m): MaxPool2d(kernel_size=5, stride=1, padding=2, dilation=1, ceil_mode=False)
+        (cv5): SimConv(
+          (conv): Conv2d(1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+          (act): ReLU(inplace=True)
+        )
+        (cv6): SimConv(
+          (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+          (act): ReLU(inplace=True)
+        )
+        (cv7): SimConv(
+          (conv): Conv2d(512, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn): BatchNorm2d(512, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+          (act): ReLU(inplace=True)
+        )
+      )
+    )
+  )
+  (neck): RepBiFPANNeck(
+    (reduce_layer0): SimConv(
+      (conv): Conv2d(512, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+      (act): ReLU(inplace=True)
+    )
+    (Bifusion0): BiFusion(
+      (cv1): SimConv(
+        (conv): Conv2d(256, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+        (act): ReLU(inplace=True)
+      )
+      (cv2): SimConv(
+        (conv): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+        (act): ReLU(inplace=True)
+      )
+      (cv3): SimConv(
+        (conv): Conv2d(384, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+        (act): ReLU(inplace=True)
+      )
+      (upsample): Transpose(
+        (upsample_transpose): ConvTranspose2d(128, 128, kernel_size=(2, 2), stride=(2, 2))
+      )
+      (downsample): SimConv(
+        (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+        (act): ReLU(inplace=True)
+      )
+    )
+    (Rep_p4): RepBlock(
+      (conv1): RepVGGBlock(
+        (nonlinearity): ReLU(inplace=True)
+        (se): Identity()
+        (rbr_identity): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+        (rbr_dense): Sequential(
+          (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+        )
+        (rbr_1x1): Sequential(
+          (conv): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+        )
+      )
+      (block): Sequential(
+        (0): RepVGGBlock(
+          (nonlinearity): ReLU(inplace=True)
+          (se): Identity()
+          (rbr_identity): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+          (rbr_dense): Sequential(
+            (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+          )
+          (rbr_1x1): Sequential(
+            (conv): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+          )
+        )
+        (1): RepVGGBlock(
+          (nonlinearity): ReLU(inplace=True)
+          (se): Identity()
+          (rbr_identity): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+          (rbr_dense): Sequential(
+            (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+          )
+          (rbr_1x1): Sequential(
+            (conv): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+          )
+        )
+        (2): RepVGGBlock(
+          (nonlinearity): ReLU(inplace=True)
+          (se): Identity()
+          (rbr_identity): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+          (rbr_dense): Sequential(
+            (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+          )
+          (rbr_1x1): Sequential(
+            (conv): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+          )
+        )
+      )
+    )
+    (reduce_layer1): SimConv(
+      (conv): Conv2d(128, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn): BatchNorm2d(64, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+      (act): ReLU(inplace=True)
+    )
+    (Bifusion1): BiFusion(
+      (cv1): SimConv(
+        (conv): Conv2d(128, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn): BatchNorm2d(64, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+        (act): ReLU(inplace=True)
+      )
+      (cv2): SimConv(
+        (conv): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn): BatchNorm2d(64, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+        (act): ReLU(inplace=True)
+      )
+      (cv3): SimConv(
+        (conv): Conv2d(192, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn): BatchNorm2d(64, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+        (act): ReLU(inplace=True)
+      )
+      (upsample): Transpose(
+        (upsample_transpose): ConvTranspose2d(64, 64, kernel_size=(2, 2), stride=(2, 2))
+      )
+      (downsample): SimConv(
+        (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(64, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+        (act): ReLU(inplace=True)
+      )
+    )
+    (Rep_p3): RepBlock(
+      (conv1): RepVGGBlock(
+        (nonlinearity): ReLU(inplace=True)
+        (se): Identity()
+        (rbr_identity): BatchNorm2d(64, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+        (rbr_dense): Sequential(
+          (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn): BatchNorm2d(64, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+        )
+        (rbr_1x1): Sequential(
+          (conv): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn): BatchNorm2d(64, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+        )
+      )
+      (block): Sequential(
+        (0): RepVGGBlock(
+          (nonlinearity): ReLU(inplace=True)
+          (se): Identity()
+          (rbr_identity): BatchNorm2d(64, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+          (rbr_dense): Sequential(
+            (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn): BatchNorm2d(64, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+          )
+          (rbr_1x1): Sequential(
+            (conv): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNorm2d(64, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+          )
+        )
+        (1): RepVGGBlock(
+          (nonlinearity): ReLU(inplace=True)
+          (se): Identity()
+          (rbr_identity): BatchNorm2d(64, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+          (rbr_dense): Sequential(
+            (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn): BatchNorm2d(64, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+          )
+          (rbr_1x1): Sequential(
+            (conv): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNorm2d(64, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+          )
+        )
+        (2): RepVGGBlock(
+          (nonlinearity): ReLU(inplace=True)
+          (se): Identity()
+          (rbr_identity): BatchNorm2d(64, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+          (rbr_dense): Sequential(
+            (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn): BatchNorm2d(64, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+          )
+          (rbr_1x1): Sequential(
+            (conv): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNorm2d(64, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+          )
+        )
+      )
+    )
+    (downsample2): SimConv(
+      (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn): BatchNorm2d(64, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+      (act): ReLU(inplace=True)
+    )
+    (Rep_n3): RepBlock(
+      (conv1): RepVGGBlock(
+        (nonlinearity): ReLU(inplace=True)
+        (se): Identity()
+        (rbr_identity): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+        (rbr_dense): Sequential(
+          (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+        )
+        (rbr_1x1): Sequential(
+          (conv): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+        )
+      )
+      (block): Sequential(
+        (0): RepVGGBlock(
+          (nonlinearity): ReLU(inplace=True)
+          (se): Identity()
+          (rbr_identity): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+          (rbr_dense): Sequential(
+            (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+          )
+          (rbr_1x1): Sequential(
+            (conv): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+          )
+        )
+        (1): RepVGGBlock(
+          (nonlinearity): ReLU(inplace=True)
+          (se): Identity()
+          (rbr_identity): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+          (rbr_dense): Sequential(
+            (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+          )
+          (rbr_1x1): Sequential(
+            (conv): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+          )
+        )
+        (2): RepVGGBlock(
+          (nonlinearity): ReLU(inplace=True)
+          (se): Identity()
+          (rbr_identity): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+          (rbr_dense): Sequential(
+            (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+          )
+          (rbr_1x1): Sequential(
+            (conv): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+          )
+        )
+      )
+    )
+    (downsample1): SimConv(
+      (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+      (act): ReLU(inplace=True)
+    )
+    (Rep_n4): RepBlock(
+      (conv1): RepVGGBlock(
+        (nonlinearity): ReLU(inplace=True)
+        (se): Identity()
+        (rbr_identity): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+        (rbr_dense): Sequential(
+          (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+        )
+        (rbr_1x1): Sequential(
+          (conv): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+        )
+      )
+      (block): Sequential(
+        (0): RepVGGBlock(
+          (nonlinearity): ReLU(inplace=True)
+          (se): Identity()
+          (rbr_identity): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+          (rbr_dense): Sequential(
+            (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+          )
+          (rbr_1x1): Sequential(
+            (conv): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+          )
+        )
+        (1): RepVGGBlock(
+          (nonlinearity): ReLU(inplace=True)
+          (se): Identity()
+          (rbr_identity): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+          (rbr_dense): Sequential(
+            (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+          )
+          (rbr_1x1): Sequential(
+            (conv): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+          )
+        )
+        (2): RepVGGBlock(
+          (nonlinearity): ReLU(inplace=True)
+          (se): Identity()
+          (rbr_identity): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+          (rbr_dense): Sequential(
+            (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+          )
+          (rbr_1x1): Sequential(
+            (conv): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+          )
+        )
+      )
+    )
+  )
+  (detect): Detect(
+    (proj_conv): Conv2d(17, 1, kernel_size=(1, 1), stride=(1, 1), bias=False)
+    (stems): ModuleList(
+      (0): Conv(
+        (conv): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn): BatchNorm2d(64, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+        (act): SiLU(inplace=True)
+      )
+      (1): Conv(
+        (conv): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+        (act): SiLU(inplace=True)
+      )
+      (2): Conv(
+        (conv): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+        (act): SiLU(inplace=True)
+      )
+    )
+    (cls_convs): ModuleList(
+      (0): Conv(
+        (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(64, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+        (act): SiLU(inplace=True)
+      )
+      (1): Conv(
+        (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+        (act): SiLU(inplace=True)
+      )
+      (2): Conv(
+        (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+        (act): SiLU(inplace=True)
+      )
+    )
+    (reg_convs): ModuleList(
+      (0): Conv(
+        (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(64, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+        (act): SiLU(inplace=True)
+      )
+      (1): Conv(
+        (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+        (act): SiLU(inplace=True)
+      )
+      (2): Conv(
+        (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+        (act): SiLU(inplace=True)
+      )
+    )
+    (cls_preds): ModuleList(
+      (0): Conv2d(64, 80, kernel_size=(1, 1), stride=(1, 1))
+      (1): Conv2d(128, 80, kernel_size=(1, 1), stride=(1, 1))
+      (2): Conv2d(256, 80, kernel_size=(1, 1), stride=(1, 1))
+    )
+    (reg_preds): ModuleList(
+      (0): Conv2d(64, 4, kernel_size=(1, 1), stride=(1, 1))
+      (1): Conv2d(128, 4, kernel_size=(1, 1), stride=(1, 1))
+      (2): Conv2d(256, 4, kernel_size=(1, 1), stride=(1, 1))
+    )
+  )
+)
+Training start...
+/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:297: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+  self.scaler = amp.GradScaler(enabled=self.device != 'cpu')
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/29572 [00:00<?, ?it/s]                                       /data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+/data/bigc-data/lcs/envs/yolo/lib/python3.10/site-packages/torch/functional.py:513: UserWarning: torch.meshgrid: in an upcoming release, it will be required to pass the indexing argument. (Triggered internally at /root/pytorch/aten/src/ATen/native/TensorShape.cpp:3609.)
+  return _VF.meshgrid(tensors, **kwargs)  # type: ignore[attr-defined]
+TCAPPDLL 2025-11-05 04:11:25.941365 - Epoch: 0 Iteration: 0  rank : 0  train.loss : 3.164750855896881  train.ips : 7.788594176154498 imgs/s
+     0/399     1.841         0     1.324:   0%|          | 0/29572 [00:00<?, ?it     0/399     1.841         0     1.324:   0%|          | 1/29572 [00:00<4:14:1/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:11:26.471988 - Epoch: 0 Iteration: 1  rank : 0  train.loss : 3.331614561015906  train.ips : 7.572295603232526 imgs/s
+     0/399     1.806         0     1.442:   0%|          | 1/29572 [00:01<4:14:1     0/399     1.806         0     1.442:   0%|          | 2/29572 [00:01<4:18:2/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:11:27.063850 - Epoch: 0 Iteration: 2  rank : 0  train.loss : 3.306184083834971  train.ips : 6.786051419947911 imgs/s
+     0/399     1.776         0     1.492:   0%|          | 2/29572 [00:01<4:18:2     0/399     1.776         0     1.492:   0%|          | 3/29572 [00:01<4:33:4/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:11:27.556870 - Epoch: 0 Iteration: 3  rank : 0  train.loss : 3.150046110153052  train.ips : 8.152665776106588 imgs/s
+     0/399     1.804         0     1.434:   0%|          | 3/29572 [00:02<4:33:4     0/399     1.804         0     1.434:   0%|          | 4/29572 [00:02<4:21:3/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:11:28.246651 - Epoch: 0 Iteration: 4  rank : 0  train.loss : 3.165541356779108  train.ips : 5.818310953279325 imgs/s
+     0/399     1.815         0     1.408:   0%|          | 4/29572 [00:02<4:21:3     0/399     1.815         0     1.408:   0%|          | 5/29572 [00:02<4:49:4/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:11:28.839285 - Epoch: 0 Iteration: 5  rank : 0  train.loss : 3.3053626559743985  train.ips : 6.779670222206417 imgs/s
+     0/399      1.79         0     1.447:   0%|          | 5/29572 [00:03<4:49:4     0/399      1.79         0     1.447:   0%|          | 6/29572 [00:03<4:50:4/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:11:29.354819 - Epoch: 0 Iteration: 6  rank : 0  train.loss : 3.1956404195190506  train.ips : 7.816196654224521 imgs/s
+     0/399     1.787         0     1.444:   0%|          | 6/29572 [00:03<4:50:4     0/399     1.787         0     1.444:   0%|          | 7/29572 [00:03<4:38:3/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:11:29.859284 - Epoch: 0 Iteration: 7  rank : 0  train.loss : 3.1732565625638114  train.ips : 7.969916411251323 imgs/s
+     0/399     1.792         0     1.432:   0%|          | 7/29572 [00:04<4:38:3     0/399     1.792         0     1.432:   0%|          | 8/29572 [00:04<4:29:0/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:11:30.390343 - Epoch: 0 Iteration: 8  rank : 0  train.loss : 3.3258131295980675  train.ips : 7.570057664714429 imgs/s
+     0/399     1.783         0     1.452:   0%|          | 8/29572 [00:04<4:29:0     0/399     1.783         0     1.452:   0%|          | 9/29572 [00:04<4:26:4/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:11:30.854631 - Epoch: 0 Iteration: 9  rank : 0  train.loss : 3.1881190439876823  train.ips : 8.659878700286473 imgs/s
+     0/399     1.776         0     1.454:   0%|          | 9/29572 [00:05<4:26:4     0/399     1.776         0     1.454:   0%|          | 10/29572 [00:05<4:14:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:11:31.370703 - Epoch: 0 Iteration: 10  rank : 0  train.loss : 3.286952850396222  train.ips : 7.790832968029066 imgs/s
+     0/399     1.772         0     1.463:   0%|          | 10/29572 [00:05<4:14:     0/399     1.772         0     1.463:   0%|          | 11/29572 [00:05<4:14:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:11:31.901429 - Epoch: 0 Iteration: 11  rank : 0  train.loss : 3.242589656554534  train.ips : 7.577230573011369 imgs/s
+     0/399     1.769         0     1.468:   0%|          | 11/29572 [00:06<4:14:     0/399     1.769         0     1.468:   0%|          | 12/29572 [00:06<4:16:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:11:32.317756 - Epoch: 0 Iteration: 12  rank : 0  train.loss : 3.181534005879679  train.ips : 9.672691674166456 imgs/s
+     0/399     1.771         0     1.461:   0%|          | 12/29572 [00:06<4:16:     0/399     1.771         0     1.461:   0%|          | 13/29572 [00:06<4:01:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:11:32.840543 - Epoch: 0 Iteration: 13  rank : 0  train.loss : 3.2548626835354666  train.ips : 7.684982527276367 imgs/s
+     0/399     1.776         0     1.458:   0%|          | 13/29572 [00:07<4:01:     0/399     1.776         0     1.458:   0%|          | 14/29572 [00:07<4:06:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:11:33.351763 - Epoch: 0 Iteration: 14  rank : 0  train.loss : 3.241891344800017  train.ips : 7.863458705538659 imgs/s
+     0/399      1.77         0     1.465:   0%|          | 14/29572 [00:07<4:06:     0/399      1.77         0     1.465:   0%|          | 15/29572 [00:07<4:07:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:11:33.795509 - Epoch: 0 Iteration: 15  rank : 0  train.loss : 3.2078040176600178  train.ips : 9.063126670919877 imgs/s
+     0/399     1.772         0      1.46:   0%|          | 15/29572 [00:08<4:07:     0/399     1.772         0      1.46:   0%|          | 16/29572 [00:08<3:59:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:11:34.218742 - Epoch: 0 Iteration: 16  rank : 0  train.loss : 3.2681445597711125  train.ips : 9.509556479587904 imgs/s
+     0/399      1.78         0     1.455:   0%|          | 16/29572 [00:08<3:59:     0/399      1.78         0     1.455:   0%|          | 17/29572 [00:08<3:49:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:11:34.713351 - Epoch: 0 Iteration: 17  rank : 0  train.loss : 3.2516320708388253  train.ips : 8.125327088998718 imgs/s
+     0/399     1.782         0     1.454:   0%|          | 17/29572 [00:09<3:49:     0/399     1.782         0     1.454:   0%|          | 18/29572 [00:09<3:53:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:11:35.167295 - Epoch: 0 Iteration: 18  rank : 0  train.loss : 3.193205359757583  train.ips : 8.855538401040883 imgs/s
+     0/399     1.775         0     1.458:   0%|          | 18/29572 [00:09<3:53:     0/399     1.775         0     1.458:   0%|          | 19/29572 [00:09<3:50:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:11:35.691339 - Epoch: 0 Iteration: 19  rank : 0  train.loss : 3.191156524361642  train.ips : 7.6654389877382885 imgs/s
+     0/399     1.776         0     1.455:   0%|          | 19/29572 [00:10<3:50:     0/399     1.776         0     1.455:   0%|          | 20/29572 [00:10<3:59:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:11:36.296285 - Epoch: 0 Iteration: 20  rank : 0  train.loss : 3.1996670191140986  train.ips : 6.640570724710189 imgs/s
+     0/399     1.775         0     1.455:   0%|          | 20/29572 [00:10<3:59:     0/399     1.775         0     1.455:   0%|          | 21/29572 [00:10<4:16:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:11:36.762122 - Epoch: 0 Iteration: 21  rank : 0  train.loss : 3.137937152887356  train.ips : 8.635781333322353 imgs/s
+     0/399     1.777         0     1.449:   0%|          | 21/29572 [00:11<4:16:     0/399     1.777         0     1.449:   0%|          | 22/29572 [00:11<4:08:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:11:37.228846 - Epoch: 0 Iteration: 22  rank : 0  train.loss : 3.269149368383342  train.ips : 8.616647578155895 imgs/s
+     0/399     1.769         0     1.459:   0%|          | 22/29572 [00:11<4:08:     0/399     1.769         0     1.459:   0%|          | 23/29572 [00:11<4:02:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:11:37.699482 - Epoch: 0 Iteration: 23  rank : 0  train.loss : 3.1043626251826812  train.ips : 8.541940095687641 imgs/s
+     0/399     1.768         0     1.455:   0%|          | 23/29572 [00:12<4:02:     0/399     1.768         0     1.455:   0%|          | 24/29572 [00:12<3:59:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:11:38.249035 - Epoch: 0 Iteration: 24  rank : 0  train.loss : 3.279414338086993  train.ips : 7.3081015341283555 imgs/s
+     0/399     1.766         0     1.459:   0%|          | 24/29572 [00:12<3:59:     0/399     1.766         0     1.459:   0%|          | 25/29572 [00:12<4:08:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:11:38.737552 - Epoch: 0 Iteration: 25  rank : 0  train.loss : 3.2321998585723843  train.ips : 8.231885252618032 imgs/s
+     0/399      1.76         0     1.465:   0%|          | 25/29572 [00:13<4:08:     0/399      1.76         0     1.465:   0%|          | 26/29572 [00:13<4:06:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:11:39.210405 - Epoch: 0 Iteration: 26  rank : 0  train.loss : 3.260168622344888  train.ips : 8.501116019966243 imgs/s
+     0/399     1.757         0     1.469:   0%|          | 26/29572 [00:13<4:06:     0/399     1.757         0     1.469:   0%|          | 27/29572 [00:13<4:02:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:11:39.706836 - Epoch: 0 Iteration: 27  rank : 0  train.loss : 3.240429729112095  train.ips : 8.093428521671845 imgs/s
+     0/399     1.756         0     1.471:   0%|          | 27/29572 [00:14<4:02:     0/399     1.756         0     1.471:   0%|          | 28/29572 [00:14<4:02:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:11:40.179684 - Epoch: 0 Iteration: 28  rank : 0  train.loss : 3.2426233580645074  train.ips : 8.499337367220145 imgs/s
+     0/399     1.756         0     1.471:   0%|          | 28/29572 [00:14<4:02:     0/399     1.756         0     1.471:   0%|          | 29/29572 [00:14<3:59:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:11:40.641957 - Epoch: 0 Iteration: 29  rank : 0  train.loss : 3.1527748226091683  train.ips : 8.68873875856783 imgs/s
+     0/399     1.755         0      1.47:   0%|          | 29/29572 [00:15<3:59:     0/399     1.755         0      1.47:   0%|          | 30/29572 [00:15<3:56:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:11:41.097803 - Epoch: 0 Iteration: 30  rank : 0  train.loss : 3.1891596317128093  train.ips : 8.816985656619696 imgs/s
+     0/399     1.756         0     1.467:   0%|          | 30/29572 [00:15<3:56:     0/399     1.756         0     1.467:   0%|          | 31/29572 [00:15<3:52:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:11:41.743451 - Epoch: 0 Iteration: 31  rank : 0  train.loss : 3.2731383055887484  train.ips : 6.216263302065306 imgs/s
+     0/399     1.758         0     1.467:   0%|          | 31/29572 [00:16<3:52:     0/399     1.758         0     1.467:   0%|          | 32/29572 [00:16<4:18:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:11:42.248390 - Epoch: 0 Iteration: 32  rank : 0  train.loss : 3.1559205827248507  train.ips : 7.956490975140139 imgs/s
+     0/399     1.755         0     1.468:   0%|          | 32/29572 [00:16<4:18:     0/399     1.755         0     1.468:   0%|          | 33/29572 [00:16<4:15:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:11:42.826880 - Epoch: 0 Iteration: 33  rank : 0  train.loss : 3.2087023751200756  train.ips : 6.942950349667424 imgs/s
+     0/399     1.752         0     1.471:   0%|          | 33/29572 [00:17<4:15:     0/399     1.752         0     1.471:   0%|          | 34/29572 [00:17<4:24:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:11:43.506794 - Epoch: 0 Iteration: 34  rank : 0  train.loss : 3.2154002107047113  train.ips : 5.905781868001121 imgs/s
+     0/399     1.748         0     1.474:   0%|          | 34/29572 [00:18<4:24:     0/399     1.748         0     1.474:   0%|          | 35/29572 [00:18<4:45:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:11:44.016012 - Epoch: 0 Iteration: 35  rank : 0  train.loss : 3.228004886496059  train.ips : 7.891844039187297 imgs/s
+     0/399      1.75         0     1.472:   0%|          | 35/29572 [00:18<4:45:     0/399      1.75         0     1.472:   0%|          | 36/29572 [00:18<4:34:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:11:44.535229 - Epoch: 0 Iteration: 36  rank : 0  train.loss : 3.248934820943731  train.ips : 7.745416957706607 imgs/s
+     0/399     1.752         0     1.472:   0%|          | 36/29572 [00:19<4:34:     0/399     1.752         0     1.472:   0%|          | 37/29572 [00:19<4:29:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:11:45.011848 - Epoch: 0 Iteration: 37  rank : 0  train.loss : 3.0465536684928596  train.ips : 8.426738993947612 imgs/s
+     0/399     1.751         0     1.467:   0%|          | 37/29572 [00:19<4:29:     0/399     1.751         0     1.467:   0%|          | 38/29572 [00:19<4:18:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:11:45.473127 - Epoch: 0 Iteration: 38  rank : 0  train.loss : 3.1655097096064866  train.ips : 8.708867908465926 imgs/s
+     0/399      1.75         0     1.467:   0%|          | 38/29572 [00:20<4:18:     0/399      1.75         0     1.467:   0%|          | 39/29572 [00:20<4:09:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:11:45.952042 - Epoch: 0 Iteration: 39  rank : 0  train.loss : 3.098366064265495  train.ips : 8.390017522943854 imgs/s
+     0/399     1.746         0     1.468:   0%|          | 39/29572 [00:20<4:09:     0/399     1.746         0     1.468:   0%|          | 40/29572 [00:20<4:05:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:11:46.424260 - Epoch: 0 Iteration: 40  rank : 0  train.loss : 3.182991994599563  train.ips : 8.510711173201928 imgs/s
+     0/399     1.746         0     1.468:   0%|          | 40/29572 [00:20<4:05:     0/399     1.746         0     1.468:   0%|          | 41/29572 [00:20<4:01:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:11:46.894245 - Epoch: 0 Iteration: 41  rank : 0  train.loss : 3.175591275073616  train.ips : 8.549008777181875 imgs/s
+     0/399     1.742         0      1.47:   0%|          | 41/29572 [00:21<4:01:     0/399     1.742         0      1.47:   0%|          | 42/29572 [00:21<3:58:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:11:47.403394 - Epoch: 0 Iteration: 42  rank : 0  train.loss : 3.209161122487706  train.ips : 7.899521006183648 imgs/s
+     0/399     1.742         0     1.471:   0%|          | 42/29572 [00:21<3:58:     0/399     1.742         0     1.471:   0%|          | 43/29572 [00:21<4:01:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:11:47.952227 - Epoch: 0 Iteration: 43  rank : 0  train.loss : 3.2116752839281526  train.ips : 7.316448343321347 imgs/s
+     0/399     1.738         0     1.475:   0%|          | 43/29572 [00:22<4:01:     0/399     1.738         0     1.475:   0%|          | 44/29572 [00:22<4:10:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:11:48.511854 - Epoch: 0 Iteration: 44  rank : 0  train.loss : 3.102523116035541  train.ips : 7.181240412009643 imgs/s
+     0/399     1.735         0     1.475:   0%|          | 44/29572 [00:23<4:10:     0/399     1.735         0     1.475:   0%|          | 45/29572 [00:23<4:17:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:11:48.899439 - Epoch: 0 Iteration: 45  rank : 0  train.loss : 3.114146076131433  train.ips : 10.382313226588579 imgs/s
+     0/399     1.734         0     1.474:   0%|          | 45/29572 [00:23<4:17:     0/399     1.734         0     1.474:   0%|          | 46/29572 [00:23<3:57:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:11:49.453970 - Epoch: 0 Iteration: 46  rank : 0  train.loss : 3.205722564139837  train.ips : 7.242910008962322 imgs/s
+     0/399     1.733         0     1.475:   0%|          | 46/29572 [00:24<3:57:     0/399     1.733         0     1.475:   0%|          | 47/29572 [00:24<4:08:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:11:49.950714 - Epoch: 0 Iteration: 47  rank : 0  train.loss : 3.0153816917747585  train.ips : 8.087038298335905 imgs/s
+     0/399      1.73         0     1.474:   0%|          | 47/29572 [00:24<4:08:     0/399      1.73         0     1.474:   0%|          | 48/29572 [00:24<4:07:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:11:50.501794 - Epoch: 0 Iteration: 48  rank : 0  train.loss : 3.1306238845837067  train.ips : 7.288652014247813 imgs/s
+     0/399     1.729         0     1.474:   0%|          | 48/29572 [00:25<4:07:     0/399     1.729         0     1.474:   0%|          | 49/29572 [00:25<4:14:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:11:50.951382 - Epoch: 0 Iteration: 49  rank : 0  train.loss : 3.2488464026555657  train.ips : 8.938704834201602 imgs/s
+     0/399     1.729         0     1.475:   0%|          | 49/29572 [00:25<4:14:     0/399     1.729         0     1.475:   0%|          | 50/29572 [00:25<4:04:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:11:51.453965 - Epoch: 0 Iteration: 50  rank : 0  train.loss : 3.1784518033936107  train.ips : 8.002083367118095 imgs/s
+     0/399     1.727         0     1.476:   0%|          | 50/29572 [00:26<4:04:     0/399     1.727         0     1.476:   0%|          | 51/29572 [00:26<4:05:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:11:51.944997 - Epoch: 0 Iteration: 51  rank : 0  train.loss : 3.1805621805666506  train.ips : 8.181904456756726 imgs/s
+     0/399     1.724         0     1.478:   0%|          | 51/29572 [00:26<4:05:     0/399     1.724         0     1.478:   0%|          | 52/29572 [00:26<4:04:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:11:52.417599 - Epoch: 0 Iteration: 52  rank : 0  train.loss : 3.0854661424291683  train.ips : 8.503985827717559 imgs/s
+     0/399     1.723         0     1.477:   0%|          | 52/29572 [00:26<4:04:     0/399     1.723         0     1.477:   0%|          | 53/29572 [00:26<4:00:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:11:53.001914 - Epoch: 0 Iteration: 53  rank : 0  train.loss : 3.086424178973489  train.ips : 6.872125711135223 imgs/s
+     0/399     1.721         0     1.477:   0%|          | 53/29572 [00:27<4:00:     0/399     1.721         0     1.477:   0%|          | 54/29572 [00:27<4:14:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:11:53.577758 - Epoch: 0 Iteration: 54  rank : 0  train.loss : 3.0892498703712676  train.ips : 6.9767653459207635 imgs/s
+     0/399     1.717         0     1.479:   0%|          | 54/29572 [00:28<4:14:     0/399     1.717         0     1.479:   0%|          | 55/29572 [00:28<4:23:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:11:54.091022 - Epoch: 0 Iteration: 55  rank : 0  train.loss : 3.2045087620229444  train.ips : 7.827307841063422 imgs/s
+     0/399     1.716         0      1.48:   0%|          | 55/29572 [00:28<4:23:     0/399     1.716         0      1.48:   0%|          | 56/29572 [00:28<4:20:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:11:54.687135 - Epoch: 0 Iteration: 56  rank : 0  train.loss : 3.128453136274561  train.ips : 6.736712260120398 imgs/s
+     0/399     1.716         0      1.48:   0%|          | 56/29572 [00:29<4:20:     0/399     1.716         0      1.48:   0%|          | 57/29572 [00:29<4:30:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:11:55.254776 - Epoch: 0 Iteration: 57  rank : 0  train.loss : 3.0710093300005017  train.ips : 7.078561016309129 imgs/s
+     0/399     1.714         0     1.479:   0%|          | 57/29572 [00:29<4:30:     0/399     1.714         0     1.479:   0%|          | 58/29572 [00:29<4:33:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:11:55.752000 - Epoch: 0 Iteration: 58  rank : 0  train.loss : 3.040352978518767  train.ips : 8.171364113673867 imgs/s
+     0/399     1.711         0     1.479:   0%|          | 58/29572 [00:30<4:33:     0/399     1.711         0     1.479:   0%|          | 59/29572 [00:30<4:24:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:11:56.416544 - Epoch: 0 Iteration: 59  rank : 0  train.loss : 3.1349207821109526  train.ips : 6.040662782910513 imgs/s
+     0/399     1.709         0      1.48:   0%|          | 59/29572 [00:30<4:24:     0/399     1.709         0      1.48:   0%|          | 60/29572 [00:30<4:42:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:11:56.954427 - Epoch: 0 Iteration: 60  rank : 0  train.loss : 3.196641556789877  train.ips : 7.469776889091915 imgs/s
+     0/399     1.709         0      1.48:   0%|          | 60/29572 [00:31<4:42:     0/399     1.709         0      1.48:   0%|          | 61/29572 [00:31<4:37:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:11:57.499804 - Epoch: 0 Iteration: 61  rank : 0  train.loss : 3.062574527749867  train.ips : 7.362580824096399 imgs/s
+     0/399     1.706         0     1.481:   0%|          | 61/29572 [00:32<4:37:     0/399     1.706         0     1.481:   0%|          | 62/29572 [00:32<4:34:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:11:58.052450 - Epoch: 0 Iteration: 62  rank : 0  train.loss : 3.2385331070345353  train.ips : 7.270978607294201 imgs/s
+     0/399     1.707         0     1.481:   0%|          | 62/29572 [00:32<4:34:     0/399     1.707         0     1.481:   0%|          | 63/29572 [00:32<4:33:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:11:58.553714 - Epoch: 0 Iteration: 63  rank : 0  train.loss : 3.139505646653263  train.ips : 8.014725082274438 imgs/s
+     0/399     1.705         0     1.483:   0%|          | 63/29572 [00:33<4:33:     0/399     1.705         0     1.483:   0%|          | 64/29572 [00:33<4:25:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:11:58.971861 - Epoch: 0 Iteration: 64  rank : 0  train.loss : 3.0889529268016047  train.ips : 9.618965004205412 imgs/s
+     0/399     1.703         0     1.483:   0%|          | 64/29572 [00:33<4:25:     0/399     1.703         0     1.483:   0%|          | 65/29572 [00:33<4:07:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:11:59.439972 - Epoch: 0 Iteration: 65  rank : 0  train.loss : 3.084892418622445  train.ips : 8.587714152628696 imgs/s
+     0/399     1.703         0     1.482:   0%|          | 65/29572 [00:34<4:07:     0/399     1.703         0     1.482:   0%|          | 66/29572 [00:34<4:02:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:11:59.900464 - Epoch: 0 Iteration: 66  rank : 0  train.loss : 3.1121381490920497  train.ips : 8.731339259971667 imgs/s
+     0/399     1.701         0     1.482:   0%|          | 66/29572 [00:34<4:02:     0/399     1.701         0     1.482:   0%|          | 67/29572 [00:34<3:57:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:12:00.332202 - Epoch: 0 Iteration: 67  rank : 0  train.loss : 3.0124678061684245  train.ips : 9.313369734408342 imgs/s
+     0/399       1.7         0     1.481:   0%|          | 67/29572 [00:34<3:57:     0/399       1.7         0     1.481:   0%|          | 68/29572 [00:34<3:49:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:12:00.806523 - Epoch: 0 Iteration: 68  rank : 0  train.loss : 3.107928142094236  train.ips : 8.4723401375797 imgs/s
+     0/399       1.7         0     1.479:   0%|          | 68/29572 [00:35<3:49:     0/399       1.7         0     1.479:   0%|          | 69/29572 [00:35<3:50:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:12:01.315628 - Epoch: 0 Iteration: 69  rank : 0  train.loss : 3.121622967883619  train.ips : 7.8940943034987745 imgs/s
+     0/399     1.698         0     1.482:   0%|          | 69/29572 [00:35<3:50:     0/399     1.698         0     1.482:   0%|          | 70/29572 [00:35<3:56:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:12:01.877406 - Epoch: 0 Iteration: 70  rank : 0  train.loss : 3.134117196033612  train.ips : 7.150249192160526 imgs/s
+     0/399     1.697         0     1.482:   0%|          | 70/29572 [00:36<3:56:     0/399     1.697         0     1.482:   0%|          | 71/29572 [00:36<4:08:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:12:02.422808 - Epoch: 0 Iteration: 71  rank : 0  train.loss : 3.1276056682219173  train.ips : 7.364119113104074 imgs/s
+     0/399     1.695         0     1.483:   0%|          | 71/29572 [00:36<4:08:     0/399     1.695         0     1.483:   0%|          | 72/29572 [00:36<4:14:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:12:02.941714 - Epoch: 0 Iteration: 72  rank : 0  train.loss : 2.9541123321585565  train.ips : 7.742407328357004 imgs/s
+     0/399     1.693         0     1.482:   0%|          | 72/29572 [00:37<4:14:     0/399     1.693         0     1.482:   0%|          | 73/29572 [00:37<4:14:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:12:03.463388 - Epoch: 0 Iteration: 73  rank : 0  train.loss : 3.11105606824244  train.ips : 7.701082323909494 imgs/s
+     0/399     1.692         0     1.482:   0%|          | 73/29572 [00:38<4:14:     0/399     1.692         0     1.482:   0%|          | 74/29572 [00:38<4:15:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:12:03.996325 - Epoch: 0 Iteration: 74  rank : 0  train.loss : 3.074464163462022  train.ips : 7.550345942433235 imgs/s
+     0/399     1.689         0     1.483:   0%|          | 74/29572 [00:38<4:15:     0/399     1.689         0     1.483:   0%|          | 75/29572 [00:38<4:17:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:12:04.461479 - Epoch: 0 Iteration: 75  rank : 0  train.loss : 2.9962861835837535  train.ips : 8.640998607837007 imgs/s
+     0/399     1.689         0     1.482:   0%|          | 75/29572 [00:39<4:17:     0/399     1.689         0     1.482:   0%|          | 76/29572 [00:39<4:08:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:12:04.957419 - Epoch: 0 Iteration: 76  rank : 0  train.loss : 3.055545714153337  train.ips : 8.103510300604144 imgs/s
+     0/399     1.688         0     1.481:   0%|          | 76/29572 [00:39<4:08:     0/399     1.688         0     1.481:   0%|          | 77/29572 [00:39<4:07:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:12:05.468009 - Epoch: 0 Iteration: 77  rank : 0  train.loss : 3.0834700388725897  train.ips : 7.868297178339364 imgs/s
+     0/399     1.686         0     1.482:   0%|          | 77/29572 [00:40<4:07:     0/399     1.686         0     1.482:   0%|          | 78/29572 [00:40<4:08:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:12:06.005500 - Epoch: 0 Iteration: 78  rank : 0  train.loss : 3.112784358606268  train.ips : 7.479500849942468 imgs/s
+     0/399     1.685         0     1.482:   0%|          | 78/29572 [00:40<4:08:     0/399     1.685         0     1.482:   0%|          | 79/29572 [00:40<4:13:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:12:06.500653 - Epoch: 0 Iteration: 79  rank : 0  train.loss : 3.0238059900373866  train.ips : 8.115618870251902 imgs/s
+     0/399     1.682         0     1.483:   0%|          | 79/29572 [00:41<4:13:     0/399     1.682         0     1.483:   0%|          | 80/29572 [00:41<4:10:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:12:07.006904 - Epoch: 0 Iteration: 80  rank : 0  train.loss : 3.101807946052736  train.ips : 7.936238440757597 imgs/s
+     0/399     1.681         0     1.483:   0%|          | 80/29572 [00:41<4:10:     0/399     1.681         0     1.483:   0%|          | 81/29572 [00:41<4:09:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:12:07.484655 - Epoch: 0 Iteration: 81  rank : 0  train.loss : 3.0961249199980143  train.ips : 8.41160954630437 imgs/s
+     0/399     1.681         0     1.482:   0%|          | 81/29572 [00:42<4:09:     0/399     1.681         0     1.482:   0%|          | 82/29572 [00:42<4:05:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:12:07.936069 - Epoch: 0 Iteration: 82  rank : 0  train.loss : 3.1899468824387593  train.ips : 8.906281138006031 imgs/s
+     0/399     1.682         0     1.482:   0%|          | 82/29572 [00:42<4:05:     0/399     1.682         0     1.482:   0%|          | 83/29572 [00:42<3:58:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:12:08.339463 - Epoch: 0 Iteration: 83  rank : 0  train.loss : 3.129944755552656  train.ips : 9.969264849717213 imgs/s
+     0/399     1.681         0     1.483:   0%|          | 83/29572 [00:42<3:58:     0/399     1.681         0     1.483:   0%|          | 84/29572 [00:42<3:46:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:12:08.836301 - Epoch: 0 Iteration: 84  rank : 0  train.loss : 3.2177293199438948  train.ips : 8.093163036761503 imgs/s
+     0/399      1.68         0     1.484:   0%|          | 84/29572 [00:43<3:46:     0/399      1.68         0     1.484:   0%|          | 85/29572 [00:43<3:51:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:12:09.338621 - Epoch: 0 Iteration: 85  rank : 0  train.loss : 3.1538785401094684  train.ips : 7.998302819845756 imgs/s
+     0/399     1.678         0     1.486:   0%|          | 85/29572 [00:43<3:51:     0/399     1.678         0     1.486:   0%|          | 86/29572 [00:43<3:56:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:12:09.884131 - Epoch: 0 Iteration: 86  rank : 0  train.loss : 3.12044780044352  train.ips : 7.369786592142451 imgs/s
+     0/399     1.676         0     1.487:   0%|          | 86/29572 [00:44<3:56:     0/399     1.676         0     1.487:   0%|          | 87/29572 [00:44<4:05:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:12:10.369336 - Epoch: 0 Iteration: 87  rank : 0  train.loss : 3.3429637622147164  train.ips : 8.283658192529744 imgs/s
+     0/399     1.678         0     1.487:   0%|          | 87/29572 [00:44<4:05:     0/399     1.678         0     1.487:   0%|          | 88/29572 [00:44<4:03:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:12:10.782411 - Epoch: 0 Iteration: 88  rank : 0  train.loss : 3.4330927116622907  train.ips : 9.737663965825458 imgs/s
+     0/399     1.681         0     1.487:   0%|          | 88/29572 [00:45<4:03:     0/399     1.681         0     1.487:   0%|          | 89/29572 [00:45<3:51:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:12:11.297007 - Epoch: 0 Iteration: 89  rank : 0  train.loss : 2.9989752516001467  train.ips : 7.807648670106077 imgs/s
+     0/399     1.679         0     1.487:   0%|          | 89/29572 [00:45<3:51:     0/399     1.679         0     1.487:   0%|          | 90/29572 [00:45<3:57:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:12:11.813889 - Epoch: 0 Iteration: 90  rank : 0  train.loss : 3.0581370820089306  train.ips : 7.775988416582196 imgs/s
+     0/399      1.68         0     1.485:   0%|          | 90/29572 [00:46<3:57:     0/399      1.68         0     1.485:   0%|          | 91/29572 [00:46<4:02:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:12:12.344153 - Epoch: 0 Iteration: 91  rank : 0  train.loss : 3.1130688020036823  train.ips : 7.574668237233912 imgs/s
+     0/399     1.679         0     1.486:   0%|          | 91/29572 [00:46<4:02:     0/399     1.679         0     1.486:   0%|          | 92/29572 [00:46<4:07:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:12:12.798259 - Epoch: 0 Iteration: 92  rank : 0  train.loss : 3.0386118259913397  train.ips : 8.85252454898981 imgs/s
+     0/399     1.679         0     1.485:   0%|          | 92/29572 [00:47<4:07:     0/399     1.679         0     1.485:   0%|          | 93/29572 [00:47<4:00:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:12:13.181288 - Epoch: 0 Iteration: 93  rank : 0  train.loss : 3.1258153299245492  train.ips : 10.507563193626776 imgs/s
+     0/399     1.682         0     1.482:   0%|          | 93/29572 [00:47<4:00:     0/399     1.682         0     1.482:   0%|          | 94/29572 [00:47<3:44:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:12:13.708466 - Epoch: 0 Iteration: 94  rank : 0  train.loss : 3.1313200793201483  train.ips : 7.619312667551647 imgs/s
+     0/399      1.68         0     1.482:   0%|          | 94/29572 [00:48<3:44:     0/399      1.68         0     1.482:   0%|          | 95/29572 [00:48<3:55:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:12:14.188784 - Epoch: 0 Iteration: 95  rank : 0  train.loss : 3.1584837666111216  train.ips : 8.36205012879096 imgs/s
+     0/399     1.679         0     1.483:   0%|          | 95/29572 [00:48<3:55:     0/399     1.679         0     1.483:   0%|          | 96/29572 [00:48<3:55:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:12:14.645842 - Epoch: 0 Iteration: 96  rank : 0  train.loss : 3.189737911964934  train.ips : 8.795371964948977 imgs/s
+     0/399     1.679         0     1.484:   0%|          | 96/29572 [00:49<3:55:     0/399     1.679         0     1.484:   0%|          | 97/29572 [00:49<3:52:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:12:15.072669 - Epoch: 0 Iteration: 97  rank : 0  train.loss : 3.0799078619280733  train.ips : 9.422829497114833 imgs/s
+     0/399     1.678         0     1.484:   0%|          | 97/29572 [00:49<3:52:     0/399     1.678         0     1.484:   0%|          | 98/29572 [00:49<3:45:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:12:15.574940 - Epoch: 0 Iteration: 98  rank : 0  train.loss : 3.1252254497882523  train.ips : 7.998787110185128 imgs/s
+     0/399     1.678         0     1.484:   0%|          | 98/29572 [00:50<3:45:     0/399     1.678         0     1.484:   0%|          | 99/29572 [00:50<3:51:/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:12:16.012419 - Epoch: 0 Iteration: 99  rank : 0  train.loss : 3.0815094401423675  train.ips : 9.190829557967163 imgs/s
+     0/399     1.676         0     1.485:   0%|          | 99/29572 [00:50<3:51:     0/399     1.676         0     1.485:   0%|          | 100/29572 [00:50<3:46/data/bigc-data/lcs/YOLOv6/yolov6/core/engine.py:164: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with amp.autocast(enabled=self.device != 'cpu'):
+TCAPPDLL 2025-11-05 04:12:16.491542 - Epoch: 0 Iteration: 100  rank : 0  train.loss : 3.131931215382563  train.ips : 8.388566057169713 imgs/s
+Reached 100 steps at epoch 0, stopping training...
+     0/399     1.676         0     1.485:   0%|          | 100/29572 [00:51<4:10
+Executing command: torchrun --nproc_per_node=1 tools/train.py --batch-size 4 --conf-file configs/yolov6s.py --data-path data/coco.yaml --device 0 
