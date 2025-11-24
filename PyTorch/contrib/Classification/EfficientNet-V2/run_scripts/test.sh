@@ -11,7 +11,7 @@ echo "Using NUM_PROC=${NUM_PROC}"
 echo "执行训练"
 torchrun --nproc_per_node=${NUM_PROC} train.py \
   --data-dir /data/teco-data/imagenet/ \
-  --model efficientnet_b2 \
+  --model efficientnetv2_s \
   -b 128 \
   --sched step \
   --epochs 450 \
