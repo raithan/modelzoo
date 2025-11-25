@@ -1,9 +1,9 @@
 #!/bin/bash
 script_path=$(dirname $(readlink -f "$0"))
 echo "当前脚本路径: $script_path"
-# cd .. 
+cd .. 
 #安装依赖
-# pip install -r requirements.txt
+pip install -r requirements.txt
 echo "默认 1 个进程（1 GPU）；可以通过第一个参数覆盖，比如 ./test.sh 4"
 NUM_PROC=${1:-1}
 cd $script_path
