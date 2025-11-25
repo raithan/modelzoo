@@ -10,28 +10,17 @@ cd $script_path
 echo "Using NUM_PROC=${NUM_PROC}"
 echo "执行训练"
 torchrun --nproc_per_node=${NUM_PROC} train.py \
-  --data-dir /data/teco-data/imagenet/ \
-  --model mvitv2_base \
-  -b 128 \
-  --sched step \
-  --epochs 450 \
-  --decay-epochs 2.4 \
-  --decay-rate .97 \
-  --opt rmsproptf \
-  --opt-eps .001 \
-  -j 8 \
-  --warmup-lr 1e-6 \
-  --weight-decay 1e-5 \
-  --drop 0.3 \
-  --drop-path 0.2 \
-  --model-ema \
-  --model-ema-decay 0.9999 \
-  --aa rand-m9-mstd0.5 \
-  --remode pixel \
-  --reprob 0.2 \
-  --amp \
-  --lr .016 \
-  2>&1 | tee sdaa.log
-
+    --data-dir /data/teco-data/imagenet \
+    --model mvitv2_base \
+    --sched cosine \
+    --epochs 2 \
+    --warmup-epochs 5 \
+    --lr 0.4 \
+    --reprob 0.5 \
+    --remode pixel \
+    --batch-size 16 \
+    --amp \
+    -j 4 \
+    2>&1 | tee sdaa.log
   # 生成loss对比图
 python loss.py --sdaa-log sdaa.log --cuda-log cuda.log
