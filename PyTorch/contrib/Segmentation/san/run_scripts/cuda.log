@@ -1,0 +1,1132 @@
+/root/miniconda3/envs/wyc_mmlab2/lib/python3.9/site-packages/mmengine/utils/dl_utils/setup_env.py:46: UserWarning: Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed.
+  warnings.warn(
+/root/miniconda3/envs/wyc_mmlab2/lib/python3.9/site-packages/mmengine/utils/dl_utils/setup_env.py:56: UserWarning: Setting MKL_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed.
+  warnings.warn(
+/root/miniconda3/envs/wyc_mmlab2/lib/python3.9/site-packages/torch/utils/cpp_extension.py:28: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import packaging  # type: ignore[attr-defined]
+08/22 00:39:54 - mmengine - INFO - 
+------------------------------------------------------------
+System environment:
+    sys.platform: linux
+    Python: 3.9.23 (main, Jun  5 2025, 13:40:20) [GCC 11.2.0]
+    CUDA available: True
+    MUSA available: False
+    numpy_random_seed: 887111121
+    GPU 0: NVIDIA GeForce RTX 4090
+    CUDA_HOME: /usr/local/cuda
+    NVCC: Cuda compilation tools, release 12.9, V12.9.86
+    GCC: gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
+    PyTorch: 2.1.0+cu121
+    PyTorch compiling details: PyTorch built with:
+  - GCC 9.3
+  - C++ Version: 201703
+  - Intel(R) oneAPI Math Kernel Library Version 2023.1-Product Build 20230303 for Intel(R) 64 architecture applications
+  - Intel(R) MKL-DNN v3.1.1 (Git Hash 64f6bcbcbab628e96f33a62c3e975f8535a7bde4)
+  - OpenMP 201511 (a.k.a. OpenMP 4.5)
+  - LAPACK is enabled (usually provided by MKL)
+  - NNPACK is enabled
+  - CPU capability usage: AVX512
+  - CUDA Runtime 12.1
+  - NVCC architecture flags: -gencode;arch=compute_50,code=sm_50;-gencode;arch=compute_60,code=sm_60;-gencode;arch=compute_70,code=sm_70;-gencode;arch=compute_75,code=sm_75;-gencode;arch=compute_80,code=sm_80;-gencode;arch=compute_86,code=sm_86;-gencode;arch=compute_90,code=sm_90
+  - CuDNN 8.9.2
+  - Magma 2.6.1
+  - Build settings: BLAS_INFO=mkl, BUILD_TYPE=Release, CUDA_VERSION=12.1, CUDNN_VERSION=8.9.2, CXX_COMPILER=/opt/rh/devtoolset-9/root/usr/bin/c++, CXX_FLAGS= -D_GLIBCXX_USE_CXX11_ABI=0 -fabi-version=11 -fvisibility-inlines-hidden -DUSE_PTHREADPOOL -DNDEBUG -DUSE_KINETO -DLIBKINETO_NOROCTRACER -DUSE_FBGEMM -DUSE_QNNPACK -DUSE_PYTORCH_QNNPACK -DUSE_XNNPACK -DSYMBOLICATE_MOBILE_DEBUG_HANDLE -O2 -fPIC -Wall -Wextra -Werror=return-type -Werror=non-virtual-dtor -Werror=bool-operation -Wnarrowing -Wno-missing-field-initializers -Wno-type-limits -Wno-array-bounds -Wno-unknown-pragmas -Wno-unused-parameter -Wno-unused-function -Wno-unused-result -Wno-strict-overflow -Wno-strict-aliasing -Wno-stringop-overflow -Wno-psabi -Wno-error=pedantic -Wno-error=old-style-cast -Wno-invalid-partial-specialization -Wno-unused-private-field -Wno-aligned-allocation-unavailable -Wno-missing-braces -fdiagnostics-color=always -faligned-new -Wno-unused-but-set-variable -Wno-maybe-uninitialized -fno-math-errno -fno-trapping-math -Werror=format -Werror=cast-function-type -Wno-stringop-overflow, LAPACK_INFO=mkl, PERF_WITH_AVX=1, PERF_WITH_AVX2=1, PERF_WITH_AVX512=1, TORCH_DISABLE_GPU_ASSERTS=ON, TORCH_VERSION=2.1.0, USE_CUDA=ON, USE_CUDNN=ON, USE_EXCEPTION_PTR=1, USE_GFLAGS=OFF, USE_GLOG=OFF, USE_MKL=ON, USE_MKLDNN=ON, USE_MPI=OFF, USE_NCCL=1, USE_NNPACK=ON, USE_OPENMP=ON, USE_ROCM=OFF, 
+
+    TorchVision: 0.16.0+cu121
+    OpenCV: 4.11.0
+    MMEngine: 0.10.4
+
+Runtime environment:
+    cudnn_benchmark: True
+    mp_cfg: {'mp_start_method': 'fork', 'opencv_num_threads': 0}
+    dist_cfg: {'backend': 'nccl'}
+    seed: 887111121
+    Distributed launcher: pytorch
+    Distributed training: True
+    GPU number: 1
+------------------------------------------------------------
+
+08/22 00:39:55 - mmengine - INFO - Config:
+crop_size = (
+    640,
+    640,
+)
+data_preprocessor = dict(
+    bgr_to_rgb=True,
+    mean=[
+        122.7709,
+        116.746,
+        104.0937,
+    ],
+    pad_val=0,
+    seg_pad_val=255,
+    size_divisor=640,
+    std=[
+        68.5005,
+        66.6322,
+        70.3232,
+    ],
+    test_cfg=dict(size_divisor=32),
+    type='SegDataPreProcessor')
+data_root = 'data/coco_stuff164k'
+dataset_type = 'COCOStuffDataset'
+default_hooks = dict(
+    checkpoint=dict(
+        by_epoch=False,
+        interval=10000,
+        save_best='mIoU',
+        type='CheckpointHook'),
+    logger=dict(interval=50, log_metric_by_epoch=False, type='LoggerHook'),
+    param_scheduler=dict(type='ParamSchedulerHook'),
+    sampler_seed=dict(type='DistSamplerSeedHook'),
+    timer=dict(type='IterTimerHook'),
+    visualization=dict(type='SegVisualizationHook'))
+default_scope = 'mmseg'
+env_cfg = dict(
+    cudnn_benchmark=True,
+    dist_cfg=dict(backend='nccl'),
+    mp_cfg=dict(mp_start_method='fork', opencv_num_threads=0))
+img_ratios = [
+    0.5,
+    0.75,
+    1.0,
+    1.25,
+    1.5,
+    1.75,
+]
+launcher = 'pytorch'
+load_from = None
+log_level = 'INFO'
+log_processor = dict(by_epoch=False)
+model = dict(
+    asymetric_input=True,
+    data_preprocessor=dict(
+        bgr_to_rgb=True,
+        mean=[
+            122.7709,
+            116.746,
+            104.0937,
+        ],
+        pad_val=0,
+        seg_pad_val=255,
+        size_divisor=640,
+        std=[
+            68.5005,
+            66.6322,
+            70.3232,
+        ],
+        test_cfg=dict(size_divisor=32),
+        type='SegDataPreProcessor'),
+    decode_head=dict(
+        align_corners=False,
+        deep_supervision_idxs=[
+            7,
+        ],
+        loss_decode=[
+            dict(
+                class_weight=[
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0,
+                    0.1,
+                ],
+                loss_name='loss_cls_ce',
+                loss_weight=2.0,
+                type='CrossEntropyLoss'),
+            dict(
+                loss_name='loss_mask_ce',
+                loss_weight=5.0,
+                type='CrossEntropyLoss',
+                use_sigmoid=True),
+            dict(
+                eps=1,
+                ignore_index=None,
+                loss_name='loss_mask_dice',
+                loss_weight=5.0,
+                naive_dice=True,
+                type='DiceLoss'),
+        ],
+        maskgen_cfg=dict(
+            act_cfg=dict(type='QuickGELU'),
+            cross_attn=False,
+            embed_dims=768,
+            final_norm=True,
+            frozen_exclude=[],
+            mlp_ratio=4,
+            norm_cfg=dict(eps=1e-05, type='LN'),
+            num_heads=12,
+            num_layers=3,
+            out_dims=512,
+            qkv_bias=True,
+            sos_token_format='cls_token',
+            sos_token_num=100),
+        num_classes=171,
+        san_cfg=dict(
+            cfg_decoder=dict(
+                embed_channels=256,
+                mlp_channels=256,
+                num_heads=12,
+                num_layers=1,
+                num_mlp=3,
+                rescale=True),
+            cfg_encoder=dict(mlp_ratio=4, num_encode_layer=8, num_heads=6),
+            clip_channels=768,
+            embed_dims=240,
+            fusion_index=[
+                0,
+                1,
+                2,
+                3,
+            ],
+            in_channels=3,
+            norm_cfg=dict(eps=1e-06, type='LN'),
+            num_queries=100,
+            patch_bias=True,
+            patch_size=16),
+        train_cfg=dict(
+            assigner=dict(
+                match_costs=[
+                    dict(type='ClassificationCost', weight=2.0),
+                    dict(
+                        type='CrossEntropyLossCost',
+                        use_sigmoid=True,
+                        weight=5.0),
+                    dict(eps=1.0, pred_act=True, type='DiceCost', weight=5.0),
+                ],
+                type='HungarianAssigner'),
+            importance_sample_ratio=0.75,
+            num_points=12544,
+            oversample_ratio=3.0),
+        type='SideAdapterCLIPHead'),
+    encoder_resolution=0.5,
+    image_encoder=dict(
+        act_cfg=dict(type='QuickGELU'),
+        attn_drop_rate=0.0,
+        drop_path_rate=0.0,
+        drop_rate=0.0,
+        embed_dims=768,
+        frozen_exclude=[
+            'pos_embed',
+        ],
+        img_size=(
+            224,
+            224,
+        ),
+        in_channels=3,
+        interpolate_mode='bicubic',
+        mlp_ratio=4,
+        norm_cfg=dict(eps=1e-05, type='LN'),
+        norm_eval=False,
+        num_heads=12,
+        num_layers=9,
+        out_indices=(
+            2,
+            5,
+            8,
+        ),
+        out_origin=True,
+        output_cls_token=True,
+        patch_bias=False,
+        patch_pad=0,
+        patch_size=16,
+        pre_norm=True,
+        qkv_bias=True,
+        type='VisionTransformer',
+        with_cls_token=True),
+    pretrained=
+    '/home/01/raithan/mmsegmentation/data/coco_stuff164k/clip_vit-base-patch16-224_3rdparty-d08f8887.pth',
+    test_cfg=dict(mode='whole'),
+    text_encoder=dict(
+        cache_feature=True,
+        cat_bg=True,
+        dataset_name='coco-stuff164k',
+        embed_dims=512,
+        mlp_ratio=4,
+        norm_cfg=dict(eps=1e-05, type='LN'),
+        num_heads=8,
+        num_layers=12,
+        output_dims=512,
+        templates='vild',
+        type='CLIPTextEncoder'),
+    train_cfg=dict(),
+    type='MultimodalEncoderDecoder')
+norm_cfg = dict(requires_grad=True, type='SyncBN')
+num_classes = 171
+optim_wrapper = dict(
+    clip_grad=dict(max_norm=0.01, norm_type=2),
+    loss_scale='dynamic',
+    optimizer=dict(
+        betas=(
+            0.9,
+            0.999,
+        ), lr=1e-05, type='AdamW', weight_decay=0.0001),
+    paramwise_cfg=dict(
+        custom_keys=dict(
+            cls_token=dict(decay_mult=0.0),
+            img_encoder=dict(decay_mult=1.0, lr_mult=0.1),
+            norm=dict(decay_mult=0.0),
+            pos_embed=dict(decay_mult=0.0))),
+    type='AmpOptimWrapper')
+optimizer = dict(lr=0.01, momentum=0.9, type='SGD', weight_decay=0.0005)
+param_scheduler = [
+    dict(
+        begin=0,
+        by_epoch=False,
+        end=60000,
+        eta_min=0.0,
+        power=1.0,
+        type='PolyLR'),
+]
+pretrained = '/home/01/raithan/mmsegmentation/data/coco_stuff164k/clip_vit-base-patch16-224_3rdparty-d08f8887.pth'
+resume = False
+test_cfg = dict(type='TestLoop')
+test_dataloader = dict(
+    batch_size=1,
+    dataset=dict(
+        data_prefix=dict(
+            img_path='images/val2017', seg_map_path='annotations/val2017'),
+        data_root='data/coco_stuff164k',
+        pipeline=[
+            dict(type='LoadImageFromFile'),
+            dict(max_size=2560, scale=(
+                640,
+                640,
+            ), type='ResizeShortestEdge'),
+            dict(type='LoadAnnotations'),
+            dict(type='PackSegInputs'),
+        ],
+        type='COCOStuffDataset'),
+    num_workers=4,
+    persistent_workers=True,
+    sampler=dict(shuffle=False, type='DefaultSampler'))
+test_evaluator = dict(
+    iou_metrics=[
+        'mIoU',
+    ], type='IoUMetric')
+test_pipeline = [
+    dict(type='LoadImageFromFile'),
+    dict(max_size=2560, scale=(
+        640,
+        640,
+    ), type='ResizeShortestEdge'),
+    dict(type='LoadAnnotations'),
+    dict(type='PackSegInputs'),
+]
+train_cfg = dict(
+    max_iters=100,
+    type='IterBasedTrainLoop',
+    val_begin=55000,
+    val_interval=500)
+train_dataloader = dict(
+    batch_size=8,
+    dataset=dict(
+        data_prefix=dict(
+            img_path='images/train2017', seg_map_path='annotations/train2017'),
+        data_root='data/coco_stuff164k',
+        pipeline=[
+            dict(type='LoadImageFromFile'),
+            dict(type='LoadAnnotations'),
+            dict(
+                max_size=2560,
+                resize_type='ResizeShortestEdge',
+                scales=[
+                    320,
+                    384,
+                    448,
+                    512,
+                    576,
+                    640,
+                    704,
+                    768,
+                    832,
+                    896,
+                    960,
+                ],
+                type='RandomChoiceResize'),
+            dict(cat_max_ratio=1.0, crop_size=(
+                640,
+                640,
+            ), type='RandomCrop'),
+            dict(type='PhotoMetricDistortion'),
+            dict(prob=0.5, type='RandomFlip'),
+            dict(type='PackSegInputs'),
+        ],
+        type='COCOStuffDataset'),
+    num_workers=4,
+    persistent_workers=True,
+    sampler=dict(shuffle=True, type='InfiniteSampler'))
+train_pipeline = [
+    dict(type='LoadImageFromFile'),
+    dict(type='LoadAnnotations'),
+    dict(
+        max_size=2560,
+        resize_type='ResizeShortestEdge',
+        scales=[
+            320,
+            384,
+            448,
+            512,
+            576,
+            640,
+            704,
+            768,
+            832,
+            896,
+            960,
+        ],
+        type='RandomChoiceResize'),
+    dict(cat_max_ratio=1.0, crop_size=(
+        640,
+        640,
+    ), type='RandomCrop'),
+    dict(type='PhotoMetricDistortion'),
+    dict(prob=0.5, type='RandomFlip'),
+    dict(type='PackSegInputs'),
+]
+tta_model = dict(type='SegTTAModel')
+tta_pipeline = [
+    dict(backend_args=None, type='LoadImageFromFile'),
+    dict(
+        transforms=[
+            [
+                dict(keep_ratio=True, scale_factor=0.5, type='Resize'),
+                dict(keep_ratio=True, scale_factor=0.75, type='Resize'),
+                dict(keep_ratio=True, scale_factor=1.0, type='Resize'),
+                dict(keep_ratio=True, scale_factor=1.25, type='Resize'),
+                dict(keep_ratio=True, scale_factor=1.5, type='Resize'),
+                dict(keep_ratio=True, scale_factor=1.75, type='Resize'),
+            ],
+            [
+                dict(direction='horizontal', prob=0.0, type='RandomFlip'),
+                dict(direction='horizontal', prob=1.0, type='RandomFlip'),
+            ],
+            [
+                dict(type='LoadAnnotations'),
+            ],
+            [
+                dict(type='PackSegInputs'),
+            ],
+        ],
+        type='TestTimeAug'),
+]
+val_cfg = dict(type='ValLoop')
+val_dataloader = dict(
+    batch_size=1,
+    dataset=dict(
+        data_prefix=dict(
+            img_path='images/val2017', seg_map_path='annotations/val2017'),
+        data_root='data/coco_stuff164k',
+        pipeline=[
+            dict(type='LoadImageFromFile'),
+            dict(max_size=2560, scale=(
+                640,
+                640,
+            ), type='ResizeShortestEdge'),
+            dict(type='LoadAnnotations'),
+            dict(type='PackSegInputs'),
+        ],
+        type='COCOStuffDataset'),
+    num_workers=4,
+    persistent_workers=True,
+    sampler=dict(shuffle=False, type='DefaultSampler'))
+val_evaluator = dict(
+    iou_metrics=[
+        'mIoU',
+    ], type='IoUMetric')
+vis_backends = [
+    dict(type='LocalVisBackend'),
+]
+visualizer = dict(
+    name='visualizer',
+    type='SegLocalVisualizer',
+    vis_backends=[
+        dict(type='LocalVisBackend'),
+    ])
+work_dir = './work_dirs/san-vit-b16_coco-stuff164k-640x640'
+
+/home/01/raithan/mmsegmentation/mmseg/models/losses/cross_entropy_loss.py:250: UserWarning: Default ``avg_non_ignore`` is False, if you would like to ignore the certain label and average loss over non-ignore labels, which is the same with PyTorch official cross_entropy, set ``avg_non_ignore=True``.
+  warnings.warn(
+/home/01/raithan/mmsegmentation/mmseg/engine/hooks/visualization_hook.py:60: UserWarning: The draw is False, it means that the hook for visualization will not take effect. The results will NOT be visualized or stored.
+  warnings.warn('The draw is False, it means that the '
+08/22 00:40:00 - mmengine - INFO - Hooks will be executed in the following order:
+before_run:
+(VERY_HIGH   ) RuntimeInfoHook                    
+(BELOW_NORMAL) LoggerHook                         
+ -------------------- 
+before_train:
+(VERY_HIGH   ) RuntimeInfoHook                    
+(NORMAL      ) IterTimerHook                      
+(VERY_LOW    ) CheckpointHook                     
+ -------------------- 
+before_train_epoch:
+(VERY_HIGH   ) RuntimeInfoHook                    
+(NORMAL      ) IterTimerHook                      
+(NORMAL      ) DistSamplerSeedHook                
+ -------------------- 
+before_train_iter:
+(VERY_HIGH   ) RuntimeInfoHook                    
+(NORMAL      ) IterTimerHook                      
+ -------------------- 
+after_train_iter:
+(VERY_HIGH   ) RuntimeInfoHook                    
+(NORMAL      ) IterTimerHook                      
+(BELOW_NORMAL) LoggerHook                         
+(LOW         ) ParamSchedulerHook                 
+(VERY_LOW    ) CheckpointHook                     
+ -------------------- 
+after_train_epoch:
+(NORMAL      ) IterTimerHook                      
+(LOW         ) ParamSchedulerHook                 
+(VERY_LOW    ) CheckpointHook                     
+ -------------------- 
+before_val:
+(VERY_HIGH   ) RuntimeInfoHook                    
+ -------------------- 
+before_val_epoch:
+(NORMAL      ) IterTimerHook                      
+ -------------------- 
+before_val_iter:
+(NORMAL      ) IterTimerHook                      
+ -------------------- 
+after_val_iter:
+(NORMAL      ) IterTimerHook                      
+(NORMAL      ) SegVisualizationHook               
+(BELOW_NORMAL) LoggerHook                         
+ -------------------- 
+after_val_epoch:
+(VERY_HIGH   ) RuntimeInfoHook                    
+(NORMAL      ) IterTimerHook                      
+(BELOW_NORMAL) LoggerHook                         
+(LOW         ) ParamSchedulerHook                 
+(VERY_LOW    ) CheckpointHook                     
+ -------------------- 
+after_val:
+(VERY_HIGH   ) RuntimeInfoHook                    
+ -------------------- 
+after_train:
+(VERY_HIGH   ) RuntimeInfoHook                    
+(VERY_LOW    ) CheckpointHook                     
+ -------------------- 
+before_test:
+(VERY_HIGH   ) RuntimeInfoHook                    
+ -------------------- 
+before_test_epoch:
+(NORMAL      ) IterTimerHook                      
+ -------------------- 
+before_test_iter:
+(NORMAL      ) IterTimerHook                      
+ -------------------- 
+after_test_iter:
+(NORMAL      ) IterTimerHook                      
+(NORMAL      ) SegVisualizationHook               
+(BELOW_NORMAL) LoggerHook                         
+ -------------------- 
+after_test_epoch:
+(VERY_HIGH   ) RuntimeInfoHook                    
+(NORMAL      ) IterTimerHook                      
+(BELOW_NORMAL) LoggerHook                         
+ -------------------- 
+after_test:
+(VERY_HIGH   ) RuntimeInfoHook                    
+ -------------------- 
+after_run:
+(BELOW_NORMAL) LoggerHook                         
+ -------------------- 
+08/22 00:40:16 - mmengine - WARNING - image_encoder.cls_token is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - INFO - paramwise_options -- image_encoder.pos_embed:lr=1e-05
+08/22 00:40:16 - mmengine - INFO - paramwise_options -- image_encoder.pos_embed:weight_decay=0.0
+08/22 00:40:16 - mmengine - INFO - paramwise_options -- image_encoder.pos_embed:decay_mult=0.0
+08/22 00:40:16 - mmengine - WARNING - image_encoder.patch_embed.projection.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.ln_pre.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.ln_pre.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.0.ln1.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.0.ln1.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.0.attn.attn.in_proj_weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.0.attn.attn.in_proj_bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.0.attn.attn.out_proj.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.0.attn.attn.out_proj.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.0.ln2.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.0.ln2.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.0.ffn.layers.0.0.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.0.ffn.layers.0.0.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.0.ffn.layers.1.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.0.ffn.layers.1.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.1.ln1.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.1.ln1.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.1.attn.attn.in_proj_weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.1.attn.attn.in_proj_bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.1.attn.attn.out_proj.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.1.attn.attn.out_proj.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.1.ln2.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.1.ln2.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.1.ffn.layers.0.0.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.1.ffn.layers.0.0.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.1.ffn.layers.1.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.1.ffn.layers.1.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.2.ln1.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.2.ln1.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.2.attn.attn.in_proj_weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.2.attn.attn.in_proj_bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.2.attn.attn.out_proj.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.2.attn.attn.out_proj.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.2.ln2.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.2.ln2.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.2.ffn.layers.0.0.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.2.ffn.layers.0.0.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.2.ffn.layers.1.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.2.ffn.layers.1.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.3.ln1.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.3.ln1.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.3.attn.attn.in_proj_weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.3.attn.attn.in_proj_bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.3.attn.attn.out_proj.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.3.attn.attn.out_proj.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.3.ln2.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.3.ln2.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.3.ffn.layers.0.0.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.3.ffn.layers.0.0.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.3.ffn.layers.1.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.3.ffn.layers.1.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.4.ln1.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.4.ln1.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.4.attn.attn.in_proj_weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.4.attn.attn.in_proj_bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.4.attn.attn.out_proj.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.4.attn.attn.out_proj.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.4.ln2.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.4.ln2.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.4.ffn.layers.0.0.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.4.ffn.layers.0.0.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.4.ffn.layers.1.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.4.ffn.layers.1.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.5.ln1.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.5.ln1.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.5.attn.attn.in_proj_weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.5.attn.attn.in_proj_bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.5.attn.attn.out_proj.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.5.attn.attn.out_proj.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.5.ln2.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.5.ln2.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.5.ffn.layers.0.0.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.5.ffn.layers.0.0.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.5.ffn.layers.1.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.5.ffn.layers.1.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.6.ln1.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.6.ln1.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.6.attn.attn.in_proj_weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.6.attn.attn.in_proj_bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.6.attn.attn.out_proj.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.6.attn.attn.out_proj.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.6.ln2.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.6.ln2.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.6.ffn.layers.0.0.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.6.ffn.layers.0.0.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.6.ffn.layers.1.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.6.ffn.layers.1.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.7.ln1.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.7.ln1.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.7.attn.attn.in_proj_weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.7.attn.attn.in_proj_bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.7.attn.attn.out_proj.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.7.attn.attn.out_proj.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.7.ln2.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.7.ln2.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.7.ffn.layers.0.0.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.7.ffn.layers.0.0.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.7.ffn.layers.1.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.7.ffn.layers.1.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.8.ln1.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.8.ln1.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.8.attn.attn.in_proj_weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.8.attn.attn.in_proj_bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.8.attn.attn.out_proj.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.8.attn.attn.out_proj.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.8.ln2.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.8.ln2.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.8.ffn.layers.0.0.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.8.ffn.layers.0.0.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.8.ffn.layers.1.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - image_encoder.layers.8.ffn.layers.1.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.positional_embedding is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.text_projection is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.logit_scale is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.token_embedding.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.0.attentions.0.attn.in_proj_weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.0.attentions.0.attn.in_proj_bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.0.attentions.0.attn.out_proj.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.0.attentions.0.attn.out_proj.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.0.ffns.0.layers.0.0.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.0.ffns.0.layers.0.0.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.0.ffns.0.layers.1.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.0.ffns.0.layers.1.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.0.norms.0.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.0.norms.0.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.0.norms.1.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.0.norms.1.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.1.attentions.0.attn.in_proj_weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.1.attentions.0.attn.in_proj_bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.1.attentions.0.attn.out_proj.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.1.attentions.0.attn.out_proj.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.1.ffns.0.layers.0.0.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.1.ffns.0.layers.0.0.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.1.ffns.0.layers.1.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.1.ffns.0.layers.1.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.1.norms.0.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.1.norms.0.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.1.norms.1.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.1.norms.1.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.2.attentions.0.attn.in_proj_weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.2.attentions.0.attn.in_proj_bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.2.attentions.0.attn.out_proj.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.2.attentions.0.attn.out_proj.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.2.ffns.0.layers.0.0.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.2.ffns.0.layers.0.0.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.2.ffns.0.layers.1.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.2.ffns.0.layers.1.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.2.norms.0.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.2.norms.0.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.2.norms.1.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.2.norms.1.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.3.attentions.0.attn.in_proj_weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.3.attentions.0.attn.in_proj_bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.3.attentions.0.attn.out_proj.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.3.attentions.0.attn.out_proj.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.3.ffns.0.layers.0.0.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.3.ffns.0.layers.0.0.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.3.ffns.0.layers.1.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.3.ffns.0.layers.1.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.3.norms.0.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.3.norms.0.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.3.norms.1.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.3.norms.1.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.4.attentions.0.attn.in_proj_weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.4.attentions.0.attn.in_proj_bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.4.attentions.0.attn.out_proj.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.4.attentions.0.attn.out_proj.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.4.ffns.0.layers.0.0.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.4.ffns.0.layers.0.0.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.4.ffns.0.layers.1.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.4.ffns.0.layers.1.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.4.norms.0.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.4.norms.0.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.4.norms.1.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.4.norms.1.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.5.attentions.0.attn.in_proj_weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.5.attentions.0.attn.in_proj_bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.5.attentions.0.attn.out_proj.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.5.attentions.0.attn.out_proj.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.5.ffns.0.layers.0.0.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.5.ffns.0.layers.0.0.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.5.ffns.0.layers.1.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.5.ffns.0.layers.1.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.5.norms.0.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.5.norms.0.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.5.norms.1.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.5.norms.1.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.6.attentions.0.attn.in_proj_weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.6.attentions.0.attn.in_proj_bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.6.attentions.0.attn.out_proj.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.6.attentions.0.attn.out_proj.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.6.ffns.0.layers.0.0.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.6.ffns.0.layers.0.0.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.6.ffns.0.layers.1.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.6.ffns.0.layers.1.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.6.norms.0.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.6.norms.0.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.6.norms.1.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.6.norms.1.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.7.attentions.0.attn.in_proj_weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.7.attentions.0.attn.in_proj_bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.7.attentions.0.attn.out_proj.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.7.attentions.0.attn.out_proj.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.7.ffns.0.layers.0.0.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.7.ffns.0.layers.0.0.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.7.ffns.0.layers.1.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.7.ffns.0.layers.1.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.7.norms.0.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.7.norms.0.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.7.norms.1.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.7.norms.1.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.8.attentions.0.attn.in_proj_weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.8.attentions.0.attn.in_proj_bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.8.attentions.0.attn.out_proj.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.8.attentions.0.attn.out_proj.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.8.ffns.0.layers.0.0.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.8.ffns.0.layers.0.0.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.8.ffns.0.layers.1.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.8.ffns.0.layers.1.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.8.norms.0.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.8.norms.0.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.8.norms.1.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.8.norms.1.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.9.attentions.0.attn.in_proj_weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.9.attentions.0.attn.in_proj_bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.9.attentions.0.attn.out_proj.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.9.attentions.0.attn.out_proj.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.9.ffns.0.layers.0.0.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.9.ffns.0.layers.0.0.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.9.ffns.0.layers.1.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.9.ffns.0.layers.1.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.9.norms.0.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.9.norms.0.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.9.norms.1.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.9.norms.1.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.10.attentions.0.attn.in_proj_weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.10.attentions.0.attn.in_proj_bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.10.attentions.0.attn.out_proj.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.10.attentions.0.attn.out_proj.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.10.ffns.0.layers.0.0.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.10.ffns.0.layers.0.0.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.10.ffns.0.layers.1.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.10.ffns.0.layers.1.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.10.norms.0.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.10.norms.0.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.10.norms.1.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.10.norms.1.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.11.attentions.0.attn.in_proj_weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.11.attentions.0.attn.in_proj_bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.11.attentions.0.attn.out_proj.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.11.attentions.0.attn.out_proj.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.11.ffns.0.layers.0.0.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.11.ffns.0.layers.0.0.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.11.ffns.0.layers.1.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.11.ffns.0.layers.1.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.11.norms.0.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.11.norms.0.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.11.norms.1.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.transformer.11.norms.1.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.ln_final.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - text_encoder.ln_final.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - INFO - paramwise_options -- decode_head.side_adapter_network.pos_embed:lr=1e-05
+08/22 00:40:16 - mmengine - INFO - paramwise_options -- decode_head.side_adapter_network.pos_embed:weight_decay=0.0
+08/22 00:40:16 - mmengine - INFO - paramwise_options -- decode_head.side_adapter_network.pos_embed:decay_mult=0.0
+08/22 00:40:16 - mmengine - INFO - paramwise_options -- decode_head.side_adapter_network.query_pos_embed:lr=1e-05
+08/22 00:40:16 - mmengine - INFO - paramwise_options -- decode_head.side_adapter_network.query_pos_embed:weight_decay=0.0
+08/22 00:40:16 - mmengine - INFO - paramwise_options -- decode_head.side_adapter_network.query_pos_embed:decay_mult=0.0
+08/22 00:40:16 - mmengine - WARNING - decode_head.rec_with_attnbias.layers.0.attentions.0.attn.in_proj_weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - decode_head.rec_with_attnbias.layers.0.attentions.0.attn.in_proj_bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - decode_head.rec_with_attnbias.layers.0.attentions.0.attn.out_proj.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - decode_head.rec_with_attnbias.layers.0.attentions.0.attn.out_proj.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - decode_head.rec_with_attnbias.layers.0.ffns.0.layers.0.0.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - decode_head.rec_with_attnbias.layers.0.ffns.0.layers.0.0.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - decode_head.rec_with_attnbias.layers.0.ffns.0.layers.1.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - decode_head.rec_with_attnbias.layers.0.ffns.0.layers.1.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - decode_head.rec_with_attnbias.layers.0.norms.0.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - decode_head.rec_with_attnbias.layers.0.norms.0.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - decode_head.rec_with_attnbias.layers.0.norms.1.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - decode_head.rec_with_attnbias.layers.0.norms.1.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - decode_head.rec_with_attnbias.layers.1.attentions.0.attn.in_proj_weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - decode_head.rec_with_attnbias.layers.1.attentions.0.attn.in_proj_bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - decode_head.rec_with_attnbias.layers.1.attentions.0.attn.out_proj.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - decode_head.rec_with_attnbias.layers.1.attentions.0.attn.out_proj.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - decode_head.rec_with_attnbias.layers.1.ffns.0.layers.0.0.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - decode_head.rec_with_attnbias.layers.1.ffns.0.layers.0.0.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - decode_head.rec_with_attnbias.layers.1.ffns.0.layers.1.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - decode_head.rec_with_attnbias.layers.1.ffns.0.layers.1.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - decode_head.rec_with_attnbias.layers.1.norms.0.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - decode_head.rec_with_attnbias.layers.1.norms.0.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - decode_head.rec_with_attnbias.layers.1.norms.1.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - decode_head.rec_with_attnbias.layers.1.norms.1.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - decode_head.rec_with_attnbias.layers.2.attentions.0.attn.in_proj_weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - decode_head.rec_with_attnbias.layers.2.attentions.0.attn.in_proj_bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - decode_head.rec_with_attnbias.layers.2.attentions.0.attn.out_proj.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - decode_head.rec_with_attnbias.layers.2.attentions.0.attn.out_proj.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - decode_head.rec_with_attnbias.layers.2.ffns.0.layers.0.0.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - decode_head.rec_with_attnbias.layers.2.ffns.0.layers.0.0.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - decode_head.rec_with_attnbias.layers.2.ffns.0.layers.1.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - decode_head.rec_with_attnbias.layers.2.ffns.0.layers.1.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - decode_head.rec_with_attnbias.layers.2.norms.0.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - decode_head.rec_with_attnbias.layers.2.norms.0.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - decode_head.rec_with_attnbias.layers.2.norms.1.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - decode_head.rec_with_attnbias.layers.2.norms.1.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - decode_head.rec_with_attnbias.ln_post.weight is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - decode_head.rec_with_attnbias.ln_post.bias is skipped since its requires_grad=False
+08/22 00:40:16 - mmengine - WARNING - decode_head.rec_with_attnbias.proj.weight is skipped since its requires_grad=False
+08/22 00:40:17 - mmengine - WARNING - The prefix is not set in metric class IoUMetric.
+Loads checkpoint by local backend from path: /home/01/raithan/mmsegmentation/data/coco_stuff164k/clip_vit-base-patch16-224_3rdparty-d08f8887.pth
+Loads checkpoint by local backend from path: /home/01/raithan/mmsegmentation/data/coco_stuff164k/clip_vit-base-patch16-224_3rdparty-d08f8887.pth
+The model and loaded state dict do not match exactly
+
+missing keys in source state_dict: bg_embed
+
+Loads checkpoint by local backend from path: /home/01/raithan/mmsegmentation/data/coco_stuff164k/clip_vit-base-patch16-224_3rdparty-d08f8887.pth
+08/22 00:40:19 - mmengine - WARNING - "FileClient" will be deprecated in future. Please use io functions in https://mmengine.readthedocs.io/en/latest/api/fileio.html#file-io
+08/22 00:40:19 - mmengine - WARNING - "HardDiskBackend" is the alias of "LocalBackend" and the former will be deprecated in future.
+08/22 00:40:19 - mmengine - INFO - Checkpoints will be saved to /home/01/raithan/mmsegmentation/work_dirs/san-vit-b16_coco-stuff164k-640x640.
+/root/miniconda3/envs/wyc_mmlab2/lib/python3.9/site-packages/mmcv/cnn/bricks/transformer.py:819: UserWarning: Use same attn_mask in all attentions in BaseTransformerLayer 
+  warnings.warn(f'Use same attn_mask in all attentions in '
+/root/miniconda3/envs/wyc_mmlab2/lib/python3.9/site-packages/torch/autograd/__init__.py:251: UserWarning: Grad strides do not match bucket view strides. This may indicate grad was not created according to the gradient layout contract, or that the param's strides changed since DDP was constructed.  This is not an error, but may impair performance.
+grad.sizes() = [3072, 256, 1, 1], strides() = [256, 1, 256, 256]
+bucket_view.sizes() = [3072, 256, 1, 1], strides() = [256, 1, 1, 1] (Triggered internally at ../torch/csrc/distributed/c10d/reducer.cpp:320.)
+  Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+TCAPPDLL 2025-08-22 00:40:21.094223 - Epoch: 0 Iteration: 0  rank : 0  train.loss : 83.53414154052734  train.ips : 4.754911649681144 imgs/s train.total_time : 1.6824707984924316 
+TCAPPDLL 2025-08-22 00:40:21.353839 - Epoch: 0 Iteration: 1  rank : 0  train.loss : 95.0344467163086  train.ips : 30.829447927165745 imgs/s train.total_time : 0.2594921588897705 
+TCAPPDLL 2025-08-22 00:40:21.664341 - Epoch: 0 Iteration: 2  rank : 0  train.loss : 94.12641143798828  train.ips : 25.773175319702624 imgs/s train.total_time : 0.31040024757385254 
+TCAPPDLL 2025-08-22 00:40:21.915456 - Epoch: 0 Iteration: 3  rank : 0  train.loss : 93.0379638671875  train.ips : 31.87097521800952 imgs/s train.total_time : 0.25101208686828613 
+TCAPPDLL 2025-08-22 00:40:22.203442 - Epoch: 0 Iteration: 4  rank : 0  train.loss : 87.9595718383789  train.ips : 27.789293052600545 imgs/s train.total_time : 0.28788065910339355 
+TCAPPDLL 2025-08-22 00:40:22.461556 - Epoch: 0 Iteration: 5  rank : 0  train.loss : 90.84843444824219  train.ips : 31.006847403623485 imgs/s train.total_time : 0.2580075263977051 
+TCAPPDLL 2025-08-22 00:40:22.695912 - Epoch: 0 Iteration: 6  rank : 0  train.loss : 97.37467956542969  train.ips : 34.15233696321501 imgs/s train.total_time : 0.23424458503723145 
+TCAPPDLL 2025-08-22 00:40:22.950868 - Epoch: 0 Iteration: 7  rank : 0  train.loss : 87.2706527709961  train.ips : 31.392141306788414 imgs/s train.total_time : 0.2548408508300781 
+TCAPPDLL 2025-08-22 00:40:23.212775 - Epoch: 0 Iteration: 8  rank : 0  train.loss : 94.042724609375  train.ips : 30.560287802545595 imgs/s train.total_time : 0.2617776393890381 
+TCAPPDLL 2025-08-22 00:40:23.486368 - Epoch: 0 Iteration: 9  rank : 0  train.loss : 93.54276275634766  train.ips : 29.25188869884211 imgs/s train.total_time : 0.2734866142272949 
+TCAPPDLL 2025-08-22 00:40:23.748686 - Epoch: 0 Iteration: 10  rank : 0  train.loss : 93.5530014038086  train.ips : 30.509964665853175 imgs/s train.total_time : 0.262209415435791 
+TCAPPDLL 2025-08-22 00:40:24.009158 - Epoch: 0 Iteration: 11  rank : 0  train.loss : 91.40928649902344  train.ips : 30.72575732879635 imgs/s train.total_time : 0.26036787033081055 
+TCAPPDLL 2025-08-22 00:40:24.277111 - Epoch: 0 Iteration: 12  rank : 0  train.loss : 86.871337890625  train.ips : 29.86779084092317 imgs/s train.total_time : 0.26784706115722656 
+TCAPPDLL 2025-08-22 00:40:24.540681 - Epoch: 0 Iteration: 13  rank : 0  train.loss : 89.28987121582031  train.ips : 30.36454541094409 imgs/s train.total_time : 0.26346516609191895 
+TCAPPDLL 2025-08-22 00:40:24.806182 - Epoch: 0 Iteration: 14  rank : 0  train.loss : 87.4222183227539  train.ips : 30.143566838011633 imgs/s train.total_time : 0.2653965950012207 
+TCAPPDLL 2025-08-22 00:40:25.068442 - Epoch: 0 Iteration: 15  rank : 0  train.loss : 88.7939682006836  train.ips : 30.51584704621972 imgs/s train.total_time : 0.2621588706970215 
+TCAPPDLL 2025-08-22 00:40:25.333171 - Epoch: 0 Iteration: 16  rank : 0  train.loss : 94.27342224121094  train.ips : 30.232241242142234 imgs/s train.total_time : 0.2646181583404541 
+TCAPPDLL 2025-08-22 00:40:25.594304 - Epoch: 0 Iteration: 17  rank : 0  train.loss : 87.79174041748047  train.ips : 30.647851097605308 imgs/s train.total_time : 0.2610297203063965 
+TCAPPDLL 2025-08-22 00:40:25.857320 - Epoch: 0 Iteration: 18  rank : 0  train.loss : 88.35124969482422  train.ips : 30.428511058917415 imgs/s train.total_time : 0.262911319732666 
+TCAPPDLL 2025-08-22 00:40:26.120131 - Epoch: 0 Iteration: 19  rank : 0  train.loss : 90.60491180419922  train.ips : 30.45187333693928 imgs/s train.total_time : 0.2627096176147461 
+TCAPPDLL 2025-08-22 00:40:26.381430 - Epoch: 0 Iteration: 20  rank : 0  train.loss : 71.97103881835938  train.ips : 30.628212570969566 imgs/s train.total_time : 0.2611970901489258 
+TCAPPDLL 2025-08-22 00:40:26.650056 - Epoch: 0 Iteration: 21  rank : 0  train.loss : 86.87803649902344  train.ips : 29.792846754473665 imgs/s train.total_time : 0.2685208320617676 
+TCAPPDLL 2025-08-22 00:40:26.927082 - Epoch: 0 Iteration: 22  rank : 0  train.loss : 81.8848876953125  train.ips : 28.890768573750844 imgs/s train.total_time : 0.2769050598144531 
+TCAPPDLL 2025-08-22 00:40:27.197100 - Epoch: 0 Iteration: 23  rank : 0  train.loss : 74.9072265625  train.ips : 29.64067700787958 imgs/s train.total_time : 0.2698993682861328 
+TCAPPDLL 2025-08-22 00:40:27.457918 - Epoch: 0 Iteration: 24  rank : 0  train.loss : 91.5331039428711  train.ips : 30.685997053435965 imgs/s train.total_time : 0.26070523262023926 
+TCAPPDLL 2025-08-22 00:40:27.717117 - Epoch: 0 Iteration: 25  rank : 0  train.loss : 82.84248352050781  train.ips : 30.876739405294085 imgs/s train.total_time : 0.2590947151184082 
+TCAPPDLL 2025-08-22 00:40:27.988377 - Epoch: 0 Iteration: 26  rank : 0  train.loss : 85.43293762207031  train.ips : 29.510932554218627 imgs/s train.total_time : 0.2710859775543213 
+TCAPPDLL 2025-08-22 00:40:28.254470 - Epoch: 0 Iteration: 27  rank : 0  train.loss : 85.0902328491211  train.ips : 30.090503507703676 imgs/s train.total_time : 0.26586461067199707 
+TCAPPDLL 2025-08-22 00:40:28.516115 - Epoch: 0 Iteration: 28  rank : 0  train.loss : 79.55796813964844  train.ips : 30.58814649376695 imgs/s train.total_time : 0.2615392208099365 
+TCAPPDLL 2025-08-22 00:40:28.780712 - Epoch: 0 Iteration: 29  rank : 0  train.loss : 91.93443298339844  train.ips : 30.24769363629316 imgs/s train.total_time : 0.2644829750061035 
+TCAPPDLL 2025-08-22 00:40:29.046450 - Epoch: 0 Iteration: 30  rank : 0  train.loss : 93.47620391845703  train.ips : 30.12132397825447 imgs/s train.total_time : 0.2655925750732422 
+TCAPPDLL 2025-08-22 00:40:29.305813 - Epoch: 0 Iteration: 31  rank : 0  train.loss : 83.30773162841797  train.ips : 30.860126900682143 imgs/s train.total_time : 0.2592341899871826 
+TCAPPDLL 2025-08-22 00:40:29.566553 - Epoch: 0 Iteration: 32  rank : 0  train.loss : 88.99153137207031  train.ips : 30.694446273976013 imgs/s train.total_time : 0.2606334686279297 
+TCAPPDLL 2025-08-22 00:40:29.828407 - Epoch: 0 Iteration: 33  rank : 0  train.loss : 85.87284851074219  train.ips : 30.564908832046378 imgs/s train.total_time : 0.2617380619049072 
+TCAPPDLL 2025-08-22 00:40:30.094513 - Epoch: 0 Iteration: 34  rank : 0  train.loss : 82.80411529541016  train.ips : 30.07920138839087 imgs/s train.total_time : 0.2659645080566406 
+TCAPPDLL 2025-08-22 00:40:30.372396 - Epoch: 0 Iteration: 35  rank : 0  train.loss : 80.46101379394531  train.ips : 28.802952878412658 imgs/s train.total_time : 0.27774930000305176 
+TCAPPDLL 2025-08-22 00:40:30.641551 - Epoch: 0 Iteration: 36  rank : 0  train.loss : 85.11554718017578  train.ips : 29.73821596044409 imgs/s train.total_time : 0.2690141201019287 
+TCAPPDLL 2025-08-22 00:40:30.918178 - Epoch: 0 Iteration: 37  rank : 0  train.loss : 86.74057006835938  train.ips : 28.93576332895833 imgs/s train.total_time : 0.2764744758605957 
+TCAPPDLL 2025-08-22 00:40:31.185035 - Epoch: 0 Iteration: 38  rank : 0  train.loss : 97.54090881347656  train.ips : 29.995496353190322 imgs/s train.total_time : 0.2667067050933838 
+TCAPPDLL 2025-08-22 00:40:31.452570 - Epoch: 0 Iteration: 39  rank : 0  train.loss : 89.5682601928711  train.ips : 29.918203468626594 imgs/s train.total_time : 0.2673957347869873 
+TCAPPDLL 2025-08-22 00:40:31.730150 - Epoch: 0 Iteration: 40  rank : 0  train.loss : 87.36396789550781  train.ips : 28.834040125151564 imgs/s train.total_time : 0.2774498462677002 
+TCAPPDLL 2025-08-22 00:40:31.995047 - Epoch: 0 Iteration: 41  rank : 0  train.loss : 83.6830062866211  train.ips : 30.21313156688646 imgs/s train.total_time : 0.2647855281829834 
+TCAPPDLL 2025-08-22 00:40:32.261933 - Epoch: 0 Iteration: 42  rank : 0  train.loss : 99.26004791259766  train.ips : 29.994316581939817 imgs/s train.total_time : 0.26671719551086426 
+TCAPPDLL 2025-08-22 00:40:32.535233 - Epoch: 0 Iteration: 43  rank : 0  train.loss : 90.63512420654297  train.ips : 29.286764654540377 imgs/s train.total_time : 0.2731609344482422 
+TCAPPDLL 2025-08-22 00:40:32.806438 - Epoch: 0 Iteration: 44  rank : 0  train.loss : 84.0866470336914  train.ips : 29.509349402591553 imgs/s train.total_time : 0.2711005210876465 
+TCAPPDLL 2025-08-22 00:40:33.077656 - Epoch: 0 Iteration: 45  rank : 0  train.loss : 84.67532348632812  train.ips : 29.50929749885672 imgs/s train.total_time : 0.2711009979248047 
+TCAPPDLL 2025-08-22 00:40:33.341208 - Epoch: 0 Iteration: 46  rank : 0  train.loss : 84.55408477783203  train.ips : 30.370839156281907 imgs/s train.total_time : 0.2634105682373047 
+TCAPPDLL 2025-08-22 00:40:33.619983 - Epoch: 0 Iteration: 47  rank : 0  train.loss : 82.83010864257812  train.ips : 28.71156602402896 imgs/s train.total_time : 0.27863335609436035 
+TCAPPDLL 2025-08-22 00:40:33.902912 - Epoch: 0 Iteration: 48  rank : 0  train.loss : 84.84765625  train.ips : 28.29081306584692 imgs/s train.total_time : 0.2827773094177246 
+TCAPPDLL 2025-08-22 00:40:34.174791 - Epoch: 0 Iteration: 49  rank : 0  train.loss : 81.29843139648438  train.ips : 29.440065136862867 imgs/s train.total_time : 0.27173852920532227 
+08/22 00:40:34 - mmengine - INFO - Iter(train) [ 50/100]  base_lr: 9.9918e-06 lr: 9.9918e-06  eta: 0:00:14  time: 0.2721  data_time: 0.0209  memory: 12942  grad_norm: 180.2894  loss: 86.3234  decode.loss_cls_ce: 36.8341  decode.loss_mask_ce: 1.7917  decode.loss_mask_dice: 4.4935  decode.d7.loss_cls_ce: 36.9097  decode.d7.loss_mask_ce: 1.8250  decode.d7.loss_mask_dice: 4.4694
+TCAPPDLL 2025-08-22 00:40:34.454478 - Epoch: 0 Iteration: 50  rank : 0  train.loss : 91.01345825195312  train.ips : 28.620195768694067 imgs/s train.total_time : 0.2795228958129883 
+TCAPPDLL 2025-08-22 00:40:34.725268 - Epoch: 0 Iteration: 51  rank : 0  train.loss : 88.04553985595703  train.ips : 29.556891924150563 imgs/s train.total_time : 0.2706644535064697 
+TCAPPDLL 2025-08-22 00:40:34.989423 - Epoch: 0 Iteration: 52  rank : 0  train.loss : 88.3205337524414  train.ips : 30.298030030366263 imgs/s train.total_time : 0.26404356956481934 
+TCAPPDLL 2025-08-22 00:40:35.254377 - Epoch: 0 Iteration: 53  rank : 0  train.loss : 83.13227081298828  train.ips : 30.206930201950094 imgs/s train.total_time : 0.26483988761901855 
+TCAPPDLL 2025-08-22 00:40:35.521202 - Epoch: 0 Iteration: 54  rank : 0  train.loss : 95.6576919555664  train.ips : 29.998124359103876 imgs/s train.total_time : 0.26668334007263184 
+TCAPPDLL 2025-08-22 00:40:35.785624 - Epoch: 0 Iteration: 55  rank : 0  train.loss : 93.07347106933594  train.ips : 30.268676373614973 imgs/s train.total_time : 0.2642996311187744 
+TCAPPDLL 2025-08-22 00:40:36.057531 - Epoch: 0 Iteration: 56  rank : 0  train.loss : 86.36325073242188  train.ips : 29.43577794932978 imgs/s train.total_time : 0.2717781066894531 
+TCAPPDLL 2025-08-22 00:40:36.322084 - Epoch: 0 Iteration: 57  rank : 0  train.loss : 86.35903930664062  train.ips : 30.253420754621715 imgs/s train.total_time : 0.2644329071044922 
+TCAPPDLL 2025-08-22 00:40:36.566299 - Epoch: 0 Iteration: 58  rank : 0  train.loss : 89.44403839111328  train.ips : 32.77702648580957 imgs/s train.total_time : 0.24407339096069336 
+TCAPPDLL 2025-08-22 00:40:36.837304 - Epoch: 0 Iteration: 59  rank : 0  train.loss : 74.01515197753906  train.ips : 29.533166514252823 imgs/s train.total_time : 0.27088189125061035 
+TCAPPDLL 2025-08-22 00:40:37.100357 - Epoch: 0 Iteration: 60  rank : 0  train.loss : 76.92627716064453  train.ips : 30.425282926824845 imgs/s train.total_time : 0.2629392147064209 
+TCAPPDLL 2025-08-22 00:40:37.363358 - Epoch: 0 Iteration: 61  rank : 0  train.loss : 82.47863006591797  train.ips : 30.431298288000768 imgs/s train.total_time : 0.26288723945617676 
+TCAPPDLL 2025-08-22 00:40:37.626298 - Epoch: 0 Iteration: 62  rank : 0  train.loss : 81.22675323486328  train.ips : 30.443198046086092 imgs/s train.total_time : 0.262784481048584 
+TCAPPDLL 2025-08-22 00:40:37.886527 - Epoch: 0 Iteration: 63  rank : 0  train.loss : 80.25907897949219  train.ips : 30.757611617966674 imgs/s train.total_time : 0.2600982189178467 
+TCAPPDLL 2025-08-22 00:40:38.149912 - Epoch: 0 Iteration: 64  rank : 0  train.loss : 82.57151794433594  train.ips : 30.385773186353834 imgs/s train.total_time : 0.26328110694885254 
+TCAPPDLL 2025-08-22 00:40:38.413716 - Epoch: 0 Iteration: 65  rank : 0  train.loss : 83.25296020507812  train.ips : 30.33761349108617 imgs/s train.total_time : 0.2636990547180176 
+TCAPPDLL 2025-08-22 00:40:38.679807 - Epoch: 0 Iteration: 66  rank : 0  train.loss : 70.99085998535156  train.ips : 30.081924988905673 imgs/s train.total_time : 0.26594042778015137 
+TCAPPDLL 2025-08-22 00:40:38.945155 - Epoch: 0 Iteration: 67  rank : 0  train.loss : 85.57207489013672  train.ips : 30.16299529771124 imgs/s train.total_time : 0.2652256488800049 
+TCAPPDLL 2025-08-22 00:40:39.213650 - Epoch: 0 Iteration: 68  rank : 0  train.loss : 89.86114501953125  train.ips : 29.807508901096558 imgs/s train.total_time : 0.2683887481689453 
+TCAPPDLL 2025-08-22 00:40:39.492033 - Epoch: 0 Iteration: 69  rank : 0  train.loss : 77.5910415649414  train.ips : 28.749154560915738 imgs/s train.total_time : 0.27826905250549316 
+TCAPPDLL 2025-08-22 00:40:39.757961 - Epoch: 0 Iteration: 70  rank : 0  train.loss : 84.85165405273438  train.ips : 30.09930291866368 imgs/s train.total_time : 0.26578688621520996 
+TCAPPDLL 2025-08-22 00:40:40.021383 - Epoch: 0 Iteration: 71  rank : 0  train.loss : 81.41571807861328  train.ips : 30.383544526160804 imgs/s train.total_time : 0.26330041885375977 
+TCAPPDLL 2025-08-22 00:40:40.301373 - Epoch: 0 Iteration: 72  rank : 0  train.loss : 85.5751724243164  train.ips : 28.58364958603905 imgs/s train.total_time : 0.2798802852630615 
+TCAPPDLL 2025-08-22 00:40:40.580292 - Epoch: 0 Iteration: 73  rank : 0  train.loss : 92.55671691894531  train.ips : 28.700514830347192 imgs/s train.total_time : 0.27874064445495605 
+TCAPPDLL 2025-08-22 00:40:40.847570 - Epoch: 0 Iteration: 74  rank : 0  train.loss : 81.88164520263672  train.ips : 29.950569788999104 imgs/s train.total_time : 0.2671067714691162 
+TCAPPDLL 2025-08-22 00:40:41.114569 - Epoch: 0 Iteration: 75  rank : 0  train.loss : 88.32015228271484  train.ips : 29.976818606579197 imgs/s train.total_time : 0.2668728828430176 
+TCAPPDLL 2025-08-22 00:40:41.377942 - Epoch: 0 Iteration: 76  rank : 0  train.loss : 88.28630065917969  train.ips : 30.38745177591422 imgs/s train.total_time : 0.26326656341552734 
+TCAPPDLL 2025-08-22 00:40:41.644575 - Epoch: 0 Iteration: 77  rank : 0  train.loss : 78.34520721435547  train.ips : 30.01562037357579 imgs/s train.total_time : 0.2665278911590576 
+TCAPPDLL 2025-08-22 00:40:41.918488 - Epoch: 0 Iteration: 78  rank : 0  train.loss : 73.33403015136719  train.ips : 29.224118950404815 imgs/s train.total_time : 0.2737464904785156 
+TCAPPDLL 2025-08-22 00:40:42.185813 - Epoch: 0 Iteration: 79  rank : 0  train.loss : 79.94062805175781  train.ips : 29.940708274143926 imgs/s train.total_time : 0.2671947479248047 
+TCAPPDLL 2025-08-22 00:40:42.454585 - Epoch: 0 Iteration: 80  rank : 0  train.loss : 85.4478988647461  train.ips : 29.777009860168594 imgs/s train.total_time : 0.2686636447906494 
+TCAPPDLL 2025-08-22 00:40:42.706392 - Epoch: 0 Iteration: 81  rank : 0  train.loss : 81.56171417236328  train.ips : 31.786137390811753 imgs/s train.total_time : 0.2516820430755615 
+TCAPPDLL 2025-08-22 00:40:42.980490 - Epoch: 0 Iteration: 82  rank : 0  train.loss : 83.67827606201172  train.ips : 29.20450812787709 imgs/s train.total_time : 0.27393031120300293 
+TCAPPDLL 2025-08-22 00:40:43.242375 - Epoch: 0 Iteration: 83  rank : 0  train.loss : 80.67031860351562  train.ips : 30.56304354954476 imgs/s train.total_time : 0.26175403594970703 
+TCAPPDLL 2025-08-22 00:40:43.506433 - Epoch: 0 Iteration: 84  rank : 0  train.loss : 72.77811431884766  train.ips : 30.30873065194456 imgs/s train.total_time : 0.2639503479003906 
+TCAPPDLL 2025-08-22 00:40:43.765269 - Epoch: 0 Iteration: 85  rank : 0  train.loss : 84.77008056640625  train.ips : 30.919816293282025 imgs/s train.total_time : 0.25873374938964844 
+TCAPPDLL 2025-08-22 00:40:44.025767 - Epoch: 0 Iteration: 86  rank : 0  train.loss : 78.33201599121094  train.ips : 30.722859641171436 imgs/s train.total_time : 0.260392427444458 
+TCAPPDLL 2025-08-22 00:40:44.292872 - Epoch: 0 Iteration: 87  rank : 0  train.loss : 77.2434310913086  train.ips : 29.970232013090484 imgs/s train.total_time : 0.26693153381347656 
+TCAPPDLL 2025-08-22 00:40:44.561107 - Epoch: 0 Iteration: 88  rank : 0  train.loss : 75.19412994384766  train.ips : 29.839105318573747 imgs/s train.total_time : 0.26810455322265625 
+TCAPPDLL 2025-08-22 00:40:44.826707 - Epoch: 0 Iteration: 89  rank : 0  train.loss : 80.73283386230469  train.ips : 30.132630720627034 imgs/s train.total_time : 0.26549291610717773 
+TCAPPDLL 2025-08-22 00:40:45.095198 - Epoch: 0 Iteration: 90  rank : 0  train.loss : 68.7020492553711  train.ips : 29.80925661713624 imgs/s train.total_time : 0.2683730125427246 
+TCAPPDLL 2025-08-22 00:40:45.363198 - Epoch: 0 Iteration: 91  rank : 0  train.loss : 75.88151550292969  train.ips : 29.866408422371837 imgs/s train.total_time : 0.26785945892333984 
+TCAPPDLL 2025-08-22 00:40:45.628560 - Epoch: 0 Iteration: 92  rank : 0  train.loss : 86.05465698242188  train.ips : 30.16174808963373 imgs/s train.total_time : 0.26523661613464355 
+TCAPPDLL 2025-08-22 00:40:45.898199 - Epoch: 0 Iteration: 93  rank : 0  train.loss : 78.11376190185547  train.ips : 29.68113316532463 imgs/s train.total_time : 0.2695314884185791 
+TCAPPDLL 2025-08-22 00:40:46.164275 - Epoch: 0 Iteration: 94  rank : 0  train.loss : 71.26344299316406  train.ips : 30.078554268708093 imgs/s train.total_time : 0.26597023010253906 
+TCAPPDLL 2025-08-22 00:40:46.433492 - Epoch: 0 Iteration: 95  rank : 0  train.loss : 76.34082794189453  train.ips : 29.7315230364502 imgs/s train.total_time : 0.2690746784210205 
+TCAPPDLL 2025-08-22 00:40:46.697088 - Epoch: 0 Iteration: 96  rank : 0  train.loss : 79.37663269042969  train.ips : 30.363034201182145 imgs/s train.total_time : 0.26347827911376953 
+TCAPPDLL 2025-08-22 00:40:46.958583 - Epoch: 0 Iteration: 97  rank : 0  train.loss : 71.56535339355469  train.ips : 30.605779395681825 imgs/s train.total_time : 0.26138854026794434 
+TCAPPDLL 2025-08-22 00:40:47.228518 - Epoch: 0 Iteration: 98  rank : 0  train.loss : 77.1338882446289  train.ips : 29.650368040153047 imgs/s train.total_time : 0.26981115341186523 
+TCAPPDLL 2025-08-22 00:40:47.498114 - Epoch: 0 Iteration: 99  rank : 0  train.loss : 72.4573974609375  train.ips : 29.690220156421574 imgs/s train.total_time : 0.26944899559020996 
+08/22 00:40:47 - mmengine - INFO - Iter(train) [100/100]  base_lr: 9.9835e-06 lr: 9.9835e-06  eta: 0:00:00  time: 0.2670  data_time: 0.0209  memory: 13071  grad_norm: 195.6825  loss: 75.6890  decode.loss_cls_ce: 31.6904  decode.loss_mask_ce: 1.5251  decode.loss_mask_dice: 4.3538  decode.d7.loss_cls_ce: 32.2241  decode.d7.loss_mask_ce: 1.5417  decode.d7.loss_mask_dice: 4.3538
+08/22 00:40:47 - mmengine - INFO - Saving checkpoint at 100 iterations
