@@ -1,0 +1,402 @@
+Namespace(attr_path='data/celeba/list_attr_celeba.txt', batch_size=16, beta1=0.5, beta2=0.999, c2_dim=8, c_dim=5, celeba_crop_size=178, celeba_image_dir='data/celeba/images', d_conv_dim=64, d_lr=0.0001, d_repeat_num=6, dataset='CelebA', g_conv_dim=64, g_lr=0.0001, g_repeat_num=6, image_size=128, lambda_cls=1, lambda_gp=10, lambda_rec=10, log_dir='stargan_celeba/logs', log_step=1, lr_update_step=1000, mode='train', model_save_dir='stargan_celeba/models', model_save_step=10000, n_critic=5, num_iters=150, num_iters_decay=100000, num_workers=1, rafd_crop_size=256, rafd_image_dir='data/RaFD/train', result_dir='stargan_celeba/results', resume_iters=None, sample_dir='stargan_celeba/samples', sample_step=1000, selected_attrs=['Black_Hair', 'Blond_Hair', 'Brown_Hair', 'Male', 'Young'], test_iters=200000, use_tensorboard=True)
+Finished preprocessing the CelebA dataset...
+Generator(
+  (main): Sequential(
+    (0): Conv2d(8, 64, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3), bias=False)
+    (1): InstanceNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (2): ReLU(inplace=True)
+    (3): Conv2d(64, 128, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1), bias=False)
+    (4): InstanceNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (5): ReLU(inplace=True)
+    (6): Conv2d(128, 256, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1), bias=False)
+    (7): InstanceNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (8): ReLU(inplace=True)
+    (9): ResidualBlock(
+      (main): Sequential(
+        (0): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (1): InstanceNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (4): InstanceNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (10): ResidualBlock(
+      (main): Sequential(
+        (0): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (1): InstanceNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (4): InstanceNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (11): ResidualBlock(
+      (main): Sequential(
+        (0): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (1): InstanceNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (4): InstanceNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (12): ResidualBlock(
+      (main): Sequential(
+        (0): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (1): InstanceNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (4): InstanceNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (13): ResidualBlock(
+      (main): Sequential(
+        (0): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (1): InstanceNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (4): InstanceNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (14): ResidualBlock(
+      (main): Sequential(
+        (0): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (1): InstanceNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (4): InstanceNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (15): ConvTranspose2d(256, 128, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1), bias=False)
+    (16): InstanceNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (17): ReLU(inplace=True)
+    (18): ConvTranspose2d(128, 64, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1), bias=False)
+    (19): InstanceNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (20): ReLU(inplace=True)
+    (21): Conv2d(64, 3, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3), bias=False)
+    (22): Tanh()
+  )
+)
+G
+The number of parameters: 8430528
+Discriminator(
+  (main): Sequential(
+    (0): Conv2d(3, 64, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1))
+    (1): LeakyReLU(negative_slope=0.01)
+    (2): Conv2d(64, 128, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1))
+    (3): LeakyReLU(negative_slope=0.01)
+    (4): Conv2d(128, 256, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1))
+    (5): LeakyReLU(negative_slope=0.01)
+    (6): Conv2d(256, 512, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1))
+    (7): LeakyReLU(negative_slope=0.01)
+    (8): Conv2d(512, 1024, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1))
+    (9): LeakyReLU(negative_slope=0.01)
+    (10): Conv2d(1024, 2048, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1))
+    (11): LeakyReLU(negative_slope=0.01)
+  )
+  (conv1): Conv2d(2048, 1, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+  (conv2): Conv2d(2048, 5, kernel_size=(2, 2), stride=(1, 1), bias=False)
+)
+D
+The number of parameters: 44762048
+Start training...
+Elapsed [0:00:01], Iteration [1/150], D/loss_real: -0.0010, D/loss_fake: 0.0007, D/loss_cls: 3.4686, D/loss_gp: 0.9955
+TCAPPDLL 2025-07-08 06:26:07.914391 - Epoch: 1 Iteration: 0  rank : 0  train.loss : 3.4685893058776855  train.ips : 12.1700933074416 imgs/s
+Elapsed [0:00:01], Iteration [2/150], D/loss_real: -0.0065, D/loss_fake: 0.0021, D/loss_cls: 3.4263, D/loss_gp: 0.9921
+TCAPPDLL 2025-07-08 06:26:07.956437 - Epoch: 1 Iteration: 1  rank : 0  train.loss : 3.426342010498047  train.ips : 11.792673868443828 imgs/s
+Elapsed [0:00:01], Iteration [3/150], D/loss_real: -0.0291, D/loss_fake: 0.0098, D/loss_cls: 3.3496, D/loss_gp: 0.9852
+TCAPPDLL 2025-07-08 06:26:07.996734 - Epoch: 1 Iteration: 2  rank : 0  train.loss : 3.349644184112549  train.ips : 11.452536615118287 imgs/s
+Elapsed [0:00:01], Iteration [4/150], D/loss_real: -0.1484, D/loss_fake: 0.0577, D/loss_cls: 3.0500, D/loss_gp: 0.9695
+TCAPPDLL 2025-07-08 06:26:08.463879 - Epoch: 1 Iteration: 3  rank : 0  train.loss : 3.049959659576416  train.ips : 8.582747605141398 imgs/s
+Elapsed [0:00:02], Iteration [5/150], D/loss_real: -0.6965, D/loss_fake: 0.3068, D/loss_cls: 2.7844, D/loss_gp: 0.9230, G/loss_fake: -1.1977, G/loss_rec: 0.5815, G/loss_cls: 2.5440
+TCAPPDLL 2025-07-08 06:26:08.736435 - Epoch: 1 Iteration: 4  rank : 0  train.loss : 2.784420967102051  train.ips : 7.487873868640764 imgs/s
+Elapsed [0:00:02], Iteration [6/150], D/loss_real: -2.4104, D/loss_fake: 1.5831, D/loss_cls: 3.0192, D/loss_gp: 0.7702
+TCAPPDLL 2025-07-08 06:26:08.774241 - Epoch: 1 Iteration: 5  rank : 0  train.loss : 3.0191898345947266  train.ips : 7.357730215281117 imgs/s
+Elapsed [0:00:02], Iteration [7/150], D/loss_real: -6.7885, D/loss_fake: 4.0619, D/loss_cls: 4.2211, D/loss_gp: 0.4280
+TCAPPDLL 2025-07-08 06:26:08.885728 - Epoch: 1 Iteration: 6  rank : 0  train.loss : 4.221117973327637  train.ips : 6.998911922453538 imgs/s
+Elapsed [0:00:02], Iteration [8/150], D/loss_real: -17.1485, D/loss_fake: 8.8842, D/loss_cls: 3.4956, D/loss_gp: 0.0265
+TCAPPDLL 2025-07-08 06:26:08.979576 - Epoch: 1 Iteration: 7  rank : 0  train.loss : 3.4956374168395996  train.ips : 6.7229217745608185 imgs/s
+Elapsed [0:00:02], Iteration [9/150], D/loss_real: -48.2958, D/loss_fake: 20.7384, D/loss_cls: 13.1144, D/loss_gp: 2.2575
+TCAPPDLL 2025-07-08 06:26:09.141432 - Epoch: 1 Iteration: 8  rank : 0  train.loss : 13.114408493041992  train.ips : 6.294793617603434 imgs/s
+Elapsed [0:00:02], Iteration [10/150], D/loss_real: -26.4621, D/loss_fake: 9.3060, D/loss_cls: 3.6253, D/loss_gp: 0.0998, G/loss_fake: -5.7718, G/loss_rec: 0.5532, G/loss_cls: 2.7852
+TCAPPDLL 2025-07-08 06:26:09.339187 - Epoch: 1 Iteration: 9  rank : 0  train.loss : 3.6253228187561035  train.ips : 5.840402957203334 imgs/s
+Elapsed [0:00:02], Iteration [11/150], D/loss_real: -20.2711, D/loss_fake: 9.6312, D/loss_cls: 6.2248, D/loss_gp: 0.0288
+TCAPPDLL 2025-07-08 06:26:09.376856 - Epoch: 1 Iteration: 10  rank : 0  train.loss : 6.224818706512451  train.ips : 5.761168688003183 imgs/s
+Elapsed [0:00:02], Iteration [12/150], D/loss_real: -19.0535, D/loss_fake: 6.9763, D/loss_cls: 4.2446, D/loss_gp: 0.0564
+TCAPPDLL 2025-07-08 06:26:09.449263 - Epoch: 1 Iteration: 11  rank : 0  train.loss : 4.244553565979004  train.ips : 5.614790567527638 imgs/s
+Elapsed [0:00:02], Iteration [13/150], D/loss_real: -26.5568, D/loss_fake: 5.7540, D/loss_cls: 7.7297, D/loss_gp: 0.2618
+TCAPPDLL 2025-07-08 06:26:09.547675 - Epoch: 1 Iteration: 12  rank : 0  train.loss : 7.729670524597168  train.ips : 5.427351435162877 imgs/s
+Elapsed [0:00:03], Iteration [14/150], D/loss_real: -26.7868, D/loss_fake: 2.9638, D/loss_cls: 7.9469, D/loss_gp: 0.4941
+TCAPPDLL 2025-07-08 06:26:09.689929 - Epoch: 1 Iteration: 13  rank : 0  train.loss : 7.946876525878906  train.ips : 5.17758299298372 imgs/s
+Elapsed [0:00:03], Iteration [15/150], D/loss_real: -30.2968, D/loss_fake: 0.2042, D/loss_cls: 6.7215, D/loss_gp: 1.1070, G/loss_fake: 0.0290, G/loss_rec: 0.4734, G/loss_cls: 3.2360
+TCAPPDLL 2025-07-08 06:26:09.845075 - Epoch: 1 Iteration: 14  rank : 0  train.loss : 6.72148323059082  train.ips : 4.930019426559466 imgs/s
+Elapsed [0:00:03], Iteration [16/150], D/loss_real: -19.8576, D/loss_fake: 5.8315, D/loss_cls: 4.1741, D/loss_gp: 0.2896
+TCAPPDLL 2025-07-08 06:26:09.896796 - Epoch: 1 Iteration: 15  rank : 0  train.loss : 4.174093246459961  train.ips : 4.852704721838994 imgs/s
+Elapsed [0:00:03], Iteration [17/150], D/loss_real: -20.8040, D/loss_fake: 2.8666, D/loss_cls: 4.7871, D/loss_gp: 0.1573
+TCAPPDLL 2025-07-08 06:26:10.039270 - Epoch: 1 Iteration: 16  rank : 0  train.loss : 4.787106990814209  train.ips : 4.651682418145016 imgs/s
+Elapsed [0:00:03], Iteration [18/150], D/loss_real: -32.0087, D/loss_fake: 1.9184, D/loss_cls: 5.3844, D/loss_gp: 0.7178
+TCAPPDLL 2025-07-08 06:26:10.173617 - Epoch: 1 Iteration: 17  rank : 0  train.loss : 5.384353160858154  train.ips : 4.476812706224723 imgs/s
+Elapsed [0:00:03], Iteration [19/150], D/loss_real: -23.7343, D/loss_fake: -2.1842, D/loss_cls: 3.4386, D/loss_gp: 0.6210
+TCAPPDLL 2025-07-08 06:26:10.267755 - Epoch: 1 Iteration: 18  rank : 0  train.loss : 3.438591718673706  train.ips : 4.361920613910908 imgs/s
+Elapsed [0:00:03], Iteration [20/150], D/loss_real: -52.4129, D/loss_fake: 7.4658, D/loss_cls: 5.2500, D/loss_gp: 1.9538, G/loss_fake: -1.9496, G/loss_rec: 0.4766, G/loss_cls: 3.1287
+TCAPPDLL 2025-07-08 06:26:10.443984 - Epoch: 1 Iteration: 19  rank : 0  train.loss : 5.249978065490723  train.ips : 4.161959591159777 imgs/s
+Elapsed [0:00:03], Iteration [21/150], D/loss_real: -43.6830, D/loss_fake: 16.4924, D/loss_cls: 6.2052, D/loss_gp: 1.7060
+TCAPPDLL 2025-07-08 06:26:10.487539 - Epoch: 1 Iteration: 20  rank : 0  train.loss : 6.205170631408691  train.ips : 4.1153305495460515 imgs/s
+Elapsed [0:00:04], Iteration [22/150], D/loss_real: -3.6781, D/loss_fake: -4.2289, D/loss_cls: 9.9058, D/loss_gp: 0.0171
+TCAPPDLL 2025-07-08 06:26:11.341992 - Epoch: 1 Iteration: 21  rank : 0  train.loss : 9.905769348144531  train.ips : 3.37386500902905 imgs/s
+Elapsed [0:00:04], Iteration [23/150], D/loss_real: 0.7898, D/loss_fake: -9.1076, D/loss_cls: 5.8690, D/loss_gp: 0.1022
+TCAPPDLL 2025-07-08 06:26:11.446220 - Epoch: 1 Iteration: 22  rank : 0  train.loss : 5.8690314292907715  train.ips : 3.301297952029179 imgs/s
+Elapsed [0:00:04], Iteration [24/150], D/loss_real: -13.1645, D/loss_fake: 0.4937, D/loss_cls: 4.6073, D/loss_gp: 0.0937
+TCAPPDLL 2025-07-08 06:26:11.551607 - Epoch: 1 Iteration: 23  rank : 0  train.loss : 4.607295989990234  train.ips : 3.2310377459097985 imgs/s
+Elapsed [0:00:05], Iteration [25/150], D/loss_real: -15.6104, D/loss_fake: -3.6904, D/loss_cls: 3.2718, D/loss_gp: 0.1678, G/loss_fake: 11.0964, G/loss_rec: 0.4426, G/loss_cls: 7.8446
+TCAPPDLL 2025-07-08 06:26:11.745150 - Epoch: 1 Iteration: 24  rank : 0  train.loss : 3.2717950344085693  train.ips : 3.1095144969956605 imgs/s
+Elapsed [0:00:05], Iteration [26/150], D/loss_real: -6.5612, D/loss_fake: 2.7687, D/loss_cls: 6.0252, D/loss_gp: 0.7308
+TCAPPDLL 2025-07-08 06:26:11.874300 - Epoch: 1 Iteration: 25  rank : 0  train.loss : 6.025168418884277  train.ips : 3.0333963105574195 imgs/s
+Elapsed [0:00:05], Iteration [27/150], D/loss_real: -14.8970, D/loss_fake: 5.4105, D/loss_cls: 3.7676, D/loss_gp: 0.0827
+TCAPPDLL 2025-07-08 06:26:12.036456 - Epoch: 1 Iteration: 26  rank : 0  train.loss : 3.767604351043701  train.ips : 2.9429314663374644 imgs/s
+Elapsed [0:00:05], Iteration [28/150], D/loss_real: -13.4211, D/loss_fake: 6.7142, D/loss_cls: 3.2310, D/loss_gp: 0.0168
+TCAPPDLL 2025-07-08 06:26:12.242164 - Epoch: 1 Iteration: 27  rank : 0  train.loss : 3.230956792831421  train.ips : 2.8356376430656436 imgs/s
+Elapsed [0:00:05], Iteration [29/150], D/loss_real: -22.5259, D/loss_fake: 9.3202, D/loss_cls: 2.5549, D/loss_gp: 0.0585
+TCAPPDLL 2025-07-08 06:26:12.438321 - Epoch: 1 Iteration: 28  rank : 0  train.loss : 2.5548973083496094  train.ips : 2.7403711442486616 imgs/s
+Elapsed [0:00:06], Iteration [30/150], D/loss_real: -27.1127, D/loss_fake: 11.9035, D/loss_cls: 2.7962, D/loss_gp: 0.2277, G/loss_fake: -13.2293, G/loss_rec: 0.4391, G/loss_cls: 3.1448
+TCAPPDLL 2025-07-08 06:26:12.665163 - Epoch: 1 Iteration: 29  rank : 0  train.loss : 2.7962350845336914  train.ips : 2.637868459289328 imgs/s
+Elapsed [0:00:06], Iteration [31/150], D/loss_real: -30.2965, D/loss_fake: 26.5676, D/loss_cls: 2.6108, D/loss_gp: 0.4390
+TCAPPDLL 2025-07-08 06:26:12.816678 - Epoch: 1 Iteration: 30  rank : 0  train.loss : 2.610762119293213  train.ips : 2.573578576143071 imgs/s
+Elapsed [0:00:06], Iteration [32/150], D/loss_real: -17.0198, D/loss_fake: 11.4697, D/loss_cls: 4.2349, D/loss_gp: 0.0155
+TCAPPDLL 2025-07-08 06:26:12.871413 - Epoch: 1 Iteration: 31  rank : 0  train.loss : 4.23494815826416  train.ips : 2.5511172569752625 imgs/s
+Elapsed [0:00:06], Iteration [33/150], D/loss_real: -13.6917, D/loss_fake: 6.8663, D/loss_cls: 5.5332, D/loss_gp: 0.0289
+TCAPPDLL 2025-07-08 06:26:12.988633 - Epoch: 1 Iteration: 32  rank : 0  train.loss : 5.533243656158447  train.ips : 2.504312707712018 imgs/s
+Elapsed [0:00:06], Iteration [34/150], D/loss_real: -20.3841, D/loss_fake: 10.3655, D/loss_cls: 4.7482, D/loss_gp: 0.0096
+TCAPPDLL 2025-07-08 06:26:13.094216 - Epoch: 1 Iteration: 33  rank : 0  train.loss : 4.748186111450195  train.ips : 2.4635943352156597 imgs/s
+Elapsed [0:00:06], Iteration [35/150], D/loss_real: -23.7912, D/loss_fake: 12.7589, D/loss_cls: 5.7451, D/loss_gp: 0.1084, G/loss_fake: -14.3199, G/loss_rec: 0.3676, G/loss_cls: 3.5946
+TCAPPDLL 2025-07-08 06:26:13.256716 - Epoch: 1 Iteration: 34  rank : 0  train.loss : 5.745086669921875  train.ips : 2.4034664367475074 imgs/s
+Elapsed [0:00:06], Iteration [36/150], D/loss_real: -27.9228, D/loss_fake: 21.7635, D/loss_cls: 5.3050, D/loss_gp: 0.2534
+TCAPPDLL 2025-07-08 06:26:13.315432 - Epoch: 1 Iteration: 35  rank : 0  train.loss : 5.305046081542969  train.ips : 2.3824435046731263 imgs/s
+Elapsed [0:00:06], Iteration [37/150], D/loss_real: -12.0942, D/loss_fake: 5.8337, D/loss_cls: 4.6249, D/loss_gp: 0.0120
+TCAPPDLL 2025-07-08 06:26:13.407253 - Epoch: 1 Iteration: 36  rank : 0  train.loss : 4.624895095825195  train.ips : 2.3503145117969853 imgs/s
+Elapsed [0:00:06], Iteration [38/150], D/loss_real: -6.4046, D/loss_fake: -5.6865, D/loss_cls: 3.6071, D/loss_gp: 0.0551
+TCAPPDLL 2025-07-08 06:26:13.478311 - Epoch: 1 Iteration: 37  rank : 0  train.loss : 3.6070961952209473  train.ips : 2.326036862086763 imgs/s
+Elapsed [0:00:07], Iteration [39/150], D/loss_real: -7.0027, D/loss_fake: -10.3785, D/loss_cls: 3.4925, D/loss_gp: 0.1772
+TCAPPDLL 2025-07-08 06:26:14.539610 - Epoch: 1 Iteration: 38  rank : 0  train.loss : 3.492504596710205  train.ips : 2.015134029851033 imgs/s
+Elapsed [0:00:08], Iteration [40/150], D/loss_real: -12.6041, D/loss_fake: -14.9749, D/loss_cls: 4.9868, D/loss_gp: 1.0259, G/loss_fake: 11.4527, G/loss_rec: 0.4297, G/loss_cls: 3.9976
+TCAPPDLL 2025-07-08 06:26:14.752468 - Epoch: 1 Iteration: 39  rank : 0  train.loss : 4.9867753982543945  train.ips : 1.9625113915172394 imgs/s
+Elapsed [0:00:08], Iteration [41/150], D/loss_real: -13.5029, D/loss_fake: -5.4649, D/loss_cls: 2.5319, D/loss_gp: 0.5547
+TCAPPDLL 2025-07-08 06:26:14.826564 - Epoch: 1 Iteration: 40  rank : 0  train.loss : 2.531864881515503  train.ips : 1.944833097255212 imgs/s
+Elapsed [0:00:08], Iteration [42/150], D/loss_real: -10.4082, D/loss_fake: -2.5572, D/loss_cls: 7.8138, D/loss_gp: 0.1371
+TCAPPDLL 2025-07-08 06:26:14.927189 - Epoch: 1 Iteration: 41  rank : 0  train.loss : 7.813787460327148  train.ips : 1.921332155339142 imgs/s
+Elapsed [0:00:08], Iteration [43/150], D/loss_real: -20.2812, D/loss_fake: 9.0573, D/loss_cls: 7.3034, D/loss_gp: 0.0485
+TCAPPDLL 2025-07-08 06:26:15.064811 - Epoch: 1 Iteration: 42  rank : 0  train.loss : 7.303391456604004  train.ips : 1.8901126620286444 imgs/s
+Elapsed [0:00:08], Iteration [44/150], D/loss_real: -16.3858, D/loss_fake: 5.6434, D/loss_cls: 5.1270, D/loss_gp: 0.0209
+TCAPPDLL 2025-07-08 06:26:15.181303 - Epoch: 1 Iteration: 43  rank : 0  train.loss : 5.126997947692871  train.ips : 1.8644464218733856 imgs/s
+Elapsed [0:00:08], Iteration [45/150], D/loss_real: -15.4953, D/loss_fake: -3.3311, D/loss_cls: 6.1825, D/loss_gp: 0.1071, G/loss_fake: 9.7344, G/loss_rec: 0.4158, G/loss_cls: 5.8409
+TCAPPDLL 2025-07-08 06:26:15.365234 - Epoch: 1 Iteration: 44  rank : 0  train.loss : 6.182541847229004  train.ips : 1.8253182978160436 imgs/s
+Elapsed [0:00:08], Iteration [46/150], D/loss_real: -8.1820, D/loss_fake: 3.5824, D/loss_cls: 3.5176, D/loss_gp: 0.1722
+TCAPPDLL 2025-07-08 06:26:15.435115 - Epoch: 1 Iteration: 45  rank : 0  train.loss : 3.5176050662994385  train.ips : 1.8108828806580186 imgs/s
+Elapsed [0:00:08], Iteration [47/150], D/loss_real: -11.4321, D/loss_fake: 2.3535, D/loss_cls: 2.0664, D/loss_gp: 0.1626
+TCAPPDLL 2025-07-08 06:26:15.540032 - Epoch: 1 Iteration: 46  rank : 0  train.loss : 2.0663952827453613  train.ips : 1.789639287842178 imgs/s
+Elapsed [0:00:09], Iteration [48/150], D/loss_real: -18.2142, D/loss_fake: 9.3301, D/loss_cls: 5.0905, D/loss_gp: 0.1659
+TCAPPDLL 2025-07-08 06:26:15.628895 - Epoch: 1 Iteration: 47  rank : 0  train.loss : 5.090472221374512  train.ips : 1.7720170040465304 imgs/s
+Elapsed [0:00:09], Iteration [49/150], D/loss_real: -21.4159, D/loss_fake: 9.4351, D/loss_cls: 3.3369, D/loss_gp: 0.0843
+TCAPPDLL 2025-07-08 06:26:15.753155 - Epoch: 1 Iteration: 48  rank : 0  train.loss : 3.3369078636169434  train.ips : 1.7479640146175086 imgs/s
+Elapsed [0:00:09], Iteration [50/150], D/loss_real: -22.7071, D/loss_fake: 11.6685, D/loss_cls: 2.7604, D/loss_gp: 0.1629, G/loss_fake: -14.3420, G/loss_rec: 0.5092, G/loss_cls: 2.5284
+TCAPPDLL 2025-07-08 06:26:15.928726 - Epoch: 1 Iteration: 49  rank : 0  train.loss : 2.7604241371154785  train.ips : 1.715066442890707 imgs/s
+Elapsed [0:00:09], Iteration [51/150], D/loss_real: -29.3249, D/loss_fake: 19.6036, D/loss_cls: 2.8459, D/loss_gp: 0.2894
+TCAPPDLL 2025-07-08 06:26:15.965727 - Epoch: 1 Iteration: 50  rank : 0  train.loss : 2.8458783626556396  train.ips : 1.7082896930603801 imgs/s
+Elapsed [0:00:09], Iteration [52/150], D/loss_real: -11.6449, D/loss_fake: 3.6948, D/loss_cls: 3.8072, D/loss_gp: 0.0804
+TCAPPDLL 2025-07-08 06:26:16.044108 - Epoch: 1 Iteration: 51  rank : 0  train.loss : 3.8072469234466553  train.ips : 1.6941119638389455 imgs/s
+Elapsed [0:00:09], Iteration [53/150], D/loss_real: -7.1802, D/loss_fake: -1.7860, D/loss_cls: 7.1790, D/loss_gp: 0.1223
+TCAPPDLL 2025-07-08 06:26:16.170128 - Epoch: 1 Iteration: 52  rank : 0  train.loss : 7.179018020629883  train.ips : 1.6718071642048344 imgs/s
+Elapsed [0:00:09], Iteration [54/150], D/loss_real: -16.1315, D/loss_fake: 5.2848, D/loss_cls: 6.9976, D/loss_gp: 0.0213
+TCAPPDLL 2025-07-08 06:26:16.319193 - Epoch: 1 Iteration: 53  rank : 0  train.loss : 6.997641086578369  train.ips : 1.646165714416493 imgs/s
+Elapsed [0:00:09], Iteration [55/150], D/loss_real: -22.3859, D/loss_fake: 13.3902, D/loss_cls: 4.5584, D/loss_gp: 0.0388, G/loss_fake: -11.1376, G/loss_rec: 0.4006, G/loss_cls: 4.5257
+TCAPPDLL 2025-07-08 06:26:16.506295 - Epoch: 1 Iteration: 54  rank : 0  train.loss : 4.558440208435059  train.ips : 1.6150785574175441 imgs/s
+Elapsed [0:00:10], Iteration [56/150], D/loss_real: -21.7842, D/loss_fake: 18.6805, D/loss_cls: 4.1776, D/loss_gp: 0.0178
+TCAPPDLL 2025-07-08 06:26:17.415351 - Epoch: 1 Iteration: 55  rank : 0  train.loss : 4.177568435668945  train.ips : 1.4793388568209411 imgs/s
+Elapsed [0:00:11], Iteration [57/150], D/loss_real: -19.2599, D/loss_fake: 14.6429, D/loss_cls: 3.5339, D/loss_gp: 0.0150
+TCAPPDLL 2025-07-08 06:26:17.626687 - Epoch: 1 Iteration: 56  rank : 0  train.loss : 3.533888816833496  train.ips : 1.4509857432345699 imgs/s
+Elapsed [0:00:11], Iteration [58/150], D/loss_real: -17.9173, D/loss_fake: 12.4186, D/loss_cls: 2.9943, D/loss_gp: 0.0250
+TCAPPDLL 2025-07-08 06:26:17.816957 - Epoch: 1 Iteration: 57  rank : 0  train.loss : 2.9942917823791504  train.ips : 1.4263662060728735 imgs/s
+Elapsed [0:00:11], Iteration [59/150], D/loss_real: -14.3277, D/loss_fake: 11.7136, D/loss_cls: 2.6086, D/loss_gp: 0.0776
+TCAPPDLL 2025-07-08 06:26:17.955385 - Epoch: 1 Iteration: 58  rank : 0  train.loss : 2.608647584915161  train.ips : 1.4089800684417721 imgs/s
+Elapsed [0:00:11], Iteration [60/150], D/loss_real: -12.3310, D/loss_fake: 7.1014, D/loss_cls: 3.1210, D/loss_gp: 0.0266, G/loss_fake: -8.0841, G/loss_rec: 0.4173, G/loss_cls: 2.9483
+TCAPPDLL 2025-07-08 06:26:18.111358 - Epoch: 1 Iteration: 59  rank : 0  train.loss : 3.121000289916992  train.ips : 1.3899205505396384 imgs/s
+Elapsed [0:00:11], Iteration [61/150], D/loss_real: -14.8233, D/loss_fake: 11.2874, D/loss_cls: 2.3792, D/loss_gp: 0.0088
+TCAPPDLL 2025-07-08 06:26:18.153927 - Epoch: 1 Iteration: 60  rank : 0  train.loss : 2.379213809967041  train.ips : 1.3847666936079297 imgs/s
+Elapsed [0:00:11], Iteration [62/150], D/loss_real: -17.7497, D/loss_fake: 14.0459, D/loss_cls: 3.2424, D/loss_gp: 0.0171
+TCAPPDLL 2025-07-08 06:26:18.259688 - Epoch: 1 Iteration: 61  rank : 0  train.loss : 3.2423558235168457  train.ips : 1.3722063416962864 imgs/s
+Elapsed [0:00:11], Iteration [63/150], D/loss_real: -16.3883, D/loss_fake: 8.9836, D/loss_cls: 2.8103, D/loss_gp: 0.0328
+TCAPPDLL 2025-07-08 06:26:18.394574 - Epoch: 1 Iteration: 62  rank : 0  train.loss : 2.810316801071167  train.ips : 1.3565168843325914 imgs/s
+Elapsed [0:00:11], Iteration [64/150], D/loss_real: -13.6015, D/loss_fake: 3.7475, D/loss_cls: 3.3075, D/loss_gp: 0.0977
+TCAPPDLL 2025-07-08 06:26:18.489871 - Epoch: 1 Iteration: 63  rank : 0  train.loss : 3.3075191974639893  train.ips : 1.3456467880265044 imgs/s
+Elapsed [0:00:12], Iteration [65/150], D/loss_real: -14.4239, D/loss_fake: 8.8635, D/loss_cls: 4.0876, D/loss_gp: 0.1010, G/loss_fake: -8.2415, G/loss_rec: 0.4280, G/loss_cls: 3.4807
+TCAPPDLL 2025-07-08 06:26:18.620587 - Epoch: 1 Iteration: 64  rank : 0  train.loss : 4.087557792663574  train.ips : 1.3310191336396375 imgs/s
+Elapsed [0:00:12], Iteration [66/150], D/loss_real: -14.1100, D/loss_fake: 17.7194, D/loss_cls: 2.3810, D/loss_gp: 0.1423
+TCAPPDLL 2025-07-08 06:26:18.658136 - Epoch: 1 Iteration: 65  rank : 0  train.loss : 2.381021022796631  train.ips : 1.3268644679215051 imgs/s
+Elapsed [0:00:12], Iteration [67/150], D/loss_real: -9.3429, D/loss_fake: 8.0935, D/loss_cls: 2.5596, D/loss_gp: 0.0120
+TCAPPDLL 2025-07-08 06:26:18.799149 - Epoch: 1 Iteration: 66  rank : 0  train.loss : 2.559561252593994  train.ips : 1.3115300234844263 imgs/s
+Elapsed [0:00:12], Iteration [68/150], D/loss_real: -5.9984, D/loss_fake: 2.8124, D/loss_cls: 2.8509, D/loss_gp: 0.0202
+TCAPPDLL 2025-07-08 06:26:18.910809 - Epoch: 1 Iteration: 67  rank : 0  train.loss : 2.8509275913238525  train.ips : 1.2996350521941769 imgs/s
+Elapsed [0:00:12], Iteration [69/150], D/loss_real: -0.7088, D/loss_fake: -2.3371, D/loss_cls: 4.2791, D/loss_gp: 0.0138
+TCAPPDLL 2025-07-08 06:26:19.013332 - Epoch: 1 Iteration: 68  rank : 0  train.loss : 4.279070854187012  train.ips : 1.2888999558739715 imgs/s
+Elapsed [0:00:12], Iteration [70/150], D/loss_real: -0.9871, D/loss_fake: -4.6887, D/loss_cls: 2.8609, D/loss_gp: 0.0815, G/loss_fake: 1.1166, G/loss_rec: 0.4200, G/loss_cls: 3.6145
+TCAPPDLL 2025-07-08 06:26:19.165221 - Epoch: 1 Iteration: 69  rank : 0  train.loss : 2.860922336578369  train.ips : 1.2733196184628892 imgs/s
+Elapsed [0:00:12], Iteration [71/150], D/loss_real: -7.3015, D/loss_fake: 4.2246, D/loss_cls: 3.9741, D/loss_gp: 0.0267
+TCAPPDLL 2025-07-08 06:26:19.202879 - Epoch: 1 Iteration: 70  rank : 0  train.loss : 3.974107265472412  train.ips : 1.269515542322725 imgs/s
+Elapsed [0:00:12], Iteration [72/150], D/loss_real: -12.1293, D/loss_fake: 5.7412, D/loss_cls: 3.2155, D/loss_gp: 0.0185
+TCAPPDLL 2025-07-08 06:26:19.298353 - Epoch: 1 Iteration: 71  rank : 0  train.loss : 3.215451240539551  train.ips : 1.2599697947590678 imgs/s
+Elapsed [0:00:12], Iteration [73/150], D/loss_real: -9.3632, D/loss_fake: 7.8341, D/loss_cls: 2.8338, D/loss_gp: 0.0309
+TCAPPDLL 2025-07-08 06:26:19.400841 - Epoch: 1 Iteration: 72  rank : 0  train.loss : 2.8337581157684326  train.ips : 1.2498822732888242 imgs/s
+Elapsed [0:00:12], Iteration [74/150], D/loss_real: -11.7128, D/loss_fake: 6.6087, D/loss_cls: 2.9541, D/loss_gp: 0.0100
+TCAPPDLL 2025-07-08 06:26:19.503737 - Epoch: 1 Iteration: 73  rank : 0  train.loss : 2.9541006088256836  train.ips : 1.2399156806112335 imgs/s
+Elapsed [0:00:13], Iteration [75/150], D/loss_real: -14.7646, D/loss_fake: 7.1380, D/loss_cls: 2.2324, D/loss_gp: 0.0658, G/loss_fake: -8.2684, G/loss_rec: 0.4330, G/loss_cls: 2.7881
+TCAPPDLL 2025-07-08 06:26:20.496818 - Epoch: 1 Iteration: 74  rank : 0  train.loss : 2.2323784828186035  train.ips : 1.151312962474814 imgs/s
+Elapsed [0:00:13], Iteration [76/150], D/loss_real: -18.5816, D/loss_fake: 10.2826, D/loss_cls: 3.3914, D/loss_gp: 0.1040
+TCAPPDLL 2025-07-08 06:26:20.545728 - Epoch: 1 Iteration: 75  rank : 0  train.loss : 3.3914337158203125  train.ips : 1.147274678174688 imgs/s
+Elapsed [0:00:14], Iteration [77/150], D/loss_real: -14.3642, D/loss_fake: 10.2902, D/loss_cls: 2.4813, D/loss_gp: 0.1079
+TCAPPDLL 2025-07-08 06:26:20.660056 - Epoch: 1 Iteration: 76  rank : 0  train.loss : 2.481266975402832  train.ips : 1.1379462247804186 imgs/s
+Elapsed [0:00:14], Iteration [78/150], D/loss_real: -9.4609, D/loss_fake: 3.8533, D/loss_cls: 2.4475, D/loss_gp: 0.0468
+TCAPPDLL 2025-07-08 06:26:20.761175 - Epoch: 1 Iteration: 77  rank : 0  train.loss : 2.4474730491638184  train.ips : 1.1298206433662201 imgs/s
+Elapsed [0:00:14], Iteration [79/150], D/loss_real: -7.9812, D/loss_fake: 0.4293, D/loss_cls: 3.0676, D/loss_gp: 0.0312
+TCAPPDLL 2025-07-08 06:26:20.851389 - Epoch: 1 Iteration: 78  rank : 0  train.loss : 3.0675582885742188  train.ips : 1.1226686769651806 imgs/s
+Elapsed [0:00:14], Iteration [80/150], D/loss_real: -11.2205, D/loss_fake: 2.6050, D/loss_cls: 2.7932, D/loss_gp: 0.1058, G/loss_fake: -3.2554, G/loss_rec: 0.3928, G/loss_cls: 2.8665
+TCAPPDLL 2025-07-08 06:26:20.995393 - Epoch: 1 Iteration: 79  rank : 0  train.loss : 2.793194055557251  train.ips : 1.1114393573781047 imgs/s
+Elapsed [0:00:14], Iteration [81/150], D/loss_real: -14.3459, D/loss_fake: 6.2308, D/loss_cls: 2.8397, D/loss_gp: 0.2222
+TCAPPDLL 2025-07-08 06:26:21.069886 - Epoch: 1 Iteration: 80  rank : 0  train.loss : 2.8396995067596436  train.ips : 1.1057168009171723 imgs/s
+Elapsed [0:00:14], Iteration [82/150], D/loss_real: -9.3167, D/loss_fake: 1.6529, D/loss_cls: 4.0317, D/loss_gp: 0.0810
+TCAPPDLL 2025-07-08 06:26:21.186682 - Epoch: 1 Iteration: 81  rank : 0  train.loss : 4.031746864318848  train.ips : 1.0968655217328107 imgs/s
+Elapsed [0:00:14], Iteration [83/150], D/loss_real: -8.5310, D/loss_fake: 0.6300, D/loss_cls: 3.5980, D/loss_gp: 0.0751
+TCAPPDLL 2025-07-08 06:26:21.282415 - Epoch: 1 Iteration: 82  rank : 0  train.loss : 3.5980377197265625  train.ips : 1.0897134665955355 imgs/s
+Elapsed [0:00:14], Iteration [84/150], D/loss_real: -5.4848, D/loss_fake: -4.1006, D/loss_cls: 3.5543, D/loss_gp: 0.0702
+TCAPPDLL 2025-07-08 06:26:21.398419 - Epoch: 1 Iteration: 83  rank : 0  train.loss : 3.5543019771575928  train.ips : 1.0811717399896963 imgs/s
+Elapsed [0:00:14], Iteration [85/150], D/loss_real: -5.4799, D/loss_fake: -3.0508, D/loss_cls: 3.0275, D/loss_gp: 0.1455, G/loss_fake: 1.1700, G/loss_rec: 0.4221, G/loss_cls: 3.1961
+TCAPPDLL 2025-07-08 06:26:21.535377 - Epoch: 1 Iteration: 84  rank : 0  train.loss : 3.0274693965911865  train.ips : 1.0712565602006494 imgs/s
+Elapsed [0:00:14], Iteration [86/150], D/loss_real: -7.5245, D/loss_fake: 1.0616, D/loss_cls: 3.9949, D/loss_gp: 0.0981
+TCAPPDLL 2025-07-08 06:26:21.582370 - Epoch: 1 Iteration: 85  rank : 0  train.loss : 3.994905948638916  train.ips : 1.067897112044481 imgs/s
+Elapsed [0:00:15], Iteration [87/150], D/loss_real: -7.8307, D/loss_fake: -0.6628, D/loss_cls: 2.8877, D/loss_gp: 0.1094
+TCAPPDLL 2025-07-08 06:26:21.700318 - Epoch: 1 Iteration: 86  rank : 0  train.loss : 2.8876514434814453  train.ips : 1.0595619187537029 imgs/s
+Elapsed [0:00:15], Iteration [88/150], D/loss_real: -6.3544, D/loss_fake: 4.2136, D/loss_cls: 2.7435, D/loss_gp: 0.1354
+TCAPPDLL 2025-07-08 06:26:21.799973 - Epoch: 1 Iteration: 87  rank : 0  train.loss : 2.743474006652832  train.ips : 1.0526123076820761 imgs/s
+Elapsed [0:00:15], Iteration [89/150], D/loss_real: -6.0386, D/loss_fake: -1.9653, D/loss_cls: 2.5593, D/loss_gp: 0.0543
+TCAPPDLL 2025-07-08 06:26:21.878810 - Epoch: 1 Iteration: 88  rank : 0  train.loss : 2.5592763423919678  train.ips : 1.0471779029644592 imgs/s
+Elapsed [0:00:15], Iteration [90/150], D/loss_real: -4.7476, D/loss_fake: -0.7458, D/loss_cls: 2.8737, D/loss_gp: 0.0874, G/loss_fake: 3.4595, G/loss_rec: 0.4198, G/loss_cls: 2.4771
+TCAPPDLL 2025-07-08 06:26:22.072673 - Epoch: 1 Iteration: 89  rank : 0  train.loss : 2.873748540878296  train.ips : 1.0340572863566198 imgs/s
+Elapsed [0:00:15], Iteration [91/150], D/loss_real: 3.3248, D/loss_fake: 3.9742, D/loss_cls: 2.7760, D/loss_gp: 0.0828
+TCAPPDLL 2025-07-08 06:26:22.145421 - Epoch: 1 Iteration: 90  rank : 0  train.loss : 2.7760009765625  train.ips : 1.0292185381423176 imgs/s
+Elapsed [0:00:15], Iteration [92/150], D/loss_real: -0.5740, D/loss_fake: -3.5575, D/loss_cls: 3.0033, D/loss_gp: 0.0097
+TCAPPDLL 2025-07-08 06:26:22.269382 - Epoch: 1 Iteration: 91  rank : 0  train.loss : 3.0033071041107178  train.ips : 1.021076573138415 imgs/s
+Elapsed [0:00:15], Iteration [93/150], D/loss_real: -3.9885, D/loss_fake: -0.2747, D/loss_cls: 2.7664, D/loss_gp: 0.0146
+TCAPPDLL 2025-07-08 06:26:22.349818 - Epoch: 1 Iteration: 92  rank : 0  train.loss : 2.7664074897766113  train.ips : 1.0158610980873861 imgs/s
+Elapsed [0:00:15], Iteration [94/150], D/loss_real: -7.3503, D/loss_fake: 0.2077, D/loss_cls: 3.4022, D/loss_gp: 0.0132
+TCAPPDLL 2025-07-08 06:26:22.484639 - Epoch: 1 Iteration: 93  rank : 0  train.loss : 3.402191162109375  train.ips : 1.0072393533440904 imgs/s
+Elapsed [0:00:16], Iteration [95/150], D/loss_real: -9.1257, D/loss_fake: 4.1711, D/loss_cls: 2.4952, D/loss_gp: 0.0536, G/loss_fake: -4.7847, G/loss_rec: 0.4487, G/loss_cls: 3.1032
+TCAPPDLL 2025-07-08 06:26:23.463428 - Epoch: 1 Iteration: 94  rank : 0  train.loss : 2.495206594467163  train.ips : 0.9487792880477786 imgs/s
+Elapsed [0:00:16], Iteration [96/150], D/loss_real: -7.7701, D/loss_fake: 10.3811, D/loss_cls: 3.9703, D/loss_gp: 0.1093
+TCAPPDLL 2025-07-08 06:26:23.536640 - Epoch: 1 Iteration: 95  rank : 0  train.loss : 3.9703145027160645  train.ips : 0.9446782225953513 imgs/s
+Elapsed [0:00:17], Iteration [97/150], D/loss_real: -6.1227, D/loss_fake: 5.2505, D/loss_cls: 3.1267, D/loss_gp: 0.0089
+TCAPPDLL 2025-07-08 06:26:23.679774 - Epoch: 1 Iteration: 96  rank : 0  train.loss : 3.1266591548919678  train.ips : 0.9367627012885653 imgs/s
+Elapsed [0:00:17], Iteration [98/150], D/loss_real: -6.8405, D/loss_fake: 2.6190, D/loss_cls: 2.1197, D/loss_gp: 0.0085
+TCAPPDLL 2025-07-08 06:26:23.814875 - Epoch: 1 Iteration: 97  rank : 0  train.loss : 2.1197493076324463  train.ips : 0.9294121089836755 imgs/s
+Elapsed [0:00:17], Iteration [99/150], D/loss_real: -5.8096, D/loss_fake: 2.4931, D/loss_cls: 2.3238, D/loss_gp: 0.0046
+TCAPPDLL 2025-07-08 06:26:23.936646 - Epoch: 1 Iteration: 98  rank : 0  train.loss : 2.3238415718078613  train.ips : 0.9228832013848846 imgs/s
+Elapsed [0:00:17], Iteration [100/150], D/loss_real: -5.7279, D/loss_fake: 1.9713, D/loss_cls: 2.2511, D/loss_gp: 0.0193, G/loss_fake: 0.4575, G/loss_rec: 0.4412, G/loss_cls: 3.1131
+TCAPPDLL 2025-07-08 06:26:24.087820 - Epoch: 1 Iteration: 99  rank : 0  train.loss : 2.2510769367218018  train.ips : 0.9149037203292526 imgs/s
+Elapsed [0:00:17], Iteration [101/150], D/loss_real: -8.2142, D/loss_fake: 6.1996, D/loss_cls: 2.7330, D/loss_gp: 0.0619
+TCAPPDLL 2025-07-08 06:26:24.181800 - Epoch: 1 Iteration: 100  rank : 0  train.loss : 2.7329647541046143  train.ips : 0.9100136774211466 imgs/s
+Elapsed [0:00:17], Iteration [102/150], D/loss_real: -1.8692, D/loss_fake: -0.4266, D/loss_cls: 2.5259, D/loss_gp: 0.0163
+TCAPPDLL 2025-07-08 06:26:24.280926 - Epoch: 1 Iteration: 101  rank : 0  train.loss : 2.525855541229248  train.ips : 0.9049113055270278 imgs/s
+Elapsed [0:00:17], Iteration [103/150], D/loss_real: 0.7076, D/loss_fake: -4.8624, D/loss_cls: 2.3719, D/loss_gp: 0.0055
+TCAPPDLL 2025-07-08 06:26:24.418955 - Epoch: 1 Iteration: 102  rank : 0  train.loss : 2.371853828430176  train.ips : 0.8979036318080554 imgs/s
+Elapsed [0:00:17], Iteration [104/150], D/loss_real: 6.5256, D/loss_fake: -10.9961, D/loss_cls: 3.2549, D/loss_gp: 0.0753
+TCAPPDLL 2025-07-08 06:26:24.515033 - Epoch: 1 Iteration: 103  rank : 0  train.loss : 3.254856586456299  train.ips : 0.8930878673070676 imgs/s
+Elapsed [0:00:18], Iteration [105/150], D/loss_real: 0.6199, D/loss_fake: -8.1877, D/loss_cls: 3.9042, D/loss_gp: 0.0857, G/loss_fake: 3.4051, G/loss_rec: 0.4500, G/loss_cls: 2.6019
+TCAPPDLL 2025-07-08 06:26:24.678855 - Epoch: 1 Iteration: 104  rank : 0  train.loss : 3.904229164123535  train.ips : 0.8849944546793671 imgs/s
+Elapsed [0:00:18], Iteration [106/150], D/loss_real: -1.7636, D/loss_fake: 6.0883, D/loss_cls: 2.3743, D/loss_gp: 0.0752
+TCAPPDLL 2025-07-08 06:26:24.729132 - Epoch: 1 Iteration: 105  rank : 0  train.loss : 2.374279022216797  train.ips : 0.8825396741899264 imgs/s
+Elapsed [0:00:18], Iteration [107/150], D/loss_real: 0.0548, D/loss_fake: -0.6495, D/loss_cls: 3.0446, D/loss_gp: 0.0164
+TCAPPDLL 2025-07-08 06:26:24.827843 - Epoch: 1 Iteration: 106  rank : 0  train.loss : 3.0445992946624756  train.ips : 0.8777613736995299 imgs/s
+Elapsed [0:00:18], Iteration [108/150], D/loss_real: 2.5354, D/loss_fake: -5.5509, D/loss_cls: 2.8146, D/loss_gp: 0.0699
+TCAPPDLL 2025-07-08 06:26:24.985306 - Epoch: 1 Iteration: 107  rank : 0  train.loss : 2.814573049545288  train.ips : 0.8702437588714074 imgs/s
+Elapsed [0:00:18], Iteration [109/150], D/loss_real: 3.9830, D/loss_fake: -7.8787, D/loss_cls: 3.3996, D/loss_gp: 0.0147
+TCAPPDLL 2025-07-08 06:26:25.139608 - Epoch: 1 Iteration: 108  rank : 0  train.loss : 3.399634599685669  train.ips : 0.8630008540651012 imgs/s
+Elapsed [0:00:18], Iteration [110/150], D/loss_real: 4.1272, D/loss_fake: -8.9961, D/loss_cls: 2.6798, D/loss_gp: 0.0174, G/loss_fake: 11.0521, G/loss_rec: 0.3828, G/loss_cls: 3.0028
+TCAPPDLL 2025-07-08 06:26:25.351768 - Epoch: 1 Iteration: 109  rank : 0  train.loss : 2.6798319816589355  train.ips : 0.8532369032593261 imgs/s
+Elapsed [0:00:18], Iteration [111/150], D/loss_real: 2.7627, D/loss_fake: -6.1814, D/loss_cls: 2.6866, D/loss_gp: 0.1388
+TCAPPDLL 2025-07-08 06:26:25.439180 - Epoch: 1 Iteration: 110  rank : 0  train.loss : 2.6866462230682373  train.ips : 0.8492789150671147 imgs/s
+Elapsed [0:00:19], Iteration [112/150], D/loss_real: -0.5805, D/loss_fake: -1.9926, D/loss_cls: 3.1164, D/loss_gp: 0.0670
+TCAPPDLL 2025-07-08 06:26:26.508393 - Epoch: 1 Iteration: 111  rank : 0  train.loss : 3.1163527965545654  train.ips : 0.8036675163419952 imgs/s
+Elapsed [0:00:20], Iteration [113/150], D/loss_real: -5.2506, D/loss_fake: 0.6952, D/loss_cls: 2.6855, D/loss_gp: 0.0204
+TCAPPDLL 2025-07-08 06:26:26.898560 - Epoch: 1 Iteration: 112  rank : 0  train.loss : 2.685476779937744  train.ips : 0.7882221201727507 imgs/s
+Elapsed [0:00:20], Iteration [114/150], D/loss_real: -8.0475, D/loss_fake: 1.9020, D/loss_cls: 2.3478, D/loss_gp: 0.0212
+TCAPPDLL 2025-07-08 06:26:27.037037 - Epoch: 1 Iteration: 113  rank : 0  train.loss : 2.3478310108184814  train.ips : 0.7828807185032458 imgs/s
+Elapsed [0:00:20], Iteration [115/150], D/loss_real: -14.4533, D/loss_fake: 4.4897, D/loss_cls: 2.5143, D/loss_gp: 0.0523, G/loss_fake: -2.0647, G/loss_rec: 0.4044, G/loss_cls: 3.3779
+TCAPPDLL 2025-07-08 06:26:27.221822 - Epoch: 1 Iteration: 114  rank : 0  train.loss : 2.5143210887908936  train.ips : 0.7758663938921968 imgs/s
+Elapsed [0:00:20], Iteration [116/150], D/loss_real: -14.3516, D/loss_fake: 9.1191, D/loss_cls: 4.3435, D/loss_gp: 0.2568
+TCAPPDLL 2025-07-08 06:26:27.267337 - Epoch: 1 Iteration: 115  rank : 0  train.loss : 4.343514442443848  train.ips : 0.774155919279515 imgs/s
+Elapsed [0:00:20], Iteration [117/150], D/loss_real: -11.0317, D/loss_fake: 7.2221, D/loss_cls: 4.0225, D/loss_gp: 0.0627
+TCAPPDLL 2025-07-08 06:26:27.413252 - Epoch: 1 Iteration: 116  rank : 0  train.loss : 4.022531986236572  train.ips : 0.7687297043789628 imgs/s
+Elapsed [0:00:20], Iteration [118/150], D/loss_real: -10.8474, D/loss_fake: 6.3639, D/loss_cls: 3.3304, D/loss_gp: 0.0180
+TCAPPDLL 2025-07-08 06:26:27.544092 - Epoch: 1 Iteration: 117  rank : 0  train.loss : 3.330381393432617  train.ips : 0.7639273652714562 imgs/s
+Elapsed [0:00:21], Iteration [119/150], D/loss_real: -14.2726, D/loss_fake: 6.5960, D/loss_cls: 2.4465, D/loss_gp: 0.0150
+TCAPPDLL 2025-07-08 06:26:27.668694 - Epoch: 1 Iteration: 118  rank : 0  train.loss : 2.446451187133789  train.ips : 0.7594153251724132 imgs/s
+Elapsed [0:00:21], Iteration [120/150], D/loss_real: -21.9073, D/loss_fake: 15.7191, D/loss_cls: 3.2591, D/loss_gp: 0.0902, G/loss_fake: -15.5825, G/loss_rec: 0.3906, G/loss_cls: 3.6599
+TCAPPDLL 2025-07-08 06:26:27.826679 - Epoch: 1 Iteration: 119  rank : 0  train.loss : 3.2590763568878174  train.ips : 0.7537561187140943 imgs/s
+Elapsed [0:00:21], Iteration [121/150], D/loss_real: -23.0689, D/loss_fake: 20.2020, D/loss_cls: 2.9348, D/loss_gp: 0.1428
+TCAPPDLL 2025-07-08 06:26:27.879463 - Epoch: 1 Iteration: 120  rank : 0  train.loss : 2.934804916381836  train.ips : 0.7518858582317904 imgs/s
+Elapsed [0:00:21], Iteration [122/150], D/loss_real: -16.3909, D/loss_fake: 12.7020, D/loss_cls: 3.7890, D/loss_gp: 0.0266
+TCAPPDLL 2025-07-08 06:26:27.975516 - Epoch: 1 Iteration: 121  rank : 0  train.loss : 3.789048433303833  train.ips : 0.7485072793425704 imgs/s
+Elapsed [0:00:21], Iteration [123/150], D/loss_real: -12.5473, D/loss_fake: 8.7829, D/loss_cls: 2.7668, D/loss_gp: 0.0070
+TCAPPDLL 2025-07-08 06:26:28.088355 - Epoch: 1 Iteration: 122  rank : 0  train.loss : 2.766813039779663  train.ips : 0.7445774764174586 imgs/s
+Elapsed [0:00:21], Iteration [124/150], D/loss_real: -9.0077, D/loss_fake: 6.4394, D/loss_cls: 3.1368, D/loss_gp: 0.0081
+TCAPPDLL 2025-07-08 06:26:28.188645 - Epoch: 1 Iteration: 123  rank : 0  train.loss : 3.1368093490600586  train.ips : 0.741118309807297 imgs/s
+Elapsed [0:00:21], Iteration [125/150], D/loss_real: -10.1712, D/loss_fake: 1.8211, D/loss_cls: 2.5541, D/loss_gp: 0.0219, G/loss_fake: -2.0839, G/loss_rec: 0.4220, G/loss_cls: 3.7369
+TCAPPDLL 2025-07-08 06:26:28.336916 - Epoch: 1 Iteration: 124  rank : 0  train.loss : 2.5540785789489746  train.ips : 0.7360627380439879 imgs/s
+Elapsed [0:00:21], Iteration [126/150], D/loss_real: -12.1983, D/loss_fake: 9.5508, D/loss_cls: 2.3162, D/loss_gp: 0.1715
+TCAPPDLL 2025-07-08 06:26:28.374052 - Epoch: 1 Iteration: 125  rank : 0  train.loss : 2.316183567047119  train.ips : 0.7348072203197925 imgs/s
+Elapsed [0:00:21], Iteration [127/150], D/loss_real: -9.2300, D/loss_fake: -0.5405, D/loss_cls: 3.5377, D/loss_gp: 0.0223
+TCAPPDLL 2025-07-08 06:26:28.510036 - Epoch: 1 Iteration: 126  rank : 0  train.loss : 3.537748336791992  train.ips : 0.7302467786224695 imgs/s
+Elapsed [0:00:23], Iteration [128/150], D/loss_real: -10.8504, D/loss_fake: 2.6174, D/loss_cls: 2.9260, D/loss_gp: 0.0530
+TCAPPDLL 2025-07-08 06:26:29.648599 - Epoch: 1 Iteration: 127  rank : 0  train.loss : 2.9260101318359375  train.ips : 0.6941762621876234 imgs/s
+Elapsed [0:00:23], Iteration [129/150], D/loss_real: -10.3839, D/loss_fake: 7.0726, D/loss_cls: 2.8304, D/loss_gp: 0.1228
+TCAPPDLL 2025-07-08 06:26:29.769177 - Epoch: 1 Iteration: 128  rank : 0  train.loss : 2.8304202556610107  train.ips : 0.6905619767278629 imgs/s
+Elapsed [0:00:23], Iteration [130/150], D/loss_real: -11.9115, D/loss_fake: 2.7206, D/loss_cls: 4.0930, D/loss_gp: 0.0904, G/loss_fake: -3.3196, G/loss_rec: 0.4687, G/loss_cls: 3.1659
+TCAPPDLL 2025-07-08 06:26:29.989533 - Epoch: 1 Iteration: 129  rank : 0  train.loss : 4.0930047035217285  train.ips : 0.6840564416155589 imgs/s
+Elapsed [0:00:23], Iteration [131/150], D/loss_real: -8.7425, D/loss_fake: 7.3675, D/loss_cls: 2.6869, D/loss_gp: 0.0527
+TCAPPDLL 2025-07-08 06:26:30.032061 - Epoch: 1 Iteration: 130  rank : 0  train.loss : 2.686915874481201  train.ips : 0.682815129502136 imgs/s
+Elapsed [0:00:23], Iteration [132/150], D/loss_real: -9.4400, D/loss_fake: 4.2939, D/loss_cls: 2.4780, D/loss_gp: 0.0235
+TCAPPDLL 2025-07-08 06:26:30.136394 - Epoch: 1 Iteration: 131  rank : 0  train.loss : 2.4780261516571045  train.ips : 0.6797879406596569 imgs/s
+Elapsed [0:00:23], Iteration [133/150], D/loss_real: -17.6616, D/loss_fake: 3.0823, D/loss_cls: 3.2015, D/loss_gp: 0.1562
+TCAPPDLL 2025-07-08 06:26:30.244741 - Epoch: 1 Iteration: 132  rank : 0  train.loss : 3.2015445232391357  train.ips : 0.6766732923490862 imgs/s
+Elapsed [0:00:23], Iteration [134/150], D/loss_real: -16.9145, D/loss_fake: 5.7916, D/loss_cls: 2.8040, D/loss_gp: 0.5219
+TCAPPDLL 2025-07-08 06:26:30.335802 - Epoch: 1 Iteration: 133  rank : 0  train.loss : 2.8039982318878174  train.ips : 0.6740772017184509 imgs/s
+Elapsed [0:00:23], Iteration [135/150], D/loss_real: -4.0359, D/loss_fake: -6.7581, D/loss_cls: 3.7337, D/loss_gp: 0.0519, G/loss_fake: 8.1471, G/loss_rec: 0.4673, G/loss_cls: 4.4772
+TCAPPDLL 2025-07-08 06:26:30.499303 - Epoch: 1 Iteration: 134  rank : 0  train.loss : 3.733691692352295  train.ips : 0.6694661419423727 imgs/s
+Elapsed [0:00:23], Iteration [136/150], D/loss_real: -0.8492, D/loss_fake: -4.3628, D/loss_cls: 3.6710, D/loss_gp: 0.1235
+TCAPPDLL 2025-07-08 06:26:30.538301 - Epoch: 1 Iteration: 135  rank : 0  train.loss : 3.6710004806518555  train.ips : 0.6683749641244089 imgs/s
+Elapsed [0:00:24], Iteration [137/150], D/loss_real: -3.9027, D/loss_fake: -7.9353, D/loss_cls: 3.4735, D/loss_gp: 0.1121
+TCAPPDLL 2025-07-08 06:26:30.622403 - Epoch: 1 Iteration: 136  rank : 0  train.loss : 3.473497152328491  train.ips : 0.6660350986886995 imgs/s
+Elapsed [0:00:24], Iteration [138/150], D/loss_real: -0.0217, D/loss_fake: -8.5640, D/loss_cls: 2.4935, D/loss_gp: 0.1248
+TCAPPDLL 2025-07-08 06:26:30.731805 - Epoch: 1 Iteration: 137  rank : 0  train.loss : 2.4935173988342285  train.ips : 0.6630157535545621 imgs/s
+Elapsed [0:00:24], Iteration [139/150], D/loss_real: -20.4895, D/loss_fake: -4.0202, D/loss_cls: 3.7121, D/loss_gp: 0.5208
+TCAPPDLL 2025-07-08 06:26:30.845582 - Epoch: 1 Iteration: 138  rank : 0  train.loss : 3.7120566368103027  train.ips : 0.6599043436187851 imgs/s
+Elapsed [0:00:24], Iteration [140/150], D/loss_real: -13.1494, D/loss_fake: 6.1100, D/loss_cls: 5.9209, D/loss_gp: 0.8071, G/loss_fake: 20.9011, G/loss_rec: 0.3795, G/loss_cls: 4.9687
+TCAPPDLL 2025-07-08 06:26:31.026837 - Epoch: 1 Iteration: 139  rank : 0  train.loss : 5.920928001403809  train.ips : 0.6550079076633846 imgs/s
+Elapsed [0:00:24], Iteration [141/150], D/loss_real: 10.4772, D/loss_fake: -7.9557, D/loss_cls: 9.1140, D/loss_gp: 0.3753
+TCAPPDLL 2025-07-08 06:26:31.066640 - Epoch: 1 Iteration: 140  rank : 0  train.loss : 9.11396312713623  train.ips : 0.6539426431824882 imgs/s
+Elapsed [0:00:24], Iteration [142/150], D/loss_real: -7.6423, D/loss_fake: 1.4173, D/loss_cls: 2.8756, D/loss_gp: 0.1584
+TCAPPDLL 2025-07-08 06:26:31.133727 - Epoch: 1 Iteration: 141  rank : 0  train.loss : 2.8756251335144043  train.ips : 0.6521541338307267 imgs/s
+Elapsed [0:00:24], Iteration [143/150], D/loss_real: -13.5800, D/loss_fake: 7.1751, D/loss_cls: 2.9770, D/loss_gp: 0.1460
+TCAPPDLL 2025-07-08 06:26:31.335126 - Epoch: 1 Iteration: 142  rank : 0  train.loss : 2.9769554138183594  train.ips : 0.646844650239606 imgs/s
+Elapsed [0:00:24], Iteration [144/150], D/loss_real: -23.4961, D/loss_fake: 11.8752, D/loss_cls: 2.5356, D/loss_gp: 0.0592
+TCAPPDLL 2025-07-08 06:26:31.433201 - Epoch: 1 Iteration: 143  rank : 0  train.loss : 2.5356462001800537  train.ips : 0.6442894895538513 imgs/s
+Elapsed [0:00:25], Iteration [145/150], D/loss_real: -45.7467, D/loss_fake: 18.0676, D/loss_cls: 4.1341, D/loss_gp: 0.5794, G/loss_fake: -16.2099, G/loss_rec: 0.4631, G/loss_cls: 3.1507
+TCAPPDLL 2025-07-08 06:26:31.602089 - Epoch: 1 Iteration: 144  rank : 0  train.loss : 4.134126663208008  train.ips : 0.6399377257866485 imgs/s
+Elapsed [0:00:25], Iteration [146/150], D/loss_real: -43.1878, D/loss_fake: 29.4967, D/loss_cls: 5.0776, D/loss_gp: 1.4757
+TCAPPDLL 2025-07-08 06:26:32.496460 - Epoch: 1 Iteration: 145  rank : 0  train.loss : 5.077599048614502  train.ips : 0.6178381179096847 imgs/s
+Elapsed [0:00:26], Iteration [147/150], D/loss_real: -12.8665, D/loss_fake: 9.5237, D/loss_cls: 3.4679, D/loss_gp: 0.0895
+TCAPPDLL 2025-07-08 06:26:32.662961 - Epoch: 1 Iteration: 146  rank : 0  train.loss : 3.467888832092285  train.ips : 0.6138899250661071 imgs/s
+Elapsed [0:00:26], Iteration [148/150], D/loss_real: -8.7249, D/loss_fake: 5.0412, D/loss_cls: 3.1433, D/loss_gp: 0.1821/root/miniconda3/envs/vae/lib/python3.8/site-packages/torch/nn/_reduction.py:42: UserWarning: size_average and reduce args will be deprecated, please use reduction='sum' instead.
+  warnings.warn(warning.format(ret))
+
+TCAPPDLL 2025-07-08 06:26:32.756851 - Epoch: 1 Iteration: 147  rank : 0  train.loss : 3.1432924270629883  train.ips : 0.6116885330257514 imgs/s
+Elapsed [0:00:26], Iteration [149/150], D/loss_real: -8.8732, D/loss_fake: 5.9092, D/loss_cls: 2.9639, D/loss_gp: 0.1807
+TCAPPDLL 2025-07-08 06:26:32.881372 - Epoch: 1 Iteration: 148  rank : 0  train.loss : 2.963925361633301  train.ips : 0.6087880252207795 imgs/s
+Elapsed [0:00:26], Iteration [150/150], D/loss_real: -10.8292, D/loss_fake: 8.2390, D/loss_cls: 2.5828, D/loss_gp: 0.1198, G/loss_fake: -10.4972, G/loss_rec: 0.4135, G/loss_cls: 2.6646
+TCAPPDLL 2025-07-08 06:26:33.037458 - Epoch: 1 Iteration: 149  rank : 0  train.loss : 2.5828027725219727  train.ips : 0.6051947892667234 imgs/s
