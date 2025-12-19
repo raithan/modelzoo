@@ -1,0 +1,2157 @@
+2025/07/08 11:30:31 - mmengine - INFO - 
+------------------------------------------------------------
+System environment:
+    sys.platform: linux
+    Python: 3.10.16 (main, Dec 11 2024, 16:24:50) [GCC 11.2.0]
+    CUDA available: False
+    MUSA available: False
+    numpy_random_seed: 415004225
+    GCC: gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
+    PyTorch: 2.4.0a0+git4451b0e
+    PyTorch compiling details: PyTorch built with:
+  - GCC 11.5
+  - C++ Version: 201703
+  - Intel(R) oneAPI Math Kernel Library Version 2025.0-Product Build 20241009 for Intel(R) 64 architecture applications
+  - Intel(R) MKL-DNN v3.4.2 (Git Hash 1137e04ec0b5251ca2b4400a4fd3c667ce843d67)
+  - OpenMP 201511 (a.k.a. OpenMP 4.5)
+  - LAPACK is enabled (usually provided by MKL)
+  - NNPACK is enabled
+  - CPU capability usage: AVX512
+  - Build settings: BLAS_INFO=mkl, BUILD_TYPE=Release, CXX_COMPILER=/usr/bin/g++, CXX_FLAGS= -D_GLIBCXX_USE_CXX11_ABI=1 -fvisibility-inlines-hidden -DUSE_PTHREADPOOL -DNDEBUG -DUSE_KINETO -DLIBKINETO_NOCUPTI -DLIBKINETO_NOROCTRACER -DUSE_FBGEMM -DUSE_PYTORCH_QNNPACK -DUSE_XNNPACK -DSYMBOLICATE_MOBILE_DEBUG_HANDLE -O2 -fPIC -Wall -Wextra -Werror=return-type -Werror=non-virtual-dtor -Werror=range-loop-construct -Werror=bool-operation -Wnarrowing -Wno-missing-field-initializers -Wno-type-limits -Wno-array-bounds -Wno-unknown-pragmas -Wno-unused-parameter -Wno-unused-function -Wno-unused-result -Wno-strict-overflow -Wno-strict-aliasing -Wno-stringop-overflow -Wsuggest-override -Wno-psabi -Wno-error=pedantic -Wno-error=old-style-cast -Wno-missing-braces -fdiagnostics-color=always -faligned-new -Wno-unused-but-set-variable -Wno-maybe-uninitialized -fno-math-errno -fno-trapping-math -Werror=format -Wno-stringop-overflow, FORCE_FALLBACK_CUDA_MPI=1, LAPACK_INFO=mkl, PERF_WITH_AVX=1, PERF_WITH_AVX2=1, PERF_WITH_AVX512=1, TORCH_VERSION=2.4.0, USE_CUDA=OFF, USE_CUDNN=OFF, USE_CUSPARSELT=OFF, USE_EXCEPTION_PTR=1, USE_GFLAGS=OFF, USE_GLOG=OFF, USE_GLOO=ON, USE_MKL=ON, USE_MKLDNN=1, USE_MPI=ON, USE_NCCL=OFF, USE_NNPACK=ON, USE_OPENMP=ON, USE_ROCM=OFF, USE_ROCM_KERNEL_ASSERT=OFF, 
+
+    TorchVision: 0.15.1a0+42759b1
+    OpenCV: 4.11.0
+    MMEngine: 0.10.4
+
+Runtime environment:
+    cudnn_benchmark: True
+    mp_cfg: {'mp_start_method': 'fork', 'opencv_num_threads': 0}
+    dist_cfg: {'backend': 'tccl'}
+    seed: 415004225
+    Distributed launcher: pytorch
+    Distributed training: True
+    GPU number: 1
+------------------------------------------------------------
+
+2025/07/08 11:30:31 - mmengine - INFO - Config:
+auto_scale_lr = dict(base_batch_size=32, enable=False)
+backend_args = None
+batch_augments = [
+    dict(size=(
+        512,
+        512,
+    ), type='BatchFixedSizePad'),
+]
+checkpoint = 'https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth'
+custom_hooks = [
+    dict(
+        ema_type='ExpMomentumEMA',
+        momentum=0.0002,
+        priority=49,
+        type='EMAHook',
+        update_buffers=True),
+]
+custom_imports = dict(
+    allow_failed_imports=False,
+    imports=[
+        'projects.EfficientDet.efficientdet',
+    ])
+data_root = '/data/teco-data/coco/'
+dataset_type = 'CocoDataset'
+default_hooks = dict(
+    checkpoint=dict(_scope_='mmdet', interval=15, type='CheckpointHook'),
+    logger=dict(_scope_='mmdet', interval=50, type='LoggerHook'),
+    param_scheduler=dict(_scope_='mmdet', type='ParamSchedulerHook'),
+    sampler_seed=dict(_scope_='mmdet', type='DistSamplerSeedHook'),
+    timer=dict(_scope_='mmdet', type='IterTimerHook'),
+    visualization=dict(_scope_='mmdet', type='DetVisualizationHook'))
+default_scope = 'mmdet'
+env_cfg = dict(
+    cudnn_benchmark=True,
+    dist_cfg=dict(backend='nccl'),
+    mp_cfg=dict(mp_start_method='fork', opencv_num_threads=0))
+evalute_type = 'CocoMetric'
+image_size = 512
+launcher = 'pytorch'
+load_from = None
+log_level = 'INFO'
+log_processor = dict(
+    _scope_='mmdet', by_epoch=True, type='LogProcessor', window_size=50)
+max_epochs = 300
+model = dict(
+    backbone=dict(
+        arch='b0',
+        conv_cfg=dict(type='Conv2dSamePadding'),
+        drop_path_rate=0.2,
+        frozen_stages=0,
+        init_cfg=dict(
+            checkpoint=
+            'https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth',
+            prefix='backbone',
+            type='Pretrained'),
+        norm_cfg=dict(eps=0.001, momentum=0.01, requires_grad=True, type='BN'),
+        norm_eval=False,
+        out_indices=(
+            3,
+            4,
+            5,
+        ),
+        type='EfficientNet'),
+    bbox_head=dict(
+        anchor_generator=dict(
+            center_offset=0.5,
+            octave_base_scale=4,
+            ratios=[
+                1.0,
+                0.5,
+                2.0,
+            ],
+            scales_per_octave=3,
+            strides=[
+                8,
+                16,
+                32,
+                64,
+                128,
+            ],
+            type='AnchorGenerator'),
+        bbox_coder=dict(
+            target_means=[
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+            ],
+            target_stds=[
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+            ],
+            type='DeltaXYWHBBoxCoder'),
+        feat_channels=64,
+        in_channels=64,
+        loss_bbox=dict(beta=0.1, loss_weight=50, type='HuberLoss'),
+        loss_cls=dict(
+            alpha=0.25,
+            gamma=1.5,
+            loss_weight=1.0,
+            type='FocalLoss',
+            use_sigmoid=True),
+        norm_cfg=dict(eps=0.001, momentum=0.01, requires_grad=True, type='BN'),
+        num_classes=80,
+        num_ins=5,
+        stacked_convs=3,
+        type='EfficientDetSepBNHead'),
+    data_preprocessor=dict(
+        batch_augments=[
+            dict(size=(
+                512,
+                512,
+            ), type='BatchFixedSizePad'),
+        ],
+        bgr_to_rgb=True,
+        mean=[
+            123.675,
+            116.28,
+            103.53,
+        ],
+        pad_size_divisor=512,
+        std=[
+            58.395,
+            57.12,
+            57.375,
+        ],
+        type='DetDataPreprocessor'),
+    neck=dict(
+        in_channels=[
+            40,
+            112,
+            320,
+        ],
+        norm_cfg=dict(eps=0.001, momentum=0.01, requires_grad=True, type='BN'),
+        num_stages=3,
+        out_channels=64,
+        start_level=0,
+        type='BiFPN'),
+    test_cfg=dict(
+        max_per_img=100,
+        min_bbox_size=0,
+        nms=dict(
+            iou_threshold=0.3,
+            method='gaussian',
+            min_score=0.001,
+            sigma=0.5,
+            type='soft_nms'),
+        nms_pre=1000,
+        score_thr=0.05),
+    train_cfg=dict(
+        allowed_border=-1,
+        assigner=dict(
+            ignore_iof_thr=-1,
+            min_pos_iou=0,
+            neg_iou_thr=0.5,
+            pos_iou_thr=0.5,
+            type='MaxIoUAssigner'),
+        debug=False,
+        pos_weight=-1,
+        sampler=dict(type='PseudoSampler')),
+    type='EfficientDet')
+norm_cfg = dict(eps=0.001, momentum=0.01, requires_grad=True, type='BN')
+optim_wrapper = dict(
+    _scope_='mmdet',
+    clip_grad=dict(max_norm=10, norm_type=2),
+    loss_scale='dynamic',
+    optimizer=dict(lr=0.16, momentum=0.9, type='SGD', weight_decay=4e-05),
+    paramwise_cfg=dict(
+        bias_decay_mult=0, bypass_duplicate=True, norm_decay_mult=0),
+    type='AmpOptimWrapper')
+param_scheduler = [
+    dict(begin=0, by_epoch=False, end=917, start_factor=0.1, type='LinearLR'),
+    dict(
+        T_max=299,
+        begin=1,
+        by_epoch=True,
+        convert_to_iter_based=True,
+        end=300,
+        eta_min=0.0,
+        type='CosineAnnealingLR'),
+]
+resume = False
+test_cfg = dict(_scope_='mmdet', type='TestLoop')
+test_dataloader = dict(
+    batch_size=1,
+    dataset=dict(
+        ann_file='annotations/instances_val2017.json',
+        backend_args=None,
+        data_prefix=dict(img='val2017/'),
+        data_root='/data/teco-data/coco/',
+        pipeline=[
+            dict(backend_args=None, type='LoadImageFromFile'),
+            dict(keep_ratio=True, scale=(
+                512,
+                512,
+            ), type='Resize'),
+            dict(type='LoadAnnotations', with_bbox=True),
+            dict(
+                meta_keys=(
+                    'img_id',
+                    'img_path',
+                    'ori_shape',
+                    'img_shape',
+                    'scale_factor',
+                ),
+                type='PackDetInputs'),
+        ],
+        test_mode=True,
+        type='CocoDataset'),
+    drop_last=False,
+    num_workers=2,
+    persistent_workers=True,
+    sampler=dict(shuffle=False, type='DefaultSampler'))
+test_evaluator = dict(
+    ann_file='/data/teco-data/coco/annotations/instances_val2017.json',
+    backend_args=None,
+    format_only=False,
+    metric='bbox',
+    type='CocoMetric')
+test_pipeline = [
+    dict(backend_args=None, type='LoadImageFromFile'),
+    dict(keep_ratio=True, scale=(
+        512,
+        512,
+    ), type='Resize'),
+    dict(type='LoadAnnotations', with_bbox=True),
+    dict(
+        meta_keys=(
+            'img_id',
+            'img_path',
+            'ori_shape',
+            'img_shape',
+            'scale_factor',
+        ),
+        type='PackDetInputs'),
+]
+train_cfg = dict(
+    _scope_='mmdet',
+    max_epochs=300,
+    type='EpochBasedTrainLoop',
+    val_interval=1)
+train_dataloader = dict(
+    batch_sampler=dict(type='AspectRatioBatchSampler'),
+    batch_size=4,
+    dataset=dict(
+        ann_file='annotations/instances_train2017.json',
+        backend_args=None,
+        data_prefix=dict(img='train2017/'),
+        data_root='/data/teco-data/coco',
+        filter_cfg=dict(filter_empty_gt=True, min_size=32),
+        pipeline=[
+            dict(backend_args=None, type='LoadImageFromFile'),
+            dict(type='LoadAnnotations', with_bbox=True),
+            dict(
+                keep_ratio=True,
+                ratio_range=(
+                    0.1,
+                    2.0,
+                ),
+                scale=(
+                    512,
+                    512,
+                ),
+                type='RandomResize'),
+            dict(crop_size=(
+                512,
+                512,
+            ), type='RandomCrop'),
+            dict(prob=0.5, type='RandomFlip'),
+            dict(type='PackDetInputs'),
+        ],
+        type='CocoDataset'),
+    num_workers=2,
+    persistent_workers=True,
+    sampler=dict(shuffle=True, type='DefaultSampler'))
+train_pipeline = [
+    dict(backend_args=None, type='LoadImageFromFile'),
+    dict(type='LoadAnnotations', with_bbox=True),
+    dict(
+        keep_ratio=True,
+        ratio_range=(
+            0.1,
+            2.0,
+        ),
+        scale=(
+            512,
+            512,
+        ),
+        type='RandomResize'),
+    dict(crop_size=(
+        512,
+        512,
+    ), type='RandomCrop'),
+    dict(prob=0.5, type='RandomFlip'),
+    dict(type='PackDetInputs'),
+]
+val_cfg = dict(_scope_='mmdet', type='ValLoop')
+val_dataloader = dict(
+    batch_size=1,
+    dataset=dict(
+        ann_file='annotations/instances_val2017.json',
+        backend_args=None,
+        data_prefix=dict(img='val2017/'),
+        data_root='/data/teco-data/coco',
+        pipeline=[
+            dict(backend_args=None, type='LoadImageFromFile'),
+            dict(keep_ratio=True, scale=(
+                512,
+                512,
+            ), type='Resize'),
+            dict(type='LoadAnnotations', with_bbox=True),
+            dict(
+                meta_keys=(
+                    'img_id',
+                    'img_path',
+                    'ori_shape',
+                    'img_shape',
+                    'scale_factor',
+                ),
+                type='PackDetInputs'),
+        ],
+        test_mode=True,
+        type='CocoDataset'),
+    drop_last=False,
+    num_workers=2,
+    persistent_workers=True,
+    sampler=dict(shuffle=False, type='DefaultSampler'))
+val_evaluator = dict(
+    ann_file='/data/teco-data/coco/annotations/instances_val2017.json',
+    backend_args=None,
+    format_only=False,
+    metric='bbox',
+    type='CocoMetric')
+vis_backends = [
+    dict(type='LocalVisBackend'),
+    dict(type='TensorboardVisBackend'),
+]
+visualizer = dict(
+    _scope_='mmdet',
+    name='visualizer',
+    type='DetLocalVisualizer',
+    vis_backends=[
+        dict(type='LocalVisBackend'),
+        dict(type='TensorboardVisBackend'),
+    ])
+work_dir = './work_dirs/efficientdet_effb0_bifpn_8xb16-crop512-300e_coco'
+
+2025/07/08 11:30:39 - mmengine - INFO - Hooks will be executed in the following order:
+before_run:
+(VERY_HIGH   ) RuntimeInfoHook                    
+(49          ) EMAHook                            
+(BELOW_NORMAL) LoggerHook                         
+ -------------------- 
+after_load_checkpoint:
+(49          ) EMAHook                            
+ -------------------- 
+before_train:
+(VERY_HIGH   ) RuntimeInfoHook                    
+(49          ) EMAHook                            
+(NORMAL      ) IterTimerHook                      
+(VERY_LOW    ) CheckpointHook                     
+ -------------------- 
+before_train_epoch:
+(VERY_HIGH   ) RuntimeInfoHook                    
+(NORMAL      ) IterTimerHook                      
+(NORMAL      ) DistSamplerSeedHook                
+ -------------------- 
+before_train_iter:
+(VERY_HIGH   ) RuntimeInfoHook                    
+(NORMAL      ) IterTimerHook                      
+ -------------------- 
+after_train_iter:
+(VERY_HIGH   ) RuntimeInfoHook                    
+(49          ) EMAHook                            
+(NORMAL      ) IterTimerHook                      
+(BELOW_NORMAL) LoggerHook                         
+(LOW         ) ParamSchedulerHook                 
+(VERY_LOW    ) CheckpointHook                     
+ -------------------- 
+after_train_epoch:
+(NORMAL      ) IterTimerHook                      
+(LOW         ) ParamSchedulerHook                 
+(VERY_LOW    ) CheckpointHook                     
+ -------------------- 
+before_val:
+(VERY_HIGH   ) RuntimeInfoHook                    
+ -------------------- 
+before_val_epoch:
+(49          ) EMAHook                            
+(NORMAL      ) IterTimerHook                      
+ -------------------- 
+before_val_iter:
+(NORMAL      ) IterTimerHook                      
+ -------------------- 
+after_val_iter:
+(NORMAL      ) IterTimerHook                      
+(NORMAL      ) DetVisualizationHook               
+(BELOW_NORMAL) LoggerHook                         
+ -------------------- 
+after_val_epoch:
+(VERY_HIGH   ) RuntimeInfoHook                    
+(49          ) EMAHook                            
+(NORMAL      ) IterTimerHook                      
+(BELOW_NORMAL) LoggerHook                         
+(LOW         ) ParamSchedulerHook                 
+(VERY_LOW    ) CheckpointHook                     
+ -------------------- 
+after_val:
+(VERY_HIGH   ) RuntimeInfoHook                    
+ -------------------- 
+before_save_checkpoint:
+(49          ) EMAHook                            
+ -------------------- 
+after_train:
+(VERY_HIGH   ) RuntimeInfoHook                    
+(VERY_LOW    ) CheckpointHook                     
+ -------------------- 
+before_test:
+(VERY_HIGH   ) RuntimeInfoHook                    
+ -------------------- 
+before_test_epoch:
+(49          ) EMAHook                            
+(NORMAL      ) IterTimerHook                      
+ -------------------- 
+before_test_iter:
+(NORMAL      ) IterTimerHook                      
+ -------------------- 
+after_test_iter:
+(NORMAL      ) IterTimerHook                      
+(NORMAL      ) DetVisualizationHook               
+(BELOW_NORMAL) LoggerHook                         
+ -------------------- 
+after_test_epoch:
+(VERY_HIGH   ) RuntimeInfoHook                    
+(49          ) EMAHook                            
+(NORMAL      ) IterTimerHook                      
+(BELOW_NORMAL) LoggerHook                         
+ -------------------- 
+after_test:
+(VERY_HIGH   ) RuntimeInfoHook                    
+ -------------------- 
+after_run:
+(BELOW_NORMAL) LoggerHook                         
+ -------------------- 
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.0.bn.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.0.bn.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.1.0.depthwise_conv.bn.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.1.0.depthwise_conv.bn.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.1.0.se.conv1.conv.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.1.0.se.conv2.conv.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.1.0.linear_conv.bn.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.1.0.linear_conv.bn.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.2.0.expand_conv.bn.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.2.0.expand_conv.bn.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.2.0.depthwise_conv.bn.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.2.0.depthwise_conv.bn.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.2.0.se.conv1.conv.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.2.0.se.conv2.conv.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.2.0.linear_conv.bn.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.2.0.linear_conv.bn.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.2.1.expand_conv.bn.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.2.1.expand_conv.bn.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.2.1.depthwise_conv.bn.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.2.1.depthwise_conv.bn.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.2.1.se.conv1.conv.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.2.1.se.conv2.conv.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.2.1.linear_conv.bn.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.2.1.linear_conv.bn.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.3.0.expand_conv.bn.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.3.0.expand_conv.bn.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.3.0.depthwise_conv.bn.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.3.0.depthwise_conv.bn.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.3.0.se.conv1.conv.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.3.0.se.conv2.conv.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.3.0.linear_conv.bn.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.3.0.linear_conv.bn.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.3.1.expand_conv.bn.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.3.1.expand_conv.bn.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.3.1.depthwise_conv.bn.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.3.1.depthwise_conv.bn.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.3.1.se.conv1.conv.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.3.1.se.conv2.conv.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.3.1.linear_conv.bn.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.3.1.linear_conv.bn.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.4.0.expand_conv.bn.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.4.0.expand_conv.bn.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.4.0.depthwise_conv.bn.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.4.0.depthwise_conv.bn.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.4.0.se.conv1.conv.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.4.0.se.conv2.conv.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.4.0.linear_conv.bn.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.4.0.linear_conv.bn.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.4.1.expand_conv.bn.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.4.1.expand_conv.bn.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.4.1.depthwise_conv.bn.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.4.1.depthwise_conv.bn.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.4.1.se.conv1.conv.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.4.1.se.conv2.conv.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.4.1.linear_conv.bn.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.4.1.linear_conv.bn.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.4.2.expand_conv.bn.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.4.2.expand_conv.bn.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.4.2.depthwise_conv.bn.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.4.2.depthwise_conv.bn.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.4.2.se.conv1.conv.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.4.2.se.conv2.conv.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.4.2.linear_conv.bn.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.4.2.linear_conv.bn.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.4.3.expand_conv.bn.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.4.3.expand_conv.bn.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.4.3.depthwise_conv.bn.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.4.3.depthwise_conv.bn.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.4.3.se.conv1.conv.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.4.3.se.conv2.conv.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.4.3.linear_conv.bn.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.4.3.linear_conv.bn.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.4.4.expand_conv.bn.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.4.4.expand_conv.bn.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.4.4.depthwise_conv.bn.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.4.4.depthwise_conv.bn.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.4.4.se.conv1.conv.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.4.4.se.conv2.conv.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.4.4.linear_conv.bn.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.4.4.linear_conv.bn.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.4.5.expand_conv.bn.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.4.5.expand_conv.bn.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.4.5.depthwise_conv.bn.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.4.5.depthwise_conv.bn.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.4.5.se.conv1.conv.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.4.5.se.conv2.conv.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.4.5.linear_conv.bn.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.4.5.linear_conv.bn.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.5.0.expand_conv.bn.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.5.0.expand_conv.bn.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.5.0.depthwise_conv.bn.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.5.0.depthwise_conv.bn.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.5.0.se.conv1.conv.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.5.0.se.conv2.conv.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.5.0.linear_conv.bn.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.5.0.linear_conv.bn.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.5.1.expand_conv.bn.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.5.1.expand_conv.bn.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.5.1.depthwise_conv.bn.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.5.1.depthwise_conv.bn.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.5.1.se.conv1.conv.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.5.1.se.conv2.conv.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.5.1.linear_conv.bn.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.5.1.linear_conv.bn.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.5.2.expand_conv.bn.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.5.2.expand_conv.bn.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.5.2.depthwise_conv.bn.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.5.2.depthwise_conv.bn.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.5.2.se.conv1.conv.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.5.2.se.conv2.conv.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.5.2.linear_conv.bn.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.5.2.linear_conv.bn.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.5.3.expand_conv.bn.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.5.3.expand_conv.bn.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.5.3.depthwise_conv.bn.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.5.3.depthwise_conv.bn.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.5.3.se.conv1.conv.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.5.3.se.conv2.conv.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.5.3.linear_conv.bn.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.5.3.linear_conv.bn.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.5.4.expand_conv.bn.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.5.4.expand_conv.bn.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.5.4.depthwise_conv.bn.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.5.4.depthwise_conv.bn.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.5.4.se.conv1.conv.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.5.4.se.conv2.conv.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.5.4.linear_conv.bn.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- backbone.layers.5.4.linear_conv.bn.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.0.p5_down_channel.down_conv.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.0.p5_down_channel.bn.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.0.p5_down_channel.bn.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.0.p4_down_channel.down_conv.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.0.p4_down_channel.bn.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.0.p4_down_channel.bn.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.0.p3_down_channel.down_conv.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.0.p3_down_channel.bn.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.0.p3_down_channel.bn.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.0.p5_to_p6.0.down_conv.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.0.p5_to_p6.0.bn.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.0.p5_to_p6.0.bn.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.0.p4_level_connection.down_conv.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.0.p4_level_connection.bn.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.0.p4_level_connection.bn.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.0.p5_level_connection.down_conv.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.0.p5_level_connection.bn.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.0.p5_level_connection.bn.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.0.conv6_up.pointwise_conv.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.0.conv6_up.bn.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.0.conv6_up.bn.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.0.conv5_up.pointwise_conv.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.0.conv5_up.bn.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.0.conv5_up.bn.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.0.conv4_up.pointwise_conv.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.0.conv4_up.bn.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.0.conv4_up.bn.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.0.conv3_up.pointwise_conv.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.0.conv3_up.bn.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.0.conv3_up.bn.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.0.conv4_down.pointwise_conv.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.0.conv4_down.bn.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.0.conv4_down.bn.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.0.conv5_down.pointwise_conv.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.0.conv5_down.bn.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.0.conv5_down.bn.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.0.conv6_down.pointwise_conv.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.0.conv6_down.bn.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.0.conv6_down.bn.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.0.conv7_down.pointwise_conv.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.0.conv7_down.bn.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.0.conv7_down.bn.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.1.conv6_up.pointwise_conv.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.1.conv6_up.bn.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.1.conv6_up.bn.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.1.conv5_up.pointwise_conv.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.1.conv5_up.bn.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.1.conv5_up.bn.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.1.conv4_up.pointwise_conv.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.1.conv4_up.bn.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.1.conv4_up.bn.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.1.conv3_up.pointwise_conv.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.1.conv3_up.bn.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.1.conv3_up.bn.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.1.conv4_down.pointwise_conv.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.1.conv4_down.bn.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.1.conv4_down.bn.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.1.conv5_down.pointwise_conv.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.1.conv5_down.bn.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.1.conv5_down.bn.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.1.conv6_down.pointwise_conv.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.1.conv6_down.bn.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.1.conv6_down.bn.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.1.conv7_down.pointwise_conv.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.1.conv7_down.bn.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.1.conv7_down.bn.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.2.conv6_up.pointwise_conv.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.2.conv6_up.bn.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.2.conv6_up.bn.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.2.conv5_up.pointwise_conv.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.2.conv5_up.bn.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.2.conv5_up.bn.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.2.conv4_up.pointwise_conv.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.2.conv4_up.bn.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.2.conv4_up.bn.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.2.conv3_up.pointwise_conv.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.2.conv3_up.bn.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.2.conv3_up.bn.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.2.conv4_down.pointwise_conv.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.2.conv4_down.bn.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.2.conv4_down.bn.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.2.conv5_down.pointwise_conv.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.2.conv5_down.bn.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.2.conv5_down.bn.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.2.conv6_down.pointwise_conv.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.2.conv6_down.bn.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.2.conv6_down.bn.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.2.conv7_down.pointwise_conv.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.2.conv7_down.bn.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- neck.bifpn.2.conv7_down.bn.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- bbox_head.reg_conv_list.0.pointwise_conv.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- bbox_head.reg_conv_list.1.pointwise_conv.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- bbox_head.reg_conv_list.2.pointwise_conv.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- bbox_head.cls_conv_list.0.pointwise_conv.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- bbox_head.cls_conv_list.1.pointwise_conv.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- bbox_head.cls_conv_list.2.pointwise_conv.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- bbox_head.reg_bn_list.0.0.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- bbox_head.reg_bn_list.0.0.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- bbox_head.reg_bn_list.0.1.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- bbox_head.reg_bn_list.0.1.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- bbox_head.reg_bn_list.0.2.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- bbox_head.reg_bn_list.0.2.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- bbox_head.reg_bn_list.0.3.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- bbox_head.reg_bn_list.0.3.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- bbox_head.reg_bn_list.0.4.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- bbox_head.reg_bn_list.0.4.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- bbox_head.reg_bn_list.1.0.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- bbox_head.reg_bn_list.1.0.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- bbox_head.reg_bn_list.1.1.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- bbox_head.reg_bn_list.1.1.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- bbox_head.reg_bn_list.1.2.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- bbox_head.reg_bn_list.1.2.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- bbox_head.reg_bn_list.1.3.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- bbox_head.reg_bn_list.1.3.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- bbox_head.reg_bn_list.1.4.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- bbox_head.reg_bn_list.1.4.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- bbox_head.reg_bn_list.2.0.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- bbox_head.reg_bn_list.2.0.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- bbox_head.reg_bn_list.2.1.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- bbox_head.reg_bn_list.2.1.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- bbox_head.reg_bn_list.2.2.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- bbox_head.reg_bn_list.2.2.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- bbox_head.reg_bn_list.2.3.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- bbox_head.reg_bn_list.2.3.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- bbox_head.reg_bn_list.2.4.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- bbox_head.reg_bn_list.2.4.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- bbox_head.cls_bn_list.0.0.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- bbox_head.cls_bn_list.0.0.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- bbox_head.cls_bn_list.0.1.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- bbox_head.cls_bn_list.0.1.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- bbox_head.cls_bn_list.0.2.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- bbox_head.cls_bn_list.0.2.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- bbox_head.cls_bn_list.0.3.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- bbox_head.cls_bn_list.0.3.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- bbox_head.cls_bn_list.0.4.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- bbox_head.cls_bn_list.0.4.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- bbox_head.cls_bn_list.1.0.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- bbox_head.cls_bn_list.1.0.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- bbox_head.cls_bn_list.1.1.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- bbox_head.cls_bn_list.1.1.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- bbox_head.cls_bn_list.1.2.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- bbox_head.cls_bn_list.1.2.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- bbox_head.cls_bn_list.1.3.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- bbox_head.cls_bn_list.1.3.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- bbox_head.cls_bn_list.1.4.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- bbox_head.cls_bn_list.1.4.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- bbox_head.cls_bn_list.2.0.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- bbox_head.cls_bn_list.2.0.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- bbox_head.cls_bn_list.2.1.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- bbox_head.cls_bn_list.2.1.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- bbox_head.cls_bn_list.2.2.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- bbox_head.cls_bn_list.2.2.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- bbox_head.cls_bn_list.2.3.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- bbox_head.cls_bn_list.2.3.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- bbox_head.cls_bn_list.2.4.weight:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- bbox_head.cls_bn_list.2.4.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- bbox_head.cls_header.pointwise_conv.bias:weight_decay=0.0
+2025/07/08 11:31:18 - mmengine - INFO - paramwise_options -- bbox_head.reg_header.pointwise_conv.bias:weight_decay=0.0
+2025/07/08 11:31:21 - mmengine - INFO - load backbone in model from: https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth
+2025/07/08 11:31:21 - mmengine - WARNING - The model and loaded state dict do not match exactly
+
+unexpected key in source state_dict: layers.6.bn.running_var, layers.6.bn.running_mean, layers.6.bn.weight, layers.6.bn.bias, layers.6.conv.weight
+
+Name of parameter - Initialization information
+
+backbone.layers.0.conv.weight - torch.Size([32, 3, 3, 3]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.0.bn.weight - torch.Size([32]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.0.bn.bias - torch.Size([32]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.1.0.depthwise_conv.conv.weight - torch.Size([32, 1, 3, 3]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.1.0.depthwise_conv.bn.weight - torch.Size([32]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.1.0.depthwise_conv.bn.bias - torch.Size([32]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.1.0.se.conv1.conv.weight - torch.Size([8, 32, 1, 1]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.1.0.se.conv1.conv.bias - torch.Size([8]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.1.0.se.conv2.conv.weight - torch.Size([32, 8, 1, 1]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.1.0.se.conv2.conv.bias - torch.Size([32]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.1.0.linear_conv.conv.weight - torch.Size([16, 32, 1, 1]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.1.0.linear_conv.bn.weight - torch.Size([16]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.1.0.linear_conv.bn.bias - torch.Size([16]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.2.0.expand_conv.conv.weight - torch.Size([96, 16, 1, 1]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.2.0.expand_conv.bn.weight - torch.Size([96]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.2.0.expand_conv.bn.bias - torch.Size([96]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.2.0.depthwise_conv.conv.weight - torch.Size([96, 1, 3, 3]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.2.0.depthwise_conv.bn.weight - torch.Size([96]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.2.0.depthwise_conv.bn.bias - torch.Size([96]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.2.0.se.conv1.conv.weight - torch.Size([4, 96, 1, 1]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.2.0.se.conv1.conv.bias - torch.Size([4]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.2.0.se.conv2.conv.weight - torch.Size([96, 4, 1, 1]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.2.0.se.conv2.conv.bias - torch.Size([96]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.2.0.linear_conv.conv.weight - torch.Size([24, 96, 1, 1]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.2.0.linear_conv.bn.weight - torch.Size([24]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.2.0.linear_conv.bn.bias - torch.Size([24]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.2.1.expand_conv.conv.weight - torch.Size([144, 24, 1, 1]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.2.1.expand_conv.bn.weight - torch.Size([144]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.2.1.expand_conv.bn.bias - torch.Size([144]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.2.1.depthwise_conv.conv.weight - torch.Size([144, 1, 3, 3]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.2.1.depthwise_conv.bn.weight - torch.Size([144]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.2.1.depthwise_conv.bn.bias - torch.Size([144]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.2.1.se.conv1.conv.weight - torch.Size([6, 144, 1, 1]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.2.1.se.conv1.conv.bias - torch.Size([6]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.2.1.se.conv2.conv.weight - torch.Size([144, 6, 1, 1]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.2.1.se.conv2.conv.bias - torch.Size([144]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.2.1.linear_conv.conv.weight - torch.Size([24, 144, 1, 1]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.2.1.linear_conv.bn.weight - torch.Size([24]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.2.1.linear_conv.bn.bias - torch.Size([24]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.3.0.expand_conv.conv.weight - torch.Size([144, 24, 1, 1]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.3.0.expand_conv.bn.weight - torch.Size([144]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.3.0.expand_conv.bn.bias - torch.Size([144]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.3.0.depthwise_conv.conv.weight - torch.Size([144, 1, 5, 5]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.3.0.depthwise_conv.bn.weight - torch.Size([144]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.3.0.depthwise_conv.bn.bias - torch.Size([144]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.3.0.se.conv1.conv.weight - torch.Size([6, 144, 1, 1]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.3.0.se.conv1.conv.bias - torch.Size([6]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.3.0.se.conv2.conv.weight - torch.Size([144, 6, 1, 1]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.3.0.se.conv2.conv.bias - torch.Size([144]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.3.0.linear_conv.conv.weight - torch.Size([40, 144, 1, 1]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.3.0.linear_conv.bn.weight - torch.Size([40]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.3.0.linear_conv.bn.bias - torch.Size([40]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.3.1.expand_conv.conv.weight - torch.Size([240, 40, 1, 1]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.3.1.expand_conv.bn.weight - torch.Size([240]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.3.1.expand_conv.bn.bias - torch.Size([240]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.3.1.depthwise_conv.conv.weight - torch.Size([240, 1, 5, 5]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.3.1.depthwise_conv.bn.weight - torch.Size([240]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.3.1.depthwise_conv.bn.bias - torch.Size([240]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.3.1.se.conv1.conv.weight - torch.Size([10, 240, 1, 1]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.3.1.se.conv1.conv.bias - torch.Size([10]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.3.1.se.conv2.conv.weight - torch.Size([240, 10, 1, 1]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.3.1.se.conv2.conv.bias - torch.Size([240]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.3.1.linear_conv.conv.weight - torch.Size([40, 240, 1, 1]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.3.1.linear_conv.bn.weight - torch.Size([40]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.3.1.linear_conv.bn.bias - torch.Size([40]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.4.0.expand_conv.conv.weight - torch.Size([240, 40, 1, 1]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.4.0.expand_conv.bn.weight - torch.Size([240]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.4.0.expand_conv.bn.bias - torch.Size([240]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.4.0.depthwise_conv.conv.weight - torch.Size([240, 1, 3, 3]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.4.0.depthwise_conv.bn.weight - torch.Size([240]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.4.0.depthwise_conv.bn.bias - torch.Size([240]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.4.0.se.conv1.conv.weight - torch.Size([10, 240, 1, 1]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.4.0.se.conv1.conv.bias - torch.Size([10]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.4.0.se.conv2.conv.weight - torch.Size([240, 10, 1, 1]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.4.0.se.conv2.conv.bias - torch.Size([240]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.4.0.linear_conv.conv.weight - torch.Size([80, 240, 1, 1]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.4.0.linear_conv.bn.weight - torch.Size([80]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.4.0.linear_conv.bn.bias - torch.Size([80]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.4.1.expand_conv.conv.weight - torch.Size([480, 80, 1, 1]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.4.1.expand_conv.bn.weight - torch.Size([480]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.4.1.expand_conv.bn.bias - torch.Size([480]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.4.1.depthwise_conv.conv.weight - torch.Size([480, 1, 3, 3]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.4.1.depthwise_conv.bn.weight - torch.Size([480]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.4.1.depthwise_conv.bn.bias - torch.Size([480]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.4.1.se.conv1.conv.weight - torch.Size([20, 480, 1, 1]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.4.1.se.conv1.conv.bias - torch.Size([20]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.4.1.se.conv2.conv.weight - torch.Size([480, 20, 1, 1]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.4.1.se.conv2.conv.bias - torch.Size([480]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.4.1.linear_conv.conv.weight - torch.Size([80, 480, 1, 1]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.4.1.linear_conv.bn.weight - torch.Size([80]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.4.1.linear_conv.bn.bias - torch.Size([80]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.4.2.expand_conv.conv.weight - torch.Size([480, 80, 1, 1]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.4.2.expand_conv.bn.weight - torch.Size([480]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.4.2.expand_conv.bn.bias - torch.Size([480]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.4.2.depthwise_conv.conv.weight - torch.Size([480, 1, 3, 3]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.4.2.depthwise_conv.bn.weight - torch.Size([480]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.4.2.depthwise_conv.bn.bias - torch.Size([480]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.4.2.se.conv1.conv.weight - torch.Size([20, 480, 1, 1]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.4.2.se.conv1.conv.bias - torch.Size([20]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.4.2.se.conv2.conv.weight - torch.Size([480, 20, 1, 1]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.4.2.se.conv2.conv.bias - torch.Size([480]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.4.2.linear_conv.conv.weight - torch.Size([80, 480, 1, 1]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.4.2.linear_conv.bn.weight - torch.Size([80]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.4.2.linear_conv.bn.bias - torch.Size([80]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.4.3.expand_conv.conv.weight - torch.Size([480, 80, 1, 1]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.4.3.expand_conv.bn.weight - torch.Size([480]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.4.3.expand_conv.bn.bias - torch.Size([480]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.4.3.depthwise_conv.conv.weight - torch.Size([480, 1, 5, 5]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.4.3.depthwise_conv.bn.weight - torch.Size([480]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.4.3.depthwise_conv.bn.bias - torch.Size([480]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.4.3.se.conv1.conv.weight - torch.Size([20, 480, 1, 1]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.4.3.se.conv1.conv.bias - torch.Size([20]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.4.3.se.conv2.conv.weight - torch.Size([480, 20, 1, 1]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.4.3.se.conv2.conv.bias - torch.Size([480]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.4.3.linear_conv.conv.weight - torch.Size([112, 480, 1, 1]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.4.3.linear_conv.bn.weight - torch.Size([112]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.4.3.linear_conv.bn.bias - torch.Size([112]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.4.4.expand_conv.conv.weight - torch.Size([672, 112, 1, 1]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.4.4.expand_conv.bn.weight - torch.Size([672]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.4.4.expand_conv.bn.bias - torch.Size([672]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.4.4.depthwise_conv.conv.weight - torch.Size([672, 1, 5, 5]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.4.4.depthwise_conv.bn.weight - torch.Size([672]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.4.4.depthwise_conv.bn.bias - torch.Size([672]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.4.4.se.conv1.conv.weight - torch.Size([28, 672, 1, 1]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.4.4.se.conv1.conv.bias - torch.Size([28]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.4.4.se.conv2.conv.weight - torch.Size([672, 28, 1, 1]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.4.4.se.conv2.conv.bias - torch.Size([672]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.4.4.linear_conv.conv.weight - torch.Size([112, 672, 1, 1]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.4.4.linear_conv.bn.weight - torch.Size([112]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.4.4.linear_conv.bn.bias - torch.Size([112]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.4.5.expand_conv.conv.weight - torch.Size([672, 112, 1, 1]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.4.5.expand_conv.bn.weight - torch.Size([672]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.4.5.expand_conv.bn.bias - torch.Size([672]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.4.5.depthwise_conv.conv.weight - torch.Size([672, 1, 5, 5]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.4.5.depthwise_conv.bn.weight - torch.Size([672]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.4.5.depthwise_conv.bn.bias - torch.Size([672]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.4.5.se.conv1.conv.weight - torch.Size([28, 672, 1, 1]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.4.5.se.conv1.conv.bias - torch.Size([28]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.4.5.se.conv2.conv.weight - torch.Size([672, 28, 1, 1]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.4.5.se.conv2.conv.bias - torch.Size([672]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.4.5.linear_conv.conv.weight - torch.Size([112, 672, 1, 1]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.4.5.linear_conv.bn.weight - torch.Size([112]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.4.5.linear_conv.bn.bias - torch.Size([112]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.5.0.expand_conv.conv.weight - torch.Size([672, 112, 1, 1]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.5.0.expand_conv.bn.weight - torch.Size([672]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.5.0.expand_conv.bn.bias - torch.Size([672]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.5.0.depthwise_conv.conv.weight - torch.Size([672, 1, 5, 5]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.5.0.depthwise_conv.bn.weight - torch.Size([672]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.5.0.depthwise_conv.bn.bias - torch.Size([672]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.5.0.se.conv1.conv.weight - torch.Size([28, 672, 1, 1]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.5.0.se.conv1.conv.bias - torch.Size([28]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.5.0.se.conv2.conv.weight - torch.Size([672, 28, 1, 1]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.5.0.se.conv2.conv.bias - torch.Size([672]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.5.0.linear_conv.conv.weight - torch.Size([192, 672, 1, 1]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.5.0.linear_conv.bn.weight - torch.Size([192]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.5.0.linear_conv.bn.bias - torch.Size([192]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.5.1.expand_conv.conv.weight - torch.Size([1152, 192, 1, 1]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.5.1.expand_conv.bn.weight - torch.Size([1152]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.5.1.expand_conv.bn.bias - torch.Size([1152]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.5.1.depthwise_conv.conv.weight - torch.Size([1152, 1, 5, 5]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.5.1.depthwise_conv.bn.weight - torch.Size([1152]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.5.1.depthwise_conv.bn.bias - torch.Size([1152]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.5.1.se.conv1.conv.weight - torch.Size([48, 1152, 1, 1]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.5.1.se.conv1.conv.bias - torch.Size([48]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.5.1.se.conv2.conv.weight - torch.Size([1152, 48, 1, 1]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.5.1.se.conv2.conv.bias - torch.Size([1152]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.5.1.linear_conv.conv.weight - torch.Size([192, 1152, 1, 1]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.5.1.linear_conv.bn.weight - torch.Size([192]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.5.1.linear_conv.bn.bias - torch.Size([192]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.5.2.expand_conv.conv.weight - torch.Size([1152, 192, 1, 1]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.5.2.expand_conv.bn.weight - torch.Size([1152]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.5.2.expand_conv.bn.bias - torch.Size([1152]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.5.2.depthwise_conv.conv.weight - torch.Size([1152, 1, 5, 5]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.5.2.depthwise_conv.bn.weight - torch.Size([1152]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.5.2.depthwise_conv.bn.bias - torch.Size([1152]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.5.2.se.conv1.conv.weight - torch.Size([48, 1152, 1, 1]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.5.2.se.conv1.conv.bias - torch.Size([48]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.5.2.se.conv2.conv.weight - torch.Size([1152, 48, 1, 1]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.5.2.se.conv2.conv.bias - torch.Size([1152]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.5.2.linear_conv.conv.weight - torch.Size([192, 1152, 1, 1]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.5.2.linear_conv.bn.weight - torch.Size([192]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.5.2.linear_conv.bn.bias - torch.Size([192]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.5.3.expand_conv.conv.weight - torch.Size([1152, 192, 1, 1]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.5.3.expand_conv.bn.weight - torch.Size([1152]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.5.3.expand_conv.bn.bias - torch.Size([1152]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.5.3.depthwise_conv.conv.weight - torch.Size([1152, 1, 5, 5]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.5.3.depthwise_conv.bn.weight - torch.Size([1152]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.5.3.depthwise_conv.bn.bias - torch.Size([1152]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.5.3.se.conv1.conv.weight - torch.Size([48, 1152, 1, 1]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.5.3.se.conv1.conv.bias - torch.Size([48]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.5.3.se.conv2.conv.weight - torch.Size([1152, 48, 1, 1]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.5.3.se.conv2.conv.bias - torch.Size([1152]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.5.3.linear_conv.conv.weight - torch.Size([192, 1152, 1, 1]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.5.3.linear_conv.bn.weight - torch.Size([192]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.5.3.linear_conv.bn.bias - torch.Size([192]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.5.4.expand_conv.conv.weight - torch.Size([1152, 192, 1, 1]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.5.4.expand_conv.bn.weight - torch.Size([1152]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.5.4.expand_conv.bn.bias - torch.Size([1152]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.5.4.depthwise_conv.conv.weight - torch.Size([1152, 1, 3, 3]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.5.4.depthwise_conv.bn.weight - torch.Size([1152]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.5.4.depthwise_conv.bn.bias - torch.Size([1152]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.5.4.se.conv1.conv.weight - torch.Size([48, 1152, 1, 1]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.5.4.se.conv1.conv.bias - torch.Size([48]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.5.4.se.conv2.conv.weight - torch.Size([1152, 48, 1, 1]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.5.4.se.conv2.conv.bias - torch.Size([1152]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.5.4.linear_conv.conv.weight - torch.Size([320, 1152, 1, 1]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.5.4.linear_conv.bn.weight - torch.Size([320]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+backbone.layers.5.4.linear_conv.bn.bias - torch.Size([320]): 
+PretrainedInit: load from https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32-aa-advprop_in1k_20220119-26434485.pth 
+
+neck.bifpn.0.p6_w1 - torch.Size([2]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.0.p5_w1 - torch.Size([2]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.0.p4_w1 - torch.Size([2]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.0.p3_w1 - torch.Size([2]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.0.p4_w2 - torch.Size([3]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.0.p5_w2 - torch.Size([3]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.0.p6_w2 - torch.Size([3]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.0.p7_w2 - torch.Size([2]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.0.p5_down_channel.down_conv.weight - torch.Size([64, 320, 1, 1]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.0.p5_down_channel.down_conv.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.0.p5_down_channel.bn.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.0.p5_down_channel.bn.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.0.p4_down_channel.down_conv.weight - torch.Size([64, 112, 1, 1]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.0.p4_down_channel.down_conv.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.0.p4_down_channel.bn.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.0.p4_down_channel.bn.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.0.p3_down_channel.down_conv.weight - torch.Size([64, 40, 1, 1]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.0.p3_down_channel.down_conv.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.0.p3_down_channel.bn.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.0.p3_down_channel.bn.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.0.p5_to_p6.0.down_conv.weight - torch.Size([64, 320, 1, 1]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.0.p5_to_p6.0.down_conv.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.0.p5_to_p6.0.bn.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.0.p5_to_p6.0.bn.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.0.p4_level_connection.down_conv.weight - torch.Size([64, 112, 1, 1]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.0.p4_level_connection.down_conv.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.0.p4_level_connection.bn.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.0.p4_level_connection.bn.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.0.p5_level_connection.down_conv.weight - torch.Size([64, 320, 1, 1]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.0.p5_level_connection.down_conv.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.0.p5_level_connection.bn.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.0.p5_level_connection.bn.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.0.conv6_up.depthwise_conv.weight - torch.Size([64, 1, 3, 3]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.0.conv6_up.pointwise_conv.weight - torch.Size([64, 64, 1, 1]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.0.conv6_up.pointwise_conv.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.0.conv6_up.bn.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.0.conv6_up.bn.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.0.conv5_up.depthwise_conv.weight - torch.Size([64, 1, 3, 3]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.0.conv5_up.pointwise_conv.weight - torch.Size([64, 64, 1, 1]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.0.conv5_up.pointwise_conv.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.0.conv5_up.bn.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.0.conv5_up.bn.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.0.conv4_up.depthwise_conv.weight - torch.Size([64, 1, 3, 3]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.0.conv4_up.pointwise_conv.weight - torch.Size([64, 64, 1, 1]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.0.conv4_up.pointwise_conv.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.0.conv4_up.bn.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.0.conv4_up.bn.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.0.conv3_up.depthwise_conv.weight - torch.Size([64, 1, 3, 3]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.0.conv3_up.pointwise_conv.weight - torch.Size([64, 64, 1, 1]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.0.conv3_up.pointwise_conv.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.0.conv3_up.bn.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.0.conv3_up.bn.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.0.conv4_down.depthwise_conv.weight - torch.Size([64, 1, 3, 3]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.0.conv4_down.pointwise_conv.weight - torch.Size([64, 64, 1, 1]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.0.conv4_down.pointwise_conv.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.0.conv4_down.bn.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.0.conv4_down.bn.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.0.conv5_down.depthwise_conv.weight - torch.Size([64, 1, 3, 3]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.0.conv5_down.pointwise_conv.weight - torch.Size([64, 64, 1, 1]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.0.conv5_down.pointwise_conv.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.0.conv5_down.bn.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.0.conv5_down.bn.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.0.conv6_down.depthwise_conv.weight - torch.Size([64, 1, 3, 3]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.0.conv6_down.pointwise_conv.weight - torch.Size([64, 64, 1, 1]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.0.conv6_down.pointwise_conv.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.0.conv6_down.bn.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.0.conv6_down.bn.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.0.conv7_down.depthwise_conv.weight - torch.Size([64, 1, 3, 3]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.0.conv7_down.pointwise_conv.weight - torch.Size([64, 64, 1, 1]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.0.conv7_down.pointwise_conv.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.0.conv7_down.bn.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.0.conv7_down.bn.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.1.p6_w1 - torch.Size([2]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.1.p5_w1 - torch.Size([2]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.1.p4_w1 - torch.Size([2]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.1.p3_w1 - torch.Size([2]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.1.p4_w2 - torch.Size([3]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.1.p5_w2 - torch.Size([3]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.1.p6_w2 - torch.Size([3]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.1.p7_w2 - torch.Size([2]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.1.conv6_up.depthwise_conv.weight - torch.Size([64, 1, 3, 3]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.1.conv6_up.pointwise_conv.weight - torch.Size([64, 64, 1, 1]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.1.conv6_up.pointwise_conv.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.1.conv6_up.bn.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.1.conv6_up.bn.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.1.conv5_up.depthwise_conv.weight - torch.Size([64, 1, 3, 3]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.1.conv5_up.pointwise_conv.weight - torch.Size([64, 64, 1, 1]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.1.conv5_up.pointwise_conv.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.1.conv5_up.bn.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.1.conv5_up.bn.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.1.conv4_up.depthwise_conv.weight - torch.Size([64, 1, 3, 3]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.1.conv4_up.pointwise_conv.weight - torch.Size([64, 64, 1, 1]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.1.conv4_up.pointwise_conv.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.1.conv4_up.bn.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.1.conv4_up.bn.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.1.conv3_up.depthwise_conv.weight - torch.Size([64, 1, 3, 3]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.1.conv3_up.pointwise_conv.weight - torch.Size([64, 64, 1, 1]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.1.conv3_up.pointwise_conv.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.1.conv3_up.bn.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.1.conv3_up.bn.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.1.conv4_down.depthwise_conv.weight - torch.Size([64, 1, 3, 3]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.1.conv4_down.pointwise_conv.weight - torch.Size([64, 64, 1, 1]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.1.conv4_down.pointwise_conv.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.1.conv4_down.bn.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.1.conv4_down.bn.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.1.conv5_down.depthwise_conv.weight - torch.Size([64, 1, 3, 3]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.1.conv5_down.pointwise_conv.weight - torch.Size([64, 64, 1, 1]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.1.conv5_down.pointwise_conv.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.1.conv5_down.bn.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.1.conv5_down.bn.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.1.conv6_down.depthwise_conv.weight - torch.Size([64, 1, 3, 3]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.1.conv6_down.pointwise_conv.weight - torch.Size([64, 64, 1, 1]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.1.conv6_down.pointwise_conv.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.1.conv6_down.bn.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.1.conv6_down.bn.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.1.conv7_down.depthwise_conv.weight - torch.Size([64, 1, 3, 3]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.1.conv7_down.pointwise_conv.weight - torch.Size([64, 64, 1, 1]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.1.conv7_down.pointwise_conv.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.1.conv7_down.bn.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.1.conv7_down.bn.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.2.p6_w1 - torch.Size([2]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.2.p5_w1 - torch.Size([2]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.2.p4_w1 - torch.Size([2]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.2.p3_w1 - torch.Size([2]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.2.p4_w2 - torch.Size([3]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.2.p5_w2 - torch.Size([3]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.2.p6_w2 - torch.Size([3]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.2.p7_w2 - torch.Size([2]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.2.conv6_up.depthwise_conv.weight - torch.Size([64, 1, 3, 3]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.2.conv6_up.pointwise_conv.weight - torch.Size([64, 64, 1, 1]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.2.conv6_up.pointwise_conv.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.2.conv6_up.bn.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.2.conv6_up.bn.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.2.conv5_up.depthwise_conv.weight - torch.Size([64, 1, 3, 3]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.2.conv5_up.pointwise_conv.weight - torch.Size([64, 64, 1, 1]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.2.conv5_up.pointwise_conv.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.2.conv5_up.bn.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.2.conv5_up.bn.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.2.conv4_up.depthwise_conv.weight - torch.Size([64, 1, 3, 3]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.2.conv4_up.pointwise_conv.weight - torch.Size([64, 64, 1, 1]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.2.conv4_up.pointwise_conv.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.2.conv4_up.bn.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.2.conv4_up.bn.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.2.conv3_up.depthwise_conv.weight - torch.Size([64, 1, 3, 3]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.2.conv3_up.pointwise_conv.weight - torch.Size([64, 64, 1, 1]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.2.conv3_up.pointwise_conv.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.2.conv3_up.bn.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.2.conv3_up.bn.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.2.conv4_down.depthwise_conv.weight - torch.Size([64, 1, 3, 3]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.2.conv4_down.pointwise_conv.weight - torch.Size([64, 64, 1, 1]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.2.conv4_down.pointwise_conv.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.2.conv4_down.bn.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.2.conv4_down.bn.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.2.conv5_down.depthwise_conv.weight - torch.Size([64, 1, 3, 3]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.2.conv5_down.pointwise_conv.weight - torch.Size([64, 64, 1, 1]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.2.conv5_down.pointwise_conv.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.2.conv5_down.bn.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.2.conv5_down.bn.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.2.conv6_down.depthwise_conv.weight - torch.Size([64, 1, 3, 3]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.2.conv6_down.pointwise_conv.weight - torch.Size([64, 64, 1, 1]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.2.conv6_down.pointwise_conv.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.2.conv6_down.bn.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.2.conv6_down.bn.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.2.conv7_down.depthwise_conv.weight - torch.Size([64, 1, 3, 3]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.2.conv7_down.pointwise_conv.weight - torch.Size([64, 64, 1, 1]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.2.conv7_down.pointwise_conv.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.2.conv7_down.bn.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+neck.bifpn.2.conv7_down.bn.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+bbox_head.reg_conv_list.0.depthwise_conv.weight - torch.Size([64, 1, 3, 3]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+bbox_head.reg_conv_list.0.pointwise_conv.weight - torch.Size([64, 64, 1, 1]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+bbox_head.reg_conv_list.0.pointwise_conv.bias - torch.Size([64]): 
+Initialized by user-defined `init_weights` in EfficientDetSepBNHead  
+
+bbox_head.reg_conv_list.1.depthwise_conv.weight - torch.Size([64, 1, 3, 3]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+bbox_head.reg_conv_list.1.pointwise_conv.weight - torch.Size([64, 64, 1, 1]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+bbox_head.reg_conv_list.1.pointwise_conv.bias - torch.Size([64]): 
+Initialized by user-defined `init_weights` in EfficientDetSepBNHead  
+
+bbox_head.reg_conv_list.2.depthwise_conv.weight - torch.Size([64, 1, 3, 3]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+bbox_head.reg_conv_list.2.pointwise_conv.weight - torch.Size([64, 64, 1, 1]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+bbox_head.reg_conv_list.2.pointwise_conv.bias - torch.Size([64]): 
+Initialized by user-defined `init_weights` in EfficientDetSepBNHead  
+
+bbox_head.cls_conv_list.0.depthwise_conv.weight - torch.Size([64, 1, 3, 3]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+bbox_head.cls_conv_list.0.pointwise_conv.weight - torch.Size([64, 64, 1, 1]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+bbox_head.cls_conv_list.0.pointwise_conv.bias - torch.Size([64]): 
+Initialized by user-defined `init_weights` in EfficientDetSepBNHead  
+
+bbox_head.cls_conv_list.1.depthwise_conv.weight - torch.Size([64, 1, 3, 3]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+bbox_head.cls_conv_list.1.pointwise_conv.weight - torch.Size([64, 64, 1, 1]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+bbox_head.cls_conv_list.1.pointwise_conv.bias - torch.Size([64]): 
+Initialized by user-defined `init_weights` in EfficientDetSepBNHead  
+
+bbox_head.cls_conv_list.2.depthwise_conv.weight - torch.Size([64, 1, 3, 3]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+bbox_head.cls_conv_list.2.pointwise_conv.weight - torch.Size([64, 64, 1, 1]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+bbox_head.cls_conv_list.2.pointwise_conv.bias - torch.Size([64]): 
+Initialized by user-defined `init_weights` in EfficientDetSepBNHead  
+
+bbox_head.reg_bn_list.0.0.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+bbox_head.reg_bn_list.0.0.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+bbox_head.reg_bn_list.0.1.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+bbox_head.reg_bn_list.0.1.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+bbox_head.reg_bn_list.0.2.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+bbox_head.reg_bn_list.0.2.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+bbox_head.reg_bn_list.0.3.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+bbox_head.reg_bn_list.0.3.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+bbox_head.reg_bn_list.0.4.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+bbox_head.reg_bn_list.0.4.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+bbox_head.reg_bn_list.1.0.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+bbox_head.reg_bn_list.1.0.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+bbox_head.reg_bn_list.1.1.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+bbox_head.reg_bn_list.1.1.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+bbox_head.reg_bn_list.1.2.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+bbox_head.reg_bn_list.1.2.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+bbox_head.reg_bn_list.1.3.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+bbox_head.reg_bn_list.1.3.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+bbox_head.reg_bn_list.1.4.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+bbox_head.reg_bn_list.1.4.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+bbox_head.reg_bn_list.2.0.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+bbox_head.reg_bn_list.2.0.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+bbox_head.reg_bn_list.2.1.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+bbox_head.reg_bn_list.2.1.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+bbox_head.reg_bn_list.2.2.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+bbox_head.reg_bn_list.2.2.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+bbox_head.reg_bn_list.2.3.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+bbox_head.reg_bn_list.2.3.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+bbox_head.reg_bn_list.2.4.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+bbox_head.reg_bn_list.2.4.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+bbox_head.cls_bn_list.0.0.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+bbox_head.cls_bn_list.0.0.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+bbox_head.cls_bn_list.0.1.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+bbox_head.cls_bn_list.0.1.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+bbox_head.cls_bn_list.0.2.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+bbox_head.cls_bn_list.0.2.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+bbox_head.cls_bn_list.0.3.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+bbox_head.cls_bn_list.0.3.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+bbox_head.cls_bn_list.0.4.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+bbox_head.cls_bn_list.0.4.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+bbox_head.cls_bn_list.1.0.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+bbox_head.cls_bn_list.1.0.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+bbox_head.cls_bn_list.1.1.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+bbox_head.cls_bn_list.1.1.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+bbox_head.cls_bn_list.1.2.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+bbox_head.cls_bn_list.1.2.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+bbox_head.cls_bn_list.1.3.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+bbox_head.cls_bn_list.1.3.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+bbox_head.cls_bn_list.1.4.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+bbox_head.cls_bn_list.1.4.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+bbox_head.cls_bn_list.2.0.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+bbox_head.cls_bn_list.2.0.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+bbox_head.cls_bn_list.2.1.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+bbox_head.cls_bn_list.2.1.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+bbox_head.cls_bn_list.2.2.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+bbox_head.cls_bn_list.2.2.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+bbox_head.cls_bn_list.2.3.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+bbox_head.cls_bn_list.2.3.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+bbox_head.cls_bn_list.2.4.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+bbox_head.cls_bn_list.2.4.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+bbox_head.cls_header.depthwise_conv.weight - torch.Size([64, 1, 3, 3]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+bbox_head.cls_header.pointwise_conv.weight - torch.Size([720, 64, 1, 1]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+bbox_head.cls_header.pointwise_conv.bias - torch.Size([720]): 
+Initialized by user-defined `init_weights` in EfficientDetSepBNHead  
+
+bbox_head.reg_header.depthwise_conv.weight - torch.Size([64, 1, 3, 3]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+bbox_head.reg_header.pointwise_conv.weight - torch.Size([36, 64, 1, 1]): 
+The value is the same before and after calling `init_weights` of EfficientDet  
+
+bbox_head.reg_header.pointwise_conv.bias - torch.Size([36]): 
+Initialized by user-defined `init_weights` in EfficientDetSepBNHead  
+2025/07/08 11:31:21 - mmengine - WARNING - "FileClient" will be deprecated in future. Please use io functions in https://mmengine.readthedocs.io/en/latest/api/fileio.html#file-io
+2025/07/08 11:31:21 - mmengine - WARNING - "HardDiskBackend" is the alias of "LocalBackend" and the former will be deprecated in future.
+2025/07/08 11:31:21 - mmengine - INFO - Checkpoints will be saved to /data/bigc-data/wyc/EfficientDet/run_scripts/work_dirs/efficientdet_effb0_bifpn_8xb16-crop512-300e_coco.
