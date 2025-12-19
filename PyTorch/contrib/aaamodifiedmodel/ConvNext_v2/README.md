@@ -1,9 +1,9 @@
-# DetectoRS
+# ConvNeXt-V2
 ## 1. 模型概述
-DetectoRS 是 MMDetection 提供的一种增强型两阶段目标检测器，核心创新在于引入了递归特征金字塔（Recursive Feature Pyramid, RFP）和可见性感知（Switchable Atrous Convolution, SAC）机制，从而显著提升了检测精度。
+ConvNeXt-V2 是 MMDetection 模型库中一种基于卷积神经网络改进设计的新一代主干网络，结合了现代Transformer架构中的归一化和扩展技巧，具备更强的表征能力和高效性，常用于目标检测等视觉任务。
 
-- 论文链接：https://arxiv.org/abs/2006.02334
-- 仓库链接：https://github.com/open-mmlab/mmdetection/tree/main/configs/detectors
+- 论文链接：https://arxiv.org/abs/2301.00808
+- 仓库链接：https://github.com/open-mmlab/mmdetection/tree/main/projects/ConvNeXt-V2
 
 ## 2. 快速开始
 使用本模型执行训练的主要流程如下：
@@ -18,7 +18,7 @@ DetectoRS 是 MMDetection 提供的一种增强型两阶段目标检测器，核
 
 ### 2.2 准备数据集
 #### 2.2.1 获取数据集
-<MODLE DetectoRS>使用 COCO2017 数据集，该数据集为开源数据集，可从 [COCO](https://cocodataset.org/#download) 下载。
+<MODLE ConvNeXt-V2>使用 COCO2017 数据集，该数据集为开源数据集，可从 [COCO](https://cocodataset.org/#download) 下载。
 
 #### 2.2.2 处理数据集
 1.具体配置方式可参考：https://github.com/Atten4Vis/ConditionalDETR/blob/main/README.md。
@@ -43,21 +43,23 @@ datasets #根目录
     pip3 install opencv_python mmcv --no-deps
     mim install -e .
     pip install -r requirements.txt
+    pip install mmpretain
     ```
 ### 2.4 启动训练
 1. 在构建好的环境中，进入训练脚本所在目录。
   ```
-  cd <ModelZoo_path>/PyTorch/contrib/Detection/DetectoRS/run_scripts
+  cd <ModelZoo_path>/PyTorch/contrib/Detection/ConvNeXt-V2/run_scripts
   ```
 2. 运行训练。该模型支持单机单卡。
   ```
-  python run_DetectoRS.py --config ../configs/detectors/cascade-rcnn_r50-rfp_1x_coco.py --launcher pytorch --nproc-per-node 1 --cfg-options "train_dataloader.dataset.data_root=/data/teco-data/coco/" "val_dataloader.dataset.data_root=/data/teco-data/coco/" 
+  python run_ConvNext_v2.py --config ../projects/ConvNeXt-V2/configs/mask-rcnn_convnext-v2-b_fpn_lsj-3x-fcmae_coco.py --launcher pytorch --nproc-per-node 1 --cfg-options "train_dataloader.dataset.data_root=/data/teco-data/coco/" "val_dataloader.dataset.data_root=/data/teco-data/coco/" 
   ```
+    该模型开启amp在sdaa和cuda上都会梯度爆炸，长nan现象，且训练很慢
     更多训练参数参考 run_scripts/argument.py
 ### 2.5 训练结果
 输出训练loss曲线及结果（参考使用[loss.py](./run_scripts/loss.py)）: 
 
-MeanRelativeError: -0.022358765421009803
-MeanAbsoluteError: -0.3940729123353958
-Rule,mean_absolute_error -0.3940729123353958
-pass mean_relative_error=-0.022358765421009803 <= 0.05 or mean_absolute_error=-0.3940729123353958 <= 0.0002
+MeanRelativeError: -0.020596150482013312
+MeanAbsoluteError: -0.11818480491638184
+Rule,mean_absolute_error -0.11818480491638184
+pass mean_relative_error=-0.020596150482013312 <= 0.05 or mean_absolute_error=-0.11818480491638184 <= 0.0002

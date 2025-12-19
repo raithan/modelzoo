@@ -1,4 +1,5 @@
 #!/bin/bash
+
 script_path=$(dirname $(readlink -f "$0"))
 echo "当前脚本路径: $script_path"
 
@@ -12,13 +13,14 @@ cd ..
 # pip3 install opencv_python mmcv --no-deps
 # mim install -e .
 # pip install -r requirements.txt
+# pip install mmpretain
 
 cd $script_path
 
 #执行训练
-python run_DetectoRS.py --config ../configs/detectors/cascade-rcnn_r50-rfp_1x_coco.py \
-    --launcher pytorch --nproc-per-node 1 --amp \
-    --cfg-options "train_dataloader.dataset.data_root=$data_path" "val_dataloader.dataset.data_root=$data_path" 2>&1 | tee sdaa.log 
+python run_ConvNext_v2.py --config ../projects/ConvNeXt-V2/configs/mask-rcnn_convnext-v2-b_fpn_lsj-3x-fcmae_coco.py \
+    --launcher pytorch --nproc-per-node 1   \
+    --cfg-options "train_dataloader.dataset.data_root=$data_path" "val_dataloader.dataset.data_root=$data_path" 2>&1 | tee sdaa.log
 
 # 生成loss对比图
 python loss.py --sdaa-log sdaa.log --cuda-log cuda.log
