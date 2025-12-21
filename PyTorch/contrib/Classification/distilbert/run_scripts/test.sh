@@ -14,14 +14,12 @@ cd tcap_dllogger
 python setup.py install
 cd ..
 
-cd $script_path
-
 #执行训练
 
-mkdir -p bart_out && python run_bart.py \
+mkdir -p distilbert_out && python run_distilbert.py \
 --train_file ../configs/train_sample.txt \
 --do_train --do_eval \
---output_dir bart_out \
+--output_dir distilbert_out \
 --overwrite_output_dir \
 --per_device_train_batch_size 2 \
 --max_seq_length 32 \

@@ -1,11 +1,11 @@
 
-# Bart
+# Distilbert
 ## 1. 模型概述
-BART 是一个序列到序列模型，结合了 BERT 和 GPT 的预训练目标。它通过以不同的方式破坏文本（例如删除单词、打乱句子或屏蔽标记）进行预训练并学习如何修复它。编码器对损坏的文档进行编码，损坏的文本由解码器修复。当它学习恢复原始文本时，BART 在理解和生成语言方面变得非常擅长。
+DistilBERT 通过知识蒸馏进行预训练，以创建具有更快推理的更小模型，并且需要更少的计算来训练。通过预训练期间的三重损失目标、语言建模损失、蒸馏损失、余弦距离损失，DistilBERT 表现出与更大的 Transformer 语言模型相似的性能。
 
 
-- 论文链接：[1910.13461\]BART: Denoising Sequence-to-Sequence Pre-training for Natural Language Generation, Translation, and Comprehension(https://huggingface.co/papers/1910.13461)
-- 仓库链接：https://github.com/huggingface/transformers/blob/main/docs/source/en/model_doc/bart.md
+- 论文链接：[1910.01108\]DistilBERT, a distilled version of BERT: smaller, faster, cheaper and lighter(https://huggingface.co/papers/1910.01108)
+- 仓库链接：https://github.com/huggingface/transformers/blob/main/docs/source/en/model_doc/distilbert.md
 
 ## 2. 快速开始
 使用本模型执行训练的主要流程如下：
@@ -51,15 +51,15 @@ BART 是一个序列到序列模型，结合了 BERT 和 GPT 的预训练目标�
 
 1. 在构建好的环境中，进入训练脚本所在目录。
     ```
-    cd <ModelZoo_path>/PyTorch/contrib/Classification/bart/run_scripts
+    cd <ModelZoo_path>/PyTorch/contrib/Classification/distilbert/run_scripts
     ```
 
 2. 运行训练。该模型支持单机单卡。
     ```
-    mkdir -p bart_out && python run_bart.py \
+    mkdir -p distilbert_out && python run_distilbert.py \
     --train_file ../configs/train_sample.txt \
     --do_train --do_eval \
-    --output_dir bart_out \
+    --output_dir distilbert_out \
     --overwrite_output_dir \
     --per_device_train_batch_size 2 \
     --max_seq_length 32 \
@@ -72,8 +72,8 @@ BART 是一个序列到序列模型，结合了 BERT 和 GPT 的预训练目标�
 
 ![loss](./run_scripts/loss.jpg)
 
-MeanRelativeError:0.023865286396830804
-MeanAbsoluteError:-0.023647474747474748
-Rule,mean_absolute_error 0.023865286396830804
-pass mean_relative_error=0.023865286396830804 <=0.05 or mean_absolute_error=-0.023647474747474748<=0.0002
+MeanRelativeError:0.890243939077245
+MeanAbsoluteError:-0.0401000000000002
+Rule,mean_absolute_error 0.890243939077245
+pass mean_relative_error=0.890243939077245 <=0.05 or mean_absolute_error=-0.0401000000000002<=0.0002
 
