@@ -135,7 +135,7 @@ def main():
     raw_datasets = load_dataset("text", data_files=data_files)
 
     # Set local paths
-    model_path = "/data/teco-data/models/chinese-roberta-wwm-ext"  # 修改这里
+    model_path = "/data/teco-data/models/bart-large"  # 修改这里
     model_args.model_name_or_path = model_path
     model_args.config_name = os.path.join(model_path, "config.json")
     model_args.tokenizer_name = model_path  
