@@ -1,0 +1,8 @@
+Disabling PyTorch because PyTorch >= 2.1 is required but found 1.12.0
+None of PyTorch, TensorFlow >= 2.0, or Flax have been found. Models won't be available and only tokenizers, configuration and file/data utilities can be used.
+Traceback (most recent call last):
+  File "/data/bigc-data/zjh/new/roberta/run_scripts/../configs/run_mlm.py", line 6, in <module>
+    import datasets
+ModuleNotFoundError: No module named 'datasets'
+🚀 Running command:
+python ../configs/run_mlm.py --model_name_or_path model --train_file ../configs/train_sample.txt --validation_file ../configs/train_sample.txt --output_dir roberta_out --per_device_train_batch_size 2 --per_device_eval_batch_size 16 --max_seq_length 32 --num_train_epochs 3 --learning_rate 5e-05 --logging_steps 1 --line_by_line --mlm_probability 0.15 --overwrite_output_dir --do_train --do_eval
