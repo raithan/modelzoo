@@ -1,0 +1,789 @@
+2025-08-05 09:19:49,947 - INFO - __main__ - Training/evaluation parameters TrainingArguments(
+_n_gpu=0,
+accelerator_config={'split_batches': False, 'dispatch_batches': None, 'even_batches': True, 'use_seedable_sampler': True, 'non_blocking': False, 'gradient_accumulation_kwargs': None},
+adafactor=False,
+adam_beta1=0.9,
+adam_beta2=0.999,
+adam_epsilon=1e-08,
+auto_find_batch_size=False,
+batch_eval_metrics=False,
+bf16=False,
+bf16_full_eval=False,
+data_seed=None,
+dataloader_drop_last=False,
+dataloader_num_workers=0,
+dataloader_persistent_workers=False,
+dataloader_pin_memory=True,
+dataloader_prefetch_factor=None,
+ddp_backend=None,
+ddp_broadcast_buffers=None,
+ddp_bucket_cap_mb=None,
+ddp_find_unused_parameters=None,
+ddp_timeout=1800,
+debug=[],
+deepspeed=None,
+disable_tqdm=False,
+dispatch_batches=None,
+do_eval=True,
+do_predict=False,
+do_train=True,
+eval_accumulation_steps=None,
+eval_delay=0,
+eval_do_concat_batches=True,
+eval_steps=None,
+eval_strategy=no,
+evaluation_strategy=None,
+fp16=False,
+fp16_backend=auto,
+fp16_full_eval=False,
+fp16_opt_level=O1,
+fsdp=[],
+fsdp_config={'min_num_params': 0, 'xla': False, 'xla_fsdp_v2': False, 'xla_fsdp_grad_ckpt': False},
+fsdp_min_num_params=0,
+fsdp_transformer_layer_cls_to_wrap=None,
+full_determinism=False,
+gradient_accumulation_steps=1,
+gradient_checkpointing=False,
+gradient_checkpointing_kwargs=None,
+greater_is_better=None,
+group_by_length=False,
+half_precision_backend=auto,
+hub_always_push=False,
+hub_model_id=None,
+hub_private_repo=False,
+hub_strategy=every_save,
+hub_token=<HUB_TOKEN>,
+ignore_data_skip=False,
+include_inputs_for_metrics=False,
+include_num_input_tokens_seen=False,
+include_tokens_per_second=False,
+jit_mode_eval=False,
+label_names=None,
+label_smoothing_factor=0.0,
+learning_rate=5e-05,
+length_column_name=length,
+load_best_model_at_end=False,
+local_rank=0,
+log_level=passive,
+log_level_replica=warning,
+log_on_each_node=True,
+logging_dir=t5_out/logs,
+logging_first_step=False,
+logging_nan_inf_filter=True,
+logging_steps=1.0,
+logging_strategy=steps,
+lr_scheduler_kwargs={},
+lr_scheduler_type=linear,
+max_grad_norm=1.0,
+max_steps=-1,
+metric_for_best_model=None,
+mp_parameters=,
+neftune_noise_alpha=None,
+no_cuda=False,
+num_train_epochs=3.0,
+optim=adamw_torch,
+optim_args=None,
+optim_target_modules=None,
+output_dir=t5_out,
+overwrite_output_dir=True,
+past_index=-1,
+per_device_eval_batch_size=8,
+per_device_train_batch_size=2,
+prediction_loss_only=False,
+push_to_hub=False,
+push_to_hub_model_id=None,
+push_to_hub_organization=None,
+push_to_hub_token=<PUSH_TO_HUB_TOKEN>,
+ray_scope=last,
+remove_unused_columns=True,
+report_to=[],
+restore_callback_states_from_checkpoint=False,
+resume_from_checkpoint=None,
+run_name=t5_out,
+save_on_each_node=False,
+save_only_model=False,
+save_safetensors=True,
+save_steps=500,
+save_strategy=steps,
+save_total_limit=None,
+seed=42,
+skip_memory_metrics=True,
+split_batches=None,
+tf32=None,
+torch_compile=False,
+torch_compile_backend=None,
+torch_compile_mode=None,
+torchdynamo=None,
+tpu_metrics_debug=False,
+tpu_num_cores=None,
+use_cpu=False,
+use_ipex=False,
+use_legacy_prediction_loop=False,
+use_mps_device=False,
+warmup_ratio=0.0,
+warmup_steps=0,
+weight_decay=0.0,
+)
+当前使用的模型路径： /home/01/zjh/transformers1/examples/pytorch/language-modeling/electra-small-generator
+
+Tokenizing line by line:   0%|          | 0/10000 [00:00<?, ? examples/s]
+Tokenizing line by line:  10%|█         | 1000/10000 [00:00<00:03, 2924.53 examples/s]
+Tokenizing line by line:  20%|██        | 2000/10000 [00:00<00:01, 4102.29 examples/s]
+Tokenizing line by line:  30%|███       | 3000/10000 [00:00<00:01, 5137.13 examples/s]
+Tokenizing line by line:  50%|█████     | 5000/10000 [00:00<00:00, 7077.09 examples/s]
+Tokenizing line by line:  70%|███████   | 7000/10000 [00:01<00:00, 7320.45 examples/s]
+Tokenizing line by line:  80%|████████  | 8000/10000 [00:01<00:00, 6131.29 examples/s]
+Tokenizing line by line:  90%|█████████ | 9000/10000 [00:01<00:00, 5837.23 examples/s]
+Tokenizing line by line: 100%|██████████| 10000/10000 [00:01<00:00, 6248.65 examples/s]
+Tokenizing line by line: 100%|██████████| 10000/10000 [00:01<00:00, 5921.98 examples/s]
+
+Tokenizing line by line:   0%|          | 0/10000 [00:00<?, ? examples/s]
+Tokenizing line by line:  10%|█         | 1000/10000 [00:00<00:02, 3946.48 examples/s]
+Tokenizing line by line:  20%|██        | 2000/10000 [00:00<00:01, 4931.65 examples/s]
+Tokenizing line by line:  30%|███       | 3000/10000 [00:00<00:01, 5757.45 examples/s]
+Tokenizing line by line:  50%|█████     | 5000/10000 [00:00<00:00, 7548.32 examples/s]
+Tokenizing line by line:  70%|███████   | 7000/10000 [00:01<00:00, 7690.47 examples/s]
+Tokenizing line by line:  80%|████████  | 8000/10000 [00:01<00:00, 6215.69 examples/s]
+Tokenizing line by line: 100%|██████████| 10000/10000 [00:01<00:00, 7443.23 examples/s]
+Tokenizing line by line: 100%|██████████| 10000/10000 [00:01<00:00, 6807.40 examples/s]
+
+  0%|          | 0/15000 [00:00<?, ?it/s]
+  0%|          | 1/15000 [00:00<57:00,  4.39it/s]
+                                                 
+
+  0%|          | 1/15000 [00:00<57:00,  4.39it/s]
+  0%|          | 2/15000 [00:00<48:52,  5.12it/s]
+                                                 
+
+  0%|          | 2/15000 [00:00<48:52,  5.12it/s]
+  0%|          | 3/15000 [00:00<43:52,  5.70it/s]
+                                                 
+
+  0%|          | 3/15000 [00:00<43:52,  5.70it/s]
+  0%|          | 4/15000 [00:00<39:42,  6.29it/s]
+                                                 
+
+  0%|          | 4/15000 [00:00<39:42,  6.29it/s]
+  0%|          | 5/15000 [00:00<35:20,  7.07it/s]
+                                                 
+
+  0%|          | 5/15000 [00:00<35:20,  7.07it/s]
+  0%|          | 6/15000 [00:00<34:00,  7.35it/s]
+                                                 
+
+  0%|          | 6/15000 [00:00<34:00,  7.35it/s]
+  0%|          | 7/15000 [00:01<44:53,  5.57it/s]
+                                                 
+
+  0%|          | 7/15000 [00:01<44:53,  5.57it/s]
+  0%|          | 8/15000 [00:01<48:54,  5.11it/s]
+                                                 
+
+  0%|          | 8/15000 [00:01<48:54,  5.11it/s]
+  0%|          | 9/15000 [00:01<42:45,  5.84it/s]
+                                                 
+
+  0%|          | 9/15000 [00:01<42:45,  5.84it/s]
+  0%|          | 10/15000 [00:01<37:16,  6.70it/s]
+                                                  
+
+  0%|          | 10/15000 [00:01<37:16,  6.70it/s]
+  0%|          | 11/15000 [00:01<37:32,  6.65it/s]
+                                                  
+
+  0%|          | 11/15000 [00:01<37:32,  6.65it/s]
+  0%|          | 12/15000 [00:02<1:45:00,  2.38it/s]
+                                                    
+
+  0%|          | 12/15000 [00:02<1:45:00,  2.38it/s]
+  0%|          | 13/15000 [00:03<1:27:49,  2.84it/s]
+                                                    
+
+  0%|          | 13/15000 [00:03<1:27:49,  2.84it/s]
+  0%|          | 14/15000 [00:03<1:10:35,  3.54it/s]
+                                                    
+
+  0%|          | 14/15000 [00:03<1:10:35,  3.54it/s]
+                                                    
+
+  0%|          | 15/15000 [00:03<1:10:35,  3.54it/s]
+  0%|          | 16/15000 [00:03<50:27,  4.95it/s]  
+                                                  
+
+  0%|          | 16/15000 [00:03<50:27,  4.95it/s]
+  0%|          | 17/15000 [00:03<48:22,  5.16it/s]
+                                                  
+
+  0%|          | 17/15000 [00:03<48:22,  5.16it/s]
+  0%|          | 18/15000 [00:03<50:48,  4.91it/s]
+                                                  
+
+  0%|          | 18/15000 [00:03<50:48,  4.91it/s]
+  0%|          | 19/15000 [00:03<44:27,  5.62it/s]
+                                                  
+
+  0%|          | 19/15000 [00:03<44:27,  5.62it/s]
+  0%|          | 20/15000 [00:04<42:44,  5.84it/s]
+                                                  
+
+  0%|          | 20/15000 [00:04<42:44,  5.84it/s]
+  0%|          | 21/15000 [00:04<38:23,  6.50it/s]
+                                                  
+
+  0%|          | 21/15000 [00:04<38:23,  6.50it/s]
+  0%|          | 22/15000 [00:04<35:34,  7.02it/s]
+                                                  
+
+  0%|          | 22/15000 [00:04<35:34,  7.02it/s]
+                                                  
+
+  0%|          | 23/15000 [00:04<35:34,  7.02it/s]
+  0%|          | 24/15000 [00:04<31:07,  8.02it/s]
+                                                  
+
+  0%|          | 24/15000 [00:04<31:07,  8.02it/s]
+  0%|          | 25/15000 [00:04<31:30,  7.92it/s]
+                                                  
+
+  0%|          | 25/15000 [00:04<31:30,  7.92it/s]
+  0%|          | 26/15000 [00:04<32:33,  7.67it/s]
+                                                  
+
+  0%|          | 26/15000 [00:04<32:33,  7.67it/s]
+  0%|          | 27/15000 [00:04<31:11,  8.00it/s]
+                                                  
+
+  0%|          | 27/15000 [00:04<31:11,  8.00it/s]
+  0%|          | 28/15000 [00:05<1:35:42,  2.61it/s]
+                                                    
+
+  0%|          | 28/15000 [00:05<1:35:42,  2.61it/s]
+  0%|          | 29/15000 [00:06<1:17:41,  3.21it/s]
+                                                    
+
+  0%|          | 29/15000 [00:06<1:17:41,  3.21it/s]
+  0%|          | 30/15000 [00:06<1:04:30,  3.87it/s]
+                                                    
+
+  0%|          | 30/15000 [00:06<1:04:30,  3.87it/s]
+  0%|          | 31/15000 [00:06<59:08,  4.22it/s]  
+                                                  
+
+  0%|          | 31/15000 [00:06<59:08,  4.22it/s]
+  0%|          | 32/15000 [00:06<52:20,  4.77it/s]
+                                                  
+
+  0%|          | 32/15000 [00:06<52:20,  4.77it/s]
+  0%|          | 33/15000 [00:06<56:58,  4.38it/s]
+                                                  
+
+  0%|          | 33/15000 [00:06<56:58,  4.38it/s]
+  0%|          | 34/15000 [00:06<53:50,  4.63it/s]
+                                                  
+
+  0%|          | 34/15000 [00:06<53:50,  4.63it/s]
+  0%|          | 35/15000 [00:07<45:35,  5.47it/s]
+                                                  
+
+  0%|          | 35/15000 [00:07<45:35,  5.47it/s]
+  0%|          | 36/15000 [00:07<43:39,  5.71it/s]
+                                                  
+
+  0%|          | 36/15000 [00:07<43:39,  5.71it/s]
+  0%|          | 37/15000 [00:07<41:36,  5.99it/s]
+                                                  
+
+  0%|          | 37/15000 [00:07<41:36,  5.99it/s]TCAPPDLL 2025-08-05 09:20:01.724452 - Epoch: 0.0002 Iteration: 1  rank : 0  train.loss : 0  train.ips : 0 imgs/s
+{'loss': 0.5289, 'grad_norm': 20.3277645111084, 'learning_rate': 4.999666666666667e-05, 'epoch': 0.0}
+TCAPPDLL 2025-08-05 09:20:01.897224 - Epoch: 0.0004 Iteration: 2  rank : 0  train.loss : 0.5289  train.ips : 0 imgs/s
+{'loss': 0.5587, 'grad_norm': 18.75667381286621, 'learning_rate': 4.9993333333333335e-05, 'epoch': 0.0}
+TCAPPDLL 2025-08-05 09:20:02.049090 - Epoch: 0.0006 Iteration: 3  rank : 0  train.loss : 0.5587  train.ips : 0 imgs/s
+{'loss': 0.3746, 'grad_norm': 33.040096282958984, 'learning_rate': 4.999e-05, 'epoch': 0.0}
+TCAPPDLL 2025-08-05 09:20:02.182350 - Epoch: 0.0008 Iteration: 4  rank : 0  train.loss : 0.3746  train.ips : 0 imgs/s
+{'loss': 0.3178, 'grad_norm': 27.521743774414062, 'learning_rate': 4.9986666666666674e-05, 'epoch': 0.0}
+TCAPPDLL 2025-08-05 09:20:02.292719 - Epoch: 0.001 Iteration: 5  rank : 0  train.loss : 0.3178  train.ips : 0 imgs/s
+{'loss': 0.2241, 'grad_norm': 18.41843032836914, 'learning_rate': 4.998333333333334e-05, 'epoch': 0.0}
+TCAPPDLL 2025-08-05 09:20:02.418643 - Epoch: 0.0012 Iteration: 6  rank : 0  train.loss : 0.2241  train.ips : 0 imgs/s
+{'loss': 0.2019, 'grad_norm': 11.213627815246582, 'learning_rate': 4.9980000000000006e-05, 'epoch': 0.0}
+TCAPPDLL 2025-08-05 09:20:02.688046 - Epoch: 0.0014 Iteration: 7  rank : 0  train.loss : 0.2019  train.ips : 0 imgs/s
+{'loss': 0.1709, 'grad_norm': 12.695297241210938, 'learning_rate': 4.997666666666667e-05, 'epoch': 0.0}
+TCAPPDLL 2025-08-05 09:20:02.918106 - Epoch: 0.0016 Iteration: 8  rank : 0  train.loss : 0.1709  train.ips : 0 imgs/s
+{'loss': 0.0754, 'grad_norm': 3.981788158416748, 'learning_rate': 4.997333333333333e-05, 'epoch': 0.0}
+TCAPPDLL 2025-08-05 09:20:03.035293 - Epoch: 0.0018 Iteration: 9  rank : 0  train.loss : 0.0754  train.ips : 0 imgs/s
+{'loss': 0.0762, 'grad_norm': 4.6905975341796875, 'learning_rate': 4.997e-05, 'epoch': 0.0}
+TCAPPDLL 2025-08-05 09:20:03.135374 - Epoch: 0.002 Iteration: 10  rank : 0  train.loss : 0.0762  train.ips : 0 imgs/s
+{'loss': 0.1001, 'grad_norm': 6.275590419769287, 'learning_rate': 4.996666666666667e-05, 'epoch': 0.0}
+TCAPPDLL 2025-08-05 09:20:03.288110 - Epoch: 0.0022 Iteration: 11  rank : 0  train.loss : 0.1001  train.ips : 0 imgs/s
+{'loss': 0.1102, 'grad_norm': 4.524080276489258, 'learning_rate': 4.996333333333334e-05, 'epoch': 0.0}
+TCAPPDLL 2025-08-05 09:20:04.326074 - Epoch: 0.0024 Iteration: 12  rank : 0  train.loss : 0.1102  train.ips : 0 imgs/s
+{'loss': 0.0681, 'grad_norm': 2.3213438987731934, 'learning_rate': 4.996e-05, 'epoch': 0.0}
+TCAPPDLL 2025-08-05 09:20:04.519521 - Epoch: 0.0026 Iteration: 13  rank : 0  train.loss : 0.0681  train.ips : 0 imgs/s
+{'loss': 0.0582, 'grad_norm': 3.1420040130615234, 'learning_rate': 4.995666666666667e-05, 'epoch': 0.0}
+TCAPPDLL 2025-08-05 09:20:04.642850 - Epoch: 0.0028 Iteration: 14  rank : 0  train.loss : 0.0582  train.ips : 0 imgs/s
+{'loss': 0.0525, 'grad_norm': 3.2872958183288574, 'learning_rate': 4.9953333333333335e-05, 'epoch': 0.0}
+TCAPPDLL 2025-08-05 09:20:04.739840 - Epoch: 0.003 Iteration: 15  rank : 0  train.loss : 0.0525  train.ips : 0 imgs/s
+{'loss': 0.0504, 'grad_norm': 2.400388479232788, 'learning_rate': 4.995e-05, 'epoch': 0.0}
+TCAPPDLL 2025-08-05 09:20:04.860088 - Epoch: 0.0032 Iteration: 16  rank : 0  train.loss : 0.0504  train.ips : 0 imgs/s
+{'loss': 0.07, 'grad_norm': 7.6606764793396, 'learning_rate': 4.994666666666667e-05, 'epoch': 0.0}
+TCAPPDLL 2025-08-05 09:20:05.028731 - Epoch: 0.0034 Iteration: 17  rank : 0  train.loss : 0.07  train.ips : 0 imgs/s
+{'loss': 0.0597, 'grad_norm': 1.914103388786316, 'learning_rate': 4.9943333333333333e-05, 'epoch': 0.0}
+TCAPPDLL 2025-08-05 09:20:05.259643 - Epoch: 0.0036 Iteration: 18  rank : 0  train.loss : 0.0597  train.ips : 0 imgs/s
+{'loss': 0.097, 'grad_norm': 2.5004937648773193, 'learning_rate': 4.9940000000000006e-05, 'epoch': 0.0}
+TCAPPDLL 2025-08-05 09:20:05.369952 - Epoch: 0.0038 Iteration: 19  rank : 0  train.loss : 0.097  train.ips : 0 imgs/s
+{'loss': 0.0471, 'grad_norm': 1.589551329612732, 'learning_rate': 4.993666666666667e-05, 'epoch': 0.0}
+TCAPPDLL 2025-08-05 09:20:05.523523 - Epoch: 0.004 Iteration: 20  rank : 0  train.loss : 0.0471  train.ips : 0 imgs/s
+{'loss': 0.048, 'grad_norm': 2.85115385055542, 'learning_rate': 4.993333333333334e-05, 'epoch': 0.0}
+TCAPPDLL 2025-08-05 09:20:05.633835 - Epoch: 0.0042 Iteration: 21  rank : 0  train.loss : 0.048  train.ips : 0 imgs/s
+{'loss': 0.1787, 'grad_norm': 2.2109036445617676, 'learning_rate': 4.9930000000000005e-05, 'epoch': 0.0}
+TCAPPDLL 2025-08-05 09:20:05.748738 - Epoch: 0.0044 Iteration: 22  rank : 0  train.loss : 0.1787  train.ips : 0 imgs/s
+{'loss': 0.0781, 'grad_norm': 5.450805187225342, 'learning_rate': 4.992666666666667e-05, 'epoch': 0.0}
+TCAPPDLL 2025-08-05 09:20:05.845771 - Epoch: 0.0046 Iteration: 23  rank : 0  train.loss : 0.0781  train.ips : 0 imgs/s
+{'loss': 1.67, 'grad_norm': 28.871540069580078, 'learning_rate': 4.992333333333333e-05, 'epoch': 0.0}
+TCAPPDLL 2025-08-05 09:20:05.955222 - Epoch: 0.0048 Iteration: 24  rank : 0  train.loss : 1.67  train.ips : 0 imgs/s
+{'loss': 0.0415, 'grad_norm': 3.116525650024414, 'learning_rate': 4.992e-05, 'epoch': 0.0}
+TCAPPDLL 2025-08-05 09:20:06.086063 - Epoch: 0.005 Iteration: 25  rank : 0  train.loss : 0.0415  train.ips : 0 imgs/s
+{'loss': 0.0699, 'grad_norm': 3.221892833709717, 'learning_rate': 4.991666666666667e-05, 'epoch': 0.01}
+TCAPPDLL 2025-08-05 09:20:06.228554 - Epoch: 0.0052 Iteration: 26  rank : 0  train.loss : 0.0699  train.ips : 0 imgs/s
+{'loss': 0.0766, 'grad_norm': 3.71695613861084, 'learning_rate': 4.9913333333333335e-05, 'epoch': 0.01}
+TCAPPDLL 2025-08-05 09:20:06.338748 - Epoch: 0.0054 Iteration: 27  rank : 0  train.loss : 0.0766  train.ips : 0 imgs/s
+{'loss': 0.0658, 'grad_norm': 2.4161975383758545, 'learning_rate': 4.991e-05, 'epoch': 0.01}
+TCAPPDLL 2025-08-05 09:20:07.392330 - Epoch: 0.0056 Iteration: 28  rank : 0  train.loss : 0.0658  train.ips : 0 imgs/s
+{'loss': 0.0389, 'grad_norm': 1.3748693466186523, 'learning_rate': 4.990666666666667e-05, 'epoch': 0.01}
+TCAPPDLL 2025-08-05 09:20:07.522708 - Epoch: 0.0058 Iteration: 29  rank : 0  train.loss : 0.0389  train.ips : 0 imgs/s
+{'loss': 0.1772, 'grad_norm': 4.909600734710693, 'learning_rate': 4.9903333333333334e-05, 'epoch': 0.01}
+TCAPPDLL 2025-08-05 09:20:07.651268 - Epoch: 0.006 Iteration: 30  rank : 0  train.loss : 0.1772  train.ips : 0 imgs/s
+{'loss': 0.0563, 'grad_norm': 3.086376428604126, 'learning_rate': 4.99e-05, 'epoch': 0.01}
+TCAPPDLL 2025-08-05 09:20:07.836170 - Epoch: 0.0062 Iteration: 31  rank : 0  train.loss : 0.0563  train.ips : 0 imgs/s
+{'loss': 0.0568, 'grad_norm': 4.276433944702148, 'learning_rate': 4.9896666666666666e-05, 'epoch': 0.01}
+TCAPPDLL 2025-08-05 09:20:07.980652 - Epoch: 0.0064 Iteration: 32  rank : 0  train.loss : 0.0568  train.ips : 0 imgs/s
+{'loss': 0.0414, 'grad_norm': 1.1969151496887207, 'learning_rate': 4.989333333333334e-05, 'epoch': 0.01}
+TCAPPDLL 2025-08-05 09:20:08.253261 - Epoch: 0.0066 Iteration: 33  rank : 0  train.loss : 0.0414  train.ips : 0 imgs/s
+{'loss': 0.0466, 'grad_norm': 1.3520824909210205, 'learning_rate': 4.9890000000000005e-05, 'epoch': 0.01}
+TCAPPDLL 2025-08-05 09:20:08.439565 - Epoch: 0.0068 Iteration: 34  rank : 0  train.loss : 0.0466  train.ips : 0 imgs/s
+{'loss': 0.0575, 'grad_norm': 2.088325262069702, 'learning_rate': 4.988666666666667e-05, 'epoch': 0.01}
+TCAPPDLL 2025-08-05 09:20:08.544388 - Epoch: 0.007 Iteration: 35  rank : 0  train.loss : 0.0575  train.ips : 0 imgs/s
+{'loss': 0.0307, 'grad_norm': 0.924969494342804, 'learning_rate': 4.988333333333334e-05, 'epoch': 0.01}
+TCAPPDLL 2025-08-05 09:20:08.701204 - Epoch: 0.0072 Iteration: 36  rank : 0  train.loss : 0.0307  train.ips : 0 imgs/s
+{'loss': 0.0408, 'grad_norm': 1.3614637851715088, 'learning_rate': 4.9880000000000004e-05, 'epoch': 0.01}
+TCAPPDLL 2025-08-05 09:20:08.848981 - Epoch: 0.0074 Iteration: 37  rank : 0  train.loss : 0.0408  train.ips : 0 imgs/s
+{'loss': 0.0681, 'grad_norm': 4.275932312011719, 'learning_rate': 4.987666666666667e-05, 'epoch': 0.01}
+
+  0%|          | 38/15000 [00:07<38:24,  6.49it/s]
+                                                  
+
+  0%|          | 38/15000 [00:07<38:24,  6.49it/s]
+  0%|          | 39/15000 [00:07<34:52,  7.15it/s]
+                                                  
+
+  0%|          | 39/15000 [00:07<34:52,  7.15it/s]
+  0%|          | 40/15000 [00:07<35:58,  6.93it/s]
+                                                  
+
+  0%|          | 40/15000 [00:07<35:58,  6.93it/s]
+  0%|          | 41/15000 [00:08<1:55:30,  2.16it/s]
+                                                    
+
+  0%|          | 41/15000 [00:08<1:55:30,  2.16it/s]
+  0%|          | 42/15000 [00:09<1:28:51,  2.81it/s]
+                                                    
+
+  0%|          | 42/15000 [00:09<1:28:51,  2.81it/s]
+                                                    
+
+  0%|          | 43/15000 [00:09<1:28:50,  2.81it/s]
+  0%|          | 44/15000 [00:09<1:07:42,  3.68it/s]
+                                                    
+
+  0%|          | 44/15000 [00:09<1:07:42,  3.68it/s]
+  0%|          | 45/15000 [00:09<1:01:08,  4.08it/s]
+                                                    
+
+  0%|          | 45/15000 [00:09<1:01:08,  4.08it/s]
+  0%|          | 46/15000 [00:09<53:49,  4.63it/s]  
+                                                  
+
+  0%|          | 46/15000 [00:09<53:49,  4.63it/s]
+  0%|          | 47/15000 [00:09<49:04,  5.08it/s]
+                                                  
+
+  0%|          | 47/15000 [00:09<49:04,  5.08it/s]
+  0%|          | 48/15000 [00:09<42:28,  5.87it/s]
+                                                  
+
+  0%|          | 48/15000 [00:09<42:28,  5.87it/s]
+  0%|          | 49/15000 [00:10<37:27,  6.65it/s]
+                                                  
+
+  0%|          | 49/15000 [00:10<37:27,  6.65it/s]
+                                                  
+
+  0%|          | 50/15000 [00:10<37:27,  6.65it/s]
+  0%|          | 51/15000 [00:10<31:45,  7.85it/s]
+                                                  
+
+  0%|          | 51/15000 [00:10<31:45,  7.85it/s]
+  0%|          | 52/15000 [00:10<31:28,  7.92it/s]
+                                                  
+
+  0%|          | 52/15000 [00:10<31:28,  7.92it/s]
+  0%|          | 53/15000 [00:10<34:06,  7.30it/s]
+                                                  
+
+  0%|          | 53/15000 [00:10<34:06,  7.30it/s]
+  0%|          | 54/15000 [00:10<33:25,  7.45it/s]
+                                                  
+
+  0%|          | 54/15000 [00:10<33:25,  7.45it/s]
+                                                  
+
+  0%|          | 55/15000 [00:10<33:24,  7.45it/s]
+  0%|          | 56/15000 [00:10<30:00,  8.30it/s]
+                                                  
+
+  0%|          | 56/15000 [00:10<30:00,  8.30it/s]
+  0%|          | 57/15000 [00:11<1:18:52,  3.16it/s]
+                                                    
+
+  0%|          | 57/15000 [00:11<1:18:52,  3.16it/s]
+  0%|          | 58/15000 [00:11<1:06:05,  3.77it/s]
+                                                    
+
+  0%|          | 58/15000 [00:11<1:06:05,  3.77it/s]
+  0%|          | 59/15000 [00:12<58:45,  4.24it/s]  
+                                                  
+
+  0%|          | 59/15000 [00:12<58:45,  4.24it/s]
+  0%|          | 60/15000 [00:12<52:00,  4.79it/s]
+                                                  
+
+  0%|          | 60/15000 [00:12<52:00,  4.79it/s]
+  0%|          | 61/15000 [00:12<44:49,  5.55it/s]
+                                                  
+
+  0%|          | 61/15000 [00:12<44:49,  5.55it/s]
+  0%|          | 62/15000 [00:12<41:09,  6.05it/s]
+                                                  
+
+  0%|          | 62/15000 [00:12<41:09,  6.05it/s]
+  0%|          | 63/15000 [00:12<47:04,  5.29it/s]
+                                                  
+
+  0%|          | 63/15000 [00:12<47:04,  5.29it/s]
+  0%|          | 64/15000 [00:12<43:48,  5.68it/s]
+                                                  
+
+  0%|          | 64/15000 [00:12<43:48,  5.68it/s]
+  0%|          | 65/15000 [00:13<44:27,  5.60it/s]
+                                                  
+
+  0%|          | 65/15000 [00:13<44:27,  5.60it/s]
+  0%|          | 66/15000 [00:13<39:50,  6.25it/s]
+                                                  
+
+  0%|          | 66/15000 [00:13<39:50,  6.25it/s]
+  0%|          | 67/15000 [00:13<41:53,  5.94it/s]
+                                                  
+
+  0%|          | 67/15000 [00:13<41:53,  5.94it/s]
+  0%|          | 68/15000 [00:13<37:50,  6.58it/s]
+                                                  
+
+  0%|          | 68/15000 [00:13<37:50,  6.58it/s]
+  0%|          | 69/15000 [00:13<38:17,  6.50it/s]
+                                                  
+
+  0%|          | 69/15000 [00:13<38:17,  6.50it/s]
+  0%|          | 70/15000 [00:13<41:57,  5.93it/s]
+                                                  
+
+  0%|          | 70/15000 [00:13<41:57,  5.93it/s]
+  0%|          | 71/15000 [00:14<1:57:07,  2.12it/s]
+                                                    
+
+  0%|          | 71/15000 [00:14<1:57:07,  2.12it/s]
+  0%|          | 72/15000 [00:15<1:39:05,  2.51it/s]
+                                                    
+
+  0%|          | 72/15000 [00:15<1:39:05,  2.51it/s]
+  0%|          | 73/15000 [00:15<1:18:02,  3.19it/s]
+                                                    
+
+  0%|          | 73/15000 [00:15<1:18:02,  3.19it/s]
+  0%|          | 74/15000 [00:15<1:05:38,  3.79it/s]
+                                                    
+
+  0%|          | 74/15000 [00:15<1:05:38,  3.79it/s]TCAPPDLL 2025-08-05 09:20:08.973031 - Epoch: 0.0076 Iteration: 38  rank : 0  train.loss : 0.0681  train.ips : 0 imgs/s
+{'loss': 0.0646, 'grad_norm': 2.9263877868652344, 'learning_rate': 4.9873333333333336e-05, 'epoch': 0.01}
+TCAPPDLL 2025-08-05 09:20:09.079679 - Epoch: 0.0078 Iteration: 39  rank : 0  train.loss : 0.0646  train.ips : 0 imgs/s
+{'loss': 0.0489, 'grad_norm': 1.3859045505523682, 'learning_rate': 4.987e-05, 'epoch': 0.01}
+TCAPPDLL 2025-08-05 09:20:09.234255 - Epoch: 0.008 Iteration: 40  rank : 0  train.loss : 0.0489  train.ips : 0 imgs/s
+{'loss': 0.1194, 'grad_norm': 7.51176643371582, 'learning_rate': 4.986666666666667e-05, 'epoch': 0.01}
+TCAPPDLL 2025-08-05 09:20:10.442838 - Epoch: 0.0082 Iteration: 41  rank : 0  train.loss : 0.1194  train.ips : 0 imgs/s
+{'loss': 0.0785, 'grad_norm': 4.627937316894531, 'learning_rate': 4.9863333333333334e-05, 'epoch': 0.01}
+TCAPPDLL 2025-08-05 09:20:10.549603 - Epoch: 0.0084 Iteration: 42  rank : 0  train.loss : 0.0785  train.ips : 0 imgs/s
+{'loss': 0.0421, 'grad_norm': 2.0444278717041016, 'learning_rate': 4.986e-05, 'epoch': 0.01}
+TCAPPDLL 2025-08-05 09:20:10.644893 - Epoch: 0.0086 Iteration: 43  rank : 0  train.loss : 0.0421  train.ips : 0 imgs/s
+{'loss': 0.0564, 'grad_norm': 1.5815011262893677, 'learning_rate': 4.9856666666666666e-05, 'epoch': 0.01}
+TCAPPDLL 2025-08-05 09:20:10.895044 - Epoch: 0.0088 Iteration: 44  rank : 0  train.loss : 0.0564  train.ips : 0 imgs/s
+{'loss': 0.0397, 'grad_norm': 1.1227095127105713, 'learning_rate': 4.985333333333333e-05, 'epoch': 0.01}
+TCAPPDLL 2025-08-05 09:20:11.060490 - Epoch: 0.009 Iteration: 45  rank : 0  train.loss : 0.0397  train.ips : 0 imgs/s
+{'loss': 0.057, 'grad_norm': 2.2334792613983154, 'learning_rate': 4.9850000000000006e-05, 'epoch': 0.01}
+TCAPPDLL 2025-08-05 09:20:11.193500 - Epoch: 0.0092 Iteration: 46  rank : 0  train.loss : 0.057  train.ips : 0 imgs/s
+{'loss': 0.0605, 'grad_norm': 2.3235530853271484, 'learning_rate': 4.984666666666667e-05, 'epoch': 0.01}
+TCAPPDLL 2025-08-05 09:20:11.339434 - Epoch: 0.0094 Iteration: 47  rank : 0  train.loss : 0.0605  train.ips : 0 imgs/s
+{'loss': 0.2342, 'grad_norm': 4.63865852355957, 'learning_rate': 4.984333333333334e-05, 'epoch': 0.01}
+TCAPPDLL 2025-08-05 09:20:11.441677 - Epoch: 0.0096 Iteration: 48  rank : 0  train.loss : 0.2342  train.ips : 0 imgs/s
+{'loss': 0.0607, 'grad_norm': 2.5177056789398193, 'learning_rate': 4.9840000000000004e-05, 'epoch': 0.01}
+TCAPPDLL 2025-08-05 09:20:11.541726 - Epoch: 0.0098 Iteration: 49  rank : 0  train.loss : 0.0607  train.ips : 0 imgs/s
+{'loss': 0.0368, 'grad_norm': 1.9619003534317017, 'learning_rate': 4.983666666666667e-05, 'epoch': 0.01}
+TCAPPDLL 2025-08-05 09:20:11.640503 - Epoch: 0.01 Iteration: 50  rank : 0  train.loss : 0.0368  train.ips : 0 imgs/s
+{'loss': 0.197, 'grad_norm': 4.6927056312561035, 'learning_rate': 4.9833333333333336e-05, 'epoch': 0.01}
+TCAPPDLL 2025-08-05 09:20:11.740604 - Epoch: 0.0102 Iteration: 51  rank : 0  train.loss : 0.197  train.ips : 0 imgs/s
+{'loss': 0.0598, 'grad_norm': 2.8977651596069336, 'learning_rate': 4.983e-05, 'epoch': 0.01}
+TCAPPDLL 2025-08-05 09:20:11.863384 - Epoch: 0.0104 Iteration: 52  rank : 0  train.loss : 0.0598  train.ips : 0 imgs/s
+{'loss': 0.1767, 'grad_norm': 2.9980146884918213, 'learning_rate': 4.982666666666667e-05, 'epoch': 0.01}
+TCAPPDLL 2025-08-05 09:20:12.030856 - Epoch: 0.0106 Iteration: 53  rank : 0  train.loss : 0.1767  train.ips : 0 imgs/s
+{'loss': 0.0496, 'grad_norm': 1.9247428178787231, 'learning_rate': 4.9823333333333335e-05, 'epoch': 0.01}
+TCAPPDLL 2025-08-05 09:20:12.157497 - Epoch: 0.0108 Iteration: 54  rank : 0  train.loss : 0.0496  train.ips : 0 imgs/s
+{'loss': 0.0587, 'grad_norm': 3.0156266689300537, 'learning_rate': 4.982e-05, 'epoch': 0.01}
+TCAPPDLL 2025-08-05 09:20:12.256465 - Epoch: 0.011 Iteration: 55  rank : 0  train.loss : 0.0587  train.ips : 0 imgs/s
+{'loss': 0.0916, 'grad_norm': 2.809692621231079, 'learning_rate': 4.981666666666667e-05, 'epoch': 0.01}
+TCAPPDLL 2025-08-05 09:20:12.362808 - Epoch: 0.0112 Iteration: 56  rank : 0  train.loss : 0.0916  train.ips : 0 imgs/s
+{'loss': 0.0621, 'grad_norm': 2.950809955596924, 'learning_rate': 4.981333333333333e-05, 'epoch': 0.01}
+TCAPPDLL 2025-08-05 09:20:13.311491 - Epoch: 0.0114 Iteration: 57  rank : 0  train.loss : 0.0621  train.ips : 0 imgs/s
+{'loss': 0.0645, 'grad_norm': 3.8540470600128174, 'learning_rate': 4.981e-05, 'epoch': 0.01}
+TCAPPDLL 2025-08-05 09:20:13.425406 - Epoch: 0.0116 Iteration: 58  rank : 0  train.loss : 0.0645  train.ips : 0 imgs/s
+{'loss': 0.1108, 'grad_norm': 3.768092632293701, 'learning_rate': 4.9806666666666665e-05, 'epoch': 0.01}
+TCAPPDLL 2025-08-05 09:20:13.579898 - Epoch: 0.0118 Iteration: 59  rank : 0  train.loss : 0.1108  train.ips : 0 imgs/s
+{'loss': 0.0642, 'grad_norm': 2.762497901916504, 'learning_rate': 4.980333333333334e-05, 'epoch': 0.01}
+TCAPPDLL 2025-08-05 09:20:13.717352 - Epoch: 0.012 Iteration: 60  rank : 0  train.loss : 0.0642  train.ips : 0 imgs/s
+{'loss': 0.0414, 'grad_norm': 0.9851977229118347, 'learning_rate': 4.9800000000000004e-05, 'epoch': 0.01}
+TCAPPDLL 2025-08-05 09:20:13.823912 - Epoch: 0.0122 Iteration: 61  rank : 0  train.loss : 0.0414  train.ips : 0 imgs/s
+{'loss': 0.0505, 'grad_norm': 3.935478687286377, 'learning_rate': 4.979666666666667e-05, 'epoch': 0.01}
+TCAPPDLL 2025-08-05 09:20:13.952750 - Epoch: 0.0124 Iteration: 62  rank : 0  train.loss : 0.0505  train.ips : 0 imgs/s
+{'loss': 0.0637, 'grad_norm': 3.0709340572357178, 'learning_rate': 4.9793333333333337e-05, 'epoch': 0.01}
+TCAPPDLL 2025-08-05 09:20:14.199827 - Epoch: 0.0126 Iteration: 63  rank : 0  train.loss : 0.0637  train.ips : 0 imgs/s
+{'loss': 0.0654, 'grad_norm': 2.362567901611328, 'learning_rate': 4.979e-05, 'epoch': 0.01}
+TCAPPDLL 2025-08-05 09:20:14.344301 - Epoch: 0.0128 Iteration: 64  rank : 0  train.loss : 0.0654  train.ips : 0 imgs/s
+{'loss': 0.0534, 'grad_norm': 2.6143414974212646, 'learning_rate': 4.978666666666667e-05, 'epoch': 0.01}
+TCAPPDLL 2025-08-05 09:20:14.529048 - Epoch: 0.013 Iteration: 65  rank : 0  train.loss : 0.0534  train.ips : 0 imgs/s
+{'loss': 0.046, 'grad_norm': 2.946183443069458, 'learning_rate': 4.9783333333333335e-05, 'epoch': 0.01}
+TCAPPDLL 2025-08-05 09:20:14.645318 - Epoch: 0.0132 Iteration: 66  rank : 0  train.loss : 0.046  train.ips : 0 imgs/s
+{'loss': 0.0543, 'grad_norm': 2.5284478664398193, 'learning_rate': 4.978e-05, 'epoch': 0.01}
+TCAPPDLL 2025-08-05 09:20:14.832996 - Epoch: 0.0134 Iteration: 67  rank : 0  train.loss : 0.0543  train.ips : 0 imgs/s
+{'loss': 0.0606, 'grad_norm': 2.0924267768859863, 'learning_rate': 4.9776666666666674e-05, 'epoch': 0.01}
+TCAPPDLL 2025-08-05 09:20:14.946779 - Epoch: 0.0136 Iteration: 68  rank : 0  train.loss : 0.0606  train.ips : 0 imgs/s
+{'loss': 0.0464, 'grad_norm': 2.432121753692627, 'learning_rate': 4.977333333333334e-05, 'epoch': 0.01}
+TCAPPDLL 2025-08-05 09:20:15.104874 - Epoch: 0.0138 Iteration: 69  rank : 0  train.loss : 0.0464  train.ips : 0 imgs/s
+{'loss': 0.0615, 'grad_norm': 2.043626546859741, 'learning_rate': 4.977e-05, 'epoch': 0.01}
+TCAPPDLL 2025-08-05 09:20:15.307883 - Epoch: 0.014 Iteration: 70  rank : 0  train.loss : 0.0615  train.ips : 0 imgs/s
+{'loss': 0.0454, 'grad_norm': 1.1283410787582397, 'learning_rate': 4.9766666666666666e-05, 'epoch': 0.01}
+TCAPPDLL 2025-08-05 09:20:16.485316 - Epoch: 0.0142 Iteration: 71  rank : 0  train.loss : 0.0454  train.ips : 0 imgs/s
+{'loss': 0.0474, 'grad_norm': 1.663334608078003, 'learning_rate': 4.976333333333333e-05, 'epoch': 0.01}
+TCAPPDLL 2025-08-05 09:20:16.714391 - Epoch: 0.0144 Iteration: 72  rank : 0  train.loss : 0.0474  train.ips : 0 imgs/s
+{'loss': 0.0469, 'grad_norm': 3.006592273712158, 'learning_rate': 4.976e-05, 'epoch': 0.01}
+TCAPPDLL 2025-08-05 09:20:16.830465 - Epoch: 0.0146 Iteration: 73  rank : 0  train.loss : 0.0469  train.ips : 0 imgs/s
+{'loss': 0.0528, 'grad_norm': 2.3557839393615723, 'learning_rate': 4.975666666666667e-05, 'epoch': 0.01}
+TCAPPDLL 2025-08-05 09:20:16.978064 - Epoch: 0.0148 Iteration: 74  rank : 0  train.loss : 0.0528  train.ips : 0 imgs/s
+{'loss': 0.0434, 'grad_norm': 1.266757845878601, 'learning_rate': 4.975333333333334e-05, 'epoch': 0.01}
+
+  0%|          | 75/15000 [00:15<56:01,  4.44it/s]  
+                                                  
+
+  0%|          | 75/15000 [00:15<56:01,  4.44it/s]
+  1%|          | 76/15000 [00:15<49:03,  5.07it/s]
+                                                  
+
+  1%|          | 76/15000 [00:15<49:03,  5.07it/s]
+  1%|          | 77/15000 [00:15<44:08,  5.63it/s]
+                                                  
+
+  1%|          | 77/15000 [00:15<44:08,  5.63it/s]
+  1%|          | 78/15000 [00:16<44:35,  5.58it/s]
+                                                  
+
+  1%|          | 78/15000 [00:16<44:35,  5.58it/s]
+  1%|          | 79/15000 [00:16<39:41,  6.27it/s]
+                                                  
+
+  1%|          | 79/15000 [00:16<39:41,  6.27it/s]
+  1%|          | 80/15000 [00:16<36:42,  6.78it/s]
+                                                  
+
+  1%|          | 80/15000 [00:16<36:42,  6.78it/s]
+  1%|          | 81/15000 [00:16<33:11,  7.49it/s]
+                                                  
+
+  1%|          | 81/15000 [00:16<33:11,  7.49it/s]
+  1%|          | 82/15000 [00:16<34:23,  7.23it/s]
+                                                  
+
+  1%|          | 82/15000 [00:16<34:23,  7.23it/s]
+  1%|          | 83/15000 [00:16<32:40,  7.61it/s]
+                                                  
+
+  1%|          | 83/15000 [00:16<32:40,  7.61it/s]
+  1%|          | 84/15000 [00:16<32:39,  7.61it/s]
+                                                  
+
+  1%|          | 84/15000 [00:16<32:39,  7.61it/s]
+  1%|          | 85/15000 [00:17<1:40:31,  2.47it/s]
+                                                    
+
+  1%|          | 85/15000 [00:17<1:40:31,  2.47it/s]
+  1%|          | 86/15000 [00:17<1:20:47,  3.08it/s]
+                                                    
+
+  1%|          | 86/15000 [00:17<1:20:47,  3.08it/s]
+  1%|          | 87/15000 [00:18<1:07:36,  3.68it/s]
+                                                    
+
+  1%|          | 87/15000 [00:18<1:07:36,  3.68it/s]
+  1%|          | 88/15000 [00:18<55:36,  4.47it/s]  
+                                                  
+
+  1%|          | 88/15000 [00:18<55:36,  4.47it/s]
+  1%|          | 89/15000 [00:18<49:02,  5.07it/s]
+                                                  
+
+  1%|          | 89/15000 [00:18<49:02,  5.07it/s]
+  1%|          | 90/15000 [00:18<42:52,  5.79it/s]
+                                                  
+
+  1%|          | 90/15000 [00:18<42:52,  5.79it/s]
+  1%|          | 91/15000 [00:18<40:16,  6.17it/s]
+                                                  
+
+  1%|          | 91/15000 [00:18<40:16,  6.17it/s]
+  1%|          | 92/15000 [00:18<39:09,  6.35it/s]
+                                                  
+
+  1%|          | 92/15000 [00:18<39:09,  6.35it/s]
+  1%|          | 93/15000 [00:18<35:59,  6.90it/s]
+                                                  
+
+  1%|          | 93/15000 [00:18<35:59,  6.90it/s]
+  1%|          | 94/15000 [00:18<33:37,  7.39it/s]
+                                                  
+
+  1%|          | 94/15000 [00:18<33:37,  7.39it/s]
+  1%|          | 95/15000 [00:19<33:08,  7.49it/s]
+                                                  
+
+  1%|          | 95/15000 [00:19<33:08,  7.49it/s]
+  1%|          | 96/15000 [00:19<36:00,  6.90it/s]
+                                                  
+
+  1%|          | 96/15000 [00:19<36:00,  6.90it/s]
+  1%|          | 97/15000 [00:19<37:02,  6.71it/s]
+                                                  
+
+  1%|          | 97/15000 [00:19<37:02,  6.71it/s]
+  1%|          | 98/15000 [00:19<33:47,  7.35it/s]
+                                                  
+
+  1%|          | 98/15000 [00:19<33:47,  7.35it/s]
+  1%|          | 99/15000 [00:19<32:22,  7.67it/s]
+                                                  
+
+  1%|          | 99/15000 [00:19<32:22,  7.67it/s]
+  1%|          | 100/15000 [00:19<33:31,  7.41it/s]
+                                                   
+
+  1%|          | 100/15000 [00:19<33:31,  7.41it/s]
+  1%|          | 101/15000 [00:20<1:47:14,  2.32it/s]
+                                                     
+
+  1%|          | 101/15000 [00:20<1:47:14,  2.32it/s]
+  1%|          | 102/15000 [00:21<1:24:14,  2.95it/s]
+                                                     
+
+  1%|          | 102/15000 [00:21<1:24:14,  2.95it/s]
+  1%|          | 103/15000 [00:21<1:08:22,  3.63it/s]
+                                                     
+
+  1%|          | 103/15000 [00:21<1:08:22,  3.63it/s]
+  1%|          | 104/15000 [00:21<59:49,  4.15it/s]  
+                                                   
+
+  1%|          | 104/15000 [00:21<59:49,  4.15it/s]
+  1%|          | 105/15000 [00:21<50:18,  4.93it/s]
+                                                   
+
+  1%|          | 105/15000 [00:21<50:18,  4.93it/s]
+  1%|          | 106/15000 [00:21<46:32,  5.33it/s]
+                                                   
+
+  1%|          | 106/15000 [00:21<46:32,  5.33it/s]
+  1%|          | 107/15000 [00:21<45:29,  5.46it/s]
+                                                   
+
+  1%|          | 107/15000 [00:21<45:29,  5.46it/s]
+  1%|          | 108/15000 [00:21<45:09,  5.50it/s]
+                                                   
+
+  1%|          | 108/15000 [00:21<45:09,  5.50it/s]
+  1%|          | 109/15000 [00:22<43:04,  5.76it/s]
+                                                   
+
+  1%|          | 109/15000 [00:22<43:04,  5.76it/s]
+  1%|          | 110/15000 [00:22<41:39,  5.96it/s]
+                                                   
+
+  1%|          | 110/15000 [00:22<41:39,  5.96it/s]
+  1%|          | 111/15000 [00:22<36:47,  6.75it/s]
+                                                   
+
+  1%|          | 111/15000 [00:22<36:47,  6.75it/s]TCAPPDLL 2025-08-05 09:20:17.113113 - Epoch: 0.015 Iteration: 75  rank : 0  train.loss : 0.0434  train.ips : 0 imgs/s
+{'loss': 0.0612, 'grad_norm': 34.296627044677734, 'learning_rate': 4.975e-05, 'epoch': 0.01}
+TCAPPDLL 2025-08-05 09:20:17.244834 - Epoch: 0.0152 Iteration: 76  rank : 0  train.loss : 0.0612  train.ips : 0 imgs/s
+{'loss': 0.0959, 'grad_norm': 5.80472993850708, 'learning_rate': 4.974666666666667e-05, 'epoch': 0.02}
+TCAPPDLL 2025-08-05 09:20:17.376285 - Epoch: 0.0154 Iteration: 77  rank : 0  train.loss : 0.0959  train.ips : 0 imgs/s
+{'loss': 0.0695, 'grad_norm': 4.737293720245361, 'learning_rate': 4.9743333333333335e-05, 'epoch': 0.02}
+TCAPPDLL 2025-08-05 09:20:17.559801 - Epoch: 0.0156 Iteration: 78  rank : 0  train.loss : 0.0695  train.ips : 0 imgs/s
+{'loss': 0.0497, 'grad_norm': 2.6720964908599854, 'learning_rate': 4.974e-05, 'epoch': 0.02}
+TCAPPDLL 2025-08-05 09:20:17.673260 - Epoch: 0.0158 Iteration: 79  rank : 0  train.loss : 0.0497  train.ips : 0 imgs/s
+{'loss': 0.0625, 'grad_norm': 1.8366827964782715, 'learning_rate': 4.973666666666667e-05, 'epoch': 0.02}
+TCAPPDLL 2025-08-05 09:20:17.793024 - Epoch: 0.016 Iteration: 80  rank : 0  train.loss : 0.0625  train.ips : 0 imgs/s
+{'loss': 0.0415, 'grad_norm': 2.170971155166626, 'learning_rate': 4.973333333333334e-05, 'epoch': 0.02}
+TCAPPDLL 2025-08-05 09:20:17.893517 - Epoch: 0.0162 Iteration: 81  rank : 0  train.loss : 0.0415  train.ips : 0 imgs/s
+{'loss': 0.0564, 'grad_norm': 1.4905121326446533, 'learning_rate': 4.973000000000001e-05, 'epoch': 0.02}
+TCAPPDLL 2025-08-05 09:20:18.043159 - Epoch: 0.0164 Iteration: 82  rank : 0  train.loss : 0.0564  train.ips : 0 imgs/s
+{'loss': 0.0928, 'grad_norm': 3.9683926105499268, 'learning_rate': 4.972666666666667e-05, 'epoch': 0.02}
+TCAPPDLL 2025-08-05 09:20:18.158615 - Epoch: 0.0166 Iteration: 83  rank : 0  train.loss : 0.0928  train.ips : 0 imgs/s
+{'loss': 0.0442, 'grad_norm': 0.8782273530960083, 'learning_rate': 4.972333333333334e-05, 'epoch': 0.02}
+TCAPPDLL 2025-08-05 09:20:18.289678 - Epoch: 0.0168 Iteration: 84  rank : 0  train.loss : 0.0442  train.ips : 0 imgs/s
+{'loss': 0.0579, 'grad_norm': 3.011277198791504, 'learning_rate': 4.972e-05, 'epoch': 0.02}
+TCAPPDLL 2025-08-05 09:20:19.331127 - Epoch: 0.017 Iteration: 85  rank : 0  train.loss : 0.0579  train.ips : 0 imgs/s
+{'loss': 0.0382, 'grad_norm': 1.3710253238677979, 'learning_rate': 4.9716666666666664e-05, 'epoch': 0.02}
+TCAPPDLL 2025-08-05 09:20:19.471204 - Epoch: 0.0172 Iteration: 86  rank : 0  train.loss : 0.0382  train.ips : 0 imgs/s
+{'loss': 0.0487, 'grad_norm': 1.0171146392822266, 'learning_rate': 4.971333333333334e-05, 'epoch': 0.02}
+TCAPPDLL 2025-08-05 09:20:19.619348 - Epoch: 0.0174 Iteration: 87  rank : 0  train.loss : 0.0487  train.ips : 0 imgs/s
+{'loss': 0.0549, 'grad_norm': 2.6886489391326904, 'learning_rate': 4.9710000000000003e-05, 'epoch': 0.02}
+TCAPPDLL 2025-08-05 09:20:19.730552 - Epoch: 0.0176 Iteration: 88  rank : 0  train.loss : 0.0549  train.ips : 0 imgs/s
+{'loss': 0.0737, 'grad_norm': 1.952366828918457, 'learning_rate': 4.970666666666667e-05, 'epoch': 0.02}
+TCAPPDLL 2025-08-05 09:20:19.866147 - Epoch: 0.0178 Iteration: 89  rank : 0  train.loss : 0.0737  train.ips : 0 imgs/s
+{'loss': 0.0366, 'grad_norm': 0.834712564945221, 'learning_rate': 4.9703333333333336e-05, 'epoch': 0.02}
+TCAPPDLL 2025-08-05 09:20:19.980999 - Epoch: 0.018 Iteration: 90  rank : 0  train.loss : 0.0366  train.ips : 0 imgs/s
+{'loss': 0.0409, 'grad_norm': 2.1032791137695312, 'learning_rate': 4.97e-05, 'epoch': 0.02}
+TCAPPDLL 2025-08-05 09:20:20.118691 - Epoch: 0.0182 Iteration: 91  rank : 0  train.loss : 0.0409  train.ips : 0 imgs/s
+{'loss': 0.0795, 'grad_norm': 49.76810836791992, 'learning_rate': 4.969666666666667e-05, 'epoch': 0.02}
+TCAPPDLL 2025-08-05 09:20:20.265589 - Epoch: 0.0184 Iteration: 92  rank : 0  train.loss : 0.0795  train.ips : 0 imgs/s
+{'loss': 0.0446, 'grad_norm': 1.1862143278121948, 'learning_rate': 4.9693333333333334e-05, 'epoch': 0.02}
+TCAPPDLL 2025-08-05 09:20:20.380902 - Epoch: 0.0186 Iteration: 93  rank : 0  train.loss : 0.0446  train.ips : 0 imgs/s
+{'loss': 0.0479, 'grad_norm': 2.5062708854675293, 'learning_rate': 4.969e-05, 'epoch': 0.02}
+TCAPPDLL 2025-08-05 09:20:20.494093 - Epoch: 0.0188 Iteration: 94  rank : 0  train.loss : 0.0479  train.ips : 0 imgs/s
+{'loss': 0.0623, 'grad_norm': 1.8887995481491089, 'learning_rate': 4.968666666666667e-05, 'epoch': 0.02}
+TCAPPDLL 2025-08-05 09:20:20.623046 - Epoch: 0.019 Iteration: 95  rank : 0  train.loss : 0.0623  train.ips : 0 imgs/s
+{'loss': 0.0683, 'grad_norm': 4.967922210693359, 'learning_rate': 4.968333333333334e-05, 'epoch': 0.02}
+TCAPPDLL 2025-08-05 09:20:20.794879 - Epoch: 0.0192 Iteration: 96  rank : 0  train.loss : 0.0683  train.ips : 0 imgs/s
+{'loss': 0.1059, 'grad_norm': 5.0375895500183105, 'learning_rate': 4.9680000000000005e-05, 'epoch': 0.02}
+TCAPPDLL 2025-08-05 09:20:20.953752 - Epoch: 0.0194 Iteration: 97  rank : 0  train.loss : 0.1059  train.ips : 0 imgs/s
+{'loss': 0.0573, 'grad_norm': 1.5646053552627563, 'learning_rate': 4.967666666666667e-05, 'epoch': 0.02}
+TCAPPDLL 2025-08-05 09:20:21.059338 - Epoch: 0.0196 Iteration: 98  rank : 0  train.loss : 0.0573  train.ips : 0 imgs/s
+{'loss': 0.0454, 'grad_norm': 3.4199676513671875, 'learning_rate': 4.967333333333334e-05, 'epoch': 0.02}
+TCAPPDLL 2025-08-05 09:20:21.176380 - Epoch: 0.0198 Iteration: 99  rank : 0  train.loss : 0.0454  train.ips : 0 imgs/s
+{'loss': 0.0403, 'grad_norm': 4.055163383483887, 'learning_rate': 4.967e-05, 'epoch': 0.02}
+TCAPPDLL 2025-08-05 09:20:21.322164 - Epoch: 0.02 Iteration: 100  rank : 0  train.loss : 0.0403  train.ips : 0 imgs/s
+{'loss': 0.0458, 'grad_norm': 2.3280394077301025, 'learning_rate': 4.966666666666667e-05, 'epoch': 0.02}
+·~
