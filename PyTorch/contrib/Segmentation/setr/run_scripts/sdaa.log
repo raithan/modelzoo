@@ -1,0 +1,1871 @@
+2025/07/24 12:51:10 - mmengine - INFO - 
+------------------------------------------------------------
+System environment:
+    sys.platform: linux
+    Python: 3.10.16 (main, Dec 11 2024, 16:24:50) [GCC 11.2.0]
+    CUDA available: True
+    MUSA available: False
+    numpy_random_seed: 63625788
+    GPU 0: /dev/tcaicard4
+    GPU 1: /dev/tcaicard5
+    GPU 2: /dev/tcaicard6
+    GPU 3: /dev/tcaicard7
+    CUDA_HOME: None
+    GCC: gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
+    PyTorch: 2.4.0a0+git4451b0e
+    PyTorch compiling details: PyTorch built with:
+  - GCC 11.5
+  - C++ Version: 201703
+  - Intel(R) oneAPI Math Kernel Library Version 2025.0-Product Build 20241009 for Intel(R) 64 architecture applications
+  - Intel(R) MKL-DNN v3.4.2 (Git Hash 1137e04ec0b5251ca2b4400a4fd3c667ce843d67)
+  - OpenMP 201511 (a.k.a. OpenMP 4.5)
+  - LAPACK is enabled (usually provided by MKL)
+  - NNPACK is enabled
+  - CPU capability usage: AVX512
+  - Build settings: BLAS_INFO=mkl, BUILD_TYPE=Release, CXX_COMPILER=/usr/bin/g++, CXX_FLAGS= -D_GLIBCXX_USE_CXX11_ABI=1 -fvisibility-inlines-hidden -DUSE_PTHREADPOOL -DNDEBUG -DUSE_KINETO -DLIBKINETO_NOCUPTI -DLIBKINETO_NOROCTRACER -DUSE_FBGEMM -DUSE_PYTORCH_QNNPACK -DUSE_XNNPACK -DSYMBOLICATE_MOBILE_DEBUG_HANDLE -O2 -fPIC -Wall -Wextra -Werror=return-type -Werror=non-virtual-dtor -Werror=range-loop-construct -Werror=bool-operation -Wnarrowing -Wno-missing-field-initializers -Wno-type-limits -Wno-array-bounds -Wno-unknown-pragmas -Wno-unused-parameter -Wno-unused-function -Wno-unused-result -Wno-strict-overflow -Wno-strict-aliasing -Wno-stringop-overflow -Wsuggest-override -Wno-psabi -Wno-error=pedantic -Wno-error=old-style-cast -Wno-missing-braces -fdiagnostics-color=always -faligned-new -Wno-unused-but-set-variable -Wno-maybe-uninitialized -fno-math-errno -fno-trapping-math -Werror=format -Wno-stringop-overflow, FORCE_FALLBACK_CUDA_MPI=1, LAPACK_INFO=mkl, PERF_WITH_AVX=1, PERF_WITH_AVX2=1, PERF_WITH_AVX512=1, TORCH_VERSION=2.4.0, USE_CUDA=OFF, USE_CUDNN=OFF, USE_CUSPARSELT=OFF, USE_EXCEPTION_PTR=1, USE_GFLAGS=OFF, USE_GLOG=OFF, USE_GLOO=ON, USE_MKL=ON, USE_MKLDNN=1, USE_MPI=ON, USE_NCCL=OFF, USE_NNPACK=ON, USE_OPENMP=ON, USE_ROCM=OFF, USE_ROCM_KERNEL_ASSERT=OFF, 
+
+    TorchVision: 0.15.1a0+42759b1
+    OpenCV: 4.12.0
+    MMEngine: 0.10.4
+
+Runtime environment:
+    cudnn_benchmark: True
+    dist_cfg: {'backend': 'nccl'}
+    mp_cfg: {'mp_start_method': 'fork', 'opencv_num_threads': 0}
+    seed: 63625788
+    Distributed launcher: pytorch
+    Distributed training: True
+    GPU number: 4
+------------------------------------------------------------
+
+2025/07/24 12:51:10 - mmengine - INFO - Config:
+backbone_norm_cfg = dict(eps=1e-06, requires_grad=True, type='LN')
+crop_size = (
+    512,
+    512,
+)
+data_preprocessor = dict(
+    bgr_to_rgb=True,
+    mean=[
+        123.675,
+        116.28,
+        103.53,
+    ],
+    pad_val=0,
+    seg_pad_val=255,
+    size=(
+        512,
+        512,
+    ),
+    std=[
+        58.395,
+        57.12,
+        57.375,
+    ],
+    type='SegDataPreProcessor')
+data_root = '/data/suda-data/lf/ADEChallengeData2016'
+dataset_type = 'ADE20KDataset'
+default_hooks = dict(
+    checkpoint=dict(by_epoch=False, interval=16000, type='CheckpointHook'),
+    logger=dict(interval=1, log_metric_by_epoch=False, type='LoggerHook'),
+    param_scheduler=dict(type='ParamSchedulerHook'),
+    sampler_seed=dict(type='DistSamplerSeedHook'),
+    timer=dict(type='IterTimerHook'),
+    visualization=dict(type='SegVisualizationHook'))
+default_scope = 'mmseg'
+env_cfg = dict(
+    cudnn_benchmark=True,
+    dist_cfg=dict(backend='nccl'),
+    mp_cfg=dict(mp_start_method='fork', opencv_num_threads=0))
+img_ratios = [
+    0.5,
+    0.75,
+    1.0,
+    1.25,
+    1.5,
+    1.75,
+]
+launcher = 'pytorch'
+load_from = None
+log_level = 'INFO'
+log_processor = dict(by_epoch=False)
+model = dict(
+    auxiliary_head=[
+        dict(
+            act_cfg=dict(type='ReLU'),
+            align_corners=False,
+            channels=256,
+            concat_input=False,
+            dropout_ratio=0,
+            in_channels=256,
+            in_index=0,
+            kernel_size=1,
+            loss_decode=dict(
+                loss_weight=0.4, type='CrossEntropyLoss', use_sigmoid=False),
+            norm_cfg=dict(requires_grad=True, type='SyncBN'),
+            num_classes=150,
+            num_convs=0,
+            type='FCNHead'),
+        dict(
+            act_cfg=dict(type='ReLU'),
+            align_corners=False,
+            channels=256,
+            concat_input=False,
+            dropout_ratio=0,
+            in_channels=256,
+            in_index=1,
+            kernel_size=1,
+            loss_decode=dict(
+                loss_weight=0.4, type='CrossEntropyLoss', use_sigmoid=False),
+            norm_cfg=dict(requires_grad=True, type='SyncBN'),
+            num_classes=150,
+            num_convs=0,
+            type='FCNHead'),
+        dict(
+            act_cfg=dict(type='ReLU'),
+            align_corners=False,
+            channels=256,
+            concat_input=False,
+            dropout_ratio=0,
+            in_channels=256,
+            in_index=2,
+            kernel_size=1,
+            loss_decode=dict(
+                loss_weight=0.4, type='CrossEntropyLoss', use_sigmoid=False),
+            norm_cfg=dict(requires_grad=True, type='SyncBN'),
+            num_classes=150,
+            num_convs=0,
+            type='FCNHead'),
+        dict(
+            act_cfg=dict(type='ReLU'),
+            align_corners=False,
+            channels=256,
+            concat_input=False,
+            dropout_ratio=0,
+            in_channels=256,
+            in_index=3,
+            kernel_size=1,
+            loss_decode=dict(
+                loss_weight=0.4, type='CrossEntropyLoss', use_sigmoid=False),
+            norm_cfg=dict(requires_grad=True, type='SyncBN'),
+            num_classes=150,
+            num_convs=0,
+            type='FCNHead'),
+    ],
+    backbone=dict(
+        drop_rate=0.0,
+        embed_dims=1024,
+        img_size=(
+            512,
+            512,
+        ),
+        in_channels=3,
+        init_cfg=dict(
+            checkpoint='pretrain/vit_large_p16.pth', type='Pretrained'),
+        interpolate_mode='bilinear',
+        norm_cfg=dict(eps=1e-06, requires_grad=True, type='LN'),
+        num_heads=16,
+        num_layers=24,
+        out_indices=(
+            5,
+            11,
+            17,
+            23,
+        ),
+        patch_size=16,
+        type='VisionTransformer',
+        with_cls_token=False),
+    data_preprocessor=dict(
+        bgr_to_rgb=True,
+        mean=[
+            123.675,
+            116.28,
+            103.53,
+        ],
+        pad_val=0,
+        seg_pad_val=255,
+        size=(
+            512,
+            512,
+        ),
+        std=[
+            58.395,
+            57.12,
+            57.375,
+        ],
+        type='SegDataPreProcessor'),
+    decode_head=dict(
+        align_corners=False,
+        channels=512,
+        dropout_ratio=0,
+        in_channels=(
+            256,
+            256,
+            256,
+            256,
+        ),
+        in_index=(
+            0,
+            1,
+            2,
+            3,
+        ),
+        loss_decode=dict(
+            loss_weight=1.0, type='CrossEntropyLoss', use_sigmoid=False),
+        mla_channels=128,
+        norm_cfg=dict(requires_grad=True, type='SyncBN'),
+        num_classes=150,
+        type='SETRMLAHead'),
+    neck=dict(
+        act_cfg=dict(type='ReLU'),
+        in_channels=[
+            1024,
+            1024,
+            1024,
+            1024,
+        ],
+        norm_cfg=dict(requires_grad=True, type='SyncBN'),
+        out_channels=256,
+        type='MLANeck'),
+    pretrained=None,
+    test_cfg=dict(crop_size=(
+        512,
+        512,
+    ), mode='slide', stride=(
+        341,
+        341,
+    )),
+    train_cfg=dict(),
+    type='EncoderDecoder')
+norm_cfg = dict(requires_grad=True, type='SyncBN')
+optim_wrapper = dict(
+    clip_grad=None,
+    loss_scale='dynamic',
+    optimizer=dict(lr=0.001, momentum=0.9, type='SGD', weight_decay=0.0),
+    paramwise_cfg=dict(custom_keys=dict(head=dict(lr_mult=10.0))),
+    type='AmpOptimWrapper')
+optimizer = dict(lr=0.001, momentum=0.9, type='SGD', weight_decay=0.0)
+param_scheduler = [
+    dict(
+        begin=0,
+        by_epoch=False,
+        end=160000,
+        eta_min=0.0001,
+        power=0.9,
+        type='PolyLR'),
+]
+resume = False
+test_cfg = dict(type='TestLoop')
+test_dataloader = dict(
+    batch_size=1,
+    dataset=dict(
+        data_prefix=dict(
+            img_path='images/validation',
+            seg_map_path='annotations/validation'),
+        data_root='/data/suda-data/lf/ADEChallengeData2016',
+        pipeline=[
+            dict(type='LoadImageFromFile'),
+            dict(keep_ratio=True, scale=(
+                2048,
+                512,
+            ), type='Resize'),
+            dict(reduce_zero_label=True, type='LoadAnnotations'),
+            dict(type='PackSegInputs'),
+        ],
+        type='ADE20KDataset'),
+    num_workers=4,
+    persistent_workers=True,
+    sampler=dict(shuffle=False, type='DefaultSampler'))
+test_evaluator = dict(
+    iou_metrics=[
+        'mIoU',
+    ], type='IoUMetric')
+test_pipeline = [
+    dict(type='LoadImageFromFile'),
+    dict(keep_ratio=True, scale=(
+        2048,
+        512,
+    ), type='Resize'),
+    dict(reduce_zero_label=True, type='LoadAnnotations'),
+    dict(type='PackSegInputs'),
+]
+train_cfg = dict(
+    max_iters=160000, type='IterBasedTrainLoop', val_interval=16000)
+train_dataloader = dict(
+    batch_size=2,
+    dataset=dict(
+        data_prefix=dict(
+            img_path='images/training', seg_map_path='annotations/training'),
+        data_root='/data/suda-data/lf/ADEChallengeData2016',
+        pipeline=[
+            dict(type='LoadImageFromFile'),
+            dict(reduce_zero_label=True, type='LoadAnnotations'),
+            dict(
+                keep_ratio=True,
+                ratio_range=(
+                    0.5,
+                    2.0,
+                ),
+                scale=(
+                    2048,
+                    512,
+                ),
+                type='RandomResize'),
+            dict(
+                cat_max_ratio=0.75, crop_size=(
+                    512,
+                    512,
+                ), type='RandomCrop'),
+            dict(prob=0.5, type='RandomFlip'),
+            dict(type='PhotoMetricDistortion'),
+            dict(type='PackSegInputs'),
+        ],
+        type='ADE20KDataset'),
+    num_workers=4,
+    persistent_workers=True,
+    sampler=dict(shuffle=True, type='InfiniteSampler'))
+train_pipeline = [
+    dict(type='LoadImageFromFile'),
+    dict(reduce_zero_label=True, type='LoadAnnotations'),
+    dict(
+        keep_ratio=True,
+        ratio_range=(
+            0.5,
+            2.0,
+        ),
+        scale=(
+            2048,
+            512,
+        ),
+        type='RandomResize'),
+    dict(cat_max_ratio=0.75, crop_size=(
+        512,
+        512,
+    ), type='RandomCrop'),
+    dict(prob=0.5, type='RandomFlip'),
+    dict(type='PhotoMetricDistortion'),
+    dict(type='PackSegInputs'),
+]
+tta_model = dict(type='SegTTAModel')
+tta_pipeline = [
+    dict(backend_args=None, type='LoadImageFromFile'),
+    dict(
+        transforms=[
+            [
+                dict(keep_ratio=True, scale_factor=0.5, type='Resize'),
+                dict(keep_ratio=True, scale_factor=0.75, type='Resize'),
+                dict(keep_ratio=True, scale_factor=1.0, type='Resize'),
+                dict(keep_ratio=True, scale_factor=1.25, type='Resize'),
+                dict(keep_ratio=True, scale_factor=1.5, type='Resize'),
+                dict(keep_ratio=True, scale_factor=1.75, type='Resize'),
+            ],
+            [
+                dict(direction='horizontal', prob=0.0, type='RandomFlip'),
+                dict(direction='horizontal', prob=1.0, type='RandomFlip'),
+            ],
+            [
+                dict(type='LoadAnnotations'),
+            ],
+            [
+                dict(type='PackSegInputs'),
+            ],
+        ],
+        type='TestTimeAug'),
+]
+val_cfg = dict(type='ValLoop')
+val_dataloader = dict(
+    batch_size=1,
+    dataset=dict(
+        data_prefix=dict(
+            img_path='images/validation',
+            seg_map_path='annotations/validation'),
+        data_root='/data/suda-data/lf/ADEChallengeData2016',
+        pipeline=[
+            dict(type='LoadImageFromFile'),
+            dict(keep_ratio=True, scale=(
+                2048,
+                512,
+            ), type='Resize'),
+            dict(reduce_zero_label=True, type='LoadAnnotations'),
+            dict(type='PackSegInputs'),
+        ],
+        type='ADE20KDataset'),
+    num_workers=4,
+    persistent_workers=True,
+    sampler=dict(shuffle=False, type='DefaultSampler'))
+val_evaluator = dict(
+    iou_metrics=[
+        'mIoU',
+    ], type='IoUMetric')
+vis_backends = [
+    dict(type='LocalVisBackend'),
+]
+visualizer = dict(
+    name='visualizer',
+    type='SegLocalVisualizer',
+    vis_backends=[
+        dict(type='LocalVisBackend'),
+    ])
+work_dir = './work_dirs/setr_vit-l_mla_8xb2-160k_ade20k-512x512'
+
+2025/07/24 12:51:17 - mmengine - INFO - Hooks will be executed in the following order:
+before_run:
+(VERY_HIGH   ) RuntimeInfoHook                    
+(BELOW_NORMAL) LoggerHook                         
+ -------------------- 
+before_train:
+(VERY_HIGH   ) RuntimeInfoHook                    
+(NORMAL      ) IterTimerHook                      
+(VERY_LOW    ) CheckpointHook                     
+ -------------------- 
+before_train_epoch:
+(VERY_HIGH   ) RuntimeInfoHook                    
+(NORMAL      ) IterTimerHook                      
+(NORMAL      ) DistSamplerSeedHook                
+ -------------------- 
+before_train_iter:
+(VERY_HIGH   ) RuntimeInfoHook                    
+(NORMAL      ) IterTimerHook                      
+ -------------------- 
+after_train_iter:
+(VERY_HIGH   ) RuntimeInfoHook                    
+(NORMAL      ) IterTimerHook                      
+(BELOW_NORMAL) LoggerHook                         
+(LOW         ) ParamSchedulerHook                 
+(VERY_LOW    ) CheckpointHook                     
+ -------------------- 
+after_train_epoch:
+(NORMAL      ) IterTimerHook                      
+(LOW         ) ParamSchedulerHook                 
+(VERY_LOW    ) CheckpointHook                     
+ -------------------- 
+before_val:
+(VERY_HIGH   ) RuntimeInfoHook                    
+ -------------------- 
+before_val_epoch:
+(NORMAL      ) IterTimerHook                      
+ -------------------- 
+before_val_iter:
+(NORMAL      ) IterTimerHook                      
+ -------------------- 
+after_val_iter:
+(NORMAL      ) IterTimerHook                      
+(NORMAL      ) SegVisualizationHook               
+(BELOW_NORMAL) LoggerHook                         
+ -------------------- 
+after_val_epoch:
+(VERY_HIGH   ) RuntimeInfoHook                    
+(NORMAL      ) IterTimerHook                      
+(BELOW_NORMAL) LoggerHook                         
+(LOW         ) ParamSchedulerHook                 
+(VERY_LOW    ) CheckpointHook                     
+ -------------------- 
+after_val:
+(VERY_HIGH   ) RuntimeInfoHook                    
+ -------------------- 
+after_train:
+(VERY_HIGH   ) RuntimeInfoHook                    
+(VERY_LOW    ) CheckpointHook                     
+ -------------------- 
+before_test:
+(VERY_HIGH   ) RuntimeInfoHook                    
+ -------------------- 
+before_test_epoch:
+(NORMAL      ) IterTimerHook                      
+ -------------------- 
+before_test_iter:
+(NORMAL      ) IterTimerHook                      
+ -------------------- 
+after_test_iter:
+(NORMAL      ) IterTimerHook                      
+(NORMAL      ) SegVisualizationHook               
+(BELOW_NORMAL) LoggerHook                         
+ -------------------- 
+after_test_epoch:
+(VERY_HIGH   ) RuntimeInfoHook                    
+(NORMAL      ) IterTimerHook                      
+(BELOW_NORMAL) LoggerHook                         
+ -------------------- 
+after_test:
+(VERY_HIGH   ) RuntimeInfoHook                    
+ -------------------- 
+after_run:
+(BELOW_NORMAL) LoggerHook                         
+ -------------------- 
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- decode_head.conv_seg.weight:lr=0.01
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- decode_head.conv_seg.weight:weight_decay=0.0
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- decode_head.conv_seg.weight:lr_mult=10.0
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- decode_head.conv_seg.bias:lr=0.01
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- decode_head.conv_seg.bias:weight_decay=0.0
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- decode_head.conv_seg.bias:lr_mult=10.0
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- decode_head.up_convs.0.0.conv.weight:lr=0.01
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- decode_head.up_convs.0.0.conv.weight:weight_decay=0.0
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- decode_head.up_convs.0.0.conv.weight:lr_mult=10.0
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- decode_head.up_convs.0.0.bn.weight:lr=0.01
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- decode_head.up_convs.0.0.bn.weight:weight_decay=0.0
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- decode_head.up_convs.0.0.bn.weight:lr_mult=10.0
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- decode_head.up_convs.0.0.bn.bias:lr=0.01
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- decode_head.up_convs.0.0.bn.bias:weight_decay=0.0
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- decode_head.up_convs.0.0.bn.bias:lr_mult=10.0
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- decode_head.up_convs.0.1.conv.weight:lr=0.01
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- decode_head.up_convs.0.1.conv.weight:weight_decay=0.0
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- decode_head.up_convs.0.1.conv.weight:lr_mult=10.0
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- decode_head.up_convs.0.1.bn.weight:lr=0.01
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- decode_head.up_convs.0.1.bn.weight:weight_decay=0.0
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- decode_head.up_convs.0.1.bn.weight:lr_mult=10.0
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- decode_head.up_convs.0.1.bn.bias:lr=0.01
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- decode_head.up_convs.0.1.bn.bias:weight_decay=0.0
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- decode_head.up_convs.0.1.bn.bias:lr_mult=10.0
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- decode_head.up_convs.1.0.conv.weight:lr=0.01
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- decode_head.up_convs.1.0.conv.weight:weight_decay=0.0
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- decode_head.up_convs.1.0.conv.weight:lr_mult=10.0
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- decode_head.up_convs.1.0.bn.weight:lr=0.01
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- decode_head.up_convs.1.0.bn.weight:weight_decay=0.0
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- decode_head.up_convs.1.0.bn.weight:lr_mult=10.0
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- decode_head.up_convs.1.0.bn.bias:lr=0.01
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- decode_head.up_convs.1.0.bn.bias:weight_decay=0.0
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- decode_head.up_convs.1.0.bn.bias:lr_mult=10.0
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- decode_head.up_convs.1.1.conv.weight:lr=0.01
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- decode_head.up_convs.1.1.conv.weight:weight_decay=0.0
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- decode_head.up_convs.1.1.conv.weight:lr_mult=10.0
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- decode_head.up_convs.1.1.bn.weight:lr=0.01
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- decode_head.up_convs.1.1.bn.weight:weight_decay=0.0
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- decode_head.up_convs.1.1.bn.weight:lr_mult=10.0
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- decode_head.up_convs.1.1.bn.bias:lr=0.01
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- decode_head.up_convs.1.1.bn.bias:weight_decay=0.0
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- decode_head.up_convs.1.1.bn.bias:lr_mult=10.0
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- decode_head.up_convs.2.0.conv.weight:lr=0.01
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- decode_head.up_convs.2.0.conv.weight:weight_decay=0.0
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- decode_head.up_convs.2.0.conv.weight:lr_mult=10.0
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- decode_head.up_convs.2.0.bn.weight:lr=0.01
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- decode_head.up_convs.2.0.bn.weight:weight_decay=0.0
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- decode_head.up_convs.2.0.bn.weight:lr_mult=10.0
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- decode_head.up_convs.2.0.bn.bias:lr=0.01
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- decode_head.up_convs.2.0.bn.bias:weight_decay=0.0
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- decode_head.up_convs.2.0.bn.bias:lr_mult=10.0
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- decode_head.up_convs.2.1.conv.weight:lr=0.01
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- decode_head.up_convs.2.1.conv.weight:weight_decay=0.0
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- decode_head.up_convs.2.1.conv.weight:lr_mult=10.0
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- decode_head.up_convs.2.1.bn.weight:lr=0.01
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- decode_head.up_convs.2.1.bn.weight:weight_decay=0.0
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- decode_head.up_convs.2.1.bn.weight:lr_mult=10.0
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- decode_head.up_convs.2.1.bn.bias:lr=0.01
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- decode_head.up_convs.2.1.bn.bias:weight_decay=0.0
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- decode_head.up_convs.2.1.bn.bias:lr_mult=10.0
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- decode_head.up_convs.3.0.conv.weight:lr=0.01
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- decode_head.up_convs.3.0.conv.weight:weight_decay=0.0
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- decode_head.up_convs.3.0.conv.weight:lr_mult=10.0
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- decode_head.up_convs.3.0.bn.weight:lr=0.01
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- decode_head.up_convs.3.0.bn.weight:weight_decay=0.0
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- decode_head.up_convs.3.0.bn.weight:lr_mult=10.0
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- decode_head.up_convs.3.0.bn.bias:lr=0.01
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- decode_head.up_convs.3.0.bn.bias:weight_decay=0.0
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- decode_head.up_convs.3.0.bn.bias:lr_mult=10.0
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- decode_head.up_convs.3.1.conv.weight:lr=0.01
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- decode_head.up_convs.3.1.conv.weight:weight_decay=0.0
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- decode_head.up_convs.3.1.conv.weight:lr_mult=10.0
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- decode_head.up_convs.3.1.bn.weight:lr=0.01
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- decode_head.up_convs.3.1.bn.weight:weight_decay=0.0
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- decode_head.up_convs.3.1.bn.weight:lr_mult=10.0
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- decode_head.up_convs.3.1.bn.bias:lr=0.01
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- decode_head.up_convs.3.1.bn.bias:weight_decay=0.0
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- decode_head.up_convs.3.1.bn.bias:lr_mult=10.0
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- auxiliary_head.0.conv_seg.weight:lr=0.01
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- auxiliary_head.0.conv_seg.weight:weight_decay=0.0
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- auxiliary_head.0.conv_seg.weight:lr_mult=10.0
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- auxiliary_head.0.conv_seg.bias:lr=0.01
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- auxiliary_head.0.conv_seg.bias:weight_decay=0.0
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- auxiliary_head.0.conv_seg.bias:lr_mult=10.0
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- auxiliary_head.1.conv_seg.weight:lr=0.01
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- auxiliary_head.1.conv_seg.weight:weight_decay=0.0
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- auxiliary_head.1.conv_seg.weight:lr_mult=10.0
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- auxiliary_head.1.conv_seg.bias:lr=0.01
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- auxiliary_head.1.conv_seg.bias:weight_decay=0.0
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- auxiliary_head.1.conv_seg.bias:lr_mult=10.0
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- auxiliary_head.2.conv_seg.weight:lr=0.01
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- auxiliary_head.2.conv_seg.weight:weight_decay=0.0
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- auxiliary_head.2.conv_seg.weight:lr_mult=10.0
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- auxiliary_head.2.conv_seg.bias:lr=0.01
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- auxiliary_head.2.conv_seg.bias:weight_decay=0.0
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- auxiliary_head.2.conv_seg.bias:lr_mult=10.0
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- auxiliary_head.3.conv_seg.weight:lr=0.01
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- auxiliary_head.3.conv_seg.weight:weight_decay=0.0
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- auxiliary_head.3.conv_seg.weight:lr_mult=10.0
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- auxiliary_head.3.conv_seg.bias:lr=0.01
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- auxiliary_head.3.conv_seg.bias:weight_decay=0.0
+2025/07/24 12:51:20 - mmengine - INFO - paramwise_options -- auxiliary_head.3.conv_seg.bias:lr_mult=10.0
+2025/07/24 12:51:20 - mmengine - WARNING - The prefix is not set in metric class IoUMetric.
+Name of parameter - Initialization information
+
+backbone.cls_token - torch.Size([1, 1, 1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.pos_embed - torch.Size([1, 1025, 1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.patch_embed.projection.weight - torch.Size([1024, 3, 16, 16]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.0.ln1.weight - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.0.ln1.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.0.attn.attn.in_proj_weight - torch.Size([3072, 1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.0.attn.attn.in_proj_bias - torch.Size([3072]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.0.attn.attn.out_proj.weight - torch.Size([1024, 1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.0.attn.attn.out_proj.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.0.ln2.weight - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.0.ln2.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.0.ffn.layers.0.0.weight - torch.Size([4096, 1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.0.ffn.layers.0.0.bias - torch.Size([4096]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.0.ffn.layers.1.weight - torch.Size([1024, 4096]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.0.ffn.layers.1.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.1.ln1.weight - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.1.ln1.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.1.attn.attn.in_proj_weight - torch.Size([3072, 1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.1.attn.attn.in_proj_bias - torch.Size([3072]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.1.attn.attn.out_proj.weight - torch.Size([1024, 1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.1.attn.attn.out_proj.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.1.ln2.weight - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.1.ln2.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.1.ffn.layers.0.0.weight - torch.Size([4096, 1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.1.ffn.layers.0.0.bias - torch.Size([4096]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.1.ffn.layers.1.weight - torch.Size([1024, 4096]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.1.ffn.layers.1.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.2.ln1.weight - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.2.ln1.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.2.attn.attn.in_proj_weight - torch.Size([3072, 1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.2.attn.attn.in_proj_bias - torch.Size([3072]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.2.attn.attn.out_proj.weight - torch.Size([1024, 1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.2.attn.attn.out_proj.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.2.ln2.weight - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.2.ln2.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.2.ffn.layers.0.0.weight - torch.Size([4096, 1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.2.ffn.layers.0.0.bias - torch.Size([4096]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.2.ffn.layers.1.weight - torch.Size([1024, 4096]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.2.ffn.layers.1.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.3.ln1.weight - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.3.ln1.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.3.attn.attn.in_proj_weight - torch.Size([3072, 1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.3.attn.attn.in_proj_bias - torch.Size([3072]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.3.attn.attn.out_proj.weight - torch.Size([1024, 1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.3.attn.attn.out_proj.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.3.ln2.weight - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.3.ln2.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.3.ffn.layers.0.0.weight - torch.Size([4096, 1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.3.ffn.layers.0.0.bias - torch.Size([4096]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.3.ffn.layers.1.weight - torch.Size([1024, 4096]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.3.ffn.layers.1.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.4.ln1.weight - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.4.ln1.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.4.attn.attn.in_proj_weight - torch.Size([3072, 1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.4.attn.attn.in_proj_bias - torch.Size([3072]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.4.attn.attn.out_proj.weight - torch.Size([1024, 1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.4.attn.attn.out_proj.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.4.ln2.weight - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.4.ln2.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.4.ffn.layers.0.0.weight - torch.Size([4096, 1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.4.ffn.layers.0.0.bias - torch.Size([4096]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.4.ffn.layers.1.weight - torch.Size([1024, 4096]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.4.ffn.layers.1.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.5.ln1.weight - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.5.ln1.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.5.attn.attn.in_proj_weight - torch.Size([3072, 1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.5.attn.attn.in_proj_bias - torch.Size([3072]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.5.attn.attn.out_proj.weight - torch.Size([1024, 1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.5.attn.attn.out_proj.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.5.ln2.weight - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.5.ln2.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.5.ffn.layers.0.0.weight - torch.Size([4096, 1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.5.ffn.layers.0.0.bias - torch.Size([4096]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.5.ffn.layers.1.weight - torch.Size([1024, 4096]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.5.ffn.layers.1.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.6.ln1.weight - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.6.ln1.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.6.attn.attn.in_proj_weight - torch.Size([3072, 1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.6.attn.attn.in_proj_bias - torch.Size([3072]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.6.attn.attn.out_proj.weight - torch.Size([1024, 1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.6.attn.attn.out_proj.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.6.ln2.weight - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.6.ln2.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.6.ffn.layers.0.0.weight - torch.Size([4096, 1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.6.ffn.layers.0.0.bias - torch.Size([4096]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.6.ffn.layers.1.weight - torch.Size([1024, 4096]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.6.ffn.layers.1.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.7.ln1.weight - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.7.ln1.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.7.attn.attn.in_proj_weight - torch.Size([3072, 1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.7.attn.attn.in_proj_bias - torch.Size([3072]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.7.attn.attn.out_proj.weight - torch.Size([1024, 1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.7.attn.attn.out_proj.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.7.ln2.weight - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.7.ln2.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.7.ffn.layers.0.0.weight - torch.Size([4096, 1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.7.ffn.layers.0.0.bias - torch.Size([4096]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.7.ffn.layers.1.weight - torch.Size([1024, 4096]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.7.ffn.layers.1.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.8.ln1.weight - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.8.ln1.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.8.attn.attn.in_proj_weight - torch.Size([3072, 1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.8.attn.attn.in_proj_bias - torch.Size([3072]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.8.attn.attn.out_proj.weight - torch.Size([1024, 1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.8.attn.attn.out_proj.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.8.ln2.weight - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.8.ln2.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.8.ffn.layers.0.0.weight - torch.Size([4096, 1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.8.ffn.layers.0.0.bias - torch.Size([4096]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.8.ffn.layers.1.weight - torch.Size([1024, 4096]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.8.ffn.layers.1.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.9.ln1.weight - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.9.ln1.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.9.attn.attn.in_proj_weight - torch.Size([3072, 1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.9.attn.attn.in_proj_bias - torch.Size([3072]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.9.attn.attn.out_proj.weight - torch.Size([1024, 1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.9.attn.attn.out_proj.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.9.ln2.weight - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.9.ln2.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.9.ffn.layers.0.0.weight - torch.Size([4096, 1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.9.ffn.layers.0.0.bias - torch.Size([4096]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.9.ffn.layers.1.weight - torch.Size([1024, 4096]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.9.ffn.layers.1.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.10.ln1.weight - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.10.ln1.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.10.attn.attn.in_proj_weight - torch.Size([3072, 1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.10.attn.attn.in_proj_bias - torch.Size([3072]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.10.attn.attn.out_proj.weight - torch.Size([1024, 1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.10.attn.attn.out_proj.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.10.ln2.weight - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.10.ln2.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.10.ffn.layers.0.0.weight - torch.Size([4096, 1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.10.ffn.layers.0.0.bias - torch.Size([4096]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.10.ffn.layers.1.weight - torch.Size([1024, 4096]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.10.ffn.layers.1.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.11.ln1.weight - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.11.ln1.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.11.attn.attn.in_proj_weight - torch.Size([3072, 1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.11.attn.attn.in_proj_bias - torch.Size([3072]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.11.attn.attn.out_proj.weight - torch.Size([1024, 1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.11.attn.attn.out_proj.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.11.ln2.weight - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.11.ln2.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.11.ffn.layers.0.0.weight - torch.Size([4096, 1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.11.ffn.layers.0.0.bias - torch.Size([4096]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.11.ffn.layers.1.weight - torch.Size([1024, 4096]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.11.ffn.layers.1.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.12.ln1.weight - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.12.ln1.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.12.attn.attn.in_proj_weight - torch.Size([3072, 1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.12.attn.attn.in_proj_bias - torch.Size([3072]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.12.attn.attn.out_proj.weight - torch.Size([1024, 1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.12.attn.attn.out_proj.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.12.ln2.weight - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.12.ln2.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.12.ffn.layers.0.0.weight - torch.Size([4096, 1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.12.ffn.layers.0.0.bias - torch.Size([4096]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.12.ffn.layers.1.weight - torch.Size([1024, 4096]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.12.ffn.layers.1.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.13.ln1.weight - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.13.ln1.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.13.attn.attn.in_proj_weight - torch.Size([3072, 1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.13.attn.attn.in_proj_bias - torch.Size([3072]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.13.attn.attn.out_proj.weight - torch.Size([1024, 1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.13.attn.attn.out_proj.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.13.ln2.weight - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.13.ln2.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.13.ffn.layers.0.0.weight - torch.Size([4096, 1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.13.ffn.layers.0.0.bias - torch.Size([4096]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.13.ffn.layers.1.weight - torch.Size([1024, 4096]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.13.ffn.layers.1.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.14.ln1.weight - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.14.ln1.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.14.attn.attn.in_proj_weight - torch.Size([3072, 1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.14.attn.attn.in_proj_bias - torch.Size([3072]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.14.attn.attn.out_proj.weight - torch.Size([1024, 1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.14.attn.attn.out_proj.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.14.ln2.weight - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.14.ln2.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.14.ffn.layers.0.0.weight - torch.Size([4096, 1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.14.ffn.layers.0.0.bias - torch.Size([4096]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.14.ffn.layers.1.weight - torch.Size([1024, 4096]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.14.ffn.layers.1.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.15.ln1.weight - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.15.ln1.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.15.attn.attn.in_proj_weight - torch.Size([3072, 1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.15.attn.attn.in_proj_bias - torch.Size([3072]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.15.attn.attn.out_proj.weight - torch.Size([1024, 1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.15.attn.attn.out_proj.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.15.ln2.weight - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.15.ln2.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.15.ffn.layers.0.0.weight - torch.Size([4096, 1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.15.ffn.layers.0.0.bias - torch.Size([4096]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.15.ffn.layers.1.weight - torch.Size([1024, 4096]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.15.ffn.layers.1.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.16.ln1.weight - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.16.ln1.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.16.attn.attn.in_proj_weight - torch.Size([3072, 1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.16.attn.attn.in_proj_bias - torch.Size([3072]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.16.attn.attn.out_proj.weight - torch.Size([1024, 1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.16.attn.attn.out_proj.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.16.ln2.weight - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.16.ln2.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.16.ffn.layers.0.0.weight - torch.Size([4096, 1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.16.ffn.layers.0.0.bias - torch.Size([4096]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.16.ffn.layers.1.weight - torch.Size([1024, 4096]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.16.ffn.layers.1.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.17.ln1.weight - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.17.ln1.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.17.attn.attn.in_proj_weight - torch.Size([3072, 1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.17.attn.attn.in_proj_bias - torch.Size([3072]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.17.attn.attn.out_proj.weight - torch.Size([1024, 1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.17.attn.attn.out_proj.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.17.ln2.weight - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.17.ln2.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.17.ffn.layers.0.0.weight - torch.Size([4096, 1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.17.ffn.layers.0.0.bias - torch.Size([4096]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.17.ffn.layers.1.weight - torch.Size([1024, 4096]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.17.ffn.layers.1.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.18.ln1.weight - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.18.ln1.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.18.attn.attn.in_proj_weight - torch.Size([3072, 1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.18.attn.attn.in_proj_bias - torch.Size([3072]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.18.attn.attn.out_proj.weight - torch.Size([1024, 1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.18.attn.attn.out_proj.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.18.ln2.weight - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.18.ln2.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.18.ffn.layers.0.0.weight - torch.Size([4096, 1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.18.ffn.layers.0.0.bias - torch.Size([4096]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.18.ffn.layers.1.weight - torch.Size([1024, 4096]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.18.ffn.layers.1.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.19.ln1.weight - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.19.ln1.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.19.attn.attn.in_proj_weight - torch.Size([3072, 1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.19.attn.attn.in_proj_bias - torch.Size([3072]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.19.attn.attn.out_proj.weight - torch.Size([1024, 1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.19.attn.attn.out_proj.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.19.ln2.weight - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.19.ln2.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.19.ffn.layers.0.0.weight - torch.Size([4096, 1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.19.ffn.layers.0.0.bias - torch.Size([4096]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.19.ffn.layers.1.weight - torch.Size([1024, 4096]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.19.ffn.layers.1.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.20.ln1.weight - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.20.ln1.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.20.attn.attn.in_proj_weight - torch.Size([3072, 1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.20.attn.attn.in_proj_bias - torch.Size([3072]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.20.attn.attn.out_proj.weight - torch.Size([1024, 1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.20.attn.attn.out_proj.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.20.ln2.weight - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.20.ln2.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.20.ffn.layers.0.0.weight - torch.Size([4096, 1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.20.ffn.layers.0.0.bias - torch.Size([4096]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.20.ffn.layers.1.weight - torch.Size([1024, 4096]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.20.ffn.layers.1.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.21.ln1.weight - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.21.ln1.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.21.attn.attn.in_proj_weight - torch.Size([3072, 1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.21.attn.attn.in_proj_bias - torch.Size([3072]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.21.attn.attn.out_proj.weight - torch.Size([1024, 1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.21.attn.attn.out_proj.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.21.ln2.weight - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.21.ln2.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.21.ffn.layers.0.0.weight - torch.Size([4096, 1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.21.ffn.layers.0.0.bias - torch.Size([4096]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.21.ffn.layers.1.weight - torch.Size([1024, 4096]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.21.ffn.layers.1.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.22.ln1.weight - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.22.ln1.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.22.attn.attn.in_proj_weight - torch.Size([3072, 1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.22.attn.attn.in_proj_bias - torch.Size([3072]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.22.attn.attn.out_proj.weight - torch.Size([1024, 1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.22.attn.attn.out_proj.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.22.ln2.weight - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.22.ln2.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.22.ffn.layers.0.0.weight - torch.Size([4096, 1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.22.ffn.layers.0.0.bias - torch.Size([4096]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.22.ffn.layers.1.weight - torch.Size([1024, 4096]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.22.ffn.layers.1.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.23.ln1.weight - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.23.ln1.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.23.attn.attn.in_proj_weight - torch.Size([3072, 1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.23.attn.attn.in_proj_bias - torch.Size([3072]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.23.attn.attn.out_proj.weight - torch.Size([1024, 1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.23.attn.attn.out_proj.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.23.ln2.weight - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.23.ln2.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.23.ffn.layers.0.0.weight - torch.Size([4096, 1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.23.ffn.layers.0.0.bias - torch.Size([4096]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.23.ffn.layers.1.weight - torch.Size([1024, 4096]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+backbone.layers.23.ffn.layers.1.bias - torch.Size([1024]): 
+Initialized by user-defined `init_weights` in VisionTransformer  
+
+neck.norm.0.weight - torch.Size([1024]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+neck.norm.0.bias - torch.Size([1024]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+neck.norm.1.weight - torch.Size([1024]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+neck.norm.1.bias - torch.Size([1024]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+neck.norm.2.weight - torch.Size([1024]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+neck.norm.2.bias - torch.Size([1024]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+neck.norm.3.weight - torch.Size([1024]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+neck.norm.3.bias - torch.Size([1024]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+neck.mla.channel_proj.0.conv.weight - torch.Size([256, 1024, 1, 1]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+neck.mla.channel_proj.0.bn.weight - torch.Size([256]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+neck.mla.channel_proj.0.bn.bias - torch.Size([256]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+neck.mla.channel_proj.1.conv.weight - torch.Size([256, 1024, 1, 1]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+neck.mla.channel_proj.1.bn.weight - torch.Size([256]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+neck.mla.channel_proj.1.bn.bias - torch.Size([256]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+neck.mla.channel_proj.2.conv.weight - torch.Size([256, 1024, 1, 1]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+neck.mla.channel_proj.2.bn.weight - torch.Size([256]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+neck.mla.channel_proj.2.bn.bias - torch.Size([256]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+neck.mla.channel_proj.3.conv.weight - torch.Size([256, 1024, 1, 1]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+neck.mla.channel_proj.3.bn.weight - torch.Size([256]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+neck.mla.channel_proj.3.bn.bias - torch.Size([256]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+neck.mla.feat_extract.0.conv.weight - torch.Size([256, 256, 3, 3]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+neck.mla.feat_extract.0.bn.weight - torch.Size([256]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+neck.mla.feat_extract.0.bn.bias - torch.Size([256]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+neck.mla.feat_extract.1.conv.weight - torch.Size([256, 256, 3, 3]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+neck.mla.feat_extract.1.bn.weight - torch.Size([256]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+neck.mla.feat_extract.1.bn.bias - torch.Size([256]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+neck.mla.feat_extract.2.conv.weight - torch.Size([256, 256, 3, 3]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+neck.mla.feat_extract.2.bn.weight - torch.Size([256]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+neck.mla.feat_extract.2.bn.bias - torch.Size([256]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+neck.mla.feat_extract.3.conv.weight - torch.Size([256, 256, 3, 3]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+neck.mla.feat_extract.3.bn.weight - torch.Size([256]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+neck.mla.feat_extract.3.bn.bias - torch.Size([256]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+decode_head.conv_seg.weight - torch.Size([150, 512, 1, 1]): 
+NormalInit: mean=0, std=0.01, bias=0 
+
+decode_head.conv_seg.bias - torch.Size([150]): 
+NormalInit: mean=0, std=0.01, bias=0 
+
+decode_head.up_convs.0.0.conv.weight - torch.Size([128, 256, 3, 3]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+decode_head.up_convs.0.0.bn.weight - torch.Size([128]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+decode_head.up_convs.0.0.bn.bias - torch.Size([128]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+decode_head.up_convs.0.1.conv.weight - torch.Size([128, 128, 3, 3]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+decode_head.up_convs.0.1.bn.weight - torch.Size([128]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+decode_head.up_convs.0.1.bn.bias - torch.Size([128]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+decode_head.up_convs.1.0.conv.weight - torch.Size([128, 256, 3, 3]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+decode_head.up_convs.1.0.bn.weight - torch.Size([128]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+decode_head.up_convs.1.0.bn.bias - torch.Size([128]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+decode_head.up_convs.1.1.conv.weight - torch.Size([128, 128, 3, 3]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+decode_head.up_convs.1.1.bn.weight - torch.Size([128]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+decode_head.up_convs.1.1.bn.bias - torch.Size([128]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+decode_head.up_convs.2.0.conv.weight - torch.Size([128, 256, 3, 3]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+decode_head.up_convs.2.0.bn.weight - torch.Size([128]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+decode_head.up_convs.2.0.bn.bias - torch.Size([128]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+decode_head.up_convs.2.1.conv.weight - torch.Size([128, 128, 3, 3]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+decode_head.up_convs.2.1.bn.weight - torch.Size([128]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+decode_head.up_convs.2.1.bn.bias - torch.Size([128]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+decode_head.up_convs.3.0.conv.weight - torch.Size([128, 256, 3, 3]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+decode_head.up_convs.3.0.bn.weight - torch.Size([128]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+decode_head.up_convs.3.0.bn.bias - torch.Size([128]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+decode_head.up_convs.3.1.conv.weight - torch.Size([128, 128, 3, 3]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+decode_head.up_convs.3.1.bn.weight - torch.Size([128]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+decode_head.up_convs.3.1.bn.bias - torch.Size([128]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+auxiliary_head.0.conv_seg.weight - torch.Size([150, 256, 1, 1]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+auxiliary_head.0.conv_seg.bias - torch.Size([150]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+auxiliary_head.1.conv_seg.weight - torch.Size([150, 256, 1, 1]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+auxiliary_head.1.conv_seg.bias - torch.Size([150]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+auxiliary_head.2.conv_seg.weight - torch.Size([150, 256, 1, 1]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+auxiliary_head.2.conv_seg.bias - torch.Size([150]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+auxiliary_head.3.conv_seg.weight - torch.Size([150, 256, 1, 1]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+auxiliary_head.3.conv_seg.bias - torch.Size([150]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+2025/07/24 12:51:25 - mmengine - WARNING - "FileClient" will be deprecated in future. Please use io functions in https://mmengine.readthedocs.io/en/latest/api/fileio.html#file-io
+2025/07/24 12:51:25 - mmengine - WARNING - "HardDiskBackend" is the alias of "LocalBackend" and the former will be deprecated in future.
+2025/07/24 12:51:25 - mmengine - INFO - Checkpoints will be saved to /data/suda-data/lf/mmsegmentation-main/work_dirs/setr_vit-l_mla_8xb2-160k_ade20k-512x512.
+2025/07/24 12:51:37 - mmengine - INFO - Iter(train) [     1/160000]  base_lr: 1.0000e-03 lr: 1.0000e-03  eta: 21 days, 5:47:22  time: 11.4703  data_time: 0.0146  memory: 10679  loss: 8.0737  decode.loss_ce: 3.0847  decode.acc_seg: 0.0293  aux_0.loss_ce: 1.2500  aux_0.acc_seg: 0.1913  aux_1.loss_ce: 1.2426  aux_1.acc_seg: 1.0161  aux_2.loss_ce: 1.2366  aux_2.acc_seg: 2.7926  aux_3.loss_ce: 1.2597  aux_3.acc_seg: 0.0089
+2025/07/24 12:51:49 - mmengine - INFO - Iter(train) [     2/160000]  base_lr: 9.9999e-04 lr: 9.9999e-04  eta: 22 days, 9:06:10  time: 12.0850  data_time: 0.0253  memory: 11869  loss: 9.0384  decode.loss_ce: 3.4055  decode.acc_seg: 1.2307  aux_0.loss_ce: 1.4008  aux_0.acc_seg: 0.0307  aux_1.loss_ce: 1.4099  aux_1.acc_seg: 0.0111  aux_2.loss_ce: 1.4031  aux_2.acc_seg: 0.0332  aux_3.loss_ce: 1.4192  aux_3.acc_seg: 0.0000
+2025/07/24 12:52:02 - mmengine - INFO - Iter(train) [     3/160000]  base_lr: 9.9999e-04 lr: 9.9999e-04  eta: 22 days, 18:37:46  time: 12.2994  data_time: 0.0285  memory: 11869  loss: 9.4268  decode.loss_ce: 3.5526  decode.acc_seg: 9.3856  aux_0.loss_ce: 1.4598  aux_0.acc_seg: 0.3590  aux_1.loss_ce: 1.4605  aux_1.acc_seg: 3.9638  aux_2.loss_ce: 1.4722  aux_2.acc_seg: 0.0007  aux_3.loss_ce: 1.4817  aux_3.acc_seg: 0.4828
+2025/07/24 12:52:15 - mmengine - INFO - Iter(train) [     4/160000]  base_lr: 9.9998e-04 lr: 9.9998e-04  eta: 22 days, 21:01:06  time: 12.3532  data_time: 0.0285  memory: 11869  loss: 9.9510  decode.loss_ce: 3.7384  decode.acc_seg: 20.9861  aux_0.loss_ce: 1.5472  aux_0.acc_seg: 0.8625  aux_1.loss_ce: 1.5544  aux_1.acc_seg: 0.3450  aux_2.loss_ce: 1.5550  aux_2.acc_seg: 1.8837  aux_3.loss_ce: 1.5559  aux_3.acc_seg: 1.0614
+2025/07/24 12:52:26 - mmengine - INFO - Iter(train) [     5/160000]  base_lr: 9.9998e-04 lr: 9.9998e-04  eta: 22 days, 13:25:37  time: 12.1825  data_time: 0.0285  memory: 11869  loss: 10.1771  decode.loss_ce: 3.8070  decode.acc_seg: 11.0126  aux_0.loss_ce: 1.5858  aux_0.acc_seg: 0.7389  aux_1.loss_ce: 1.5950  aux_1.acc_seg: 3.5798  aux_2.loss_ce: 1.6018  aux_2.acc_seg: 0.0290  aux_3.loss_ce: 1.5875  aux_3.acc_seg: 0.3360
+2025/07/24 12:52:38 - mmengine - INFO - Iter(train) [     6/160000]  base_lr: 9.9997e-04 lr: 9.9997e-04  eta: 22 days, 11:37:51  time: 12.1422  data_time: 0.0304  memory: 11869  loss: 10.6334  decode.loss_ce: 3.9670  decode.acc_seg: 0.0000  aux_0.loss_ce: 1.6506  aux_0.acc_seg: 0.6572  aux_1.loss_ce: 1.6754  aux_1.acc_seg: 0.0649  aux_2.loss_ce: 1.6879  aux_2.acc_seg: 0.0021  aux_3.loss_ce: 1.6525  aux_3.acc_seg: 2.1368
+2025/07/24 12:52:50 - mmengine - INFO - Iter(train) [     7/160000]  base_lr: 9.9997e-04 lr: 9.9997e-04  eta: 22 days, 9:59:53  time: 12.1055  data_time: 0.0304  memory: 11869  loss: 10.3849  decode.loss_ce: 3.8575  decode.acc_seg: 8.9166  aux_0.loss_ce: 1.6157  aux_0.acc_seg: 1.5550  aux_1.loss_ce: 1.6419  aux_1.acc_seg: 0.5794  aux_2.loss_ce: 1.6516  aux_2.acc_seg: 3.7182  aux_3.loss_ce: 1.6182  aux_3.acc_seg: 0.7650
+2025/07/24 12:53:02 - mmengine - INFO - Iter(train) [     8/160000]  base_lr: 9.9996e-04 lr: 9.9996e-04  eta: 22 days, 12:53:17  time: 12.1706  data_time: 0.0279  memory: 11869  loss: 9.6027  decode.loss_ce: 3.5563  decode.acc_seg: 10.3465  aux_0.loss_ce: 1.4979  aux_0.acc_seg: 4.7694  aux_1.loss_ce: 1.5198  aux_1.acc_seg: 1.1065  aux_2.loss_ce: 1.5283  aux_2.acc_seg: 17.1199  aux_3.loss_ce: 1.5004  aux_3.acc_seg: 1.3575
+2025/07/24 12:53:15 - mmengine - INFO - Iter(train) [     9/160000]  base_lr: 9.9996e-04 lr: 9.9996e-04  eta: 22 days, 12:44:37  time: 12.1674  data_time: 0.0288  memory: 11869  loss: 9.7621  decode.loss_ce: 3.6091  decode.acc_seg: 3.2941  aux_0.loss_ce: 1.5243  aux_0.acc_seg: 2.0039  aux_1.loss_ce: 1.5440  aux_1.acc_seg: 2.9863  aux_2.loss_ce: 1.5552  aux_2.acc_seg: 2.1474  aux_3.loss_ce: 1.5296  aux_3.acc_seg: 1.0392
+2025/07/24 12:53:26 - mmengine - INFO - Iter(train) [    10/160000]  base_lr: 9.9995e-04 lr: 9.9995e-04  eta: 22 days, 9:03:28  time: 12.0846  data_time: 0.0288  memory: 11869  loss: 9.8093  decode.loss_ce: 3.6096  decode.acc_seg: 18.6707  aux_0.loss_ce: 1.5354  aux_0.acc_seg: 5.3646  aux_1.loss_ce: 1.5559  aux_1.acc_seg: 1.4989  aux_2.loss_ce: 1.5664  aux_2.acc_seg: 0.7447  aux_3.loss_ce: 1.5420  aux_3.acc_seg: 4.4213
+2025/07/24 12:53:37 - mmengine - INFO - Iter(train) [    11/160000]  base_lr: 9.9995e-04 lr: 9.9995e-04  eta: 22 days, 6:28:12  time: 12.0820  data_time: 0.0293  memory: 11869  loss: 10.1123  decode.loss_ce: 3.6457  decode.acc_seg: 0.0000  aux_0.loss_ce: 1.5918  aux_0.acc_seg: 5.0580  aux_1.loss_ce: 1.6301  aux_1.acc_seg: 0.0000  aux_2.loss_ce: 1.6388  aux_2.acc_seg: 0.4380  aux_3.loss_ce: 1.6059  aux_3.acc_seg: 4.4997
+2025/07/24 12:53:49 - mmengine - INFO - Iter(train) [    12/160000]  base_lr: 9.9994e-04 lr: 9.9994e-04  eta: 22 days, 3:15:20  time: 11.9280  data_time: 0.0278  memory: 11869  loss: 10.3141  decode.loss_ce: 3.7455  decode.acc_seg: 5.3577  aux_0.loss_ce: 1.6195  aux_0.acc_seg: 1.6985  aux_1.loss_ce: 1.6533  aux_1.acc_seg: 1.2235  aux_2.loss_ce: 1.6667  aux_2.acc_seg: 1.8551  aux_3.loss_ce: 1.6291  aux_3.acc_seg: 0.8245
+2025/07/24 12:53:59 - mmengine - INFO - Iter(train) [    13/160000]  base_lr: 9.9994e-04 lr: 9.9994e-04  eta: 21 days, 23:35:52  time: 11.7437  data_time: 0.0274  memory: 11869  loss: 10.3773  decode.loss_ce: 3.7198  decode.acc_seg: 3.3291  aux_0.loss_ce: 1.6427  aux_0.acc_seg: 21.5718  aux_1.loss_ce: 1.6803  aux_1.acc_seg: 16.2789  aux_2.loss_ce: 1.6898  aux_2.acc_seg: 21.4283  aux_3.loss_ce: 1.6446  aux_3.acc_seg: 26.1808
+2025/07/24 12:54:10 - mmengine - INFO - Iter(train) [    14/160000]  base_lr: 9.9993e-04 lr: 9.9993e-04  eta: 21 days, 19:26:32  time: 11.5486  data_time: 0.0269  memory: 11869  loss: 10.4078  decode.loss_ce: 3.7169  decode.acc_seg: 13.2679  aux_0.loss_ce: 1.6493  aux_0.acc_seg: 8.1313  aux_1.loss_ce: 1.6878  aux_1.acc_seg: 4.6986  aux_2.loss_ce: 1.6982  aux_2.acc_seg: 4.0120  aux_3.loss_ce: 1.6557  aux_3.acc_seg: 3.6341
+2025/07/24 12:54:20 - mmengine - INFO - Iter(train) [    15/160000]  base_lr: 9.9993e-04 lr: 9.9993e-04  eta: 21 days, 15:23:00  time: 11.4396  data_time: 0.0271  memory: 11867  loss: 9.9625  decode.loss_ce: 3.5259  decode.acc_seg: 37.2986  aux_0.loss_ce: 1.5904  aux_0.acc_seg: 38.1378  aux_1.loss_ce: 1.6241  aux_1.acc_seg: 37.9151  aux_2.loss_ce: 1.6271  aux_2.acc_seg: 43.5631  aux_3.loss_ce: 1.5950  aux_3.acc_seg: 42.0170
+2025/07/24 12:54:31 - mmengine - INFO - Iter(train) [    16/160000]  base_lr: 9.9992e-04 lr: 9.9992e-04  eta: 21 days, 12:45:41  time: 11.3200  data_time: 0.0247  memory: 11869  loss: 9.4860  decode.loss_ce: 3.3179  decode.acc_seg: 44.1867  aux_0.loss_ce: 1.5317  aux_0.acc_seg: 30.0669  aux_1.loss_ce: 1.5564  aux_1.acc_seg: 28.5609  aux_2.loss_ce: 1.5487  aux_2.acc_seg: 26.5246  aux_3.loss_ce: 1.5313  aux_3.acc_seg: 26.5768
+2025/07/24 12:54:45 - mmengine - INFO - Iter(train) [    17/160000]  base_lr: 9.9992e-04 lr: 9.9992e-04  eta: 21 days, 19:17:35  time: 11.5442  data_time: 0.0240  memory: 11869  loss: 9.7770  decode.loss_ce: 3.4445  decode.acc_seg: 14.5528  aux_0.loss_ce: 1.5698  aux_0.acc_seg: 9.9577  aux_1.loss_ce: 1.5986  aux_1.acc_seg: 15.8084  aux_2.loss_ce: 1.5911  aux_2.acc_seg: 7.6070  aux_3.loss_ce: 1.5731  aux_3.acc_seg: 3.2905
+2025/07/24 12:54:57 - mmengine - INFO - Iter(train) [    18/160000]  base_lr: 9.9991e-04 lr: 9.9991e-04  eta: 21 days, 19:34:23  time: 11.4706  data_time: 0.0260  memory: 11869  loss: 10.4089  decode.loss_ce: 3.6450  decode.acc_seg: 18.3411  aux_0.loss_ce: 1.6756  aux_0.acc_seg: 4.9276  aux_1.loss_ce: 1.7070  aux_1.acc_seg: 17.7396  aux_2.loss_ce: 1.6970  aux_2.acc_seg: 24.8391  aux_3.loss_ce: 1.6842  aux_3.acc_seg: 26.6466
+2025/07/24 12:55:08 - mmengine - INFO - Iter(train) [    19/160000]  base_lr: 9.9991e-04 lr: 9.9991e-04  eta: 21 days, 17:01:44  time: 11.3260  data_time: 0.0248  memory: 11869  loss: 10.5279  decode.loss_ce: 3.7000  decode.acc_seg: 1.0870  aux_0.loss_ce: 1.6953  aux_0.acc_seg: 0.0964  aux_1.loss_ce: 1.7185  aux_1.acc_seg: 0.8476  aux_2.loss_ce: 1.7146  aux_2.acc_seg: 0.0664  aux_3.loss_ce: 1.6994  aux_3.acc_seg: 0.1907
+2025/07/24 12:55:19 - mmengine - INFO - Iter(train) [    20/160000]  base_lr: 9.9990e-04 lr: 9.9990e-04  eta: 21 days, 15:11:52  time: 11.2823  data_time: 0.0248  memory: 11869  loss: 10.7525  decode.loss_ce: 3.8473  decode.acc_seg: 10.3991  aux_0.loss_ce: 1.7153  aux_0.acc_seg: 3.1116  aux_1.loss_ce: 1.7336  aux_1.acc_seg: 3.1197  aux_2.loss_ce: 1.7328  aux_2.acc_seg: 1.0857  aux_3.loss_ce: 1.7234  aux_3.acc_seg: 2.8812
+2025/07/24 12:55:30 - mmengine - INFO - Iter(train) [    21/160000]  base_lr: 9.9990e-04 lr: 9.9990e-04  eta: 21 days, 13:54:40  time: 11.2455  data_time: 0.0252  memory: 11869  loss: 10.4230  decode.loss_ce: 3.7705  decode.acc_seg: 48.3528  aux_0.loss_ce: 1.6622  aux_0.acc_seg: 33.9150  aux_1.loss_ce: 1.6678  aux_1.acc_seg: 39.7406  aux_2.loss_ce: 1.6622  aux_2.acc_seg: 34.5835  aux_3.loss_ce: 1.6604  aux_3.acc_seg: 34.0654
+2025/07/24 12:55:41 - mmengine - INFO - Iter(train) [    22/160000]  base_lr: 9.9989e-04 lr: 9.9989e-04  eta: 21 days, 13:07:32  time: 11.2563  data_time: 0.0260  memory: 11869  loss: 9.9648  decode.loss_ce: 3.5530  decode.acc_seg: 28.0172  aux_0.loss_ce: 1.6029  aux_0.acc_seg: 12.2872  aux_1.loss_ce: 1.6099  aux_1.acc_seg: 8.8189  aux_2.loss_ce: 1.6005  aux_2.acc_seg: 11.7808  aux_3.loss_ce: 1.5986  aux_3.acc_seg: 18.8141
+2025/07/24 12:55:53 - mmengine - INFO - Iter(train) [    23/160000]  base_lr: 9.9989e-04 lr: 9.9989e-04  eta: 21 days, 14:26:42  time: 11.3999  data_time: 0.0254  memory: 11869  loss: 9.8532  decode.loss_ce: 3.5390  decode.acc_seg: 14.9099  aux_0.loss_ce: 1.5791  aux_0.acc_seg: 22.9160  aux_1.loss_ce: 1.5819  aux_1.acc_seg: 11.4014  aux_2.loss_ce: 1.5707  aux_2.acc_seg: 13.2407  aux_3.loss_ce: 1.5825  aux_3.acc_seg: 16.9386
+2025/07/24 12:56:05 - mmengine - INFO - Iter(train) [    24/160000]  base_lr: 9.9988e-04 lr: 9.9988e-04  eta: 21 days, 14:38:40  time: 11.5211  data_time: 0.0254  memory: 11869  loss: 9.7056  decode.loss_ce: 3.4566  decode.acc_seg: 0.1648  aux_0.loss_ce: 1.5688  aux_0.acc_seg: 1.4025  aux_1.loss_ce: 1.5582  aux_1.acc_seg: 5.5587  aux_2.loss_ce: 1.5536  aux_2.acc_seg: 5.1649  aux_3.loss_ce: 1.5684  aux_3.acc_seg: 1.1494
+2025/07/24 12:56:16 - mmengine - INFO - Iter(train) [    25/160000]  base_lr: 9.9988e-04 lr: 9.9988e-04  eta: 21 days, 13:20:46  time: 11.5744  data_time: 0.0250  memory: 11869  loss: 9.7870  decode.loss_ce: 3.4855  decode.acc_seg: 27.7092  aux_0.loss_ce: 1.5833  aux_0.acc_seg: 18.2635  aux_1.loss_ce: 1.5687  aux_1.acc_seg: 22.8959  aux_2.loss_ce: 1.5696  aux_2.acc_seg: 20.0834  aux_3.loss_ce: 1.5799  aux_3.acc_seg: 25.2910
+2025/07/24 12:56:27 - mmengine - INFO - Iter(train) [    26/160000]  base_lr: 9.9987e-04 lr: 9.9987e-04  eta: 21 days, 12:07:03  time: 11.5925  data_time: 0.0252  memory: 11869  loss: 9.5597  decode.loss_ce: 3.3998  decode.acc_seg: 2.0249  aux_0.loss_ce: 1.5417  aux_0.acc_seg: 0.0651  aux_1.loss_ce: 1.5320  aux_1.acc_seg: 0.1720  aux_2.loss_ce: 1.5404  aux_2.acc_seg: 0.2987  aux_3.loss_ce: 1.5459  aux_3.acc_seg: 1.3583
+2025/07/24 12:56:41 - mmengine - INFO - Iter(train) [    27/160000]  base_lr: 9.9987e-04 lr: 9.9987e-04  eta: 21 days, 16:33:52  time: 11.6115  data_time: 0.0254  memory: 11869  loss: 9.2458  decode.loss_ce: 3.2254  decode.acc_seg: 3.2727  aux_0.loss_ce: 1.5107  aux_0.acc_seg: 4.2156  aux_1.loss_ce: 1.4905  aux_1.acc_seg: 3.1026  aux_2.loss_ce: 1.5043  aux_2.acc_seg: 6.8482  aux_3.loss_ce: 1.5149  aux_3.acc_seg: 3.6668
+2025/07/24 12:56:55 - mmengine - INFO - Iter(train) [    28/160000]  base_lr: 9.9986e-04 lr: 9.9986e-04  eta: 21 days, 19:05:50  time: 11.7538  data_time: 0.0247  memory: 11869  loss: 9.3941  decode.loss_ce: 3.3545  decode.acc_seg: 4.8280  aux_0.loss_ce: 1.5140  aux_0.acc_seg: 15.1594  aux_1.loss_ce: 1.4909  aux_1.acc_seg: 4.1382  aux_2.loss_ce: 1.5131  aux_2.acc_seg: 5.9676  aux_3.loss_ce: 1.5216  aux_3.acc_seg: 1.8376
+2025/07/24 12:57:08 - mmengine - INFO - Iter(train) [    29/160000]  base_lr: 9.9986e-04 lr: 9.9986e-04  eta: 21 days, 20:40:08  time: 11.9642  data_time: 0.0254  memory: 11867  loss: 8.7536  decode.loss_ce: 3.0941  decode.acc_seg: 38.4792  aux_0.loss_ce: 1.4132  aux_0.acc_seg: 31.9510  aux_1.loss_ce: 1.4075  aux_1.acc_seg: 12.6358  aux_2.loss_ce: 1.4147  aux_2.acc_seg: 11.3859  aux_3.loss_ce: 1.4241  aux_3.acc_seg: 28.3166
+2025/07/24 12:57:19 - mmengine - INFO - Iter(train) [    30/160000]  base_lr: 9.9985e-04 lr: 9.9985e-04  eta: 21 days, 20:41:09  time: 12.0561  data_time: 0.0247  memory: 11869  loss: 8.3074  decode.loss_ce: 2.8899  decode.acc_seg: 27.9902  aux_0.loss_ce: 1.3565  aux_0.acc_seg: 11.6703  aux_1.loss_ce: 1.3488  aux_1.acc_seg: 11.0082  aux_2.loss_ce: 1.3495  aux_2.acc_seg: 11.0913  aux_3.loss_ce: 1.3627  aux_3.acc_seg: 7.7154
+2025/07/24 12:57:31 - mmengine - INFO - Iter(train) [    31/160000]  base_lr: 9.9985e-04 lr: 9.9985e-04  eta: 21 days, 20:09:21  time: 12.0925  data_time: 0.0259  memory: 11867  loss: 8.0820  decode.loss_ce: 2.8318  decode.acc_seg: 7.4114  aux_0.loss_ce: 1.3140  aux_0.acc_seg: 23.9968  aux_1.loss_ce: 1.2998  aux_1.acc_seg: 30.0627  aux_2.loss_ce: 1.3098  aux_2.acc_seg: 28.9909  aux_3.loss_ce: 1.3266  aux_3.acc_seg: 12.6968
+2025/07/24 12:57:42 - mmengine - INFO - Iter(train) [    32/160000]  base_lr: 9.9984e-04 lr: 9.9984e-04  eta: 21 days, 19:17:56  time: 12.0838  data_time: 0.0251  memory: 11867  loss: 8.0913  decode.loss_ce: 2.8455  decode.acc_seg: 25.1760  aux_0.loss_ce: 1.3096  aux_0.acc_seg: 8.6170  aux_1.loss_ce: 1.2987  aux_1.acc_seg: 7.2797  aux_2.loss_ce: 1.3088  aux_2.acc_seg: 7.3006  aux_3.loss_ce: 1.3288  aux_3.acc_seg: 9.2179
+2025/07/24 12:57:53 - mmengine - INFO - Iter(train) [    33/160000]  base_lr: 9.9984e-04 lr: 9.9984e-04  eta: 21 days, 18:06:41  time: 11.9414  data_time: 0.0246  memory: 11869  loss: 7.8096  decode.loss_ce: 2.7549  decode.acc_seg: 35.2632  aux_0.loss_ce: 1.2644  aux_0.acc_seg: 39.4621  aux_1.loss_ce: 1.2535  aux_1.acc_seg: 46.2816  aux_2.loss_ce: 1.2640  aux_2.acc_seg: 31.0322  aux_3.loss_ce: 1.2728  aux_3.acc_seg: 55.8809
+2025/07/24 12:58:03 - mmengine - INFO - Iter(train) [    34/160000]  base_lr: 9.9983e-04 lr: 9.9983e-04  eta: 21 days, 16:25:07  time: 11.8095  data_time: 0.0250  memory: 11869  loss: 7.6966  decode.loss_ce: 2.7294  decode.acc_seg: 18.3879  aux_0.loss_ce: 1.2373  aux_0.acc_seg: 4.0021  aux_1.loss_ce: 1.2391  aux_1.acc_seg: 1.9839  aux_2.loss_ce: 1.2429  aux_2.acc_seg: 2.9673  aux_3.loss_ce: 1.2478  aux_3.acc_seg: 6.8863
+2025/07/24 12:58:14 - mmengine - INFO - Iter(train) [    35/160000]  base_lr: 9.9983e-04 lr: 9.9983e-04  eta: 21 days, 14:57:23  time: 11.7715  data_time: 0.0256  memory: 11869  loss: 7.7022  decode.loss_ce: 2.7642  decode.acc_seg: 27.2211  aux_0.loss_ce: 1.2232  aux_0.acc_seg: 20.6280  aux_1.loss_ce: 1.2350  aux_1.acc_seg: 19.9490  aux_2.loss_ce: 1.2396  aux_2.acc_seg: 15.3008  aux_3.loss_ce: 1.2402  aux_3.acc_seg: 36.7525
+2025/07/24 12:58:24 - mmengine - INFO - Iter(train) [    36/160000]  base_lr: 9.9982e-04 lr: 9.9982e-04  eta: 21 days, 12:47:30  time: 11.6718  data_time: 0.0269  memory: 11869  loss: 7.7084  decode.loss_ce: 2.8052  decode.acc_seg: 47.9340  aux_0.loss_ce: 1.2184  aux_0.acc_seg: 31.3799  aux_1.loss_ce: 1.2253  aux_1.acc_seg: 31.4646  aux_2.loss_ce: 1.2252  aux_2.acc_seg: 34.0080  aux_3.loss_ce: 1.2342  aux_3.acc_seg: 19.6358
+2025/07/24 12:58:34 - mmengine - INFO - Iter(train) [    37/160000]  base_lr: 9.9982e-04 lr: 9.9982e-04  eta: 21 days, 10:42:56  time: 11.2304  data_time: 0.0261  memory: 11869  loss: 7.3761  decode.loss_ce: 2.7415  decode.acc_seg: 6.3699  aux_0.loss_ce: 1.1529  aux_0.acc_seg: 38.1101  aux_1.loss_ce: 1.1615  aux_1.acc_seg: 43.9689  aux_2.loss_ce: 1.1582  aux_2.acc_seg: 38.7449  aux_3.loss_ce: 1.1620  aux_3.acc_seg: 50.1509
+2025/07/24 12:58:44 - mmengine - INFO - Iter(train) [    38/160000]  base_lr: 9.9981e-04 lr: 9.9981e-04  eta: 21 days, 9:08:20  time: 10.9229  data_time: 0.0262  memory: 11869  loss: 6.7398  decode.loss_ce: 2.4589  decode.acc_seg: 12.0503  aux_0.loss_ce: 1.0684  aux_0.acc_seg: 26.1876  aux_1.loss_ce: 1.0751  aux_1.acc_seg: 39.3213  aux_2.loss_ce: 1.0698  aux_2.acc_seg: 25.2236  aux_3.loss_ce: 1.0675  aux_3.acc_seg: 35.7205
+2025/07/24 12:58:54 - mmengine - INFO - Iter(train) [    39/160000]  base_lr: 9.9981e-04 lr: 9.9981e-04  eta: 21 days, 7:35:50  time: 10.6627  data_time: 0.0249  memory: 11869  loss: 6.8503  decode.loss_ce: 2.5128  decode.acc_seg: 17.4509  aux_0.loss_ce: 1.0859  aux_0.acc_seg: 6.2917  aux_1.loss_ce: 1.0842  aux_1.acc_seg: 5.8662  aux_2.loss_ce: 1.0847  aux_2.acc_seg: 11.0890  aux_3.loss_ce: 1.0827  aux_3.acc_seg: 10.1437
+2025/07/24 12:59:04 - mmengine - INFO - Iter(train) [    40/160000]  base_lr: 9.9980e-04 lr: 9.9980e-04  eta: 21 days, 5:46:44  time: 10.4686  data_time: 0.0249  memory: 11869  loss: 6.9450  decode.loss_ce: 2.5257  decode.acc_seg: 21.6777  aux_0.loss_ce: 1.1049  aux_0.acc_seg: 16.9585  aux_1.loss_ce: 1.1070  aux_1.acc_seg: 17.6077  aux_2.loss_ce: 1.1082  aux_2.acc_seg: 16.3904  aux_3.loss_ce: 1.0992  aux_3.acc_seg: 20.3734
+2025/07/24 12:59:14 - mmengine - INFO - Iter(train) [    41/160000]  base_lr: 9.9980e-04 lr: 9.9980e-04  eta: 21 days, 4:34:13  time: 10.3607  data_time: 0.0241  memory: 11869  loss: 7.0446  decode.loss_ce: 2.5563  decode.acc_seg: 47.0314  aux_0.loss_ce: 1.1270  aux_0.acc_seg: 34.8395  aux_1.loss_ce: 1.1273  aux_1.acc_seg: 32.3989  aux_2.loss_ce: 1.1254  aux_2.acc_seg: 35.0882  aux_3.loss_ce: 1.1086  aux_3.acc_seg: 43.2843
+2025/07/24 12:59:25 - mmengine - INFO - Iter(train) [    42/160000]  base_lr: 9.9979e-04 lr: 9.9979e-04  eta: 21 days, 3:21:42  time: 10.2732  data_time: 0.0249  memory: 11869  loss: 7.1689  decode.loss_ce: 2.6084  decode.acc_seg: 4.2710  aux_0.loss_ce: 1.1488  aux_0.acc_seg: 17.0105  aux_1.loss_ce: 1.1423  aux_1.acc_seg: 7.9818  aux_2.loss_ce: 1.1466  aux_2.acc_seg: 7.4010  aux_3.loss_ce: 1.1227  aux_3.acc_seg: 12.9777
+2025/07/24 12:59:34 - mmengine - INFO - Iter(train) [    43/160000]  base_lr: 9.9979e-04 lr: 9.9979e-04  eta: 21 days, 1:29:09  time: 10.1441  data_time: 0.0252  memory: 11869  loss: 7.4638  decode.loss_ce: 2.7381  decode.acc_seg: 0.0016  aux_0.loss_ce: 1.1894  aux_0.acc_seg: 6.4609  aux_1.loss_ce: 1.1815  aux_1.acc_seg: 15.0669  aux_2.loss_ce: 1.1859  aux_2.acc_seg: 8.4205  aux_3.loss_ce: 1.1689  aux_3.acc_seg: 6.6748
+2025/07/24 12:59:45 - mmengine - INFO - Iter(train) [    44/160000]  base_lr: 9.9978e-04 lr: 9.9978e-04  eta: 21 days, 0:25:53  time: 10.1320  data_time: 0.0250  memory: 11869  loss: 7.1798  decode.loss_ce: 2.6464  decode.acc_seg: 31.7393  aux_0.loss_ce: 1.1436  aux_0.acc_seg: 22.5353  aux_1.loss_ce: 1.1351  aux_1.acc_seg: 29.9427  aux_2.loss_ce: 1.1356  aux_2.acc_seg: 27.6339  aux_3.loss_ce: 1.1191  aux_3.acc_seg: 31.1722
+2025/07/24 12:59:55 - mmengine - INFO - Iter(train) [    45/160000]  base_lr: 9.9978e-04 lr: 9.9978e-04  eta: 20 days, 23:56:18  time: 10.1614  data_time: 0.0246  memory: 11869  loss: 7.3233  decode.loss_ce: 2.7232  decode.acc_seg: 17.2498  aux_0.loss_ce: 1.1624  aux_0.acc_seg: 21.6474  aux_1.loss_ce: 1.1483  aux_1.acc_seg: 22.6396  aux_2.loss_ce: 1.1473  aux_2.acc_seg: 20.8625  aux_3.loss_ce: 1.1421  aux_3.acc_seg: 18.3451
+2025/07/24 13:00:06 - mmengine - INFO - Iter(train) [    46/160000]  base_lr: 9.9977e-04 lr: 9.9977e-04  eta: 20 days, 23:06:56  time: 10.2179  data_time: 0.0252  memory: 11869  loss: 7.6103  decode.loss_ce: 2.8264  decode.acc_seg: 13.6694  aux_0.loss_ce: 1.2112  aux_0.acc_seg: 6.8039  aux_1.loss_ce: 1.1929  aux_1.acc_seg: 9.1679  aux_2.loss_ce: 1.1940  aux_2.acc_seg: 12.3630  aux_3.loss_ce: 1.1859  aux_3.acc_seg: 9.0636
+2025/07/24 13:00:17 - mmengine - INFO - Iter(train) [    47/160000]  base_lr: 9.9977e-04 lr: 9.9977e-04  eta: 20 days, 22:26:09  time: 10.2882  data_time: 0.0266  memory: 11869  loss: 7.7526  decode.loss_ce: 2.8634  decode.acc_seg: 12.6552  aux_0.loss_ce: 1.2354  aux_0.acc_seg: 5.7187  aux_1.loss_ce: 1.2213  aux_1.acc_seg: 7.3684  aux_2.loss_ce: 1.2176  aux_2.acc_seg: 6.8767  aux_3.loss_ce: 1.2148  aux_3.acc_seg: 5.5075
+2025/07/24 13:00:27 - mmengine - INFO - Iter(train) [    48/160000]  base_lr: 9.9976e-04 lr: 9.9976e-04  eta: 20 days, 22:03:25  time: 10.3546  data_time: 0.0263  memory: 11869  loss: 8.1427  decode.loss_ce: 3.0142  decode.acc_seg: 17.3713  aux_0.loss_ce: 1.2957  aux_0.acc_seg: 11.8726  aux_1.loss_ce: 1.2821  aux_1.acc_seg: 9.7462  aux_2.loss_ce: 1.2755  aux_2.acc_seg: 11.5590  aux_3.loss_ce: 1.2752  aux_3.acc_seg: 7.1390
+2025/07/24 13:00:38 - mmengine - INFO - Iter(train) [    49/160000]  base_lr: 9.9976e-04 lr: 9.9976e-04  eta: 20 days, 21:00:48  time: 10.3500  data_time: 0.0263  memory: 11869  loss: 8.0523  decode.loss_ce: 2.9767  decode.acc_seg: 10.7936  aux_0.loss_ce: 1.2852  aux_0.acc_seg: 10.2020  aux_1.loss_ce: 1.2695  aux_1.acc_seg: 10.4352  aux_2.loss_ce: 1.2582  aux_2.acc_seg: 10.3311  aux_3.loss_ce: 1.2627  aux_3.acc_seg: 10.0689
+2025/07/24 13:00:49 - mmengine - INFO - Iter(train) [    50/160000]  base_lr: 9.9975e-04 lr: 9.9975e-04  eta: 20 days, 20:51:18  time: 10.4722  data_time: 0.0270  memory: 11869  loss: 8.1049  decode.loss_ce: 2.9971  decode.acc_seg: 16.8183  aux_0.loss_ce: 1.2941  aux_0.acc_seg: 22.3770  aux_1.loss_ce: 1.2784  aux_1.acc_seg: 19.7602  aux_2.loss_ce: 1.2669  aux_2.acc_seg: 20.2122  aux_3.loss_ce: 1.2684  aux_3.acc_seg: 20.5821
+2025/07/24 13:00:59 - mmengine - INFO - Iter(train) [    51/160000]  base_lr: 9.9975e-04 lr: 9.9975e-04  eta: 20 days, 20:15:40  time: 10.4956  data_time: 0.0264  memory: 11869  loss: 8.4096  decode.loss_ce: 3.0800  decode.acc_seg: 22.0381  aux_0.loss_ce: 1.3466  aux_0.acc_seg: 15.3144  aux_1.loss_ce: 1.3367  aux_1.acc_seg: 15.4818  aux_2.loss_ce: 1.3204  aux_2.acc_seg: 15.6313  aux_3.loss_ce: 1.3258  aux_3.acc_seg: 15.2739
+2025/07/24 13:01:10 - mmengine - INFO - Iter(train) [    52/160000]  base_lr: 9.9974e-04 lr: 9.9974e-04  eta: 20 days, 19:22:12  time: 10.4870  data_time: 0.0258  memory: 11869  loss: 8.4872  decode.loss_ce: 3.0709  decode.acc_seg: 23.1588  aux_0.loss_ce: 1.3646  aux_0.acc_seg: 17.2530  aux_1.loss_ce: 1.3574  aux_1.acc_seg: 16.9658  aux_2.loss_ce: 1.3408  aux_2.acc_seg: 20.3135  aux_3.loss_ce: 1.3534  aux_3.acc_seg: 18.7399
+2025/07/24 13:01:22 - mmengine - INFO - Iter(train) [    53/160000]  base_lr: 9.9974e-04 lr: 9.9974e-04  eta: 20 days, 20:00:04  time: 10.7260  data_time: 0.0262  memory: 11870  loss: 7.9315  decode.loss_ce: 2.8275  decode.acc_seg: 48.4667  aux_0.loss_ce: 1.2821  aux_0.acc_seg: 43.4980  aux_1.loss_ce: 1.2823  aux_1.acc_seg: 44.7982  aux_2.loss_ce: 1.2629  aux_2.acc_seg: 41.7276  aux_3.loss_ce: 1.2768  aux_3.acc_seg: 45.1678
+2025/07/24 13:01:33 - mmengine - INFO - Iter(train) [    54/160000]  base_lr: 9.9973e-04 lr: 9.9973e-04  eta: 20 days, 19:55:07  time: 10.8082  data_time: 0.0258  memory: 11869  loss: 8.2569  decode.loss_ce: 2.9392  decode.acc_seg: 13.9477  aux_0.loss_ce: 1.3336  aux_0.acc_seg: 6.1503  aux_1.loss_ce: 1.3311  aux_1.acc_seg: 9.4397  aux_2.loss_ce: 1.3177  aux_2.acc_seg: 10.2774  aux_3.loss_ce: 1.3353  aux_3.acc_seg: 9.3777
+2025/07/24 13:01:44 - mmengine - INFO - Iter(train) [    55/160000]  base_lr: 9.9973e-04 lr: 9.9973e-04  eta: 20 days, 20:07:52  time: 10.8744  data_time: 0.0256  memory: 11869  loss: 8.0564  decode.loss_ce: 2.8247  decode.acc_seg: 23.2720  aux_0.loss_ce: 1.3144  aux_0.acc_seg: 14.2206  aux_1.loss_ce: 1.3125  aux_1.acc_seg: 13.4432  aux_2.loss_ce: 1.2963  aux_2.acc_seg: 10.8741  aux_3.loss_ce: 1.3085  aux_3.acc_seg: 13.6556
+2025/07/24 13:01:55 - mmengine - INFO - Iter(train) [    56/160000]  base_lr: 9.9972e-04 lr: 9.9972e-04  eta: 20 days, 19:35:11  time: 10.8825  data_time: 0.0239  memory: 11869  loss: 7.8589  decode.loss_ce: 2.7471  decode.acc_seg: 38.0522  aux_0.loss_ce: 1.2819  aux_0.acc_seg: 40.9355  aux_1.loss_ce: 1.2819  aux_1.acc_seg: 40.1903  aux_2.loss_ce: 1.2682  aux_2.acc_seg: 45.6350  aux_3.loss_ce: 1.2798  aux_3.acc_seg: 44.1555
+2025/07/24 13:02:07 - mmengine - INFO - Iter(train) [    57/160000]  base_lr: 9.9972e-04 lr: 9.9972e-04  eta: 20 days, 20:15:57  time: 11.0338  data_time: 0.0226  memory: 11869  loss: 8.0969  decode.loss_ce: 2.8245  decode.acc_seg: 11.7246  aux_0.loss_ce: 1.3207  aux_0.acc_seg: 15.8471  aux_1.loss_ce: 1.3268  aux_1.acc_seg: 8.7607  aux_2.loss_ce: 1.3078  aux_2.acc_seg: 15.3258  aux_3.loss_ce: 1.3170  aux_3.acc_seg: 14.4517
+2025/07/24 13:02:19 - mmengine - INFO - Iter(train) [    58/160000]  base_lr: 9.9971e-04 lr: 9.9971e-04  eta: 20 days, 20:56:46  time: 11.1588  data_time: 0.0235  memory: 11869  loss: 8.0938  decode.loss_ce: 2.8296  decode.acc_seg: 18.8817  aux_0.loss_ce: 1.3186  aux_0.acc_seg: 22.6468  aux_1.loss_ce: 1.3246  aux_1.acc_seg: 23.1997  aux_2.loss_ce: 1.3052  aux_2.acc_seg: 19.7491  aux_3.loss_ce: 1.3159  aux_3.acc_seg: 21.5304
+2025/07/24 13:02:29 - mmengine - INFO - Iter(train) [    59/160000]  base_lr: 9.9971e-04 lr: 9.9971e-04  eta: 20 days, 20:15:19  time: 11.1798  data_time: 0.0242  memory: 11869  loss: 8.1708  decode.loss_ce: 2.8371  decode.acc_seg: 41.3111  aux_0.loss_ce: 1.3334  aux_0.acc_seg: 6.4288  aux_1.loss_ce: 1.3377  aux_1.acc_seg: 9.1610  aux_2.loss_ce: 1.3256  aux_2.acc_seg: 7.0113  aux_3.loss_ce: 1.3369  aux_3.acc_seg: 4.8203
+2025/07/24 13:02:41 - mmengine - INFO - Iter(train) [    60/160000]  base_lr: 9.9970e-04 lr: 9.9970e-04  eta: 20 days, 20:06:07  time: 11.1753  data_time: 0.0245  memory: 11869  loss: 7.8502  decode.loss_ce: 2.6995  decode.acc_seg: 33.6140  aux_0.loss_ce: 1.2858  aux_0.acc_seg: 14.9728  aux_1.loss_ce: 1.2930  aux_1.acc_seg: 11.3107  aux_2.loss_ce: 1.2812  aux_2.acc_seg: 21.1541  aux_3.loss_ce: 1.2907  aux_3.acc_seg: 16.5681
+2025/07/24 13:02:52 - mmengine - INFO - Iter(train) [    61/160000]  base_lr: 9.9970e-04 lr: 9.9970e-04  eta: 20 days, 20:19:41  time: 11.2730  data_time: 0.0247  memory: 11869  loss: 7.8886  decode.loss_ce: 2.7357  decode.acc_seg: 27.4557  aux_0.loss_ce: 1.2874  aux_0.acc_seg: 13.8641  aux_1.loss_ce: 1.2903  aux_1.acc_seg: 9.9025  aux_2.loss_ce: 1.2841  aux_2.acc_seg: 15.6069  aux_3.loss_ce: 1.2912  aux_3.acc_seg: 8.2075
+2025/07/24 13:03:02 - mmengine - INFO - Iter(train) [    62/160000]  base_lr: 9.9969e-04 lr: 9.9969e-04  eta: 20 days, 19:41:43  time: 11.2892  data_time: 0.0253  memory: 11869  loss: 7.6492  decode.loss_ce: 2.6691  decode.acc_seg: 41.8120  aux_0.loss_ce: 1.2453  aux_0.acc_seg: 34.7917  aux_1.loss_ce: 1.2508  aux_1.acc_seg: 32.6561  aux_2.loss_ce: 1.2392  aux_2.acc_seg: 24.2980  aux_3.loss_ce: 1.2448  aux_3.acc_seg: 23.1414
+2025/07/24 13:03:14 - mmengine - INFO - Iter(train) [    63/160000]  base_lr: 9.9969e-04 lr: 9.9969e-04  eta: 20 days, 19:53:15  time: 11.2421  data_time: 0.0260  memory: 11869  loss: 8.0635  decode.loss_ce: 2.8306  decode.acc_seg: 51.4138  aux_0.loss_ce: 1.3106  aux_0.acc_seg: 43.4516  aux_1.loss_ce: 1.3129  aux_1.acc_seg: 38.6179  aux_2.loss_ce: 1.3015  aux_2.acc_seg: 41.7530  aux_3.loss_ce: 1.3079  aux_3.acc_seg: 42.9108
+2025/07/24 13:03:25 - mmengine - INFO - Iter(train) [    64/160000]  base_lr: 9.9968e-04 lr: 9.9968e-04  eta: 20 days, 19:29:12  time: 11.1942  data_time: 0.0270  memory: 11869  loss: 7.6110  decode.loss_ce: 2.6753  decode.acc_seg: 32.2100  aux_0.loss_ce: 1.2364  aux_0.acc_seg: 23.7786  aux_1.loss_ce: 1.2395  aux_1.acc_seg: 19.4568  aux_2.loss_ce: 1.2273  aux_2.acc_seg: 20.8605  aux_3.loss_ce: 1.2324  aux_3.acc_seg: 16.0096
+2025/07/24 13:03:35 - mmengine - INFO - Iter(train) [    65/160000]  base_lr: 9.9968e-04 lr: 9.9968e-04  eta: 20 days, 18:50:57  time: 11.0738  data_time: 0.0275  memory: 11869  loss: 7.4011  decode.loss_ce: 2.5956  decode.acc_seg: 32.9026  aux_0.loss_ce: 1.2042  aux_0.acc_seg: 34.7372  aux_1.loss_ce: 1.2073  aux_1.acc_seg: 34.6873  aux_2.loss_ce: 1.1937  aux_2.acc_seg: 34.5782  aux_3.loss_ce: 1.2003  aux_3.acc_seg: 33.9678
+2025/07/24 13:03:45 - mmengine - INFO - Iter(train) [    66/160000]  base_lr: 9.9967e-04 lr: 9.9967e-04  eta: 20 days, 18:13:27  time: 11.0469  data_time: 0.0286  memory: 11869  loss: 7.5001  decode.loss_ce: 2.6115  decode.acc_seg: 46.3022  aux_0.loss_ce: 1.2214  aux_0.acc_seg: 41.2511  aux_1.loss_ce: 1.2311  aux_1.acc_seg: 42.3882  aux_2.loss_ce: 1.2124  aux_2.acc_seg: 41.1168  aux_3.loss_ce: 1.2237  aux_3.acc_seg: 41.6529
+2025/07/24 13:03:56 - mmengine - INFO - Iter(train) [    67/160000]  base_lr: 9.9967e-04 lr: 9.9967e-04  eta: 20 days, 17:37:30  time: 10.8664  data_time: 0.0300  memory: 11869  loss: 7.3973  decode.loss_ce: 2.5821  decode.acc_seg: 21.3349  aux_0.loss_ce: 1.2064  aux_0.acc_seg: 28.7131  aux_1.loss_ce: 1.2071  aux_1.acc_seg: 28.0166  aux_2.loss_ce: 1.1944  aux_2.acc_seg: 24.3834  aux_3.loss_ce: 1.2073  aux_3.acc_seg: 22.4701
+2025/07/24 13:04:06 - mmengine - INFO - Iter(train) [    68/160000]  base_lr: 9.9966e-04 lr: 9.9966e-04  eta: 20 days, 17:01:04  time: 10.6789  data_time: 0.0303  memory: 11869  loss: 7.5351  decode.loss_ce: 2.6275  decode.acc_seg: 22.6001  aux_0.loss_ce: 1.2288  aux_0.acc_seg: 20.8795  aux_1.loss_ce: 1.2320  aux_1.acc_seg: 17.3035  aux_2.loss_ce: 1.2169  aux_2.acc_seg: 20.7521  aux_3.loss_ce: 1.2299  aux_3.acc_seg: 21.1769
+2025/07/24 13:04:16 - mmengine - INFO - Iter(train) [    69/160000]  base_lr: 9.9966e-04 lr: 9.9966e-04  eta: 20 days, 16:29:14  time: 10.6795  data_time: 0.0313  memory: 11869  loss: 7.4416  decode.loss_ce: 2.6071  decode.acc_seg: 54.8236  aux_0.loss_ce: 1.2120  aux_0.acc_seg: 49.8064  aux_1.loss_ce: 1.2165  aux_1.acc_seg: 49.0072  aux_2.loss_ce: 1.1980  aux_2.acc_seg: 52.4570  aux_3.loss_ce: 1.2081  aux_3.acc_seg: 48.1474
+2025/07/24 13:04:26 - mmengine - INFO - Iter(train) [    70/160000]  base_lr: 9.9965e-04 lr: 9.9965e-04  eta: 20 days, 15:43:24  time: 10.5715  data_time: 0.0302  memory: 11869  loss: 7.4211  decode.loss_ce: 2.5956  decode.acc_seg: 47.9635  aux_0.loss_ce: 1.2061  aux_0.acc_seg: 34.6115  aux_1.loss_ce: 1.2128  aux_1.acc_seg: 33.4573  aux_2.loss_ce: 1.1992  aux_2.acc_seg: 28.2266  aux_3.loss_ce: 1.2074  aux_3.acc_seg: 49.0385
+2025/07/24 13:04:36 - mmengine - INFO - Iter(train) [    71/160000]  base_lr: 9.9965e-04 lr: 9.9965e-04  eta: 20 days, 14:42:46  time: 10.3693  data_time: 0.0308  memory: 11869  loss: 7.1234  decode.loss_ce: 2.4815  decode.acc_seg: 39.9962  aux_0.loss_ce: 1.1570  aux_0.acc_seg: 34.8921  aux_1.loss_ce: 1.1660  aux_1.acc_seg: 36.2983  aux_2.loss_ce: 1.1544  aux_2.acc_seg: 29.5533  aux_3.loss_ce: 1.1646  aux_3.acc_seg: 31.5333
+2025/07/24 13:04:46 - mmengine - INFO - Iter(train) [    72/160000]  base_lr: 9.9964e-04 lr: 9.9964e-04  eta: 20 days, 14:25:23  time: 10.3981  data_time: 0.0310  memory: 11869  loss: 7.0553  decode.loss_ce: 2.4494  decode.acc_seg: 24.2238  aux_0.loss_ce: 1.1492  aux_0.acc_seg: 23.2335  aux_1.loss_ce: 1.1530  aux_1.acc_seg: 21.2675  aux_2.loss_ce: 1.1456  aux_2.acc_seg: 20.6425  aux_3.loss_ce: 1.1581  aux_3.acc_seg: 23.1381
+2025/07/24 13:04:56 - mmengine - INFO - Iter(train) [    73/160000]  base_lr: 9.9964e-04 lr: 9.9964e-04  eta: 20 days, 13:43:43  time: 10.2450  data_time: 0.0301  memory: 11869  loss: 7.1812  decode.loss_ce: 2.4883  decode.acc_seg: 29.0641  aux_0.loss_ce: 1.1706  aux_0.acc_seg: 27.5851  aux_1.loss_ce: 1.1714  aux_1.acc_seg: 27.3835  aux_2.loss_ce: 1.1685  aux_2.acc_seg: 27.0508  aux_3.loss_ce: 1.1824  aux_3.acc_seg: 28.4016
+2025/07/24 13:05:07 - mmengine - INFO - Iter(train) [    74/160000]  base_lr: 9.9963e-04 lr: 9.9963e-04  eta: 20 days, 13:14:42  time: 10.2084  data_time: 0.0296  memory: 11869  loss: 7.5814  decode.loss_ce: 2.6270  decode.acc_seg: 35.8105  aux_0.loss_ce: 1.2350  aux_0.acc_seg: 33.7967  aux_1.loss_ce: 1.2352  aux_1.acc_seg: 34.6178  aux_2.loss_ce: 1.2347  aux_2.acc_seg: 35.0418  aux_3.loss_ce: 1.2494  aux_3.acc_seg: 34.1432
+2025/07/24 13:05:17 - mmengine - INFO - Iter(train) [    75/160000]  base_lr: 9.9963e-04 lr: 9.9963e-04  eta: 20 days, 12:54:19  time: 10.2304  data_time: 0.0290  memory: 11869  loss: 7.3670  decode.loss_ce: 2.5612  decode.acc_seg: 35.0519  aux_0.loss_ce: 1.1957  aux_0.acc_seg: 27.5071  aux_1.loss_ce: 1.1959  aux_1.acc_seg: 33.3380  aux_2.loss_ce: 1.2004  aux_2.acc_seg: 36.2666  aux_3.loss_ce: 1.2139  aux_3.acc_seg: 30.8212
+2025/07/24 13:05:27 - mmengine - INFO - Iter(train) [    76/160000]  base_lr: 9.9962e-04 lr: 9.9962e-04  eta: 20 days, 12:18:39  time: 10.2083  data_time: 0.0282  memory: 11869  loss: 7.1479  decode.loss_ce: 2.4875  decode.acc_seg: 32.7233  aux_0.loss_ce: 1.1631  aux_0.acc_seg: 29.6197  aux_1.loss_ce: 1.1571  aux_1.acc_seg: 33.1656  aux_2.loss_ce: 1.1650  aux_2.acc_seg: 25.8878  aux_3.loss_ce: 1.1752  aux_3.acc_seg: 31.6393
+2025/07/24 13:05:37 - mmengine - INFO - Iter(train) [    77/160000]  base_lr: 9.9962e-04 lr: 9.9962e-04  eta: 20 days, 11:26:04  time: 10.1336  data_time: 0.0274  memory: 11869  loss: 6.8774  decode.loss_ce: 2.3578  decode.acc_seg: 64.6597  aux_0.loss_ce: 1.1288  aux_0.acc_seg: 45.3399  aux_1.loss_ce: 1.1185  aux_1.acc_seg: 42.1227  aux_2.loss_ce: 1.1272  aux_2.acc_seg: 56.7226  aux_3.loss_ce: 1.1451  aux_3.acc_seg: 41.7667
+2025/07/24 13:05:47 - mmengine - INFO - Iter(train) [    78/160000]  base_lr: 9.9961e-04 lr: 9.9961e-04  eta: 20 days, 10:35:47  time: 10.0656  data_time: 0.0267  memory: 11869  loss: 6.5295  decode.loss_ce: 2.2154  decode.acc_seg: 45.8245  aux_0.loss_ce: 1.0768  aux_0.acc_seg: 35.4007  aux_1.loss_ce: 1.0662  aux_1.acc_seg: 40.4474  aux_2.loss_ce: 1.0766  aux_2.acc_seg: 39.0452  aux_3.loss_ce: 1.0945  aux_3.acc_seg: 42.8947
+2025/07/24 13:05:56 - mmengine - INFO - Iter(train) [    79/160000]  base_lr: 9.9961e-04 lr: 9.9961e-04  eta: 20 days, 9:29:30  time: 9.9372  data_time: 0.0257  memory: 11869  loss: 6.4060  decode.loss_ce: 2.1656  decode.acc_seg: 33.7767  aux_0.loss_ce: 1.0545  aux_0.acc_seg: 36.5217  aux_1.loss_ce: 1.0470  aux_1.acc_seg: 36.2044  aux_2.loss_ce: 1.0590  aux_2.acc_seg: 35.2566  aux_3.loss_ce: 1.0799  aux_3.acc_seg: 34.8829
+2025/07/24 13:06:06 - mmengine - INFO - Iter(train) [    80/160000]  base_lr: 9.9960e-04 lr: 9.9960e-04  eta: 20 days, 9:04:44  time: 9.9676  data_time: 0.0246  memory: 11869  loss: 6.1396  decode.loss_ce: 2.0892  decode.acc_seg: 60.6259  aux_0.loss_ce: 1.0114  aux_0.acc_seg: 41.9150  aux_1.loss_ce: 0.9952  aux_1.acc_seg: 43.4507  aux_2.loss_ce: 1.0092  aux_2.acc_seg: 38.9334  aux_3.loss_ce: 1.0345  aux_3.acc_seg: 39.7319
+2025/07/24 13:06:17 - mmengine - INFO - Iter(train) [    81/160000]  base_lr: 9.9959e-04 lr: 9.9959e-04  eta: 20 days, 8:50:59  time: 10.0725  data_time: 0.0242  memory: 11869  loss: 6.1373  decode.loss_ce: 2.0955  decode.acc_seg: 34.9570  aux_0.loss_ce: 1.0127  aux_0.acc_seg: 23.9471  aux_1.loss_ce: 0.9941  aux_1.acc_seg: 25.2384  aux_2.loss_ce: 1.0053  aux_2.acc_seg: 27.3076  aux_3.loss_ce: 1.0297  aux_3.acc_seg: 30.1880
+2025/07/24 13:06:26 - mmengine - INFO - Iter(train) [    82/160000]  base_lr: 9.9959e-04 lr: 9.9959e-04  eta: 20 days, 8:11:43  time: 9.9856  data_time: 0.0230  memory: 11869  loss: 6.3724  decode.loss_ce: 2.2131  decode.acc_seg: 27.1884  aux_0.loss_ce: 1.0448  aux_0.acc_seg: 27.2270  aux_1.loss_ce: 1.0223  aux_1.acc_seg: 29.4205  aux_2.loss_ce: 1.0325  aux_2.acc_seg: 27.9409  aux_3.loss_ce: 1.0597  aux_3.acc_seg: 24.3496
+2025/07/24 13:06:36 - mmengine - INFO - Iter(train) [    83/160000]  base_lr: 9.9958e-04 lr: 9.9958e-04  eta: 20 days, 7:27:20  time: 9.9476  data_time: 0.0224  memory: 11869  loss: 6.2293  decode.loss_ce: 2.1696  decode.acc_seg: 36.9492  aux_0.loss_ce: 1.0239  aux_0.acc_seg: 14.7421  aux_1.loss_ce: 0.9993  aux_1.acc_seg: 15.7685  aux_2.loss_ce: 1.0071  aux_2.acc_seg: 14.8736  aux_3.loss_ce: 1.0295  aux_3.acc_seg: 19.6313
+2025/07/24 13:06:47 - mmengine - INFO - Iter(train) [    84/160000]  base_lr: 9.9958e-04 lr: 9.9958e-04  eta: 20 days, 7:16:56  time: 9.9814  data_time: 0.0220  memory: 11869  loss: 6.0315  decode.loss_ce: 2.0943  decode.acc_seg: 42.0499  aux_0.loss_ce: 0.9955  aux_0.acc_seg: 34.7227  aux_1.loss_ce: 0.9662  aux_1.acc_seg: 31.9930  aux_2.loss_ce: 0.9808  aux_2.acc_seg: 23.0028  aux_3.loss_ce: 0.9946  aux_3.acc_seg: 34.6863
+2025/07/24 13:06:57 - mmengine - INFO - Iter(train) [    85/160000]  base_lr: 9.9957e-04 lr: 9.9957e-04  eta: 20 days, 6:51:24  time: 9.9441  data_time: 0.0217  memory: 11869  loss: 6.9131  decode.loss_ce: 2.4064  decode.acc_seg: 7.0631  aux_0.loss_ce: 1.1354  aux_0.acc_seg: 7.0935  aux_1.loss_ce: 1.1098  aux_1.acc_seg: 7.2884  aux_2.loss_ce: 1.1219  aux_2.acc_seg: 4.8742  aux_3.loss_ce: 1.1395  aux_3.acc_seg: 4.0744
+2025/07/24 13:07:06 - mmengine - INFO - Iter(train) [    86/160000]  base_lr: 9.9957e-04 lr: 9.9957e-04  eta: 20 days, 6:09:18  time: 9.8964  data_time: 0.0214  memory: 11869  loss: 7.1170  decode.loss_ce: 2.4657  decode.acc_seg: 41.9888  aux_0.loss_ce: 1.1731  aux_0.acc_seg: 26.1384  aux_1.loss_ce: 1.1531  aux_1.acc_seg: 22.7399  aux_2.loss_ce: 1.1575  aux_2.acc_seg: 28.0634  aux_3.loss_ce: 1.1676  aux_3.acc_seg: 30.1577
+2025/07/24 13:07:16 - mmengine - INFO - Iter(train) [    87/160000]  base_lr: 9.9956e-04 lr: 9.9956e-04  eta: 20 days, 5:38:02  time: 9.9326  data_time: 0.0222  memory: 11869  loss: 7.1139  decode.loss_ce: 2.4970  decode.acc_seg: 29.6127  aux_0.loss_ce: 1.1618  aux_0.acc_seg: 24.4034  aux_1.loss_ce: 1.1470  aux_1.acc_seg: 25.2079  aux_2.loss_ce: 1.1537  aux_2.acc_seg: 23.3028  aux_3.loss_ce: 1.1544  aux_3.acc_seg: 23.9322
+2025/07/24 13:07:26 - mmengine - INFO - Iter(train) [    88/160000]  base_lr: 9.9956e-04 lr: 9.9956e-04  eta: 20 days, 5:04:13  time: 9.9551  data_time: 0.0220  memory: 11869  loss: 6.8592  decode.loss_ce: 2.3977  decode.acc_seg: 47.7928  aux_0.loss_ce: 1.1226  aux_0.acc_seg: 33.9525  aux_1.loss_ce: 1.1089  aux_1.acc_seg: 33.6518  aux_2.loss_ce: 1.1153  aux_2.acc_seg: 34.9680  aux_3.loss_ce: 1.1146  aux_3.acc_seg: 31.4101
+2025/07/24 13:07:36 - mmengine - INFO - Iter(train) [    89/160000]  base_lr: 9.9955e-04 lr: 9.9955e-04  eta: 20 days, 4:41:51  time: 10.0646  data_time: 0.0225  memory: 11869  loss: 6.8646  decode.loss_ce: 2.3920  decode.acc_seg: 63.3968  aux_0.loss_ce: 1.1301  aux_0.acc_seg: 53.2993  aux_1.loss_ce: 1.1128  aux_1.acc_seg: 57.3566  aux_2.loss_ce: 1.1173  aux_2.acc_seg: 55.4782  aux_3.loss_ce: 1.1124  aux_3.acc_seg: 54.0988
+2025/07/24 13:07:47 - mmengine - INFO - Iter(train) [    90/160000]  base_lr: 9.9955e-04 lr: 9.9955e-04  eta: 20 days, 4:23:28  time: 10.0662  data_time: 0.0237  memory: 11869  loss: 7.1816  decode.loss_ce: 2.4969  decode.acc_seg: 35.4377  aux_0.loss_ce: 1.1830  aux_0.acc_seg: 18.9899  aux_1.loss_ce: 1.1653  aux_1.acc_seg: 16.6318  aux_2.loss_ce: 1.1681  aux_2.acc_seg: 14.1934  aux_3.loss_ce: 1.1683  aux_3.acc_seg: 12.2934
+2025/07/24 13:07:57 - mmengine - INFO - Iter(train) [    91/160000]  base_lr: 9.9954e-04 lr: 9.9954e-04  eta: 20 days, 3:58:09  time: 10.0111  data_time: 0.0242  memory: 11869  loss: 7.3235  decode.loss_ce: 2.5284  decode.acc_seg: 24.3547  aux_0.loss_ce: 1.2104  aux_0.acc_seg: 12.5621  aux_1.loss_ce: 1.1913  aux_1.acc_seg: 11.7537  aux_2.loss_ce: 1.1953  aux_2.acc_seg: 10.3782  aux_3.loss_ce: 1.1980  aux_3.acc_seg: 9.0176
+2025/07/24 13:08:07 - mmengine - INFO - Iter(train) [    92/160000]  base_lr: 9.9954e-04 lr: 9.9954e-04  eta: 20 days, 3:37:46  time: 10.0507  data_time: 0.0243  memory: 11869  loss: 7.2480  decode.loss_ce: 2.4613  decode.acc_seg: 35.5065  aux_0.loss_ce: 1.2023  aux_0.acc_seg: 18.5425  aux_1.loss_ce: 1.1951  aux_1.acc_seg: 17.5692  aux_2.loss_ce: 1.1924  aux_2.acc_seg: 21.2869  aux_3.loss_ce: 1.1970  aux_3.acc_seg: 15.5790
+2025/07/24 13:08:17 - mmengine - INFO - Iter(train) [    93/160000]  base_lr: 9.9953e-04 lr: 9.9953e-04  eta: 20 days, 3:16:59  time: 10.1062  data_time: 0.0245  memory: 11869  loss: 7.3866  decode.loss_ce: 2.5285  decode.acc_seg: 29.4924  aux_0.loss_ce: 1.2173  aux_0.acc_seg: 28.0129  aux_1.loss_ce: 1.2119  aux_1.acc_seg: 26.3583  aux_2.loss_ce: 1.2086  aux_2.acc_seg: 29.2749  aux_3.loss_ce: 1.2203  aux_3.acc_seg: 27.8020
+2025/07/24 13:08:27 - mmengine - INFO - Iter(train) [    94/160000]  base_lr: 9.9953e-04 lr: 9.9953e-04  eta: 20 days, 2:57:11  time: 10.0599  data_time: 0.0249  memory: 11869  loss: 7.4227  decode.loss_ce: 2.5496  decode.acc_seg: 47.5131  aux_0.loss_ce: 1.2222  aux_0.acc_seg: 7.4959  aux_1.loss_ce: 1.2183  aux_1.acc_seg: 3.8930  aux_2.loss_ce: 1.2074  aux_2.acc_seg: 5.8333  aux_3.loss_ce: 1.2253  aux_3.acc_seg: 4.6728
+2025/07/24 13:08:38 - mmengine - INFO - Iter(train) [    95/160000]  base_lr: 9.9952e-04 lr: 9.9952e-04  eta: 20 days, 2:45:11  time: 10.0889  data_time: 0.0256  memory: 11869  loss: 7.0123  decode.loss_ce: 2.3883  decode.acc_seg: 45.5113  aux_0.loss_ce: 1.1656  aux_0.acc_seg: 15.0792  aux_1.loss_ce: 1.1552  aux_1.acc_seg: 13.7403  aux_2.loss_ce: 1.1477  aux_2.acc_seg: 11.2271  aux_3.loss_ce: 1.1555  aux_3.acc_seg: 14.0964
+2025/07/24 13:08:48 - mmengine - INFO - Iter(train) [    96/160000]  base_lr: 9.9952e-04 lr: 9.9952e-04  eta: 20 days, 2:34:58  time: 10.1789  data_time: 0.0257  memory: 11869  loss: 6.8062  decode.loss_ce: 2.3431  decode.acc_seg: 26.9867  aux_0.loss_ce: 1.1220  aux_0.acc_seg: 14.6695  aux_1.loss_ce: 1.1101  aux_1.acc_seg: 14.6643  aux_2.loss_ce: 1.1083  aux_2.acc_seg: 11.0282  aux_3.loss_ce: 1.1227  aux_3.acc_seg: 14.7973
+2025/07/24 13:08:58 - mmengine - INFO - Iter(train) [    97/160000]  base_lr: 9.9951e-04 lr: 9.9951e-04  eta: 20 days, 2:18:06  time: 10.2117  data_time: 0.0249  memory: 11869  loss: 6.7694  decode.loss_ce: 2.2905  decode.acc_seg: 52.6126  aux_0.loss_ce: 1.1272  aux_0.acc_seg: 42.2377  aux_1.loss_ce: 1.1178  aux_1.acc_seg: 30.5198  aux_2.loss_ce: 1.1120  aux_2.acc_seg: 38.9262  aux_3.loss_ce: 1.1219  aux_3.acc_seg: 42.0296
+2025/07/24 13:09:08 - mmengine - INFO - Iter(train) [    98/160000]  base_lr: 9.9951e-04 lr: 9.9951e-04  eta: 20 days, 1:43:20  time: 10.1880  data_time: 0.0249  memory: 11869  loss: 7.4656  decode.loss_ce: 2.5539  decode.acc_seg: 8.3370  aux_0.loss_ce: 1.2334  aux_0.acc_seg: 1.0877  aux_1.loss_ce: 1.2317  aux_1.acc_seg: 0.4573  aux_2.loss_ce: 1.2197  aux_2.acc_seg: 4.8417  aux_3.loss_ce: 1.2269  aux_3.acc_seg: 4.2928
+2025/07/24 13:09:17 - mmengine - INFO - Iter(train) [    99/160000]  base_lr: 9.9950e-04 lr: 9.9950e-04  eta: 20 days, 1:04:13  time: 10.1100  data_time: 0.0245  memory: 11869  loss: 7.5032  decode.loss_ce: 2.5925  decode.acc_seg: 46.4314  aux_0.loss_ce: 1.2297  aux_0.acc_seg: 42.0877  aux_1.loss_ce: 1.2323  aux_1.acc_seg: 43.2780  aux_2.loss_ce: 1.2226  aux_2.acc_seg: 42.7612  aux_3.loss_ce: 1.2260  aux_3.acc_seg: 45.8253
+2025/07/24 13:09:28 - mmengine - INFO - Iter(train) [   100/160000]  base_lr: 9.9950e-04 lr: 9.9950e-04  eta: 20 days, 1:07:56  time: 10.1781  data_time: 0.0249  memory: 11869  loss: 7.2972  decode.loss_ce: 2.5435  decode.acc_seg: 49.1090  aux_0.loss_ce: 1.1959  aux_0.acc_seg: 57.9535  aux_1.loss_ce: 1.1999  aux_1.acc_seg: 59.6127  aux_2.loss_ce: 1.1801  aux_2.acc_seg: 64.5224  aux_3.loss_ce: 1.1777  aux_3.acc_seg: 64.3670
+2025/07/24 13:09:40 - mmengine - INFO - Iter(train) [   101/160000]  base_lr: 9.9949e-04 lr: 9.9949e-04  eta: 20 days, 1:26:14  time: 10.3267  data_time: 0.0247  memory: 11869  loss: 6.6740  decode.loss_ce: 2.3310  decode.acc_seg: 72.5763  aux_0.loss_ce: 1.0922  aux_0.acc_seg: 65.4065  aux_1.loss_ce: 1.0988  aux_1.acc_seg: 65.8930  aux_2.loss_ce: 1.0784  aux_2.acc_seg: 67.0421  aux_3.loss_ce: 1.0736  aux_3.acc_seg: 67.2092
+2025/07/24 13:09:51 - mmengine - INFO - Iter(train) [   102/160000]  base_lr: 9.9949e-04 lr: 9.9949e-04  eta: 20 days, 1:34:07  time: 10.4216  data_time: 0.0255  memory: 11869  loss: 6.9145  decode.loss_ce: 2.4887  decode.acc_seg: 31.1204  aux_0.loss_ce: 1.1131  aux_0.acc_seg: 18.1824  aux_1.loss_ce: 1.1190  aux_1.acc_seg: 15.1495  aux_2.loss_ce: 1.1009  aux_2.acc_seg: 21.8814  aux_3.loss_ce: 1.0928  aux_3.acc_seg: 21.7848
+2025/07/24 13:10:03 - mmengine - INFO - Iter(train) [   103/160000]  base_lr: 9.9948e-04 lr: 9.9948e-04  eta: 20 days, 2:12:51  time: 10.6393  data_time: 0.0260  memory: 11869  loss: 6.6107  decode.loss_ce: 2.3540  decode.acc_seg: 38.8218  aux_0.loss_ce: 1.0674  aux_0.acc_seg: 27.4570  aux_1.loss_ce: 1.0781  aux_1.acc_seg: 24.6172  aux_2.loss_ce: 1.0639  aux_2.acc_seg: 17.5470  aux_3.loss_ce: 1.0473  aux_3.acc_seg: 16.5468
+2025/07/24 13:10:14 - mmengine - INFO - Iter(train) [   104/160000]  base_lr: 9.9948e-04 lr: 9.9948e-04  eta: 20 days, 2:00:56  time: 10.6604  data_time: 0.0260  memory: 11869  loss: 6.3841  decode.loss_ce: 2.2641  decode.acc_seg: 57.1131  aux_0.loss_ce: 1.0287  aux_0.acc_seg: 44.0081  aux_1.loss_ce: 1.0471  aux_1.acc_seg: 37.4212  aux_2.loss_ce: 1.0293  aux_2.acc_seg: 41.0460  aux_3.loss_ce: 1.0149  aux_3.acc_seg: 36.1410
+2025/07/24 13:10:26 - mmengine - INFO - Iter(train) [   105/160000]  base_lr: 9.9947e-04 lr: 9.9947e-04  eta: 20 days, 2:31:57  time: 10.8234  data_time: 0.0261  memory: 11869  loss: 6.3948  decode.loss_ce: 2.2843  decode.acc_seg: 32.7941  aux_0.loss_ce: 1.0210  aux_0.acc_seg: 16.2775  aux_1.loss_ce: 1.0461  aux_1.acc_seg: 14.1852  aux_2.loss_ce: 1.0232  aux_2.acc_seg: 13.7172  aux_3.loss_ce: 1.0203  aux_3.acc_seg: 10.8664
+2025/07/24 13:10:40 - mmengine - INFO - Iter(train) [   106/160000]  base_lr: 9.9947e-04 lr: 9.9947e-04  eta: 20 days, 3:54:34  time: 11.1884  data_time: 0.0268  memory: 11869  loss: 6.3325  decode.loss_ce: 2.2693  decode.acc_seg: 34.0992  aux_0.loss_ce: 1.0133  aux_0.acc_seg: 19.7341  aux_1.loss_ce: 1.0324  aux_1.acc_seg: 25.7884  aux_2.loss_ce: 1.0126  aux_2.acc_seg: 25.4904  aux_3.loss_ce: 1.0049  aux_3.acc_seg: 17.1833
+2025/07/24 13:10:50 - mmengine - INFO - Iter(train) [   107/160000]  base_lr: 9.9946e-04 lr: 9.9946e-04  eta: 20 days, 3:28:07  time: 11.1467  data_time: 0.0270  memory: 11869  loss: 6.6697  decode.loss_ce: 2.4314  decode.acc_seg: 31.5513  aux_0.loss_ce: 1.0569  aux_0.acc_seg: 24.2332  aux_1.loss_ce: 1.0728  aux_1.acc_seg: 23.9932  aux_2.loss_ce: 1.0559  aux_2.acc_seg: 24.4714  aux_3.loss_ce: 1.0527  aux_3.acc_seg: 25.0859
+2025/07/24 13:11:00 - mmengine - INFO - Iter(train) [   108/160000]  base_lr: 9.9946e-04 lr: 9.9946e-04  eta: 20 days, 3:21:09  time: 11.2492  data_time: 0.0282  memory: 11869  loss: 6.0585  decode.loss_ce: 2.1833  decode.acc_seg: 66.5866  aux_0.loss_ce: 0.9670  aux_0.acc_seg: 47.3871  aux_1.loss_ce: 0.9766  aux_1.acc_seg: 43.6663  aux_2.loss_ce: 0.9634  aux_2.acc_seg: 45.8623  aux_3.loss_ce: 0.9684  aux_3.acc_seg: 36.5368
+2025/07/24 13:11:12 - mmengine - INFO - Iter(train) [   109/160000]  base_lr: 9.9945e-04 lr: 9.9945e-04  eta: 20 days, 3:29:37  time: 11.4329  data_time: 0.0282  memory: 11869  loss: 6.2057  decode.loss_ce: 2.2426  decode.acc_seg: 58.4775  aux_0.loss_ce: 0.9886  aux_0.acc_seg: 61.0170  aux_1.loss_ce: 0.9985  aux_1.acc_seg: 53.9663  aux_2.loss_ce: 0.9818  aux_2.acc_seg: 58.9050  aux_3.loss_ce: 0.9943  aux_3.acc_seg: 57.7645
+2025/07/24 13:11:22 - mmengine - INFO - Iter(train) [   110/160000]  base_lr: 9.9945e-04 lr: 9.9945e-04  eta: 20 days, 3:08:18  time: 11.3365  data_time: 0.0271  memory: 11869  loss: 6.2272  decode.loss_ce: 2.2378  decode.acc_seg: 23.0770  aux_0.loss_ce: 0.9890  aux_0.acc_seg: 22.5840  aux_1.loss_ce: 0.9997  aux_1.acc_seg: 19.1462  aux_2.loss_ce: 0.9936  aux_2.acc_seg: 21.1469  aux_3.loss_ce: 1.0071  aux_3.acc_seg: 19.0470
+2025/07/24 13:11:33 - mmengine - INFO - Iter(train) [   111/160000]  base_lr: 9.9944e-04 lr: 9.9944e-04  eta: 20 days, 3:09:34  time: 11.2772  data_time: 0.0284  memory: 11869  loss: 6.9905  decode.loss_ce: 2.5027  decode.acc_seg: 23.8857  aux_0.loss_ce: 1.1135  aux_0.acc_seg: 18.3514  aux_1.loss_ce: 1.1228  aux_1.acc_seg: 18.6406  aux_2.loss_ce: 1.1185  aux_2.acc_seg: 17.1097  aux_3.loss_ce: 1.1330  aux_3.acc_seg: 11.0548
+2025/07/24 13:11:45 - mmengine - INFO - Iter(train) [   112/160000]  base_lr: 9.9944e-04 lr: 9.9944e-04  eta: 20 days, 3:50:25  time: 11.4227  data_time: 0.0281  memory: 11869  loss: 6.5416  decode.loss_ce: 2.3201  decode.acc_seg: 29.5226  aux_0.loss_ce: 1.0507  aux_0.acc_seg: 32.9130  aux_1.loss_ce: 1.0547  aux_1.acc_seg: 36.4657  aux_2.loss_ce: 1.0456  aux_2.acc_seg: 34.9281  aux_3.loss_ce: 1.0704  aux_3.acc_seg: 22.0823
+2025/07/24 13:11:57 - mmengine - INFO - Iter(train) [   113/160000]  base_lr: 9.9943e-04 lr: 9.9943e-04  eta: 20 days, 4:09:43  time: 11.3601  data_time: 0.0277  memory: 11869  loss: 6.2302  decode.loss_ce: 2.2178  decode.acc_seg: 43.4835  aux_0.loss_ce: 1.0043  aux_0.acc_seg: 31.2998  aux_1.loss_ce: 1.0026  aux_1.acc_seg: 41.1968  aux_2.loss_ce: 0.9901  aux_2.acc_seg: 38.0169  aux_3.loss_ce: 1.0153  aux_3.acc_seg: 50.4688
+2025/07/24 13:12:08 - mmengine - INFO - Iter(train) [   114/160000]  base_lr: 9.9943e-04 lr: 9.9943e-04  eta: 20 days, 4:11:34  time: 11.4190  data_time: 0.0272  memory: 11869  loss: 6.3063  decode.loss_ce: 2.2099  decode.acc_seg: 57.6010  aux_0.loss_ce: 1.0285  aux_0.acc_seg: 44.5881  aux_1.loss_ce: 1.0180  aux_1.acc_seg: 51.9144  aux_2.loss_ce: 1.0127  aux_2.acc_seg: 46.7109  aux_3.loss_ce: 1.0372  aux_3.acc_seg: 39.6619
+2025/07/24 13:12:18 - mmengine - INFO - Iter(train) [   115/160000]  base_lr: 9.9942e-04 lr: 9.9942e-04  eta: 20 days, 3:49:00  time: 11.2045  data_time: 0.0270  memory: 11869  loss: 6.0568  decode.loss_ce: 2.1277  decode.acc_seg: 13.4215  aux_0.loss_ce: 0.9880  aux_0.acc_seg: 17.1269  aux_1.loss_ce: 0.9778  aux_1.acc_seg: 14.0239  aux_2.loss_ce: 0.9713  aux_2.acc_seg: 15.9018  aux_3.loss_ce: 0.9919  aux_3.acc_seg: 11.1709
+2025/07/24 13:12:28 - mmengine - INFO - Iter(train) [   116/160000]  base_lr: 9.9942e-04 lr: 9.9942e-04  eta: 20 days, 3:23:03  time: 10.7659  data_time: 0.0267  memory: 11869  loss: 5.8599  decode.loss_ce: 2.0163  decode.acc_seg: 73.0782  aux_0.loss_ce: 0.9644  aux_0.acc_seg: 66.4866  aux_1.loss_ce: 0.9588  aux_1.acc_seg: 48.1347  aux_2.loss_ce: 0.9474  aux_2.acc_seg: 49.5972  aux_3.loss_ce: 0.9730  aux_3.acc_seg: 54.6339
+2025/07/24 13:12:38 - mmengine - INFO - Iter(train) [   117/160000]  base_lr: 9.9941e-04 lr: 9.9941e-04  eta: 20 days, 3:16:54  time: 10.8440  data_time: 0.0265  memory: 11869  loss: 5.5681  decode.loss_ce: 1.8805  decode.acc_seg: 64.5427  aux_0.loss_ce: 0.9271  aux_0.acc_seg: 54.2285  aux_1.loss_ce: 0.9205  aux_1.acc_seg: 52.9112  aux_2.loss_ce: 0.9084  aux_2.acc_seg: 51.8681  aux_3.loss_ce: 0.9315  aux_3.acc_seg: 51.7880
+2025/07/24 13:12:52 - mmengine - INFO - Iter(train) [   118/160000]  base_lr: 9.9941e-04 lr: 9.9941e-04  eta: 20 days, 4:14:05  time: 11.1252  data_time: 0.0265  memory: 11869  loss: 5.6863  decode.loss_ce: 1.9355  decode.acc_seg: 47.9589  aux_0.loss_ce: 0.9426  aux_0.acc_seg: 41.0394  aux_1.loss_ce: 0.9333  aux_1.acc_seg: 38.0155  aux_2.loss_ce: 0.9308  aux_2.acc_seg: 17.9505  aux_3.loss_ce: 0.9442  aux_3.acc_seg: 39.7238
+2025/07/24 13:13:07 - mmengine - INFO - Iter(train) [   119/160000]  base_lr: 9.9940e-04 lr: 9.9940e-04  eta: 20 days, 5:41:01  time: 11.4809  data_time: 0.0262  memory: 11869  loss: 5.5412  decode.loss_ce: 1.8560  decode.acc_seg: 41.5120  aux_0.loss_ce: 0.9272  aux_0.acc_seg: 25.4439  aux_1.loss_ce: 0.9131  aux_1.acc_seg: 24.0211  aux_2.loss_ce: 0.9176  aux_2.acc_seg: 20.6493  aux_3.loss_ce: 0.9272  aux_3.acc_seg: 17.1990
+2025/07/24 13:13:23 - mmengine - INFO - Iter(train) [   120/160000]  base_lr: 9.9940e-04 lr: 9.9940e-04  eta: 20 days, 7:37:31  time: 12.0986  data_time: 0.0266  memory: 11867  loss: 5.4734  decode.loss_ce: 1.8239  decode.acc_seg: 51.5520  aux_0.loss_ce: 0.9234  aux_0.acc_seg: 15.7241  aux_1.loss_ce: 0.9055  aux_1.acc_seg: 30.3833  aux_2.loss_ce: 0.9042  aux_2.acc_seg: 30.4006  aux_3.loss_ce: 0.9164  aux_3.acc_seg: 32.4191
+2025/07/24 13:13:38 - mmengine - INFO - Iter(train) [   121/160000]  base_lr: 9.9939e-04 lr: 9.9939e-04  eta: 20 days, 9:21:26  time: 12.5755  data_time: 0.0256  memory: 11869  loss: 5.0737  decode.loss_ce: 1.6848  decode.acc_seg: 52.8777  aux_0.loss_ce: 0.8549  aux_0.acc_seg: 49.4223  aux_1.loss_ce: 0.8418  aux_1.acc_seg: 44.1459  aux_2.loss_ce: 0.8391  aux_2.acc_seg: 47.9912  aux_3.loss_ce: 0.8531  aux_3.acc_seg: 46.9049
+2025/07/24 13:13:52 - mmengine - INFO - Iter(train) [   122/160000]  base_lr: 9.9939e-04 lr: 9.9939e-04  eta: 20 days, 10:24:19  time: 12.7058  data_time: 0.0252  memory: 11869  loss: 5.3566  decode.loss_ce: 1.7506  decode.acc_seg: 28.9232  aux_0.loss_ce: 0.9078  aux_0.acc_seg: 25.2249  aux_1.loss_ce: 0.8989  aux_1.acc_seg: 22.8207  aux_2.loss_ce: 0.8972  aux_2.acc_seg: 24.2444  aux_3.loss_ce: 0.9021  aux_3.acc_seg: 18.9374
+2025/07/24 13:14:06 - mmengine - INFO - Iter(train) [   123/160000]  base_lr: 9.9938e-04 lr: 9.9938e-04  eta: 20 days, 11:20:49  time: 12.8996  data_time: 0.0268  memory: 11869  loss: 5.9155  decode.loss_ce: 1.9546  decode.acc_seg: 23.4379  aux_0.loss_ce: 0.9965  aux_0.acc_seg: 9.8602  aux_1.loss_ce: 0.9862  aux_1.acc_seg: 4.6869  aux_2.loss_ce: 0.9901  aux_2.acc_seg: 9.9435  aux_3.loss_ce: 0.9880  aux_3.acc_seg: 12.1076
+2025/07/24 13:14:17 - mmengine - INFO - Iter(train) [   124/160000]  base_lr: 9.9938e-04 lr: 9.9938e-04  eta: 20 days, 11:22:27  time: 12.9157  data_time: 0.0270  memory: 11869  loss: 5.6329  decode.loss_ce: 1.8633  decode.acc_seg: 90.7312  aux_0.loss_ce: 0.9460  aux_0.acc_seg: 82.3654  aux_1.loss_ce: 0.9414  aux_1.acc_seg: 85.7766  aux_2.loss_ce: 0.9432  aux_2.acc_seg: 84.4364  aux_3.loss_ce: 0.9390  aux_3.acc_seg: 84.5590
+2025/07/24 13:14:29 - mmengine - INFO - Iter(train) [   125/160000]  base_lr: 9.9937e-04 lr: 9.9937e-04  eta: 20 days, 11:30:57  time: 13.0693  data_time: 0.0261  memory: 11869  loss: 5.8193  decode.loss_ce: 1.9139  decode.acc_seg: 52.3599  aux_0.loss_ce: 0.9816  aux_0.acc_seg: 30.6514  aux_1.loss_ce: 0.9722  aux_1.acc_seg: 29.3710  aux_2.loss_ce: 0.9785  aux_2.acc_seg: 34.6350  aux_3.loss_ce: 0.9731  aux_3.acc_seg: 30.0890
+2025/07/24 13:14:42 - mmengine - INFO - Iter(train) [   126/160000]  base_lr: 9.9937e-04 lr: 9.9937e-04  eta: 20 days, 12:29:37  time: 13.4772  data_time: 0.0265  memory: 11869  loss: 6.5933  decode.loss_ce: 2.2330  decode.acc_seg: 11.0300  aux_0.loss_ce: 1.0992  aux_0.acc_seg: 3.9585  aux_1.loss_ce: 1.0813  aux_1.acc_seg: 3.9063  aux_2.loss_ce: 1.0922  aux_2.acc_seg: 5.1953  aux_3.loss_ce: 1.0877  aux_3.acc_seg: 3.9943
+2025/07/24 13:14:56 - mmengine - INFO - Iter(train) [   127/160000]  base_lr: 9.9936e-04 lr: 9.9936e-04  eta: 20 days, 13:21:47  time: 13.7735  data_time: 0.0273  memory: 11869  loss: 6.6856  decode.loss_ce: 2.2967  decode.acc_seg: 28.0822  aux_0.loss_ce: 1.1033  aux_0.acc_seg: 24.5988  aux_1.loss_ce: 1.0870  aux_1.acc_seg: 24.2329  aux_2.loss_ce: 1.0997  aux_2.acc_seg: 24.0692  aux_3.loss_ce: 1.0989  aux_3.acc_seg: 24.2706
+2025/07/24 13:15:07 - mmengine - INFO - Iter(train) [   128/160000]  base_lr: 9.9936e-04 lr: 9.9936e-04  eta: 20 days, 13:21:37  time: 13.5423  data_time: 0.0263  memory: 11869  loss: 6.9787  decode.loss_ce: 2.4648  decode.acc_seg: 3.5689  aux_0.loss_ce: 1.1362  aux_0.acc_seg: 4.4566  aux_1.loss_ce: 1.1197  aux_1.acc_seg: 6.9925  aux_2.loss_ce: 1.1269  aux_2.acc_seg: 8.5635  aux_3.loss_ce: 1.1310  aux_3.acc_seg: 7.5390
+2025/07/24 13:15:18 - mmengine - INFO - Iter(train) [   129/160000]  base_lr: 9.9935e-04 lr: 9.9935e-04  eta: 20 days, 13:26:07  time: 13.1966  data_time: 0.0263  memory: 11869  loss: 7.1899  decode.loss_ce: 2.5624  decode.acc_seg: 51.7303  aux_0.loss_ce: 1.1678  aux_0.acc_seg: 46.5966  aux_1.loss_ce: 1.1497  aux_1.acc_seg: 50.2582  aux_2.loss_ce: 1.1510  aux_2.acc_seg: 46.7244  aux_3.loss_ce: 1.1591  aux_3.acc_seg: 46.8128
+2025/07/24 13:15:30 - mmengine - INFO - Iter(train) [   130/160000]  base_lr: 9.9935e-04 lr: 9.9935e-04  eta: 20 days, 13:30:15  time: 12.7097  data_time: 0.0258  memory: 11869  loss: 7.5914  decode.loss_ce: 2.7237  decode.acc_seg: 20.3908  aux_0.loss_ce: 1.2199  aux_0.acc_seg: 7.6256  aux_1.loss_ce: 1.2101  aux_1.acc_seg: 8.4668  aux_2.loss_ce: 1.2178  aux_2.acc_seg: 7.5731  aux_3.loss_ce: 1.2199  aux_3.acc_seg: 8.3693
+2025/07/24 13:15:40 - mmengine - INFO - Iter(train) [   131/160000]  base_lr: 9.9934e-04 lr: 9.9934e-04  eta: 20 days, 13:12:34  time: 12.1643  data_time: 0.0255  memory: 11869  loss: 7.8633  decode.loss_ce: 2.8396  decode.acc_seg: 22.2296  aux_0.loss_ce: 1.2596  aux_0.acc_seg: 21.9573  aux_1.loss_ce: 1.2511  aux_1.acc_seg: 19.2818  aux_2.loss_ce: 1.2549  aux_2.acc_seg: 20.8940  aux_3.loss_ce: 1.2581  aux_3.acc_seg: 17.6609
+2025/07/24 13:15:50 - mmengine - INFO - Iter(train) [   132/160000]  base_lr: 9.9934e-04 lr: 9.9934e-04  eta: 20 days, 12:56:06  time: 11.8036  data_time: 0.0252  memory: 11869  loss: 7.4599  decode.loss_ce: 2.6942  decode.acc_seg: 42.7301  aux_0.loss_ce: 1.1959  aux_0.acc_seg: 17.5188  aux_1.loss_ce: 1.1841  aux_1.acc_seg: 19.8030  aux_2.loss_ce: 1.1931  aux_2.acc_seg: 9.5211  aux_3.loss_ce: 1.1927  aux_3.acc_seg: 12.4956
+2025/07/24 13:16:01 - mmengine - INFO - Iter(train) [   133/160000]  base_lr: 9.9933e-04 lr: 9.9933e-04  eta: 20 days, 12:42:37  time: 11.4814  data_time: 0.0242  memory: 11869  loss: 7.0312  decode.loss_ce: 2.4987  decode.acc_seg: 63.8616  aux_0.loss_ce: 1.1345  aux_0.acc_seg: 42.1051  aux_1.loss_ce: 1.1282  aux_1.acc_seg: 41.9042  aux_2.loss_ce: 1.1314  aux_2.acc_seg: 44.6314  aux_3.loss_ce: 1.1384  aux_3.acc_seg: 42.5661
+2025/07/24 13:16:11 - mmengine - INFO - Iter(train) [   134/160000]  base_lr: 9.9933e-04 lr: 9.9933e-04  eta: 20 days, 12:21:44  time: 11.3719  data_time: 0.0248  memory: 11869  loss: 7.1717  decode.loss_ce: 2.5833  decode.acc_seg: 35.9714  aux_0.loss_ce: 1.1519  aux_0.acc_seg: 33.4754  aux_1.loss_ce: 1.1416  aux_1.acc_seg: 33.5396  aux_2.loss_ce: 1.1429  aux_2.acc_seg: 34.0906  aux_3.loss_ce: 1.1520  aux_3.acc_seg: 34.4287
+2025/07/24 13:16:21 - mmengine - INFO - Iter(train) [   135/160000]  base_lr: 9.9932e-04 lr: 9.9932e-04  eta: 20 days, 12:02:42  time: 11.2380  data_time: 0.0254  memory: 11869  loss: 7.1185  decode.loss_ce: 2.5382  decode.acc_seg: 57.3858  aux_0.loss_ce: 1.1497  aux_0.acc_seg: 16.6184  aux_1.loss_ce: 1.1393  aux_1.acc_seg: 26.1115  aux_2.loss_ce: 1.1402  aux_2.acc_seg: 18.7813  aux_3.loss_ce: 1.1510  aux_3.acc_seg: 21.0783
+2025/07/24 13:16:31 - mmengine - INFO - Iter(train) [   136/160000]  base_lr: 9.9932e-04 lr: 9.9932e-04  eta: 20 days, 11:41:06  time: 10.8516  data_time: 0.0253  memory: 11869  loss: 6.8006  decode.loss_ce: 2.4048  decode.acc_seg: 40.9688  aux_0.loss_ce: 1.1016  aux_0.acc_seg: 44.9293  aux_1.loss_ce: 1.0966  aux_1.acc_seg: 47.7291  aux_2.loss_ce: 1.0957  aux_2.acc_seg: 45.5637  aux_3.loss_ce: 1.1020  aux_3.acc_seg: 48.1471
+2025/07/24 13:16:40 - mmengine - INFO - Iter(train) [   137/160000]  base_lr: 9.9931e-04 lr: 9.9931e-04  eta: 20 days, 11:09:31  time: 10.4390  data_time: 0.0248  memory: 11869  loss: 6.7126  decode.loss_ce: 2.3638  decode.acc_seg: 42.4728  aux_0.loss_ce: 1.0902  aux_0.acc_seg: 32.0229  aux_1.loss_ce: 1.0856  aux_1.acc_seg: 31.2589  aux_2.loss_ce: 1.0834  aux_2.acc_seg: 33.3938  aux_3.loss_ce: 1.0895  aux_3.acc_seg: 30.7142
+2025/07/24 13:16:50 - mmengine - INFO - Iter(train) [   138/160000]  base_lr: 9.9931e-04 lr: 9.9931e-04  eta: 20 days, 10:45:57  time: 10.3128  data_time: 0.0243  memory: 11869  loss: 6.0157  decode.loss_ce: 2.0702  decode.acc_seg: 51.5542  aux_0.loss_ce: 0.9898  aux_0.acc_seg: 48.4269  aux_1.loss_ce: 0.9869  aux_1.acc_seg: 49.1467  aux_2.loss_ce: 0.9806  aux_2.acc_seg: 52.2029  aux_3.loss_ce: 0.9882  aux_3.acc_seg: 44.5800
+2025/07/24 13:17:00 - mmengine - INFO - Iter(train) [   139/160000]  base_lr: 9.9930e-04 lr: 9.9930e-04  eta: 20 days, 10:22:12  time: 10.1614  data_time: 0.0244  memory: 11869  loss: 6.0603  decode.loss_ce: 2.0645  decode.acc_seg: 31.1620  aux_0.loss_ce: 1.0004  aux_0.acc_seg: 26.7843  aux_1.loss_ce: 1.0026  aux_1.acc_seg: 27.8966  aux_2.loss_ce: 0.9925  aux_2.acc_seg: 31.2197  aux_3.loss_ce: 1.0003  aux_3.acc_seg: 27.7073
+2025/07/24 13:17:10 - mmengine - INFO - Iter(train) [   140/160000]  base_lr: 9.9930e-04 lr: 9.9930e-04  eta: 20 days, 10:00:15  time: 10.0191  data_time: 0.0252  memory: 11869  loss: 5.9032  decode.loss_ce: 1.9945  decode.acc_seg: 45.1989  aux_0.loss_ce: 0.9791  aux_0.acc_seg: 35.2674  aux_1.loss_ce: 0.9829  aux_1.acc_seg: 31.2426  aux_2.loss_ce: 0.9642  aux_2.acc_seg: 33.2107  aux_3.loss_ce: 0.9825  aux_3.acc_seg: 33.7393
+2025/07/24 13:17:22 - mmengine - INFO - Iter(train) [   141/160000]  base_lr: 9.9929e-04 lr: 9.9929e-04  eta: 20 days, 10:15:48  time: 10.1806  data_time: 0.0250  memory: 11867  loss: 5.6040  decode.loss_ce: 1.8886  decode.acc_seg: 20.2057  aux_0.loss_ce: 0.9307  aux_0.acc_seg: 38.0105  aux_1.loss_ce: 0.9321  aux_1.acc_seg: 35.5099  aux_2.loss_ce: 0.9195  aux_2.acc_seg: 21.5902  aux_3.loss_ce: 0.9330  aux_3.acc_seg: 33.9957
+2025/07/24 13:17:32 - mmengine - INFO - Iter(train) [   142/160000]  base_lr: 9.9929e-04 lr: 9.9929e-04  eta: 20 days, 10:02:23  time: 10.1842  data_time: 0.0256  memory: 11869  loss: 5.7228  decode.loss_ce: 1.9184  decode.acc_seg: 64.5171  aux_0.loss_ce: 0.9505  aux_0.acc_seg: 52.8305  aux_1.loss_ce: 0.9490  aux_1.acc_seg: 49.8091  aux_2.loss_ce: 0.9444  aux_2.acc_seg: 47.3777  aux_3.loss_ce: 0.9605  aux_3.acc_seg: 40.8444
+2025/07/24 13:17:42 - mmengine - INFO - Iter(train) [   143/160000]  base_lr: 9.9928e-04 lr: 9.9928e-04  eta: 20 days, 9:37:49  time: 10.1133  data_time: 0.0252  memory: 11869  loss: 6.1156  decode.loss_ce: 2.0938  decode.acc_seg: 34.3192  aux_0.loss_ce: 1.0089  aux_0.acc_seg: 20.9076  aux_1.loss_ce: 0.9987  aux_1.acc_seg: 22.1307  aux_2.loss_ce: 0.9962  aux_2.acc_seg: 26.5821  aux_3.loss_ce: 1.0180  aux_3.acc_seg: 25.6992
+2025/07/24 13:17:52 - mmengine - INFO - Iter(train) [   144/160000]  base_lr: 9.9928e-04 lr: 9.9928e-04  eta: 20 days, 9:11:46  time: 10.0707  data_time: 0.0244  memory: 11869  loss: 6.5822  decode.loss_ce: 2.2507  decode.acc_seg: 20.9413  aux_0.loss_ce: 1.0858  aux_0.acc_seg: 19.2498  aux_1.loss_ce: 1.0818  aux_1.acc_seg: 8.9734  aux_2.loss_ce: 1.0701  aux_2.acc_seg: 17.1603  aux_3.loss_ce: 1.0938  aux_3.acc_seg: 11.9619
+2025/07/24 13:18:01 - mmengine - INFO - Iter(train) [   145/160000]  base_lr: 9.9927e-04 lr: 9.9927e-04  eta: 20 days, 8:44:00  time: 10.0089  data_time: 0.0244  memory: 11869  loss: 6.2745  decode.loss_ce: 2.1627  decode.acc_seg: 74.9888  aux_0.loss_ce: 1.0309  aux_0.acc_seg: 66.0592  aux_1.loss_ce: 1.0263  aux_1.acc_seg: 69.8267  aux_2.loss_ce: 1.0175  aux_2.acc_seg: 70.3858  aux_3.loss_ce: 1.0371  aux_3.acc_seg: 72.2880
+2025/07/24 13:18:11 - mmengine - INFO - Iter(train) [   146/160000]  base_lr: 9.9927e-04 lr: 9.9927e-04  eta: 20 days, 8:21:57  time: 9.9911  data_time: 0.0243  memory: 11867  loss: 5.8438  decode.loss_ce: 2.0090  decode.acc_seg: 34.7973  aux_0.loss_ce: 0.9598  aux_0.acc_seg: 24.6012  aux_1.loss_ce: 0.9559  aux_1.acc_seg: 22.7361  aux_2.loss_ce: 0.9481  aux_2.acc_seg: 25.7088  aux_3.loss_ce: 0.9711  aux_3.acc_seg: 22.6096
+2025/07/24 13:18:20 - mmengine - INFO - Iter(train) [   147/160000]  base_lr: 9.9926e-04 lr: 9.9926e-04  eta: 20 days, 7:56:20  time: 10.0048  data_time: 0.0236  memory: 11869  loss: 5.7676  decode.loss_ce: 1.9725  decode.acc_seg: 64.2657  aux_0.loss_ce: 0.9522  aux_0.acc_seg: 49.4521  aux_1.loss_ce: 0.9493  aux_1.acc_seg: 47.7012  aux_2.loss_ce: 0.9359  aux_2.acc_seg: 55.2787  aux_3.loss_ce: 0.9576  aux_3.acc_seg: 54.0907
+2025/07/24 13:18:30 - mmengine - INFO - Iter(train) [   148/160000]  base_lr: 9.9926e-04 lr: 9.9926e-04  eta: 20 days, 7:30:27  time: 9.9760  data_time: 0.0248  memory: 11869  loss: 6.0174  decode.loss_ce: 2.0439  decode.acc_seg: 69.2157  aux_0.loss_ce: 0.9983  aux_0.acc_seg: 55.4017  aux_1.loss_ce: 0.9920  aux_1.acc_seg: 52.8601  aux_2.loss_ce: 0.9820  aux_2.acc_seg: 59.2976  aux_3.loss_ce: 1.0012  aux_3.acc_seg: 62.1896
+2025/07/24 13:18:40 - mmengine - INFO - Iter(train) [   149/160000]  base_lr: 9.9925e-04 lr: 9.9925e-04  eta: 20 days, 7:03:57  time: 9.9445  data_time: 0.0248  memory: 11869  loss: 5.8236  decode.loss_ce: 1.9855  decode.acc_seg: 50.6702  aux_0.loss_ce: 0.9685  aux_0.acc_seg: 44.2946  aux_1.loss_ce: 0.9547  aux_1.acc_seg: 43.2229  aux_2.loss_ce: 0.9501  aux_2.acc_seg: 45.9078  aux_3.loss_ce: 0.9649  aux_3.acc_seg: 39.2266
+2025/07/24 13:18:49 - mmengine - INFO - Iter(train) [   150/160000]  base_lr: 9.9925e-04 lr: 9.9925e-04  eta: 20 days, 6:44:56  time: 9.9454  data_time: 0.0242  memory: 11869  loss: 5.8462  decode.loss_ce: 1.9932  decode.acc_seg: 47.0402  aux_0.loss_ce: 0.9737  aux_0.acc_seg: 34.4004  aux_1.loss_ce: 0.9551  aux_1.acc_seg: 33.2685  aux_2.loss_ce: 0.9582  aux_2.acc_seg: 33.6838  aux_3.loss_ce: 0.9661  aux_3.acc_seg: 28.6135
+2025/07/24 13:18:59 - mmengine - INFO - Iter(train) [   151/160000]  base_lr: 9.9924e-04 lr: 9.9924e-04  eta: 20 days, 6:20:36  time: 9.7180  data_time: 0.0239  memory: 11869  loss: 5.6639  decode.loss_ce: 1.9055  decode.acc_seg: 56.2359  aux_0.loss_ce: 0.9523  aux_0.acc_seg: 41.5619  aux_1.loss_ce: 0.9309  aux_1.acc_seg: 42.4951  aux_2.loss_ce: 0.9296  aux_2.acc_seg: 44.0679  aux_3.loss_ce: 0.9455  aux_3.acc_seg: 39.2731
+2025/07/24 13:19:09 - mmengine - INFO - Iter(train) [   152/160000]  base_lr: 9.9924e-04 lr: 9.9924e-04  eta: 20 days, 5:57:14  time: 9.6475  data_time: 0.0235  memory: 11869  loss: 5.9242  decode.loss_ce: 2.0162  decode.acc_seg: 13.4562  aux_0.loss_ce: 0.9926  aux_0.acc_seg: 8.5311  aux_1.loss_ce: 0.9735  aux_1.acc_seg: 8.6016  aux_2.loss_ce: 0.9646  aux_2.acc_seg: 8.5215  aux_3.loss_ce: 0.9773  aux_3.acc_seg: 8.6307
+2025/07/24 13:19:18 - mmengine - INFO - Iter(train) [   153/160000]  base_lr: 9.9923e-04 lr: 9.9923e-04  eta: 20 days, 5:31:22  time: 9.6217  data_time: 0.0237  memory: 11869  loss: 5.4798  decode.loss_ce: 1.8457  decode.acc_seg: 50.7192  aux_0.loss_ce: 0.9217  aux_0.acc_seg: 36.9232  aux_1.loss_ce: 0.9077  aux_1.acc_seg: 36.7603  aux_2.loss_ce: 0.8973  aux_2.acc_seg: 37.9253  aux_3.loss_ce: 0.9073  aux_3.acc_seg: 36.3240
+2025/07/24 13:19:28 - mmengine - INFO - Iter(train) [   154/160000]  base_lr: 9.9923e-04 lr: 9.9923e-04  eta: 20 days, 5:06:41  time: 9.6107  data_time: 0.0250  memory: 11869  loss: 5.1407  decode.loss_ce: 1.7307  decode.acc_seg: 54.3132  aux_0.loss_ce: 0.8635  aux_0.acc_seg: 53.8690  aux_1.loss_ce: 0.8463  aux_1.acc_seg: 54.2946  aux_2.loss_ce: 0.8463  aux_2.acc_seg: 50.2840  aux_3.loss_ce: 0.8540  aux_3.acc_seg: 54.9594
+2025/07/24 13:19:38 - mmengine - INFO - Iter(train) [   155/160000]  base_lr: 9.9922e-04 lr: 9.9922e-04  eta: 20 days, 4:48:59  time: 9.6499  data_time: 0.0251  memory: 11869  loss: 5.3387  decode.loss_ce: 1.7998  decode.acc_seg: 68.3849  aux_0.loss_ce: 0.8944  aux_0.acc_seg: 61.0323  aux_1.loss_ce: 0.8799  aux_1.acc_seg: 62.1449  aux_2.loss_ce: 0.8788  aux_2.acc_seg: 59.7103  aux_3.loss_ce: 0.8858  aux_3.acc_seg: 61.6551
+2025/07/24 13:19:47 - mmengine - INFO - Iter(train) [   156/160000]  base_lr: 9.9922e-04 lr: 9.9922e-04  eta: 20 days, 4:25:37  time: 9.6251  data_time: 0.0256  memory: 11867  loss: 5.8019  decode.loss_ce: 1.9917  decode.acc_seg: 30.5502  aux_0.loss_ce: 0.9668  aux_0.acc_seg: 20.4623  aux_1.loss_ce: 0.9452  aux_1.acc_seg: 18.7640  aux_2.loss_ce: 0.9459  aux_2.acc_seg: 20.4750  aux_3.loss_ce: 0.9523  aux_3.acc_seg: 18.3622
+2025/07/24 13:19:57 - mmengine - INFO - Iter(train) [   157/160000]  base_lr: 9.9921e-04 lr: 9.9921e-04  eta: 20 days, 4:05:30  time: 9.6392  data_time: 0.0264  memory: 11869  loss: 5.5058  decode.loss_ce: 1.8776  decode.acc_seg: 84.5561  aux_0.loss_ce: 0.9173  aux_0.acc_seg: 82.0453  aux_1.loss_ce: 0.8966  aux_1.acc_seg: 81.5222  aux_2.loss_ce: 0.9024  aux_2.acc_seg: 82.7344  aux_3.loss_ce: 0.9120  aux_3.acc_seg: 81.2413
+2025/07/24 13:20:06 - mmengine - INFO - Iter(train) [   158/160000]  base_lr: 9.9921e-04 lr: 9.9921e-04  eta: 20 days, 3:41:50  time: 9.6340  data_time: 0.0259  memory: 11869  loss: 5.7753  decode.loss_ce: 1.9864  decode.acc_seg: 39.7036  aux_0.loss_ce: 0.9561  aux_0.acc_seg: 36.0332  aux_1.loss_ce: 0.9381  aux_1.acc_seg: 36.0955  aux_2.loss_ce: 0.9411  aux_2.acc_seg: 37.3249  aux_3.loss_ce: 0.9537  aux_3.acc_seg: 37.8645
+2025/07/24 13:20:16 - mmengine - INFO - Iter(train) [   159/160000]  base_lr: 9.9920e-04 lr: 9.9920e-04  eta: 20 days, 3:20:52  time: 9.6486  data_time: 0.0261  memory: 11869  loss: 5.5485  decode.loss_ce: 1.9048  decode.acc_seg: 75.8767  aux_0.loss_ce: 0.9151  aux_0.acc_seg: 81.2163  aux_1.loss_ce: 0.9013  aux_1.acc_seg: 82.4294  aux_2.loss_ce: 0.9078  aux_2.acc_seg: 79.1537  aux_3.loss_ce: 0.9194  aux_3.acc_seg: 79.6210
+2025/07/24 13:20:25 - mmengine - INFO - Iter(train) [   160/160000]  base_lr: 9.9920e-04 lr: 9.9920e-04  eta: 20 days, 2:56:24  time: 9.6006  data_time: 0.0273  memory: 11869  loss: 5.2451  decode.loss_ce: 1.7904  decode.acc_seg: 51.4050  aux_0.loss_ce: 0.8689  aux_0.acc_seg: 48.7810  aux_1.loss_ce: 0.8576  aux_1.acc_seg: 43.3598  aux_2.loss_ce: 0.8570  aux_2.acc_seg: 50.6912  aux_3.loss_ce: 0.8711  aux_3.acc_seg: 49.1087
+2025/07/24 13:20:34 - mmengine - INFO - Iter(train) [   161/160000]  base_lr: 9.9919e-04 lr: 9.9919e-04  eta: 20 days, 2:25:09  time: 9.5412  data_time: 0.0279  memory: 11869  loss: 5.7492  decode.loss_ce: 2.0157  decode.acc_seg: 29.0034  aux_0.loss_ce: 0.9389  aux_0.acc_seg: 27.2888  aux_1.loss_ce: 0.9275  aux_1.acc_seg: 28.3355  aux_2.loss_ce: 0.9317  aux_2.acc_seg: 27.5885  aux_3.loss_ce: 0.9353  aux_3.acc_seg: 25.4913
+2025/07/24 13:20:44 - mmengine - INFO - Iter(train) [   162/160000]  base_lr: 9.9918e-04 lr: 9.9918e-04  eta: 20 days, 2:00:32  time: 9.5161  data_time: 0.0276  memory: 11869  loss: 5.5351  decode.loss_ce: 1.9441  decode.acc_seg: 44.9967  aux_0.loss_ce: 0.9033  aux_0.acc_seg: 39.1124  aux_1.loss_ce: 0.8909  aux_1.acc_seg: 46.8152  aux_2.loss_ce: 0.8964  aux_2.acc_seg: 44.6656  aux_3.loss_ce: 0.9004  aux_3.acc_seg: 39.8509
+2025/07/24 13:20:53 - mmengine - INFO - Iter(train) [   163/160000]  base_lr: 9.9918e-04 lr: 9.9918e-04  eta: 20 days, 1:38:49  time: 9.5229  data_time: 0.0280  memory: 11869  loss: 5.6230  decode.loss_ce: 1.9695  decode.acc_seg: 62.0593  aux_0.loss_ce: 0.9145  aux_0.acc_seg: 60.3035  aux_1.loss_ce: 0.9058  aux_1.acc_seg: 60.0587  aux_2.loss_ce: 0.9168  aux_2.acc_seg: 55.6491  aux_3.loss_ce: 0.9164  aux_3.acc_seg: 56.1771
+2025/07/24 13:21:03 - mmengine - INFO - Iter(train) [   164/160000]  base_lr: 9.9917e-04 lr: 9.9917e-04  eta: 20 days, 1:19:31  time: 9.5383  data_time: 0.0273  memory: 11870  loss: 5.5258  decode.loss_ce: 1.9380  decode.acc_seg: 50.6734  aux_0.loss_ce: 0.9008  aux_0.acc_seg: 44.0821  aux_1.loss_ce: 0.8900  aux_1.acc_seg: 46.2966  aux_2.loss_ce: 0.8996  aux_2.acc_seg: 47.0681  aux_3.loss_ce: 0.8975  aux_3.acc_seg: 42.4206
+2025/07/24 13:21:12 - mmengine - INFO - Iter(train) [   165/160000]  base_lr: 9.9917e-04 lr: 9.9917e-04  eta: 20 days, 0:53:58  time: 9.4745  data_time: 0.0265  memory: 11869  loss: 5.7100  decode.loss_ce: 1.9962  decode.acc_seg: 47.3808  aux_0.loss_ce: 0.9293  aux_0.acc_seg: 39.8238  aux_1.loss_ce: 0.9174  aux_1.acc_seg: 40.9482  aux_2.loss_ce: 0.9328  aux_2.acc_seg: 40.4644  aux_3.loss_ce: 0.9343  aux_3.acc_seg: 39.7554
+2025/07/24 13:21:21 - mmengine - INFO - Iter(train) [   166/160000]  base_lr: 9.9916e-04 lr: 9.9916e-04  eta: 20 days, 0:25:29  time: 9.4252  data_time: 0.0258  memory: 11869  loss: 5.5693  decode.loss_ce: 1.9259  decode.acc_seg: 16.5374  aux_0.loss_ce: 0.9035  aux_0.acc_seg: 18.3433  aux_1.loss_ce: 0.9042  aux_1.acc_seg: 19.4587  aux_2.loss_ce: 0.9160  aux_2.acc_seg: 20.7508  aux_3.loss_ce: 0.9197  aux_3.acc_seg: 20.5264
+2025/07/24 13:21:31 - mmengine - INFO - Iter(train) [   167/160000]  base_lr: 9.9916e-04 lr: 9.9916e-04  eta: 20 days, 0:03:04  time: 9.3943  data_time: 0.0252  memory: 11869  loss: 5.7447  decode.loss_ce: 2.0026  decode.acc_seg: 41.2302  aux_0.loss_ce: 0.9307  aux_0.acc_seg: 24.6720  aux_1.loss_ce: 0.9286  aux_1.acc_seg: 25.8453  aux_2.loss_ce: 0.9395  aux_2.acc_seg: 27.5042  aux_3.loss_ce: 0.9433  aux_3.acc_seg: 26.2604
+2025/07/24 13:21:40 - mmengine - INFO - Iter(train) [   168/160000]  base_lr: 9.9915e-04 lr: 9.9915e-04  eta: 19 days, 23:42:29  time: 9.3960  data_time: 0.0254  memory: 11869  loss: 5.2899  decode.loss_ce: 1.8405  decode.acc_seg: 62.9146  aux_0.loss_ce: 0.8590  aux_0.acc_seg: 60.0785  aux_1.loss_ce: 0.8540  aux_1.acc_seg: 60.8200  aux_2.loss_ce: 0.8679  aux_2.acc_seg: 59.1681  aux_3.loss_ce: 0.8684  aux_3.acc_seg: 59.8126
+2025/07/24 13:21:49 - mmengine - INFO - Iter(train) [   169/160000]  base_lr: 9.9915e-04 lr: 9.9915e-04  eta: 19 days, 23:14:20  time: 9.3336  data_time: 0.0249  memory: 11869  loss: 5.8540  decode.loss_ce: 2.0407  decode.acc_seg: 26.4191  aux_0.loss_ce: 0.9538  aux_0.acc_seg: 14.5620  aux_1.loss_ce: 0.9456  aux_1.acc_seg: 14.0710  aux_2.loss_ce: 0.9523  aux_2.acc_seg: 14.3837  aux_3.loss_ce: 0.9617  aux_3.acc_seg: 13.0429
+2025/07/24 13:21:59 - mmengine - INFO - Iter(train) [   170/160000]  base_lr: 9.9914e-04 lr: 9.9914e-04  eta: 19 days, 22:54:26  time: 9.3444  data_time: 0.0237  memory: 11867  loss: 5.8224  decode.loss_ce: 2.0303  decode.acc_seg: 63.1202  aux_0.loss_ce: 0.9497  aux_0.acc_seg: 57.7099  aux_1.loss_ce: 0.9386  aux_1.acc_seg: 57.2086  aux_2.loss_ce: 0.9495  aux_2.acc_seg: 53.1654  aux_3.loss_ce: 0.9542  aux_3.acc_seg: 54.2314
+2025/07/24 13:22:08 - mmengine - INFO - Iter(train) [   171/160000]  base_lr: 9.9914e-04 lr: 9.9914e-04  eta: 19 days, 22:32:27  time: 9.3832  data_time: 0.0222  memory: 11869  loss: 5.2989  decode.loss_ce: 1.8017  decode.acc_seg: 64.4727  aux_0.loss_ce: 0.8746  aux_0.acc_seg: 57.4571  aux_1.loss_ce: 0.8665  aux_1.acc_seg: 56.6113  aux_2.loss_ce: 0.8754  aux_2.acc_seg: 56.3444  aux_3.loss_ce: 0.8808  aux_3.acc_seg: 55.2172
+2025/07/24 13:22:18 - mmengine - INFO - Iter(train) [   172/160000]  base_lr: 9.9913e-04 lr: 9.9913e-04  eta: 19 days, 22:08:09  time: 9.3673  data_time: 0.0234  memory: 11869  loss: 5.1191  decode.loss_ce: 1.7226  decode.acc_seg: 56.6600  aux_0.loss_ce: 0.8464  aux_0.acc_seg: 53.2700  aux_1.loss_ce: 0.8404  aux_1.acc_seg: 53.7553  aux_2.loss_ce: 0.8506  aux_2.acc_seg: 53.2976  aux_3.loss_ce: 0.8591  aux_3.acc_seg: 52.8439
+2025/07/24 13:22:27 - mmengine - INFO - Iter(train) [   173/160000]  base_lr: 9.9913e-04 lr: 9.9913e-04  eta: 19 days, 21:45:44  time: 9.3461  data_time: 0.0230  memory: 11869  loss: 5.0246  decode.loss_ce: 1.6825  decode.acc_seg: 65.5716  aux_0.loss_ce: 0.8306  aux_0.acc_seg: 61.6885  aux_1.loss_ce: 0.8309  aux_1.acc_seg: 58.6548  aux_2.loss_ce: 0.8330  aux_2.acc_seg: 58.3205  aux_3.loss_ce: 0.8475  aux_3.acc_seg: 51.5283
+2025/07/24 13:22:36 - mmengine - INFO - Iter(train) [   174/160000]  base_lr: 9.9912e-04 lr: 9.9912e-04  eta: 19 days, 21:24:37  time: 9.3183  data_time: 0.0231  memory: 11869  loss: 5.2776  decode.loss_ce: 1.7482  decode.acc_seg: 39.1994  aux_0.loss_ce: 0.8759  aux_0.acc_seg: 22.6512  aux_1.loss_ce: 0.8814  aux_1.acc_seg: 22.9991  aux_2.loss_ce: 0.8800  aux_2.acc_seg: 24.9617  aux_3.loss_ce: 0.8921  aux_3.acc_seg: 22.3790
+2025/07/24 13:22:46 - mmengine - INFO - Iter(train) [   175/160000]  base_lr: 9.9912e-04 lr: 9.9912e-04  eta: 19 days, 21:02:04  time: 9.3198  data_time: 0.0237  memory: 11869  loss: 4.9676  decode.loss_ce: 1.6445  decode.acc_seg: 59.7085  aux_0.loss_ce: 0.8295  aux_0.acc_seg: 30.8776  aux_1.loss_ce: 0.8346  aux_1.acc_seg: 31.5889  aux_2.loss_ce: 0.8230  aux_2.acc_seg: 32.3892  aux_3.loss_ce: 0.8360  aux_3.acc_seg: 31.3120
+2025/07/24 13:22:55 - mmengine - INFO - Iter(train) [   176/160000]  base_lr: 9.9911e-04 lr: 9.9911e-04  eta: 19 days, 20:39:09  time: 9.3373  data_time: 0.0247  memory: 11869  loss: 4.6106  decode.loss_ce: 1.5102  decode.acc_seg: 73.0471  aux_0.loss_ce: 0.7767  aux_0.acc_seg: 73.7154  aux_1.loss_ce: 0.7752  aux_1.acc_seg: 73.3006  aux_2.loss_ce: 0.7690  aux_2.acc_seg: 73.0872  aux_3.loss_ce: 0.7795  aux_3.acc_seg: 72.8930
+2025/07/24 13:23:04 - mmengine - INFO - Iter(train) [   177/160000]  base_lr: 9.9911e-04 lr: 9.9911e-04  eta: 19 days, 20:14:07  time: 9.3031  data_time: 0.0251  memory: 11869  loss: 4.5445  decode.loss_ce: 1.4826  decode.acc_seg: 60.4697  aux_0.loss_ce: 0.7679  aux_0.acc_seg: 53.7896  aux_1.loss_ce: 0.7668  aux_1.acc_seg: 51.3340  aux_2.loss_ce: 0.7593  aux_2.acc_seg: 53.9754  aux_3.loss_ce: 0.7680  aux_3.acc_seg: 54.9345
+2025/07/24 13:23:13 - mmengine - INFO - Iter(train) [   178/160000]  base_lr: 9.9910e-04 lr: 9.9910e-04  eta: 19 days, 19:52:49  time: 9.2820  data_time: 0.0245  memory: 11869  loss: 4.5974  decode.loss_ce: 1.4917  decode.acc_seg: 43.8132  aux_0.loss_ce: 0.7784  aux_0.acc_seg: 22.3833  aux_1.loss_ce: 0.7776  aux_1.acc_seg: 23.8790  aux_2.loss_ce: 0.7695  aux_2.acc_seg: 22.4988  aux_3.loss_ce: 0.7802  aux_3.acc_seg: 22.2452
+2025/07/24 13:23:22 - mmengine - INFO - Iter(train) [   179/160000]  base_lr: 9.9910e-04 lr: 9.9910e-04  eta: 19 days, 19:26:40  time: 9.2764  data_time: 0.0252  memory: 11869  loss: 4.6534  decode.loss_ce: 1.5077  decode.acc_seg: 25.6132  aux_0.loss_ce: 0.7855  aux_0.acc_seg: 14.7666  aux_1.loss_ce: 0.7902  aux_1.acc_seg: 13.8589  aux_2.loss_ce: 0.7825  aux_2.acc_seg: 12.7430  aux_3.loss_ce: 0.7875  aux_3.acc_seg: 12.6954
+2025/07/24 13:23:32 - mmengine - INFO - Iter(train) [   180/160000]  base_lr: 9.9909e-04 lr: 9.9909e-04  eta: 19 days, 19:10:44  time: 9.2874  data_time: 0.0250  memory: 11869  loss: 4.9868  decode.loss_ce: 1.6310  decode.acc_seg: 55.3993  aux_0.loss_ce: 0.8341  aux_0.acc_seg: 53.9993  aux_1.loss_ce: 0.8454  aux_1.acc_seg: 54.2361  aux_2.loss_ce: 0.8324  aux_2.acc_seg: 56.2974  aux_3.loss_ce: 0.8438  aux_3.acc_seg: 52.5657
+2025/07/24 13:23:41 - mmengine - INFO - Iter(train) [   181/160000]  base_lr: 9.9909e-04 lr: 9.9909e-04  eta: 19 days, 18:51:45  time: 9.2912  data_time: 0.0271  memory: 11869  loss: 5.4675  decode.loss_ce: 1.7919  decode.acc_seg: 10.3563  aux_0.loss_ce: 0.9189  aux_0.acc_seg: 9.8637  aux_1.loss_ce: 0.9238  aux_1.acc_seg: 8.2399  aux_2.loss_ce: 0.9087  aux_2.acc_seg: 9.3266  aux_3.loss_ce: 0.9241  aux_3.acc_seg: 8.4627
+2025/07/24 13:23:50 - mmengine - INFO - Iter(train) [   182/160000]  base_lr: 9.9908e-04 lr: 9.9908e-04  eta: 19 days, 18:30:32  time: 9.2950  data_time: 0.0273  memory: 11869  loss: 5.8674  decode.loss_ce: 1.9609  decode.acc_seg: 15.8471  aux_0.loss_ce: 0.9740  aux_0.acc_seg: 15.5334  aux_1.loss_ce: 0.9859  aux_1.acc_seg: 15.2298  aux_2.loss_ce: 0.9668  aux_2.acc_seg: 14.9521  aux_3.loss_ce: 0.9797  aux_3.acc_seg: 15.0745
+2025/07/24 13:24:02 - mmengine - INFO - Iter(train) [   183/160000]  base_lr: 9.9908e-04 lr: 9.9908e-04  eta: 19 days, 18:37:40  time: 9.4815  data_time: 0.0270  memory: 11869  loss: 6.0345  decode.loss_ce: 2.0457  decode.acc_seg: 61.2796  aux_0.loss_ce: 1.0021  aux_0.acc_seg: 59.1569  aux_1.loss_ce: 1.0014  aux_1.acc_seg: 59.3935  aux_2.loss_ce: 0.9874  aux_2.acc_seg: 59.1162  aux_3.loss_ce: 0.9979  aux_3.acc_seg: 57.5471
+2025/07/24 13:24:11 - mmengine - INFO - Iter(train) [   184/160000]  base_lr: 9.9907e-04 lr: 9.9907e-04  eta: 19 days, 18:24:47  time: 9.5236  data_time: 0.0279  memory: 11869  loss: 6.0547  decode.loss_ce: 2.0450  decode.acc_seg: 47.1483  aux_0.loss_ce: 1.0076  aux_0.acc_seg: 28.5609  aux_1.loss_ce: 1.0041  aux_1.acc_seg: 25.5098  aux_2.loss_ce: 0.9908  aux_2.acc_seg: 21.6619  aux_3.loss_ce: 1.0072  aux_3.acc_seg: 23.2437
+2025/07/24 13:24:21 - mmengine - INFO - Iter(train) [   185/160000]  base_lr: 9.9907e-04 lr: 9.9907e-04  eta: 19 days, 18:07:06  time: 9.5422  data_time: 0.0280  memory: 11869  loss: 6.5762  decode.loss_ce: 2.2208  decode.acc_seg: 29.3517  aux_0.loss_ce: 1.0933  aux_0.acc_seg: 20.5716  aux_1.loss_ce: 1.0857  aux_1.acc_seg: 21.3831  aux_2.loss_ce: 1.0801  aux_2.acc_seg: 21.2753  aux_3.loss_ce: 1.0961  aux_3.acc_seg: 20.6262
+2025/07/24 13:24:31 - mmengine - INFO - Iter(train) [   186/160000]  base_lr: 9.9906e-04 lr: 9.9906e-04  eta: 19 days, 17:50:49  time: 9.5734  data_time: 0.0267  memory: 11869  loss: 6.8866  decode.loss_ce: 2.3196  decode.acc_seg: 55.2652  aux_0.loss_ce: 1.1456  aux_0.acc_seg: 50.1451  aux_1.loss_ce: 1.1373  aux_1.acc_seg: 42.1651  aux_2.loss_ce: 1.1334  aux_2.acc_seg: 41.6245  aux_3.loss_ce: 1.1507  aux_3.acc_seg: 39.1530
+2025/07/24 13:24:40 - mmengine - INFO - Iter(train) [   187/160000]  base_lr: 9.9906e-04 lr: 9.9906e-04  eta: 19 days, 17:28:16  time: 9.5753  data_time: 0.0262  memory: 11869  loss: 7.0900  decode.loss_ce: 2.4058  decode.acc_seg: 34.9734  aux_0.loss_ce: 1.1730  aux_0.acc_seg: 28.7022  aux_1.loss_ce: 1.1667  aux_1.acc_seg: 27.0950  aux_2.loss_ce: 1.1632  aux_2.acc_seg: 28.3598  aux_3.loss_ce: 1.1813  aux_3.acc_seg: 26.7819
+2025/07/24 13:24:49 - mmengine - INFO - Iter(train) [   188/160000]  base_lr: 9.9905e-04 lr: 9.9905e-04  eta: 19 days, 17:12:50  time: 9.6027  data_time: 0.0268  memory: 11869  loss: 7.6526  decode.loss_ce: 2.6174  decode.acc_seg: 33.4345  aux_0.loss_ce: 1.2561  aux_0.acc_seg: 15.0748  aux_1.loss_ce: 1.2552  aux_1.acc_seg: 14.8799  aux_2.loss_ce: 1.2537  aux_2.acc_seg: 15.1145  aux_3.loss_ce: 1.2703  aux_3.acc_seg: 12.9131
+2025/07/24 13:24:58 - mmengine - INFO - Iter(train) [   189/160000]  base_lr: 9.9905e-04 lr: 9.9905e-04  eta: 19 days, 16:52:52  time: 9.6309  data_time: 0.0264  memory: 11869  loss: 7.1227  decode.loss_ce: 2.4261  decode.acc_seg: 67.2188  aux_0.loss_ce: 1.1706  aux_0.acc_seg: 58.1518  aux_1.loss_ce: 1.1661  aux_1.acc_seg: 63.4078  aux_2.loss_ce: 1.1708  aux_2.acc_seg: 60.8662  aux_3.loss_ce: 1.1891  aux_3.acc_seg: 57.1292
+2025/07/24 13:25:08 - mmengine - INFO - Iter(train) [   190/160000]  base_lr: 9.9904e-04 lr: 9.9904e-04  eta: 19 days, 16:33:47  time: 9.5967  data_time: 0.0267  memory: 11869  loss: 6.6567  decode.loss_ce: 2.2649  decode.acc_seg: 39.8671  aux_0.loss_ce: 1.0961  aux_0.acc_seg: 44.2578  aux_1.loss_ce: 1.0872  aux_1.acc_seg: 43.7991  aux_2.loss_ce: 1.0963  aux_2.acc_seg: 46.0680  aux_3.loss_ce: 1.1122  aux_3.acc_seg: 43.8191
+2025/07/24 13:25:17 - mmengine - INFO - Iter(train) [   191/160000]  base_lr: 9.9904e-04 lr: 9.9904e-04  eta: 19 days, 16:09:56  time: 9.5489  data_time: 0.0264  memory: 11869  loss: 6.1415  decode.loss_ce: 2.0921  decode.acc_seg: 74.9089  aux_0.loss_ce: 1.0068  aux_0.acc_seg: 71.7667  aux_1.loss_ce: 1.0023  aux_1.acc_seg: 71.8639  aux_2.loss_ce: 1.0121  aux_2.acc_seg: 73.5198  aux_3.loss_ce: 1.0282  aux_3.acc_seg: 71.1811
+2025/07/24 13:25:27 - mmengine - INFO - Iter(train) [   192/160000]  base_lr: 9.9903e-04 lr: 9.9903e-04  eta: 19 days, 16:03:03  time: 9.6383  data_time: 0.0249  memory: 11869  loss: 5.9016  decode.loss_ce: 2.0378  decode.acc_seg: 66.7829  aux_0.loss_ce: 0.9649  aux_0.acc_seg: 64.4698  aux_1.loss_ce: 0.9519  aux_1.acc_seg: 66.0157  aux_2.loss_ce: 0.9605  aux_2.acc_seg: 65.3752  aux_3.loss_ce: 0.9864  aux_3.acc_seg: 64.3871
+2025/07/24 13:25:36 - mmengine - INFO - Iter(train) [   193/160000]  base_lr: 9.9903e-04 lr: 9.9903e-04  eta: 19 days, 15:45:24  time: 9.4560  data_time: 0.0251  memory: 11869  loss: 5.9800  decode.loss_ce: 2.0660  decode.acc_seg: 15.5657  aux_0.loss_ce: 0.9751  aux_0.acc_seg: 15.8508  aux_1.loss_ce: 0.9657  aux_1.acc_seg: 15.6584  aux_2.loss_ce: 0.9734  aux_2.acc_seg: 17.1079  aux_3.loss_ce: 0.9998  aux_3.acc_seg: 14.6209
+2025/07/24 13:25:46 - mmengine - INFO - Iter(train) [   194/160000]  base_lr: 9.9902e-04 lr: 9.9902e-04  eta: 19 days, 15:27:07  time: 9.4054  data_time: 0.0235  memory: 11869  loss: 5.9308  decode.loss_ce: 2.0735  decode.acc_seg: 32.2069  aux_0.loss_ce: 0.9610  aux_0.acc_seg: 24.0794  aux_1.loss_ce: 0.9507  aux_1.acc_seg: 25.7176  aux_2.loss_ce: 0.9592  aux_2.acc_seg: 31.4994  aux_3.loss_ce: 0.9864  aux_3.acc_seg: 23.0913
+2025/07/24 13:25:55 - mmengine - INFO - Iter(train) [   195/160000]  base_lr: 9.9902e-04 lr: 9.9902e-04  eta: 19 days, 15:06:54  time: 9.3737  data_time: 0.0239  memory: 11869  loss: 5.7418  decode.loss_ce: 2.0301  decode.acc_seg: 45.6108  aux_0.loss_ce: 0.9280  aux_0.acc_seg: 36.5674  aux_1.loss_ce: 0.9163  aux_1.acc_seg: 38.0881  aux_2.loss_ce: 0.9167  aux_2.acc_seg: 40.4897  aux_3.loss_ce: 0.9506  aux_3.acc_seg: 31.1261
+2025/07/24 13:26:04 - mmengine - INFO - Iter(train) [   196/160000]  base_lr: 9.9901e-04 lr: 9.9901e-04  eta: 19 days, 14:46:55  time: 9.3337  data_time: 0.0242  memory: 11869  loss: 5.7475  decode.loss_ce: 2.0376  decode.acc_seg: 37.3478  aux_0.loss_ce: 0.9303  aux_0.acc_seg: 40.2763  aux_1.loss_ce: 0.9175  aux_1.acc_seg: 43.2063  aux_2.loss_ce: 0.9162  aux_2.acc_seg: 41.4206  aux_3.loss_ce: 0.9459  aux_3.acc_seg: 39.5394
+2025/07/24 13:26:13 - mmengine - INFO - Iter(train) [   197/160000]  base_lr: 9.9901e-04 lr: 9.9901e-04  eta: 19 days, 14:27:32  time: 9.3419  data_time: 0.0251  memory: 11869  loss: 6.1102  decode.loss_ce: 2.1815  decode.acc_seg: 25.1489  aux_0.loss_ce: 0.9857  aux_0.acc_seg: 26.6369  aux_1.loss_ce: 0.9698  aux_1.acc_seg: 24.7941  aux_2.loss_ce: 0.9737  aux_2.acc_seg: 27.0408  aux_3.loss_ce: 0.9995  aux_3.acc_seg: 26.5938
+2025/07/24 13:26:22 - mmengine - INFO - Iter(train) [   198/160000]  base_lr: 9.9900e-04 lr: 9.9900e-04  eta: 19 days, 14:09:03  time: 9.3068  data_time: 0.0247  memory: 11869  loss: 5.6190  decode.loss_ce: 1.9941  decode.acc_seg: 62.8950  aux_0.loss_ce: 0.9100  aux_0.acc_seg: 31.2109  aux_1.loss_ce: 0.8927  aux_1.acc_seg: 39.5494  aux_2.loss_ce: 0.8976  aux_2.acc_seg: 39.8362  aux_3.loss_ce: 0.9246  aux_3.acc_seg: 35.8505
+2025/07/24 13:26:31 - mmengine - INFO - Iter(train) [   199/160000]  base_lr: 9.9900e-04 lr: 9.9900e-04  eta: 19 days, 13:48:01  time: 9.2845  data_time: 0.0247  memory: 11869  loss: 5.6509  decode.loss_ce: 1.9929  decode.acc_seg: 64.0181  aux_0.loss_ce: 0.9191  aux_0.acc_seg: 49.9180  aux_1.loss_ce: 0.9033  aux_1.acc_seg: 51.9395  aux_2.loss_ce: 0.9055  aux_2.acc_seg: 52.7749  aux_3.loss_ce: 0.9301  aux_3.acc_seg: 49.7404
