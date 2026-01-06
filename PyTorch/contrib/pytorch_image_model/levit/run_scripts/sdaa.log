@@ -1,0 +1,1397 @@
+--------------+------------------------------------------------
+ Host IP      | 100.10.19.61
+ PyTorch      | 2.4.0a0+git4451b0e
+ Torch-SDAA   | 20250616.14.30.dev0+git35328dc
+--------------+------------------------------------------------
+ SDAA Driver  | 2.1.0 (N/A)
+ SDAA Runtime | 2.1.0 (/opt/tecoai/lib64/libsdaart.so)
+ SDPTI        | 1.4.0b0 (/opt/tecoai/lib64/libsdpti.so)
+ TecoDNN      | 2.2.0b0 (/opt/tecoai/lib64/libtecodnn.so)
+ TecoBLAS     | 2.2.0b0 (/opt/tecoai/lib64/libtecoblas.so)
+ CustomDNN    | 1.20.0a0 (/opt/tecoai/lib64/libtecodnn_ext.so)
+ TecoRAND     | 2.0.1 (/opt/tecoai/lib64/libtecorand.so)
+ TCCL         | 1.23.0 (/opt/tecoai/lib64/libtccl.so)
+--------------+------------------------------------------------
+W1212 10:20:56.125000 140296514406208 torch/distributed/run.py:779] 
+W1212 10:20:56.125000 140296514406208 torch/distributed/run.py:779] *****************************************
+W1212 10:20:56.125000 140296514406208 torch/distributed/run.py:779] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W1212 10:20:56.125000 140296514406208 torch/distributed/run.py:779] *****************************************
+--------------+------------------------------------------------
+ Host IP      | 100.10.19.61
+ PyTorch      | 2.4.0a0+git4451b0e
+ Torch-SDAA   | 20250616.14.30.dev0+git35328dc
+--------------+------------------------------------------------
+ SDAA Driver  | 2.1.0 (N/A)
+ SDAA Runtime | 2.1.0 (/opt/tecoai/lib64/libsdaart.so)
+ SDPTI        | 1.4.0b0 (/opt/tecoai/lib64/libsdpti.so)
+ TecoDNN      | 2.2.0b0 (/opt/tecoai/lib64/libtecodnn.so)
+ TecoBLAS     | 2.2.0b0 (/opt/tecoai/lib64/libtecoblas.so)
+ CustomDNN    | 1.20.0a0 (/opt/tecoai/lib64/libtecodnn_ext.so)
+ TecoRAND     | 2.0.1 (/opt/tecoai/lib64/libtecorand.so)
+ TCCL         | 1.23.0 (/opt/tecoai/lib64/libtccl.so)
+--------------+--------------------------------------------------------------+------------------------------------------------
+ Host IP      | 100.10.19.61
+ PyTorch      | 2.4.0a0+git4451b0e
+ Torch-SDAA   | 20250616.14.30.dev0+git35328dc
+--------------+------------------------------------------------
+ SDAA Driver  | 2.1.0 (N/A)
+ SDAA Runtime | 2.1.0 (/opt/tecoai/lib64/libsdaart.so)
+ SDPTI        | 1.4.0b0 (/opt/tecoai/lib64/libsdpti.so)
+ TecoDNN      | 2.2.0b0 (/opt/tecoai/lib64/libtecodnn.so)
+ TecoBLAS     | 2.2.0b0 (/opt/tecoai/lib64/libtecoblas.so)
+ CustomDNN    | 1.20.0a0 (/opt/tecoai/lib64/libtecodnn_ext.so)
+ TecoRAND     | 2.0.1 (/opt/tecoai/lib64/libtecorand.so)
+ TCCL         | 1.23.0 (/opt/tecoai/lib64/libtccl.so)
+--------------+------------------------------------------------
+
+--------------+------------------------------------------------
+ Host IP      | 100.10.19.61
+ PyTorch      | 2.4.0a0+git4451b0e
+ Torch-SDAA   | 20250616.14.30.dev0+git35328dc
+--------------+------------------------------------------------
+ SDAA Driver  | 2.1.0 (N/A)
+ SDAA Runtime | 2.1.0 (/opt/tecoai/lib64/libsdaart.so)
+ SDPTI        | 1.4.0b0 (/opt/tecoai/lib64/libsdpti.so)
+ TecoDNN      | 2.2.0b0 (/opt/tecoai/lib64/libtecodnn.so)
+ TecoBLAS     | 2.2.0b0 (/opt/tecoai/lib64/libtecoblas.so)
+ CustomDNN    | 1.20.0a0 (/opt/tecoai/lib64/libtecodnn_ext.so)
+ TecoRAND     | 2.0.1 (/opt/tecoai/lib64/libtecorand.so)
+ TCCL         | 1.23.0 (/opt/tecoai/lib64/libtccl.so)
+--------------+------------------------------------------------
+--------------+------------------------------------------------
+ Host IP      | 100.10.19.61
+ PyTorch      | 2.4.0a0+git4451b0e
+ Torch-SDAA   | 20250616.14.30.dev0+git35328dc
+--------------+------------------------------------------------
+ SDAA Driver  | 2.1.0 (N/A)
+ SDAA Runtime | 2.1.0 (/opt/tecoai/lib64/libsdaart.so)
+ SDPTI        | 1.4.0b0 (/opt/tecoai/lib64/libsdpti.so)
+ TecoDNN      | 2.2.0b0 (/opt/tecoai/lib64/libtecodnn.so)
+ TecoBLAS     | 2.2.0b0 (/opt/tecoai/lib64/libtecoblas.so)
+ CustomDNN    | 1.20.0a0 (/opt/tecoai/lib64/libtecodnn_ext.so)
+ TecoRAND     | 2.0.1 (/opt/tecoai/lib64/libtecorand.so)
+ TCCL         | 1.23.0 (/opt/tecoai/lib64/libtccl.so)
+--------------+------------------------------------------------
+Training in distributed mode with multiple processes, 1 device per process.Process 0, total 4, device cuda:0.
+Training in distributed mode with multiple processes, 1 device per process.Process 1, total 4, device cuda:1.
+Training in distributed mode with multiple processes, 1 device per process.Process 3, total 4, device cuda:3.
+Training in distributed mode with multiple processes, 1 device per process.Process 2, total 4, device cuda:2.
+Model levit_128 created, param count:9213936
+Data processing configuration for current model + dataset:
+	input_size: (3, 224, 224)
+	interpolation: bicubic
+	mean: (0.485, 0.456, 0.406)
+	std: (0.229, 0.224, 0.225)
+	crop_pct: 0.9
+	crop_mode: center
+Created SGD (sgd) optimizer: lr: 0.4, momentum: 0.9, dampening: 0, weight_decay: 2e-05, nesterov: True, maximize: False, foreach: None, differentiable: False
+Using native Torch AMP. Training in mixed precision.
+Using native Torch DistributedDataParallel.
+Scheduled epochs: 1 (epochs + cooldown_epochs). Warmup within epochs when warmup_prefix=False. LR stepped per epoch.
+TCAPPDLL 2025-12-12 10:22:12.914535 - Epoch: 0 Iteration: 0  rank : 0  train.loss : 6.966820240020752  train.ips : 18.18466595644738 imgs/sTCAPPDLL 2025-12-12 10:22:12.914552 - Epoch: 0 Iteration: 0  rank : 3  train.loss : 6.966820240020752  train.ips : 17.928420018885134 imgs/sTCAPPDLL 2025-12-12 10:22:12.914573 - Epoch: 0 Iteration: 0  rank : 2  train.loss : 6.966820240020752  train.ips : 17.83348436202028 imgs/s
+
+
+TCAPPDLL 2025-12-12 10:22:12.915061 - Epoch: 0 Iteration: 0  rank : 1  train.loss : 6.966820240020752  train.ips : 17.921644022882997 imgs/s
+Train: 0 [   0/20018 (  0%)]  Loss: 6.97 (6.97)  Time: 3.519s,   18.18/s  (3.519s,   18.18/s)  LR: 1.000e-05  Data: 2.502 (2.502)
+TCAPPDLL 2025-12-12 10:22:13.518393 - Epoch: 0 Iteration: 1  rank : 1  train.loss : 6.9454755783081055  train.ips : 30.668720117942442 imgs/sTCAPPDLL 2025-12-12 10:22:13.518400 - Epoch: 0 Iteration: 1  rank : 0  train.loss : 6.9454755783081055  train.ips : 31.00849681156584 imgs/s
+
+TCAPPDLL 2025-12-12 10:22:13.518509 - Epoch: 0 Iteration: 1  rank : 2  train.loss : 6.9454755783081055  train.ips : 30.506980987989916 imgs/s
+Train: 0 [   1/20018 (  0%)]  Loss: 6.95 (6.96)  Time: 0.608s,  105.18/s  (2.064s,   31.01/s)  LR: 1.000e-05  Data: 0.007 (1.254)
+TCAPPDLL 2025-12-12 10:22:13.518747 - Epoch: 0 Iteration: 1  rank : 3  train.loss : 6.9454755783081055  train.ips : 30.626638313005458 imgs/s
+TCAPPDLL 2025-12-12 10:22:13.942129 - Epoch: 0 Iteration: 2  rank : 1  train.loss : 6.94049596786499  train.ips : 41.745115968912394 imgs/sTCAPPDLL 2025-12-12 10:22:13.942134 - Epoch: 0 Iteration: 2  rank : 2  train.loss : 6.94049596786499  train.ips : 41.543778325431155 imgs/s
+
+TCAPPDLL 2025-12-12 10:22:13.942226 - Epoch: 0 Iteration: 2  rank : 0  train.loss : 6.94049596786499  train.ips : 42.17807070870069 imgs/s
+TCAPPDLL 2025-12-12 10:22:13.942418 - Epoch: 0 Iteration: 2  rank : 3  train.loss : 6.94049596786499  train.ips : 41.708494885790685 imgs/s
+Train: 0 [   2/20018 (  0%)]  Loss: 6.94 (6.95)  Time: 0.424s,  150.86/s  (1.517s,   42.18/s)  LR: 1.000e-05  Data: 0.006 (0.838)
+TCAPPDLL 2025-12-12 10:22:14.456049 - Epoch: 0 Iteration: 3  rank : 1  train.loss : 6.944469928741455  train.ips : 50.07396892074537 imgs/sTCAPPDLL 2025-12-12 10:22:14.456064 - Epoch: 0 Iteration: 3  rank : 2  train.loss : 6.944469928741455  train.ips : 49.855482956236514 imgs/sTCAPPDLL 2025-12-12 10:22:14.456064 - Epoch: 0 Iteration: 3  rank : 3  train.loss : 6.944469928741455  train.ips : 50.034301961303655 imgs/s
+
+
+TCAPPDLL 2025-12-12 10:22:14.456310 - Epoch: 0 Iteration: 3  rank : 0  train.loss : 6.944469928741455  train.ips : 50.52808065053652 imgs/s
+Train: 0 [   3/20018 (  0%)]  Loss: 6.94 (6.95)  Time: 0.514s,  124.43/s  (1.267s,   50.53/s)  LR: 1.000e-05  Data: 0.068 (0.646)
+TCAPPDLL 2025-12-12 10:22:14.843277 - Epoch: 0 Iteration: 4  rank : 2  train.loss : 6.944012641906738  train.ips : 57.95731925199679 imgs/sTCAPPDLL 2025-12-12 10:22:14.843280 - Epoch: 0 Iteration: 4  rank : 3  train.loss : 6.944012641906738  train.ips : 58.150999150899594 imgs/sTCAPPDLL 2025-12-12 10:22:14.843301 - Epoch: 0 Iteration: 4  rank : 1  train.loss : 6.944012641906738  train.ips : 58.19315981633161 imgs/s
+
+
+TCAPPDLL 2025-12-12 10:22:14.886037 - Epoch: 0 Iteration: 4  rank : 0  train.loss : 6.944012641906738  train.ips : 58.67874152385615 imgs/s
+Train: 0 [   4/20018 (  0%)]  Loss: 6.94 (6.95)  Time: 0.387s,  165.40/s  (1.091s,   58.68/s)  LR: 1.000e-05  Data: 0.008 (0.518)
+TCAPPDLL 2025-12-12 10:22:15.393661 - Epoch: 0 Iteration: 5  rank : 1  train.loss : 6.979587554931641  train.ips : 63.47182276896691 imgs/sTCAPPDLL 2025-12-12 10:22:15.393658 - Epoch: 0 Iteration: 5  rank : 2  train.loss : 6.979587554931641  train.ips : 63.23850666113415 imgs/sTCAPPDLL 2025-12-12 10:22:15.393683 - Epoch: 0 Iteration: 5  rank : 3  train.loss : 6.979587554931641  train.ips : 63.42492750847227 imgs/s
+
+
+TCAPPDLL 2025-12-12 10:22:15.393930 - Epoch: 0 Iteration: 5  rank : 0  train.loss : 6.979587554931641  train.ips : 63.95590452752682 imgs/s
+Train: 0 [   5/20018 (  0%)]  Loss: 6.98 (6.95)  Time: 0.551s,  116.21/s  (1.001s,   63.96/s)  LR: 1.000e-05  Data: 0.007 (0.433)
+TCAPPDLL 2025-12-12 10:22:15.898796 - Epoch: 0 Iteration: 6  rank : 2  train.loss : 6.967031002044678  train.ips : 68.12659256781504 imgs/sTCAPPDLL 2025-12-12 10:22:15.898804 - Epoch: 0 Iteration: 6  rank : 1  train.loss : 6.967031002044678  train.ips : 68.35677304208978 imgs/sTCAPPDLL 2025-12-12 10:22:15.898798 - Epoch: 0 Iteration: 6  rank : 3  train.loss : 6.967031002044678  train.ips : 68.3226152600956 imgs/s
+
+
+TCAPPDLL 2025-12-12 10:22:15.899041 - Epoch: 0 Iteration: 6  rank : 0  train.loss : 6.967031002044678  train.ips : 68.82423429966819 imgs/s
+Train: 0 [   6/20018 (  0%)]  Loss: 6.97 (6.96)  Time: 0.505s,  126.68/s  (0.930s,   68.82/s)  LR: 1.000e-05  Data: 0.014 (0.373)
+TCAPPDLL 2025-12-12 10:22:16.429973 - Epoch: 0 Iteration: 7  rank : 0  train.loss : 6.962852478027344  train.ips : 72.72535695637983 imgs/sTCAPPDLL 2025-12-12 10:22:16.429806 - Epoch: 0 Iteration: 7  rank : 2  train.loss : 6.962852478027344  train.ips : 72.02744489590185 imgs/s
+
+TCAPPDLL 2025-12-12 10:22:16.430367 - Epoch: 0 Iteration: 7  rank : 3  train.loss : 6.962852478027344  train.ips : 72.23248576765334 imgs/s
+Train: 0 [   7/20018 (  0%)]  Loss: 6.96 (6.96)  Time: 0.531s,  120.56/s  (0.880s,   72.73/s)  LR: 1.000e-05  Data: 0.019 (0.329)
+TCAPPDLL 2025-12-12 10:22:16.430550 - Epoch: 0 Iteration: 7  rank : 1  train.loss : 6.962852478027344  train.ips : 72.26921329945377 imgs/s
+TCAPPDLL 2025-12-12 10:22:16.896431 - Epoch: 0 Iteration: 8  rank : 0  train.loss : 7.012598991394043  train.ips : 76.77567421134744 imgs/sTCAPPDLL 2025-12-12 10:22:16.896438 - Epoch: 0 Iteration: 8  rank : 2  train.loss : 7.012598991394043  train.ips : 76.02919644078295 imgs/s
+
+TCAPPDLL 2025-12-12 10:22:16.896626 - Epoch: 0 Iteration: 8  rank : 1  train.loss : 7.012598991394043  train.ips : 76.25730936265315 imgs/s
+TCAPPDLL 2025-12-12 10:22:16.896691 - Epoch: 0 Iteration: 8  rank : 3  train.loss : 7.012598991394043  train.ips : 76.21405079571585 imgs/s
+Train: 0 [   8/20018 (  0%)]  Loss: 7.01 (6.96)  Time: 0.462s,  138.47/s  (0.834s,   76.78/s)  LR: 1.000e-05  Data: 0.008 (0.293)
+TCAPPDLL 2025-12-12 10:22:17.390411 - Epoch: 0 Iteration: 9  rank : 1  train.loss : 6.915455341339111  train.ips : 79.52355448221495 imgs/s
+TCAPPDLL 2025-12-12 10:22:17.390658 - Epoch: 0 Iteration: 9  rank : 3  train.loss : 6.915455341339111  train.ips : 79.92041882771636 imgs/sTCAPPDLL 2025-12-12 10:22:17.390704 - Epoch: 0 Iteration: 9  rank : 2  train.loss : 6.915455341339111  train.ips : 79.73055108483533 imgs/s
+
+TCAPPDLL 2025-12-12 10:22:17.390768 - Epoch: 0 Iteration: 9  rank : 0  train.loss : 6.915455341339111  train.ips : 80.4285833834023 imgs/s
+Train: 0 [   9/20018 (  0%)]  Loss: 6.92 (6.96)  Time: 0.455s,  140.66/s  (0.796s,   80.43/s)  LR: 1.000e-05  Data: 0.012 (0.265)
+TCAPPDLL 2025-12-12 10:22:17.902705 - Epoch: 0 Iteration: 10  rank : 1  train.loss : 7.010807991027832  train.ips : 82.24650297288076 imgs/sTCAPPDLL 2025-12-12 10:22:17.902718 - Epoch: 0 Iteration: 10  rank : 2  train.loss : 7.010807991027832  train.ips : 82.06387496989434 imgs/sTCAPPDLL 2025-12-12 10:22:17.902715 - Epoch: 0 Iteration: 10  rank : 3  train.loss : 7.010807991027832  train.ips : 82.20775038960976 imgs/s
+
+
+TCAPPDLL 2025-12-12 10:22:17.902952 - Epoch: 0 Iteration: 10  rank : 0  train.loss : 7.010807991027832  train.ips : 82.69495317110788 imgs/s
+Train: 0 [  10/20018 (  0%)]  Loss: 7.01 (6.96)  Time: 0.556s,  115.14/s  (0.774s,   82.69/s)  LR: 1.000e-05  Data: 0.013 (0.242)
+TCAPPDLL 2025-12-12 10:22:18.404000 - Epoch: 0 Iteration: 11  rank : 2  train.loss : 6.9295454025268555  train.ips : 84.56336872049037 imgs/sTCAPPDLL 2025-12-12 10:22:18.404013 - Epoch: 0 Iteration: 11  rank : 1  train.loss : 6.9295454025268555  train.ips : 84.77188660984005 imgs/s
+
+TCAPPDLL 2025-12-12 10:22:18.404169 - Epoch: 0 Iteration: 11  rank : 0  train.loss : 6.9295454025268555  train.ips : 85.20683024739199 imgs/s
+Train: 0 [  11/20018 (  0%)]  Loss: 6.93 (6.96)  Time: 0.500s,  127.96/s  (0.751s,   85.21/s)  LR: 1.000e-05  Data: 0.013 (0.223)
+TCAPPDLL 2025-12-12 10:22:18.404453 - Epoch: 0 Iteration: 11  rank : 3  train.loss : 6.9295454025268555  train.ips : 84.72271014370737 imgs/s
+TCAPPDLL 2025-12-12 10:22:18.839734 - Epoch: 0 Iteration: 12  rank : 0  train.loss : 6.907144069671631  train.ips : 88.04788776815269 imgs/sTCAPPDLL 2025-12-12 10:22:18.839747 - Epoch: 0 Iteration: 12  rank : 1  train.loss : 6.907144069671631  train.ips : 87.60709446413466 imgs/s
+
+TCAPPDLL 2025-12-12 10:22:18.839869 - Epoch: 0 Iteration: 12  rank : 2  train.loss : 6.907144069671631  train.ips : 87.4050974696596 imgs/s
+TCAPPDLL 2025-12-12 10:22:18.840008 - Epoch: 0 Iteration: 12  rank : 3  train.loss : 6.907144069671631  train.ips : 87.57074321986651 imgs/s
+Train: 0 [  12/20018 (  0%)]  Loss: 6.91 (6.96)  Time: 0.436s,  146.78/s  (0.727s,   88.05/s)  LR: 1.000e-05  Data: 0.014 (0.207)
+TCAPPDLL 2025-12-12 10:22:19.394099 - Epoch: 0 Iteration: 13  rank : 2  train.loss : 6.954566478729248  train.ips : 88.95015108593326 imgs/sTCAPPDLL 2025-12-12 10:22:19.394120 - Epoch: 0 Iteration: 13  rank : 0  train.loss : 6.954566478729248  train.ips : 89.5628428690728 imgs/sTCAPPDLL 2025-12-12 10:22:19.394127 - Epoch: 0 Iteration: 13  rank : 1  train.loss : 6.954566478729248  train.ips : 89.56388449720141 imgs/s
+
+
+TCAPPDLL 2025-12-12 10:22:19.394365 - Epoch: 0 Iteration: 13  rank : 3  train.loss : 6.954566478729248  train.ips : 89.1072581311548 imgs/s
+Train: 0 [  13/20018 (  0%)]  Loss: 6.95 (6.96)  Time: 0.555s,  115.37/s  (0.715s,   89.56/s)  LR: 1.000e-05  Data: 0.056 (0.196)
+TCAPPDLL 2025-12-12 10:22:19.904467 - Epoch: 0 Iteration: 14  rank : 1  train.loss : 6.980388641357422  train.ips : 90.9442705189962 imgs/sTCAPPDLL 2025-12-12 10:22:19.904448 - Epoch: 0 Iteration: 14  rank : 0  train.loss : 6.980388641357422  train.ips : 91.30234503564742 imgs/s
+
+TCAPPDLL 2025-12-12 10:22:19.904527 - Epoch: 0 Iteration: 14  rank : 2  train.loss : 6.980388641357422  train.ips : 90.74489487096061 imgs/s
+Train: 0 [  14/20018 (  0%)]  Loss: 6.98 (6.96)  Time: 0.510s,  125.40/s  (0.701s,   91.30/s)  LR: 1.000e-05  Data: 0.015 (0.184)
+TCAPPDLL 2025-12-12 10:22:19.904813 - Epoch: 0 Iteration: 14  rank : 3  train.loss : 6.980388641357422  train.ips : 90.86479333145023 imgs/s
+TCAPPDLL 2025-12-12 10:22:20.429780 - Epoch: 0 Iteration: 15  rank : 0  train.loss : 7.003164768218994  train.ips : 92.7586114878236 imgs/sTCAPPDLL 2025-12-12 10:22:20.429783 - Epoch: 0 Iteration: 15  rank : 2  train.loss : 7.003164768218994  train.ips : 92.18009771679856 imgs/s
+TCAPPDLL 2025-12-12 10:22:20.429816 - Epoch: 0 Iteration: 15  rank : 3  train.loss : 7.003164768218994  train.ips : 92.33722067751184 imgs/s
+
+TCAPPDLL 2025-12-12 10:22:20.430108 - Epoch: 0 Iteration: 15  rank : 1  train.loss : 7.003164768218994  train.ips : 92.35682225687773 imgs/s
+Train: 0 [  15/20018 (  0%)]  Loss: 7.00 (6.96)  Time: 0.525s,  121.93/s  (0.690s,   92.76/s)  LR: 1.000e-05  Data: 0.011 (0.173)
+TCAPPDLL 2025-12-12 10:22:20.993330 - Epoch: 0 Iteration: 16  rank : 0  train.loss : 6.9039106369018555  train.ips : 93.77126392713258 imgs/sTCAPPDLL 2025-12-12 10:22:20.993342 - Epoch: 0 Iteration: 16  rank : 2  train.loss : 6.9039106369018555  train.ips : 93.21260799748742 imgs/sTCAPPDLL 2025-12-12 10:22:20.993379 - Epoch: 0 Iteration: 16  rank : 1  train.loss : 6.9039106369018555  train.ips : 93.39372039864035 imgs/s
+
+
+TCAPPDLL 2025-12-12 10:22:20.993594 - Epoch: 0 Iteration: 16  rank : 3  train.loss : 6.9039106369018555  train.ips : 93.35424038274847 imgs/s
+Train: 0 [  16/20018 (  0%)]  Loss: 6.90 (6.96)  Time: 0.563s,  113.62/s  (0.683s,   93.77/s)  LR: 1.000e-05  Data: 0.014 (0.164)
+TCAPPDLL 2025-12-12 10:22:21.451535 - Epoch: 0 Iteration: 17  rank : 3  train.loss : 6.960599899291992  train.ips : 95.12058390560162 imgs/sTCAPPDLL 2025-12-12 10:22:21.451541 - Epoch: 0 Iteration: 17  rank : 1  train.loss : 6.960599899291992  train.ips : 95.16158825124681 imgs/sTCAPPDLL 2025-12-12 10:22:21.451581 - Epoch: 0 Iteration: 17  rank : 2  train.loss : 6.960599899291992  train.ips : 94.97608079401404 imgs/s
+
+
+TCAPPDLL 2025-12-12 10:22:21.451857 - Epoch: 0 Iteration: 17  rank : 0  train.loss : 6.960599899291992  train.ips : 95.50713631396208 imgs/s
+Train: 0 [  17/20018 (  0%)]  Loss: 6.96 (6.96)  Time: 0.459s,  139.37/s  (0.670s,   95.51/s)  LR: 1.000e-05  Data: 0.015 (0.156)
+TCAPPDLL 2025-12-12 10:22:21.920521 - Epoch: 0 Iteration: 18  rank : 0  train.loss : 6.888497352600098  train.ips : 97.05143613766363 imgs/sTCAPPDLL 2025-12-12 10:22:21.920528 - Epoch: 0 Iteration: 18  rank : 2  train.loss : 6.888497352600098  train.ips : 96.52011178170275 imgs/s
+
+TCAPPDLL 2025-12-12 10:22:21.920606 - Epoch: 0 Iteration: 18  rank : 3  train.loss : 6.888497352600098  train.ips : 96.66662946780559 imgs/sTCAPPDLL 2025-12-12 10:22:21.920779 - Epoch: 0 Iteration: 18  rank : 1  train.loss : 6.888497352600098  train.ips : 96.67381567188015 imgs/s
+
+Train: 0 [  18/20018 (  0%)]  Loss: 6.89 (6.95)  Time: 0.468s,  136.89/s  (0.659s,   97.05/s)  LR: 1.000e-05  Data: 0.014 (0.148)
+TCAPPDLL 2025-12-12 10:22:22.407305 - Epoch: 0 Iteration: 19  rank : 2  train.loss : 6.937417030334473  train.ips : 97.82876381985879 imgs/sTCAPPDLL 2025-12-12 10:22:22.407308 - Epoch: 0 Iteration: 19  rank : 1  train.loss : 6.937417030334473  train.ips : 97.99674813511338 imgs/s
+
+TCAPPDLL 2025-12-12 10:22:22.407576 - Epoch: 0 Iteration: 19  rank : 3  train.loss : 6.937417030334473  train.ips : 97.94566973674594 imgs/s
+TCAPPDLL 2025-12-12 10:22:22.407891 - Epoch: 0 Iteration: 19  rank : 0  train.loss : 6.937417030334473  train.ips : 98.326662423257 imgs/s
+Train: 0 [  19/20018 (  0%)]  Loss: 6.94 (6.95)  Time: 0.488s,  131.04/s  (0.651s,   98.33/s)  LR: 1.000e-05  Data: 0.011 (0.141)
+TCAPPDLL 2025-12-12 10:22:22.900198 - Epoch: 0 Iteration: 20  rank : 2  train.loss : 6.932696342468262  train.ips : 98.97634668202116 imgs/sTCAPPDLL 2025-12-12 10:22:22.900207 - Epoch: 0 Iteration: 20  rank : 0  train.loss : 6.932696342468262  train.ips : 99.4849272376515 imgs/s
+
+TCAPPDLL 2025-12-12 10:22:22.900249 - Epoch: 0 Iteration: 20  rank : 1  train.loss : 6.932696342468262  train.ips : 99.14130175047181 imgs/s
+TCAPPDLL 2025-12-12 10:22:22.900461 - Epoch: 0 Iteration: 20  rank : 3  train.loss : 6.932696342468262  train.ips : 99.10511407423368 imgs/s
+Train: 0 [  20/20018 (  0%)]  Loss: 6.93 (6.95)  Time: 0.492s,  130.15/s  (0.643s,   99.48/s)  LR: 1.000e-05  Data: 0.013 (0.135)
+TCAPPDLL 2025-12-12 10:22:23.422391 - Epoch: 0 Iteration: 21  rank : 1  train.loss : 6.985918045043945  train.ips : 100.03821460522556 imgs/s
+TCAPPDLL 2025-12-12 10:22:23.422506 - Epoch: 0 Iteration: 21  rank : 0  train.loss : 6.985918045043945  train.ips : 100.35495369417883 imgs/s
+TCAPPDLL 2025-12-12 10:22:23.422465 - Epoch: 0 Iteration: 21  rank : 3  train.loss : 6.985918045043945  train.ips : 100.00888445517378 imgs/s
+Train: 0 [  21/20018 (  0%)]  Loss: 6.99 (6.95)  Time: 0.521s,  122.93/s  (0.638s,  100.35/s)  LR: 1.000e-05  Data: 0.014 (0.130)
+TCAPPDLL 2025-12-12 10:22:23.422831 - Epoch: 0 Iteration: 21  rank : 2  train.loss : 6.985918045043945  train.ips : 99.84070896610501 imgs/s
+TCAPPDLL 2025-12-12 10:22:23.906844 - Epoch: 0 Iteration: 22  rank : 1  train.loss : 6.928608417510986  train.ips : 101.124059533455 imgs/sTCAPPDLL 2025-12-12 10:22:23.906841 - Epoch: 0 Iteration: 22  rank : 3  train.loss : 6.928608417510986  train.ips : 101.099883208149 imgs/sTCAPPDLL 2025-12-12 10:22:23.906847 - Epoch: 0 Iteration: 22  rank : 2  train.loss : 6.928608417510986  train.ips : 100.96508557930618 imgs/s
+
+
+TCAPPDLL 2025-12-12 10:22:23.907156 - Epoch: 0 Iteration: 22  rank : 0  train.loss : 6.928608417510986  train.ips : 101.39579631557112 imgs/s
+Train: 0 [  22/20018 (  0%)]  Loss: 6.93 (6.95)  Time: 0.487s,  131.37/s  (0.631s,  101.40/s)  LR: 1.000e-05  Data: 0.014 (0.125)
+TCAPPDLL 2025-12-12 10:22:24.396614 - Epoch: 0 Iteration: 23  rank : 3  train.loss : 6.905982971191406  train.ips : 102.03916014820079 imgs/sTCAPPDLL 2025-12-12 10:22:24.396619 - Epoch: 0 Iteration: 23  rank : 2  train.loss : 6.905982971191406  train.ips : 101.9110245203984 imgs/sTCAPPDLL 2025-12-12 10:22:24.396672 - Epoch: 0 Iteration: 23  rank : 1  train.loss : 6.905982971191406  train.ips : 102.06347127281525 imgs/s
+
+
+TCAPPDLL 2025-12-12 10:22:24.396865 - Epoch: 0 Iteration: 23  rank : 0  train.loss : 6.905982971191406  train.ips : 102.35132685743574 imgs/s
+Train: 0 [  23/20018 (  0%)]  Loss: 6.91 (6.95)  Time: 0.490s,  130.67/s  (0.625s,  102.35/s)  LR: 1.000e-05  Data: 0.012 (0.120)
+TCAPPDLL 2025-12-12 10:22:24.910741 - Epoch: 0 Iteration: 24  rank : 3  train.loss : 6.928404331207275  train.ips : 102.76922969490819 imgs/sTCAPPDLL 2025-12-12 10:22:24.910742 - Epoch: 0 Iteration: 24  rank : 1  train.loss : 6.928404331207275  train.ips : 102.79411573912695 imgs/s
+
+TCAPPDLL 2025-12-12 10:22:24.910811 - Epoch: 0 Iteration: 24  rank : 2  train.loss : 6.928404331207275  train.ips : 102.64516054825283 imgs/s
+TCAPPDLL 2025-12-12 10:22:24.910997 - Epoch: 0 Iteration: 24  rank : 0  train.loss : 6.928404331207275  train.ips : 103.08399793760928 imgs/s
+Train: 0 [  24/20018 (  0%)]  Loss: 6.93 (6.95)  Time: 0.514s,  124.47/s  (0.621s,  103.08/s)  LR: 1.000e-05  Data: 0.014 (0.116)
+TCAPPDLL 2025-12-12 10:22:25.398591 - Epoch: 0 Iteration: 25  rank : 0  train.loss : 6.955720901489258  train.ips : 103.94208356245383 imgs/s
+TCAPPDLL 2025-12-12 10:22:25.398623 - Epoch: 0 Iteration: 25  rank : 3  train.loss : 6.955720901489258  train.ips : 103.65413438694978 imgs/s
+TCAPPDLL 2025-12-12 10:22:25.398672 - Epoch: 0 Iteration: 25  rank : 1  train.loss : 6.955720901489258  train.ips : 103.64532035856925 imgs/s
+TCAPPDLL 2025-12-12 10:22:25.398954 - Epoch: 0 Iteration: 25  rank : 2  train.loss : 6.955720901489258  train.ips : 103.49150129883334 imgs/sTrain: 0 [  25/20018 (  0%)]  Loss: 6.96 (6.95)  Time: 0.488s,  131.26/s  (0.616s,  103.94/s)  LR: 1.000e-05  Data: 0.015 (0.112)
+
+TCAPPDLL 2025-12-12 10:22:25.663918 - Epoch: 0 Iteration: 26  rank : 0  train.loss : 6.960323810577393  train.ips : 106.18035031664427 imgs/s
+TCAPPDLL 2025-12-12 10:22:25.664139 - Epoch: 0 Iteration: 26  rank : 1  train.loss : 6.960323810577393  train.ips : 105.87270510707853 imgs/s
+TCAPPDLL 2025-12-12 10:22:25.664362 - Epoch: 0 Iteration: 26  rank : 2  train.loss : 6.960323810577393  train.ips : 105.72697646884785 imgs/sTCAPPDLL 2025-12-12 10:22:25.664378 - Epoch: 0 Iteration: 26  rank : 3  train.loss : 6.960323810577393  train.ips : 105.84994321766561 imgs/sTrain: 0 [  26/20018 (  0%)]  Loss: 6.96 (6.95)  Time: 0.265s,  241.25/s  (0.603s,  106.18/s)  LR: 1.000e-05  Data: 0.014 (0.108)
+
+
+TCAPPDLL 2025-12-12 10:22:25.940769 - Epoch: 0 Iteration: 27  rank : 1  train.loss : 6.898894786834717  train.ips : 107.96741398330617 imgs/s
+TCAPPDLL 2025-12-12 10:22:25.940845 - Epoch: 0 Iteration: 27  rank : 2  train.loss : 6.898894786834717  train.ips : 107.82152621071064 imgs/s
+TCAPPDLL 2025-12-12 10:22:25.941027 - Epoch: 0 Iteration: 27  rank : 3  train.loss : 6.898894786834717  train.ips : 107.93864290714104 imgs/s
+TCAPPDLL 2025-12-12 10:22:25.941604 - Epoch: 0 Iteration: 27  rank : 0  train.loss : 6.898894786834717  train.ips : 108.27903783547976 imgs/s
+Train: 0 [  27/20018 (  0%)]  Loss: 6.90 (6.95)  Time: 0.276s,  232.19/s  (0.591s,  108.28/s)  LR: 1.000e-05  Data: 0.011 (0.105)
+TCAPPDLL 2025-12-12 10:22:26.520841 - Epoch: 0 Iteration: 28  rank : 2  train.loss : 6.970017910003662  train.ips : 107.92197948206066 imgs/sTCAPPDLL 2025-12-12 10:22:26.520837 - Epoch: 0 Iteration: 28  rank : 1  train.loss : 6.970017910003662  train.ips : 108.06254828516603 imgs/s
+
+TCAPPDLL 2025-12-12 10:22:26.520991 - Epoch: 0 Iteration: 28  rank : 0  train.loss : 6.970017910003662  train.ips : 108.34891464207249 imgs/s
+TCAPPDLL 2025-12-12 10:22:26.521073 - Epoch: 0 Iteration: 28  rank : 3  train.loss : 6.970017910003662  train.ips : 108.01966770619806 imgs/s
+Train: 0 [  28/20018 (  0%)]  Loss: 6.97 (6.95)  Time: 0.580s,  110.34/s  (0.591s,  108.35/s)  LR: 1.000e-05  Data: 0.053 (0.103)
+TCAPPDLL 2025-12-12 10:22:27.036618 - Epoch: 0 Iteration: 29  rank : 2  train.loss : 6.949365615844727  train.ips : 108.3758921006146 imgs/sTCAPPDLL 2025-12-12 10:22:27.036620 - Epoch: 0 Iteration: 29  rank : 1  train.loss : 6.949365615844727  train.ips : 108.51274733751062 imgs/s
+
+TCAPPDLL 2025-12-12 10:22:27.036898 - Epoch: 0 Iteration: 29  rank : 0  train.loss : 6.949365615844727  train.ips : 108.79950965085091 imgs/s
+TCAPPDLL 2025-12-12 10:22:27.036937 - Epoch: 0 Iteration: 29  rank : 3  train.loss : 6.949365615844727  train.ips : 108.48919967774397 imgs/s
+Train: 0 [  29/20018 (  0%)]  Loss: 6.95 (6.95)  Time: 0.517s,  123.72/s  (0.588s,  108.80/s)  LR: 1.000e-05  Data: 0.013 (0.100)
+TCAPPDLL 2025-12-12 10:22:27.698655 - Epoch: 0 Iteration: 30  rank : 1  train.loss : 6.930224895477295  train.ips : 108.12239073904179 imgs/sTCAPPDLL 2025-12-12 10:22:27.698669 - Epoch: 0 Iteration: 30  rank : 3  train.loss : 6.930224895477295  train.ips : 108.10185293597142 imgs/s
+TCAPPDLL 2025-12-12 10:22:27.698720 - Epoch: 0 Iteration: 30  rank : 2  train.loss : 6.930224895477295  train.ips : 107.99058429459218 imgs/s
+
+TCAPPDLL 2025-12-12 10:22:27.699112 - Epoch: 0 Iteration: 30  rank : 0  train.loss : 6.930224895477295  train.ips : 108.36182563605756 imgs/s
+Train: 0 [  30/20018 (  0%)]  Loss: 6.93 (6.95)  Time: 0.662s,   96.69/s  (0.591s,  108.36/s)  LR: 1.000e-05  Data: 0.063 (0.099)
+TCAPPDLL 2025-12-12 10:22:28.237720 - Epoch: 0 Iteration: 31  rank : 2  train.loss : 6.920682907104492  train.ips : 108.26185245354922 imgs/s
+TCAPPDLL 2025-12-12 10:22:28.237763 - Epoch: 0 Iteration: 31  rank : 1  train.loss : 6.920682907104492  train.ips : 108.39299526070417 imgs/sTCAPPDLL 2025-12-12 10:22:28.237819 - Epoch: 0 Iteration: 31  rank : 3  train.loss : 6.920682907104492  train.ips : 108.36813356647 imgs/s
+
+TCAPPDLL 2025-12-12 10:22:28.238027 - Epoch: 0 Iteration: 31  rank : 0  train.loss : 6.920682907104492  train.ips : 108.65693868065311 imgs/s
+Train: 0 [  31/20018 (  0%)]  Loss: 6.92 (6.95)  Time: 0.539s,  118.68/s  (0.589s,  108.66/s)  LR: 1.000e-05  Data: 0.008 (0.096)
+TCAPPDLL 2025-12-12 10:22:28.702844 - Epoch: 0 Iteration: 32  rank : 1  train.loss : 6.9358673095703125  train.ips : 109.1320335755845 imgs/sTCAPPDLL 2025-12-12 10:22:28.702842 - Epoch: 0 Iteration: 32  rank : 3  train.loss : 6.9358673095703125  train.ips : 109.0882926933613 imgs/s
+
+TCAPPDLL 2025-12-12 10:22:28.703124 - Epoch: 0 Iteration: 32  rank : 0  train.loss : 6.9358673095703125  train.ips : 109.35420666257053 imgs/s
+TCAPPDLL 2025-12-12 10:22:28.703015 - Epoch: 0 Iteration: 32  rank : 2  train.loss : 6.9358673095703125  train.ips : 108.97673482041364 imgs/s
+Train: 0 [  32/20018 (  0%)]  Loss: 6.94 (6.95)  Time: 0.465s,  137.61/s  (0.585s,  109.35/s)  LR: 1.000e-05  Data: 0.014 (0.094)
+TCAPPDLL 2025-12-12 10:22:29.192454 - Epoch: 0 Iteration: 33  rank : 2  train.loss : 6.918844699859619  train.ips : 109.50970145605771 imgs/sTCAPPDLL 2025-12-12 10:22:29.192468 - Epoch: 0 Iteration: 33  rank : 0  train.loss : 6.918844699859619  train.ips : 109.89386249385228 imgs/sTCAPPDLL 2025-12-12 10:22:29.192484 - Epoch: 0 Iteration: 33  rank : 1  train.loss : 6.918844699859619  train.ips : 109.6332924737309 imgs/s
+
+
+Train: 0 [  33/20018 (  0%)]  Loss: 6.92 (6.95)  Time: 0.488s,  131.27/s  (0.582s,  109.89/s)  LR: 1.000e-05  Data: 0.014 (0.091)
+TCAPPDLL 2025-12-12 10:22:29.192803 - Epoch: 0 Iteration: 33  rank : 3  train.loss : 6.918844699859619  train.ips : 109.602907230132 imgs/s
+TCAPPDLL 2025-12-12 10:22:29.735428 - Epoch: 0 Iteration: 34  rank : 2  train.loss : 6.902331829071045  train.ips : 109.740616512695 imgs/sTCAPPDLL 2025-12-12 10:22:29.735436 - Epoch: 0 Iteration: 34  rank : 1  train.loss : 6.902331829071045  train.ips : 109.8638003291199 imgs/sTCAPPDLL 2025-12-12 10:22:29.735442 - Epoch: 0 Iteration: 34  rank : 0  train.loss : 6.902331829071045  train.ips : 110.0992134289705 imgs/s
+
+
+TCAPPDLL 2025-12-12 10:22:29.735631 - Epoch: 0 Iteration: 34  rank : 3  train.loss : 6.902331829071045  train.ips : 109.82200571288891 imgs/s
+Train: 0 [  34/20018 (  0%)]  Loss: 6.90 (6.95)  Time: 0.544s,  117.57/s  (0.581s,  110.10/s)  LR: 1.000e-05  Data: 0.015 (0.089)
+TCAPPDLL 2025-12-12 10:22:30.293766 - Epoch: 0 Iteration: 35  rank : 1  train.loss : 6.936816692352295  train.ips : 109.98647357809725 imgs/sTCAPPDLL 2025-12-12 10:22:30.293755 - Epoch: 0 Iteration: 35  rank : 3  train.loss : 6.936816692352295  train.ips : 109.9687684157483 imgs/s
+
+TCAPPDLL 2025-12-12 10:22:30.294198 - Epoch: 0 Iteration: 35  rank : 2  train.loss : 6.936816692352295  train.ips : 110.1004807168 imgs/s
+TCAPPDLL 2025-12-12 10:22:30.294296 - Epoch: 0 Iteration: 35  rank : 0  train.loss : 6.936816692352295  train.ips : 110.21629572843491 imgs/s
+Train: 0 [  35/20018 (  0%)]  Loss: 6.94 (6.94)  Time: 0.559s,  114.48/s  (0.581s,  110.22/s)  LR: 1.000e-05  Data: 0.056 (0.088)
+TCAPPDLL 2025-12-12 10:22:30.803717 - Epoch: 0 Iteration: 36  rank : 1  train.loss : 6.952406883239746  train.ips : 110.36986636995597 imgs/sTCAPPDLL 2025-12-12 10:22:30.803692 - Epoch: 0 Iteration: 36  rank : 3  train.loss : 6.952406883239746  train.ips : 110.33123605628616 imgs/s
+TCAPPDLL 2025-12-12 10:22:30.803777 - Epoch: 0 Iteration: 36  rank : 2  train.loss : 6.952406883239746  train.ips : 110.23335436829598 imgs/s
+
+TCAPPDLL 2025-12-12 10:22:30.803955 - Epoch: 0 Iteration: 36  rank : 0  train.loss : 6.952406883239746  train.ips : 110.58051524684606 imgs/s
+Train: 0 [  36/20018 (  0%)]  Loss: 6.95 (6.95)  Time: 0.510s,  125.51/s  (0.579s,  110.58/s)  LR: 1.000e-05  Data: 0.013 (0.086)
+TCAPPDLL 2025-12-12 10:22:31.287158 - Epoch: 0 Iteration: 37  rank : 1  train.loss : 6.997646808624268  train.ips : 111.03114993548404 imgs/sTCAPPDLL 2025-12-12 10:22:31.287217 - Epoch: 0 Iteration: 37  rank : 2  train.loss : 6.997646808624268  train.ips : 110.91716624194922 imgs/s
+
+TCAPPDLL 2025-12-12 10:22:31.287448 - Epoch: 0 Iteration: 37  rank : 0  train.loss : 6.997646808624268  train.ips : 111.269735852185 imgs/s
+TCAPPDLL 2025-12-12 10:22:31.287442 - Epoch: 0 Iteration: 37  rank : 3  train.loss : 6.997646808624268  train.ips : 111.00717256123934 imgs/s
+Train: 0 [  37/20018 (  0%)]  Loss: 7.00 (6.95)  Time: 0.443s,  144.62/s  (0.575s,  111.27/s)  LR: 1.000e-05  Data: 0.014 (0.084)
+TCAPPDLL 2025-12-12 10:22:31.837393 - Epoch: 0 Iteration: 38  rank : 3  train.loss : 6.951509952545166  train.ips : 110.9503500129497 imgs/sTCAPPDLL 2025-12-12 10:22:31.837368 - Epoch: 0 Iteration: 38  rank : 2  train.loss : 6.951509952545166  train.ips : 110.85785936287706 imgs/sTCAPPDLL 2025-12-12 10:22:31.837370 - Epoch: 0 Iteration: 38  rank : 1  train.loss : 6.951509952545166  train.ips : 110.96364697119994 imgs/s
+
+
+TCAPPDLL 2025-12-12 10:22:31.837648 - Epoch: 0 Iteration: 38  rank : 0  train.loss : 6.951509952545166  train.ips : 111.1905877782682 imgs/s
+Train: 0 [  38/20018 (  0%)]  Loss: 6.95 (6.95)  Time: 0.591s,  108.26/s  (0.576s,  111.19/s)  LR: 1.000e-05  Data: 0.015 (0.082)
+TCAPPDLL 2025-12-12 10:22:32.392050 - Epoch: 0 Iteration: 39  rank : 2  train.loss : 6.916277885437012  train.ips : 110.95704989623849 imgs/s
+TCAPPDLL 2025-12-12 10:22:32.392164 - Epoch: 0 Iteration: 39  rank : 1  train.loss : 6.916277885437012  train.ips : 111.06535047061035 imgs/s
+TCAPPDLL 2025-12-12 10:22:32.392300 - Epoch: 0 Iteration: 39  rank : 0  train.loss : 6.916277885437012  train.ips : 111.29182837401768 imgs/sTCAPPDLL 2025-12-12 10:22:32.392368 - Epoch: 0 Iteration: 39  rank : 3  train.loss : 6.916277885437012  train.ips : 111.04823892596036 imgs/s
+
+Train: 0 [  39/20018 (  0%)]  Loss: 6.92 (6.95)  Time: 0.555s,  115.39/s  (0.575s,  111.29/s)  LR: 1.000e-05  Data: 0.057 (0.082)
+TCAPPDLL 2025-12-12 10:22:32.894305 - Epoch: 0 Iteration: 40  rank : 2  train.loss : 6.936427116394043  train.ips : 111.30971154644357 imgs/sTCAPPDLL 2025-12-12 10:22:32.894337 - Epoch: 0 Iteration: 40  rank : 1  train.loss : 6.936427116394043  train.ips : 111.42899323345885 imgs/s
+
+TCAPPDLL 2025-12-12 10:22:32.894410 - Epoch: 0 Iteration: 40  rank : 3  train.loss : 6.936427116394043  train.ips : 111.40803586742643 imgs/s
+TCAPPDLL 2025-12-12 10:22:32.894593 - Epoch: 0 Iteration: 40  rank : 0  train.loss : 6.936427116394043  train.ips : 111.63657690926671 imgs/s
+Train: 0 [  40/20018 (  0%)]  Loss: 6.94 (6.95)  Time: 0.502s,  127.43/s  (0.573s,  111.64/s)  LR: 1.000e-05  Data: 0.014 (0.080)
+TCAPPDLL 2025-12-12 10:22:33.421132 - Epoch: 0 Iteration: 41  rank : 2  train.loss : 6.950047016143799  train.ips : 111.54553276941459 imgs/sTCAPPDLL 2025-12-12 10:22:33.421142 - Epoch: 0 Iteration: 41  rank : 1  train.loss : 6.950047016143799  train.ips : 111.64752104049731 imgs/s
+
+TCAPPDLL 2025-12-12 10:22:33.421229 - Epoch: 0 Iteration: 41  rank : 3  train.loss : 6.950047016143799  train.ips : 111.62915847555668 imgs/s
+TCAPPDLL 2025-12-12 10:22:33.421531 - Epoch: 0 Iteration: 41  rank : 0  train.loss : 6.950047016143799  train.ips : 111.85222344989087 imgs/s
+Train: 0 [  41/20018 (  0%)]  Loss: 6.95 (6.95)  Time: 0.527s,  121.47/s  (0.572s,  111.85/s)  LR: 1.000e-05  Data: 0.013 (0.078)
+TCAPPDLL 2025-12-12 10:22:33.941041 - Epoch: 0 Iteration: 42  rank : 1  train.loss : 6.9340291023254395  train.ips : 111.89284428818817 imgs/sTCAPPDLL 2025-12-12 10:22:33.941045 - Epoch: 0 Iteration: 42  rank : 2  train.loss : 6.9340291023254395  train.ips : 111.7892927165887 imgs/sTCAPPDLL 2025-12-12 10:22:33.941052 - Epoch: 0 Iteration: 42  rank : 3  train.loss : 6.9340291023254395  train.ips : 111.87559857732481 imgs/s
+
+
+TCAPPDLL 2025-12-12 10:22:33.941296 - Epoch: 0 Iteration: 42  rank : 0  train.loss : 6.9340291023254395  train.ips : 112.09038373144885 imgs/s
+Train: 0 [  42/20018 (  0%)]  Loss: 6.93 (6.95)  Time: 0.520s,  123.10/s  (0.571s,  112.09/s)  LR: 1.000e-05  Data: 0.014 (0.077)
+TCAPPDLL 2025-12-12 10:22:34.532922 - Epoch: 0 Iteration: 43  rank : 2  train.loss : 6.951842308044434  train.ips : 111.69607730508321 imgs/sTCAPPDLL 2025-12-12 10:22:34.532924 - Epoch: 0 Iteration: 43  rank : 3  train.loss : 6.951842308044434  train.ips : 111.7849936637573 imgs/sTCAPPDLL 2025-12-12 10:22:34.532926 - Epoch: 0 Iteration: 43  rank : 1  train.loss : 6.951842308044434  train.ips : 111.8060036596446 imgs/s
+
+
+TCAPPDLL 2025-12-12 10:22:34.533172 - Epoch: 0 Iteration: 43  rank : 0  train.loss : 6.951842308044434  train.ips : 111.99723692688221 imgs/s
+Train: 0 [  43/20018 (  0%)]  Loss: 6.95 (6.95)  Time: 0.592s,  108.13/s  (0.571s,  112.00/s)  LR: 1.000e-05  Data: 0.054 (0.076)
+TCAPPDLL 2025-12-12 10:22:35.049263 - Epoch: 0 Iteration: 44  rank : 1  train.loss : 6.937027931213379  train.ips : 112.03924458052062 imgs/sTCAPPDLL 2025-12-12 10:22:35.049283 - Epoch: 0 Iteration: 44  rank : 3  train.loss : 6.937027931213379  train.ips : 112.02112952461351 imgs/s
+
+TCAPPDLL 2025-12-12 10:22:35.049535 - Epoch: 0 Iteration: 44  rank : 0  train.loss : 6.937027931213379  train.ips : 112.23795481029701 imgs/s
+Train: 0 [  44/20018 (  0%)]  Loss: 6.94 (6.95)  Time: 0.516s,  123.96/s  (0.570s,  112.24/s)  LR: 1.000e-05  Data: 0.013 (0.075)
+TCAPPDLL 2025-12-12 10:22:35.049946 - Epoch: 0 Iteration: 44  rank : 2  train.loss : 6.937027931213379  train.ips : 111.93974178306519 imgs/s
+TCAPPDLL 2025-12-12 10:22:35.419310 - Epoch: 0 Iteration: 45  rank : 1  train.loss : 7.003223419189453  train.ips : 112.91875959145202 imgs/sTCAPPDLL 2025-12-12 10:22:35.419337 - Epoch: 0 Iteration: 45  rank : 2  train.loss : 7.003223419189453  train.ips : 112.81060387781366 imgs/s
+
+TCAPPDLL 2025-12-12 10:22:35.419401 - Epoch: 0 Iteration: 45  rank : 3  train.loss : 7.003223419189453  train.ips : 112.88993453725861 imgs/sTCAPPDLL 2025-12-12 10:22:35.419593 - Epoch: 0 Iteration: 45  rank : 0  train.loss : 7.003223419189453  train.ips : 113.1008574549449 imgs/s
+
+Train: 0 [  45/20018 (  0%)]  Loss: 7.00 (6.95)  Time: 0.370s,  172.93/s  (0.566s,  113.10/s)  LR: 1.000e-05  Data: 0.012 (0.074)
+TCAPPDLL 2025-12-12 10:22:35.999808 - Epoch: 0 Iteration: 46  rank : 1  train.loss : 6.942403316497803  train.ips : 112.84427148576655 imgs/sTCAPPDLL 2025-12-12 10:22:35.999806 - Epoch: 0 Iteration: 46  rank : 2  train.loss : 6.942403316497803  train.ips : 112.75024456318332 imgs/s
+
+TCAPPDLL 2025-12-12 10:22:35.999842 - Epoch: 0 Iteration: 46  rank : 3  train.loss : 6.942403316497803  train.ips : 112.83107640024328 imgs/s
+TCAPPDLL 2025-12-12 10:22:36.000062 - Epoch: 0 Iteration: 46  rank : 0  train.loss : 6.942403316497803  train.ips : 113.0389813543019 imgs/s
+Train: 0 [  46/20018 (  0%)]  Loss: 6.94 (6.95)  Time: 0.580s,  110.26/s  (0.566s,  113.04/s)  LR: 1.000e-05  Data: 0.012 (0.072)
+TCAPPDLL 2025-12-12 10:22:36.496546 - Epoch: 0 Iteration: 47  rank : 3  train.loss : 6.899501800537109  train.ips : 113.11785954974184 imgs/sTCAPPDLL 2025-12-12 10:22:36.496555 - Epoch: 0 Iteration: 47  rank : 2  train.loss : 6.899501800537109  train.ips : 113.03897818933812 imgs/sTCAPPDLL 2025-12-12 10:22:36.496574 - Epoch: 0 Iteration: 47  rank : 0  train.loss : 6.899501800537109  train.ips : 113.34808058364793 imgs/s
+
+
+TCAPPDLL 2025-12-12 10:22:36.496887 - Epoch: 0 Iteration: 47  rank : 1  train.loss : 6.899501800537109  train.ips : 113.13133318481421 imgs/s
+Train: 0 [  47/20018 (  0%)]  Loss: 6.90 (6.95)  Time: 0.492s,  130.06/s  (0.565s,  113.35/s)  LR: 1.000e-05  Data: 0.011 (0.071)
+TCAPPDLL 2025-12-12 10:22:37.020756 - Epoch: 0 Iteration: 48  rank : 1  train.loss : 6.972931861877441  train.ips : 113.31063477930638 imgs/sTCAPPDLL 2025-12-12 10:22:37.020763 - Epoch: 0 Iteration: 48  rank : 2  train.loss : 6.972931861877441  train.ips : 113.21848744978614 imgs/sTCAPPDLL 2025-12-12 10:22:37.020781 - Epoch: 0 Iteration: 48  rank : 0  train.loss : 6.972931861877441  train.ips : 113.49519408975193 imgs/s
+
+
+TCAPPDLL 2025-12-12 10:22:37.021005 - Epoch: 0 Iteration: 48  rank : 3  train.loss : 6.972931861877441  train.ips : 113.28625740132469 imgs/s
+Train: 0 [  48/20018 (  0%)]  Loss: 6.97 (6.95)  Time: 0.529s,  121.04/s  (0.564s,  113.50/s)  LR: 1.000e-05  Data: 0.011 (0.070)
+TCAPPDLL 2025-12-12 10:22:37.514354 - Epoch: 0 Iteration: 49  rank : 2  train.loss : 6.946677207946777  train.ips : 113.52055390307136 imgs/sTCAPPDLL 2025-12-12 10:22:37.514360 - Epoch: 0 Iteration: 49  rank : 1  train.loss : 6.946677207946777  train.ips : 113.59752367763879 imgs/sTCAPPDLL 2025-12-12 10:22:37.514363 - Epoch: 0 Iteration: 49  rank : 0  train.loss : 6.946677207946777  train.ips : 113.80064888664928 imgs/s
+
+
+Train: 0 [  49/20018 (  0%)]  Loss: 6.95 (6.95)  Time: 0.488s,  131.09/s  (0.562s,  113.80/s)  LR: 1.000e-05  Data: 0.013 (0.069)
+TCAPPDLL 2025-12-12 10:22:37.514900 - Epoch: 0 Iteration: 49  rank : 3  train.loss : 6.946677207946777  train.ips : 113.57580477249515 imgs/s
+TCAPPDLL 2025-12-12 10:22:38.109407 - Epoch: 0 Iteration: 50  rank : 2  train.loss : 6.925649642944336  train.ips : 113.38476950324404 imgs/sTCAPPDLL 2025-12-12 10:22:38.109408 - Epoch: 0 Iteration: 50  rank : 1  train.loss : 6.925649642944336  train.ips : 113.47200696874954 imgs/sTCAPPDLL 2025-12-12 10:22:38.109409 - Epoch: 0 Iteration: 50  rank : 3  train.loss : 6.925649642944336  train.ips : 113.46100208674731 imgs/s
+
+
+TCAPPDLL 2025-12-12 10:22:38.109682 - Epoch: 0 Iteration: 50  rank : 0  train.loss : 6.925649642944336  train.ips : 113.64902589987865 imgs/s
+Train: 0 [  50/20018 (  0%)]  Loss: 6.93 (6.95)  Time: 0.601s,  106.55/s  (0.563s,  113.65/s)  LR: 1.000e-05  Data: 0.013 (0.068)
+TCAPPDLL 2025-12-12 10:22:38.608651 - Epoch: 0 Iteration: 51  rank : 2  train.loss : 7.02027702331543  train.ips : 113.63905174823356 imgs/sTCAPPDLL 2025-12-12 10:22:38.608642 - Epoch: 0 Iteration: 51  rank : 3  train.loss : 7.02027702331543  train.ips : 113.71354456324265 imgs/s
+
+TCAPPDLL 2025-12-12 10:22:38.608703 - Epoch: 0 Iteration: 51  rank : 0  train.loss : 7.02027702331543  train.ips : 113.91179685385687 imgs/s
+TCAPPDLL 2025-12-12 10:22:38.608909 - Epoch: 0 Iteration: 51  rank : 1  train.loss : 7.02027702331543  train.ips : 113.71326758139848 imgs/s
+Train: 0 [  51/20018 (  0%)]  Loss: 7.02 (6.95)  Time: 0.496s,  129.14/s  (0.562s,  113.91/s)  LR: 1.000e-05  Data: 0.012 (0.067)
+TCAPPDLL 2025-12-12 10:22:39.120276 - Epoch: 0 Iteration: 52  rank : 2  train.loss : 6.973649024963379  train.ips : 113.83161449512046 imgs/sTCAPPDLL 2025-12-12 10:22:39.120279 - Epoch: 0 Iteration: 52  rank : 0  train.loss : 6.973649024963379  train.ips : 114.09959028714819 imgs/sTCAPPDLL 2025-12-12 10:22:39.120285 - Epoch: 0 Iteration: 52  rank : 1  train.loss : 6.973649024963379  train.ips : 113.91596350754004 imgs/s
+
+
+TCAPPDLL 2025-12-12 10:22:39.120525 - Epoch: 0 Iteration: 52  rank : 3  train.loss : 6.973649024963379  train.ips : 113.89601613374083 imgs/s
+Train: 0 [  52/20018 (  0%)]  Loss: 6.97 (6.95)  Time: 0.513s,  124.80/s  (0.561s,  114.10/s)  LR: 1.000e-05  Data: 0.013 (0.066)
+TCAPPDLL 2025-12-12 10:22:39.693975 - Epoch: 0 Iteration: 53  rank : 0  train.loss : 6.994178771972656  train.ips : 114.0518058020449 imgs/sTCAPPDLL 2025-12-12 10:22:39.694044 - Epoch: 0 Iteration: 53  rank : 2  train.loss : 6.994178771972656  train.ips : 113.780933050748 imgs/s
+
+TCAPPDLL 2025-12-12 10:22:39.694083 - Epoch: 0 Iteration: 53  rank : 1  train.loss : 6.994178771972656  train.ips : 113.87005398686502 imgs/sTCAPPDLL 2025-12-12 10:22:39.693904 - Epoch: 0 Iteration: 53  rank : 3  train.loss : 6.994178771972656  train.ips : 113.85797669344375 imgs/s
+
+Train: 0 [  53/20018 (  0%)]  Loss: 6.99 (6.95)  Time: 0.574s,  111.58/s  (0.561s,  114.05/s)  LR: 1.000e-05  Data: 0.010 (0.065)
+TCAPPDLL 2025-12-12 10:22:40.334182 - Epoch: 0 Iteration: 54  rank : 2  train.loss : 6.955857276916504  train.ips : 113.51556256416315 imgs/sTCAPPDLL 2025-12-12 10:22:40.334176 - Epoch: 0 Iteration: 54  rank : 3  train.loss : 6.955857276916504  train.ips : 113.58545645790204 imgs/sTCAPPDLL 2025-12-12 10:22:40.334214 - Epoch: 0 Iteration: 54  rank : 1  train.loss : 6.955857276916504  train.ips : 113.59741477139325 imgs/s
+
+
+TCAPPDLL 2025-12-12 10:22:40.334452 - Epoch: 0 Iteration: 54  rank : 0  train.loss : 6.955857276916504  train.ips : 113.7512302417436 imgs/s
+Train: 0 [  54/20018 (  0%)]  Loss: 6.96 (6.95)  Time: 0.643s,   99.58/s  (0.563s,  113.75/s)  LR: 1.000e-05  Data: 0.012 (0.064)
+TCAPPDLL 2025-12-12 10:22:40.892273 - Epoch: 0 Iteration: 55  rank : 1  train.loss : 6.925540924072266  train.ips : 113.7734066659516 imgs/s
+TCAPPDLL 2025-12-12 10:22:40.892550 - Epoch: 0 Iteration: 55  rank : 0  train.loss : 6.925540924072266  train.ips : 113.76772627248629 imgs/s
+TCAPPDLL 2025-12-12 10:22:40.892609 - Epoch: 0 Iteration: 55  rank : 2  train.loss : 6.925540924072266  train.ips : 113.69316571695627 imgs/s
+TCAPPDLL 2025-12-12 10:22:40.892657 - Epoch: 0 Iteration: 55  rank : 3  train.loss : 6.925540924072266  train.ips : 113.76243903077675 imgs/s
+Train: 0 [  55/20018 (  0%)]  Loss: 6.93 (6.95)  Time: 0.558s,  114.68/s  (0.563s,  113.77/s)  LR: 1.000e-05  Data: 0.011 (0.063)
+TCAPPDLL 2025-12-12 10:22:41.402135 - Epoch: 0 Iteration: 56  rank : 2  train.loss : 6.9715471267700195  train.ips : 113.7112936433692 imgs/sTCAPPDLL 2025-12-12 10:22:41.402138 - Epoch: 0 Iteration: 56  rank : 1  train.loss : 6.9715471267700195  train.ips : 113.80049135523022 imgs/s
+
+TCAPPDLL 2025-12-12 10:22:41.402340 - Epoch: 0 Iteration: 56  rank : 0  train.loss : 6.9715471267700195  train.ips : 113.95490376119855 imgs/s
+TCAPPDLL 2025-12-12 10:22:41.402395 - Epoch: 0 Iteration: 56  rank : 3  train.loss : 6.9715471267700195  train.ips : 113.77440633636795 imgs/s
+Train: 0 [  56/20018 (  0%)]  Loss: 6.97 (6.95)  Time: 0.510s,  125.52/s  (0.562s,  113.95/s)  LR: 1.000e-05  Data: 0.012 (0.062)
+TCAPPDLL 2025-12-12 10:22:41.948935 - Epoch: 0 Iteration: 57  rank : 1  train.loss : 6.908628463745117  train.ips : 113.84881308004427 imgs/sTCAPPDLL 2025-12-12 10:22:41.948942 - Epoch: 0 Iteration: 57  rank : 3  train.loss : 6.908628463745117  train.ips : 113.83694772789099 imgs/sTCAPPDLL 2025-12-12 10:22:41.948958 - Epoch: 0 Iteration: 57  rank : 2  train.loss : 6.908628463745117  train.ips : 113.77076142807525 imgs/s
+
+
+TCAPPDLL 2025-12-12 10:22:41.949322 - Epoch: 0 Iteration: 57  rank : 0  train.loss : 6.908628463745117  train.ips : 114.00653539809103 imgs/s
+Train: 0 [  57/20018 (  0%)]  Loss: 6.91 (6.95)  Time: 0.547s,  117.03/s  (0.561s,  114.01/s)  LR: 1.000e-05  Data: 0.012 (0.061)
+TCAPPDLL 2025-12-12 10:22:42.399448 - Epoch: 0 Iteration: 58  rank : 3  train.loss : 6.904366970062256  train.ips : 114.22183235937459 imgs/sTCAPPDLL 2025-12-12 10:22:42.399448 - Epoch: 0 Iteration: 58  rank : 2  train.loss : 6.904366970062256  train.ips : 114.14983901482 imgs/sTCAPPDLL 2025-12-12 10:22:42.399509 - Epoch: 0 Iteration: 58  rank : 0  train.loss : 6.904366970062256  train.ips : 114.39275574533588 imgs/s
+
+
+TCAPPDLL 2025-12-12 10:22:42.399715 - Epoch: 0 Iteration: 58  rank : 1  train.loss : 6.904366970062256  train.ips : 114.22568938416147 imgs/s
+Train: 0 [  58/20018 (  0%)]  Loss: 6.90 (6.95)  Time: 0.450s,  142.37/s  (0.559s,  114.39/s)  LR: 1.000e-05  Data: 0.012 (0.060)
+TCAPPDLL 2025-12-12 10:22:42.893042 - Epoch: 0 Iteration: 59  rank : 1  train.loss : 6.951313018798828  train.ips : 114.46181031015168 imgs/s
+TCAPPDLL 2025-12-12 10:22:42.893160 - Epoch: 0 Iteration: 59  rank : 2  train.loss : 6.951313018798828  train.ips : 114.38612832365918 imgs/s
+TCAPPDLL 2025-12-12 10:22:42.893286 - Epoch: 0 Iteration: 59  rank : 0  train.loss : 6.951313018798828  train.ips : 114.61430460177918 imgs/s
+Train: 0 [  59/20018 (  0%)]  Loss: 6.95 (6.95)  Time: 0.495s,  129.40/s  (0.558s,  114.61/s)  LR: 1.000e-05  Data: 0.012 (0.059)
+TCAPPDLL 2025-12-12 10:22:42.893685 - Epoch: 0 Iteration: 59  rank : 3  train.loss : 6.951313018798828  train.ips : 114.45048172001641 imgs/s
+TCAPPDLL 2025-12-12 10:22:43.407483 - Epoch: 0 Iteration: 60  rank : 1  train.loss : 6.941781044006348  train.ips : 114.6150124952598 imgs/sTCAPPDLL 2025-12-12 10:22:43.407484 - Epoch: 0 Iteration: 60  rank : 2  train.loss : 6.941781044006348  train.ips : 114.54030534735497 imgs/sTCAPPDLL 2025-12-12 10:22:43.407491 - Epoch: 0 Iteration: 60  rank : 3  train.loss : 6.941781044006348  train.ips : 114.59501893555664 imgs/s
+
+
+TCAPPDLL 2025-12-12 10:22:43.407759 - Epoch: 0 Iteration: 60  rank : 0  train.loss : 6.941781044006348  train.ips : 114.76343258089989 imgs/s
+Train: 0 [  60/20018 (  0%)]  Loss: 6.94 (6.95)  Time: 0.514s,  124.48/s  (0.558s,  114.76/s)  LR: 1.000e-05  Data: 0.014 (0.059)
+TCAPPDLL 2025-12-12 10:22:43.941531 - Epoch: 0 Iteration: 61  rank : 3  train.loss : 6.920971393585205  train.ips : 114.68150357768361 imgs/sTCAPPDLL 2025-12-12 10:22:43.941539 - Epoch: 0 Iteration: 61  rank : 1  train.loss : 6.920971393585205  train.ips : 114.69332035970248 imgs/sTCAPPDLL 2025-12-12 10:22:43.941542 - Epoch: 0 Iteration: 61  rank : 2  train.loss : 6.920971393585205  train.ips : 114.61952671214443 imgs/s
+
+
+TCAPPDLL 2025-12-12 10:22:43.941785 - Epoch: 0 Iteration: 61  rank : 0  train.loss : 6.920971393585205  train.ips : 114.84070335566807 imgs/s
+Train: 0 [  61/20018 (  0%)]  Loss: 6.92 (6.95)  Time: 0.534s,  119.76/s  (0.557s,  114.84/s)  LR: 1.000e-05  Data: 0.013 (0.058)
+TCAPPDLL 2025-12-12 10:22:44.444688 - Epoch: 0 Iteration: 62  rank : 0  train.loss : 6.933712482452393  train.ips : 115.02181646926931 imgs/s
+TCAPPDLL 2025-12-12 10:22:44.444878 - Epoch: 0 Iteration: 62  rank : 1  train.loss : 6.933712482452393  train.ips : 114.86679619454591 imgs/sTCAPPDLL 2025-12-12 10:22:44.444764 - Epoch: 0 Iteration: 62  rank : 2  train.loss : 6.933712482452393  train.ips : 114.79259207575923 imgs/s
+TCAPPDLL 2025-12-12 10:22:44.444928 - Epoch: 0 Iteration: 62  rank : 3  train.loss : 6.933712482452393  train.ips : 114.85212085800585 imgs/s
+
+Train: 0 [  62/20018 (  0%)]  Loss: 6.93 (6.95)  Time: 0.502s,  127.49/s  (0.556s,  115.02/s)  LR: 1.000e-05  Data: 0.055 (0.058)
+TCAPPDLL 2025-12-12 10:22:45.022545 - Epoch: 0 Iteration: 63  rank : 1  train.loss : 6.969059944152832  train.ips : 114.80767512393577 imgs/sTCAPPDLL 2025-12-12 10:22:45.022550 - Epoch: 0 Iteration: 63  rank : 2  train.loss : 6.969059944152832  train.ips : 114.73518299699796 imgs/sTCAPPDLL 2025-12-12 10:22:45.022545 - Epoch: 0 Iteration: 63  rank : 3  train.loss : 6.969059944152832  train.ips : 114.797502639494 imgs/s
+
+
+TCAPPDLL 2025-12-12 10:22:45.022809 - Epoch: 0 Iteration: 63  rank : 0  train.loss : 6.969059944152832  train.ips : 114.94933110655558 imgs/s
+Train: 0 [  63/20018 (  0%)]  Loss: 6.97 (6.95)  Time: 0.579s,  110.56/s  (0.557s,  114.95/s)  LR: 1.000e-05  Data: 0.054 (0.058)
+TCAPPDLL 2025-12-12 10:22:45.591224 - Epoch: 0 Iteration: 64  rank : 2  train.loss : 6.937212944030762  train.ips : 114.85570792687632 imgs/sTCAPPDLL 2025-12-12 10:22:45.591227 - Epoch: 0 Iteration: 64  rank : 3  train.loss : 6.937212944030762  train.ips : 114.7547850522164 imgs/sTCAPPDLL 2025-12-12 10:22:45.591229 - Epoch: 0 Iteration: 64  rank : 0  train.loss : 6.937212944030762  train.ips : 114.92366278924635 imgs/s
+
+
+Train: 0 [  64/20018 (  0%)]  Loss: 6.94 (6.95)  Time: 0.565s,  113.30/s  (0.557s,  114.92/s)  LR: 1.000e-05  Data: 0.015 (0.057)
+TCAPPDLL 2025-12-12 10:22:45.591664 - Epoch: 0 Iteration: 64  rank : 1  train.loss : 6.937212944030762  train.ips : 114.76236298525372 imgs/s
+TCAPPDLL 2025-12-12 10:22:46.102360 - Epoch: 0 Iteration: 65  rank : 1  train.loss : 6.9678802490234375  train.ips : 114.9112734127209 imgs/sTCAPPDLL 2025-12-12 10:22:46.102374 - Epoch: 0 Iteration: 65  rank : 2  train.loss : 6.9678802490234375  train.ips : 114.83860768451447 imgs/sTCAPPDLL 2025-12-12 10:22:46.102357 - Epoch: 0 Iteration: 65  rank : 3  train.loss : 6.9678802490234375  train.ips : 114.89983541461255 imgs/s
+
+
+TCAPPDLL 2025-12-12 10:22:46.102642 - Epoch: 0 Iteration: 65  rank : 0  train.loss : 6.9678802490234375  train.ips : 115.05451623623121 imgs/s
+Train: 0 [  65/20018 (  0%)]  Loss: 6.97 (6.95)  Time: 0.515s,  124.25/s  (0.556s,  115.05/s)  LR: 1.000e-05  Data: 0.014 (0.056)
+TCAPPDLL 2025-12-12 10:22:46.794562 - Epoch: 0 Iteration: 66  rank : 3  train.loss : 6.987826347351074  train.ips : 114.64920418770411 imgs/s
+TCAPPDLL 2025-12-12 10:22:46.794692 - Epoch: 0 Iteration: 66  rank : 1  train.loss : 6.987826347351074  train.ips : 114.65841800532064 imgs/s
+TCAPPDLL 2025-12-12 10:22:46.794559 - Epoch: 0 Iteration: 66  rank : 0  train.loss : 6.987826347351074  train.ips : 114.63846756591342 imgs/sTCAPPDLL 2025-12-12 10:22:46.794768 - Epoch: 0 Iteration: 66  rank : 2  train.loss : 6.987826347351074  train.ips : 114.58746247894535 imgs/s
+
+Train: 0 [  66/20018 (  0%)]  Loss: 6.99 (6.95)  Time: 0.692s,   92.55/s  (0.558s,  114.64/s)  LR: 1.000e-05  Data: 0.014 (0.056)
+TCAPPDLL 2025-12-12 10:22:47.424300 - Epoch: 0 Iteration: 67  rank : 1  train.loss : 6.963204383850098  train.ips : 114.29364756345034 imgs/sTCAPPDLL 2025-12-12 10:22:47.424301 - Epoch: 0 Iteration: 67  rank : 0  train.loss : 6.963204383850098  train.ips : 114.42615887634051 imgs/s
+
+TCAPPDLL 2025-12-12 10:22:47.424363 - Epoch: 0 Iteration: 67  rank : 2  train.loss : 6.963204383850098  train.ips : 114.22687932893288 imgs/s
+Train: 0 [  67/20018 (  0%)]  Loss: 6.96 (6.95)  Time: 0.629s,  101.80/s  (0.559s,  114.43/s)  LR: 1.000e-05  Data: 0.015 (0.055)
+TCAPPDLL 2025-12-12 10:22:47.424655 - Epoch: 0 Iteration: 67  rank : 3  train.loss : 6.963204383850098  train.ips : 114.26936671974686 imgs/s
+TCAPPDLL 2025-12-12 10:22:47.929152 - Epoch: 0 Iteration: 68  rank : 1  train.loss : 6.909936904907227  train.ips : 114.44748409136383 imgs/s
+TCAPPDLL 2025-12-12 10:22:47.929257 - Epoch: 0 Iteration: 68  rank : 2  train.loss : 6.909936904907227  train.ips : 114.38175368464313 imgs/s
+TCAPPDLL 2025-12-12 10:22:47.929364 - Epoch: 0 Iteration: 68  rank : 3  train.loss : 6.909936904907227  train.ips : 114.4323583204367 imgs/s
+TCAPPDLL 2025-12-12 10:22:47.929554 - Epoch: 0 Iteration: 68  rank : 0  train.loss : 6.909936904907227  train.ips : 114.58679117533961 imgs/s
+Train: 0 [  68/20018 (  0%)]  Loss: 6.91 (6.95)  Time: 0.505s,  126.68/s  (0.559s,  114.59/s)  LR: 1.000e-05  Data: 0.014 (0.055)
+TCAPPDLL 2025-12-12 10:22:48.498577 - Epoch: 0 Iteration: 69  rank : 1  train.loss : 6.866758346557617  train.ips : 114.41829365073976 imgs/sTCAPPDLL 2025-12-12 10:22:48.498574 - Epoch: 0 Iteration: 69  rank : 2  train.loss : 6.866758346557617  train.ips : 114.36560751269406 imgs/sTCAPPDLL 2025-12-12 10:22:48.498600 - Epoch: 0 Iteration: 69  rank : 0  train.loss : 6.866758346557617  train.ips : 114.5558154261855 imgs/s
+
+
+TCAPPDLL 2025-12-12 10:22:48.498828 - Epoch: 0 Iteration: 69  rank : 3  train.loss : 6.866758346557617  train.ips : 114.40263093244697 imgs/s
+Train: 0 [  69/20018 (  0%)]  Loss: 6.87 (6.95)  Time: 0.569s,  112.46/s  (0.559s,  114.56/s)  LR: 1.000e-05  Data: 0.015 (0.054)
+TCAPPDLL 2025-12-12 10:22:48.800599 - Epoch: 0 Iteration: 70  rank : 1  train.loss : 6.953131198883057  train.ips : 115.16272299852811 imgs/s
+TCAPPDLL 2025-12-12 10:22:48.800657 - Epoch: 0 Iteration: 70  rank : 0  train.loss : 6.953131198883057  train.ips : 115.30165094724295 imgs/s
+TCAPPDLL 2025-12-12 10:22:48.800849 - Epoch: 0 Iteration: 70  rank : 2  train.loss : 6.953131198883057  train.ips : 115.09865270340454 imgs/s
+TCAPPDLL 2025-12-12 10:22:48.800863 - Epoch: 0 Iteration: 70  rank : 3  train.loss : 6.953131198883057  train.ips : 115.14892841159663 imgs/s
+Train: 0 [  70/20018 (  0%)]  Loss: 6.95 (6.95)  Time: 0.302s,  211.85/s  (0.555s,  115.30/s)  LR: 1.000e-05  Data: 0.014 (0.053)
+TCAPPDLL 2025-12-12 10:22:49.243382 - Epoch: 0 Iteration: 71  rank : 2  train.loss : 6.971412181854248  train.ips : 115.42360326298785 imgs/s
+TCAPPDLL 2025-12-12 10:22:49.243546 - Epoch: 0 Iteration: 71  rank : 1  train.loss : 6.971412181854248  train.ips : 115.48749317840314 imgs/s
+TCAPPDLL 2025-12-12 10:22:49.243650 - Epoch: 0 Iteration: 71  rank : 3  train.loss : 6.971412181854248  train.ips : 115.47502966331288 imgs/s
+TCAPPDLL 2025-12-12 10:22:49.285464 - Epoch: 0 Iteration: 71  rank : 0  train.loss : 6.971412181854248  train.ips : 115.62276367555513 imgs/s
+Train: 0 [  71/20018 (  0%)]  Loss: 6.97 (6.95)  Time: 0.444s,  144.12/s  (0.554s,  115.62/s)  LR: 1.000e-05  Data: 0.012 (0.053)
+TCAPPDLL 2025-12-12 10:22:49.744771 - Epoch: 0 Iteration: 72  rank : 1  train.loss : 6.990508079528809  train.ips : 115.6377948146499 imgs/sTCAPPDLL 2025-12-12 10:22:49.744774 - Epoch: 0 Iteration: 72  rank : 0  train.loss : 6.990508079528809  train.ips : 115.77235194735678 imgs/sTCAPPDLL 2025-12-12 10:22:49.744780 - Epoch: 0 Iteration: 72  rank : 2  train.loss : 6.990508079528809  train.ips : 115.57463667261295 imgs/s
+
+
+TCAPPDLL 2025-12-12 10:22:49.745034 - Epoch: 0 Iteration: 72  rank : 3  train.loss : 6.990508079528809  train.ips : 115.62602535344544 imgs/s
+Train: 0 [  72/20018 (  0%)]  Loss: 6.99 (6.95)  Time: 0.501s,  127.66/s  (0.553s,  115.77/s)  LR: 1.000e-05  Data: 0.013 (0.052)
+TCAPPDLL 2025-12-12 10:22:50.241438 - Epoch: 0 Iteration: 73  rank : 1  train.loss : 6.990192890167236  train.ips : 115.79911577084987 imgs/sTCAPPDLL 2025-12-12 10:22:50.241436 - Epoch: 0 Iteration: 73  rank : 2  train.loss : 6.990192890167236  train.ips : 115.7362699127256 imgs/s
+
+TCAPPDLL 2025-12-12 10:22:50.241634 - Epoch: 0 Iteration: 73  rank : 0  train.loss : 6.990192890167236  train.ips : 115.93347706494667 imgs/s
+TCAPPDLL 2025-12-12 10:22:50.241720 - Epoch: 0 Iteration: 73  rank : 3  train.loss : 6.990192890167236  train.ips : 115.78670352276494 imgs/s
+Train: 0 [  73/20018 (  0%)]  Loss: 6.99 (6.95)  Time: 0.496s,  129.04/s  (0.552s,  115.93/s)  LR: 1.000e-05  Data: 0.052 (0.052)
+TCAPPDLL 2025-12-12 10:22:50.819277 - Epoch: 0 Iteration: 74  rank : 2  train.loss : 6.886296272277832  train.ips : 115.70096619614316 imgs/sTCAPPDLL 2025-12-12 10:22:50.819283 - Epoch: 0 Iteration: 74  rank : 1  train.loss : 6.886296272277832  train.ips : 115.76268821048698 imgs/sTCAPPDLL 2025-12-12 10:22:50.819293 - Epoch: 0 Iteration: 74  rank : 0  train.loss : 6.886296272277832  train.ips : 115.8880577128037 imgs/s
+
+
+Train: 0 [  74/20018 (  0%)]  Loss: 6.89 (6.95)  Time: 0.568s,  112.62/s  (0.552s,  115.89/s)  LR: 1.000e-05  Data: 0.055 (0.052)
+TCAPPDLL 2025-12-12 10:22:50.819891 - Epoch: 0 Iteration: 74  rank : 3  train.loss : 6.886296272277832  train.ips : 115.7193855628274 imgs/s
+TCAPPDLL 2025-12-12 10:22:51.392456 - Epoch: 0 Iteration: 75  rank : 1  train.loss : 6.924106597900391  train.ips : 115.6768774970087 imgs/sTCAPPDLL 2025-12-12 10:22:51.392463 - Epoch: 0 Iteration: 75  rank : 3  train.loss : 6.924106597900391  train.ips : 115.78055973571259 imgs/s
+TCAPPDLL 2025-12-12 10:22:51.392511 - Epoch: 0 Iteration: 75  rank : 2  train.loss : 6.924106597900391  train.ips : 115.72731940557924 imgs/s
+
+TCAPPDLL 2025-12-12 10:22:51.392709 - Epoch: 0 Iteration: 75  rank : 0  train.loss : 6.924106597900391  train.ips : 115.8009255494039 imgs/s
+Train: 0 [  75/20018 (  0%)]  Loss: 6.92 (6.95)  Time: 0.584s,  109.62/s  (0.553s,  115.80/s)  LR: 1.000e-05  Data: 0.009 (0.052)
+TCAPPDLL 2025-12-12 10:22:51.893745 - Epoch: 0 Iteration: 76  rank : 1  train.loss : 6.972184181213379  train.ips : 115.81448712929445 imgs/s
+TCAPPDLL 2025-12-12 10:22:51.893881 - Epoch: 0 Iteration: 76  rank : 3  train.loss : 6.972184181213379  train.ips : 115.80855949371941 imgs/s
+TCAPPDLL 2025-12-12 10:22:51.894015 - Epoch: 0 Iteration: 76  rank : 0  train.loss : 6.972184181213379  train.ips : 115.94093978982251 imgs/s
+TCAPPDLL 2025-12-12 10:22:51.894370 - Epoch: 0 Iteration: 76  rank : 2  train.loss : 6.972184181213379  train.ips : 115.75429744518523 imgs/sTrain: 0 [  76/20018 (  0%)]  Loss: 6.97 (6.95)  Time: 0.501s,  127.67/s  (0.552s,  115.94/s)  LR: 1.000e-05  Data: 0.014 (0.051)
+
+TCAPPDLL 2025-12-12 10:22:52.419446 - Epoch: 0 Iteration: 77  rank : 0  train.loss : 7.009547233581543  train.ips : 116.01841910963147 imgs/sTCAPPDLL 2025-12-12 10:22:52.419449 - Epoch: 0 Iteration: 77  rank : 2  train.loss : 7.009547233581543  train.ips : 115.83190239557896 imgs/sTCAPPDLL 2025-12-12 10:22:52.419464 - Epoch: 0 Iteration: 77  rank : 1  train.loss : 7.009547233581543  train.ips : 115.89099818761302 imgs/s
+
+
+Train: 0 [  77/20018 (  0%)]  Loss: 7.01 (6.95)  Time: 0.523s,  122.31/s  (0.552s,  116.02/s)  LR: 1.000e-05  Data: 0.013 (0.051)
+TCAPPDLL 2025-12-12 10:22:52.419797 - Epoch: 0 Iteration: 77  rank : 3  train.loss : 7.009547233581543  train.ips : 115.87576183056643 imgs/s
+TCAPPDLL 2025-12-12 10:22:52.896593 - Epoch: 0 Iteration: 78  rank : 2  train.loss : 6.912644386291504  train.ips : 116.02934592907664 imgs/sTCAPPDLL 2025-12-12 10:22:52.896592 - Epoch: 0 Iteration: 78  rank : 1  train.loss : 6.912644386291504  train.ips : 116.09652680316242 imgs/s
+
+TCAPPDLL 2025-12-12 10:22:52.896743 - Epoch: 0 Iteration: 78  rank : 0  train.loss : 6.912644386291504  train.ips : 116.22124102888019 imgs/s
+TCAPPDLL 2025-12-12 10:22:52.896863 - Epoch: 0 Iteration: 78  rank : 3  train.loss : 6.912644386291504  train.ips : 116.07525396386814 imgs/s
+Train: 0 [  78/20018 (  0%)]  Loss: 6.91 (6.95)  Time: 0.476s,  134.57/s  (0.551s,  116.22/s)  LR: 1.000e-05  Data: 0.013 (0.050)
+TCAPPDLL 2025-12-12 10:22:53.407235 - Epoch: 0 Iteration: 79  rank : 1  train.loss : 6.932709217071533  train.ips : 116.19938195310134 imgs/sTCAPPDLL 2025-12-12 10:22:53.407239 - Epoch: 0 Iteration: 79  rank : 2  train.loss : 6.932709217071533  train.ips : 116.13978631630889 imgs/s
+
+TCAPPDLL 2025-12-12 10:22:53.407499 - Epoch: 0 Iteration: 79  rank : 0  train.loss : 6.932709217071533  train.ips : 116.31634388802463 imgs/s
+TCAPPDLL 2025-12-12 10:22:53.407766 - Epoch: 0 Iteration: 79  rank : 3  train.loss : 6.932709217071533  train.ips : 116.18263761882761 imgs/s
+Train: 0 [  79/20018 (  0%)]  Loss: 6.93 (6.95)  Time: 0.515s,  124.36/s  (0.550s,  116.32/s)  LR: 1.000e-05  Data: 0.013 (0.050)
+TCAPPDLL 2025-12-12 10:22:53.890322 - Epoch: 0 Iteration: 80  rank : 3  train.loss : 6.9380269050598145  train.ips : 116.47597516861619 imgs/s
+TCAPPDLL 2025-12-12 10:22:53.890392 - Epoch: 0 Iteration: 80  rank : 1  train.loss : 6.9380269050598145  train.ips : 116.48464743190593 imgs/s
+TCAPPDLL 2025-12-12 10:22:53.890427 - Epoch: 0 Iteration: 80  rank : 2  train.loss : 6.9380269050598145  train.ips : 116.42576221496078 imgs/sTCAPPDLL 2025-12-12 10:22:53.890578 - Epoch: 0 Iteration: 80  rank : 0  train.loss : 6.9380269050598145  train.ips : 116.49198473323136 imgs/s
+
+Train: 0 [  80/20018 (  0%)]  Loss: 6.94 (6.95)  Time: 0.483s,  132.50/s  (0.549s,  116.49/s)  LR: 1.000e-05  Data: 0.012 (0.049)
+TCAPPDLL 2025-12-12 10:22:54.387387 - Epoch: 0 Iteration: 81  rank : 2  train.loss : 6.974415302276611  train.ips : 116.55366229056173 imgs/s
+TCAPPDLL 2025-12-12 10:22:54.387497 - Epoch: 0 Iteration: 81  rank : 1  train.loss : 6.974415302276611  train.ips : 116.61245054394509 imgs/s
+TCAPPDLL 2025-12-12 10:22:54.387813 - Epoch: 0 Iteration: 81  rank : 3  train.loss : 6.974415302276611  train.ips : 116.59748048946018 imgs/sTCAPPDLL 2025-12-12 10:22:54.387998 - Epoch: 0 Iteration: 81  rank : 0  train.loss : 6.974415302276611  train.ips : 116.73193969496498 imgs/s
+
+Train: 0 [  81/20018 (  0%)]  Loss: 6.97 (6.95)  Time: 0.457s,  140.11/s  (0.548s,  116.73/s)  LR: 1.000e-05  Data: 0.014 (0.049)
+TCAPPDLL 2025-12-12 10:22:54.896530 - Epoch: 0 Iteration: 82  rank : 2  train.loss : 6.967382907867432  train.ips : 116.56268761574219 imgs/sTCAPPDLL 2025-12-12 10:22:54.896540 - Epoch: 0 Iteration: 82  rank : 1  train.loss : 6.967382907867432  train.ips : 116.61925383575041 imgs/s
+TCAPPDLL 2025-12-12 10:22:54.896601 - Epoch: 0 Iteration: 82  rank : 0  train.loss : 6.967382907867432  train.ips : 116.74057279809514 imgs/s
+
+TCAPPDLL 2025-12-12 10:22:54.896800 - Epoch: 0 Iteration: 82  rank : 3  train.loss : 6.967382907867432  train.ips : 116.59928703970444 imgs/s
+Train: 0 [  82/20018 (  0%)]  Loss: 6.97 (6.95)  Time: 0.545s,  117.45/s  (0.548s,  116.74/s)  LR: 1.000e-05  Data: 0.013 (0.048)
+TCAPPDLL 2025-12-12 10:22:55.436239 - Epoch: 0 Iteration: 83  rank : 2  train.loss : 6.935400009155273  train.ips : 116.58261755666959 imgs/sTCAPPDLL 2025-12-12 10:22:55.436269 - Epoch: 0 Iteration: 83  rank : 1  train.loss : 6.935400009155273  train.ips : 116.64341042183176 imgs/s
+
+TCAPPDLL 2025-12-12 10:22:55.436496 - Epoch: 0 Iteration: 83  rank : 3  train.loss : 6.935400009155273  train.ips : 116.62216756869213 imgs/s
+TCAPPDLL 2025-12-12 10:22:55.436564 - Epoch: 0 Iteration: 83  rank : 0  train.loss : 6.935400009155273  train.ips : 116.75828301437404 imgs/s
+Train: 0 [  83/20018 (  0%)]  Loss: 6.94 (6.95)  Time: 0.541s,  118.25/s  (0.548s,  116.76/s)  LR: 1.000e-05  Data: 0.012 (0.048)
+TCAPPDLL 2025-12-12 10:22:55.893541 - Epoch: 0 Iteration: 84  rank : 3  train.loss : 6.946516990661621  train.ips : 116.85563049441227 imgs/sTCAPPDLL 2025-12-12 10:22:55.893561 - Epoch: 0 Iteration: 84  rank : 2  train.loss : 6.946516990661621  train.ips : 116.81164534148508 imgs/sTCAPPDLL 2025-12-12 10:22:55.893588 - Epoch: 0 Iteration: 84  rank : 0  train.loss : 6.946516990661621  train.ips : 116.97927107751583 imgs/s
+
+
+TCAPPDLL 2025-12-12 10:22:55.893818 - Epoch: 0 Iteration: 84  rank : 1  train.loss : 6.946516990661621  train.ips : 116.85988635092255 imgs/s
+Train: 0 [  84/20018 (  0%)]  Loss: 6.95 (6.95)  Time: 0.460s,  139.09/s  (0.547s,  116.98/s)  LR: 1.000e-05  Data: 0.011 (0.048)
+TCAPPDLL 2025-12-12 10:22:56.409587 - Epoch: 0 Iteration: 85  rank : 2  train.loss : 6.95599889755249  train.ips : 116.89394420590729 imgs/sTCAPPDLL 2025-12-12 10:22:56.409591 - Epoch: 0 Iteration: 85  rank : 1  train.loss : 6.95599889755249  train.ips : 116.94846552490408 imgs/sTCAPPDLL 2025-12-12 10:22:56.409621 - Epoch: 0 Iteration: 85  rank : 0  train.loss : 6.95599889755249  train.ips : 117.06597184432819 imgs/s
+
+
+Train: 0 [  85/20018 (  0%)]  Loss: 6.96 (6.95)  Time: 0.512s,  124.94/s  (0.547s,  117.07/s)  LR: 1.000e-05  Data: 0.015 (0.047)
+TCAPPDLL 2025-12-12 10:22:56.409943 - Epoch: 0 Iteration: 85  rank : 3  train.loss : 6.95599889755249  train.ips : 116.93014099712619 imgs/s
+TCAPPDLL 2025-12-12 10:22:56.902916 - Epoch: 0 Iteration: 86  rank : 1  train.loss : 6.978852272033691  train.ips : 117.09339150093521 imgs/sTCAPPDLL 2025-12-12 10:22:56.902912 - Epoch: 0 Iteration: 86  rank : 0  train.loss : 6.978852272033691  train.ips : 117.19768126700181 imgs/sTCAPPDLL 2025-12-12 10:22:56.902923 - Epoch: 0 Iteration: 86  rank : 2  train.loss : 6.978852272033691  train.ips : 117.02192038740068 imgs/s
+
+
+TCAPPDLL 2025-12-12 10:22:56.903195 - Epoch: 0 Iteration: 86  rank : 3  train.loss : 6.978852272033691  train.ips : 117.0627263621549 imgs/s
+Train: 0 [  86/20018 (  0%)]  Loss: 6.98 (6.95)  Time: 0.493s,  129.75/s  (0.546s,  117.20/s)  LR: 1.000e-05  Data: 0.014 (0.047)
+TCAPPDLL 2025-12-12 10:22:57.393773 - Epoch: 0 Iteration: 87  rank : 1  train.loss : 6.888980865478516  train.ips : 117.20811768789872 imgs/sTCAPPDLL 2025-12-12 10:22:57.393770 - Epoch: 0 Iteration: 87  rank : 0  train.loss : 6.888980865478516  train.ips : 117.32489906120243 imgs/sTCAPPDLL 2025-12-12 10:22:57.393767 - Epoch: 0 Iteration: 87  rank : 3  train.loss : 6.888980865478516  train.ips : 117.2003735953151 imgs/s
+
+
+TCAPPDLL 2025-12-12 10:22:57.394018 - Epoch: 0 Iteration: 87  rank : 2  train.loss : 6.888980865478516  train.ips : 117.15242337429261 imgs/s
+Train: 0 [  87/20018 (  0%)]  Loss: 6.89 (6.95)  Time: 0.494s,  129.56/s  (0.545s,  117.32/s)  LR: 1.000e-05  Data: 0.013 (0.046)
+TCAPPDLL 2025-12-12 10:22:57.890641 - Epoch: 0 Iteration: 88  rank : 3  train.loss : 6.919736862182617  train.ips : 117.31872321922059 imgs/sTCAPPDLL 2025-12-12 10:22:57.890671 - Epoch: 0 Iteration: 88  rank : 2  train.loss : 6.919736862182617  train.ips : 117.37603546438402 imgs/s
+
+TCAPPDLL 2025-12-12 10:22:57.890890 - Epoch: 0 Iteration: 88  rank : 1  train.loss : 6.919736862182617  train.ips : 117.43077217300575 imgs/s
+TCAPPDLL 2025-12-12 10:22:57.890947 - Epoch: 0 Iteration: 88  rank : 0  train.loss : 6.919736862182617  train.ips : 117.4406213583314 imgs/s
+Train: 0 [  88/20018 (  0%)]  Loss: 6.92 (6.95)  Time: 0.498s,  128.60/s  (0.545s,  117.44/s)  LR: 1.000e-05  Data: 0.013 (0.046)
+TCAPPDLL 2025-12-12 10:22:58.342900 - Epoch: 0 Iteration: 89  rank : 2  train.loss : 6.976961135864258  train.ips : 117.4994865426362 imgs/sTCAPPDLL 2025-12-12 10:22:58.342906 - Epoch: 0 Iteration: 89  rank : 1  train.loss : 6.976961135864258  train.ips : 117.55279753423193 imgs/s
+TCAPPDLL 2025-12-12 10:22:58.342908 - Epoch: 0 Iteration: 89  rank : 0  train.loss : 6.976961135864258  train.ips : 117.66582137470142 imgs/s
+
+Train: 0 [  89/20018 (  0%)]  Loss: 6.98 (6.95)  Time: 0.451s,  141.88/s  (0.544s,  117.67/s)  LR: 1.000e-05  Data: 0.015 (0.046)
+TCAPPDLL 2025-12-12 10:22:58.385487 - Epoch: 0 Iteration: 89  rank : 3  train.loss : 6.976961135864258  train.ips : 117.5411462399919 imgs/s
+TCAPPDLL 2025-12-12 10:22:58.893373 - Epoch: 0 Iteration: 90  rank : 2  train.loss : 6.951403617858887  train.ips : 117.48553437720997 imgs/s
+TCAPPDLL 2025-12-12 10:22:58.893530 - Epoch: 0 Iteration: 90  rank : 0  train.loss : 6.951403617858887  train.ips : 117.65466895162707 imgs/sTCAPPDLL 2025-12-12 10:22:58.893518 - Epoch: 0 Iteration: 90  rank : 3  train.loss : 6.951403617858887  train.ips : 117.5283316555893 imgs/s
+
+TCAPPDLL 2025-12-12 10:22:58.893658 - Epoch: 0 Iteration: 90  rank : 1  train.loss : 6.951403617858887  train.ips : 117.53460749442293 imgs/s
+Train: 0 [  90/20018 (  0%)]  Loss: 6.95 (6.95)  Time: 0.549s,  116.66/s  (0.544s,  117.65/s)  LR: 1.000e-05  Data: 0.014 (0.045)
+TCAPPDLL 2025-12-12 10:22:59.399883 - Epoch: 0 Iteration: 91  rank : 1  train.loss : 6.920576095581055  train.ips : 117.6316757797168 imgs/s
+TCAPPDLL 2025-12-12 10:22:59.400114 - Epoch: 0 Iteration: 91  rank : 2  train.loss : 6.920576095581055  train.ips : 117.5746777267648 imgs/sTCAPPDLL 2025-12-12 10:22:59.400107 - Epoch: 0 Iteration: 91  rank : 3  train.loss : 6.920576095581055  train.ips : 117.61603987672864 imgs/s
+
+TCAPPDLL 2025-12-12 10:22:59.400236 - Epoch: 0 Iteration: 91  rank : 0  train.loss : 6.920576095581055  train.ips : 117.73593746177889 imgs/s
+Train: 0 [  91/20018 (  0%)]  Loss: 6.92 (6.95)  Time: 0.509s,  125.63/s  (0.544s,  117.74/s)  LR: 1.000e-05  Data: 0.013 (0.045)
+TCAPPDLL 2025-12-12 10:22:59.887296 - Epoch: 0 Iteration: 92  rank : 3  train.loss : 6.9362311363220215  train.ips : 117.8446635206079 imgs/sTCAPPDLL 2025-12-12 10:22:59.887308 - Epoch: 0 Iteration: 92  rank : 0  train.loss : 6.9362311363220215  train.ips : 117.95935240641924 imgs/s
+
+TCAPPDLL 2025-12-12 10:22:59.887586 - Epoch: 0 Iteration: 92  rank : 1  train.loss : 6.9362311363220215  train.ips : 117.7565944407278 imgs/s
+TCAPPDLL 2025-12-12 10:22:59.887629 - Epoch: 0 Iteration: 92  rank : 2  train.loss : 6.9362311363220215  train.ips : 117.80073953645777 imgs/s
+Train: 0 [  92/20018 (  0%)]  Loss: 6.94 (6.95)  Time: 0.448s,  142.91/s  (0.543s,  117.96/s)  LR: 1.000e-05  Data: 0.011 (0.045)
+TCAPPDLL 2025-12-12 10:23:00.421838 - Epoch: 0 Iteration: 93  rank : 1  train.loss : 6.9127726554870605  train.ips : 117.78711413198413 imgs/sTCAPPDLL 2025-12-12 10:23:00.421837 - Epoch: 0 Iteration: 93  rank : 0  train.loss : 6.9127726554870605  train.ips : 117.89620938265507 imgs/sTCAPPDLL 2025-12-12 10:23:00.421846 - Epoch: 0 Iteration: 93  rank : 2  train.loss : 6.9127726554870605  train.ips : 117.73500843202896 imgs/s
+
+
+Train: 0 [  93/20018 (  0%)]  Loss: 6.91 (6.95)  Time: 0.570s,  112.31/s  (0.543s,  117.90/s)  LR: 1.000e-05  Data: 0.013 (0.044)
+TCAPPDLL 2025-12-12 10:23:00.422191 - Epoch: 0 Iteration: 93  rank : 3  train.loss : 6.9127726554870605  train.ips : 117.769050063811 imgs/s
+TCAPPDLL 2025-12-12 10:23:00.936239 - Epoch: 0 Iteration: 94  rank : 2  train.loss : 6.885829925537109  train.ips : 117.80249636334335 imgs/sTCAPPDLL 2025-12-12 10:23:00.936245 - Epoch: 0 Iteration: 94  rank : 1  train.loss : 6.885829925537109  train.ips : 117.85352424826311 imgs/sTCAPPDLL 2025-12-12 10:23:00.936269 - Epoch: 0 Iteration: 94  rank : 0  train.loss : 6.885829925537109  train.ips : 117.95952825917882 imgs/s
+
+
+Train: 0 [  94/20018 (  0%)]  Loss: 6.89 (6.95)  Time: 0.515s,  124.23/s  (0.543s,  117.96/s)  LR: 1.000e-05  Data: 0.011 (0.044)
+TCAPPDLL 2025-12-12 10:23:00.985428 - Epoch: 0 Iteration: 94  rank : 3  train.loss : 6.885829925537109  train.ips : 117.83535462876681 imgs/s
+TCAPPDLL 2025-12-12 10:23:01.534537 - Epoch: 0 Iteration: 95  rank : 1  train.loss : 6.965513229370117  train.ips : 117.72739165622572 imgs/sTCAPPDLL 2025-12-12 10:23:01.534545 - Epoch: 0 Iteration: 95  rank : 0  train.loss : 6.965513229370117  train.ips : 117.82985321027364 imgs/sTCAPPDLL 2025-12-12 10:23:01.534549 - Epoch: 0 Iteration: 95  rank : 2  train.loss : 6.965513229370117  train.ips : 117.67826753219411 imgs/s
+
+
+TCAPPDLL 2025-12-12 10:23:01.534806 - Epoch: 0 Iteration: 95  rank : 3  train.loss : 6.965513229370117  train.ips : 117.7114224631126 imgs/s
+Train: 0 [  95/20018 (  0%)]  Loss: 6.97 (6.95)  Time: 0.600s,  106.69/s  (0.543s,  117.83/s)  LR: 1.000e-05  Data: 0.064 (0.044)
+TCAPPDLL 2025-12-12 10:23:02.058640 - Epoch: 0 Iteration: 96  rank : 1  train.loss : 6.96889066696167  train.ips : 117.76538793074342 imgs/s
+TCAPPDLL 2025-12-12 10:23:02.058694 - Epoch: 0 Iteration: 96  rank : 0  train.loss : 6.96889066696167  train.ips : 117.87050092922776 imgs/sTCAPPDLL 2025-12-12 10:23:02.058739 - Epoch: 0 Iteration: 96  rank : 2  train.loss : 6.96889066696167  train.ips : 117.71607501628695 imgs/s
+
+Train: 0 [  96/20018 (  0%)]  Loss: 6.97 (6.95)  Time: 0.525s,  121.91/s  (0.543s,  117.87/s)  LR: 1.000e-05  Data: 0.011 (0.044)
+TCAPPDLL 2025-12-12 10:23:02.059015 - Epoch: 0 Iteration: 96  rank : 3  train.loss : 6.96889066696167  train.ips : 117.75464155041759 imgs/s
+TCAPPDLL 2025-12-12 10:23:02.440003 - Epoch: 0 Iteration: 97  rank : 2  train.loss : 6.911557674407959  train.ips : 118.07545485162613 imgs/sTCAPPDLL 2025-12-12 10:23:02.440018 - Epoch: 0 Iteration: 97  rank : 1  train.loss : 6.911557674407959  train.ips : 118.12508430498033 imgs/s
+
+TCAPPDLL 2025-12-12 10:23:02.440598 - Epoch: 0 Iteration: 97  rank : 3  train.loss : 6.911557674407959  train.ips : 118.11643169847804 imgs/s
+TCAPPDLL 2025-12-12 10:23:02.485387 - Epoch: 0 Iteration: 97  rank : 0  train.loss : 6.911557674407959  train.ips : 118.22661820173765 imgs/s
+Train: 0 [  97/20018 (  0%)]  Loss: 6.91 (6.95)  Time: 0.383s,  167.24/s  (0.541s,  118.23/s)  LR: 1.000e-05  Data: 0.015 (0.044)
+TCAPPDLL 2025-12-12 10:23:03.018274 - Epoch: 0 Iteration: 98  rank : 1  train.loss : 6.934754371643066  train.ips : 118.04578880112349 imgs/sTCAPPDLL 2025-12-12 10:23:03.018273 - Epoch: 0 Iteration: 98  rank : 0  train.loss : 6.934754371643066  train.ips : 118.14927450533061 imgs/s
+
+TCAPPDLL 2025-12-12 10:23:03.018429 - Epoch: 0 Iteration: 98  rank : 2  train.loss : 6.934754371643066  train.ips : 117.99333618135286 imgs/s
+TCAPPDLL 2025-12-12 10:23:03.018534 - Epoch: 0 Iteration: 98  rank : 3  train.loss : 6.934754371643066  train.ips : 118.03347873946488 imgs/s
+Train: 0 [  98/20018 (  0%)]  Loss: 6.93 (6.95)  Time: 0.576s,  111.03/s  (0.542s,  118.15/s)  LR: 1.000e-05  Data: 0.014 (0.043)
+TCAPPDLL 2025-12-12 10:23:03.509696 - Epoch: 0 Iteration: 99  rank : 3  train.loss : 6.930258274078369  train.ips : 118.14882290680198 imgs/sTCAPPDLL 2025-12-12 10:23:03.509703 - Epoch: 0 Iteration: 99  rank : 1  train.loss : 6.930258274078369  train.ips : 118.15971778206688 imgs/sTCAPPDLL 2025-12-12 10:23:03.509711 - Epoch: 0 Iteration: 99  rank : 2  train.loss : 6.930258274078369  train.ips : 118.11223324912127 imgs/s
+
+
+TCAPPDLL 2025-12-12 10:23:03.510029 - Epoch: 0 Iteration: 99  rank : 0  train.loss : 6.930258274078369  train.ips : 118.25520730404172 imgs/s
+Train: 0 [  99/20018 (  0%)]  Loss: 6.93 (6.95)  Time: 0.493s,  129.77/s  (0.541s,  118.26/s)  LR: 1.000e-05  Data: 0.014 (0.043)
+TCAPPDLL 2025-12-12 10:23:03.942196 - Epoch: 0 Iteration: 100  rank : 2  train.loss : 6.949149131774902  train.ips : 118.34117135790017 imgs/sTCAPPDLL 2025-12-12 10:23:03.942197 - Epoch: 0 Iteration: 100  rank : 3  train.loss : 6.949149131774902  train.ips : 118.3810493639409 imgs/s
+
+TCAPPDLL 2025-12-12 10:23:03.942464 - Epoch: 0 Iteration: 100  rank : 0  train.loss : 6.949149131774902  train.ips : 118.49037914002166 imgs/s
+TCAPPDLL 2025-12-12 10:23:03.942785 - Epoch: 0 Iteration: 100  rank : 1  train.loss : 6.949149131774902  train.ips : 118.38898476536363 imgs/s
+Train: 0 [ 100/20018 (  1%)]  Loss: 6.95 (6.95)  Time: 0.433s,  147.90/s  (0.540s,  118.49/s)  LR: 1.000e-05  Data: 0.013 (0.043)
+Distributing BatchNorm running means and vars
+Test: [   0/781]  Time: 3.707 (3.707)  Loss:   6.892 ( 6.892)  Acc@1:   0.000 (  0.000)  Acc@5:   0.000 (  0.000)
+Test: [   1/781]  Time: 0.201 (1.954)  Loss:   6.842 ( 6.867)  Acc@1:   0.000 (  0.000)  Acc@5:   3.125 (  1.562)
+Test: [   2/781]  Time: 0.193 (1.367)  Loss:   6.919 ( 6.884)  Acc@1:   0.000 (  0.000)  Acc@5:   0.000 (  1.042)
+Test: [   3/781]  Time: 0.286 (1.097)  Loss:   6.860 ( 6.878)  Acc@1:   0.000 (  0.000)  Acc@5:   0.000 (  0.781)
+Test: [   4/781]  Time: 0.230 (0.923)  Loss:   6.791 ( 6.861)  Acc@1:   0.000 (  0.000)  Acc@5:   0.000 (  0.625)
+Test: [   5/781]  Time: 0.202 (0.803)  Loss:   6.725 ( 6.838)  Acc@1:   0.000 (  0.000)  Acc@5:   0.000 (  0.521)
+Test: [   6/781]  Time: 0.100 (0.703)  Loss:   6.970 ( 6.857)  Acc@1:   0.000 (  0.000)  Acc@5:   0.000 (  0.446)
+Test: [   7/781]  Time: 0.108 (0.628)  Loss:   6.835 ( 6.854)  Acc@1:   0.000 (  0.000)  Acc@5:   0.000 (  0.391)
+Test: [   8/781]  Time: 0.274 (0.589)  Loss:   6.918 ( 6.861)  Acc@1:   0.000 (  0.000)  Acc@5:   0.000 (  0.347)
+Test: [   9/781]  Time: 0.291 (0.559)  Loss:   6.904 ( 6.866)  Acc@1:   0.000 (  0.000)  Acc@5:   0.000 (  0.312)
+Test: [  10/781]  Time: 0.208 (0.527)  Loss:   7.001 ( 6.878)  Acc@1:   0.000 (  0.000)  Acc@5:   0.000 (  0.284)
+Test: [  11/781]  Time: 0.215 (0.501)  Loss:   6.982 ( 6.887)  Acc@1:   0.000 (  0.000)  Acc@5:   0.000 (  0.260)
+Test: [  12/781]  Time: 0.277 (0.484)  Loss:   7.032 ( 6.898)  Acc@1:   0.000 (  0.000)  Acc@5:   0.000 (  0.240)
+Test: [  13/781]  Time: 0.293 (0.470)  Loss:   6.951 ( 6.902)  Acc@1:   0.000 (  0.000)  Acc@5:   0.000 (  0.223)
+Test: [  14/781]  Time: 0.216 (0.453)  Loss:   7.001 ( 6.908)  Acc@1:   0.000 (  0.000)  Acc@5:   0.000 (  0.208)
+Test: [  15/781]  Time: 0.216 (0.439)  Loss:   6.985 ( 6.913)  Acc@1:   0.000 (  0.000)  Acc@5:   0.000 (  0.195)
+Test: [  16/781]  Time: 0.272 (0.429)  Loss:   6.895 ( 6.912)  Acc@1:   0.000 (  0.000)  Acc@5:   0.000 (  0.184)
+Test: [  17/781]  Time: 0.215 (0.417)  Loss:   7.011 ( 6.917)  Acc@1:   0.000 (  0.000)  Acc@5:   0.000 (  0.174)
+Test: [  18/781]  Time: 0.212 (0.406)  Loss:   6.886 ( 6.916)  Acc@1:   0.000 (  0.000)  Acc@5:   0.000 (  0.164)
+Test: [  19/781]  Time: 0.378 (0.405)  Loss:   6.915 ( 6.916)  Acc@1:   0.000 (  0.000)  Acc@5:   1.562 (  0.234)
+Test: [  20/781]  Time: 0.326 (0.401)  Loss:   6.849 ( 6.913)  Acc@1:   0.000 (  0.000)  Acc@5:   0.000 (  0.223)
+Test: [  21/781]  Time: 0.269 (0.395)  Loss:   6.816 ( 6.908)  Acc@1:   0.000 (  0.000)  Acc@5:   1.562 (  0.284)
+Test: [  22/781]  Time: 0.301 (0.391)  Loss:   6.860 ( 6.906)  Acc@1:   0.000 (  0.000)  Acc@5:   0.000 (  0.272)
+Test: [  23/781]  Time: 0.220 (0.384)  Loss:   6.880 ( 6.905)  Acc@1:   0.000 (  0.000)  Acc@5:   0.000 (  0.260)
+Test: [  24/781]  Time: 0.206 (0.377)  Loss:   6.985 ( 6.908)  Acc@1:   0.000 (  0.000)  Acc@5:   0.000 (  0.250)
+Test: [  25/781]  Time: 0.200 (0.370)  Loss:   7.072 ( 6.915)  Acc@1:   0.000 (  0.000)  Acc@5:   0.000 (  0.240)
+Test: [  26/781]  Time: 0.295 (0.367)  Loss:   6.852 ( 6.912)  Acc@1:   0.000 (  0.000)  Acc@5:   1.562 (  0.289)
+Test: [  27/781]  Time: 0.290 (0.364)  Loss:   6.997 ( 6.915)  Acc@1:   0.000 (  0.000)  Acc@5:   0.000 (  0.279)
+Test: [  28/781]  Time: 0.309 (0.362)  Loss:   6.957 ( 6.917)  Acc@1:   0.000 (  0.000)  Acc@5:   0.000 (  0.269)
+Test: [  29/781]  Time: 0.206 (0.357)  Loss:   6.775 ( 6.912)  Acc@1:   0.000 (  0.000)  Acc@5:   1.562 (  0.312)
+Test: [  30/781]  Time: 0.301 (0.355)  Loss:   6.778 ( 6.908)  Acc@1:   0.000 (  0.000)  Acc@5:   0.000 (  0.302)
+Test: [  31/781]  Time: 0.277 (0.353)  Loss:   6.913 ( 6.908)  Acc@1:   0.000 (  0.000)  Acc@5:   4.688 (  0.439)
+Test: [  32/781]  Time: 0.290 (0.351)  Loss:   6.906 ( 6.908)  Acc@1:   0.000 (  0.000)  Acc@5:   4.688 (  0.568)
+Test: [  33/781]  Time: 0.207 (0.347)  Loss:   6.797 ( 6.905)  Acc@1:   0.000 (  0.000)  Acc@5:   1.562 (  0.597)
+Test: [  34/781]  Time: 0.222 (0.343)  Loss:   6.844 ( 6.903)  Acc@1:   0.000 (  0.000)  Acc@5:   0.000 (  0.580)
+Test: [  35/781]  Time: 0.282 (0.342)  Loss:   7.041 ( 6.907)  Acc@1:   0.000 (  0.000)  Acc@5:   0.000 (  0.564)
+Test: [  36/781]  Time: 0.215 (0.338)  Loss:   6.972 ( 6.908)  Acc@1:   0.000 (  0.000)  Acc@5:   0.000 (  0.549)
+Test: [  37/781]  Time: 0.123 (0.332)  Loss:   6.955 ( 6.910)  Acc@1:   0.000 (  0.000)  Acc@5:   0.000 (  0.535)
+Test: [  38/781]  Time: 0.182 (0.329)  Loss:   6.985 ( 6.912)  Acc@1:   0.000 (  0.000)  Acc@5:   0.000 (  0.521)
+Test: [  39/781]  Time: 0.295 (0.328)  Loss:   6.941 ( 6.912)  Acc@1:   0.000 (  0.000)  Acc@5:   0.000 (  0.508)
+Test: [  40/781]  Time: 0.301 (0.327)  Loss:   7.039 ( 6.915)  Acc@1:   0.000 (  0.000)  Acc@5:   0.000 (  0.495)
+Test: [  41/781]  Time: 0.280 (0.326)  Loss:   6.957 ( 6.916)  Acc@1:   0.000 (  0.000)  Acc@5:   0.000 (  0.484)
+Test: [  42/781]  Time: 0.227 (0.324)  Loss:   6.928 ( 6.917)  Acc@1:   0.000 (  0.000)  Acc@5:   0.000 (  0.472)
+Test: [  43/781]  Time: 0.203 (0.321)  Loss:   7.012 ( 6.919)  Acc@1:   0.000 (  0.000)  Acc@5:   0.000 (  0.462)
+Test: [  44/781]  Time: 0.263 (0.320)  Loss:   7.034 ( 6.921)  Acc@1:   0.000 (  0.000)  Acc@5:   0.000 (  0.451)
+Test: [  45/781]  Time: 0.204 (0.317)  Loss:   6.917 ( 6.921)  Acc@1:   0.000 (  0.000)  Acc@5:   0.000 (  0.442)
+Test: [  46/781]  Time: 0.213 (0.315)  Loss:   7.128 ( 6.926)  Acc@1:   0.000 (  0.000)  Acc@5:   0.000 (  0.432)
+Test: [  47/781]  Time: 0.209 (0.313)  Loss:   6.967 ( 6.927)  Acc@1:   0.000 (  0.000)  Acc@5:   0.000 (  0.423)
+Test: [  48/781]  Time: 0.281 (0.312)  Loss:   6.964 ( 6.927)  Acc@1:   0.000 (  0.000)  Acc@5:   0.000 (  0.415)
+Test: [  49/781]  Time: 0.206 (0.310)  Loss:   6.947 ( 6.928)  Acc@1:   0.000 (  0.000)  Acc@5:   0.000 (  0.406)
+Test: [  50/781]  Time: 0.217 (0.308)  Loss:   6.945 ( 6.928)  Acc@1:   0.000 (  0.000)  Acc@5:   9.375 (  0.582)
+Test: [  51/781]  Time: 0.276 (0.308)  Loss:   6.927 ( 6.928)  Acc@1:   3.125 (  0.060)  Acc@5:  10.938 (  0.781)
+Test: [  52/781]  Time: 0.225 (0.306)  Loss:   6.863 ( 6.927)  Acc@1:   0.000 (  0.059)  Acc@5:   0.000 (  0.767)
+Test: [  53/781]  Time: 0.276 (0.305)  Loss:   6.670 ( 6.922)  Acc@1:   3.125 (  0.116)  Acc@5:  17.188 (  1.071)
+Test: [  54/781]  Time: 0.222 (0.304)  Loss:   7.014 ( 6.924)  Acc@1:   0.000 (  0.114)  Acc@5:   0.000 (  1.051)
+Test: [  55/781]  Time: 0.275 (0.303)  Loss:   7.038 ( 6.926)  Acc@1:   0.000 (  0.112)  Acc@5:   0.000 (  1.032)
+Test: [  56/781]  Time: 0.627 (0.309)  Loss:   6.971 ( 6.927)  Acc@1:   0.000 (  0.110)  Acc@5:   0.000 (  1.014)
+Test: [  57/781]  Time: 0.197 (0.307)  Loss:   6.932 ( 6.927)  Acc@1:   0.000 (  0.108)  Acc@5:   0.000 (  0.997)
+Test: [  58/781]  Time: 0.200 (0.305)  Loss:   6.928 ( 6.927)  Acc@1:   0.000 (  0.106)  Acc@5:   0.000 (  0.980)
+Test: [  59/781]  Time: 0.289 (0.305)  Loss:   7.037 ( 6.929)  Acc@1:   0.000 (  0.104)  Acc@5:   0.000 (  0.964)
+Test: [  60/781]  Time: 0.288 (0.305)  Loss:   6.866 ( 6.927)  Acc@1:   0.000 (  0.102)  Acc@5:   0.000 (  0.948)
+Test: [  61/781]  Time: 0.205 (0.303)  Loss:   6.893 ( 6.927)  Acc@1:   0.000 (  0.101)  Acc@5:   0.000 (  0.932)
+Test: [  62/781]  Time: 0.216 (0.302)  Loss:   6.901 ( 6.927)  Acc@1:   3.125 (  0.149)  Acc@5:   4.688 (  0.992)
+Test: [  63/781]  Time: 0.281 (0.301)  Loss:   6.837 ( 6.925)  Acc@1:   1.562 (  0.171)  Acc@5:   6.250 (  1.074)
+Test: [  64/781]  Time: 0.224 (0.300)  Loss:   6.878 ( 6.924)  Acc@1:   0.000 (  0.168)  Acc@5:   0.000 (  1.058)
+Test: [  65/781]  Time: 0.203 (0.299)  Loss:   6.819 ( 6.923)  Acc@1:   0.000 (  0.166)  Acc@5:   0.000 (  1.042)
+Test: [  66/781]  Time: 0.286 (0.299)  Loss:   6.787 ( 6.921)  Acc@1:   0.000 (  0.163)  Acc@5:   0.000 (  1.026)
+Test: [  67/781]  Time: 0.212 (0.297)  Loss:   6.910 ( 6.921)  Acc@1:   0.000 (  0.161)  Acc@5:   0.000 (  1.011)
+Test: [  68/781]  Time: 0.124 (0.295)  Loss:   6.893 ( 6.920)  Acc@1:   0.000 (  0.159)  Acc@5:   0.000 (  0.996)
+Test: [  69/781]  Time: 0.161 (0.293)  Loss:   6.954 ( 6.921)  Acc@1:   0.000 (  0.156)  Acc@5:   0.000 (  0.982)
+Test: [  70/781]  Time: 0.217 (0.292)  Loss:   6.919 ( 6.921)  Acc@1:   0.000 (  0.154)  Acc@5:   0.000 (  0.968)
+Test: [  71/781]  Time: 0.274 (0.292)  Loss:   6.786 ( 6.919)  Acc@1:   0.000 (  0.152)  Acc@5:   0.000 (  0.955)
+Test: [  72/781]  Time: 0.224 (0.291)  Loss:   6.966 ( 6.919)  Acc@1:   0.000 (  0.150)  Acc@5:   0.000 (  0.942)
+Test: [  73/781]  Time: 0.270 (0.290)  Loss:   6.868 ( 6.919)  Acc@1:   0.000 (  0.148)  Acc@5:   0.000 (  0.929)
+Test: [  74/781]  Time: 0.214 (0.289)  Loss:   6.765 ( 6.917)  Acc@1:   0.000 (  0.146)  Acc@5:   1.562 (  0.938)
+Test: [  75/781]  Time: 0.221 (0.288)  Loss:   7.028 ( 6.918)  Acc@1:   0.000 (  0.144)  Acc@5:   0.000 (  0.925)
+Test: [  76/781]  Time: 0.278 (0.288)  Loss:   6.883 ( 6.918)  Acc@1:   4.688 (  0.203)  Acc@5:  10.938 (  1.055)
+Test: [  77/781]  Time: 0.208 (0.287)  Loss:   6.787 ( 6.916)  Acc@1:   0.000 (  0.200)  Acc@5:   4.688 (  1.102)
+Test: [  78/781]  Time: 0.210 (0.286)  Loss:   6.876 ( 6.916)  Acc@1:   0.000 (  0.198)  Acc@5:   0.000 (  1.088)
+Test: [  79/781]  Time: 0.280 (0.286)  Loss:   6.878 ( 6.915)  Acc@1:   0.000 (  0.195)  Acc@5:   0.000 (  1.074)
+Test: [  80/781]  Time: 0.216 (0.285)  Loss:   6.917 ( 6.915)  Acc@1:   0.000 (  0.193)  Acc@5:   0.000 (  1.061)
+Test: [  81/781]  Time: 0.202 (0.284)  Loss:   6.842 ( 6.914)  Acc@1:   0.000 (  0.191)  Acc@5:   0.000 (  1.048)
+Test: [  82/781]  Time: 0.272 (0.284)  Loss:   6.788 ( 6.913)  Acc@1:   0.000 (  0.188)  Acc@5:   0.000 (  1.035)
+Test: [  83/781]  Time: 0.213 (0.283)  Loss:   7.057 ( 6.914)  Acc@1:   0.000 (  0.186)  Acc@5:   0.000 (  1.023)
+Test: [  84/781]  Time: 0.213 (0.283)  Loss:   6.987 ( 6.915)  Acc@1:   0.000 (  0.184)  Acc@5:   0.000 (  1.011)
+Test: [  85/781]  Time: 0.205 (0.282)  Loss:   6.964 ( 6.916)  Acc@1:   0.000 (  0.182)  Acc@5:   0.000 (  0.999)
+Test: [  86/781]  Time: 0.203 (0.281)  Loss:   6.869 ( 6.915)  Acc@1:   1.562 (  0.198)  Acc@5:   3.125 (  1.024)
+Test: [  87/781]  Time: 0.265 (0.281)  Loss:   6.951 ( 6.916)  Acc@1:   0.000 (  0.195)  Acc@5:   0.000 (  1.012)
+Test: [  88/781]  Time: 0.231 (0.280)  Loss:   6.923 ( 6.916)  Acc@1:   0.000 (  0.193)  Acc@5:   1.562 (  1.018)
+Test: [  89/781]  Time: 0.271 (0.280)  Loss:   7.032 ( 6.917)  Acc@1:   0.000 (  0.191)  Acc@5:   0.000 (  1.007)
+Test: [  90/781]  Time: 0.212 (0.279)  Loss:   6.875 ( 6.917)  Acc@1:   0.000 (  0.189)  Acc@5:   0.000 (  0.996)
+Test: [  91/781]  Time: 0.213 (0.278)  Loss:   6.842 ( 6.916)  Acc@1:   0.000 (  0.187)  Acc@5:   0.000 (  0.985)
+Test: [  92/781]  Time: 0.280 (0.278)  Loss:   6.891 ( 6.916)  Acc@1:   0.000 (  0.185)  Acc@5:   0.000 (  0.974)
+Test: [  93/781]  Time: 0.219 (0.278)  Loss:   6.865 ( 6.915)  Acc@1:   0.000 (  0.183)  Acc@5:   0.000 (  0.964)
+Test: [  94/781]  Time: 1.007 (0.285)  Loss:   6.912 ( 6.915)  Acc@1:   0.000 (  0.181)  Acc@5:   0.000 (  0.954)
+Test: [  95/781]  Time: 0.200 (0.285)  Loss:   6.897 ( 6.915)  Acc@1:   0.000 (  0.179)  Acc@5:   0.000 (  0.944)
+Test: [  96/781]  Time: 0.192 (0.284)  Loss:   6.992 ( 6.916)  Acc@1:   0.000 (  0.177)  Acc@5:   0.000 (  0.934)
+Test: [  97/781]  Time: 0.187 (0.283)  Loss:   6.834 ( 6.915)  Acc@1:   0.000 (  0.175)  Acc@5:   1.562 (  0.941)
+Test: [  98/781]  Time: 0.137 (0.281)  Loss:   6.958 ( 6.915)  Acc@1:   0.000 (  0.174)  Acc@5:   0.000 (  0.931)
+Test: [  99/781]  Time: 0.178 (0.280)  Loss:   6.872 ( 6.915)  Acc@1:   0.000 (  0.172)  Acc@5:   0.000 (  0.922)
+Test: [ 100/781]  Time: 0.277 (0.280)  Loss:   7.075 ( 6.916)  Acc@1:   0.000 (  0.170)  Acc@5:   0.000 (  0.913)
+Test: [ 101/781]  Time: 0.212 (0.279)  Loss:   6.978 ( 6.917)  Acc@1:   0.000 (  0.169)  Acc@5:   0.000 (  0.904)
+Test: [ 102/781]  Time: 0.212 (0.279)  Loss:   7.070 ( 6.918)  Acc@1:   0.000 (  0.167)  Acc@5:   0.000 (  0.895)
+Test: [ 103/781]  Time: 0.270 (0.279)  Loss:   6.917 ( 6.918)  Acc@1:   0.000 (  0.165)  Acc@5:   0.000 (  0.886)
+Test: [ 104/781]  Time: 0.223 (0.278)  Loss:   6.985 ( 6.919)  Acc@1:   0.000 (  0.164)  Acc@5:   0.000 (  0.878)
+Test: [ 105/781]  Time: 0.204 (0.277)  Loss:   6.876 ( 6.919)  Acc@1:   0.000 (  0.162)  Acc@5:   0.000 (  0.870)
+Test: [ 106/781]  Time: 0.281 (0.278)  Loss:   6.881 ( 6.918)  Acc@1:   0.000 (  0.161)  Acc@5:   0.000 (  0.862)
+Test: [ 107/781]  Time: 0.215 (0.277)  Loss:   7.031 ( 6.919)  Acc@1:   0.000 (  0.159)  Acc@5:   0.000 (  0.854)
+Test: [ 108/781]  Time: 0.207 (0.276)  Loss:   6.984 ( 6.920)  Acc@1:   0.000 (  0.158)  Acc@5:   0.000 (  0.846)
+Test: [ 109/781]  Time: 0.202 (0.276)  Loss:   6.965 ( 6.920)  Acc@1:   0.000 (  0.156)  Acc@5:   0.000 (  0.838)
+Test: [ 110/781]  Time: 0.286 (0.276)  Loss:   6.826 ( 6.919)  Acc@1:   0.000 (  0.155)  Acc@5:   0.000 (  0.831)
+Test: [ 111/781]  Time: 0.210 (0.275)  Loss:   6.952 ( 6.920)  Acc@1:   0.000 (  0.153)  Acc@5:   0.000 (  0.823)
+Test: [ 112/781]  Time: 0.279 (0.275)  Loss:   6.939 ( 6.920)  Acc@1:   0.000 (  0.152)  Acc@5:   0.000 (  0.816)
+Test: [ 113/781]  Time: 0.210 (0.275)  Loss:   6.915 ( 6.920)  Acc@1:   0.000 (  0.151)  Acc@5:   0.000 (  0.809)
+Test: [ 114/781]  Time: 0.212 (0.274)  Loss:   6.972 ( 6.920)  Acc@1:   0.000 (  0.149)  Acc@5:   0.000 (  0.802)
+Test: [ 115/781]  Time: 0.199 (0.273)  Loss:   6.838 ( 6.920)  Acc@1:   0.000 (  0.148)  Acc@5:   0.000 (  0.795)
+Test: [ 116/781]  Time: 0.206 (0.273)  Loss:   6.986 ( 6.920)  Acc@1:   0.000 (  0.147)  Acc@5:   0.000 (  0.788)
+Test: [ 117/781]  Time: 0.273 (0.273)  Loss:   7.072 ( 6.921)  Acc@1:   0.000 (  0.146)  Acc@5:   0.000 (  0.781)
+Test: [ 118/781]  Time: 0.215 (0.272)  Loss:   6.938 ( 6.922)  Acc@1:   0.000 (  0.144)  Acc@5:   1.562 (  0.788)
+Test: [ 119/781]  Time: 0.210 (0.272)  Loss:   6.832 ( 6.921)  Acc@1:   0.000 (  0.143)  Acc@5:   1.562 (  0.794)
+Test: [ 120/781]  Time: 0.281 (0.272)  Loss:   6.891 ( 6.921)  Acc@1:   0.000 (  0.142)  Acc@5:   0.000 (  0.788)
+Test: [ 121/781]  Time: 0.218 (0.271)  Loss:   6.960 ( 6.921)  Acc@1:   0.000 (  0.141)  Acc@5:   0.000 (  0.781)
+Test: [ 122/781]  Time: 0.288 (0.272)  Loss:   6.883 ( 6.921)  Acc@1:   0.000 (  0.140)  Acc@5:   0.000 (  0.775)
+Test: [ 123/781]  Time: 0.210 (0.271)  Loss:   6.825 ( 6.920)  Acc@1:   0.000 (  0.139)  Acc@5:   0.000 (  0.769)
+Test: [ 124/781]  Time: 0.200 (0.271)  Loss:   6.795 ( 6.919)  Acc@1:   0.000 (  0.138)  Acc@5:   1.562 (  0.775)
+Test: [ 125/781]  Time: 0.274 (0.271)  Loss:   6.846 ( 6.918)  Acc@1:   0.000 (  0.136)  Acc@5:   0.000 (  0.769)
+Test: [ 126/781]  Time: 0.215 (0.270)  Loss:   6.823 ( 6.918)  Acc@1:   0.000 (  0.135)  Acc@5:   0.000 (  0.763)
+Test: [ 127/781]  Time: 0.205 (0.270)  Loss:   6.964 ( 6.918)  Acc@1:   0.000 (  0.134)  Acc@5:   0.000 (  0.757)
+Test: [ 128/781]  Time: 0.278 (0.270)  Loss:   6.808 ( 6.917)  Acc@1:   0.000 (  0.133)  Acc@5:   1.562 (  0.763)
+Test: [ 129/781]  Time: 0.314 (0.270)  Loss:   7.071 ( 6.918)  Acc@1:   0.000 (  0.132)  Acc@5:   0.000 (  0.757)
+Test: [ 130/781]  Time: 0.292 (0.270)  Loss:   6.975 ( 6.919)  Acc@1:   0.000 (  0.131)  Acc@5:   0.000 (  0.751)
+Test: [ 131/781]  Time: 0.208 (0.270)  Loss:   6.887 ( 6.918)  Acc@1:   0.000 (  0.130)  Acc@5:   0.000 (  0.746)
+Test: [ 132/781]  Time: 0.123 (0.269)  Loss:   6.991 ( 6.919)  Acc@1:   0.000 (  0.129)  Acc@5:   0.000 (  0.740)
+Test: [ 133/781]  Time: 0.178 (0.268)  Loss:   6.970 ( 6.919)  Acc@1:   0.000 (  0.128)  Acc@5:   0.000 (  0.735)
+Test: [ 134/781]  Time: 0.213 (0.268)  Loss:   6.985 ( 6.920)  Acc@1:   0.000 (  0.127)  Acc@5:   0.000 (  0.729)
+Test: [ 135/781]  Time: 0.296 (0.268)  Loss:   6.949 ( 6.920)  Acc@1:   0.000 (  0.126)  Acc@5:   0.000 (  0.724)
+Test: [ 136/781]  Time: 0.283 (0.268)  Loss:   7.029 ( 6.921)  Acc@1:   0.000 (  0.125)  Acc@5:   0.000 (  0.719)
+Test: [ 137/781]  Time: 0.217 (0.267)  Loss:   6.919 ( 6.921)  Acc@1:   0.000 (  0.125)  Acc@5:   0.000 (  0.713)
+Test: [ 138/781]  Time: 0.281 (0.268)  Loss:   6.930 ( 6.921)  Acc@1:   0.000 (  0.124)  Acc@5:   0.000 (  0.708)
+Test: [ 139/781]  Time: 0.224 (0.267)  Loss:   6.867 ( 6.920)  Acc@1:   0.000 (  0.123)  Acc@5:   0.000 (  0.703)
+Test: [ 140/781]  Time: 0.270 (0.267)  Loss:   7.033 ( 6.921)  Acc@1:   0.000 (  0.122)  Acc@5:   0.000 (  0.698)
+Test: [ 141/781]  Time: 0.208 (0.267)  Loss:   6.947 ( 6.921)  Acc@1:   0.000 (  0.121)  Acc@5:   0.000 (  0.693)
+Test: [ 142/781]  Time: 0.217 (0.267)  Loss:   6.843 ( 6.921)  Acc@1:   0.000 (  0.120)  Acc@5:   0.000 (  0.688)
+Test: [ 143/781]  Time: 0.302 (0.267)  Loss:   6.822 ( 6.920)  Acc@1:   0.000 (  0.119)  Acc@5:   0.000 (  0.684)
+Test: [ 144/781]  Time: 0.275 (0.267)  Loss:   6.938 ( 6.920)  Acc@1:   0.000 (  0.119)  Acc@5:   1.562 (  0.690)
+Test: [ 145/781]  Time: 0.208 (0.266)  Loss:   6.895 ( 6.920)  Acc@1:   0.000 (  0.118)  Acc@5:   0.000 (  0.685)
+Test: [ 146/781]  Time: 0.210 (0.266)  Loss:   6.847 ( 6.920)  Acc@1:   0.000 (  0.117)  Acc@5:   0.000 (  0.680)
+Test: [ 147/781]  Time: 0.309 (0.266)  Loss:   6.773 ( 6.919)  Acc@1:   0.000 (  0.116)  Acc@5:   0.000 (  0.676)
+Test: [ 148/781]  Time: 0.205 (0.266)  Loss:   6.772 ( 6.918)  Acc@1:   0.000 (  0.115)  Acc@5:   0.000 (  0.671)
+Test: [ 149/781]  Time: 0.202 (0.265)  Loss:   6.969 ( 6.918)  Acc@1:   0.000 (  0.115)  Acc@5:   0.000 (  0.667)
+Test: [ 150/781]  Time: 0.197 (0.265)  Loss:   6.877 ( 6.918)  Acc@1:   0.000 (  0.114)  Acc@5:   0.000 (  0.662)
+Test: [ 151/781]  Time: 0.283 (0.265)  Loss:   6.933 ( 6.918)  Acc@1:   0.000 (  0.113)  Acc@5:   0.000 (  0.658)
+Test: [ 152/781]  Time: 0.218 (0.265)  Loss:   6.916 ( 6.918)  Acc@1:   0.000 (  0.112)  Acc@5:   0.000 (  0.654)
+Test: [ 153/781]  Time: 0.201 (0.264)  Loss:   6.946 ( 6.918)  Acc@1:   0.000 (  0.112)  Acc@5:   0.000 (  0.649)
+Test: [ 154/781]  Time: 0.202 (0.264)  Loss:   6.869 ( 6.918)  Acc@1:   0.000 (  0.111)  Acc@5:   0.000 (  0.645)
+Test: [ 155/781]  Time: 0.380 (0.265)  Loss:   7.038 ( 6.918)  Acc@1:   0.000 (  0.110)  Acc@5:   0.000 (  0.641)
+Test: [ 156/781]  Time: 0.220 (0.264)  Loss:   7.030 ( 6.919)  Acc@1:   0.000 (  0.109)  Acc@5:   0.000 (  0.637)
+Test: [ 157/781]  Time: 0.266 (0.264)  Loss:   7.120 ( 6.920)  Acc@1:   0.000 (  0.109)  Acc@5:   0.000 (  0.633)
+Test: [ 158/781]  Time: 0.214 (0.264)  Loss:   6.980 ( 6.921)  Acc@1:   0.000 (  0.108)  Acc@5:   0.000 (  0.629)
+Test: [ 159/781]  Time: 0.301 (0.264)  Loss:   6.975 ( 6.921)  Acc@1:   0.000 (  0.107)  Acc@5:   0.000 (  0.625)
+Test: [ 160/781]  Time: 0.212 (0.264)  Loss:   6.804 ( 6.920)  Acc@1:   0.000 (  0.107)  Acc@5:   0.000 (  0.621)
+Test: [ 161/781]  Time: 0.278 (0.264)  Loss:   6.823 ( 6.920)  Acc@1:   0.000 (  0.106)  Acc@5:   0.000 (  0.617)
+Test: [ 162/781]  Time: 0.214 (0.264)  Loss:   6.940 ( 6.920)  Acc@1:   0.000 (  0.105)  Acc@5:   0.000 (  0.613)
+Test: [ 163/781]  Time: 0.288 (0.264)  Loss:   6.910 ( 6.920)  Acc@1:   0.000 (  0.105)  Acc@5:   0.000 (  0.610)
+Test: [ 164/781]  Time: 0.131 (0.263)  Loss:   6.910 ( 6.920)  Acc@1:   0.000 (  0.104)  Acc@5:   0.000 (  0.606)
+Test: [ 165/781]  Time: 0.179 (0.263)  Loss:   6.919 ( 6.920)  Acc@1:   0.000 (  0.104)  Acc@5:   0.000 (  0.602)
+Test: [ 166/781]  Time: 0.211 (0.262)  Loss:   6.923 ( 6.920)  Acc@1:   0.000 (  0.103)  Acc@5:   0.000 (  0.599)
+Test: [ 167/781]  Time: 0.305 (0.263)  Loss:   7.072 ( 6.921)  Acc@1:   0.000 (  0.102)  Acc@5:   0.000 (  0.595)
+Test: [ 168/781]  Time: 0.200 (0.262)  Loss:   6.903 ( 6.921)  Acc@1:   0.000 (  0.102)  Acc@5:   0.000 (  0.592)
+Test: [ 169/781]  Time: 0.268 (0.262)  Loss:   6.939 ( 6.921)  Acc@1:   0.000 (  0.101)  Acc@5:   0.000 (  0.588)
+Test: [ 170/781]  Time: 0.202 (0.262)  Loss:   6.980 ( 6.921)  Acc@1:   0.000 (  0.101)  Acc@5:   0.000 (  0.585)
+Test: [ 171/781]  Time: 0.223 (0.262)  Loss:   6.825 ( 6.921)  Acc@1:   0.000 (  0.100)  Acc@5:   0.000 (  0.581)
+Test: [ 172/781]  Time: 0.202 (0.261)  Loss:   6.768 ( 6.920)  Acc@1:   0.000 (  0.099)  Acc@5:   0.000 (  0.578)
+Test: [ 173/781]  Time: 0.204 (0.261)  Loss:   6.904 ( 6.920)  Acc@1:   0.000 (  0.099)  Acc@5:   0.000 (  0.575)
+Test: [ 174/781]  Time: 0.265 (0.261)  Loss:   7.037 ( 6.920)  Acc@1:   0.000 (  0.098)  Acc@5:   0.000 (  0.571)
+Test: [ 175/781]  Time: 0.217 (0.261)  Loss:   6.992 ( 6.921)  Acc@1:   0.000 (  0.098)  Acc@5:   0.000 (  0.568)
+Test: [ 176/781]  Time: 0.199 (0.260)  Loss:   6.918 ( 6.921)  Acc@1:   0.000 (  0.097)  Acc@5:   0.000 (  0.565)
+Test: [ 177/781]  Time: 0.212 (0.260)  Loss:   6.896 ( 6.921)  Acc@1:   0.000 (  0.097)  Acc@5:   0.000 (  0.562)
+Test: [ 178/781]  Time: 0.204 (0.260)  Loss:   6.940 ( 6.921)  Acc@1:   0.000 (  0.096)  Acc@5:   0.000 (  0.559)
+Test: [ 179/781]  Time: 0.278 (0.260)  Loss:   6.983 ( 6.921)  Acc@1:   0.000 (  0.095)  Acc@5:   0.000 (  0.556)
+Test: [ 180/781]  Time: 0.212 (0.260)  Loss:   7.021 ( 6.922)  Acc@1:   0.000 (  0.095)  Acc@5:   0.000 (  0.552)
+Test: [ 181/781]  Time: 0.287 (0.260)  Loss:   6.867 ( 6.921)  Acc@1:   0.000 (  0.094)  Acc@5:   0.000 (  0.549)
+Test: [ 182/781]  Time: 0.207 (0.260)  Loss:   6.955 ( 6.921)  Acc@1:   0.000 (  0.094)  Acc@5:   0.000 (  0.546)
+Test: [ 183/781]  Time: 0.214 (0.259)  Loss:   6.972 ( 6.922)  Acc@1:   0.000 (  0.093)  Acc@5:   0.000 (  0.543)
+Test: [ 184/781]  Time: 0.274 (0.259)  Loss:   6.857 ( 6.921)  Acc@1:   0.000 (  0.093)  Acc@5:   0.000 (  0.541)
+Test: [ 185/781]  Time: 0.216 (0.259)  Loss:   6.884 ( 6.921)  Acc@1:   0.000 (  0.092)  Acc@5:   0.000 (  0.538)
+Test: [ 186/781]  Time: 0.214 (0.259)  Loss:   6.835 ( 6.921)  Acc@1:   0.000 (  0.092)  Acc@5:   0.000 (  0.535)
+Test: [ 187/781]  Time: 0.267 (0.259)  Loss:   6.949 ( 6.921)  Acc@1:   0.000 (  0.091)  Acc@5:   0.000 (  0.532)
+Test: [ 188/781]  Time: 0.203 (0.259)  Loss:   7.079 ( 6.922)  Acc@1:   0.000 (  0.091)  Acc@5:   0.000 (  0.529)
+Test: [ 189/781]  Time: 0.221 (0.258)  Loss:   6.844 ( 6.921)  Acc@1:   0.000 (  0.090)  Acc@5:   1.562 (  0.535)
+Test: [ 190/781]  Time: 0.210 (0.258)  Loss:   6.928 ( 6.921)  Acc@1:   0.000 (  0.090)  Acc@5:   0.000 (  0.532)
+Test: [ 191/781]  Time: 0.281 (0.258)  Loss:   7.024 ( 6.922)  Acc@1:   0.000 (  0.090)  Acc@5:   0.000 (  0.529)
+Test: [ 192/781]  Time: 0.293 (0.259)  Loss:   6.716 ( 6.921)  Acc@1:   4.688 (  0.113)  Acc@5:  20.312 (  0.631)
+Test: [ 193/781]  Time: 0.215 (0.258)  Loss:   6.819 ( 6.920)  Acc@1:   0.000 (  0.113)  Acc@5:   1.562 (  0.636)
+Test: [ 194/781]  Time: 0.202 (0.258)  Loss:   6.867 ( 6.920)  Acc@1:   0.000 (  0.112)  Acc@5:   0.000 (  0.633)
+Test: [ 195/781]  Time: 0.281 (0.258)  Loss:   6.695 ( 6.919)  Acc@1:   0.000 (  0.112)  Acc@5:   1.562 (  0.638)
+Test: [ 196/781]  Time: 0.203 (0.258)  Loss:   6.954 ( 6.919)  Acc@1:   0.000 (  0.111)  Acc@5:   0.000 (  0.635)
+Test: [ 197/781]  Time: 0.122 (0.257)  Loss:   6.980 ( 6.919)  Acc@1:   0.000 (  0.110)  Acc@5:   1.562 (  0.639)
+Test: [ 198/781]  Time: 0.103 (0.256)  Loss:   6.952 ( 6.919)  Acc@1:   0.000 (  0.110)  Acc@5:   0.000 (  0.636)
+Test: [ 199/781]  Time: 0.181 (0.256)  Loss:   6.709 ( 6.918)  Acc@1:   0.000 (  0.109)  Acc@5:   1.562 (  0.641)
+Test: [ 200/781]  Time: 0.217 (0.256)  Loss:   7.015 ( 6.919)  Acc@1:   0.000 (  0.109)  Acc@5:   0.000 (  0.637)
+Test: [ 201/781]  Time: 0.284 (0.256)  Loss:   6.875 ( 6.919)  Acc@1:   1.562 (  0.116)  Acc@5:   1.562 (  0.642)
+Test: [ 202/781]  Time: 0.216 (0.256)  Loss:   6.983 ( 6.919)  Acc@1:   0.000 (  0.115)  Acc@5:   0.000 (  0.639)
+Test: [ 203/781]  Time: 0.289 (0.256)  Loss:   6.928 ( 6.919)  Acc@1:   0.000 (  0.115)  Acc@5:   0.000 (  0.636)
+Test: [ 204/781]  Time: 0.210 (0.256)  Loss:   6.936 ( 6.919)  Acc@1:   0.000 (  0.114)  Acc@5:   0.000 (  0.633)
+Test: [ 205/781]  Time: 0.271 (0.256)  Loss:   6.899 ( 6.919)  Acc@1:   0.000 (  0.114)  Acc@5:   0.000 (  0.630)
+Test: [ 206/781]  Time: 0.208 (0.256)  Loss:   6.909 ( 6.919)  Acc@1:   0.000 (  0.113)  Acc@5:   0.000 (  0.627)
+Test: [ 207/781]  Time: 0.219 (0.255)  Loss:   6.895 ( 6.919)  Acc@1:   0.000 (  0.113)  Acc@5:   0.000 (  0.623)
+Test: [ 208/781]  Time: 0.293 (0.256)  Loss:   6.987 ( 6.919)  Acc@1:   0.000 (  0.112)  Acc@5:   0.000 (  0.621)
+Test: [ 209/781]  Time: 0.276 (0.256)  Loss:   6.842 ( 6.919)  Acc@1:   0.000 (  0.112)  Acc@5:   0.000 (  0.618)
+Test: [ 210/781]  Time: 0.212 (0.255)  Loss:   6.953 ( 6.919)  Acc@1:   0.000 (  0.111)  Acc@5:   0.000 (  0.615)
+Test: [ 211/781]  Time: 0.912 (0.259)  Loss:   6.870 ( 6.919)  Acc@1:   0.000 (  0.111)  Acc@5:   0.000 (  0.612)
+Test: [ 212/781]  Time: 0.189 (0.258)  Loss:   6.960 ( 6.919)  Acc@1:   0.000 (  0.110)  Acc@5:   0.000 (  0.609)
+Test: [ 213/781]  Time: 0.126 (0.258)  Loss:   6.851 ( 6.919)  Acc@1:   0.000 (  0.110)  Acc@5:   0.000 (  0.606)
+Test: [ 214/781]  Time: 0.197 (0.257)  Loss:   7.074 ( 6.919)  Acc@1:   0.000 (  0.109)  Acc@5:   0.000 (  0.603)
+Test: [ 215/781]  Time: 0.275 (0.257)  Loss:   6.919 ( 6.919)  Acc@1:   0.000 (  0.109)  Acc@5:   0.000 (  0.600)
+Test: [ 216/781]  Time: 0.222 (0.257)  Loss:   6.789 ( 6.919)  Acc@1:   0.000 (  0.108)  Acc@5:   0.000 (  0.598)
+Test: [ 217/781]  Time: 0.274 (0.257)  Loss:   6.919 ( 6.919)  Acc@1:   0.000 (  0.108)  Acc@5:   0.000 (  0.595)
+Test: [ 218/781]  Time: 0.210 (0.257)  Loss:   6.830 ( 6.918)  Acc@1:   0.000 (  0.107)  Acc@5:   0.000 (  0.592)
+Test: [ 219/781]  Time: 1.029 (0.261)  Loss:   6.891 ( 6.918)  Acc@1:   0.000 (  0.107)  Acc@5:   0.000 (  0.589)
+Test: [ 220/781]  Time: 0.175 (0.260)  Loss:   6.997 ( 6.919)  Acc@1:   0.000 (  0.106)  Acc@5:   0.000 (  0.587)
+Test: [ 221/781]  Time: 0.184 (0.260)  Loss:   6.956 ( 6.919)  Acc@1:   0.000 (  0.106)  Acc@5:   0.000 (  0.584)
+Test: [ 222/781]  Time: 0.197 (0.260)  Loss:   7.000 ( 6.919)  Acc@1:   0.000 (  0.105)  Acc@5:   0.000 (  0.582)
+Test: [ 223/781]  Time: 0.228 (0.259)  Loss:   6.939 ( 6.919)  Acc@1:   0.000 (  0.105)  Acc@5:   0.000 (  0.579)
+Test: [ 224/781]  Time: 0.284 (0.260)  Loss:   6.875 ( 6.919)  Acc@1:   0.000 (  0.104)  Acc@5:   0.000 (  0.576)
+Test: [ 225/781]  Time: 0.137 (0.259)  Loss:   6.879 ( 6.919)  Acc@1:   0.000 (  0.104)  Acc@5:   0.000 (  0.574)
+Test: [ 226/781]  Time: 0.166 (0.259)  Loss:   6.954 ( 6.919)  Acc@1:   0.000 (  0.103)  Acc@5:   0.000 (  0.571)
+Test: [ 227/781]  Time: 0.217 (0.258)  Loss:   6.903 ( 6.919)  Acc@1:   0.000 (  0.103)  Acc@5:   0.000 (  0.569)
+Test: [ 228/781]  Time: 0.596 (0.260)  Loss:   6.986 ( 6.919)  Acc@1:   0.000 (  0.102)  Acc@5:   0.000 (  0.566)
+Test: [ 229/781]  Time: 0.202 (0.260)  Loss:   6.984 ( 6.919)  Acc@1:   0.000 (  0.102)  Acc@5:   0.000 (  0.564)
+Test: [ 230/781]  Time: 0.198 (0.259)  Loss:   7.001 ( 6.920)  Acc@1:   0.000 (  0.101)  Acc@5:   0.000 (  0.561)
+Test: [ 231/781]  Time: 0.201 (0.259)  Loss:   6.873 ( 6.920)  Acc@1:   0.000 (  0.101)  Acc@5:   0.000 (  0.559)
+Test: [ 232/781]  Time: 1.021 (0.262)  Loss:   6.956 ( 6.920)  Acc@1:   0.000 (  0.101)  Acc@5:   0.000 (  0.557)
+Test: [ 233/781]  Time: 0.163 (0.262)  Loss:   7.068 ( 6.920)  Acc@1:   0.000 (  0.100)  Acc@5:   0.000 (  0.554)
+Test: [ 234/781]  Time: 0.128 (0.261)  Loss:   7.068 ( 6.921)  Acc@1:   0.000 (  0.100)  Acc@5:   0.000 (  0.552)
+Test: [ 235/781]  Time: 0.192 (0.261)  Loss:   6.897 ( 6.921)  Acc@1:   0.000 (  0.099)  Acc@5:   0.000 (  0.550)
+Test: [ 236/781]  Time: 0.276 (0.261)  Loss:   7.021 ( 6.921)  Acc@1:   0.000 (  0.099)  Acc@5:   0.000 (  0.547)
+Test: [ 237/781]  Time: 0.205 (0.261)  Loss:   6.985 ( 6.922)  Acc@1:   0.000 (  0.098)  Acc@5:   1.562 (  0.551)
+Test: [ 238/781]  Time: 0.215 (0.261)  Loss:   6.841 ( 6.921)  Acc@1:   1.562 (  0.105)  Acc@5:   1.562 (  0.556)
+Test: [ 239/781]  Time: 0.270 (0.261)  Loss:   7.031 ( 6.922)  Acc@1:   0.000 (  0.104)  Acc@5:   0.000 (  0.553)
+Test: [ 240/781]  Time: 0.230 (0.261)  Loss:   6.777 ( 6.921)  Acc@1:   0.000 (  0.104)  Acc@5:   3.125 (  0.564)
+Test: [ 241/781]  Time: 0.270 (0.261)  Loss:   6.905 ( 6.921)  Acc@1:   0.000 (  0.103)  Acc@5:   0.000 (  0.562)
+Test: [ 242/781]  Time: 0.210 (0.260)  Loss:   7.029 ( 6.922)  Acc@1:   0.000 (  0.103)  Acc@5:   0.000 (  0.559)
+Test: [ 243/781]  Time: 0.219 (0.260)  Loss:   6.905 ( 6.921)  Acc@1:   0.000 (  0.102)  Acc@5:   0.000 (  0.557)
+Test: [ 244/781]  Time: 0.698 (0.262)  Loss:   6.926 ( 6.921)  Acc@1:   0.000 (  0.102)  Acc@5:   0.000 (  0.555)
+Test: [ 245/781]  Time: 0.194 (0.262)  Loss:   6.854 ( 6.921)  Acc@1:   0.000 (  0.102)  Acc@5:   1.562 (  0.559)
+Test: [ 246/781]  Time: 0.179 (0.261)  Loss:   6.868 ( 6.921)  Acc@1:   0.000 (  0.101)  Acc@5:   3.125 (  0.569)
+Test: [ 247/781]  Time: 0.223 (0.261)  Loss:   7.078 ( 6.922)  Acc@1:   0.000 (  0.101)  Acc@5:   0.000 (  0.567)
+Test: [ 248/781]  Time: 0.285 (0.261)  Loss:   6.991 ( 6.922)  Acc@1:   0.000 (  0.100)  Acc@5:   0.000 (  0.565)
+Test: [ 249/781]  Time: 0.213 (0.261)  Loss:   6.817 ( 6.922)  Acc@1:   0.000 (  0.100)  Acc@5:   0.000 (  0.562)
+Test: [ 250/781]  Time: 0.209 (0.261)  Loss:   6.855 ( 6.921)  Acc@1:   0.000 (  0.100)  Acc@5:   0.000 (  0.560)
+Test: [ 251/781]  Time: 0.269 (0.261)  Loss:   6.921 ( 6.921)  Acc@1:   0.000 (  0.099)  Acc@5:   0.000 (  0.558)
+Test: [ 252/781]  Time: 0.138 (0.261)  Loss:   7.030 ( 6.922)  Acc@1:   0.000 (  0.099)  Acc@5:   0.000 (  0.556)
+Test: [ 253/781]  Time: 0.110 (0.260)  Loss:   6.944 ( 6.922)  Acc@1:   0.000 (  0.098)  Acc@5:   1.562 (  0.560)
+Test: [ 254/781]  Time: 0.152 (0.260)  Loss:   6.997 ( 6.922)  Acc@1:   0.000 (  0.098)  Acc@5:   0.000 (  0.558)
+Test: [ 255/781]  Time: 1.223 (0.263)  Loss:   6.918 ( 6.922)  Acc@1:   0.000 (  0.098)  Acc@5:   0.000 (  0.555)
+Test: [ 256/781]  Time: 0.195 (0.263)  Loss:   6.957 ( 6.922)  Acc@1:   0.000 (  0.097)  Acc@5:   0.000 (  0.553)
+Test: [ 257/781]  Time: 0.118 (0.262)  Loss:   6.972 ( 6.922)  Acc@1:   0.000 (  0.097)  Acc@5:   0.000 (  0.551)
+Test: [ 258/781]  Time: 0.197 (0.262)  Loss:   6.943 ( 6.922)  Acc@1:   0.000 (  0.097)  Acc@5:   0.000 (  0.549)
+Test: [ 259/781]  Time: 0.268 (0.262)  Loss:   6.891 ( 6.922)  Acc@1:   0.000 (  0.096)  Acc@5:   0.000 (  0.547)
+Test: [ 260/781]  Time: 0.229 (0.262)  Loss:   6.954 ( 6.922)  Acc@1:   0.000 (  0.096)  Acc@5:   0.000 (  0.545)
+Test: [ 261/781]  Time: 0.200 (0.262)  Loss:   6.829 ( 6.922)  Acc@1:   0.000 (  0.095)  Acc@5:   0.000 (  0.543)
+Test: [ 262/781]  Time: 0.201 (0.262)  Loss:   6.977 ( 6.922)  Acc@1:   0.000 (  0.095)  Acc@5:   0.000 (  0.541)
+Test: [ 263/781]  Time: 0.295 (0.262)  Loss:   6.946 ( 6.922)  Acc@1:   0.000 (  0.095)  Acc@5:   0.000 (  0.539)
+Test: [ 264/781]  Time: 0.208 (0.262)  Loss:   6.962 ( 6.923)  Acc@1:   0.000 (  0.094)  Acc@5:   0.000 (  0.537)
+Test: [ 265/781]  Time: 0.199 (0.261)  Loss:   6.887 ( 6.922)  Acc@1:   0.000 (  0.094)  Acc@5:   0.000 (  0.535)
+Test: [ 266/781]  Time: 0.276 (0.261)  Loss:   6.936 ( 6.922)  Acc@1:   0.000 (  0.094)  Acc@5:   0.000 (  0.533)
+Test: [ 267/781]  Time: 0.224 (0.261)  Loss:   6.903 ( 6.922)  Acc@1:   0.000 (  0.093)  Acc@5:   0.000 (  0.531)
+Test: [ 268/781]  Time: 0.268 (0.261)  Loss:   7.049 ( 6.923)  Acc@1:   0.000 (  0.093)  Acc@5:   0.000 (  0.529)
+Test: [ 269/781]  Time: 0.207 (0.261)  Loss:   6.926 ( 6.923)  Acc@1:   0.000 (  0.093)  Acc@5:   0.000 (  0.527)
+Test: [ 270/781]  Time: 0.213 (0.261)  Loss:   6.918 ( 6.923)  Acc@1:   0.000 (  0.092)  Acc@5:   0.000 (  0.525)
+Test: [ 271/781]  Time: 0.213 (0.261)  Loss:   6.862 ( 6.923)  Acc@1:   0.000 (  0.092)  Acc@5:   0.000 (  0.523)
+Test: [ 272/781]  Time: 0.267 (0.261)  Loss:   6.879 ( 6.922)  Acc@1:   0.000 (  0.092)  Acc@5:   0.000 (  0.521)
+Test: [ 273/781]  Time: 0.212 (0.261)  Loss:   6.896 ( 6.922)  Acc@1:   0.000 (  0.091)  Acc@5:   0.000 (  0.519)
+Test: [ 274/781]  Time: 0.208 (0.260)  Loss:   7.017 ( 6.923)  Acc@1:   0.000 (  0.091)  Acc@5:   0.000 (  0.517)
+Test: [ 275/781]  Time: 0.282 (0.260)  Loss:   7.022 ( 6.923)  Acc@1:   0.000 (  0.091)  Acc@5:   0.000 (  0.515)
+Test: [ 276/781]  Time: 0.211 (0.260)  Loss:   6.761 ( 6.922)  Acc@1:   1.562 (  0.096)  Acc@5:   1.562 (  0.519)
+Test: [ 277/781]  Time: 0.217 (0.260)  Loss:   6.884 ( 6.922)  Acc@1:   0.000 (  0.096)  Acc@5:   3.125 (  0.528)
+Test: [ 278/781]  Time: 0.203 (0.260)  Loss:   6.928 ( 6.922)  Acc@1:   0.000 (  0.095)  Acc@5:   0.000 (  0.526)
+Test: [ 279/781]  Time: 0.281 (0.260)  Loss:   6.963 ( 6.923)  Acc@1:   0.000 (  0.095)  Acc@5:   0.000 (  0.525)
+Test: [ 280/781]  Time: 0.294 (0.260)  Loss:   6.961 ( 6.923)  Acc@1:   0.000 (  0.095)  Acc@5:   0.000 (  0.523)
+Test: [ 281/781]  Time: 0.213 (0.260)  Loss:   6.966 ( 6.923)  Acc@1:   0.000 (  0.094)  Acc@5:   0.000 (  0.521)
+Test: [ 282/781]  Time: 0.125 (0.259)  Loss:   6.800 ( 6.922)  Acc@1:   0.000 (  0.094)  Acc@5:   0.000 (  0.519)
+Test: [ 283/781]  Time: 0.187 (0.259)  Loss:   6.955 ( 6.922)  Acc@1:   0.000 (  0.094)  Acc@5:   0.000 (  0.517)
+Test: [ 284/781]  Time: 0.193 (0.259)  Loss:   6.964 ( 6.923)  Acc@1:   0.000 (  0.093)  Acc@5:   0.000 (  0.515)
+Test: [ 285/781]  Time: 0.205 (0.259)  Loss:   6.809 ( 6.922)  Acc@1:   0.000 (  0.093)  Acc@5:   0.000 (  0.514)
+Test: [ 286/781]  Time: 0.286 (0.259)  Loss:   7.006 ( 6.923)  Acc@1:   0.000 (  0.093)  Acc@5:   0.000 (  0.512)
+Test: [ 287/781]  Time: 0.294 (0.259)  Loss:   6.806 ( 6.922)  Acc@1:   0.000 (  0.092)  Acc@5:   0.000 (  0.510)
+Test: [ 288/781]  Time: 0.194 (0.259)  Loss:   6.934 ( 6.922)  Acc@1:   0.000 (  0.092)  Acc@5:   0.000 (  0.508)
+Test: [ 289/781]  Time: 0.219 (0.259)  Loss:   6.824 ( 6.922)  Acc@1:   0.000 (  0.092)  Acc@5:   0.000 (  0.506)
+Test: [ 290/781]  Time: 0.296 (0.259)  Loss:   6.940 ( 6.922)  Acc@1:   0.000 (  0.091)  Acc@5:   0.000 (  0.505)
+Test: [ 291/781]  Time: 0.502 (0.260)  Loss:   6.962 ( 6.922)  Acc@1:   0.000 (  0.091)  Acc@5:   0.000 (  0.503)
+Test: [ 292/781]  Time: 0.206 (0.259)  Loss:   6.857 ( 6.922)  Acc@1:   0.000 (  0.091)  Acc@5:   0.000 (  0.501)
+Test: [ 293/781]  Time: 0.286 (0.260)  Loss:   6.886 ( 6.922)  Acc@1:   0.000 (  0.090)  Acc@5:   0.000 (  0.500)
+Test: [ 294/781]  Time: 0.289 (0.260)  Loss:   6.941 ( 6.922)  Acc@1:   0.000 (  0.090)  Acc@5:   0.000 (  0.498)
+Test: [ 295/781]  Time: 0.837 (0.262)  Loss:   6.783 ( 6.921)  Acc@1:   0.000 (  0.090)  Acc@5:   0.000 (  0.496)
+Test: [ 296/781]  Time: 0.180 (0.261)  Loss:   6.923 ( 6.921)  Acc@1:   0.000 (  0.089)  Acc@5:   0.000 (  0.495)
+Test: [ 297/781]  Time: 0.216 (0.261)  Loss:   6.912 ( 6.921)  Acc@1:   0.000 (  0.089)  Acc@5:   0.000 (  0.493)
+Test: [ 298/781]  Time: 0.287 (0.261)  Loss:   7.017 ( 6.922)  Acc@1:   0.000 (  0.089)  Acc@5:   0.000 (  0.491)
+Test: [ 299/781]  Time: 0.282 (0.261)  Loss:   6.972 ( 6.922)  Acc@1:   0.000 (  0.089)  Acc@5:   0.000 (  0.490)
+Test: [ 300/781]  Time: 0.506 (0.262)  Loss:   6.829 ( 6.921)  Acc@1:   0.000 (  0.088)  Acc@5:   0.000 (  0.488)
+Test: [ 301/781]  Time: 0.205 (0.262)  Loss:   6.815 ( 6.921)  Acc@1:   0.000 (  0.088)  Acc@5:   0.000 (  0.486)
+Test: [ 302/781]  Time: 0.204 (0.262)  Loss:   6.931 ( 6.921)  Acc@1:   0.000 (  0.088)  Acc@5:   0.000 (  0.485)
+Test: [ 303/781]  Time: 0.198 (0.262)  Loss:   7.026 ( 6.921)  Acc@1:   0.000 (  0.087)  Acc@5:   0.000 (  0.483)
+Test: [ 304/781]  Time: 0.210 (0.261)  Loss:   7.068 ( 6.922)  Acc@1:   0.000 (  0.087)  Acc@5:   0.000 (  0.482)
+Test: [ 305/781]  Time: 0.292 (0.261)  Loss:   6.980 ( 6.922)  Acc@1:   0.000 (  0.087)  Acc@5:   0.000 (  0.480)
+Test: [ 306/781]  Time: 0.201 (0.261)  Loss:   6.973 ( 6.922)  Acc@1:   0.000 (  0.087)  Acc@5:   0.000 (  0.478)
+Test: [ 307/781]  Time: 0.211 (0.261)  Loss:   7.040 ( 6.923)  Acc@1:   0.000 (  0.086)  Acc@5:   0.000 (  0.477)
+Test: [ 308/781]  Time: 0.306 (0.261)  Loss:   7.009 ( 6.923)  Acc@1:   0.000 (  0.086)  Acc@5:   0.000 (  0.475)
+Test: [ 309/781]  Time: 0.192 (0.261)  Loss:   6.956 ( 6.923)  Acc@1:   0.000 (  0.086)  Acc@5:   0.000 (  0.474)
+Test: [ 310/781]  Time: 0.171 (0.261)  Loss:   6.858 ( 6.923)  Acc@1:   0.000 (  0.085)  Acc@5:   0.000 (  0.472)
+Test: [ 311/781]  Time: 0.200 (0.261)  Loss:   6.931 ( 6.923)  Acc@1:   0.000 (  0.085)  Acc@5:   0.000 (  0.471)
+Test: [ 312/781]  Time: 0.229 (0.260)  Loss:   6.875 ( 6.923)  Acc@1:   0.000 (  0.085)  Acc@5:   0.000 (  0.469)
+Test: [ 313/781]  Time: 0.269 (0.260)  Loss:   7.007 ( 6.923)  Acc@1:   0.000 (  0.085)  Acc@5:   0.000 (  0.468)
+Test: [ 314/781]  Time: 0.228 (0.260)  Loss:   6.946 ( 6.923)  Acc@1:   0.000 (  0.084)  Acc@5:   0.000 (  0.466)
+Test: [ 315/781]  Time: 0.273 (0.260)  Loss:   6.913 ( 6.923)  Acc@1:   0.000 (  0.084)  Acc@5:   0.000 (  0.465)
+Test: [ 316/781]  Time: 0.224 (0.260)  Loss:   7.027 ( 6.923)  Acc@1:   0.000 (  0.084)  Acc@5:   0.000 (  0.463)
+Test: [ 317/781]  Time: 0.208 (0.260)  Loss:   6.896 ( 6.923)  Acc@1:   0.000 (  0.084)  Acc@5:   0.000 (  0.462)
+Test: [ 318/781]  Time: 0.279 (0.260)  Loss:   6.919 ( 6.923)  Acc@1:   0.000 (  0.083)  Acc@5:   0.000 (  0.460)
+Test: [ 319/781]  Time: 0.215 (0.260)  Loss:   6.791 ( 6.923)  Acc@1:   0.000 (  0.083)  Acc@5:   0.000 (  0.459)
+Test: [ 320/781]  Time: 0.393 (0.260)  Loss:   6.918 ( 6.923)  Acc@1:   0.000 (  0.083)  Acc@5:   0.000 (  0.458)
+Test: [ 321/781]  Time: 0.291 (0.261)  Loss:   6.969 ( 6.923)  Acc@1:   0.000 (  0.082)  Acc@5:   0.000 (  0.456)
+Test: [ 322/781]  Time: 0.193 (0.260)  Loss:   6.923 ( 6.923)  Acc@1:   0.000 (  0.082)  Acc@5:   0.000 (  0.455)
+Test: [ 323/781]  Time: 0.200 (0.260)  Loss:   6.900 ( 6.923)  Acc@1:   0.000 (  0.082)  Acc@5:   0.000 (  0.453)
+Test: [ 324/781]  Time: 0.226 (0.260)  Loss:   6.928 ( 6.923)  Acc@1:   0.000 (  0.082)  Acc@5:   0.000 (  0.452)
+Test: [ 325/781]  Time: 0.202 (0.260)  Loss:   7.031 ( 6.923)  Acc@1:   0.000 (  0.081)  Acc@5:   0.000 (  0.451)
+Test: [ 326/781]  Time: 0.286 (0.260)  Loss:   7.027 ( 6.924)  Acc@1:   0.000 (  0.081)  Acc@5:   0.000 (  0.449)
+Test: [ 327/781]  Time: 0.210 (0.260)  Loss:   7.024 ( 6.924)  Acc@1:   0.000 (  0.081)  Acc@5:   0.000 (  0.448)
+Test: [ 328/781]  Time: 0.483 (0.260)  Loss:   6.837 ( 6.924)  Acc@1:   0.000 (  0.081)  Acc@5:   0.000 (  0.446)
+Test: [ 329/781]  Time: 0.207 (0.260)  Loss:   6.874 ( 6.923)  Acc@1:   0.000 (  0.080)  Acc@5:   0.000 (  0.445)
+Test: [ 330/781]  Time: 0.199 (0.260)  Loss:   6.797 ( 6.923)  Acc@1:   0.000 (  0.080)  Acc@5:   0.000 (  0.444)
+Test: [ 331/781]  Time: 0.211 (0.260)  Loss:   6.972 ( 6.923)  Acc@1:   0.000 (  0.080)  Acc@5:   0.000 (  0.442)
+Test: [ 332/781]  Time: 0.289 (0.260)  Loss:   6.978 ( 6.923)  Acc@1:   0.000 (  0.080)  Acc@5:   0.000 (  0.441)
+Test: [ 333/781]  Time: 0.213 (0.260)  Loss:   6.956 ( 6.923)  Acc@1:   0.000 (  0.080)  Acc@5:   0.000 (  0.440)
+Test: [ 334/781]  Time: 0.205 (0.260)  Loss:   7.010 ( 6.924)  Acc@1:   0.000 (  0.079)  Acc@5:   1.562 (  0.443)
+Test: [ 335/781]  Time: 0.273 (0.260)  Loss:   6.953 ( 6.924)  Acc@1:   0.000 (  0.079)  Acc@5:   0.000 (  0.442)
+Test: [ 336/781]  Time: 0.225 (0.260)  Loss:   7.055 ( 6.924)  Acc@1:   0.000 (  0.079)  Acc@5:   0.000 (  0.440)
+Test: [ 337/781]  Time: 0.285 (0.260)  Loss:   7.199 ( 6.925)  Acc@1:   0.000 (  0.079)  Acc@5:   0.000 (  0.439)
+Test: [ 338/781]  Time: 0.208 (0.260)  Loss:   6.968 ( 6.925)  Acc@1:   0.000 (  0.078)  Acc@5:   0.000 (  0.438)
+Test: [ 339/781]  Time: 0.208 (0.259)  Loss:   6.922 ( 6.925)  Acc@1:   0.000 (  0.078)  Acc@5:   0.000 (  0.437)
+Test: [ 340/781]  Time: 0.291 (0.260)  Loss:   7.019 ( 6.925)  Acc@1:   0.000 (  0.078)  Acc@5:   0.000 (  0.435)
+Test: [ 341/781]  Time: 0.121 (0.259)  Loss:   7.039 ( 6.926)  Acc@1:   0.000 (  0.078)  Acc@5:   0.000 (  0.434)
+Test: [ 342/781]  Time: 0.124 (0.259)  Loss:   6.919 ( 6.926)  Acc@1:   0.000 (  0.077)  Acc@5:   0.000 (  0.433)
+Test: [ 343/781]  Time: 0.159 (0.258)  Loss:   6.923 ( 6.926)  Acc@1:   0.000 (  0.077)  Acc@5:   0.000 (  0.432)
+Test: [ 344/781]  Time: 0.273 (0.259)  Loss:   7.055 ( 6.926)  Acc@1:   0.000 (  0.077)  Acc@5:   0.000 (  0.430)
+Test: [ 345/781]  Time: 0.217 (0.258)  Loss:   7.123 ( 6.927)  Acc@1:   0.000 (  0.077)  Acc@5:   0.000 (  0.429)
+Test: [ 346/781]  Time: 0.210 (0.258)  Loss:   6.799 ( 6.926)  Acc@1:   0.000 (  0.077)  Acc@5:   0.000 (  0.428)
+Test: [ 347/781]  Time: 0.205 (0.258)  Loss:   6.946 ( 6.926)  Acc@1:   0.000 (  0.076)  Acc@5:   0.000 (  0.427)
+Test: [ 348/781]  Time: 0.286 (0.258)  Loss:   7.057 ( 6.927)  Acc@1:   0.000 (  0.076)  Acc@5:   0.000 (  0.425)
+Test: [ 349/781]  Time: 0.211 (0.258)  Loss:   6.927 ( 6.927)  Acc@1:   0.000 (  0.076)  Acc@5:   0.000 (  0.424)
+Test: [ 350/781]  Time: 0.272 (0.258)  Loss:   6.848 ( 6.927)  Acc@1:   0.000 (  0.076)  Acc@5:   0.000 (  0.423)
+Test: [ 351/781]  Time: 0.235 (0.258)  Loss:   6.870 ( 6.926)  Acc@1:   0.000 (  0.075)  Acc@5:   0.000 (  0.422)
+Test: [ 352/781]  Time: 0.281 (0.258)  Loss:   6.975 ( 6.927)  Acc@1:   0.000 (  0.075)  Acc@5:   0.000 (  0.421)
+Test: [ 353/781]  Time: 0.212 (0.258)  Loss:   6.864 ( 6.926)  Acc@1:   0.000 (  0.075)  Acc@5:   0.000 (  0.419)
+Test: [ 354/781]  Time: 0.200 (0.258)  Loss:   6.903 ( 6.926)  Acc@1:   0.000 (  0.075)  Acc@5:   0.000 (  0.418)
+Test: [ 355/781]  Time: 0.393 (0.258)  Loss:   6.850 ( 6.926)  Acc@1:   0.000 (  0.075)  Acc@5:   0.000 (  0.417)
+Test: [ 356/781]  Time: 0.209 (0.258)  Loss:   6.979 ( 6.926)  Acc@1:   0.000 (  0.074)  Acc@5:   0.000 (  0.416)
+Test: [ 357/781]  Time: 0.284 (0.258)  Loss:   7.037 ( 6.927)  Acc@1:   0.000 (  0.074)  Acc@5:   0.000 (  0.415)
+Test: [ 358/781]  Time: 0.206 (0.258)  Loss:   6.948 ( 6.927)  Acc@1:   0.000 (  0.074)  Acc@5:   0.000 (  0.413)
+Test: [ 359/781]  Time: 0.298 (0.258)  Loss:   6.846 ( 6.926)  Acc@1:   0.000 (  0.074)  Acc@5:   0.000 (  0.412)
+Test: [ 360/781]  Time: 0.281 (0.258)  Loss:   6.928 ( 6.926)  Acc@1:   0.000 (  0.074)  Acc@5:   0.000 (  0.411)
+Test: [ 361/781]  Time: 0.219 (0.258)  Loss:   7.015 ( 6.927)  Acc@1:   0.000 (  0.073)  Acc@5:   0.000 (  0.410)
+Test: [ 362/781]  Time: 0.201 (0.258)  Loss:   6.992 ( 6.927)  Acc@1:   0.000 (  0.073)  Acc@5:   0.000 (  0.409)
+Test: [ 363/781]  Time: 0.514 (0.259)  Loss:   6.943 ( 6.927)  Acc@1:   0.000 (  0.073)  Acc@5:   0.000 (  0.408)
+Test: [ 364/781]  Time: 0.196 (0.258)  Loss:   7.032 ( 6.927)  Acc@1:   0.000 (  0.073)  Acc@5:   0.000 (  0.407)
+Test: [ 365/781]  Time: 0.190 (0.258)  Loss:   6.981 ( 6.927)  Acc@1:   1.562 (  0.077)  Acc@5:   1.562 (  0.410)
+Test: [ 366/781]  Time: 0.202 (0.258)  Loss:   7.085 ( 6.928)  Acc@1:   0.000 (  0.077)  Acc@5:   0.000 (  0.409)
+Test: [ 367/781]  Time: 0.215 (0.258)  Loss:   6.990 ( 6.928)  Acc@1:   0.000 (  0.076)  Acc@5:   0.000 (  0.408)
+Test: [ 368/781]  Time: 0.278 (0.258)  Loss:   6.936 ( 6.928)  Acc@1:   0.000 (  0.076)  Acc@5:   0.000 (  0.407)
+Test: [ 369/781]  Time: 0.208 (0.258)  Loss:   6.829 ( 6.928)  Acc@1:   0.000 (  0.076)  Acc@5:   0.000 (  0.405)
+Test: [ 370/781]  Time: 0.208 (0.258)  Loss:   6.817 ( 6.927)  Acc@1:   0.000 (  0.076)  Acc@5:   0.000 (  0.404)
+Test: [ 371/781]  Time: 0.288 (0.258)  Loss:   6.846 ( 6.927)  Acc@1:   0.000 (  0.076)  Acc@5:   0.000 (  0.403)
+Test: [ 372/781]  Time: 0.282 (0.258)  Loss:   7.020 ( 6.927)  Acc@1:   0.000 (  0.075)  Acc@5:   0.000 (  0.402)
+Test: [ 373/781]  Time: 0.129 (0.258)  Loss:   6.962 ( 6.927)  Acc@1:   0.000 (  0.075)  Acc@5:   0.000 (  0.401)
+Test: [ 374/781]  Time: 0.177 (0.257)  Loss:   7.019 ( 6.928)  Acc@1:   0.000 (  0.075)  Acc@5:   0.000 (  0.400)
+Test: [ 375/781]  Time: 0.130 (0.257)  Loss:   6.847 ( 6.927)  Acc@1:   0.000 (  0.075)  Acc@5:   0.000 (  0.399)
+Test: [ 376/781]  Time: 0.278 (0.257)  Loss:   6.964 ( 6.928)  Acc@1:   0.000 (  0.075)  Acc@5:   0.000 (  0.398)
+Test: [ 377/781]  Time: 0.215 (0.257)  Loss:   6.916 ( 6.928)  Acc@1:   0.000 (  0.074)  Acc@5:   0.000 (  0.397)
+Test: [ 378/781]  Time: 0.196 (0.257)  Loss:   7.067 ( 6.928)  Acc@1:   0.000 (  0.074)  Acc@5:   0.000 (  0.396)
+Test: [ 379/781]  Time: 0.299 (0.257)  Loss:   6.778 ( 6.927)  Acc@1:   0.000 (  0.074)  Acc@5:   0.000 (  0.395)
+Test: [ 380/781]  Time: 0.387 (0.257)  Loss:   6.812 ( 6.927)  Acc@1:   0.000 (  0.074)  Acc@5:   0.000 (  0.394)
+Test: [ 381/781]  Time: 0.220 (0.257)  Loss:   6.841 ( 6.927)  Acc@1:   0.000 (  0.074)  Acc@5:   0.000 (  0.393)
+Test: [ 382/781]  Time: 0.200 (0.257)  Loss:   6.921 ( 6.927)  Acc@1:   0.000 (  0.073)  Acc@5:   0.000 (  0.392)
+Test: [ 383/781]  Time: 0.289 (0.257)  Loss:   6.960 ( 6.927)  Acc@1:   0.000 (  0.073)  Acc@5:   0.000 (  0.391)
+Test: [ 384/781]  Time: 0.207 (0.257)  Loss:   6.988 ( 6.927)  Acc@1:   0.000 (  0.073)  Acc@5:   0.000 (  0.390)
+Test: [ 385/781]  Time: 0.208 (0.257)  Loss:   6.980 ( 6.927)  Acc@1:   0.000 (  0.073)  Acc@5:   0.000 (  0.389)
+Test: [ 386/781]  Time: 0.195 (0.257)  Loss:   6.871 ( 6.927)  Acc@1:   0.000 (  0.073)  Acc@5:   0.000 (  0.388)
+Test: [ 387/781]  Time: 0.203 (0.256)  Loss:   7.042 ( 6.927)  Acc@1:   0.000 (  0.072)  Acc@5:   0.000 (  0.387)
+Test: [ 388/781]  Time: 0.269 (0.257)  Loss:   6.854 ( 6.927)  Acc@1:   0.000 (  0.072)  Acc@5:   0.000 (  0.386)
+Test: [ 389/781]  Time: 0.212 (0.256)  Loss:   6.871 ( 6.927)  Acc@1:   0.000 (  0.072)  Acc@5:   0.000 (  0.385)
+Test: [ 390/781]  Time: 0.285 (0.256)  Loss:   6.948 ( 6.927)  Acc@1:   0.000 (  0.072)  Acc@5:   0.000 (  0.384)
+Test: [ 391/781]  Time: 0.215 (0.256)  Loss:   6.866 ( 6.927)  Acc@1:   0.000 (  0.072)  Acc@5:   0.000 (  0.383)
+Test: [ 392/781]  Time: 0.214 (0.256)  Loss:   6.988 ( 6.927)  Acc@1:   0.000 (  0.072)  Acc@5:   0.000 (  0.382)
+Test: [ 393/781]  Time: 0.203 (0.256)  Loss:   6.928 ( 6.927)  Acc@1:   0.000 (  0.071)  Acc@5:   0.000 (  0.381)
+Test: [ 394/781]  Time: 0.283 (0.256)  Loss:   6.843 ( 6.927)  Acc@1:   0.000 (  0.071)  Acc@5:   0.000 (  0.380)
+Test: [ 395/781]  Time: 0.216 (0.256)  Loss:   6.875 ( 6.927)  Acc@1:   0.000 (  0.071)  Acc@5:   0.000 (  0.379)
+Test: [ 396/781]  Time: 0.276 (0.256)  Loss:   6.914 ( 6.927)  Acc@1:   0.000 (  0.071)  Acc@5:   1.562 (  0.382)
+Test: [ 397/781]  Time: 0.216 (0.256)  Loss:   6.879 ( 6.927)  Acc@1:   0.000 (  0.071)  Acc@5:   0.000 (  0.381)
+Test: [ 398/781]  Time: 0.308 (0.256)  Loss:   6.888 ( 6.927)  Acc@1:   0.000 (  0.070)  Acc@5:   0.000 (  0.380)
+Test: [ 399/781]  Time: 0.293 (0.256)  Loss:   6.849 ( 6.926)  Acc@1:   0.000 (  0.070)  Acc@5:   0.000 (  0.379)
+Test: [ 400/781]  Time: 0.297 (0.256)  Loss:   6.941 ( 6.926)  Acc@1:   0.000 (  0.070)  Acc@5:   0.000 (  0.378)
+Test: [ 401/781]  Time: 0.289 (0.256)  Loss:   6.820 ( 6.926)  Acc@1:   0.000 (  0.070)  Acc@5:   0.000 (  0.377)
+Test: [ 402/781]  Time: 0.218 (0.256)  Loss:   6.936 ( 6.926)  Acc@1:   0.000 (  0.070)  Acc@5:   0.000 (  0.376)
+Test: [ 403/781]  Time: 0.274 (0.256)  Loss:   7.129 ( 6.927)  Acc@1:   0.000 (  0.070)  Acc@5:   0.000 (  0.375)
+Test: [ 404/781]  Time: 0.220 (0.256)  Loss:   6.886 ( 6.927)  Acc@1:   0.000 (  0.069)  Acc@5:   0.000 (  0.374)
+Test: [ 405/781]  Time: 0.203 (0.256)  Loss:   7.011 ( 6.927)  Acc@1:   0.000 (  0.069)  Acc@5:   0.000 (  0.373)
+Test: [ 406/781]  Time: 0.110 (0.256)  Loss:   7.050 ( 6.927)  Acc@1:   0.000 (  0.069)  Acc@5:   0.000 (  0.372)
+Test: [ 407/781]  Time: 0.117 (0.255)  Loss:   6.913 ( 6.927)  Acc@1:   0.000 (  0.069)  Acc@5:   0.000 (  0.371)
+Test: [ 408/781]  Time: 0.266 (0.256)  Loss:   6.888 ( 6.927)  Acc@1:   0.000 (  0.069)  Acc@5:   0.000 (  0.371)
+Test: [ 409/781]  Time: 0.207 (0.255)  Loss:   6.834 ( 6.927)  Acc@1:   0.000 (  0.069)  Acc@5:   0.000 (  0.370)
+Test: [ 410/781]  Time: 0.274 (0.255)  Loss:   6.951 ( 6.927)  Acc@1:   0.000 (  0.068)  Acc@5:   0.000 (  0.369)
+Test: [ 411/781]  Time: 0.230 (0.255)  Loss:   6.841 ( 6.927)  Acc@1:   0.000 (  0.068)  Acc@5:   0.000 (  0.368)
+Test: [ 412/781]  Time: 0.280 (0.255)  Loss:   6.862 ( 6.926)  Acc@1:   0.000 (  0.068)  Acc@5:   0.000 (  0.367)
+Test: [ 413/781]  Time: 0.211 (0.255)  Loss:   6.916 ( 6.926)  Acc@1:   0.000 (  0.068)  Acc@5:   0.000 (  0.366)
+Test: [ 414/781]  Time: 0.279 (0.255)  Loss:   6.848 ( 6.926)  Acc@1:   3.125 (  0.075)  Acc@5:   6.250 (  0.380)
+Test: [ 415/781]  Time: 0.222 (0.255)  Loss:   6.917 ( 6.926)  Acc@1:   0.000 (  0.075)  Acc@5:   0.000 (  0.379)
+Test: [ 416/781]  Time: 0.278 (0.255)  Loss:   6.817 ( 6.926)  Acc@1:  10.938 (  0.101)  Acc@5:  20.312 (  0.427)
+Test: [ 417/781]  Time: 0.219 (0.255)  Loss:   6.946 ( 6.926)  Acc@1:   4.688 (  0.112)  Acc@5:   7.812 (  0.445)
+Test: [ 418/781]  Time: 0.283 (0.255)  Loss:   6.914 ( 6.926)  Acc@1:   0.000 (  0.112)  Acc@5:   0.000 (  0.444)
+Test: [ 419/781]  Time: 0.222 (0.255)  Loss:   6.970 ( 6.926)  Acc@1:   0.000 (  0.112)  Acc@5:   0.000 (  0.443)
+Test: [ 420/781]  Time: 0.277 (0.255)  Loss:   7.002 ( 6.926)  Acc@1:   0.000 (  0.111)  Acc@5:   0.000 (  0.442)
+Test: [ 421/781]  Time: 0.225 (0.255)  Loss:   6.979 ( 6.926)  Acc@1:   0.000 (  0.111)  Acc@5:   0.000 (  0.441)
+Test: [ 422/781]  Time: 0.276 (0.255)  Loss:   6.919 ( 6.926)  Acc@1:   0.000 (  0.111)  Acc@5:   0.000 (  0.440)
+Test: [ 423/781]  Time: 0.217 (0.255)  Loss:   6.889 ( 6.926)  Acc@1:   0.000 (  0.111)  Acc@5:   0.000 (  0.439)
+Test: [ 424/781]  Time: 0.207 (0.255)  Loss:   7.068 ( 6.927)  Acc@1:   0.000 (  0.110)  Acc@5:   0.000 (  0.438)
+Test: [ 425/781]  Time: 0.279 (0.255)  Loss:   7.000 ( 6.927)  Acc@1:   0.000 (  0.110)  Acc@5:   0.000 (  0.436)
+Test: [ 426/781]  Time: 0.220 (0.255)  Loss:   6.816 ( 6.927)  Acc@1:   0.000 (  0.110)  Acc@5:   0.000 (  0.435)
+Test: [ 427/781]  Time: 0.200 (0.255)  Loss:   6.943 ( 6.927)  Acc@1:   0.000 (  0.110)  Acc@5:   0.000 (  0.434)
+Test: [ 428/781]  Time: 0.210 (0.255)  Loss:   6.943 ( 6.927)  Acc@1:   0.000 (  0.109)  Acc@5:   0.000 (  0.433)
+Test: [ 429/781]  Time: 0.283 (0.255)  Loss:   7.015 ( 6.927)  Acc@1:   0.000 (  0.109)  Acc@5:   0.000 (  0.432)
+Test: [ 430/781]  Time: 0.214 (0.255)  Loss:   6.977 ( 6.927)  Acc@1:   0.000 (  0.109)  Acc@5:   0.000 (  0.431)
+Test: [ 431/781]  Time: 0.270 (0.255)  Loss:   7.190 ( 6.928)  Acc@1:   0.000 (  0.109)  Acc@5:   0.000 (  0.430)
+Test: [ 432/781]  Time: 0.217 (0.255)  Loss:   6.849 ( 6.927)  Acc@1:   0.000 (  0.108)  Acc@5:   0.000 (  0.429)
+Test: [ 433/781]  Time: 0.283 (0.255)  Loss:   6.968 ( 6.927)  Acc@1:   0.000 (  0.108)  Acc@5:   1.562 (  0.432)
+Test: [ 434/781]  Time: 0.749 (0.256)  Loss:   6.889 ( 6.927)  Acc@1:   0.000 (  0.108)  Acc@5:   0.000 (  0.431)
+Test: [ 435/781]  Time: 0.082 (0.256)  Loss:   6.687 ( 6.927)  Acc@1:   0.000 (  0.108)  Acc@5:   1.562 (  0.434)
+Test: [ 436/781]  Time: 0.091 (0.255)  Loss:   6.954 ( 6.927)  Acc@1:   0.000 (  0.107)  Acc@5:   0.000 (  0.433)
+Test: [ 437/781]  Time: 0.210 (0.255)  Loss:   6.971 ( 6.927)  Acc@1:   0.000 (  0.107)  Acc@5:   0.000 (  0.432)
+Test: [ 438/781]  Time: 0.295 (0.255)  Loss:   7.021 ( 6.927)  Acc@1:   0.000 (  0.107)  Acc@5:   0.000 (  0.431)
+Test: [ 439/781]  Time: 0.272 (0.255)  Loss:   6.819 ( 6.927)  Acc@1:   0.000 (  0.107)  Acc@5:   1.562 (  0.433)
+Test: [ 440/781]  Time: 0.199 (0.255)  Loss:   6.945 ( 6.927)  Acc@1:   0.000 (  0.106)  Acc@5:   0.000 (  0.432)
+Test: [ 441/781]  Time: 0.220 (0.255)  Loss:   6.957 ( 6.927)  Acc@1:   0.000 (  0.106)  Acc@5:   0.000 (  0.431)
+Test: [ 442/781]  Time: 0.295 (0.255)  Loss:   6.897 ( 6.927)  Acc@1:   0.000 (  0.106)  Acc@5:   0.000 (  0.430)
+Test: [ 443/781]  Time: 0.300 (0.255)  Loss:   6.889 ( 6.927)  Acc@1:   0.000 (  0.106)  Acc@5:   0.000 (  0.429)
+Test: [ 444/781]  Time: 0.217 (0.255)  Loss:   6.958 ( 6.927)  Acc@1:   0.000 (  0.105)  Acc@5:   0.000 (  0.428)
+Test: [ 445/781]  Time: 0.267 (0.255)  Loss:   6.950 ( 6.927)  Acc@1:   0.000 (  0.105)  Acc@5:   0.000 (  0.427)
+Test: [ 446/781]  Time: 0.215 (0.255)  Loss:   6.883 ( 6.927)  Acc@1:   0.000 (  0.105)  Acc@5:   0.000 (  0.426)
+Test: [ 447/781]  Time: 0.216 (0.255)  Loss:   6.991 ( 6.927)  Acc@1:   0.000 (  0.105)  Acc@5:   0.000 (  0.426)
+Test: [ 448/781]  Time: 0.292 (0.255)  Loss:   6.918 ( 6.927)  Acc@1:   0.000 (  0.104)  Acc@5:   0.000 (  0.425)
+Test: [ 449/781]  Time: 0.207 (0.255)  Loss:   6.884 ( 6.927)  Acc@1:   0.000 (  0.104)  Acc@5:   0.000 (  0.424)
+Test: [ 450/781]  Time: 0.291 (0.255)  Loss:   6.896 ( 6.927)  Acc@1:   0.000 (  0.104)  Acc@5:   0.000 (  0.423)
+Test: [ 451/781]  Time: 0.298 (0.255)  Loss:   7.037 ( 6.927)  Acc@1:   0.000 (  0.104)  Acc@5:   0.000 (  0.422)
+Test: [ 452/781]  Time: 0.213 (0.255)  Loss:   6.880 ( 6.927)  Acc@1:   0.000 (  0.103)  Acc@5:   0.000 (  0.421)
+Test: [ 453/781]  Time: 0.287 (0.255)  Loss:   6.861 ( 6.927)  Acc@1:   0.000 (  0.103)  Acc@5:   0.000 (  0.420)
+Test: [ 454/781]  Time: 0.213 (0.255)  Loss:   6.950 ( 6.927)  Acc@1:   0.000 (  0.103)  Acc@5:   0.000 (  0.419)
+Test: [ 455/781]  Time: 0.284 (0.255)  Loss:   6.877 ( 6.927)  Acc@1:   0.000 (  0.103)  Acc@5:   0.000 (  0.418)
+Test: [ 456/781]  Time: 0.287 (0.255)  Loss:   6.844 ( 6.927)  Acc@1:   0.000 (  0.103)  Acc@5:   0.000 (  0.417)
+Test: [ 457/781]  Time: 0.328 (0.255)  Loss:   6.952 ( 6.927)  Acc@1:   0.000 (  0.102)  Acc@5:   0.000 (  0.416)
+Test: [ 458/781]  Time: 0.271 (0.255)  Loss:   6.957 ( 6.927)  Acc@1:   0.000 (  0.102)  Acc@5:   0.000 (  0.415)
+Test: [ 459/781]  Time: 0.214 (0.255)  Loss:   7.016 ( 6.927)  Acc@1:   0.000 (  0.102)  Acc@5:   0.000 (  0.414)
+Test: [ 460/781]  Time: 0.283 (0.255)  Loss:   6.897 ( 6.927)  Acc@1:   0.000 (  0.102)  Acc@5:   0.000 (  0.414)
+Test: [ 461/781]  Time: 0.798 (0.256)  Loss:   6.937 ( 6.927)  Acc@1:   0.000 (  0.101)  Acc@5:   0.000 (  0.413)
+Test: [ 462/781]  Time: 0.080 (0.256)  Loss:   6.912 ( 6.927)  Acc@1:   0.000 (  0.101)  Acc@5:   0.000 (  0.412)
+Test: [ 463/781]  Time: 0.136 (0.256)  Loss:   6.765 ( 6.927)  Acc@1:   0.000 (  0.101)  Acc@5:   0.000 (  0.411)
+Test: [ 464/781]  Time: 0.202 (0.256)  Loss:   6.951 ( 6.927)  Acc@1:   0.000 (  0.101)  Acc@5:   0.000 (  0.410)
+Test: [ 465/781]  Time: 0.218 (0.256)  Loss:   6.820 ( 6.926)  Acc@1:   0.000 (  0.101)  Acc@5:   0.000 (  0.409)
+Test: [ 466/781]  Time: 0.198 (0.255)  Loss:   7.034 ( 6.927)  Acc@1:   0.000 (  0.100)  Acc@5:   0.000 (  0.408)
+Test: [ 467/781]  Time: 0.274 (0.256)  Loss:   6.868 ( 6.926)  Acc@1:   0.000 (  0.100)  Acc@5:   6.250 (  0.421)
+Test: [ 468/781]  Time: 0.215 (0.255)  Loss:   6.966 ( 6.927)  Acc@1:   0.000 (  0.100)  Acc@5:   0.000 (  0.420)
+Test: [ 469/781]  Time: 0.212 (0.255)  Loss:   6.919 ( 6.927)  Acc@1:   0.000 (  0.100)  Acc@5:   0.000 (  0.419)
+Test: [ 470/781]  Time: 0.278 (0.255)  Loss:   6.924 ( 6.927)  Acc@1:   0.000 (  0.100)  Acc@5:   0.000 (  0.418)
+Test: [ 471/781]  Time: 0.213 (0.255)  Loss:   6.900 ( 6.926)  Acc@1:   0.000 (  0.099)  Acc@5:   0.000 (  0.417)
+Test: [ 472/781]  Time: 0.277 (0.255)  Loss:   6.983 ( 6.927)  Acc@1:   0.000 (  0.099)  Acc@5:   0.000 (  0.416)
+Test: [ 473/781]  Time: 0.212 (0.255)  Loss:   6.877 ( 6.926)  Acc@1:   0.000 (  0.099)  Acc@5:   0.000 (  0.415)
+Test: [ 474/781]  Time: 0.221 (0.255)  Loss:   7.195 ( 6.927)  Acc@1:   0.000 (  0.099)  Acc@5:   0.000 (  0.414)
+Test: [ 475/781]  Time: 0.294 (0.255)  Loss:   6.959 ( 6.927)  Acc@1:   0.000 (  0.098)  Acc@5:   0.000 (  0.414)
+Test: [ 476/781]  Time: 0.210 (0.255)  Loss:   6.937 ( 6.927)  Acc@1:   0.000 (  0.098)  Acc@5:   0.000 (  0.413)
+Test: [ 477/781]  Time: 0.279 (0.255)  Loss:   6.938 ( 6.927)  Acc@1:   0.000 (  0.098)  Acc@5:   0.000 (  0.412)
+Test: [ 478/781]  Time: 0.216 (0.255)  Loss:   6.849 ( 6.927)  Acc@1:   0.000 (  0.098)  Acc@5:   0.000 (  0.411)
+Test: [ 479/781]  Time: 0.268 (0.255)  Loss:   6.906 ( 6.927)  Acc@1:   0.000 (  0.098)  Acc@5:   0.000 (  0.410)
+Test: [ 480/781]  Time: 0.219 (0.255)  Loss:   6.868 ( 6.927)  Acc@1:   0.000 (  0.097)  Acc@5:   0.000 (  0.409)
+Test: [ 481/781]  Time: 0.211 (0.255)  Loss:   6.885 ( 6.927)  Acc@1:   0.000 (  0.097)  Acc@5:   0.000 (  0.408)
+Test: [ 482/781]  Time: 0.288 (0.255)  Loss:   7.105 ( 6.927)  Acc@1:   0.000 (  0.097)  Acc@5:   0.000 (  0.408)
+Test: [ 483/781]  Time: 0.217 (0.255)  Loss:   6.940 ( 6.927)  Acc@1:   0.000 (  0.097)  Acc@5:   0.000 (  0.407)
+Test: [ 484/781]  Time: 0.267 (0.255)  Loss:   7.066 ( 6.927)  Acc@1:   0.000 (  0.097)  Acc@5:   0.000 (  0.406)
+Test: [ 485/781]  Time: 0.215 (0.255)  Loss:   6.867 ( 6.927)  Acc@1:   0.000 (  0.096)  Acc@5:   0.000 (  0.405)
+Test: [ 486/781]  Time: 0.281 (0.255)  Loss:   6.943 ( 6.927)  Acc@1:   0.000 (  0.096)  Acc@5:   0.000 (  0.404)
+Test: [ 487/781]  Time: 0.203 (0.255)  Loss:   6.943 ( 6.927)  Acc@1:   0.000 (  0.096)  Acc@5:   0.000 (  0.403)
+Test: [ 488/781]  Time: 0.212 (0.255)  Loss:   6.998 ( 6.927)  Acc@1:   0.000 (  0.096)  Acc@5:   0.000 (  0.403)
+Test: [ 489/781]  Time: 0.212 (0.255)  Loss:   6.897 ( 6.927)  Acc@1:   0.000 (  0.096)  Acc@5:   0.000 (  0.402)
+Test: [ 490/781]  Time: 0.290 (0.255)  Loss:   6.823 ( 6.927)  Acc@1:   0.000 (  0.095)  Acc@5:   0.000 (  0.401)
+Test: [ 491/781]  Time: 0.211 (0.255)  Loss:   6.870 ( 6.927)  Acc@1:   0.000 (  0.095)  Acc@5:   0.000 (  0.400)
+Test: [ 492/781]  Time: 0.281 (0.255)  Loss:   6.936 ( 6.927)  Acc@1:   0.000 (  0.095)  Acc@5:   0.000 (  0.399)
+Test: [ 493/781]  Time: 0.211 (0.255)  Loss:   7.062 ( 6.927)  Acc@1:   0.000 (  0.095)  Acc@5:   0.000 (  0.399)
+Test: [ 494/781]  Time: 0.181 (0.255)  Loss:   6.894 ( 6.927)  Acc@1:   0.000 (  0.095)  Acc@5:   0.000 (  0.398)
+Test: [ 495/781]  Time: 0.134 (0.254)  Loss:   6.808 ( 6.927)  Acc@1:   0.000 (  0.095)  Acc@5:   0.000 (  0.397)
+Test: [ 496/781]  Time: 0.193 (0.254)  Loss:   6.908 ( 6.927)  Acc@1:   0.000 (  0.094)  Acc@5:   0.000 (  0.396)
+Test: [ 497/781]  Time: 0.275 (0.254)  Loss:   6.953 ( 6.927)  Acc@1:   0.000 (  0.094)  Acc@5:   0.000 (  0.395)
+Test: [ 498/781]  Time: 0.225 (0.254)  Loss:   6.961 ( 6.927)  Acc@1:   0.000 (  0.094)  Acc@5:   0.000 (  0.395)
+Test: [ 499/781]  Time: 0.289 (0.254)  Loss:   6.953 ( 6.927)  Acc@1:   0.000 (  0.094)  Acc@5:   0.000 (  0.394)
+Test: [ 500/781]  Time: 0.211 (0.254)  Loss:   6.922 ( 6.927)  Acc@1:   0.000 (  0.094)  Acc@5:   0.000 (  0.393)
+Test: [ 501/781]  Time: 0.203 (0.254)  Loss:   7.104 ( 6.928)  Acc@1:   0.000 (  0.093)  Acc@5:   0.000 (  0.392)
+Test: [ 502/781]  Time: 0.204 (0.254)  Loss:   6.865 ( 6.927)  Acc@1:   0.000 (  0.093)  Acc@5:   0.000 (  0.391)
+Test: [ 503/781]  Time: 0.282 (0.254)  Loss:   7.086 ( 6.928)  Acc@1:   0.000 (  0.093)  Acc@5:   0.000 (  0.391)
+Test: [ 504/781]  Time: 0.209 (0.254)  Loss:   7.024 ( 6.928)  Acc@1:   0.000 (  0.093)  Acc@5:   0.000 (  0.390)
+Test: [ 505/781]  Time: 0.276 (0.254)  Loss:   6.965 ( 6.928)  Acc@1:   0.000 (  0.093)  Acc@5:   0.000 (  0.389)
+Test: [ 506/781]  Time: 0.231 (0.254)  Loss:   7.028 ( 6.928)  Acc@1:   0.000 (  0.092)  Acc@5:   0.000 (  0.388)
+Test: [ 507/781]  Time: 0.283 (0.254)  Loss:   6.894 ( 6.928)  Acc@1:   0.000 (  0.092)  Acc@5:   0.000 (  0.388)
+Test: [ 508/781]  Time: 0.192 (0.254)  Loss:   6.890 ( 6.928)  Acc@1:   0.000 (  0.092)  Acc@5:   0.000 (  0.387)
+Test: [ 509/781]  Time: 0.212 (0.254)  Loss:   6.977 ( 6.928)  Acc@1:   0.000 (  0.092)  Acc@5:   0.000 (  0.386)
+Test: [ 510/781]  Time: 0.304 (0.254)  Loss:   6.884 ( 6.928)  Acc@1:   0.000 (  0.092)  Acc@5:   0.000 (  0.385)
+Test: [ 511/781]  Time: 0.281 (0.254)  Loss:   6.894 ( 6.928)  Acc@1:   0.000 (  0.092)  Acc@5:   1.562 (  0.388)
+Test: [ 512/781]  Time: 0.129 (0.254)  Loss:   6.875 ( 6.928)  Acc@1:   1.562 (  0.094)  Acc@5:   3.125 (  0.393)
+Test: [ 513/781]  Time: 0.282 (0.254)  Loss:   6.877 ( 6.928)  Acc@1:   1.562 (  0.097)  Acc@5:   3.125 (  0.398)
+Test: [ 514/781]  Time: 0.295 (0.254)  Loss:   6.857 ( 6.928)  Acc@1:   0.000 (  0.097)  Acc@5:   0.000 (  0.397)
+Test: [ 515/781]  Time: 0.215 (0.254)  Loss:   6.849 ( 6.928)  Acc@1:   0.000 (  0.097)  Acc@5:   0.000 (  0.397)
+Test: [ 516/781]  Time: 0.204 (0.254)  Loss:   6.968 ( 6.928)  Acc@1:   0.000 (  0.097)  Acc@5:   0.000 (  0.396)
+Test: [ 517/781]  Time: 0.277 (0.254)  Loss:   6.873 ( 6.927)  Acc@1:   0.000 (  0.097)  Acc@5:   0.000 (  0.395)
+Test: [ 518/781]  Time: 0.310 (0.254)  Loss:   6.914 ( 6.927)  Acc@1:   0.000 (  0.096)  Acc@5:   0.000 (  0.394)
+Test: [ 519/781]  Time: 0.289 (0.254)  Loss:   6.907 ( 6.927)  Acc@1:   0.000 (  0.096)  Acc@5:   0.000 (  0.394)
+Test: [ 520/781]  Time: 0.200 (0.254)  Loss:   6.907 ( 6.927)  Acc@1:   0.000 (  0.096)  Acc@5:   0.000 (  0.393)
+Test: [ 521/781]  Time: 0.210 (0.254)  Loss:   6.866 ( 6.927)  Acc@1:   0.000 (  0.096)  Acc@5:   0.000 (  0.392)
+Test: [ 522/781]  Time: 0.217 (0.254)  Loss:   6.846 ( 6.927)  Acc@1:   0.000 (  0.096)  Acc@5:   0.000 (  0.391)
+Test: [ 523/781]  Time: 0.296 (0.254)  Loss:   6.985 ( 6.927)  Acc@1:   0.000 (  0.095)  Acc@5:   0.000 (  0.391)
+Test: [ 524/781]  Time: 0.205 (0.254)  Loss:   6.730 ( 6.927)  Acc@1:  20.312 (  0.134)  Acc@5:  40.625 (  0.467)
+Test: [ 525/781]  Time: 0.280 (0.254)  Loss:   6.974 ( 6.927)  Acc@1:   0.000 (  0.134)  Acc@5:   0.000 (  0.466)
+Test: [ 526/781]  Time: 0.220 (0.254)  Loss:   6.904 ( 6.927)  Acc@1:   0.000 (  0.133)  Acc@5:   0.000 (  0.465)
+Test: [ 527/781]  Time: 0.205 (0.253)  Loss:   6.903 ( 6.927)  Acc@1:   0.000 (  0.133)  Acc@5:   0.000 (  0.465)
+Test: [ 528/781]  Time: 0.181 (0.253)  Loss:   6.910 ( 6.927)  Acc@1:   0.000 (  0.133)  Acc@5:   0.000 (  0.464)
+Test: [ 529/781]  Time: 0.189 (0.253)  Loss:   6.808 ( 6.927)  Acc@1:   0.000 (  0.133)  Acc@5:   0.000 (  0.463)
+Test: [ 530/781]  Time: 0.216 (0.253)  Loss:   7.051 ( 6.927)  Acc@1:   0.000 (  0.132)  Acc@5:   0.000 (  0.462)
+Test: [ 531/781]  Time: 0.291 (0.253)  Loss:   7.146 ( 6.927)  Acc@1:   0.000 (  0.132)  Acc@5:   0.000 (  0.461)
+Test: [ 532/781]  Time: 0.286 (0.253)  Loss:   6.855 ( 6.927)  Acc@1:   0.000 (  0.132)  Acc@5:   0.000 (  0.460)
+Test: [ 533/781]  Time: 0.204 (0.253)  Loss:   6.968 ( 6.927)  Acc@1:   0.000 (  0.132)  Acc@5:   0.000 (  0.459)
+Test: [ 534/781]  Time: 0.218 (0.253)  Loss:   6.930 ( 6.927)  Acc@1:   0.000 (  0.131)  Acc@5:   0.000 (  0.459)
+Test: [ 535/781]  Time: 0.284 (0.253)  Loss:   6.893 ( 6.927)  Acc@1:   0.000 (  0.131)  Acc@5:   0.000 (  0.458)
+Test: [ 536/781]  Time: 0.224 (0.253)  Loss:   6.847 ( 6.927)  Acc@1:   0.000 (  0.131)  Acc@5:   0.000 (  0.457)
+Test: [ 537/781]  Time: 0.289 (0.253)  Loss:   6.708 ( 6.927)  Acc@1:   0.000 (  0.131)  Acc@5:   0.000 (  0.456)
+Test: [ 538/781]  Time: 0.297 (0.253)  Loss:   7.037 ( 6.927)  Acc@1:   0.000 (  0.130)  Acc@5:   0.000 (  0.455)
+Test: [ 539/781]  Time: 0.299 (0.253)  Loss:   6.867 ( 6.927)  Acc@1:   0.000 (  0.130)  Acc@5:   0.000 (  0.454)
+Test: [ 540/781]  Time: 0.203 (0.253)  Loss:   6.991 ( 6.927)  Acc@1:   0.000 (  0.130)  Acc@5:   0.000 (  0.453)
+Test: [ 541/781]  Time: 0.216 (0.253)  Loss:   6.886 ( 6.927)  Acc@1:   0.000 (  0.130)  Acc@5:   0.000 (  0.453)
+Test: [ 542/781]  Time: 0.204 (0.253)  Loss:   7.121 ( 6.927)  Acc@1:   0.000 (  0.129)  Acc@5:   0.000 (  0.452)
+Test: [ 543/781]  Time: 0.294 (0.253)  Loss:   7.106 ( 6.927)  Acc@1:   0.000 (  0.129)  Acc@5:   0.000 (  0.451)
+Test: [ 544/781]  Time: 0.267 (0.253)  Loss:   6.908 ( 6.927)  Acc@1:   0.000 (  0.129)  Acc@5:   0.000 (  0.450)
+Test: [ 545/781]  Time: 0.225 (0.253)  Loss:   6.892 ( 6.927)  Acc@1:   0.000 (  0.129)  Acc@5:   0.000 (  0.449)
+Test: [ 546/781]  Time: 0.617 (0.254)  Loss:   6.950 ( 6.927)  Acc@1:   0.000 (  0.129)  Acc@5:   0.000 (  0.448)
+Test: [ 547/781]  Time: 0.206 (0.254)  Loss:   7.040 ( 6.928)  Acc@1:   0.000 (  0.128)  Acc@5:   0.000 (  0.448)
+Test: [ 548/781]  Time: 0.181 (0.254)  Loss:   7.040 ( 6.928)  Acc@1:   0.000 (  0.128)  Acc@5:   0.000 (  0.447)
+Test: [ 549/781]  Time: 0.190 (0.253)  Loss:   7.007 ( 6.928)  Acc@1:   0.000 (  0.128)  Acc@5:   0.000 (  0.446)
+Test: [ 550/781]  Time: 0.210 (0.253)  Loss:   6.993 ( 6.928)  Acc@1:   0.000 (  0.128)  Acc@5:   0.000 (  0.445)
+Test: [ 551/781]  Time: 0.373 (0.254)  Loss:   6.924 ( 6.928)  Acc@1:   0.000 (  0.127)  Acc@5:   0.000 (  0.444)
+Test: [ 552/781]  Time: 0.138 (0.253)  Loss:   6.864 ( 6.928)  Acc@1:   0.000 (  0.127)  Acc@5:   0.000 (  0.444)
+Test: [ 553/781]  Time: 0.195 (0.253)  Loss:   6.981 ( 6.928)  Acc@1:   0.000 (  0.127)  Acc@5:   0.000 (  0.443)
+Test: [ 554/781]  Time: 0.296 (0.253)  Loss:   6.941 ( 6.928)  Acc@1:   0.000 (  0.127)  Acc@5:   0.000 (  0.442)
+Test: [ 555/781]  Time: 0.273 (0.253)  Loss:   7.056 ( 6.928)  Acc@1:   0.000 (  0.126)  Acc@5:   0.000 (  0.441)
+Test: [ 556/781]  Time: 0.296 (0.253)  Loss:   6.991 ( 6.928)  Acc@1:   0.000 (  0.126)  Acc@5:   0.000 (  0.440)
+Test: [ 557/781]  Time: 0.204 (0.253)  Loss:   7.027 ( 6.929)  Acc@1:   0.000 (  0.126)  Acc@5:   0.000 (  0.440)
+Test: [ 558/781]  Time: 0.196 (0.253)  Loss:   6.965 ( 6.929)  Acc@1:   0.000 (  0.126)  Acc@5:   0.000 (  0.439)
+Test: [ 559/781]  Time: 0.134 (0.253)  Loss:   6.968 ( 6.929)  Acc@1:   0.000 (  0.126)  Acc@5:   0.000 (  0.438)
+Test: [ 560/781]  Time: 0.191 (0.253)  Loss:   6.979 ( 6.929)  Acc@1:   0.000 (  0.125)  Acc@5:   0.000 (  0.437)
+Test: [ 561/781]  Time: 0.209 (0.253)  Loss:   7.001 ( 6.929)  Acc@1:   0.000 (  0.125)  Acc@5:   0.000 (  0.436)
+Test: [ 562/781]  Time: 0.286 (0.253)  Loss:   7.018 ( 6.929)  Acc@1:   0.000 (  0.125)  Acc@5:   0.000 (  0.436)
+Test: [ 563/781]  Time: 0.282 (0.253)  Loss:   6.987 ( 6.929)  Acc@1:   0.000 (  0.125)  Acc@5:   0.000 (  0.435)
+Test: [ 564/781]  Time: 0.227 (0.253)  Loss:   6.932 ( 6.929)  Acc@1:   0.000 (  0.124)  Acc@5:   0.000 (  0.434)
+Test: [ 565/781]  Time: 0.282 (0.253)  Loss:   6.950 ( 6.929)  Acc@1:   0.000 (  0.124)  Acc@5:   0.000 (  0.433)
+Test: [ 566/781]  Time: 0.706 (0.254)  Loss:   6.966 ( 6.929)  Acc@1:   0.000 (  0.124)  Acc@5:   0.000 (  0.433)
+Test: [ 567/781]  Time: 0.120 (0.254)  Loss:   7.058 ( 6.929)  Acc@1:   0.000 (  0.124)  Acc@5:   0.000 (  0.432)
+Test: [ 568/781]  Time: 0.191 (0.253)  Loss:   6.820 ( 6.929)  Acc@1:   0.000 (  0.124)  Acc@5:   0.000 (  0.431)
+Test: [ 569/781]  Time: 0.204 (0.253)  Loss:   6.867 ( 6.929)  Acc@1:   0.000 (  0.123)  Acc@5:   0.000 (  0.430)
+Test: [ 570/781]  Time: 0.277 (0.253)  Loss:   6.924 ( 6.929)  Acc@1:   0.000 (  0.123)  Acc@5:   1.562 (  0.432)
+Test: [ 571/781]  Time: 0.220 (0.253)  Loss:   6.856 ( 6.929)  Acc@1:   1.562 (  0.126)  Acc@5:   1.562 (  0.434)
+Test: [ 572/781]  Time: 0.207 (0.253)  Loss:   6.899 ( 6.929)  Acc@1:   0.000 (  0.125)  Acc@5:   0.000 (  0.434)
+Test: [ 573/781]  Time: 0.266 (0.253)  Loss:   6.890 ( 6.929)  Acc@1:   0.000 (  0.125)  Acc@5:   0.000 (  0.433)
+Test: [ 574/781]  Time: 0.231 (0.253)  Loss:   6.962 ( 6.929)  Acc@1:   0.000 (  0.125)  Acc@5:   0.000 (  0.432)
+Test: [ 575/781]  Time: 0.271 (0.253)  Loss:   6.955 ( 6.929)  Acc@1:   0.000 (  0.125)  Acc@5:   0.000 (  0.431)
+Test: [ 576/781]  Time: 0.220 (0.253)  Loss:   6.953 ( 6.929)  Acc@1:   0.000 (  0.125)  Acc@5:   0.000 (  0.431)
+Test: [ 577/781]  Time: 0.210 (0.253)  Loss:   6.987 ( 6.929)  Acc@1:   0.000 (  0.124)  Acc@5:   0.000 (  0.430)
+Test: [ 578/781]  Time: 0.282 (0.253)  Loss:   6.918 ( 6.929)  Acc@1:   0.000 (  0.124)  Acc@5:   0.000 (  0.429)
+Test: [ 579/781]  Time: 0.213 (0.253)  Loss:   6.929 ( 6.929)  Acc@1:   0.000 (  0.124)  Acc@5:   0.000 (  0.428)
+Test: [ 580/781]  Time: 0.197 (0.253)  Loss:   6.966 ( 6.929)  Acc@1:   0.000 (  0.124)  Acc@5:   0.000 (  0.428)
+Test: [ 581/781]  Time: 0.202 (0.253)  Loss:   6.941 ( 6.929)  Acc@1:   0.000 (  0.123)  Acc@5:   0.000 (  0.427)
+Test: [ 582/781]  Time: 0.392 (0.253)  Loss:   7.004 ( 6.929)  Acc@1:   0.000 (  0.123)  Acc@5:   0.000 (  0.426)
+Test: [ 583/781]  Time: 0.209 (0.253)  Loss:   6.907 ( 6.929)  Acc@1:   0.000 (  0.123)  Acc@5:   0.000 (  0.425)
+Test: [ 584/781]  Time: 0.202 (0.253)  Loss:   6.922 ( 6.929)  Acc@1:   0.000 (  0.123)  Acc@5:   0.000 (  0.425)
+Test: [ 585/781]  Time: 0.199 (0.253)  Loss:   6.949 ( 6.929)  Acc@1:   0.000 (  0.123)  Acc@5:   0.000 (  0.424)
+Test: [ 586/781]  Time: 0.705 (0.254)  Loss:   6.936 ( 6.929)  Acc@1:   1.562 (  0.125)  Acc@5:   1.562 (  0.426)
+Test: [ 587/781]  Time: 0.194 (0.254)  Loss:   7.047 ( 6.930)  Acc@1:   0.000 (  0.125)  Acc@5:   0.000 (  0.425)
+Test: [ 588/781]  Time: 0.114 (0.253)  Loss:   6.904 ( 6.930)  Acc@1:   1.562 (  0.127)  Acc@5:   3.125 (  0.430)
+Test: [ 589/781]  Time: 0.386 (0.254)  Loss:   6.869 ( 6.929)  Acc@1:   0.000 (  0.127)  Acc@5:   0.000 (  0.429)
+Test: [ 590/781]  Time: 0.308 (0.254)  Loss:   6.787 ( 6.929)  Acc@1:   3.125 (  0.132)  Acc@5:   6.250 (  0.439)
+Test: [ 591/781]  Time: 0.266 (0.254)  Loss:   6.881 ( 6.929)  Acc@1:   0.000 (  0.132)  Acc@5:   0.000 (  0.438)
+Test: [ 592/781]  Time: 0.138 (0.253)  Loss:   6.883 ( 6.929)  Acc@1:   0.000 (  0.132)  Acc@5:   0.000 (  0.437)
+Test: [ 593/781]  Time: 0.501 (0.254)  Loss:   7.023 ( 6.929)  Acc@1:   0.000 (  0.132)  Acc@5:   0.000 (  0.437)
+Test: [ 594/781]  Time: 0.284 (0.254)  Loss:   6.974 ( 6.929)  Acc@1:   0.000 (  0.131)  Acc@5:   0.000 (  0.436)
+Test: [ 595/781]  Time: 0.202 (0.254)  Loss:   6.959 ( 6.929)  Acc@1:   0.000 (  0.131)  Acc@5:   0.000 (  0.435)
+Test: [ 596/781]  Time: 0.211 (0.254)  Loss:   6.995 ( 6.929)  Acc@1:   0.000 (  0.131)  Acc@5:   0.000 (  0.434)
+Test: [ 597/781]  Time: 0.482 (0.254)  Loss:   6.858 ( 6.929)  Acc@1:   0.000 (  0.131)  Acc@5:   0.000 (  0.434)
+Test: [ 598/781]  Time: 0.281 (0.254)  Loss:   6.921 ( 6.929)  Acc@1:   0.000 (  0.130)  Acc@5:   0.000 (  0.433)
+Test: [ 599/781]  Time: 0.301 (0.254)  Loss:   6.899 ( 6.929)  Acc@1:   0.000 (  0.130)  Acc@5:   0.000 (  0.432)
+Test: [ 600/781]  Time: 0.300 (0.254)  Loss:   7.002 ( 6.929)  Acc@1:   0.000 (  0.130)  Acc@5:   0.000 (  0.432)
+Test: [ 601/781]  Time: 0.537 (0.255)  Loss:   6.921 ( 6.929)  Acc@1:   0.000 (  0.130)  Acc@5:   0.000 (  0.431)
+Test: [ 602/781]  Time: 0.278 (0.255)  Loss:   6.836 ( 6.929)  Acc@1:   0.000 (  0.130)  Acc@5:   0.000 (  0.430)
+Test: [ 603/781]  Time: 0.219 (0.255)  Loss:   6.918 ( 6.929)  Acc@1:   0.000 (  0.129)  Acc@5:   0.000 (  0.429)
+Test: [ 604/781]  Time: 0.298 (0.255)  Loss:   7.035 ( 6.929)  Acc@1:   0.000 (  0.129)  Acc@5:   0.000 (  0.429)
+Test: [ 605/781]  Time: 0.366 (0.255)  Loss:   6.958 ( 6.929)  Acc@1:   0.000 (  0.129)  Acc@5:   0.000 (  0.428)
+Test: [ 606/781]  Time: 0.224 (0.255)  Loss:   6.878 ( 6.929)  Acc@1:   0.000 (  0.129)  Acc@5:   0.000 (  0.427)
+Test: [ 607/781]  Time: 0.283 (0.255)  Loss:   7.012 ( 6.929)  Acc@1:   0.000 (  0.128)  Acc@5:   0.000 (  0.427)
+Test: [ 608/781]  Time: 0.298 (0.255)  Loss:   7.008 ( 6.930)  Acc@1:   0.000 (  0.128)  Acc@5:   0.000 (  0.426)
+Test: [ 609/781]  Time: 0.302 (0.255)  Loss:   6.914 ( 6.930)  Acc@1:   0.000 (  0.128)  Acc@5:   0.000 (  0.425)
+Test: [ 610/781]  Time: 0.233 (0.255)  Loss:   6.963 ( 6.930)  Acc@1:   0.000 (  0.128)  Acc@5:   1.562 (  0.427)
+Test: [ 611/781]  Time: 0.358 (0.255)  Loss:   7.000 ( 6.930)  Acc@1:   0.000 (  0.128)  Acc@5:   0.000 (  0.426)
+Test: [ 612/781]  Time: 0.301 (0.255)  Loss:   6.978 ( 6.930)  Acc@1:   0.000 (  0.127)  Acc@5:   0.000 (  0.426)
+Test: [ 613/781]  Time: 0.216 (0.255)  Loss:   6.865 ( 6.930)  Acc@1:   0.000 (  0.127)  Acc@5:   0.000 (  0.425)
+Test: [ 614/781]  Time: 0.142 (0.255)  Loss:   6.899 ( 6.930)  Acc@1:   0.000 (  0.127)  Acc@5:   0.000 (  0.424)
+Test: [ 615/781]  Time: 0.267 (0.255)  Loss:   6.980 ( 6.930)  Acc@1:   0.000 (  0.127)  Acc@5:   0.000 (  0.424)
+Test: [ 616/781]  Time: 0.206 (0.255)  Loss:   6.922 ( 6.930)  Acc@1:   0.000 (  0.127)  Acc@5:   0.000 (  0.423)
+Test: [ 617/781]  Time: 0.389 (0.255)  Loss:   6.974 ( 6.930)  Acc@1:   0.000 (  0.126)  Acc@5:   0.000 (  0.422)
+Test: [ 618/781]  Time: 0.281 (0.255)  Loss:   6.861 ( 6.930)  Acc@1:   0.000 (  0.126)  Acc@5:   0.000 (  0.422)
+Test: [ 619/781]  Time: 0.206 (0.255)  Loss:   6.985 ( 6.930)  Acc@1:   0.000 (  0.126)  Acc@5:   0.000 (  0.421)
+Test: [ 620/781]  Time: 0.209 (0.255)  Loss:   6.952 ( 6.930)  Acc@1:   0.000 (  0.126)  Acc@5:   0.000 (  0.420)
+Test: [ 621/781]  Time: 0.322 (0.255)  Loss:   6.891 ( 6.930)  Acc@1:   0.000 (  0.126)  Acc@5:   0.000 (  0.420)
+Test: [ 622/781]  Time: 0.201 (0.255)  Loss:   6.872 ( 6.930)  Acc@1:   0.000 (  0.125)  Acc@5:   1.562 (  0.421)
+Test: [ 623/781]  Time: 0.261 (0.255)  Loss:   6.850 ( 6.929)  Acc@1:   0.000 (  0.125)  Acc@5:   0.000 (  0.421)
+Test: [ 624/781]  Time: 0.216 (0.255)  Loss:   6.880 ( 6.929)  Acc@1:   0.000 (  0.125)  Acc@5:   0.000 (  0.420)
+Test: [ 625/781]  Time: 0.512 (0.256)  Loss:   6.919 ( 6.929)  Acc@1:   0.000 (  0.125)  Acc@5:   3.125 (  0.424)
+Test: [ 626/781]  Time: 0.206 (0.256)  Loss:   6.948 ( 6.929)  Acc@1:   0.000 (  0.125)  Acc@5:   3.125 (  0.429)
+Test: [ 627/781]  Time: 0.290 (0.256)  Loss:   6.776 ( 6.929)  Acc@1:   0.000 (  0.124)  Acc@5:   3.125 (  0.433)
+Test: [ 628/781]  Time: 0.206 (0.256)  Loss:   6.830 ( 6.929)  Acc@1:   0.000 (  0.124)  Acc@5:   0.000 (  0.432)
+Test: [ 629/781]  Time: 1.398 (0.257)  Loss:   6.883 ( 6.929)  Acc@1:   0.000 (  0.124)  Acc@5:   0.000 (  0.432)
+Test: [ 630/781]  Time: 0.187 (0.257)  Loss:   6.924 ( 6.929)  Acc@1:   0.000 (  0.124)  Acc@5:   0.000 (  0.431)
+Test: [ 631/781]  Time: 0.200 (0.257)  Loss:   6.960 ( 6.929)  Acc@1:   0.000 (  0.124)  Acc@5:   0.000 (  0.430)
+Test: [ 632/781]  Time: 0.213 (0.257)  Loss:   6.967 ( 6.929)  Acc@1:   0.000 (  0.123)  Acc@5:   0.000 (  0.430)
+Test: [ 633/781]  Time: 0.203 (0.257)  Loss:   6.835 ( 6.929)  Acc@1:   0.000 (  0.123)  Acc@5:   1.562 (  0.431)
+Test: [ 634/781]  Time: 0.203 (0.257)  Loss:   6.884 ( 6.929)  Acc@1:   0.000 (  0.123)  Acc@5:   0.000 (  0.431)
+Test: [ 635/781]  Time: 0.205 (0.257)  Loss:   7.064 ( 6.929)  Acc@1:   0.000 (  0.123)  Acc@5:   0.000 (  0.430)
+Test: [ 636/781]  Time: 0.200 (0.257)  Loss:   6.908 ( 6.929)  Acc@1:   0.000 (  0.123)  Acc@5:   0.000 (  0.429)
+Test: [ 637/781]  Time: 0.404 (0.257)  Loss:   6.869 ( 6.929)  Acc@1:   0.000 (  0.122)  Acc@5:   0.000 (  0.429)
+Test: [ 638/781]  Time: 0.095 (0.257)  Loss:   6.981 ( 6.929)  Acc@1:   0.000 (  0.122)  Acc@5:   0.000 (  0.428)
+Test: [ 639/781]  Time: 0.095 (0.256)  Loss:   7.045 ( 6.929)  Acc@1:   0.000 (  0.122)  Acc@5:   0.000 (  0.427)
+Test: [ 640/781]  Time: 0.179 (0.256)  Loss:   6.884 ( 6.929)  Acc@1:   0.000 (  0.122)  Acc@5:   0.000 (  0.427)
+Test: [ 641/781]  Time: 0.514 (0.257)  Loss:   6.807 ( 6.929)  Acc@1:   0.000 (  0.122)  Acc@5:   0.000 (  0.426)
+Test: [ 642/781]  Time: 0.201 (0.257)  Loss:   7.027 ( 6.929)  Acc@1:   0.000 (  0.122)  Acc@5:   0.000 (  0.425)
+Test: [ 643/781]  Time: 0.201 (0.257)  Loss:   6.967 ( 6.929)  Acc@1:   0.000 (  0.121)  Acc@5:   1.562 (  0.427)
+Test: [ 644/781]  Time: 0.210 (0.256)  Loss:   6.939 ( 6.929)  Acc@1:   0.000 (  0.121)  Acc@5:   1.562 (  0.429)
+Test: [ 645/781]  Time: 0.662 (0.257)  Loss:   6.831 ( 6.929)  Acc@1:   0.000 (  0.121)  Acc@5:   1.562 (  0.431)
+Test: [ 646/781]  Time: 0.140 (0.257)  Loss:   7.000 ( 6.929)  Acc@1:   0.000 (  0.121)  Acc@5:   0.000 (  0.430)
+Test: [ 647/781]  Time: 0.196 (0.257)  Loss:   6.962 ( 6.929)  Acc@1:   0.000 (  0.121)  Acc@5:   0.000 (  0.429)
+Test: [ 648/781]  Time: 0.203 (0.257)  Loss:   6.954 ( 6.929)  Acc@1:   0.000 (  0.120)  Acc@5:   0.000 (  0.429)
+Test: [ 649/781]  Time: 0.399 (0.257)  Loss:   7.006 ( 6.929)  Acc@1:   0.000 (  0.120)  Acc@5:   0.000 (  0.428)
+Test: [ 650/781]  Time: 0.195 (0.257)  Loss:   6.850 ( 6.929)  Acc@1:   1.562 (  0.122)  Acc@5:   1.562 (  0.430)
+Test: [ 651/781]  Time: 0.268 (0.257)  Loss:   6.951 ( 6.929)  Acc@1:   0.000 (  0.122)  Acc@5:   0.000 (  0.429)
+Test: [ 652/781]  Time: 0.222 (0.257)  Loss:   6.981 ( 6.929)  Acc@1:   0.000 (  0.122)  Acc@5:   0.000 (  0.428)
+Test: [ 653/781]  Time: 0.414 (0.257)  Loss:   6.892 ( 6.929)  Acc@1:   0.000 (  0.122)  Acc@5:   0.000 (  0.428)
+Test: [ 654/781]  Time: 0.269 (0.257)  Loss:   6.870 ( 6.929)  Acc@1:   0.000 (  0.122)  Acc@5:   3.125 (  0.432)
+Test: [ 655/781]  Time: 0.211 (0.257)  Loss:   6.931 ( 6.929)  Acc@1:   0.000 (  0.121)  Acc@5:   0.000 (  0.431)
+Test: [ 656/781]  Time: 0.122 (0.257)  Loss:   6.945 ( 6.929)  Acc@1:   0.000 (  0.121)  Acc@5:   0.000 (  0.430)
+Test: [ 657/781]  Time: 0.492 (0.257)  Loss:   6.878 ( 6.929)  Acc@1:   0.000 (  0.121)  Acc@5:   0.000 (  0.430)
+Test: [ 658/781]  Time: 0.202 (0.257)  Loss:   6.777 ( 6.929)  Acc@1:   6.250 (  0.130)  Acc@5:  17.188 (  0.455)
+Test: [ 659/781]  Time: 0.267 (0.257)  Loss:   6.748 ( 6.929)  Acc@1:   4.688 (  0.137)  Acc@5:  12.500 (  0.473)
+Test: [ 660/781]  Time: 0.215 (0.257)  Loss:   6.921 ( 6.929)  Acc@1:   0.000 (  0.137)  Acc@5:   1.562 (  0.475)
+Test: [ 661/781]  Time: 0.413 (0.257)  Loss:   6.880 ( 6.929)  Acc@1:   0.000 (  0.137)  Acc@5:   0.000 (  0.474)
+Test: [ 662/781]  Time: 0.196 (0.257)  Loss:   6.867 ( 6.928)  Acc@1:   0.000 (  0.137)  Acc@5:   0.000 (  0.474)
+Test: [ 663/781]  Time: 0.201 (0.257)  Loss:   6.912 ( 6.928)  Acc@1:   0.000 (  0.136)  Acc@5:   0.000 (  0.473)
+Test: [ 664/781]  Time: 0.195 (0.257)  Loss:   7.036 ( 6.929)  Acc@1:   0.000 (  0.136)  Acc@5:   0.000 (  0.472)
+Test: [ 665/781]  Time: 0.314 (0.257)  Loss:   6.910 ( 6.929)  Acc@1:   0.000 (  0.136)  Acc@5:   0.000 (  0.472)
+Test: [ 666/781]  Time: 0.096 (0.257)  Loss:   6.961 ( 6.929)  Acc@1:   0.000 (  0.136)  Acc@5:   0.000 (  0.471)
+Test: [ 667/781]  Time: 0.199 (0.257)  Loss:   7.154 ( 6.929)  Acc@1:   0.000 (  0.136)  Acc@5:   0.000 (  0.470)
+Test: [ 668/781]  Time: 0.205 (0.257)  Loss:   7.081 ( 6.929)  Acc@1:   0.000 (  0.135)  Acc@5:   0.000 (  0.469)
+Test: [ 669/781]  Time: 0.491 (0.257)  Loss:   6.901 ( 6.929)  Acc@1:   0.000 (  0.135)  Acc@5:   0.000 (  0.469)
+Test: [ 670/781]  Time: 0.199 (0.257)  Loss:   6.940 ( 6.929)  Acc@1:   0.000 (  0.135)  Acc@5:   0.000 (  0.468)
+Test: [ 671/781]  Time: 0.302 (0.257)  Loss:   6.867 ( 6.929)  Acc@1:   0.000 (  0.135)  Acc@5:   0.000 (  0.467)
+Test: [ 672/781]  Time: 0.200 (0.257)  Loss:   6.936 ( 6.929)  Acc@1:   0.000 (  0.135)  Acc@5:   0.000 (  0.467)
+Test: [ 673/781]  Time: 0.606 (0.257)  Loss:   6.841 ( 6.929)  Acc@1:   3.125 (  0.139)  Acc@5:   6.250 (  0.475)
+Test: [ 674/781]  Time: 0.199 (0.257)  Loss:   6.776 ( 6.929)  Acc@1:   4.688 (  0.146)  Acc@5:   4.688 (  0.481)
+Test: [ 675/781]  Time: 0.200 (0.257)  Loss:   6.887 ( 6.929)  Acc@1:   0.000 (  0.146)  Acc@5:   0.000 (  0.481)
+Test: [ 676/781]  Time: 0.195 (0.257)  Loss:   6.980 ( 6.929)  Acc@1:   0.000 (  0.145)  Acc@5:   0.000 (  0.480)
+Test: [ 677/781]  Time: 0.604 (0.258)  Loss:   6.972 ( 6.929)  Acc@1:   0.000 (  0.145)  Acc@5:   0.000 (  0.479)
+Test: [ 678/781]  Time: 0.203 (0.258)  Loss:   6.889 ( 6.929)  Acc@1:   0.000 (  0.145)  Acc@5:   0.000 (  0.479)
+Test: [ 679/781]  Time: 0.309 (0.258)  Loss:   6.866 ( 6.929)  Acc@1:   0.000 (  0.145)  Acc@5:   0.000 (  0.478)
+Test: [ 680/781]  Time: 0.189 (0.258)  Loss:   6.932 ( 6.929)  Acc@1:   0.000 (  0.145)  Acc@5:   0.000 (  0.477)
+Test: [ 681/781]  Time: 0.286 (0.258)  Loss:   6.861 ( 6.929)  Acc@1:   0.000 (  0.144)  Acc@5:   0.000 (  0.477)
+Test: [ 682/781]  Time: 0.201 (0.258)  Loss:   6.837 ( 6.928)  Acc@1:   0.000 (  0.144)  Acc@5:   0.000 (  0.476)
+Test: [ 683/781]  Time: 0.593 (0.258)  Loss:   7.012 ( 6.928)  Acc@1:   0.000 (  0.144)  Acc@5:   0.000 (  0.475)
+Test: [ 684/781]  Time: 0.216 (0.258)  Loss:   6.866 ( 6.928)  Acc@1:   0.000 (  0.144)  Acc@5:   1.562 (  0.477)
+Test: [ 685/781]  Time: 0.211 (0.258)  Loss:   6.911 ( 6.928)  Acc@1:   0.000 (  0.143)  Acc@5:   0.000 (  0.476)
+Test: [ 686/781]  Time: 0.202 (0.258)  Loss:   7.004 ( 6.928)  Acc@1:   0.000 (  0.143)  Acc@5:   0.000 (  0.475)
+Test: [ 687/781]  Time: 0.297 (0.258)  Loss:   6.927 ( 6.928)  Acc@1:   0.000 (  0.143)  Acc@5:   0.000 (  0.475)
+Test: [ 688/781]  Time: 0.286 (0.258)  Loss:   6.915 ( 6.928)  Acc@1:   0.000 (  0.143)  Acc@5:   0.000 (  0.474)
+Test: [ 689/781]  Time: 0.408 (0.258)  Loss:   7.030 ( 6.929)  Acc@1:   0.000 (  0.143)  Acc@5:   0.000 (  0.473)
+Test: [ 690/781]  Time: 0.207 (0.258)  Loss:   6.886 ( 6.929)  Acc@1:   0.000 (  0.142)  Acc@5:   0.000 (  0.473)
+Test: [ 691/781]  Time: 0.268 (0.258)  Loss:   7.040 ( 6.929)  Acc@1:   0.000 (  0.142)  Acc@5:   0.000 (  0.472)
+Test: [ 692/781]  Time: 0.115 (0.258)  Loss:   7.082 ( 6.929)  Acc@1:   0.000 (  0.142)  Acc@5:   0.000 (  0.471)
+Test: [ 693/781]  Time: 0.313 (0.258)  Loss:   6.906 ( 6.929)  Acc@1:   0.000 (  0.142)  Acc@5:   0.000 (  0.471)
+Test: [ 694/781]  Time: 0.268 (0.258)  Loss:   6.842 ( 6.929)  Acc@1:   0.000 (  0.142)  Acc@5:   0.000 (  0.470)
+Test: [ 695/781]  Time: 0.304 (0.258)  Loss:   6.872 ( 6.929)  Acc@1:   0.000 (  0.141)  Acc@5:   0.000 (  0.469)
+Test: [ 696/781]  Time: 0.212 (0.258)  Loss:   6.968 ( 6.929)  Acc@1:   0.000 (  0.141)  Acc@5:   0.000 (  0.469)
+Test: [ 697/781]  Time: 0.403 (0.258)  Loss:   6.899 ( 6.929)  Acc@1:   0.000 (  0.141)  Acc@5:   0.000 (  0.468)
+Test: [ 698/781]  Time: 0.212 (0.258)  Loss:   6.890 ( 6.929)  Acc@1:   0.000 (  0.141)  Acc@5:   0.000 (  0.467)
+Test: [ 699/781]  Time: 0.390 (0.258)  Loss:   6.931 ( 6.929)  Acc@1:   0.000 (  0.141)  Acc@5:   1.562 (  0.469)
+Test: [ 700/781]  Time: 0.212 (0.258)  Loss:   6.915 ( 6.929)  Acc@1:   0.000 (  0.140)  Acc@5:   0.000 (  0.468)
+Test: [ 701/781]  Time: 0.309 (0.258)  Loss:   6.948 ( 6.929)  Acc@1:   0.000 (  0.140)  Acc@5:   0.000 (  0.467)
+Test: [ 702/781]  Time: 0.193 (0.258)  Loss:   7.086 ( 6.929)  Acc@1:   1.562 (  0.142)  Acc@5:   1.562 (  0.469)
+Test: [ 703/781]  Time: 1.014 (0.259)  Loss:   7.029 ( 6.929)  Acc@1:   0.000 (  0.142)  Acc@5:   0.000 (  0.468)
+Test: [ 704/781]  Time: 0.254 (0.259)  Loss:   6.962 ( 6.929)  Acc@1:   0.000 (  0.142)  Acc@5:   0.000 (  0.468)
+Test: [ 705/781]  Time: 0.134 (0.259)  Loss:   6.966 ( 6.929)  Acc@1:   0.000 (  0.142)  Acc@5:   0.000 (  0.467)
+Test: [ 706/781]  Time: 0.265 (0.259)  Loss:   6.899 ( 6.929)  Acc@1:   0.000 (  0.141)  Acc@5:   0.000 (  0.466)
+Test: [ 707/781]  Time: 0.429 (0.259)  Loss:   6.981 ( 6.929)  Acc@1:   0.000 (  0.141)  Acc@5:   0.000 (  0.466)
+Test: [ 708/781]  Time: 0.203 (0.259)  Loss:   6.944 ( 6.929)  Acc@1:   0.000 (  0.141)  Acc@5:   0.000 (  0.465)
+Test: [ 709/781]  Time: 0.199 (0.259)  Loss:   7.055 ( 6.929)  Acc@1:   0.000 (  0.141)  Acc@5:   0.000 (  0.464)
+Test: [ 710/781]  Time: 0.200 (0.259)  Loss:   6.810 ( 6.929)  Acc@1:   1.562 (  0.143)  Acc@5:   4.688 (  0.470)
+Test: [ 711/781]  Time: 0.480 (0.259)  Loss:   6.938 ( 6.929)  Acc@1:   0.000 (  0.143)  Acc@5:   0.000 (  0.470)
+Test: [ 712/781]  Time: 0.204 (0.259)  Loss:   7.003 ( 6.929)  Acc@1:   0.000 (  0.142)  Acc@5:   0.000 (  0.469)
+Test: [ 713/781]  Time: 0.203 (0.259)  Loss:   6.849 ( 6.929)  Acc@1:   0.000 (  0.142)  Acc@5:   0.000 (  0.468)
+Test: [ 714/781]  Time: 0.202 (0.259)  Loss:   6.855 ( 6.929)  Acc@1:   0.000 (  0.142)  Acc@5:   0.000 (  0.468)
+Test: [ 715/781]  Time: 0.588 (0.260)  Loss:   6.940 ( 6.929)  Acc@1:   0.000 (  0.142)  Acc@5:   0.000 (  0.467)
+Test: [ 716/781]  Time: 0.143 (0.259)  Loss:   7.014 ( 6.929)  Acc@1:   0.000 (  0.142)  Acc@5:   0.000 (  0.466)
+Test: [ 717/781]  Time: 0.177 (0.259)  Loss:   6.921 ( 6.929)  Acc@1:   0.000 (  0.141)  Acc@5:   0.000 (  0.466)
+Test: [ 718/781]  Time: 0.104 (0.259)  Loss:   6.937 ( 6.929)  Acc@1:   0.000 (  0.141)  Acc@5:   0.000 (  0.465)
+Test: [ 719/781]  Time: 0.203 (0.259)  Loss:   6.885 ( 6.929)  Acc@1:   0.000 (  0.141)  Acc@5:   0.000 (  0.464)
+Test: [ 720/781]  Time: 0.265 (0.259)  Loss:   6.843 ( 6.929)  Acc@1:   0.000 (  0.141)  Acc@5:   1.562 (  0.466)
+Test: [ 721/781]  Time: 0.207 (0.259)  Loss:   6.930 ( 6.929)  Acc@1:   0.000 (  0.141)  Acc@5:   0.000 (  0.465)
+Test: [ 722/781]  Time: 0.209 (0.259)  Loss:   6.892 ( 6.929)  Acc@1:   0.000 (  0.140)  Acc@5:   0.000 (  0.465)
+Test: [ 723/781]  Time: 0.420 (0.259)  Loss:   6.936 ( 6.929)  Acc@1:   0.000 (  0.140)  Acc@5:   0.000 (  0.464)
+Test: [ 724/781]  Time: 0.269 (0.259)  Loss:   7.075 ( 6.929)  Acc@1:   0.000 (  0.140)  Acc@5:   0.000 (  0.463)
+Test: [ 725/781]  Time: 0.211 (0.259)  Loss:   6.869 ( 6.929)  Acc@1:   0.000 (  0.140)  Acc@5:   0.000 (  0.463)
+Test: [ 726/781]  Time: 0.216 (0.259)  Loss:   6.808 ( 6.929)  Acc@1:   0.000 (  0.140)  Acc@5:   0.000 (  0.462)
+Test: [ 727/781]  Time: 0.396 (0.259)  Loss:   6.811 ( 6.929)  Acc@1:   0.000 (  0.140)  Acc@5:   0.000 (  0.461)
+Test: [ 728/781]  Time: 0.202 (0.259)  Loss:   7.034 ( 6.929)  Acc@1:   0.000 (  0.139)  Acc@5:   0.000 (  0.461)
+Test: [ 729/781]  Time: 0.207 (0.259)  Loss:   7.073 ( 6.929)  Acc@1:   0.000 (  0.139)  Acc@5:   0.000 (  0.460)
+Test: [ 730/781]  Time: 0.372 (0.259)  Loss:   6.838 ( 6.929)  Acc@1:   0.000 (  0.139)  Acc@5:   0.000 (  0.460)
+Test: [ 731/781]  Time: 0.902 (0.260)  Loss:   7.008 ( 6.929)  Acc@1:   0.000 (  0.139)  Acc@5:   0.000 (  0.459)
+Test: [ 732/781]  Time: 0.209 (0.260)  Loss:   7.003 ( 6.929)  Acc@1:   0.000 (  0.139)  Acc@5:   0.000 (  0.458)
+Test: [ 733/781]  Time: 0.203 (0.260)  Loss:   7.004 ( 6.929)  Acc@1:   0.000 (  0.138)  Acc@5:   0.000 (  0.458)
+Test: [ 734/781]  Time: 0.201 (0.260)  Loss:   7.048 ( 6.929)  Acc@1:   0.000 (  0.138)  Acc@5:   0.000 (  0.457)
+Test: [ 735/781]  Time: 0.415 (0.260)  Loss:   7.181 ( 6.930)  Acc@1:   0.000 (  0.138)  Acc@5:   1.562 (  0.459)
+Test: [ 736/781]  Time: 0.197 (0.260)  Loss:   6.983 ( 6.930)  Acc@1:   3.125 (  0.142)  Acc@5:   3.125 (  0.462)
+Test: [ 737/781]  Time: 0.283 (0.260)  Loss:   6.864 ( 6.930)  Acc@1:   1.562 (  0.144)  Acc@5:   1.562 (  0.464)
+Test: [ 738/781]  Time: 0.284 (0.260)  Loss:   7.035 ( 6.930)  Acc@1:   0.000 (  0.144)  Acc@5:   0.000 (  0.463)
+Test: [ 739/781]  Time: 0.705 (0.261)  Loss:   7.003 ( 6.930)  Acc@1:   0.000 (  0.144)  Acc@5:   0.000 (  0.462)
+Test: [ 740/781]  Time: 0.208 (0.261)  Loss:   7.067 ( 6.930)  Acc@1:   0.000 (  0.143)  Acc@5:   0.000 (  0.462)
+Test: [ 741/781]  Time: 0.204 (0.261)  Loss:   7.154 ( 6.931)  Acc@1:   0.000 (  0.143)  Acc@5:   0.000 (  0.461)
+Test: [ 742/781]  Time: 0.213 (0.260)  Loss:   7.355 ( 6.931)  Acc@1:   0.000 (  0.143)  Acc@5:   0.000 (  0.461)
+Test: [ 743/781]  Time: 0.255 (0.260)  Loss:   7.074 ( 6.931)  Acc@1:   0.000 (  0.143)  Acc@5:   0.000 (  0.460)
+Test: [ 744/781]  Time: 0.149 (0.260)  Loss:   7.013 ( 6.931)  Acc@1:   0.000 (  0.143)  Acc@5:   0.000 (  0.459)
+Test: [ 745/781]  Time: 0.197 (0.260)  Loss:   6.764 ( 6.931)  Acc@1:   0.000 (  0.142)  Acc@5:   0.000 (  0.459)
+Test: [ 746/781]  Time: 0.199 (0.260)  Loss:   6.965 ( 6.931)  Acc@1:   0.000 (  0.142)  Acc@5:   4.688 (  0.464)
+Test: [ 747/781]  Time: 0.485 (0.260)  Loss:   6.655 ( 6.931)  Acc@1:   1.562 (  0.144)  Acc@5:  15.625 (  0.485)
+Test: [ 748/781]  Time: 0.208 (0.260)  Loss:   6.781 ( 6.931)  Acc@1:   0.000 (  0.144)  Acc@5:   1.562 (  0.486)
+Test: [ 749/781]  Time: 0.202 (0.260)  Loss:   7.046 ( 6.931)  Acc@1:   0.000 (  0.144)  Acc@5:   0.000 (  0.485)
+Test: [ 750/781]  Time: 0.198 (0.260)  Loss:   6.978 ( 6.931)  Acc@1:   0.000 (  0.144)  Acc@5:   0.000 (  0.485)
+Test: [ 751/781]  Time: 0.590 (0.261)  Loss:   7.046 ( 6.931)  Acc@1:   0.000 (  0.143)  Acc@5:   0.000 (  0.484)
+Test: [ 752/781]  Time: 0.213 (0.261)  Loss:   7.050 ( 6.931)  Acc@1:   0.000 (  0.143)  Acc@5:   0.000 (  0.483)
+Test: [ 753/781]  Time: 0.203 (0.260)  Loss:   7.052 ( 6.931)  Acc@1:   0.000 (  0.143)  Acc@5:   0.000 (  0.483)
+Test: [ 754/781]  Time: 0.200 (0.260)  Loss:   7.002 ( 6.931)  Acc@1:   0.000 (  0.143)  Acc@5:   0.000 (  0.482)
+Test: [ 755/781]  Time: 0.386 (0.261)  Loss:   6.950 ( 6.931)  Acc@1:   0.000 (  0.143)  Acc@5:   0.000 (  0.482)
+Test: [ 756/781]  Time: 0.214 (0.261)  Loss:   6.781 ( 6.931)  Acc@1:   0.000 (  0.142)  Acc@5:   0.000 (  0.481)
+Test: [ 757/781]  Time: 0.200 (0.260)  Loss:   6.933 ( 6.931)  Acc@1:   0.000 (  0.142)  Acc@5:   0.000 (  0.480)
+Test: [ 758/781]  Time: 0.199 (0.260)  Loss:   6.920 ( 6.931)  Acc@1:   0.000 (  0.142)  Acc@5:   0.000 (  0.480)
+Test: [ 759/781]  Time: 0.703 (0.261)  Loss:   6.861 ( 6.931)  Acc@1:   0.000 (  0.142)  Acc@5:   0.000 (  0.479)
+Test: [ 760/781]  Time: 0.206 (0.261)  Loss:   6.933 ( 6.931)  Acc@1:   0.000 (  0.142)  Acc@5:   0.000 (  0.478)
+Test: [ 761/781]  Time: 0.196 (0.261)  Loss:   6.858 ( 6.931)  Acc@1:   0.000 (  0.141)  Acc@5:   0.000 (  0.478)
+Test: [ 762/781]  Time: 0.197 (0.261)  Loss:   7.020 ( 6.931)  Acc@1:   0.000 (  0.141)  Acc@5:   0.000 (  0.477)
+Test: [ 763/781]  Time: 0.473 (0.261)  Loss:   7.153 ( 6.931)  Acc@1:   0.000 (  0.141)  Acc@5:   0.000 (  0.477)
+Test: [ 764/781]  Time: 0.216 (0.261)  Loss:   6.954 ( 6.932)  Acc@1:   0.000 (  0.141)  Acc@5:   0.000 (  0.476)
+Test: [ 765/781]  Time: 0.206 (0.261)  Loss:   6.840 ( 6.931)  Acc@1:   0.000 (  0.141)  Acc@5:   0.000 (  0.475)
+Test: [ 766/781]  Time: 0.277 (0.261)  Loss:   6.948 ( 6.931)  Acc@1:   0.000 (  0.141)  Acc@5:   0.000 (  0.475)
+Test: [ 767/781]  Time: 0.518 (0.261)  Loss:   7.014 ( 6.932)  Acc@1:   0.000 (  0.140)  Acc@5:   0.000 (  0.474)
+Test: [ 768/781]  Time: 0.211 (0.261)  Loss:   7.019 ( 6.932)  Acc@1:   0.000 (  0.140)  Acc@5:   1.562 (  0.475)
+Test: [ 769/781]  Time: 0.195 (0.261)  Loss:   6.904 ( 6.932)  Acc@1:   0.000 (  0.140)  Acc@5:   0.000 (  0.475)
+Test: [ 770/781]  Time: 0.131 (0.261)  Loss:   6.878 ( 6.932)  Acc@1:   0.000 (  0.140)  Acc@5:   0.000 (  0.474)
+Test: [ 771/781]  Time: 0.272 (0.261)  Loss:   6.983 ( 6.932)  Acc@1:   0.000 (  0.140)  Acc@5:   1.562 (  0.476)
+Test: [ 772/781]  Time: 0.288 (0.261)  Loss:   6.999 ( 6.932)  Acc@1:   0.000 (  0.139)  Acc@5:   1.562 (  0.477)
+Test: [ 773/781]  Time: 0.204 (0.261)  Loss:   6.966 ( 6.932)  Acc@1:   0.000 (  0.139)  Acc@5:   0.000 (  0.476)
+Test: [ 774/781]  Time: 0.207 (0.261)  Loss:   7.063 ( 6.932)  Acc@1:   0.000 (  0.139)  Acc@5:   0.000 (  0.476)
+Test: [ 775/781]  Time: 1.002 (0.262)  Loss:   6.832 ( 6.932)  Acc@1:   0.000 (  0.139)  Acc@5:   0.000 (  0.475)
+Test: [ 776/781]  Time: 0.181 (0.262)  Loss:   6.836 ( 6.932)  Acc@1:   0.000 (  0.139)  Acc@5:   0.000 (  0.475)
+Test: [ 777/781]  Time: 0.112 (0.261)  Loss:   6.959 ( 6.932)  Acc@1:   0.000 (  0.139)  Acc@5:   0.000 (  0.474)
+Test: [ 778/781]  Time: 0.106 (0.261)  Loss:   6.869 ( 6.932)  Acc@1:   0.000 (  0.138)  Acc@5:   0.000 (  0.473)
+Test: [ 779/781]  Time: 0.269 (0.261)  Loss:   6.990 ( 6.932)  Acc@1:   0.000 (  0.138)  Acc@5:   0.000 (  0.473)
+Test: [ 780/781]  Time: 0.114 (0.261)  Loss:   7.083 ( 6.932)  Acc@1:   0.000 (  0.138)  Acc@5:   0.000 (  0.472)
+Test: [ 781/781]  Time: 0.099 (0.261)  Loss:   6.904 ( 6.932)  Acc@1:   0.000 (  0.138)  Acc@5:   0.000 (  0.472)
+Current checkpoints:
+ ('./output/train/20251212-102209-levit_128-224/checkpoint-0.pth.tar', 0.138)
+
+*** Best metric: 0.138 (epoch 0)
+--result
+[
+    {
+        "epoch": 0,
+        "train": {
+            "loss": 6.945829391479492
+        },
+        "validation": {
+            "loss": 6.93185703125,
+            "top1": 0.138,
+            "top5": 0.472
+        }
+    }
+]
+Executing command: torchrun --nproc_per_node=4 train.py --data-dir /data/teco-data/imagenet --model levit_128 --sched cosine --epochs 1 --warmup-epochs 5 --lr 0.4 --reprob 0.5 --remode pixel --batch-size 16 --amp -j 4 --log-interval 1 

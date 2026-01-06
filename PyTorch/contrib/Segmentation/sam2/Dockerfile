@@ -1,0 +1,7 @@
+ARG FROM_IMAGE_NAME=jfrog.tecorigin.net/tecotp-docker/release/ubuntu22.04/x86_64/pytorch:1.3.0-torch_sdaa1.10.0
+ FROM ${FROM_IMAGE_NAME}
+ ADD requirements.txt /workspace/
+ RUN rm -rf /bin/sh && ln -s /bin/bash /bin/sh
+ ADD . /sam2
+ RUN source activate torch_env && pip install --no-cache-dir-r requirements.txt
+

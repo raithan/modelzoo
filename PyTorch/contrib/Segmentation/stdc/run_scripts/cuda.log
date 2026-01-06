@@ -1,0 +1,1095 @@
+2025/07/26 04:30:59 - mmengine - INFO - 
+------------------------------------------------------------
+System environment:
+    sys.platform: linux
+    Python: 3.8.20 (default, Oct  3 2024, 15:24:27) [GCC 11.2.0]
+    CUDA available: True
+    MUSA available: False
+    numpy_random_seed: 109050555
+    GPU 0: NVIDIA GeForce RTX 4090
+    CUDA_HOME: /usr/local/cuda
+    NVCC: Cuda compilation tools, release 12.6, V12.6.85
+    GCC: gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
+    PyTorch: 2.0.1+cu117
+    PyTorch compiling details: PyTorch built with:
+  - GCC 9.3
+  - C++ Version: 201703
+  - Intel(R) oneAPI Math Kernel Library Version 2022.2-Product Build 20220804 for Intel(R) 64 architecture applications
+  - Intel(R) MKL-DNN v2.7.3 (Git Hash 6dbeffbae1f23cbbeae17adb7b5b13f1f37c080e)
+  - OpenMP 201511 (a.k.a. OpenMP 4.5)
+  - LAPACK is enabled (usually provided by MKL)
+  - NNPACK is enabled
+  - CPU capability usage: AVX2
+  - CUDA Runtime 11.7
+  - NVCC architecture flags: -gencode;arch=compute_37,code=sm_37;-gencode;arch=compute_50,code=sm_50;-gencode;arch=compute_60,code=sm_60;-gencode;arch=compute_70,code=sm_70;-gencode;arch=compute_75,code=sm_75;-gencode;arch=compute_80,code=sm_80;-gencode;arch=compute_86,code=sm_86
+  - CuDNN 8.5
+  - Magma 2.6.1
+  - Build settings: BLAS_INFO=mkl, BUILD_TYPE=Release, CUDA_VERSION=11.7, CUDNN_VERSION=8.5.0, CXX_COMPILER=/opt/rh/devtoolset-9/root/usr/bin/c++, CXX_FLAGS= -D_GLIBCXX_USE_CXX11_ABI=0 -fabi-version=11 -Wno-deprecated -fvisibility-inlines-hidden -DUSE_PTHREADPOOL -DNDEBUG -DUSE_KINETO -DLIBKINETO_NOROCTRACER -DUSE_FBGEMM -DUSE_QNNPACK -DUSE_PYTORCH_QNNPACK -DUSE_XNNPACK -DSYMBOLICATE_MOBILE_DEBUG_HANDLE -O2 -fPIC -Wall -Wextra -Werror=return-type -Werror=non-virtual-dtor -Werror=bool-operation -Wnarrowing -Wno-missing-field-initializers -Wno-type-limits -Wno-array-bounds -Wno-unknown-pragmas -Wunused-local-typedefs -Wno-unused-parameter -Wno-unused-function -Wno-unused-result -Wno-strict-overflow -Wno-strict-aliasing -Wno-error=deprecated-declarations -Wno-stringop-overflow -Wno-psabi -Wno-error=pedantic -Wno-error=redundant-decls -Wno-error=old-style-cast -fdiagnostics-color=always -faligned-new -Wno-unused-but-set-variable -Wno-maybe-uninitialized -fno-math-errno -fno-trapping-math -Werror=format -Werror=cast-function-type -Wno-stringop-overflow, LAPACK_INFO=mkl, PERF_WITH_AVX=1, PERF_WITH_AVX2=1, PERF_WITH_AVX512=1, TORCH_DISABLE_GPU_ASSERTS=ON, TORCH_VERSION=2.0.1, USE_CUDA=ON, USE_CUDNN=ON, USE_EXCEPTION_PTR=1, USE_GFLAGS=OFF, USE_GLOG=OFF, USE_MKL=ON, USE_MKLDNN=ON, USE_MPI=OFF, USE_NCCL=1, USE_NNPACK=ON, USE_OPENMP=ON, USE_ROCM=OFF, 
+
+    TorchVision: 0.15.2+cu117
+    OpenCV: 4.12.0
+    MMEngine: 0.10.7
+
+Runtime environment:
+    cudnn_benchmark: True
+    dist_cfg: {'backend': 'nccl'}
+    mp_cfg: {'mp_start_method': 'fork', 'opencv_num_threads': 0}
+    seed: 109050555
+    Distributed launcher: none
+    Distributed training: False
+    GPU number: 1
+------------------------------------------------------------
+
+2025/07/26 04:31:00 - mmengine - INFO - Config:
+crop_size = (
+    512,
+    1024,
+)
+data_preprocessor = dict(
+    bgr_to_rgb=True,
+    mean=[
+        123.675,
+        116.28,
+        103.53,
+    ],
+    pad_val=0,
+    seg_pad_val=255,
+    size=(
+        512,
+        1024,
+    ),
+    std=[
+        58.395,
+        57.12,
+        57.375,
+    ],
+    type='SegDataPreProcessor')
+data_root = '/home/02/Cityscapes'
+dataset_type = 'CityscapesDataset'
+default_hooks = dict(
+    checkpoint=dict(by_epoch=False, interval=8000, type='CheckpointHook'),
+    logger=dict(interval=1, log_metric_by_epoch=False, type='LoggerHook'),
+    param_scheduler=dict(type='ParamSchedulerHook'),
+    sampler_seed=dict(type='DistSamplerSeedHook'),
+    timer=dict(type='IterTimerHook'),
+    visualization=dict(type='SegVisualizationHook'))
+default_scope = 'mmseg'
+env_cfg = dict(
+    cudnn_benchmark=True,
+    dist_cfg=dict(backend='nccl'),
+    mp_cfg=dict(mp_start_method='fork', opencv_num_threads=0))
+img_ratios = [
+    0.5,
+    0.75,
+    1.0,
+    1.25,
+    1.5,
+    1.75,
+]
+launcher = 'none'
+load_from = '/home/02/lf/mmsegmentation-main/pretrained/stdc1.pth'
+log_level = 'INFO'
+log_processor = dict(by_epoch=False)
+model = dict(
+    auxiliary_head=[
+        dict(
+            align_corners=False,
+            channels=64,
+            concat_input=False,
+            in_channels=128,
+            in_index=2,
+            loss_decode=dict(
+                loss_weight=1.0, type='CrossEntropyLoss', use_sigmoid=False),
+            norm_cfg=dict(requires_grad=True, type='BN'),
+            num_classes=19,
+            num_convs=1,
+            sampler=dict(min_kept=10000, thresh=0.7, type='OHEMPixelSampler'),
+            type='FCNHead'),
+        dict(
+            align_corners=False,
+            channels=64,
+            concat_input=False,
+            in_channels=128,
+            in_index=1,
+            loss_decode=dict(
+                loss_weight=1.0, type='CrossEntropyLoss', use_sigmoid=False),
+            norm_cfg=dict(requires_grad=True, type='BN'),
+            num_classes=19,
+            num_convs=1,
+            sampler=dict(min_kept=10000, thresh=0.7, type='OHEMPixelSampler'),
+            type='FCNHead'),
+        dict(
+            align_corners=True,
+            boundary_threshold=0.1,
+            channels=64,
+            concat_input=False,
+            in_channels=256,
+            in_index=0,
+            loss_decode=[
+                dict(
+                    loss_name='loss_ce',
+                    loss_weight=1.0,
+                    type='CrossEntropyLoss',
+                    use_sigmoid=True),
+                dict(loss_name='loss_dice', loss_weight=1.0, type='DiceLoss'),
+            ],
+            norm_cfg=dict(requires_grad=True, type='BN'),
+            num_classes=2,
+            num_convs=1,
+            type='STDCHead'),
+    ],
+    backbone=dict(
+        backbone_cfg=dict(
+            act_cfg=dict(type='ReLU'),
+            bottleneck_type='cat',
+            channels=(
+                32,
+                64,
+                256,
+                512,
+                1024,
+            ),
+            in_channels=3,
+            norm_cfg=dict(requires_grad=True, type='BN'),
+            num_convs=4,
+            stdc_type='STDCNet1',
+            type='STDCNet',
+            with_final_conv=False),
+        ffm_cfg=dict(in_channels=384, out_channels=256, scale_factor=4),
+        last_in_channels=(
+            1024,
+            512,
+        ),
+        out_channels=128,
+        type='STDCContextPathNet'),
+    data_preprocessor=dict(
+        bgr_to_rgb=True,
+        mean=[
+            123.675,
+            116.28,
+            103.53,
+        ],
+        pad_val=0,
+        seg_pad_val=255,
+        size=(
+            512,
+            1024,
+        ),
+        std=[
+            58.395,
+            57.12,
+            57.375,
+        ],
+        type='SegDataPreProcessor'),
+    decode_head=dict(
+        align_corners=True,
+        channels=256,
+        concat_input=False,
+        dropout_ratio=0.1,
+        in_channels=256,
+        in_index=3,
+        loss_decode=dict(
+            loss_weight=1.0, type='CrossEntropyLoss', use_sigmoid=False),
+        norm_cfg=dict(requires_grad=True, type='BN'),
+        num_classes=19,
+        num_convs=1,
+        sampler=dict(min_kept=10000, thresh=0.7, type='OHEMPixelSampler'),
+        type='FCNHead'),
+    pretrained=None,
+    test_cfg=dict(mode='whole'),
+    train_cfg=dict(),
+    type='EncoderDecoder')
+norm_cfg = dict(requires_grad=True, type='BN')
+optim_wrapper = dict(
+    clip_grad=None,
+    loss_scale='dynamic',
+    optimizer=dict(lr=0.01, momentum=0.9, type='SGD', weight_decay=0.0005),
+    type='AmpOptimWrapper')
+optimizer = dict(lr=0.01, momentum=0.9, type='SGD', weight_decay=0.0005)
+param_scheduler = [
+    dict(begin=0, by_epoch=False, end=1000, start_factor=0.1, type='LinearLR'),
+    dict(
+        begin=1000,
+        by_epoch=False,
+        end=80000,
+        eta_min=0.0001,
+        power=0.9,
+        type='PolyLR'),
+]
+resume = False
+test_cfg = dict(type='TestLoop')
+test_dataloader = dict(
+    batch_size=1,
+    dataset=dict(
+        data_prefix=dict(
+            img_path='leftImg8bit/val', seg_map_path='gtFine/val'),
+        data_root='/home/02/Cityscapes',
+        pipeline=[
+            dict(type='LoadImageFromFile'),
+            dict(keep_ratio=True, scale=(
+                2048,
+                1024,
+            ), type='Resize'),
+            dict(type='LoadAnnotations'),
+            dict(type='PackSegInputs'),
+        ],
+        type='CityscapesDataset'),
+    num_workers=0,
+    persistent_workers=False,
+    sampler=dict(shuffle=False, type='DefaultSampler'))
+test_evaluator = dict(
+    iou_metrics=[
+        'mIoU',
+    ], type='IoUMetric')
+test_pipeline = [
+    dict(type='LoadImageFromFile'),
+    dict(keep_ratio=True, scale=(
+        2048,
+        1024,
+    ), type='Resize'),
+    dict(type='LoadAnnotations'),
+    dict(type='PackSegInputs'),
+]
+train_cfg = dict(max_iters=80000, type='IterBasedTrainLoop', val_interval=8000)
+train_dataloader = dict(
+    batch_size=12,
+    dataset=dict(
+        data_prefix=dict(
+            img_path='leftImg8bit/train', seg_map_path='gtFine/train'),
+        data_root='/home/02/Cityscapes',
+        pipeline=[
+            dict(type='LoadImageFromFile'),
+            dict(type='LoadAnnotations'),
+            dict(
+                keep_ratio=True,
+                ratio_range=(
+                    0.5,
+                    2.0,
+                ),
+                scale=(
+                    2048,
+                    1024,
+                ),
+                type='RandomResize'),
+            dict(
+                cat_max_ratio=0.75, crop_size=(
+                    512,
+                    1024,
+                ), type='RandomCrop'),
+            dict(prob=0.5, type='RandomFlip'),
+            dict(type='PhotoMetricDistortion'),
+            dict(type='PackSegInputs'),
+        ],
+        type='CityscapesDataset'),
+    num_workers=0,
+    persistent_workers=False,
+    sampler=dict(shuffle=True, type='InfiniteSampler'))
+train_pipeline = [
+    dict(type='LoadImageFromFile'),
+    dict(type='LoadAnnotations'),
+    dict(
+        keep_ratio=True,
+        ratio_range=(
+            0.5,
+            2.0,
+        ),
+        scale=(
+            2048,
+            1024,
+        ),
+        type='RandomResize'),
+    dict(cat_max_ratio=0.75, crop_size=(
+        512,
+        1024,
+    ), type='RandomCrop'),
+    dict(prob=0.5, type='RandomFlip'),
+    dict(type='PhotoMetricDistortion'),
+    dict(type='PackSegInputs'),
+]
+tta_model = dict(type='SegTTAModel')
+tta_pipeline = [
+    dict(backend_args=None, type='LoadImageFromFile'),
+    dict(
+        transforms=[
+            [
+                dict(keep_ratio=True, scale_factor=0.5, type='Resize'),
+                dict(keep_ratio=True, scale_factor=0.75, type='Resize'),
+                dict(keep_ratio=True, scale_factor=1.0, type='Resize'),
+                dict(keep_ratio=True, scale_factor=1.25, type='Resize'),
+                dict(keep_ratio=True, scale_factor=1.5, type='Resize'),
+                dict(keep_ratio=True, scale_factor=1.75, type='Resize'),
+            ],
+            [
+                dict(direction='horizontal', prob=0.0, type='RandomFlip'),
+                dict(direction='horizontal', prob=1.0, type='RandomFlip'),
+            ],
+            [
+                dict(type='LoadAnnotations'),
+            ],
+            [
+                dict(type='PackSegInputs'),
+            ],
+        ],
+        type='TestTimeAug'),
+]
+val_cfg = dict(type='ValLoop')
+val_dataloader = dict(
+    batch_size=1,
+    dataset=dict(
+        data_prefix=dict(
+            img_path='leftImg8bit/val', seg_map_path='gtFine/val'),
+        data_root='/home/02/Cityscapes',
+        pipeline=[
+            dict(type='LoadImageFromFile'),
+            dict(keep_ratio=True, scale=(
+                2048,
+                1024,
+            ), type='Resize'),
+            dict(type='LoadAnnotations'),
+            dict(type='PackSegInputs'),
+        ],
+        type='CityscapesDataset'),
+    num_workers=4,
+    persistent_workers=True,
+    sampler=dict(shuffle=False, type='DefaultSampler'))
+val_evaluator = dict(
+    iou_metrics=[
+        'mIoU',
+    ], type='IoUMetric')
+vis_backends = [
+    dict(type='LocalVisBackend'),
+]
+visualizer = dict(
+    name='visualizer',
+    type='SegLocalVisualizer',
+    vis_backends=[
+        dict(type='LocalVisBackend'),
+    ])
+work_dir = './work_dirs/stdc1_4xb12-80k_cityscapes-512x1024'
+
+2025/07/26 04:31:03 - mmengine - INFO - Distributed training is not used, all SyncBatchNorm (SyncBN) layers in the model will be automatically reverted to BatchNormXd layers if they are used.
+2025/07/26 04:31:03 - mmengine - INFO - Hooks will be executed in the following order:
+before_run:
+(VERY_HIGH   ) RuntimeInfoHook                    
+(BELOW_NORMAL) LoggerHook                         
+ -------------------- 
+before_train:
+(VERY_HIGH   ) RuntimeInfoHook                    
+(NORMAL      ) IterTimerHook                      
+(VERY_LOW    ) CheckpointHook                     
+ -------------------- 
+before_train_epoch:
+(VERY_HIGH   ) RuntimeInfoHook                    
+(NORMAL      ) IterTimerHook                      
+(NORMAL      ) DistSamplerSeedHook                
+ -------------------- 
+before_train_iter:
+(VERY_HIGH   ) RuntimeInfoHook                    
+(NORMAL      ) IterTimerHook                      
+ -------------------- 
+after_train_iter:
+(VERY_HIGH   ) RuntimeInfoHook                    
+(NORMAL      ) IterTimerHook                      
+(BELOW_NORMAL) LoggerHook                         
+(LOW         ) ParamSchedulerHook                 
+(VERY_LOW    ) CheckpointHook                     
+ -------------------- 
+after_train_epoch:
+(NORMAL      ) IterTimerHook                      
+(LOW         ) ParamSchedulerHook                 
+(VERY_LOW    ) CheckpointHook                     
+ -------------------- 
+before_val:
+(VERY_HIGH   ) RuntimeInfoHook                    
+ -------------------- 
+before_val_epoch:
+(NORMAL      ) IterTimerHook                      
+ -------------------- 
+before_val_iter:
+(NORMAL      ) IterTimerHook                      
+ -------------------- 
+after_val_iter:
+(NORMAL      ) IterTimerHook                      
+(NORMAL      ) SegVisualizationHook               
+(BELOW_NORMAL) LoggerHook                         
+ -------------------- 
+after_val_epoch:
+(VERY_HIGH   ) RuntimeInfoHook                    
+(NORMAL      ) IterTimerHook                      
+(BELOW_NORMAL) LoggerHook                         
+(LOW         ) ParamSchedulerHook                 
+(VERY_LOW    ) CheckpointHook                     
+ -------------------- 
+after_val:
+(VERY_HIGH   ) RuntimeInfoHook                    
+ -------------------- 
+after_train:
+(VERY_HIGH   ) RuntimeInfoHook                    
+(VERY_LOW    ) CheckpointHook                     
+ -------------------- 
+before_test:
+(VERY_HIGH   ) RuntimeInfoHook                    
+ -------------------- 
+before_test_epoch:
+(NORMAL      ) IterTimerHook                      
+ -------------------- 
+before_test_iter:
+(NORMAL      ) IterTimerHook                      
+ -------------------- 
+after_test_iter:
+(NORMAL      ) IterTimerHook                      
+(NORMAL      ) SegVisualizationHook               
+(BELOW_NORMAL) LoggerHook                         
+ -------------------- 
+after_test_epoch:
+(VERY_HIGH   ) RuntimeInfoHook                    
+(NORMAL      ) IterTimerHook                      
+(BELOW_NORMAL) LoggerHook                         
+ -------------------- 
+after_test:
+(VERY_HIGH   ) RuntimeInfoHook                    
+ -------------------- 
+after_run:
+(BELOW_NORMAL) LoggerHook                         
+ -------------------- 
+2025/07/26 04:31:04 - mmengine - WARNING - The prefix is not set in metric class IoUMetric.
+Name of parameter - Initialization information
+
+backbone.backbone.stages.0.conv.weight - torch.Size([32, 3, 3, 3]): 
+Initialized by user-defined `init_weights` in ConvModule  
+
+backbone.backbone.stages.0.bn.weight - torch.Size([32]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+backbone.backbone.stages.0.bn.bias - torch.Size([32]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+backbone.backbone.stages.1.conv.weight - torch.Size([64, 32, 3, 3]): 
+Initialized by user-defined `init_weights` in ConvModule  
+
+backbone.backbone.stages.1.bn.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+backbone.backbone.stages.1.bn.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+backbone.backbone.stages.2.0.layers.0.conv.weight - torch.Size([128, 64, 1, 1]): 
+Initialized by user-defined `init_weights` in ConvModule  
+
+backbone.backbone.stages.2.0.layers.0.bn.weight - torch.Size([128]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+backbone.backbone.stages.2.0.layers.0.bn.bias - torch.Size([128]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+backbone.backbone.stages.2.0.layers.1.conv.weight - torch.Size([64, 128, 3, 3]): 
+Initialized by user-defined `init_weights` in ConvModule  
+
+backbone.backbone.stages.2.0.layers.1.bn.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+backbone.backbone.stages.2.0.layers.1.bn.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+backbone.backbone.stages.2.0.layers.2.conv.weight - torch.Size([32, 64, 3, 3]): 
+Initialized by user-defined `init_weights` in ConvModule  
+
+backbone.backbone.stages.2.0.layers.2.bn.weight - torch.Size([32]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+backbone.backbone.stages.2.0.layers.2.bn.bias - torch.Size([32]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+backbone.backbone.stages.2.0.layers.3.conv.weight - torch.Size([32, 32, 3, 3]): 
+Initialized by user-defined `init_weights` in ConvModule  
+
+backbone.backbone.stages.2.0.layers.3.bn.weight - torch.Size([32]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+backbone.backbone.stages.2.0.layers.3.bn.bias - torch.Size([32]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+backbone.backbone.stages.2.0.downsample.conv.weight - torch.Size([128, 1, 3, 3]): 
+Initialized by user-defined `init_weights` in ConvModule  
+
+backbone.backbone.stages.2.0.downsample.bn.weight - torch.Size([128]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+backbone.backbone.stages.2.0.downsample.bn.bias - torch.Size([128]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+backbone.backbone.stages.2.1.layers.0.conv.weight - torch.Size([128, 256, 1, 1]): 
+Initialized by user-defined `init_weights` in ConvModule  
+
+backbone.backbone.stages.2.1.layers.0.bn.weight - torch.Size([128]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+backbone.backbone.stages.2.1.layers.0.bn.bias - torch.Size([128]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+backbone.backbone.stages.2.1.layers.1.conv.weight - torch.Size([64, 128, 3, 3]): 
+Initialized by user-defined `init_weights` in ConvModule  
+
+backbone.backbone.stages.2.1.layers.1.bn.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+backbone.backbone.stages.2.1.layers.1.bn.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+backbone.backbone.stages.2.1.layers.2.conv.weight - torch.Size([32, 64, 3, 3]): 
+Initialized by user-defined `init_weights` in ConvModule  
+
+backbone.backbone.stages.2.1.layers.2.bn.weight - torch.Size([32]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+backbone.backbone.stages.2.1.layers.2.bn.bias - torch.Size([32]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+backbone.backbone.stages.2.1.layers.3.conv.weight - torch.Size([32, 32, 3, 3]): 
+Initialized by user-defined `init_weights` in ConvModule  
+
+backbone.backbone.stages.2.1.layers.3.bn.weight - torch.Size([32]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+backbone.backbone.stages.2.1.layers.3.bn.bias - torch.Size([32]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+backbone.backbone.stages.3.0.layers.0.conv.weight - torch.Size([256, 256, 1, 1]): 
+Initialized by user-defined `init_weights` in ConvModule  
+
+backbone.backbone.stages.3.0.layers.0.bn.weight - torch.Size([256]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+backbone.backbone.stages.3.0.layers.0.bn.bias - torch.Size([256]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+backbone.backbone.stages.3.0.layers.1.conv.weight - torch.Size([128, 256, 3, 3]): 
+Initialized by user-defined `init_weights` in ConvModule  
+
+backbone.backbone.stages.3.0.layers.1.bn.weight - torch.Size([128]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+backbone.backbone.stages.3.0.layers.1.bn.bias - torch.Size([128]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+backbone.backbone.stages.3.0.layers.2.conv.weight - torch.Size([64, 128, 3, 3]): 
+Initialized by user-defined `init_weights` in ConvModule  
+
+backbone.backbone.stages.3.0.layers.2.bn.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+backbone.backbone.stages.3.0.layers.2.bn.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+backbone.backbone.stages.3.0.layers.3.conv.weight - torch.Size([64, 64, 3, 3]): 
+Initialized by user-defined `init_weights` in ConvModule  
+
+backbone.backbone.stages.3.0.layers.3.bn.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+backbone.backbone.stages.3.0.layers.3.bn.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+backbone.backbone.stages.3.0.downsample.conv.weight - torch.Size([256, 1, 3, 3]): 
+Initialized by user-defined `init_weights` in ConvModule  
+
+backbone.backbone.stages.3.0.downsample.bn.weight - torch.Size([256]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+backbone.backbone.stages.3.0.downsample.bn.bias - torch.Size([256]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+backbone.backbone.stages.3.1.layers.0.conv.weight - torch.Size([256, 512, 1, 1]): 
+Initialized by user-defined `init_weights` in ConvModule  
+
+backbone.backbone.stages.3.1.layers.0.bn.weight - torch.Size([256]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+backbone.backbone.stages.3.1.layers.0.bn.bias - torch.Size([256]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+backbone.backbone.stages.3.1.layers.1.conv.weight - torch.Size([128, 256, 3, 3]): 
+Initialized by user-defined `init_weights` in ConvModule  
+
+backbone.backbone.stages.3.1.layers.1.bn.weight - torch.Size([128]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+backbone.backbone.stages.3.1.layers.1.bn.bias - torch.Size([128]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+backbone.backbone.stages.3.1.layers.2.conv.weight - torch.Size([64, 128, 3, 3]): 
+Initialized by user-defined `init_weights` in ConvModule  
+
+backbone.backbone.stages.3.1.layers.2.bn.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+backbone.backbone.stages.3.1.layers.2.bn.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+backbone.backbone.stages.3.1.layers.3.conv.weight - torch.Size([64, 64, 3, 3]): 
+Initialized by user-defined `init_weights` in ConvModule  
+
+backbone.backbone.stages.3.1.layers.3.bn.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+backbone.backbone.stages.3.1.layers.3.bn.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+backbone.backbone.stages.4.0.layers.0.conv.weight - torch.Size([512, 512, 1, 1]): 
+Initialized by user-defined `init_weights` in ConvModule  
+
+backbone.backbone.stages.4.0.layers.0.bn.weight - torch.Size([512]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+backbone.backbone.stages.4.0.layers.0.bn.bias - torch.Size([512]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+backbone.backbone.stages.4.0.layers.1.conv.weight - torch.Size([256, 512, 3, 3]): 
+Initialized by user-defined `init_weights` in ConvModule  
+
+backbone.backbone.stages.4.0.layers.1.bn.weight - torch.Size([256]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+backbone.backbone.stages.4.0.layers.1.bn.bias - torch.Size([256]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+backbone.backbone.stages.4.0.layers.2.conv.weight - torch.Size([128, 256, 3, 3]): 
+Initialized by user-defined `init_weights` in ConvModule  
+
+backbone.backbone.stages.4.0.layers.2.bn.weight - torch.Size([128]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+backbone.backbone.stages.4.0.layers.2.bn.bias - torch.Size([128]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+backbone.backbone.stages.4.0.layers.3.conv.weight - torch.Size([128, 128, 3, 3]): 
+Initialized by user-defined `init_weights` in ConvModule  
+
+backbone.backbone.stages.4.0.layers.3.bn.weight - torch.Size([128]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+backbone.backbone.stages.4.0.layers.3.bn.bias - torch.Size([128]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+backbone.backbone.stages.4.0.downsample.conv.weight - torch.Size([512, 1, 3, 3]): 
+Initialized by user-defined `init_weights` in ConvModule  
+
+backbone.backbone.stages.4.0.downsample.bn.weight - torch.Size([512]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+backbone.backbone.stages.4.0.downsample.bn.bias - torch.Size([512]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+backbone.backbone.stages.4.1.layers.0.conv.weight - torch.Size([512, 1024, 1, 1]): 
+Initialized by user-defined `init_weights` in ConvModule  
+
+backbone.backbone.stages.4.1.layers.0.bn.weight - torch.Size([512]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+backbone.backbone.stages.4.1.layers.0.bn.bias - torch.Size([512]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+backbone.backbone.stages.4.1.layers.1.conv.weight - torch.Size([256, 512, 3, 3]): 
+Initialized by user-defined `init_weights` in ConvModule  
+
+backbone.backbone.stages.4.1.layers.1.bn.weight - torch.Size([256]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+backbone.backbone.stages.4.1.layers.1.bn.bias - torch.Size([256]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+backbone.backbone.stages.4.1.layers.2.conv.weight - torch.Size([128, 256, 3, 3]): 
+Initialized by user-defined `init_weights` in ConvModule  
+
+backbone.backbone.stages.4.1.layers.2.bn.weight - torch.Size([128]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+backbone.backbone.stages.4.1.layers.2.bn.bias - torch.Size([128]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+backbone.backbone.stages.4.1.layers.3.conv.weight - torch.Size([128, 128, 3, 3]): 
+Initialized by user-defined `init_weights` in ConvModule  
+
+backbone.backbone.stages.4.1.layers.3.bn.weight - torch.Size([128]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+backbone.backbone.stages.4.1.layers.3.bn.bias - torch.Size([128]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+backbone.arms.0.conv_layer.conv.weight - torch.Size([128, 1024, 3, 3]): 
+Initialized by user-defined `init_weights` in ConvModule  
+
+backbone.arms.0.conv_layer.bn.weight - torch.Size([128]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+backbone.arms.0.conv_layer.bn.bias - torch.Size([128]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+backbone.arms.0.atten_conv_layer.1.conv.weight - torch.Size([128, 128, 1, 1]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+backbone.arms.0.atten_conv_layer.1.bn.weight - torch.Size([128]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+backbone.arms.0.atten_conv_layer.1.bn.bias - torch.Size([128]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+backbone.arms.1.conv_layer.conv.weight - torch.Size([128, 512, 3, 3]): 
+Initialized by user-defined `init_weights` in ConvModule  
+
+backbone.arms.1.conv_layer.bn.weight - torch.Size([128]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+backbone.arms.1.conv_layer.bn.bias - torch.Size([128]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+backbone.arms.1.atten_conv_layer.1.conv.weight - torch.Size([128, 128, 1, 1]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+backbone.arms.1.atten_conv_layer.1.bn.weight - torch.Size([128]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+backbone.arms.1.atten_conv_layer.1.bn.bias - torch.Size([128]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+backbone.convs.0.conv.weight - torch.Size([128, 128, 3, 3]): 
+Initialized by user-defined `init_weights` in ConvModule  
+
+backbone.convs.0.bn.weight - torch.Size([128]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+backbone.convs.0.bn.bias - torch.Size([128]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+backbone.convs.1.conv.weight - torch.Size([128, 128, 3, 3]): 
+Initialized by user-defined `init_weights` in ConvModule  
+
+backbone.convs.1.bn.weight - torch.Size([128]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+backbone.convs.1.bn.bias - torch.Size([128]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+backbone.conv_avg.conv.weight - torch.Size([128, 1024, 1, 1]): 
+Initialized by user-defined `init_weights` in ConvModule  
+
+backbone.conv_avg.bn.weight - torch.Size([128]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+backbone.conv_avg.bn.bias - torch.Size([128]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+backbone.ffm.conv0.conv.weight - torch.Size([256, 384, 1, 1]): 
+Initialized by user-defined `init_weights` in ConvModule  
+
+backbone.ffm.conv0.bn.weight - torch.Size([256]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+backbone.ffm.conv0.bn.bias - torch.Size([256]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+backbone.ffm.attention.1.conv.weight - torch.Size([64, 256, 1, 1]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+backbone.ffm.attention.2.conv.weight - torch.Size([256, 64, 1, 1]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+decode_head.conv_seg.weight - torch.Size([19, 256, 1, 1]): 
+NormalInit: mean=0, std=0.01, bias=0 
+
+decode_head.conv_seg.bias - torch.Size([19]): 
+NormalInit: mean=0, std=0.01, bias=0 
+
+decode_head.convs.0.conv.weight - torch.Size([256, 256, 3, 3]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+decode_head.convs.0.bn.weight - torch.Size([256]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+decode_head.convs.0.bn.bias - torch.Size([256]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+auxiliary_head.0.conv_seg.weight - torch.Size([19, 64, 1, 1]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+auxiliary_head.0.conv_seg.bias - torch.Size([19]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+auxiliary_head.0.convs.0.conv.weight - torch.Size([64, 128, 3, 3]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+auxiliary_head.0.convs.0.bn.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+auxiliary_head.0.convs.0.bn.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+auxiliary_head.1.conv_seg.weight - torch.Size([19, 64, 1, 1]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+auxiliary_head.1.conv_seg.bias - torch.Size([19]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+auxiliary_head.1.convs.0.conv.weight - torch.Size([64, 128, 3, 3]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+auxiliary_head.1.convs.0.bn.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+auxiliary_head.1.convs.0.bn.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+auxiliary_head.2.fusion_kernel - torch.Size([1, 3, 1, 1]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+auxiliary_head.2.conv_seg.weight - torch.Size([2, 64, 1, 1]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+auxiliary_head.2.conv_seg.bias - torch.Size([2]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+auxiliary_head.2.convs.0.conv.weight - torch.Size([64, 256, 3, 3]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+auxiliary_head.2.convs.0.bn.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+auxiliary_head.2.convs.0.bn.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+2025/07/26 04:31:04 - mmengine - INFO - Load checkpoint from /home/02/lf/mmsegmentation-main/pretrained/stdc1.pth
+2025/07/26 04:31:04 - mmengine - WARNING - "FileClient" will be deprecated in future. Please use io functions in https://mmengine.readthedocs.io/en/latest/api/fileio.html#file-io
+2025/07/26 04:31:04 - mmengine - WARNING - "HardDiskBackend" is the alias of "LocalBackend" and the former will be deprecated in future.
+2025/07/26 04:31:04 - mmengine - INFO - Checkpoints will be saved to /home/02/lf/mmsegmentation-main/work_dirs/stdc1_4xb12-80k_cityscapes-512x1024.
+2025/07/26 04:31:10 - mmengine - INFO - Iter(train) [    1/80000]  lr: 1.0000e-03  eta: 5 days, 17:09:47  time: 6.1724  data_time: 1.5471  memory: 14585  loss: 9.2602  decode.loss_ce: 2.7658  decode.acc_seg: 8.9106  aux_0.loss_ce: 2.7054  aux_0.acc_seg: 6.4381  aux_1.loss_ce: 2.6914  aux_1.acc_seg: 10.5903  aux_2.loss_ce: 0.7506  aux_2.loss_dice: 0.3469  aux_2.acc_seg: 30.6872
+2025/07/26 04:31:12 - mmengine - INFO - Iter(train) [    2/80000]  lr: 1.0090e-03  eta: 3 days, 20:18:13  time: 4.1538  data_time: 1.7002  memory: 4938  loss: 9.4185  decode.loss_ce: 2.8126  decode.acc_seg: 6.0257  aux_0.loss_ce: 2.7607  aux_0.acc_seg: 7.1690  aux_1.loss_ce: 2.7511  aux_1.acc_seg: 16.4996  aux_2.loss_ce: 0.7478  aux_2.loss_dice: 0.3463  aux_2.acc_seg: 32.4242
+2025/07/26 04:31:14 - mmengine - INFO - Iter(train) [    3/80000]  lr: 1.0180e-03  eta: 3 days, 3:42:19  time: 3.4069  data_time: 1.6807  memory: 4971  loss: 9.0180  decode.loss_ce: 2.6755  decode.acc_seg: 10.0744  aux_0.loss_ce: 2.6280  aux_0.acc_seg: 7.8948  aux_1.loss_ce: 2.6240  aux_1.acc_seg: 17.6743  aux_2.loss_ce: 0.7456  aux_2.loss_dice: 0.3450  aux_2.acc_seg: 33.3064
+2025/07/26 04:31:16 - mmengine - INFO - Iter(train) [    4/80000]  lr: 1.0270e-03  eta: 2 days, 18:15:46  time: 2.9820  data_time: 1.6192  memory: 4971  loss: 9.0520  decode.loss_ce: 2.6791  decode.acc_seg: 13.2535  aux_0.loss_ce: 2.6389  aux_0.acc_seg: 6.2490  aux_1.loss_ce: 2.6482  aux_1.acc_seg: 11.6486  aux_2.loss_ce: 0.7424  aux_2.loss_dice: 0.3435  aux_2.acc_seg: 39.4117
+2025/07/26 04:31:18 - mmengine - INFO - Iter(train) [    5/80000]  lr: 1.0360e-03  eta: 2 days, 13:26:50  time: 2.7653  data_time: 1.6209  memory: 4971  loss: 9.0432  decode.loss_ce: 2.6834  decode.acc_seg: 11.3381  aux_0.loss_ce: 2.6371  aux_0.acc_seg: 10.3368  aux_1.loss_ce: 2.6384  aux_1.acc_seg: 25.7683  aux_2.loss_ce: 0.7418  aux_2.loss_dice: 0.3425  aux_2.acc_seg: 41.3221
+2025/07/26 04:31:20 - mmengine - INFO - Iter(train) [    6/80000]  lr: 1.0450e-03  eta: 2 days, 9:45:01  time: 2.5990  data_time: 1.5999  memory: 4971  loss: 9.1235  decode.loss_ce: 2.7108  decode.acc_seg: 13.3300  aux_0.loss_ce: 2.6560  aux_0.acc_seg: 10.1807  aux_1.loss_ce: 2.6769  aux_1.acc_seg: 10.8561  aux_2.loss_ce: 0.7388  aux_2.loss_dice: 0.3409  aux_2.acc_seg: 46.5516
+2025/07/26 04:31:21 - mmengine - INFO - Iter(train) [    7/80000]  lr: 1.0541e-03  eta: 2 days, 6:56:30  time: 2.4726  data_time: 1.5773  memory: 4971  loss: 9.0945  decode.loss_ce: 2.7026  decode.acc_seg: 20.9322  aux_0.loss_ce: 2.6480  aux_0.acc_seg: 9.7052  aux_1.loss_ce: 2.6683  aux_1.acc_seg: 18.0892  aux_2.loss_ce: 0.7362  aux_2.loss_dice: 0.3394  aux_2.acc_seg: 48.5368
+2025/07/26 04:31:23 - mmengine - INFO - Iter(train) [    8/80000]  lr: 1.0631e-03  eta: 2 days, 5:07:32  time: 2.3909  data_time: 1.5737  memory: 4971  loss: 9.1271  decode.loss_ce: 2.7086  decode.acc_seg: 24.2213  aux_0.loss_ce: 2.6604  aux_0.acc_seg: 12.3660  aux_1.loss_ce: 2.6851  aux_1.acc_seg: 17.0828  aux_2.loss_ce: 0.7345  aux_2.loss_dice: 0.3385  aux_2.acc_seg: 45.9811
+2025/07/26 04:31:25 - mmengine - INFO - Iter(train) [    9/80000]  lr: 1.0721e-03  eta: 2 days, 3:34:45  time: 2.3213  data_time: 1.5645  memory: 4971  loss: 9.1325  decode.loss_ce: 2.7098  decode.acc_seg: 24.2469  aux_0.loss_ce: 2.6627  aux_0.acc_seg: 13.5206  aux_1.loss_ce: 2.6905  aux_1.acc_seg: 18.0971  aux_2.loss_ce: 0.7323  aux_2.loss_dice: 0.3371  aux_2.acc_seg: 51.1472
+2025/07/26 04:31:27 - mmengine - INFO - Iter(train) [   10/80000]  lr: 1.0811e-03  eta: 2 days, 2:13:17  time: 2.2602  data_time: 1.5519  memory: 4971  loss: 9.1331  decode.loss_ce: 2.7084  decode.acc_seg: 32.5982  aux_0.loss_ce: 2.6691  aux_0.acc_seg: 9.7462  aux_1.loss_ce: 2.6906  aux_1.acc_seg: 20.2016  aux_2.loss_ce: 0.7294  aux_2.loss_dice: 0.3356  aux_2.acc_seg: 56.9046
+2025/07/26 04:31:28 - mmengine - INFO - Iter(train) [   11/80000]  lr: 1.0901e-03  eta: 2 days, 1:12:19  time: 1.8188  data_time: 1.5457  memory: 4971  loss: 9.1282  decode.loss_ce: 2.7024  decode.acc_seg: 26.9316  aux_0.loss_ce: 2.6711  aux_0.acc_seg: 12.1257  aux_1.loss_ce: 2.6946  aux_1.acc_seg: 22.0328  aux_2.loss_ce: 0.7263  aux_2.loss_dice: 0.3338  aux_2.acc_seg: 52.0341
+2025/07/26 04:31:30 - mmengine - INFO - Iter(train) [   12/80000]  lr: 1.0991e-03  eta: 2 days, 0:16:23  time: 1.7764  data_time: 1.5044  memory: 4971  loss: 9.0568  decode.loss_ce: 2.6782  decode.acc_seg: 40.3432  aux_0.loss_ce: 2.6566  aux_0.acc_seg: 14.3852  aux_1.loss_ce: 2.6735  aux_1.acc_seg: 20.2636  aux_2.loss_ce: 0.7191  aux_2.loss_dice: 0.3294  aux_2.acc_seg: 70.5592
+2025/07/26 04:31:32 - mmengine - INFO - Iter(train) [   13/80000]  lr: 1.1081e-03  eta: 1 day, 23:29:28  time: 1.7566  data_time: 1.4847  memory: 4971  loss: 9.1077  decode.loss_ce: 2.6905  decode.acc_seg: 27.4134  aux_0.loss_ce: 2.6800  aux_0.acc_seg: 9.4769  aux_1.loss_ce: 2.7008  aux_1.acc_seg: 15.4371  aux_2.loss_ce: 0.7116  aux_2.loss_dice: 0.3247  aux_2.acc_seg: 74.1425
+2025/07/26 04:31:34 - mmengine - INFO - Iter(train) [   14/80000]  lr: 1.1171e-03  eta: 1 day, 22:57:52  time: 1.7665  data_time: 1.4945  memory: 4971  loss: 9.0786  decode.loss_ce: 2.6808  decode.acc_seg: 27.4288  aux_0.loss_ce: 2.6775  aux_0.acc_seg: 13.9742  aux_1.loss_ce: 2.6970  aux_1.acc_seg: 17.4633  aux_2.loss_ce: 0.7036  aux_2.loss_dice: 0.3197  aux_2.acc_seg: 74.0181
+2025/07/26 04:31:35 - mmengine - INFO - Iter(train) [   15/80000]  lr: 1.1261e-03  eta: 1 day, 22:20:46  time: 1.7463  data_time: 1.4740  memory: 4971  loss: 9.0737  decode.loss_ce: 2.6725  decode.acc_seg: 36.9499  aux_0.loss_ce: 2.6833  aux_0.acc_seg: 16.8950  aux_1.loss_ce: 2.7073  aux_1.acc_seg: 21.2537  aux_2.loss_ce: 0.6958  aux_2.loss_dice: 0.3149  aux_2.acc_seg: 73.3024
+2025/07/26 04:31:37 - mmengine - INFO - Iter(train) [   16/80000]  lr: 1.1351e-03  eta: 1 day, 21:49:43  time: 1.7410  data_time: 1.4686  memory: 4971  loss: 9.0253  decode.loss_ce: 2.6528  decode.acc_seg: 29.2320  aux_0.loss_ce: 2.6887  aux_0.acc_seg: 11.6631  aux_1.loss_ce: 2.6879  aux_1.acc_seg: 22.8579  aux_2.loss_ce: 0.6866  aux_2.loss_dice: 0.3094  aux_2.acc_seg: 83.5865
+2025/07/26 04:31:39 - mmengine - INFO - Iter(train) [   17/80000]  lr: 1.1441e-03  eta: 1 day, 21:35:31  time: 1.7577  data_time: 1.4855  memory: 4971  loss: 8.9873  decode.loss_ce: 2.6338  decode.acc_seg: 36.3916  aux_0.loss_ce: 2.6839  aux_0.acc_seg: 16.9974  aux_1.loss_ce: 2.6890  aux_1.acc_seg: 21.2784  aux_2.loss_ce: 0.6773  aux_2.loss_dice: 0.3034  aux_2.acc_seg: 82.0525
+2025/07/26 04:31:41 - mmengine - INFO - Iter(train) [   18/80000]  lr: 1.1532e-03  eta: 1 day, 21:11:49  time: 1.7491  data_time: 1.4766  memory: 4971  loss: 8.9200  decode.loss_ce: 2.6117  decode.acc_seg: 24.8423  aux_0.loss_ce: 2.6765  aux_0.acc_seg: 16.2955  aux_1.loss_ce: 2.6697  aux_1.acc_seg: 21.7966  aux_2.loss_ce: 0.6659  aux_2.loss_dice: 0.2963  aux_2.acc_seg: 88.2262
+2025/07/26 04:31:42 - mmengine - INFO - Iter(train) [   19/80000]  lr: 1.1622e-03  eta: 1 day, 20:50:08  time: 1.7452  data_time: 1.4732  memory: 4971  loss: 8.7820  decode.loss_ce: 2.5620  decode.acc_seg: 32.9524  aux_0.loss_ce: 2.6432  aux_0.acc_seg: 15.9424  aux_1.loss_ce: 2.6344  aux_1.acc_seg: 20.5316  aux_2.loss_ce: 0.6535  aux_2.loss_dice: 0.2888  aux_2.acc_seg: 91.8942
+2025/07/26 04:31:44 - mmengine - INFO - Iter(train) [   20/80000]  lr: 1.1712e-03  eta: 1 day, 20:33:18  time: 1.7507  data_time: 1.4789  memory: 4971  loss: 8.7341  decode.loss_ce: 2.5385  decode.acc_seg: 23.5533  aux_0.loss_ce: 2.6345  aux_0.acc_seg: 12.9994  aux_1.loss_ce: 2.6378  aux_1.acc_seg: 15.1755  aux_2.loss_ce: 0.6417  aux_2.loss_dice: 0.2815  aux_2.acc_seg: 91.9356
+2025/07/26 04:31:46 - mmengine - INFO - Iter(train) [   21/80000]  lr: 1.1802e-03  eta: 1 day, 20:17:48  time: 1.7512  data_time: 1.4795  memory: 4971  loss: 8.6729  decode.loss_ce: 2.5134  decode.acc_seg: 30.0202  aux_0.loss_ce: 2.6273  aux_0.acc_seg: 19.3155  aux_1.loss_ce: 2.6332  aux_1.acc_seg: 25.0384  aux_2.loss_ce: 0.6268  aux_2.loss_dice: 0.2723  aux_2.acc_seg: 93.5192
+2025/07/26 04:31:48 - mmengine - INFO - Iter(train) [   22/80000]  lr: 1.1892e-03  eta: 1 day, 20:05:25  time: 1.7590  data_time: 1.4873  memory: 4971  loss: 8.6215  decode.loss_ce: 2.4950  decode.acc_seg: 36.0337  aux_0.loss_ce: 2.6191  aux_0.acc_seg: 22.8507  aux_1.loss_ce: 2.6281  aux_1.acc_seg: 27.4966  aux_2.loss_ce: 0.6145  aux_2.loss_dice: 0.2648  aux_2.acc_seg: 95.7333
+2025/07/26 04:31:50 - mmengine - INFO - Iter(train) [   23/80000]  lr: 1.1982e-03  eta: 1 day, 19:51:44  time: 1.7624  data_time: 1.4902  memory: 4971  loss: 8.5826  decode.loss_ce: 2.4811  decode.acc_seg: 32.9883  aux_0.loss_ce: 2.6226  aux_0.acc_seg: 22.8989  aux_1.loss_ce: 2.6201  aux_1.acc_seg: 28.2003  aux_2.loss_ce: 0.6018  aux_2.loss_dice: 0.2569  aux_2.acc_seg: 95.3832
+2025/07/26 04:31:52 - mmengine - INFO - Iter(train) [   24/80000]  lr: 1.2072e-03  eta: 1 day, 20:08:25  time: 1.8093  data_time: 1.5364  memory: 4971  loss: 8.5241  decode.loss_ce: 2.4571  decode.acc_seg: 33.0836  aux_0.loss_ce: 2.6204  aux_0.acc_seg: 21.4487  aux_1.loss_ce: 2.6091  aux_1.acc_seg: 25.9375  aux_2.loss_ce: 0.5887  aux_2.loss_dice: 0.2488  aux_2.acc_seg: 96.5044
+2025/07/26 04:31:54 - mmengine - INFO - Iter(train) [   25/80000]  lr: 1.2162e-03  eta: 1 day, 20:06:56  time: 1.8356  data_time: 1.5620  memory: 4971  loss: 8.3853  decode.loss_ce: 2.4094  decode.acc_seg: 28.1501  aux_0.loss_ce: 2.5907  aux_0.acc_seg: 16.1772  aux_1.loss_ce: 2.5710  aux_1.acc_seg: 21.1220  aux_2.loss_ce: 0.5740  aux_2.loss_dice: 0.2402  aux_2.acc_seg: 96.0234
+2025/07/26 04:31:56 - mmengine - INFO - Iter(train) [   26/80000]  lr: 1.2252e-03  eta: 1 day, 20:04:37  time: 1.8584  data_time: 1.5847  memory: 4971  loss: 8.2397  decode.loss_ce: 2.3609  decode.acc_seg: 34.3645  aux_0.loss_ce: 2.5478  aux_0.acc_seg: 25.3305  aux_1.loss_ce: 2.5382  aux_1.acc_seg: 31.7464  aux_2.loss_ce: 0.5611  aux_2.loss_dice: 0.2318  aux_2.acc_seg: 96.8224
+2025/07/26 04:31:58 - mmengine - INFO - Iter(train) [   27/80000]  lr: 1.2342e-03  eta: 1 day, 20:01:50  time: 1.8630  data_time: 1.5887  memory: 4971  loss: 8.1814  decode.loss_ce: 2.3434  decode.acc_seg: 39.6639  aux_0.loss_ce: 2.5435  aux_0.acc_seg: 33.7099  aux_1.loss_ce: 2.5237  aux_1.acc_seg: 34.4748  aux_2.loss_ce: 0.5474  aux_2.loss_dice: 0.2236  aux_2.acc_seg: 96.5279
+2025/07/26 04:31:59 - mmengine - INFO - Iter(train) [   28/80000]  lr: 1.2432e-03  eta: 1 day, 19:55:34  time: 1.8749  data_time: 1.6006  memory: 4971  loss: 8.0835  decode.loss_ce: 2.3071  decode.acc_seg: 36.0751  aux_0.loss_ce: 2.5225  aux_0.acc_seg: 23.7650  aux_1.loss_ce: 2.5040  aux_1.acc_seg: 28.5388  aux_2.loss_ce: 0.5344  aux_2.loss_dice: 0.2156  aux_2.acc_seg: 96.6151
+2025/07/26 04:32:02 - mmengine - INFO - Iter(train) [   29/80000]  lr: 1.2523e-03  eta: 1 day, 19:59:48  time: 1.9093  data_time: 1.6329  memory: 4971  loss: 8.0357  decode.loss_ce: 2.2923  decode.acc_seg: 38.0227  aux_0.loss_ce: 2.5223  aux_0.acc_seg: 33.9437  aux_1.loss_ce: 2.4909  aux_1.acc_seg: 37.3233  aux_2.loss_ce: 0.5222  aux_2.loss_dice: 0.2079  aux_2.acc_seg: 96.5436
+2025/07/26 04:32:04 - mmengine - INFO - Iter(train) [   30/80000]  lr: 1.2613e-03  eta: 1 day, 20:11:47  time: 1.9578  data_time: 1.6798  memory: 4971  loss: 7.9267  decode.loss_ce: 2.2577  decode.acc_seg: 25.0670  aux_0.loss_ce: 2.4963  aux_0.acc_seg: 22.2809  aux_1.loss_ce: 2.4655  aux_1.acc_seg: 18.8901  aux_2.loss_ce: 0.5081  aux_2.loss_dice: 0.1992  aux_2.acc_seg: 96.9939
+2025/07/26 04:32:06 - mmengine - INFO - Iter(train) [   31/80000]  lr: 1.2703e-03  eta: 1 day, 20:08:40  time: 1.9734  data_time: 1.6948  memory: 4971  loss: 7.8109  decode.loss_ce: 2.2223  decode.acc_seg: 47.5966  aux_0.loss_ce: 2.4721  aux_0.acc_seg: 35.9648  aux_1.loss_ce: 2.4280  aux_1.acc_seg: 43.0348  aux_2.loss_ce: 0.4964  aux_2.loss_dice: 0.1921  aux_2.acc_seg: 97.1354
+2025/07/26 04:32:08 - mmengine - INFO - Iter(train) [   32/80000]  lr: 1.2793e-03  eta: 1 day, 20:05:57  time: 1.9867  data_time: 1.7067  memory: 4971  loss: 7.7376  decode.loss_ce: 2.1957  decode.acc_seg: 35.8782  aux_0.loss_ce: 2.4568  aux_0.acc_seg: 29.5266  aux_1.loss_ce: 2.4150  aux_1.acc_seg: 34.7993  aux_2.loss_ce: 0.4850  aux_2.loss_dice: 0.1851  aux_2.acc_seg: 97.1192
+2025/07/26 04:32:10 - mmengine - INFO - Iter(train) [   33/80000]  lr: 1.2883e-03  eta: 1 day, 20:19:41  time: 2.0444  data_time: 1.7622  memory: 4971  loss: 7.6290  decode.loss_ce: 2.1705  decode.acc_seg: 28.3781  aux_0.loss_ce: 2.4220  aux_0.acc_seg: 25.8045  aux_1.loss_ce: 2.3852  aux_1.acc_seg: 24.1935  aux_2.loss_ce: 0.4731  aux_2.loss_dice: 0.1782  aux_2.acc_seg: 97.4594
+2025/07/26 04:32:12 - mmengine - INFO - Iter(train) [   34/80000]  lr: 1.2973e-03  eta: 1 day, 20:26:30  time: 2.0339  data_time: 1.7512  memory: 4971  loss: 7.5612  decode.loss_ce: 2.1522  decode.acc_seg: 17.8053  aux_0.loss_ce: 2.4036  aux_0.acc_seg: 18.2435  aux_1.loss_ce: 2.3721  aux_1.acc_seg: 18.8112  aux_2.loss_ce: 0.4619  aux_2.loss_dice: 0.1715  aux_2.acc_seg: 96.7701
+2025/07/26 04:32:14 - mmengine - INFO - Iter(train) [   35/80000]  lr: 1.3063e-03  eta: 1 day, 20:30:02  time: 2.0474  data_time: 1.7640  memory: 4971  loss: 7.5541  decode.loss_ce: 2.1532  decode.acc_seg: 33.6080  aux_0.loss_ce: 2.4059  aux_0.acc_seg: 30.6046  aux_1.loss_ce: 2.3793  aux_1.acc_seg: 30.4733  aux_2.loss_ce: 0.4508  aux_2.loss_dice: 0.1649  aux_2.acc_seg: 96.9277
+2025/07/26 04:32:16 - mmengine - INFO - Iter(train) [   36/80000]  lr: 1.3153e-03  eta: 1 day, 20:30:10  time: 2.0540  data_time: 1.7704  memory: 4971  loss: 7.4520  decode.loss_ce: 2.1199  decode.acc_seg: 47.1621  aux_0.loss_ce: 2.3852  aux_0.acc_seg: 35.6457  aux_1.loss_ce: 2.3481  aux_1.acc_seg: 43.0695  aux_2.loss_ce: 0.4399  aux_2.loss_dice: 0.1588  aux_2.acc_seg: 97.6815
+2025/07/26 04:32:18 - mmengine - INFO - Iter(train) [   37/80000]  lr: 1.3243e-03  eta: 1 day, 20:21:55  time: 2.0387  data_time: 1.7554  memory: 4971  loss: 7.4317  decode.loss_ce: 2.1131  decode.acc_seg: 23.7323  aux_0.loss_ce: 2.3849  aux_0.acc_seg: 25.0655  aux_1.loss_ce: 2.3519  aux_1.acc_seg: 22.4849  aux_2.loss_ce: 0.4292  aux_2.loss_dice: 0.1527  aux_2.acc_seg: 96.9784
+2025/07/26 04:32:20 - mmengine - INFO - Iter(train) [   38/80000]  lr: 1.3333e-03  eta: 1 day, 20:10:36  time: 2.0212  data_time: 1.7379  memory: 4971  loss: 7.3564  decode.loss_ce: 2.0906  decode.acc_seg: 21.8567  aux_0.loss_ce: 2.3646  aux_0.acc_seg: 24.1097  aux_1.loss_ce: 2.3361  aux_1.acc_seg: 22.5796  aux_2.loss_ce: 0.4184  aux_2.loss_dice: 0.1467  aux_2.acc_seg: 97.4518
+2025/07/26 04:32:21 - mmengine - INFO - Iter(train) [   39/80000]  lr: 1.3423e-03  eta: 1 day, 19:59:34  time: 1.9809  data_time: 1.6993  memory: 4971  loss: 7.3567  decode.loss_ce: 2.0928  decode.acc_seg: 34.6114  aux_0.loss_ce: 2.3666  aux_0.acc_seg: 29.9281  aux_1.loss_ce: 2.3464  aux_1.acc_seg: 31.4006  aux_2.loss_ce: 0.4093  aux_2.loss_dice: 0.1416  aux_2.acc_seg: 96.8667
+2025/07/26 04:32:23 - mmengine - INFO - Iter(train) [   40/80000]  lr: 1.3514e-03  eta: 1 day, 19:50:40  time: 1.9272  data_time: 1.6472  memory: 4971  loss: 7.3560  decode.loss_ce: 2.0971  decode.acc_seg: 23.8853  aux_0.loss_ce: 2.3729  aux_0.acc_seg: 31.8914  aux_1.loss_ce: 2.3475  aux_1.acc_seg: 25.1207  aux_2.loss_ce: 0.4013  aux_2.loss_dice: 0.1372  aux_2.acc_seg: 96.8583
+2025/07/26 04:32:25 - mmengine - INFO - Iter(train) [   41/80000]  lr: 1.3604e-03  eta: 1 day, 19:43:45  time: 1.9116  data_time: 1.6316  memory: 4971  loss: 7.3241  decode.loss_ce: 2.0892  decode.acc_seg: 22.9114  aux_0.loss_ce: 2.3693  aux_0.acc_seg: 22.6897  aux_1.loss_ce: 2.3429  aux_1.acc_seg: 26.0010  aux_2.loss_ce: 0.3911  aux_2.loss_dice: 0.1316  aux_2.acc_seg: 97.6630
+2025/07/26 04:32:27 - mmengine - INFO - Iter(train) [   42/80000]  lr: 1.3694e-03  eta: 1 day, 19:38:09  time: 1.8987  data_time: 1.6204  memory: 4971  loss: 7.2684  decode.loss_ce: 2.0717  decode.acc_seg: 35.2433  aux_0.loss_ce: 2.3603  aux_0.acc_seg: 34.8003  aux_1.loss_ce: 2.3282  aux_1.acc_seg: 40.9293  aux_2.loss_ce: 0.3816  aux_2.loss_dice: 0.1266  aux_2.acc_seg: 97.3286
+2025/07/26 04:32:28 - mmengine - INFO - Iter(train) [   43/80000]  lr: 1.3784e-03  eta: 1 day, 19:31:57  time: 1.8426  data_time: 1.5669  memory: 4971  loss: 7.2546  decode.loss_ce: 2.0558  decode.acc_seg: 32.7852  aux_0.loss_ce: 2.3650  aux_0.acc_seg: 28.9635  aux_1.loss_ce: 2.3367  aux_1.acc_seg: 29.3069  aux_2.loss_ce: 0.3744  aux_2.loss_dice: 0.1228  aux_2.acc_seg: 96.7516
+2025/07/26 04:32:30 - mmengine - INFO - Iter(train) [   44/80000]  lr: 1.3874e-03  eta: 1 day, 19:27:20  time: 1.8065  data_time: 1.5323  memory: 4971  loss: 7.2040  decode.loss_ce: 2.0393  decode.acc_seg: 31.8745  aux_0.loss_ce: 2.3529  aux_0.acc_seg: 40.7036  aux_1.loss_ce: 2.3252  aux_1.acc_seg: 30.2019  aux_2.loss_ce: 0.3674  aux_2.loss_dice: 0.1191  aux_2.acc_seg: 96.6328
+2025/07/26 04:32:32 - mmengine - INFO - Iter(train) [   45/80000]  lr: 1.3964e-03  eta: 1 day, 19:23:50  time: 1.7810  data_time: 1.5085  memory: 4971  loss: 7.1394  decode.loss_ce: 2.0164  decode.acc_seg: 46.4654  aux_0.loss_ce: 2.3444  aux_0.acc_seg: 41.5723  aux_1.loss_ce: 2.3040  aux_1.acc_seg: 45.6037  aux_2.loss_ce: 0.3595  aux_2.loss_dice: 0.1150  aux_2.acc_seg: 97.3262
+2025/07/26 04:32:34 - mmengine - INFO - Iter(train) [   46/80000]  lr: 1.4054e-03  eta: 1 day, 19:22:04  time: 1.7696  data_time: 1.4975  memory: 4971  loss: 7.1969  decode.loss_ce: 2.0457  decode.acc_seg: 33.5031  aux_0.loss_ce: 2.3612  aux_0.acc_seg: 35.4502  aux_1.loss_ce: 2.3267  aux_1.acc_seg: 36.1714  aux_2.loss_ce: 0.3521  aux_2.loss_dice: 0.1113  aux_2.acc_seg: 97.2362
+2025/07/26 04:32:36 - mmengine - INFO - Iter(train) [   47/80000]  lr: 1.4144e-03  eta: 1 day, 19:15:43  time: 1.7650  data_time: 1.4931  memory: 4971  loss: 7.1314  decode.loss_ce: 2.0269  decode.acc_seg: 26.0626  aux_0.loss_ce: 2.3424  aux_0.acc_seg: 31.0491  aux_1.loss_ce: 2.3097  aux_1.acc_seg: 28.0400  aux_2.loss_ce: 0.3448  aux_2.loss_dice: 0.1076  aux_2.acc_seg: 96.7525
+2025/07/26 04:32:37 - mmengine - INFO - Iter(train) [   48/80000]  lr: 1.4234e-03  eta: 1 day, 19:09:39  time: 1.7706  data_time: 1.4988  memory: 4971  loss: 7.0421  decode.loss_ce: 2.0060  decode.acc_seg: 43.5315  aux_0.loss_ce: 2.3126  aux_0.acc_seg: 42.0546  aux_1.loss_ce: 2.2800  aux_1.acc_seg: 40.1300  aux_2.loss_ce: 0.3388  aux_2.loss_dice: 0.1046  aux_2.acc_seg: 97.3165
+2025/07/26 04:32:39 - mmengine - INFO - Iter(train) [   49/80000]  lr: 1.4324e-03  eta: 1 day, 19:05:11  time: 1.7819  data_time: 1.5104  memory: 4971  loss: 7.0182  decode.loss_ce: 1.9960  decode.acc_seg: 31.9936  aux_0.loss_ce: 2.3094  aux_0.acc_seg: 31.3438  aux_1.loss_ce: 2.2808  aux_1.acc_seg: 30.3803  aux_2.loss_ce: 0.3312  aux_2.loss_dice: 0.1008  aux_2.acc_seg: 97.2481
+2025/07/26 04:32:41 - mmengine - INFO - Iter(train) [   50/80000]  lr: 1.4414e-03  eta: 1 day, 19:02:17  time: 1.7937  data_time: 1.5224  memory: 4971  loss: 6.9831  decode.loss_ce: 1.9847  decode.acc_seg: 31.4129  aux_0.loss_ce: 2.3041  aux_0.acc_seg: 29.7784  aux_1.loss_ce: 2.2719  aux_1.acc_seg: 29.1928  aux_2.loss_ce: 0.3248  aux_2.loss_dice: 0.0977  aux_2.acc_seg: 97.1593
+2025/07/26 04:32:43 - mmengine - INFO - Iter(train) [   51/80000]  lr: 1.4505e-03  eta: 1 day, 18:59:17  time: 1.7999  data_time: 1.5292  memory: 4971  loss: 6.9341  decode.loss_ce: 1.9717  decode.acc_seg: 25.7927  aux_0.loss_ce: 2.2819  aux_0.acc_seg: 29.3010  aux_1.loss_ce: 2.2669  aux_1.acc_seg: 28.3218  aux_2.loss_ce: 0.3188  aux_2.loss_dice: 0.0948  aux_2.acc_seg: 97.0053
+2025/07/26 04:32:45 - mmengine - INFO - Iter(train) [   52/80000]  lr: 1.4595e-03  eta: 1 day, 18:57:56  time: 1.8089  data_time: 1.5385  memory: 4971  loss: 6.7945  decode.loss_ce: 1.9360  decode.acc_seg: 34.0599  aux_0.loss_ce: 2.2357  aux_0.acc_seg: 34.4637  aux_1.loss_ce: 2.2163  aux_1.acc_seg: 37.6079  aux_2.loss_ce: 0.3141  aux_2.loss_dice: 0.0923  aux_2.acc_seg: 97.0708
+2025/07/26 04:32:46 - mmengine - INFO - Iter(train) [   53/80000]  lr: 1.4685e-03  eta: 1 day, 18:52:49  time: 1.8057  data_time: 1.5353  memory: 4971  loss: 6.7310  decode.loss_ce: 1.9244  decode.acc_seg: 35.1563  aux_0.loss_ce: 2.2154  aux_0.acc_seg: 43.8685  aux_1.loss_ce: 2.1933  aux_1.acc_seg: 37.1243  aux_2.loss_ce: 0.3083  aux_2.loss_dice: 0.0895  aux_2.acc_seg: 97.3704
+2025/07/26 04:32:48 - mmengine - INFO - Iter(train) [   54/80000]  lr: 1.4775e-03  eta: 1 day, 18:51:28  time: 1.8125  data_time: 1.5419  memory: 4971  loss: 6.6830  decode.loss_ce: 1.9121  decode.acc_seg: 36.5484  aux_0.loss_ce: 2.2046  aux_0.acc_seg: 37.3014  aux_1.loss_ce: 2.1781  aux_1.acc_seg: 40.0328  aux_2.loss_ce: 0.3017  aux_2.loss_dice: 0.0864  aux_2.acc_seg: 97.5078
+2025/07/26 04:32:50 - mmengine - INFO - Iter(train) [   55/80000]  lr: 1.4865e-03  eta: 1 day, 18:48:57  time: 1.8113  data_time: 1.5409  memory: 4971  loss: 6.6912  decode.loss_ce: 1.9219  decode.acc_seg: 27.7708  aux_0.loss_ce: 2.2028  aux_0.acc_seg: 29.3424  aux_1.loss_ce: 2.1857  aux_1.acc_seg: 30.0080  aux_2.loss_ce: 0.2967  aux_2.loss_dice: 0.0841  aux_2.acc_seg: 96.8592
+2025/07/26 04:32:52 - mmengine - INFO - Iter(train) [   56/80000]  lr: 1.4955e-03  eta: 1 day, 18:43:20  time: 1.7912  data_time: 1.5212  memory: 4971  loss: 6.6098  decode.loss_ce: 1.8930  decode.acc_seg: 36.3556  aux_0.loss_ce: 2.1773  aux_0.acc_seg: 32.1121  aux_1.loss_ce: 2.1657  aux_1.acc_seg: 30.9993  aux_2.loss_ce: 0.2918  aux_2.loss_dice: 0.0819  aux_2.acc_seg: 97.0722
+2025/07/26 04:32:54 - mmengine - INFO - Iter(train) [   57/80000]  lr: 1.5045e-03  eta: 1 day, 18:40:48  time: 1.8000  data_time: 1.5301  memory: 4971  loss: 6.5427  decode.loss_ce: 1.8776  decode.acc_seg: 40.1035  aux_0.loss_ce: 2.1543  aux_0.acc_seg: 37.3827  aux_1.loss_ce: 2.1439  aux_1.acc_seg: 33.2779  aux_2.loss_ce: 0.2872  aux_2.loss_dice: 0.0797  aux_2.acc_seg: 97.1294
+2025/07/26 04:32:55 - mmengine - INFO - Iter(train) [   58/80000]  lr: 1.5135e-03  eta: 1 day, 18:36:19  time: 1.7997  data_time: 1.5300  memory: 4971  loss: 6.6110  decode.loss_ce: 1.9007  decode.acc_seg: 28.4841  aux_0.loss_ce: 2.1807  aux_0.acc_seg: 27.8515  aux_1.loss_ce: 2.1699  aux_1.acc_seg: 27.0791  aux_2.loss_ce: 0.2822  aux_2.loss_dice: 0.0775  aux_2.acc_seg: 96.8080
+2025/07/26 04:32:57 - mmengine - INFO - Iter(train) [   59/80000]  lr: 1.5225e-03  eta: 1 day, 18:35:23  time: 1.8096  data_time: 1.5400  memory: 4971  loss: 6.5385  decode.loss_ce: 1.8755  decode.acc_seg: 38.9128  aux_0.loss_ce: 2.1595  aux_0.acc_seg: 38.2369  aux_1.loss_ce: 2.1479  aux_1.acc_seg: 30.8528  aux_2.loss_ce: 0.2793  aux_2.loss_dice: 0.0763  aux_2.acc_seg: 96.3755
+2025/07/26 04:32:59 - mmengine - INFO - Iter(train) [   60/80000]  lr: 1.5315e-03  eta: 1 day, 18:30:42  time: 1.7971  data_time: 1.5277  memory: 4971  loss: 6.4657  decode.loss_ce: 1.8564  decode.acc_seg: 39.6309  aux_0.loss_ce: 2.1370  aux_0.acc_seg: 40.5190  aux_1.loss_ce: 2.1244  aux_1.acc_seg: 39.0870  aux_2.loss_ce: 0.2740  aux_2.loss_dice: 0.0739  aux_2.acc_seg: 97.3750
+2025/07/26 04:33:01 - mmengine - INFO - Iter(train) [   61/80000]  lr: 1.5405e-03  eta: 1 day, 18:26:00  time: 1.7848  data_time: 1.5156  memory: 4971  loss: 6.4218  decode.loss_ce: 1.8491  decode.acc_seg: 39.2430  aux_0.loss_ce: 2.1281  aux_0.acc_seg: 42.8707  aux_1.loss_ce: 2.1019  aux_1.acc_seg: 46.1082  aux_2.loss_ce: 0.2704  aux_2.loss_dice: 0.0724  aux_2.acc_seg: 96.8348
+2025/07/26 04:33:03 - mmengine - INFO - Iter(train) [   62/80000]  lr: 1.5495e-03  eta: 1 day, 18:24:47  time: 1.7820  data_time: 1.5125  memory: 4971  loss: 6.4899  decode.loss_ce: 1.8661  decode.acc_seg: 39.1015  aux_0.loss_ce: 2.1503  aux_0.acc_seg: 35.7156  aux_1.loss_ce: 2.1359  aux_1.acc_seg: 36.7835  aux_2.loss_ce: 0.2667  aux_2.loss_dice: 0.0709  aux_2.acc_seg: 96.7079
+2025/07/26 04:33:04 - mmengine - INFO - Iter(train) [   63/80000]  lr: 1.5586e-03  eta: 1 day, 18:23:53  time: 1.7956  data_time: 1.5260  memory: 4971  loss: 6.4493  decode.loss_ce: 1.8620  decode.acc_seg: 27.7410  aux_0.loss_ce: 2.1366  aux_0.acc_seg: 33.9669  aux_1.loss_ce: 2.1207  aux_1.acc_seg: 28.1841  aux_2.loss_ce: 0.2615  aux_2.loss_dice: 0.0686  aux_2.acc_seg: 97.1035
+2025/07/26 04:33:06 - mmengine - INFO - Iter(train) [   64/80000]  lr: 1.5676e-03  eta: 1 day, 18:19:39  time: 1.7786  data_time: 1.5093  memory: 4971  loss: 6.3815  decode.loss_ce: 1.8436  decode.acc_seg: 42.2521  aux_0.loss_ce: 2.1114  aux_0.acc_seg: 42.5818  aux_1.loss_ce: 2.0998  aux_1.acc_seg: 38.2659  aux_2.loss_ce: 0.2591  aux_2.loss_dice: 0.0676  aux_2.acc_seg: 97.1442
+2025/07/26 04:33:08 - mmengine - INFO - Iter(train) [   65/80000]  lr: 1.5766e-03  eta: 1 day, 18:16:53  time: 1.7731  data_time: 1.5038  memory: 4971  loss: 6.3283  decode.loss_ce: 1.8340  decode.acc_seg: 42.2334  aux_0.loss_ce: 2.0916  aux_0.acc_seg: 38.4520  aux_1.loss_ce: 2.0811  aux_1.acc_seg: 37.3485  aux_2.loss_ce: 0.2555  aux_2.loss_dice: 0.0661  aux_2.acc_seg: 97.6492
+2025/07/26 04:33:10 - mmengine - INFO - Iter(train) [   66/80000]  lr: 1.5856e-03  eta: 1 day, 18:14:04  time: 1.7805  data_time: 1.5113  memory: 4971  loss: 6.2671  decode.loss_ce: 1.8168  decode.acc_seg: 44.6078  aux_0.loss_ce: 2.0760  aux_0.acc_seg: 42.9692  aux_1.loss_ce: 2.0565  aux_1.acc_seg: 37.0941  aux_2.loss_ce: 0.2527  aux_2.loss_dice: 0.0650  aux_2.acc_seg: 96.7491
+2025/07/26 04:33:11 - mmengine - INFO - Iter(train) [   67/80000]  lr: 1.5946e-03  eta: 1 day, 18:11:31  time: 1.7763  data_time: 1.5070  memory: 4971  loss: 6.1748  decode.loss_ce: 1.7879  decode.acc_seg: 42.6503  aux_0.loss_ce: 2.0506  aux_0.acc_seg: 45.2930  aux_1.loss_ce: 2.0229  aux_1.acc_seg: 47.8049  aux_2.loss_ce: 0.2496  aux_2.loss_dice: 0.0638  aux_2.acc_seg: 97.1760
+2025/07/26 04:33:13 - mmengine - INFO - Iter(train) [   68/80000]  lr: 1.6036e-03  eta: 1 day, 18:09:49  time: 1.7850  data_time: 1.5157  memory: 4971  loss: 6.1438  decode.loss_ce: 1.7867  decode.acc_seg: 35.9428  aux_0.loss_ce: 2.0381  aux_0.acc_seg: 36.3320  aux_1.loss_ce: 2.0086  aux_1.acc_seg: 36.7856  aux_2.loss_ce: 0.2475  aux_2.loss_dice: 0.0629  aux_2.acc_seg: 96.8251
+2025/07/26 04:33:15 - mmengine - INFO - Iter(train) [   69/80000]  lr: 1.6126e-03  eta: 1 day, 18:07:21  time: 1.7744  data_time: 1.5050  memory: 4971  loss: 6.1230  decode.loss_ce: 1.7894  decode.acc_seg: 39.7643  aux_0.loss_ce: 2.0329  aux_0.acc_seg: 41.7269  aux_1.loss_ce: 1.9975  aux_1.acc_seg: 34.6642  aux_2.loss_ce: 0.2425  aux_2.loss_dice: 0.0608  aux_2.acc_seg: 97.3471
+2025/07/26 04:33:17 - mmengine - INFO - Iter(train) [   70/80000]  lr: 1.6216e-03  eta: 1 day, 18:03:26  time: 1.7729  data_time: 1.5035  memory: 4971  loss: 6.1054  decode.loss_ce: 1.7888  decode.acc_seg: 29.5956  aux_0.loss_ce: 2.0269  aux_0.acc_seg: 32.1776  aux_1.loss_ce: 1.9880  aux_1.acc_seg: 29.4174  aux_2.loss_ce: 0.2412  aux_2.loss_dice: 0.0605  aux_2.acc_seg: 96.7144
+2025/07/26 04:33:18 - mmengine - INFO - Iter(train) [   71/80000]  lr: 1.6306e-03  eta: 1 day, 17:59:25  time: 1.7710  data_time: 1.5015  memory: 4971  loss: 6.1165  decode.loss_ce: 1.7845  decode.acc_seg: 37.8682  aux_0.loss_ce: 2.0310  aux_0.acc_seg: 32.4349  aux_1.loss_ce: 2.0043  aux_1.acc_seg: 28.8161  aux_2.loss_ce: 0.2377  aux_2.loss_dice: 0.0591  aux_2.acc_seg: 97.0489
+2025/07/26 04:33:20 - mmengine - INFO - Iter(train) [   72/80000]  lr: 1.6396e-03  eta: 1 day, 17:56:04  time: 1.7566  data_time: 1.4870  memory: 4971  loss: 6.0641  decode.loss_ce: 1.7750  decode.acc_seg: 49.2400  aux_0.loss_ce: 2.0096  aux_0.acc_seg: 48.7048  aux_1.loss_ce: 1.9864  aux_1.acc_seg: 44.4346  aux_2.loss_ce: 0.2352  aux_2.loss_dice: 0.0581  aux_2.acc_seg: 97.1336
+2025/07/26 04:33:22 - mmengine - INFO - Iter(train) [   73/80000]  lr: 1.6486e-03  eta: 1 day, 17:52:05  time: 1.7369  data_time: 1.4678  memory: 4971  loss: 6.0658  decode.loss_ce: 1.7757  decode.acc_seg: 46.3837  aux_0.loss_ce: 2.0077  aux_0.acc_seg: 46.2605  aux_1.loss_ce: 1.9905  aux_1.acc_seg: 40.5275  aux_2.loss_ce: 0.2341  aux_2.loss_dice: 0.0577  aux_2.acc_seg: 96.8842
+2025/07/26 04:33:23 - mmengine - INFO - Iter(train) [   74/80000]  lr: 1.6577e-03  eta: 1 day, 17:49:25  time: 1.7401  data_time: 1.4709  memory: 4971  loss: 6.0412  decode.loss_ce: 1.7717  decode.acc_seg: 41.9912  aux_0.loss_ce: 1.9975  aux_0.acc_seg: 40.9616  aux_1.loss_ce: 1.9855  aux_1.acc_seg: 36.5113  aux_2.loss_ce: 0.2302  aux_2.loss_dice: 0.0562  aux_2.acc_seg: 97.1522
+2025/07/26 04:33:25 - mmengine - INFO - Iter(train) [   75/80000]  lr: 1.6667e-03  eta: 1 day, 17:49:08  time: 1.7498  data_time: 1.4806  memory: 4971  loss: 5.9324  decode.loss_ce: 1.7307  decode.acc_seg: 54.3364  aux_0.loss_ce: 1.9622  aux_0.acc_seg: 47.9018  aux_1.loss_ce: 1.9562  aux_1.acc_seg: 50.2775  aux_2.loss_ce: 0.2279  aux_2.loss_dice: 0.0554  aux_2.acc_seg: 97.2518
+2025/07/26 04:33:27 - mmengine - INFO - Iter(train) [   76/80000]  lr: 1.6757e-03  eta: 1 day, 17:45:11  time: 1.7392  data_time: 1.4698  memory: 4971  loss: 5.9544  decode.loss_ce: 1.7358  decode.acc_seg: 39.4955  aux_0.loss_ce: 1.9675  aux_0.acc_seg: 37.6339  aux_1.loss_ce: 1.9717  aux_1.acc_seg: 32.6893  aux_2.loss_ce: 0.2250  aux_2.loss_dice: 0.0543  aux_2.acc_seg: 96.7026
+2025/07/26 04:33:29 - mmengine - INFO - Iter(train) [   77/80000]  lr: 1.6847e-03  eta: 1 day, 17:43:47  time: 1.7417  data_time: 1.4728  memory: 4971  loss: 5.9812  decode.loss_ce: 1.7511  decode.acc_seg: 35.4425  aux_0.loss_ce: 1.9747  aux_0.acc_seg: 35.8941  aux_1.loss_ce: 1.9797  aux_1.acc_seg: 36.1448  aux_2.loss_ce: 0.2224  aux_2.loss_dice: 0.0534  aux_2.acc_seg: 97.2846
+2025/07/26 04:33:31 - mmengine - INFO - Iter(train) [   78/80000]  lr: 1.6937e-03  eta: 1 day, 17:41:08  time: 1.7329  data_time: 1.4639  memory: 4971  loss: 5.8949  decode.loss_ce: 1.7210  decode.acc_seg: 43.5568  aux_0.loss_ce: 1.9439  aux_0.acc_seg: 41.3265  aux_1.loss_ce: 1.9581  aux_1.acc_seg: 38.7945  aux_2.loss_ce: 0.2196  aux_2.loss_dice: 0.0523  aux_2.acc_seg: 97.0742
+2025/07/26 04:33:32 - mmengine - INFO - Iter(train) [   79/80000]  lr: 1.7027e-03  eta: 1 day, 17:39:51  time: 1.7359  data_time: 1.4665  memory: 4971  loss: 5.9327  decode.loss_ce: 1.7395  decode.acc_seg: 35.5520  aux_0.loss_ce: 1.9455  aux_0.acc_seg: 35.8588  aux_1.loss_ce: 1.9765  aux_1.acc_seg: 32.6546  aux_2.loss_ce: 0.2191  aux_2.loss_dice: 0.0522  aux_2.acc_seg: 96.7623
+2025/07/26 04:33:34 - mmengine - INFO - Iter(train) [   80/80000]  lr: 1.7117e-03  eta: 1 day, 17:37:28  time: 1.7401  data_time: 1.4701  memory: 4971  loss: 5.8638  decode.loss_ce: 1.7180  decode.acc_seg: 42.4062  aux_0.loss_ce: 1.9179  aux_0.acc_seg: 36.3525  aux_1.loss_ce: 1.9601  aux_1.acc_seg: 34.6523  aux_2.loss_ce: 0.2165  aux_2.loss_dice: 0.0513  aux_2.acc_seg: 96.7438
+2025/07/26 04:33:36 - mmengine - INFO - Iter(train) [   81/80000]  lr: 1.7207e-03  eta: 1 day, 17:34:23  time: 1.7409  data_time: 1.4708  memory: 4971  loss: 5.8633  decode.loss_ce: 1.7198  decode.acc_seg: 28.1353  aux_0.loss_ce: 1.9139  aux_0.acc_seg: 25.7844  aux_1.loss_ce: 1.9621  aux_1.acc_seg: 25.3344  aux_2.loss_ce: 0.2162  aux_2.loss_dice: 0.0513  aux_2.acc_seg: 96.3132
+2025/07/26 04:33:38 - mmengine - INFO - Iter(train) [   82/80000]  lr: 1.7297e-03  eta: 1 day, 17:32:20  time: 1.7446  data_time: 1.4743  memory: 4971  loss: 5.8716  decode.loss_ce: 1.7255  decode.acc_seg: 44.7884  aux_0.loss_ce: 1.9165  aux_0.acc_seg: 41.3880  aux_1.loss_ce: 1.9658  aux_1.acc_seg: 43.8765  aux_2.loss_ce: 0.2135  aux_2.loss_dice: 0.0504  aux_2.acc_seg: 96.9838
+2025/07/26 04:33:39 - mmengine - INFO - Iter(train) [   83/80000]  lr: 1.7387e-03  eta: 1 day, 17:29:47  time: 1.7488  data_time: 1.4785  memory: 4971  loss: 5.8694  decode.loss_ce: 1.7215  decode.acc_seg: 29.2665  aux_0.loss_ce: 1.9172  aux_0.acc_seg: 26.8296  aux_1.loss_ce: 1.9687  aux_1.acc_seg: 24.6061  aux_2.loss_ce: 0.2121  aux_2.loss_dice: 0.0499  aux_2.acc_seg: 96.4836
+2025/07/26 04:33:41 - mmengine - INFO - Iter(train) [   84/80000]  lr: 1.7477e-03  eta: 1 day, 17:26:23  time: 1.7405  data_time: 1.4698  memory: 4971  loss: 5.8737  decode.loss_ce: 1.7234  decode.acc_seg: 43.3121  aux_0.loss_ce: 1.9232  aux_0.acc_seg: 42.0367  aux_1.loss_ce: 1.9672  aux_1.acc_seg: 43.8873  aux_2.loss_ce: 0.2104  aux_2.loss_dice: 0.0494  aux_2.acc_seg: 97.3230
+2025/07/26 04:33:43 - mmengine - INFO - Iter(train) [   85/80000]  lr: 1.7568e-03  eta: 1 day, 17:27:02  time: 1.7445  data_time: 1.4736  memory: 4971  loss: 5.9107  decode.loss_ce: 1.7460  decode.acc_seg: 50.0277  aux_0.loss_ce: 1.9282  aux_0.acc_seg: 47.7552  aux_1.loss_ce: 1.9776  aux_1.acc_seg: 46.8027  aux_2.loss_ce: 0.2096  aux_2.loss_dice: 0.0493  aux_2.acc_seg: 96.8338
+2025/07/26 04:33:45 - mmengine - INFO - Iter(train) [   86/80000]  lr: 1.7658e-03  eta: 1 day, 17:27:05  time: 1.7658  data_time: 1.4947  memory: 4971  loss: 5.8839  decode.loss_ce: 1.7376  decode.acc_seg: 37.9629  aux_0.loss_ce: 1.9155  aux_0.acc_seg: 39.0318  aux_1.loss_ce: 1.9745  aux_1.acc_seg: 34.2315  aux_2.loss_ce: 0.2077  aux_2.loss_dice: 0.0487  aux_2.acc_seg: 96.8321
+2025/07/26 04:33:46 - mmengine - INFO - Iter(train) [   87/80000]  lr: 1.7748e-03  eta: 1 day, 17:24:38  time: 1.7566  data_time: 1.4853  memory: 4971  loss: 5.8802  decode.loss_ce: 1.7365  decode.acc_seg: 45.8077  aux_0.loss_ce: 1.9124  aux_0.acc_seg: 47.8491  aux_1.loss_ce: 1.9761  aux_1.acc_seg: 43.5754  aux_2.loss_ce: 0.2067  aux_2.loss_dice: 0.0485  aux_2.acc_seg: 96.8356
+2025/07/26 04:33:48 - mmengine - INFO - Iter(train) [   88/80000]  lr: 1.7838e-03  eta: 1 day, 17:23:48  time: 1.7652  data_time: 1.4941  memory: 4971  loss: 5.9028  decode.loss_ce: 1.7423  decode.acc_seg: 35.5314  aux_0.loss_ce: 1.9227  aux_0.acc_seg: 32.3301  aux_1.loss_ce: 1.9852  aux_1.acc_seg: 29.7469  aux_2.loss_ce: 0.2047  aux_2.loss_dice: 0.0478  aux_2.acc_seg: 97.2311
+2025/07/26 04:33:50 - mmengine - INFO - Iter(train) [   89/80000]  lr: 1.7928e-03  eta: 1 day, 17:24:09  time: 1.7739  data_time: 1.5029  memory: 4971  loss: 5.8033  decode.loss_ce: 1.7080  decode.acc_seg: 49.2341  aux_0.loss_ce: 1.8989  aux_0.acc_seg: 45.5514  aux_1.loss_ce: 1.9483  aux_1.acc_seg: 45.4509  aux_2.loss_ce: 0.2014  aux_2.loss_dice: 0.0467  aux_2.acc_seg: 97.2568
+2025/07/26 04:33:52 - mmengine - INFO - Iter(train) [   90/80000]  lr: 1.8018e-03  eta: 1 day, 17:22:29  time: 1.7759  data_time: 1.5052  memory: 4971  loss: 5.7712  decode.loss_ce: 1.7015  decode.acc_seg: 50.2217  aux_0.loss_ce: 1.8936  aux_0.acc_seg: 48.0113  aux_1.loss_ce: 1.9302  aux_1.acc_seg: 47.1355  aux_2.loss_ce: 0.1997  aux_2.loss_dice: 0.0461  aux_2.acc_seg: 96.8541
+2025/07/26 04:33:54 - mmengine - INFO - Iter(train) [   91/80000]  lr: 1.8108e-03  eta: 1 day, 17:20:21  time: 1.7790  data_time: 1.5082  memory: 4971  loss: 5.6719  decode.loss_ce: 1.6799  decode.acc_seg: 47.8040  aux_0.loss_ce: 1.8622  aux_0.acc_seg: 45.3573  aux_1.loss_ce: 1.8864  aux_1.acc_seg: 45.9089  aux_2.loss_ce: 0.1980  aux_2.loss_dice: 0.0455  aux_2.acc_seg: 96.6232
+2025/07/26 04:33:55 - mmengine - INFO - Iter(train) [   92/80000]  lr: 1.8198e-03  eta: 1 day, 17:17:53  time: 1.7735  data_time: 1.5030  memory: 4971  loss: 5.5989  decode.loss_ce: 1.6537  decode.acc_seg: 49.5297  aux_0.loss_ce: 1.8426  aux_0.acc_seg: 48.3082  aux_1.loss_ce: 1.8606  aux_1.acc_seg: 48.5479  aux_2.loss_ce: 0.1969  aux_2.loss_dice: 0.0451  aux_2.acc_seg: 97.1209
+2025/07/26 04:33:57 - mmengine - INFO - Iter(train) [   93/80000]  lr: 1.8288e-03  eta: 1 day, 17:15:54  time: 1.7745  data_time: 1.5037  memory: 4971  loss: 5.5555  decode.loss_ce: 1.6417  decode.acc_seg: 44.8523  aux_0.loss_ce: 1.8308  aux_0.acc_seg: 42.2540  aux_1.loss_ce: 1.8431  aux_1.acc_seg: 45.1203  aux_2.loss_ce: 0.1953  aux_2.loss_dice: 0.0446  aux_2.acc_seg: 96.6005
+2025/07/26 04:33:59 - mmengine - INFO - Iter(train) [   94/80000]  lr: 1.8378e-03  eta: 1 day, 17:14:18  time: 1.7836  data_time: 1.5130  memory: 4971  loss: 5.5721  decode.loss_ce: 1.6491  decode.acc_seg: 44.4563  aux_0.loss_ce: 1.8328  aux_0.acc_seg: 39.5910  aux_1.loss_ce: 1.8518  aux_1.acc_seg: 37.3134  aux_2.loss_ce: 0.1941  aux_2.loss_dice: 0.0442  aux_2.acc_seg: 97.1506
+2025/07/26 04:34:00 - mmengine - INFO - Iter(train) [   95/80000]  lr: 1.8468e-03  eta: 1 day, 17:12:04  time: 1.7628  data_time: 1.4923  memory: 4971  loss: 5.5274  decode.loss_ce: 1.6232  decode.acc_seg: 49.9800  aux_0.loss_ce: 1.8289  aux_0.acc_seg: 43.0293  aux_1.loss_ce: 1.8393  aux_1.acc_seg: 44.4742  aux_2.loss_ce: 0.1924  aux_2.loss_dice: 0.0436  aux_2.acc_seg: 97.0897
+2025/07/26 04:34:02 - mmengine - INFO - Iter(train) [   96/80000]  lr: 1.8559e-03  eta: 1 day, 17:10:22  time: 1.7490  data_time: 1.4784  memory: 4971  loss: 5.4650  decode.loss_ce: 1.6136  decode.acc_seg: 53.1110  aux_0.loss_ce: 1.8078  aux_0.acc_seg: 51.5891  aux_1.loss_ce: 1.8099  aux_1.acc_seg: 52.3801  aux_2.loss_ce: 0.1907  aux_2.loss_dice: 0.0430  aux_2.acc_seg: 97.2903
+2025/07/26 04:34:04 - mmengine - INFO - Iter(train) [   97/80000]  lr: 1.8649e-03  eta: 1 day, 17:08:23  time: 1.7495  data_time: 1.4787  memory: 4971  loss: 5.4311  decode.loss_ce: 1.5987  decode.acc_seg: 46.5215  aux_0.loss_ce: 1.8003  aux_0.acc_seg: 40.5051  aux_1.loss_ce: 1.8000  aux_1.acc_seg: 38.6981  aux_2.loss_ce: 0.1895  aux_2.loss_dice: 0.0425  aux_2.acc_seg: 97.1304
+2025/07/26 04:34:06 - mmengine - INFO - Iter(train) [   98/80000]  lr: 1.8739e-03  eta: 1 day, 17:06:17  time: 1.7383  data_time: 1.4674  memory: 4971  loss: 5.4492  decode.loss_ce: 1.6099  decode.acc_seg: 40.5225  aux_0.loss_ce: 1.8070  aux_0.acc_seg: 40.3298  aux_1.loss_ce: 1.8016  aux_1.acc_seg: 40.6813  aux_2.loss_ce: 0.1885  aux_2.loss_dice: 0.0422  aux_2.acc_seg: 97.0649
+2025/07/26 04:34:07 - mmengine - INFO - Iter(train) [   99/80000]  lr: 1.8829e-03  eta: 1 day, 17:03:39  time: 1.7152  data_time: 1.4443  memory: 4971  loss: 5.3744  decode.loss_ce: 1.5861  decode.acc_seg: 53.0385  aux_0.loss_ce: 1.7775  aux_0.acc_seg: 49.7129  aux_1.loss_ce: 1.7786  aux_1.acc_seg: 45.3258  aux_2.loss_ce: 0.1894  aux_2.loss_dice: 0.0427  aux_2.acc_seg: 96.2443
+2025/07/26 04:34:09 - mmengine - INFO - Iter(train) [  100/80000]  lr: 1.8919e-03  eta: 1 day, 17:01:47  time: 1.7109  data_time: 1.4401  memory: 4971  loss: 5.3970  decode.loss_ce: 1.5965  decode.acc_seg: 39.8894  aux_0.loss_ce: 1.7809  aux_0.acc_seg: 40.6372  aux_1.loss_ce: 1.7904  aux_1.acc_seg: 36.6481  aux_2.loss_ce: 0.1872  aux_2.loss_dice: 0.0420  aux_2.acc_seg: 97.3612
+2025/07/26 04:34:11 - mmengine - INFO - Iter(train) [  101/80000]  lr: 1.9009e-03  eta: 1 day, 16:58:57  time: 1.7024  data_time: 1.4318  memory: 4971  loss: 5.3462  decode.loss_ce: 1.5787  decode.acc_seg: 54.0113  aux_0.loss_ce: 1.7608  aux_0.acc_seg: 48.4705  aux_1.loss_ce: 1.7776  aux_1.acc_seg: 48.1157  aux_2.loss_ce: 0.1871  aux_2.loss_dice: 0.0420  aux_2.acc_seg: 96.3456
+2025/07/26 04:34:12 - mmengine - INFO - Iter(train) [  102/80000]  lr: 1.9099e-03  eta: 1 day, 16:56:55  time: 1.7024  data_time: 1.4319  memory: 4971  loss: 5.3805  decode.loss_ce: 1.5958  decode.acc_seg: 47.3643  aux_0.loss_ce: 1.7674  aux_0.acc_seg: 43.9371  aux_1.loss_ce: 1.7909  aux_1.acc_seg: 47.3556  aux_2.loss_ce: 0.1850  aux_2.loss_dice: 0.0414  aux_2.acc_seg: 97.1520
+2025/07/26 04:34:14 - mmengine - INFO - Iter(train) [  103/80000]  lr: 1.9189e-03  eta: 1 day, 16:55:20  time: 1.7025  data_time: 1.4322  memory: 4971  loss: 5.3601  decode.loss_ce: 1.5910  decode.acc_seg: 43.4559  aux_0.loss_ce: 1.7574  aux_0.acc_seg: 43.8141  aux_1.loss_ce: 1.7887  aux_1.acc_seg: 40.3949  aux_2.loss_ce: 0.1824  aux_2.loss_dice: 0.0406  aux_2.acc_seg: 97.2029
+2025/07/26 04:34:16 - mmengine - INFO - Iter(train) [  104/80000]  lr: 1.9279e-03  eta: 1 day, 16:53:32  time: 1.6982  data_time: 1.4278  memory: 4971  loss: 5.2835  decode.loss_ce: 1.5772  decode.acc_seg: 49.0771  aux_0.loss_ce: 1.7272  aux_0.acc_seg: 52.0280  aux_1.loss_ce: 1.7576  aux_1.acc_seg: 53.3618  aux_2.loss_ce: 0.1814  aux_2.loss_dice: 0.0402  aux_2.acc_seg: 97.3883
+2025/07/26 04:34:17 - mmengine - INFO - Iter(train) [  105/80000]  lr: 1.9369e-03  eta: 1 day, 16:52:15  time: 1.7024  data_time: 1.4321  memory: 4971  loss: 5.3821  decode.loss_ce: 1.6138  decode.acc_seg: 37.4672  aux_0.loss_ce: 1.7566  aux_0.acc_seg: 30.7554  aux_1.loss_ce: 1.7903  aux_1.acc_seg: 29.8426  aux_2.loss_ce: 0.1811  aux_2.loss_dice: 0.0403  aux_2.acc_seg: 96.4142
+2025/07/26 04:34:19 - mmengine - INFO - Iter(train) [  106/80000]  lr: 1.9459e-03  eta: 1 day, 16:51:41  time: 1.7087  data_time: 1.4386  memory: 4971  loss: 5.4439  decode.loss_ce: 1.6303  decode.acc_seg: 44.4563  aux_0.loss_ce: 1.7792  aux_0.acc_seg: 38.9085  aux_1.loss_ce: 1.8126  aux_1.acc_seg: 38.0784  aux_2.loss_ce: 0.1813  aux_2.loss_dice: 0.0406  aux_2.acc_seg: 96.5978
+2025/07/26 04:34:21 - mmengine - INFO - Iter(train) [  107/80000]  lr: 1.9550e-03  eta: 1 day, 16:50:19  time: 1.7108  data_time: 1.4406  memory: 4971  loss: 5.4532  decode.loss_ce: 1.6387  decode.acc_seg: 43.7542  aux_0.loss_ce: 1.7817  aux_0.acc_seg: 40.1828  aux_1.loss_ce: 1.8135  aux_1.acc_seg: 41.6483  aux_2.loss_ce: 0.1793  aux_2.loss_dice: 0.0401  aux_2.acc_seg: 97.2066
+2025/07/26 04:34:23 - mmengine - INFO - Iter(train) [  108/80000]  lr: 1.9640e-03  eta: 1 day, 16:48:25  time: 1.7095  data_time: 1.4396  memory: 4971  loss: 5.3338  decode.loss_ce: 1.5965  decode.acc_seg: 40.9155  aux_0.loss_ce: 1.7402  aux_0.acc_seg: 44.1437  aux_1.loss_ce: 1.7795  aux_1.acc_seg: 38.5582  aux_2.loss_ce: 0.1779  aux_2.loss_dice: 0.0397  aux_2.acc_seg: 97.0537
+2025/07/26 04:34:24 - mmengine - INFO - Iter(train) [  109/80000]  lr: 1.9730e-03  eta: 1 day, 16:46:03  time: 1.7084  data_time: 1.4384  memory: 4971  loss: 5.4200  decode.loss_ce: 1.6262  decode.acc_seg: 39.6961  aux_0.loss_ce: 1.7703  aux_0.acc_seg: 37.0740  aux_1.loss_ce: 1.8062  aux_1.acc_seg: 33.4071  aux_2.loss_ce: 0.1776  aux_2.loss_dice: 0.0397  aux_2.acc_seg: 96.2353
+2025/07/26 04:34:26 - mmengine - INFO - Iter(train) [  110/80000]  lr: 1.9820e-03  eta: 1 day, 16:46:07  time: 1.7217  data_time: 1.4520  memory: 4971  loss: 5.3987  decode.loss_ce: 1.6204  decode.acc_seg: 40.2014  aux_0.loss_ce: 1.7634  aux_0.acc_seg: 40.8656  aux_1.loss_ce: 1.7972  aux_1.acc_seg: 43.4769  aux_2.loss_ce: 0.1779  aux_2.loss_dice: 0.0399  aux_2.acc_seg: 96.8635
+2025/07/26 04:34:28 - mmengine - INFO - Iter(train) [  111/80000]  lr: 1.9910e-03  eta: 1 day, 16:44:32  time: 1.7290  data_time: 1.4588  memory: 4971  loss: 5.5536  decode.loss_ce: 1.6687  decode.acc_seg: 33.0122  aux_0.loss_ce: 1.8191  aux_0.acc_seg: 34.0215  aux_1.loss_ce: 1.8506  aux_1.acc_seg: 25.9294  aux_2.loss_ce: 0.1760  aux_2.loss_dice: 0.0393  aux_2.acc_seg: 96.6688
+2025/07/26 04:34:30 - mmengine - INFO - Iter(train) [  112/80000]  lr: 2.0000e-03  eta: 1 day, 16:43:09  time: 1.7318  data_time: 1.4614  memory: 4971  loss: 5.6464  decode.loss_ce: 1.7119  decode.acc_seg: 36.8145  aux_0.loss_ce: 1.8467  aux_0.acc_seg: 38.9811  aux_1.loss_ce: 1.8753  aux_1.acc_seg: 37.5365  aux_2.loss_ce: 0.1739  aux_2.loss_dice: 0.0386  aux_2.acc_seg: 97.9279
+2025/07/26 04:34:31 - mmengine - INFO - Iter(train) [  113/80000]  lr: 2.0090e-03  eta: 1 day, 16:40:58  time: 1.7246  data_time: 1.4543  memory: 4971  loss: 5.6497  decode.loss_ce: 1.7218  decode.acc_seg: 46.4102  aux_0.loss_ce: 1.8433  aux_0.acc_seg: 47.4953  aux_1.loss_ce: 1.8714  aux_1.acc_seg: 43.0004  aux_2.loss_ce: 0.1744  aux_2.loss_dice: 0.0388  aux_2.acc_seg: 96.7477
+2025/07/26 04:34:33 - mmengine - INFO - Iter(train) [  114/80000]  lr: 2.0180e-03  eta: 1 day, 16:38:54  time: 1.7198  data_time: 1.4496  memory: 4971  loss: 5.6444  decode.loss_ce: 1.7136  decode.acc_seg: 51.6861  aux_0.loss_ce: 1.8464  aux_0.acc_seg: 46.5285  aux_1.loss_ce: 1.8708  aux_1.acc_seg: 42.5894  aux_2.loss_ce: 0.1745  aux_2.loss_dice: 0.0391  aux_2.acc_seg: 96.5772
+2025/07/26 04:34:35 - mmengine - INFO - Iter(train) [  115/80000]  lr: 2.0270e-03  eta: 1 day, 16:37:47  time: 1.7193  data_time: 1.4486  memory: 4971  loss: 5.5297  decode.loss_ce: 1.6788  decode.acc_seg: 49.7743  aux_0.loss_ce: 1.8060  aux_0.acc_seg: 51.6078  aux_1.loss_ce: 1.8333  aux_1.acc_seg: 45.0451  aux_2.loss_ce: 0.1731  aux_2.loss_dice: 0.0385  aux_2.acc_seg: 97.0556
+2025/07/26 04:34:36 - mmengine - INFO - Iter(train) [  116/80000]  lr: 2.0360e-03  eta: 1 day, 16:35:28  time: 1.7026  data_time: 1.4318  memory: 4971  loss: 5.5138  decode.loss_ce: 1.6871  decode.acc_seg: 40.7810  aux_0.loss_ce: 1.7983  aux_0.acc_seg: 43.1227  aux_1.loss_ce: 1.8192  aux_1.acc_seg: 43.4382  aux_2.loss_ce: 0.1713  aux_2.loss_dice: 0.0379  aux_2.acc_seg: 97.1593
+2025/07/26 04:34:38 - mmengine - INFO - Iter(train) [  117/80000]  lr: 2.0450e-03  eta: 1 day, 16:34:57  time: 1.7079  data_time: 1.4374  memory: 4971  loss: 5.4616  decode.loss_ce: 1.6661  decode.acc_seg: 48.9422  aux_0.loss_ce: 1.7769  aux_0.acc_seg: 46.0980  aux_1.loss_ce: 1.8091  aux_1.acc_seg: 40.2452  aux_2.loss_ce: 0.1715  aux_2.loss_dice: 0.0380  aux_2.acc_seg: 96.9554
+2025/07/26 04:34:40 - mmengine - INFO - Iter(train) [  118/80000]  lr: 2.0541e-03  eta: 1 day, 16:33:42  time: 1.7111  data_time: 1.4400  memory: 4971  loss: 5.4861  decode.loss_ce: 1.6749  decode.acc_seg: 51.0502  aux_0.loss_ce: 1.7848  aux_0.acc_seg: 48.3723  aux_1.loss_ce: 1.8161  aux_1.acc_seg: 44.4568  aux_2.loss_ce: 0.1720  aux_2.loss_dice: 0.0383  aux_2.acc_seg: 96.7892
+2025/07/26 04:34:42 - mmengine - INFO - Iter(train) [  119/80000]  lr: 2.0631e-03  eta: 1 day, 16:33:04  time: 1.7237  data_time: 1.4529  memory: 4971  loss: 5.3991  decode.loss_ce: 1.6590  decode.acc_seg: 49.5503  aux_0.loss_ce: 1.7545  aux_0.acc_seg: 55.2066  aux_1.loss_ce: 1.7811  aux_1.acc_seg: 58.2800  aux_2.loss_ce: 0.1678  aux_2.loss_dice: 0.0367  aux_2.acc_seg: 97.7430
+2025/07/26 04:34:43 - mmengine - INFO - Iter(train) [  120/80000]  lr: 2.0721e-03  eta: 1 day, 16:32:15  time: 1.7149  data_time: 1.4439  memory: 4971  loss: 5.4221  decode.loss_ce: 1.6690  decode.acc_seg: 47.3948  aux_0.loss_ce: 1.7602  aux_0.acc_seg: 48.6413  aux_1.loss_ce: 1.7907  aux_1.acc_seg: 43.3202  aux_2.loss_ce: 0.1660  aux_2.loss_dice: 0.0362  aux_2.acc_seg: 97.4377
+2025/07/26 04:34:45 - mmengine - INFO - Iter(train) [  121/80000]  lr: 2.0811e-03  eta: 1 day, 16:31:11  time: 1.7174  data_time: 1.4466  memory: 4971  loss: 5.2864  decode.loss_ce: 1.6325  decode.acc_seg: 51.1623  aux_0.loss_ce: 1.7138  aux_0.acc_seg: 53.5371  aux_1.loss_ce: 1.7403  aux_1.acc_seg: 55.3807  aux_2.loss_ce: 0.1642  aux_2.loss_dice: 0.0355  aux_2.acc_seg: 97.4528
+2025/07/26 04:34:47 - mmengine - INFO - Iter(train) [  122/80000]  lr: 2.0901e-03  eta: 1 day, 16:30:20  time: 1.7203  data_time: 1.4497  memory: 4971  loss: 5.1585  decode.loss_ce: 1.5830  decode.acc_seg: 43.8266  aux_0.loss_ce: 1.6696  aux_0.acc_seg: 49.4413  aux_1.loss_ce: 1.7032  aux_1.acc_seg: 41.7154  aux_2.loss_ce: 0.1664  aux_2.loss_dice: 0.0364  aux_2.acc_seg: 96.7020
+2025/07/26 04:34:49 - mmengine - INFO - Iter(train) [  123/80000]  lr: 2.0991e-03  eta: 1 day, 16:29:03  time: 1.7259  data_time: 1.4552  memory: 4971  loss: 5.0441  decode.loss_ce: 1.5364  decode.acc_seg: 61.8188  aux_0.loss_ce: 1.6398  aux_0.acc_seg: 55.7768  aux_1.loss_ce: 1.6662  aux_1.acc_seg: 54.7779  aux_2.loss_ce: 0.1655  aux_2.loss_dice: 0.0361  aux_2.acc_seg: 96.8331
+2025/07/26 04:34:50 - mmengine - INFO - Iter(train) [  124/80000]  lr: 2.1081e-03  eta: 1 day, 16:27:50  time: 1.7317  data_time: 1.4610  memory: 4971  loss: 5.0689  decode.loss_ce: 1.5496  decode.acc_seg: 39.0509  aux_0.loss_ce: 1.6469  aux_0.acc_seg: 38.1484  aux_1.loss_ce: 1.6736  aux_1.acc_seg: 37.3456  aux_2.loss_ce: 0.1633  aux_2.loss_dice: 0.0353  aux_2.acc_seg: 97.3556
+2025/07/26 04:34:52 - mmengine - INFO - Iter(train) [  125/80000]  lr: 2.1171e-03  eta: 1 day, 16:27:31  time: 1.7375  data_time: 1.4676  memory: 4971  loss: 5.0298  decode.loss_ce: 1.5491  decode.acc_seg: 49.9525  aux_0.loss_ce: 1.6296  aux_0.acc_seg: 49.1863  aux_1.loss_ce: 1.6533  aux_1.acc_seg: 48.9764  aux_2.loss_ce: 0.1626  aux_2.loss_dice: 0.0351  aux_2.acc_seg: 97.0953
+2025/07/26 04:34:54 - mmengine - INFO - Iter(train) [  126/80000]  lr: 2.1261e-03  eta: 1 day, 16:25:53  time: 1.7415  data_time: 1.4716  memory: 4971  loss: 4.9593  decode.loss_ce: 1.5170  decode.acc_seg: 53.1587  aux_0.loss_ce: 1.6035  aux_0.acc_seg: 51.5837  aux_1.loss_ce: 1.6401  aux_1.acc_seg: 48.7318  aux_2.loss_ce: 0.1633  aux_2.loss_dice: 0.0354  aux_2.acc_seg: 96.8154
+2025/07/26 04:34:55 - mmengine - INFO - Iter(train) [  127/80000]  lr: 2.1351e-03  eta: 1 day, 16:24:50  time: 1.7353  data_time: 1.4655  memory: 4971  loss: 4.9350  decode.loss_ce: 1.5159  decode.acc_seg: 60.0312  aux_0.loss_ce: 1.5959  aux_0.acc_seg: 56.0661  aux_1.loss_ce: 1.6244  aux_1.acc_seg: 56.0874  aux_2.loss_ce: 0.1635  aux_2.loss_dice: 0.0354  aux_2.acc_seg: 97.0160
+2025/07/26 04:34:57 - mmengine - INFO - Iter(train) [  128/80000]  lr: 2.1441e-03  eta: 1 day, 16:23:23  time: 1.7318  data_time: 1.4625  memory: 4971  loss: 4.8995  decode.loss_ce: 1.5049  decode.acc_seg: 53.7006  aux_0.loss_ce: 1.5889  aux_0.acc_seg: 50.2902  aux_1.loss_ce: 1.6083  aux_1.acc_seg: 53.6223  aux_2.loss_ce: 0.1624  aux_2.loss_dice: 0.0350  aux_2.acc_seg: 96.9925
+2025/07/26 04:34:59 - mmengine - INFO - Iter(train) [  129/80000]  lr: 2.1532e-03  eta: 1 day, 16:21:47  time: 1.7211  data_time: 1.4515  memory: 4971  loss: 4.9055  decode.loss_ce: 1.4934  decode.acc_seg: 58.2800  aux_0.loss_ce: 1.5953  aux_0.acc_seg: 48.5011  aux_1.loss_ce: 1.6177  aux_1.acc_seg: 48.1177  aux_2.loss_ce: 0.1636  aux_2.loss_dice: 0.0355  aux_2.acc_seg: 96.9465
+2025/07/26 04:35:01 - mmengine - INFO - Iter(train) [  130/80000]  lr: 2.1622e-03  eta: 1 day, 16:21:20  time: 1.7232  data_time: 1.4537  memory: 4971  loss: 4.8101  decode.loss_ce: 1.4572  decode.acc_seg: 51.3113  aux_0.loss_ce: 1.5662  aux_0.acc_seg: 48.5682  aux_1.loss_ce: 1.5863  aux_1.acc_seg: 46.4034  aux_2.loss_ce: 0.1645  aux_2.loss_dice: 0.0359  aux_2.acc_seg: 96.9072
+2025/07/26 04:35:02 - mmengine - INFO - Iter(train) [  131/80000]  lr: 2.1712e-03  eta: 1 day, 16:20:16  time: 1.7217  data_time: 1.4518  memory: 4971  loss: 4.7581  decode.loss_ce: 1.4413  decode.acc_seg: 56.3557  aux_0.loss_ce: 1.5493  aux_0.acc_seg: 54.3065  aux_1.loss_ce: 1.5684  aux_1.acc_seg: 54.8561  aux_2.loss_ce: 0.1634  aux_2.loss_dice: 0.0357  aux_2.acc_seg: 97.3781
+2025/07/26 04:35:04 - mmengine - INFO - Iter(train) [  132/80000]  lr: 2.1802e-03  eta: 1 day, 16:19:29  time: 1.7209  data_time: 1.4509  memory: 4971  loss: 4.7434  decode.loss_ce: 1.4352  decode.acc_seg: 52.4700  aux_0.loss_ce: 1.5480  aux_0.acc_seg: 49.9610  aux_1.loss_ce: 1.5638  aux_1.acc_seg: 49.3356  aux_2.loss_ce: 0.1614  aux_2.loss_dice: 0.0350  aux_2.acc_seg: 97.3855
+2025/07/26 04:35:06 - mmengine - INFO - Iter(train) [  133/80000]  lr: 2.1892e-03  eta: 1 day, 16:18:19  time: 1.7204  data_time: 1.4505  memory: 4971  loss: 4.8240  decode.loss_ce: 1.4675  decode.acc_seg: 49.7558  aux_0.loss_ce: 1.5723  aux_0.acc_seg: 48.1067  aux_1.loss_ce: 1.5882  aux_1.acc_seg: 44.7772  aux_2.loss_ce: 0.1612  aux_2.loss_dice: 0.0349  aux_2.acc_seg: 96.8484
+2025/07/26 04:35:07 - mmengine - INFO - Iter(train) [  134/80000]  lr: 2.1982e-03  eta: 1 day, 16:16:53  time: 1.7165  data_time: 1.4467  memory: 4971  loss: 4.8002  decode.loss_ce: 1.4566  decode.acc_seg: 42.0164  aux_0.loss_ce: 1.5658  aux_0.acc_seg: 43.3644  aux_1.loss_ce: 1.5810  aux_1.acc_seg: 44.9854  aux_2.loss_ce: 0.1616  aux_2.loss_dice: 0.0351  aux_2.acc_seg: 97.2018
+2025/07/26 04:35:09 - mmengine - INFO - Iter(train) [  135/80000]  lr: 2.2072e-03  eta: 1 day, 16:15:16  time: 1.7024  data_time: 1.4323  memory: 4971  loss: 4.7886  decode.loss_ce: 1.4431  decode.acc_seg: 56.2073  aux_0.loss_ce: 1.5680  aux_0.acc_seg: 52.9792  aux_1.loss_ce: 1.5813  aux_1.acc_seg: 53.0746  aux_2.loss_ce: 0.1612  aux_2.loss_dice: 0.0350  aux_2.acc_seg: 97.1955
+2025/07/26 04:35:11 - mmengine - INFO - Iter(train) [  136/80000]  lr: 2.2162e-03  eta: 1 day, 16:14:09  time: 1.7055  data_time: 1.4355  memory: 4971  loss: 4.7301  decode.loss_ce: 1.4257  decode.acc_seg: 55.2707  aux_0.loss_ce: 1.5492  aux_0.acc_seg: 58.7750  aux_1.loss_ce: 1.5615  aux_1.acc_seg: 55.1436  aux_2.loss_ce: 0.1592  aux_2.loss_dice: 0.0344  aux_2.acc_seg: 97.4375
+2025/07/26 04:35:13 - mmengine - INFO - Iter(train) [  137/80000]  lr: 2.2252e-03  eta: 1 day, 16:14:59  time: 1.7233  data_time: 1.4531  memory: 4971  loss: 4.8662  decode.loss_ce: 1.4744  decode.acc_seg: 35.5625  aux_0.loss_ce: 1.5919  aux_0.acc_seg: 37.0367  aux_1.loss_ce: 1.6090  aux_1.acc_seg: 35.2473  aux_2.loss_ce: 0.1571  aux_2.loss_dice: 0.0338  aux_2.acc_seg: 97.4626
+2025/07/26 04:35:14 - mmengine - INFO - Iter(train) [  138/80000]  lr: 2.2342e-03  eta: 1 day, 16:15:05  time: 1.7375  data_time: 1.4674  memory: 4971  loss: 4.8770  decode.loss_ce: 1.4825  decode.acc_seg: 51.8642  aux_0.loss_ce: 1.5914  aux_0.acc_seg: 50.0409  aux_1.loss_ce: 1.6136  aux_1.acc_seg: 47.3813  aux_2.loss_ce: 0.1561  aux_2.loss_dice: 0.0334  aux_2.acc_seg: 97.2861
+2025/07/26 04:35:16 - mmengine - INFO - Iter(train) [  139/80000]  lr: 2.2432e-03  eta: 1 day, 16:15:03  time: 1.7521  data_time: 1.4824  memory: 4971  loss: 4.9626  decode.loss_ce: 1.5251  decode.acc_seg: 37.2513  aux_0.loss_ce: 1.6127  aux_0.acc_seg: 37.3293  aux_1.loss_ce: 1.6374  aux_1.acc_seg: 40.4838  aux_2.loss_ce: 0.1545  aux_2.loss_dice: 0.0329  aux_2.acc_seg: 97.5312
+2025/07/26 04:35:18 - mmengine - INFO - Iter(train) [  140/80000]  lr: 2.2523e-03  eta: 1 day, 16:14:01  time: 1.7453  data_time: 1.4754  memory: 4971  loss: 5.0649  decode.loss_ce: 1.5649  decode.acc_seg: 46.3158  aux_0.loss_ce: 1.6451  aux_0.acc_seg: 43.7379  aux_1.loss_ce: 1.6677  aux_1.acc_seg: 41.3907  aux_2.loss_ce: 0.1543  aux_2.loss_dice: 0.0329  aux_2.acc_seg: 96.7396
+2025/07/26 04:35:20 - mmengine - INFO - Iter(train) [  141/80000]  lr: 2.2613e-03  eta: 1 day, 16:12:53  time: 1.7431  data_time: 1.4733  memory: 4971  loss: 5.0378  decode.loss_ce: 1.5561  decode.acc_seg: 63.3984  aux_0.loss_ce: 1.6329  aux_0.acc_seg: 60.9104  aux_1.loss_ce: 1.6592  aux_1.acc_seg: 60.1625  aux_2.loss_ce: 0.1561  aux_2.loss_dice: 0.0335  aux_2.acc_seg: 96.6493
+2025/07/26 04:35:21 - mmengine - INFO - Iter(train) [  142/80000]  lr: 2.2703e-03  eta: 1 day, 16:12:09  time: 1.7426  data_time: 1.4727  memory: 4971  loss: 5.1028  decode.loss_ce: 1.5805  decode.acc_seg: 46.8867  aux_0.loss_ce: 1.6495  aux_0.acc_seg: 46.0453  aux_1.loss_ce: 1.6818  aux_1.acc_seg: 42.8324  aux_2.loss_ce: 0.1570  aux_2.loss_dice: 0.0339  aux_2.acc_seg: 96.7749
+2025/07/26 04:35:23 - mmengine - INFO - Iter(train) [  143/80000]  lr: 2.2793e-03  eta: 1 day, 16:12:26  time: 1.7569  data_time: 1.4869  memory: 4971  loss: 5.1014  decode.loss_ce: 1.5782  decode.acc_seg: 47.5337  aux_0.loss_ce: 1.6487  aux_0.acc_seg: 44.5746  aux_1.loss_ce: 1.6849  aux_1.acc_seg: 43.9739  aux_2.loss_ce: 0.1559  aux_2.loss_dice: 0.0337  aux_2.acc_seg: 97.0009
+2025/07/26 04:35:25 - mmengine - INFO - Iter(train) [  144/80000]  lr: 2.2883e-03  eta: 1 day, 16:12:17  time: 1.7692  data_time: 1.4993  memory: 4971  loss: 5.0720  decode.loss_ce: 1.5690  decode.acc_seg: 49.0864  aux_0.loss_ce: 1.6336  aux_0.acc_seg: 49.7446  aux_1.loss_ce: 1.6811  aux_1.acc_seg: 46.3706  aux_2.loss_ce: 0.1548  aux_2.loss_dice: 0.0334  aux_2.acc_seg: 97.1566
+2025/07/26 04:35:27 - mmengine - INFO - Iter(train) [  145/80000]  lr: 2.2973e-03  eta: 1 day, 16:12:30  time: 1.7876  data_time: 1.5179  memory: 4971  loss: 5.1460  decode.loss_ce: 1.5979  decode.acc_seg: 50.7784  aux_0.loss_ce: 1.6532  aux_0.acc_seg: 48.9275  aux_1.loss_ce: 1.7057  aux_1.acc_seg: 45.9466  aux_2.loss_ce: 0.1555  aux_2.loss_dice: 0.0338  aux_2.acc_seg: 96.5346
+2025/07/26 04:35:29 - mmengine - INFO - Iter(train) [  146/80000]  lr: 2.3063e-03  eta: 1 day, 16:12:00  time: 1.7934  data_time: 1.5238  memory: 4971  loss: 5.1989  decode.loss_ce: 1.6162  decode.acc_seg: 43.5638  aux_0.loss_ce: 1.6718  aux_0.acc_seg: 45.5063  aux_1.loss_ce: 1.7215  aux_1.acc_seg: 42.3822  aux_2.loss_ce: 0.1556  aux_2.loss_dice: 0.0339  aux_2.acc_seg: 97.2393
+2025/07/26 04:35:30 - mmengine - INFO - Iter(train) [  147/80000]  lr: 2.3153e-03  eta: 1 day, 16:11:06  time: 1.7748  data_time: 1.5049  memory: 4971  loss: 5.1214  decode.loss_ce: 1.5860  decode.acc_seg: 44.6299  aux_0.loss_ce: 1.6503  aux_0.acc_seg: 40.9301  aux_1.loss_ce: 1.6946  aux_1.acc_seg: 41.2783  aux_2.loss_ce: 0.1563  aux_2.loss_dice: 0.0342  aux_2.acc_seg: 96.9985
+2025/07/26 04:35:32 - mmengine - INFO - Iter(train) [  148/80000]  lr: 2.3243e-03  eta: 1 day, 16:09:52  time: 1.7597  data_time: 1.4893  memory: 4971  loss: 5.1308  decode.loss_ce: 1.5962  decode.acc_seg: 50.5385  aux_0.loss_ce: 1.6494  aux_0.acc_seg: 50.7505  aux_1.loss_ce: 1.6955  aux_1.acc_seg: 48.7888  aux_2.loss_ce: 0.1556  aux_2.loss_dice: 0.0340  aux_2.acc_seg: 97.4132
+2025/07/26 04:35:34 - mmengine - INFO - Iter(train) [  149/80000]  lr: 2.3333e-03  eta: 1 day, 16:08:19  time: 1.7425  data_time: 1.4718  memory: 4971  loss: 4.9863  decode.loss_ce: 1.5444  decode.acc_seg: 58.4306  aux_0.loss_ce: 1.6030  aux_0.acc_seg: 53.8220  aux_1.loss_ce: 1.6467  aux_1.acc_seg: 54.7532  aux_2.loss_ce: 0.1575  aux_2.loss_dice: 0.0348  aux_2.acc_seg: 96.4917
+2025/07/26 04:35:36 - mmengine - INFO - Iter(train) [  150/80000]  lr: 2.3423e-03  eta: 1 day, 16:08:28  time: 1.7545  data_time: 1.4841  memory: 4971  loss: 4.8705  decode.loss_ce: 1.5073  decode.acc_seg: 51.8997  aux_0.loss_ce: 1.5628  aux_0.acc_seg: 52.1977  aux_1.loss_ce: 1.6088  aux_1.acc_seg: 55.1885  aux_2.loss_ce: 0.1568  aux_2.loss_dice: 0.0346  aux_2.acc_seg: 96.8775
+2025/07/26 04:35:37 - mmengine - INFO - Iter(train) [  151/80000]  lr: 2.3514e-03  eta: 1 day, 16:08:30  time: 1.7666  data_time: 1.4964  memory: 4971  loss: 4.9893  decode.loss_ce: 1.5448  decode.acc_seg: 43.0179  aux_0.loss_ce: 1.6048  aux_0.acc_seg: 39.8359  aux_1.loss_ce: 1.6504  aux_1.acc_seg: 38.7513  aux_2.loss_ce: 0.1552  aux_2.loss_dice: 0.0342  aux_2.acc_seg: 97.0933
+2025/07/26 04:35:39 - mmengine - INFO - Iter(train) [  152/80000]  lr: 2.3604e-03  eta: 1 day, 16:07:38  time: 1.7643  data_time: 1.4941  memory: 4971  loss: 4.9375  decode.loss_ce: 1.5243  decode.acc_seg: 48.4323  aux_0.loss_ce: 1.5931  aux_0.acc_seg: 45.2743  aux_1.loss_ce: 1.6322  aux_1.acc_seg: 44.6503  aux_2.loss_ce: 0.1540  aux_2.loss_dice: 0.0339  aux_2.acc_seg: 96.8841
+2025/07/26 04:35:41 - mmengine - INFO - Iter(train) [  153/80000]  lr: 2.3694e-03  eta: 1 day, 16:07:28  time: 1.7590  data_time: 1.4887  memory: 4971  loss: 4.8967  decode.loss_ce: 1.5140  decode.acc_seg: 49.4593  aux_0.loss_ce: 1.5827  aux_0.acc_seg: 47.4114  aux_1.loss_ce: 1.6137  aux_1.acc_seg: 52.3553  aux_2.loss_ce: 0.1528  aux_2.loss_dice: 0.0335  aux_2.acc_seg: 97.4283
+2025/07/26 04:35:43 - mmengine - INFO - Iter(train) [  154/80000]  lr: 2.3784e-03  eta: 1 day, 16:10:34  time: 1.7960  data_time: 1.5245  memory: 4971  loss: 4.9071  decode.loss_ce: 1.5237  decode.acc_seg: 46.9210  aux_0.loss_ce: 1.5866  aux_0.acc_seg: 45.6446  aux_1.loss_ce: 1.6094  aux_1.acc_seg: 42.4465  aux_2.loss_ce: 0.1536  aux_2.loss_dice: 0.0338  aux_2.acc_seg: 96.8191
+2025/07/26 04:35:45 - mmengine - INFO - Iter(train) [  155/80000]  lr: 2.3874e-03  eta: 1 day, 16:10:26  time: 1.7922  data_time: 1.5207  memory: 4971  loss: 4.8577  decode.loss_ce: 1.5076  decode.acc_seg: 58.8253  aux_0.loss_ce: 1.5715  aux_0.acc_seg: 59.0900  aux_1.loss_ce: 1.5937  aux_1.acc_seg: 55.9259  aux_2.loss_ce: 0.1517  aux_2.loss_dice: 0.0332  aux_2.acc_seg: 97.2629
+2025/07/26 04:35:47 - mmengine - INFO - Iter(train) [  156/80000]  lr: 2.3964e-03  eta: 1 day, 16:10:07  time: 1.7938  data_time: 1.5220  memory: 4971  loss: 4.9728  decode.loss_ce: 1.5447  decode.acc_seg: 43.2507  aux_0.loss_ce: 1.6099  aux_0.acc_seg: 42.5340  aux_1.loss_ce: 1.6346  aux_1.acc_seg: 40.8859  aux_2.loss_ce: 0.1506  aux_2.loss_dice: 0.0330  aux_2.acc_seg: 97.2548
+2025/07/26 04:35:48 - mmengine - INFO - Iter(train) [  157/80000]  lr: 2.4054e-03  eta: 1 day, 16:09:36  time: 1.7977  data_time: 1.5262  memory: 4971  loss: 4.8822  decode.loss_ce: 1.5187  decode.acc_seg: 58.3341  aux_0.loss_ce: 1.5764  aux_0.acc_seg: 57.6031  aux_1.loss_ce: 1.6035  aux_1.acc_seg: 54.2632  aux_2.loss_ce: 0.1507  aux_2.loss_dice: 0.0329  aux_2.acc_seg: 97.0149
+2025/07/26 04:35:50 - mmengine - INFO - Iter(train) [  158/80000]  lr: 2.4144e-03  eta: 1 day, 16:10:21  time: 1.8201  data_time: 1.5489  memory: 4971  loss: 4.9086  decode.loss_ce: 1.5234  decode.acc_seg: 53.5019  aux_0.loss_ce: 1.5849  aux_0.acc_seg: 53.9384  aux_1.loss_ce: 1.6172  aux_1.acc_seg: 51.1374  aux_2.loss_ce: 0.1502  aux_2.loss_dice: 0.0329  aux_2.acc_seg: 97.3974
+2025/07/26 04:35:52 - mmengine - INFO - Iter(train) [  159/80000]  lr: 2.4234e-03  eta: 1 day, 16:09:36  time: 1.8286  data_time: 1.5575  memory: 4971  loss: 5.0012  decode.loss_ce: 1.5526  decode.acc_seg: 46.2292  aux_0.loss_ce: 1.6170  aux_0.acc_seg: 47.9955  aux_1.loss_ce: 1.6525  aux_1.acc_seg: 47.3347  aux_2.loss_ce: 0.1473  aux_2.loss_dice: 0.0319  aux_2.acc_seg: 97.5963
+2025/07/26 04:35:54 - mmengine - INFO - Iter(train) [  160/80000]  lr: 2.4324e-03  eta: 1 day, 16:08:49  time: 1.8176  data_time: 1.5463  memory: 4971  loss: 5.0296  decode.loss_ce: 1.5605  decode.acc_seg: 50.4359  aux_0.loss_ce: 1.6258  aux_0.acc_seg: 46.0857  aux_1.loss_ce: 1.6658  aux_1.acc_seg: 43.9042  aux_2.loss_ce: 0.1460  aux_2.loss_dice: 0.0315  aux_2.acc_seg: 97.2046
+2025/07/26 04:35:55 - mmengine - INFO - Iter(train) [  161/80000]  lr: 2.4414e-03  eta: 1 day, 16:07:32  time: 1.8017  data_time: 1.5305  memory: 4971  loss: 4.9969  decode.loss_ce: 1.5540  decode.acc_seg: 47.9011  aux_0.loss_ce: 1.6135  aux_0.acc_seg: 47.5065  aux_1.loss_ce: 1.6520  aux_1.acc_seg: 47.4845  aux_2.loss_ce: 0.1460  aux_2.loss_dice: 0.0315  aux_2.acc_seg: 97.0654
+2025/07/26 04:35:57 - mmengine - INFO - Iter(train) [  162/80000]  lr: 2.4505e-03  eta: 1 day, 16:06:39  time: 1.8008  data_time: 1.5295  memory: 4971  loss: 4.9152  decode.loss_ce: 1.5277  decode.acc_seg: 58.6711  aux_0.loss_ce: 1.5885  aux_0.acc_seg: 57.0954  aux_1.loss_ce: 1.6198  aux_1.acc_seg: 55.8448  aux_2.loss_ce: 0.1474  aux_2.loss_dice: 0.0319  aux_2.acc_seg: 96.4229
+2025/07/26 04:35:59 - mmengine - INFO - Iter(train) [  163/80000]  lr: 2.4595e-03  eta: 1 day, 16:05:50  time: 1.7926  data_time: 1.5213  memory: 4971  loss: 4.9315  decode.loss_ce: 1.5367  decode.acc_seg: 46.4869  aux_0.loss_ce: 1.5873  aux_0.acc_seg: 48.0940  aux_1.loss_ce: 1.6273  aux_1.acc_seg: 47.8592  aux_2.loss_ce: 0.1480  aux_2.loss_dice: 0.0322  aux_2.acc_seg: 97.0763
+2025/07/26 04:36:01 - mmengine - INFO - Iter(train) [  164/80000]  lr: 2.4685e-03  eta: 1 day, 16:05:07  time: 1.7479  data_time: 1.4777  memory: 4971  loss: 5.0026  decode.loss_ce: 1.5564  decode.acc_seg: 47.4206  aux_0.loss_ce: 1.6048  aux_0.acc_seg: 44.4050  aux_1.loss_ce: 1.6608  aux_1.acc_seg: 44.7536  aux_2.loss_ce: 0.1483  aux_2.loss_dice: 0.0322  aux_2.acc_seg: 96.7850
+2025/07/26 04:36:02 - mmengine - INFO - Iter(train) [  165/80000]  lr: 2.4775e-03  eta: 1 day, 16:04:43  time: 1.7441  data_time: 1.4734  memory: 4971  loss: 5.0931  decode.loss_ce: 1.5945  decode.acc_seg: 42.7489  aux_0.loss_ce: 1.6308  aux_0.acc_seg: 46.6751  aux_1.loss_ce: 1.6887  aux_1.acc_seg: 42.3408  aux_2.loss_ce: 0.1471  aux_2.loss_dice: 0.0319  aux_2.acc_seg: 97.4986
+2025/07/26 04:36:04 - mmengine - INFO - Iter(train) [  166/80000]  lr: 2.4865e-03  eta: 1 day, 16:03:42  time: 1.7349  data_time: 1.4642  memory: 4971  loss: 4.9849  decode.loss_ce: 1.5549  decode.acc_seg: 52.4340  aux_0.loss_ce: 1.5951  aux_0.acc_seg: 47.9810  aux_1.loss_ce: 1.6553  aux_1.acc_seg: 43.6456  aux_2.loss_ce: 0.1475  aux_2.loss_dice: 0.0320  aux_2.acc_seg: 97.1641
+2025/07/26 04:36:06 - mmengine - INFO - Iter(train) [  167/80000]  lr: 2.4955e-03  eta: 1 day, 16:03:42  time: 1.7405  data_time: 1.4694  memory: 4971  loss: 4.9889  decode.loss_ce: 1.5532  decode.acc_seg: 53.2393  aux_0.loss_ce: 1.5980  aux_0.acc_seg: 55.3428  aux_1.loss_ce: 1.6591  aux_1.acc_seg: 52.3659  aux_2.loss_ce: 0.1468  aux_2.loss_dice: 0.0319  aux_2.acc_seg: 97.0016
+2025/07/26 04:36:08 - mmengine - INFO - Iter(train) [  168/80000]  lr: 2.5045e-03  eta: 1 day, 16:03:02  time: 1.7227  data_time: 1.4516  memory: 4971  loss: 4.9988  decode.loss_ce: 1.5584  decode.acc_seg: 52.3875  aux_0.loss_ce: 1.6025  aux_0.acc_seg: 50.4289  aux_1.loss_ce: 1.6566  aux_1.acc_seg: 50.6945  aux_2.loss_ce: 0.1488  aux_2.loss_dice: 0.0326  aux_2.acc_seg: 96.7194
+2025/07/26 04:36:09 - mmengine - INFO - Iter(train) [  169/80000]  lr: 2.5135e-03  eta: 1 day, 16:02:37  time: 1.7259  data_time: 1.4546  memory: 4971  loss: 5.0426  decode.loss_ce: 1.5755  decode.acc_seg: 45.0473  aux_0.loss_ce: 1.6158  aux_0.acc_seg: 41.9603  aux_1.loss_ce: 1.6683  aux_1.acc_seg: 37.9575  aux_2.loss_ce: 0.1500  aux_2.loss_dice: 0.0330  aux_2.acc_seg: 97.2072
+2025/07/26 04:36:11 - mmengine - INFO - Iter(train) [  170/80000]  lr: 2.5225e-03  eta: 1 day, 16:03:15  time: 1.7430  data_time: 1.4717  memory: 4971  loss: 4.9983  decode.loss_ce: 1.5576  decode.acc_seg: 53.4647  aux_0.loss_ce: 1.6056  aux_0.acc_seg: 49.6813  aux_1.loss_ce: 1.6518  aux_1.acc_seg: 44.4997  aux_2.loss_ce: 0.1502  aux_2.loss_dice: 0.0331  aux_2.acc_seg: 97.1023
+2025/07/26 04:36:13 - mmengine - INFO - Iter(train) [  171/80000]  lr: 2.5315e-03  eta: 1 day, 16:02:44  time: 1.7515  data_time: 1.4801  memory: 4971  loss: 4.9792  decode.loss_ce: 1.5487  decode.acc_seg: 44.3219  aux_0.loss_ce: 1.5954  aux_0.acc_seg: 44.9830  aux_1.loss_ce: 1.6538  aux_1.acc_seg: 42.4550  aux_2.loss_ce: 0.1487  aux_2.loss_dice: 0.0327  aux_2.acc_seg: 97.3924
+2025/07/26 04:36:15 - mmengine - INFO - Iter(train) [  172/80000]  lr: 2.5405e-03  eta: 1 day, 16:01:50  time: 1.7504  data_time: 1.4792  memory: 4971  loss: 4.9916  decode.loss_ce: 1.5457  decode.acc_seg: 59.2626  aux_0.loss_ce: 1.5982  aux_0.acc_seg: 52.4718  aux_1.loss_ce: 1.6688  aux_1.acc_seg: 49.1879  aux_2.loss_ce: 0.1467  aux_2.loss_dice: 0.0321  aux_2.acc_seg: 96.9318
+2025/07/26 04:36:16 - mmengine - INFO - Iter(train) [  173/80000]  lr: 2.5495e-03  eta: 1 day, 16:02:25  time: 1.7676  data_time: 1.4963  memory: 4971  loss: 4.9531  decode.loss_ce: 1.5294  decode.acc_seg: 52.0508  aux_0.loss_ce: 1.5888  aux_0.acc_seg: 48.3391  aux_1.loss_ce: 1.6559  aux_1.acc_seg: 49.2847  aux_2.loss_ce: 0.1468  aux_2.loss_dice: 0.0322  aux_2.acc_seg: 96.9212
+2025/07/26 04:36:18 - mmengine - INFO - Iter(train) [  174/80000]  lr: 2.5586e-03  eta: 1 day, 16:01:54  time: 1.7694  data_time: 1.4982  memory: 4971  loss: 4.8764  decode.loss_ce: 1.5009  decode.acc_seg: 47.8393  aux_0.loss_ce: 1.5726  aux_0.acc_seg: 46.4096  aux_1.loss_ce: 1.6258  aux_1.acc_seg: 46.7251  aux_2.loss_ce: 0.1454  aux_2.loss_dice: 0.0317  aux_2.acc_seg: 97.2769
+2025/07/26 04:36:20 - mmengine - INFO - Iter(train) [  175/80000]  lr: 2.5676e-03  eta: 1 day, 16:01:04  time: 1.7634  data_time: 1.4926  memory: 4971  loss: 4.7657  decode.loss_ce: 1.4563  decode.acc_seg: 52.7613  aux_0.loss_ce: 1.5413  aux_0.acc_seg: 49.0726  aux_1.loss_ce: 1.5906  aux_1.acc_seg: 47.3049  aux_2.loss_ce: 0.1457  aux_2.loss_dice: 0.0318  aux_2.acc_seg: 97.3244
+2025/07/26 04:36:22 - mmengine - INFO - Iter(train) [  176/80000]  lr: 2.5766e-03  eta: 1 day, 16:00:06  time: 1.7628  data_time: 1.4918  memory: 4971  loss: 4.6835  decode.loss_ce: 1.4320  decode.acc_seg: 62.5738  aux_0.loss_ce: 1.5157  aux_0.acc_seg: 59.1820  aux_1.loss_ce: 1.5597  aux_1.acc_seg: 59.3788  aux_2.loss_ce: 0.1445  aux_2.loss_dice: 0.0315  aux_2.acc_seg: 97.4760
+2025/07/26 04:36:23 - mmengine - INFO - Iter(train) [  177/80000]  lr: 2.5856e-03  eta: 1 day, 16:00:02  time: 1.7618  data_time: 1.4912  memory: 4971  loss: 4.7132  decode.loss_ce: 1.4432  decode.acc_seg: 45.9206  aux_0.loss_ce: 1.5265  aux_0.acc_seg: 43.5084  aux_1.loss_ce: 1.5673  aux_1.acc_seg: 45.5049  aux_2.loss_ce: 0.1447  aux_2.loss_dice: 0.0315  aux_2.acc_seg: 97.0215
+2025/07/26 04:36:25 - mmengine - INFO - Iter(train) [  178/80000]  lr: 2.5946e-03  eta: 1 day, 15:59:58  time: 1.7691  data_time: 1.4983  memory: 4971  loss: 4.6619  decode.loss_ce: 1.4237  decode.acc_seg: 45.4236  aux_0.loss_ce: 1.5121  aux_0.acc_seg: 43.8546  aux_1.loss_ce: 1.5524  aux_1.acc_seg: 43.8064  aux_2.loss_ce: 0.1426  aux_2.loss_dice: 0.0310  aux_2.acc_seg: 97.1919
+2025/07/26 04:36:27 - mmengine - INFO - Iter(train) [  179/80000]  lr: 2.6036e-03  eta: 1 day, 16:00:23  time: 1.7796  data_time: 1.5088  memory: 4971  loss: 4.5195  decode.loss_ce: 1.3765  decode.acc_seg: 57.1450  aux_0.loss_ce: 1.4641  aux_0.acc_seg: 57.3596  aux_1.loss_ce: 1.5051  aux_1.acc_seg: 54.5677  aux_2.loss_ce: 0.1428  aux_2.loss_dice: 0.0311  aux_2.acc_seg: 96.9974
+2025/07/26 04:36:29 - mmengine - INFO - Iter(train) [  180/80000]  lr: 2.6126e-03  eta: 1 day, 15:59:09  time: 1.7549  data_time: 1.4843  memory: 4971  loss: 4.5328  decode.loss_ce: 1.3856  decode.acc_seg: 58.8785  aux_0.loss_ce: 1.4660  aux_0.acc_seg: 57.3378  aux_1.loss_ce: 1.5064  aux_1.acc_seg: 54.7222  aux_2.loss_ce: 0.1435  aux_2.loss_dice: 0.0313  aux_2.acc_seg: 96.7754
+2025/07/26 04:36:30 - mmengine - INFO - Iter(train) [  181/80000]  lr: 2.6216e-03  eta: 1 day, 15:58:27  time: 1.7517  data_time: 1.4811  memory: 4971  loss: 4.5626  decode.loss_ce: 1.3955  decode.acc_seg: 46.4575  aux_0.loss_ce: 1.4754  aux_0.acc_seg: 47.3928  aux_1.loss_ce: 1.5155  aux_1.acc_seg: 46.9145  aux_2.loss_ce: 0.1445  aux_2.loss_dice: 0.0317  aux_2.acc_seg: 96.8963
+2025/07/26 04:36:32 - mmengine - INFO - Iter(train) [  182/80000]  lr: 2.6306e-03  eta: 1 day, 15:57:36  time: 1.7513  data_time: 1.4806  memory: 4971  loss: 4.6007  decode.loss_ce: 1.4109  decode.acc_seg: 55.2476  aux_0.loss_ce: 1.4901  aux_0.acc_seg: 53.3878  aux_1.loss_ce: 1.5241  aux_1.acc_seg: 51.6738  aux_2.loss_ce: 0.1441  aux_2.loss_dice: 0.0315  aux_2.acc_seg: 97.1855
+2025/07/26 04:36:34 - mmengine - INFO - Iter(train) [  183/80000]  lr: 2.6396e-03  eta: 1 day, 15:57:32  time: 1.7428  data_time: 1.4722  memory: 4971  loss: 4.6069  decode.loss_ce: 1.4121  decode.acc_seg: 50.9980  aux_0.loss_ce: 1.4918  aux_0.acc_seg: 52.5541  aux_1.loss_ce: 1.5272  aux_1.acc_seg: 52.0252  aux_2.loss_ce: 0.1443  aux_2.loss_dice: 0.0315  aux_2.acc_seg: 96.8730
+2025/07/26 04:36:36 - mmengine - INFO - Iter(train) [  184/80000]  lr: 2.6486e-03  eta: 1 day, 15:56:58  time: 1.7413  data_time: 1.4710  memory: 4971  loss: 4.5619  decode.loss_ce: 1.3997  decode.acc_seg: 53.4191  aux_0.loss_ce: 1.4772  aux_0.acc_seg: 52.9491  aux_1.loss_ce: 1.5092  aux_1.acc_seg: 54.1043  aux_2.loss_ce: 0.1442  aux_2.loss_dice: 0.0316  aux_2.acc_seg: 97.0436
+2025/07/26 04:36:37 - mmengine - INFO - Iter(train) [  185/80000]  lr: 2.6577e-03  eta: 1 day, 15:57:00  time: 1.7523  data_time: 1.4818  memory: 4971  loss: 4.5062  decode.loss_ce: 1.3818  decode.acc_seg: 51.3699  aux_0.loss_ce: 1.4577  aux_0.acc_seg: 50.5584  aux_1.loss_ce: 1.4912  aux_1.acc_seg: 48.7839  aux_2.loss_ce: 0.1439  aux_2.loss_dice: 0.0315  aux_2.acc_seg: 97.3418
+2025/07/26 04:36:39 - mmengine - INFO - Iter(train) [  186/80000]  lr: 2.6667e-03  eta: 1 day, 15:56:24  time: 1.7566  data_time: 1.4862  memory: 4971  loss: 4.5130  decode.loss_ce: 1.3857  decode.acc_seg: 56.7218  aux_0.loss_ce: 1.4605  aux_0.acc_seg: 55.1208  aux_1.loss_ce: 1.4912  aux_1.acc_seg: 59.2431  aux_2.loss_ce: 0.1441  aux_2.loss_dice: 0.0316  aux_2.acc_seg: 97.4137
+2025/07/26 04:36:41 - mmengine - INFO - Iter(train) [  187/80000]  lr: 2.6757e-03  eta: 1 day, 15:57:42  time: 1.7754  data_time: 1.5034  memory: 4971  loss: 4.4562  decode.loss_ce: 1.3655  decode.acc_seg: 61.1777  aux_0.loss_ce: 1.4444  aux_0.acc_seg: 51.9750  aux_1.loss_ce: 1.4738  aux_1.acc_seg: 52.2720  aux_2.loss_ce: 0.1416  aux_2.loss_dice: 0.0309  aux_2.acc_seg: 97.5865
+2025/07/26 04:36:43 - mmengine - INFO - Iter(train) [  188/80000]  lr: 2.6847e-03  eta: 1 day, 15:57:21  time: 1.7713  data_time: 1.4996  memory: 4971  loss: 4.4672  decode.loss_ce: 1.3700  decode.acc_seg: 49.1819  aux_0.loss_ce: 1.4471  aux_0.acc_seg: 47.0507  aux_1.loss_ce: 1.4768  aux_1.acc_seg: 49.6383  aux_2.loss_ce: 0.1422  aux_2.loss_dice: 0.0311  aux_2.acc_seg: 96.9479
+2025/07/26 04:36:45 - mmengine - INFO - Iter(train) [  189/80000]  lr: 2.6937e-03  eta: 1 day, 15:56:57  time: 1.7599  data_time: 1.4885  memory: 4971  loss: 4.5159  decode.loss_ce: 1.3836  decode.acc_seg: 56.2065  aux_0.loss_ce: 1.4625  aux_0.acc_seg: 54.3887  aux_1.loss_ce: 1.4954  aux_1.acc_seg: 51.4925  aux_2.loss_ce: 0.1429  aux_2.loss_dice: 0.0314  aux_2.acc_seg: 96.5679
+2025/07/26 04:36:46 - mmengine - INFO - Iter(train) [  190/80000]  lr: 2.7027e-03  eta: 1 day, 15:56:32  time: 1.7702  data_time: 1.4983  memory: 4971  loss: 4.4965  decode.loss_ce: 1.3737  decode.acc_seg: 54.1658  aux_0.loss_ce: 1.4561  aux_0.acc_seg: 50.6868  aux_1.loss_ce: 1.4931  aux_1.acc_seg: 49.9111  aux_2.loss_ce: 0.1423  aux_2.loss_dice: 0.0313  aux_2.acc_seg: 96.8741
+2025/07/26 04:36:48 - mmengine - INFO - Iter(train) [  191/80000]  lr: 2.7117e-03  eta: 1 day, 15:56:10  time: 1.7744  data_time: 1.5025  memory: 4971  loss: 4.4515  decode.loss_ce: 1.3611  decode.acc_seg: 53.7034  aux_0.loss_ce: 1.4481  aux_0.acc_seg: 51.8546  aux_1.loss_ce: 1.4693  aux_1.acc_seg: 51.4173  aux_2.loss_ce: 0.1419  aux_2.loss_dice: 0.0311  aux_2.acc_seg: 97.1452
+2025/07/26 04:36:50 - mmengine - INFO - Iter(train) [  192/80000]  lr: 2.7207e-03  eta: 1 day, 15:55:20  time: 1.7741  data_time: 1.5021  memory: 4971  loss: 4.4671  decode.loss_ce: 1.3720  decode.acc_seg: 47.2721  aux_0.loss_ce: 1.4544  aux_0.acc_seg: 46.7943  aux_1.loss_ce: 1.4674  aux_1.acc_seg: 51.1486  aux_2.loss_ce: 0.1421  aux_2.loss_dice: 0.0312  aux_2.acc_seg: 97.0580
+2025/07/26 04:36:52 - mmengine - INFO - Iter(train) [  193/80000]  lr: 2.7297e-03  eta: 1 day, 15:54:33  time: 1.7634  data_time: 1.4915  memory: 4971  loss: 4.3921  decode.loss_ce: 1.3478  decode.acc_seg: 64.1731  aux_0.loss_ce: 1.4292  aux_0.acc_seg: 61.3186  aux_1.loss_ce: 1.4432  aux_1.acc_seg: 61.5054  aux_2.loss_ce: 0.1411  aux_2.loss_dice: 0.0309  aux_2.acc_seg: 97.0996
+2025/07/26 04:36:53 - mmengine - INFO - Iter(train) [  194/80000]  lr: 2.7387e-03  eta: 1 day, 15:54:00  time: 1.7630  data_time: 1.4909  memory: 4971  loss: 4.3592  decode.loss_ce: 1.3374  decode.acc_seg: 56.1015  aux_0.loss_ce: 1.4190  aux_0.acc_seg: 52.0738  aux_1.loss_ce: 1.4316  aux_1.acc_seg: 51.6027  aux_2.loss_ce: 0.1405  aux_2.loss_dice: 0.0307  aux_2.acc_seg: 97.1325
+2025/07/26 04:36:55 - mmengine - INFO - Iter(train) [  195/80000]  lr: 2.7477e-03  eta: 1 day, 15:53:19  time: 1.7522  data_time: 1.4801  memory: 4971  loss: 4.4144  decode.loss_ce: 1.3516  decode.acc_seg: 55.8711  aux_0.loss_ce: 1.4380  aux_0.acc_seg: 54.4052  aux_1.loss_ce: 1.4516  aux_1.acc_seg: 52.2130  aux_2.loss_ce: 0.1419  aux_2.loss_dice: 0.0312  aux_2.acc_seg: 96.8411
+2025/07/26 04:36:57 - mmengine - INFO - Iter(train) [  196/80000]  lr: 2.7568e-03  eta: 1 day, 15:52:40  time: 1.7508  data_time: 1.4787  memory: 4971  loss: 4.4338  decode.loss_ce: 1.3570  decode.acc_seg: 54.6515  aux_0.loss_ce: 1.4440  aux_0.acc_seg: 51.4557  aux_1.loss_ce: 1.4566  aux_1.acc_seg: 51.8588  aux_2.loss_ce: 0.1442  aux_2.loss_dice: 0.0320  aux_2.acc_seg: 96.4604
+2025/07/26 04:36:58 - mmengine - INFO - Iter(train) [  197/80000]  lr: 2.7658e-03  eta: 1 day, 15:52:23  time: 1.7283  data_time: 1.4577  memory: 4971  loss: 4.5083  decode.loss_ce: 1.3887  decode.acc_seg: 46.8249  aux_0.loss_ce: 1.4636  aux_0.acc_seg: 46.9964  aux_1.loss_ce: 1.4770  aux_1.acc_seg: 47.1963  aux_2.loss_ce: 0.1463  aux_2.loss_dice: 0.0326  aux_2.acc_seg: 97.0069
+2025/07/26 04:37:00 - mmengine - INFO - Iter(train) [  198/80000]  lr: 2.7748e-03  eta: 1 day, 15:52:05  time: 1.7283  data_time: 1.4578  memory: 4971  loss: 4.5566  decode.loss_ce: 1.3966  decode.acc_seg: 50.2078  aux_0.loss_ce: 1.4819  aux_0.acc_seg: 45.7547  aux_1.loss_ce: 1.5013  aux_1.acc_seg: 44.7017  aux_2.loss_ce: 0.1448  aux_2.loss_dice: 0.0321  aux_2.acc_seg: 97.4534
+2025/07/26 04:37:02 - mmengine - INFO - Iter(train) [  199/80000]  lr: 2.7838e-03  eta: 1 day, 15:51:56  time: 1.7314  data_time: 1.4608  memory: 4971  loss: 4.5440  decode.loss_ce: 1.3946  decode.acc_seg: 48.3768  aux_0.loss_ce: 1.4799  aux_0.acc_seg: 48.4761  aux_1.loss_ce: 1.4949  aux_1.acc_seg: 49.6126  aux_2.loss_ce: 0.1431  aux_2.loss_dice: 0.0315  aux_2.acc_seg: 97.1837
+2025/07/26 04:37:04 - mmengine - INFO - Iter(train) [  200/80000]  lr: 2.7928e-03  eta: 1 day, 15:51:31  time: 1.7309  data_time: 1.4607  memory: 4971  loss: 4.5164  decode.loss_ce: 1.3852  decode.acc_seg: 60.7916  aux_0.loss_ce: 1.4709  aux_0.acc_seg: 56.7321  aux_1.loss_ce: 1.4861  aux_1.acc_seg: 55.3772  aux_2.loss_ce: 0.1428  aux_2.loss_dice: 0.0314  aux_2.acc_seg: 97.1231
+2025/07/26 04:37:05 - mmengine - INFO - Iter(train) [  201/80000]  lr: 2.8018e-03  eta: 1 day, 15:51:10  time: 1.7304  data_time: 1.4602  memory: 4971  loss: 4.4810  decode.loss_ce: 1.3746  decode.acc_seg: 51.1527  aux_0.loss_ce: 1.4566  aux_0.acc_seg: 51.8524  aux_1.loss_ce: 1.4768  aux_1.acc_seg: 54.3233  aux_2.loss_ce: 0.1419  aux_2.loss_dice: 0.0311  aux_2.acc_seg: 97.3685
+2025/07/26 04:37:07 - mmengine - INFO - Iter(train) [  202/80000]  lr: 2.8108e-03  eta: 1 day, 15:51:58  time: 1.7541  data_time: 1.4839  memory: 4971  loss: 4.4118  decode.loss_ce: 1.3479  decode.acc_seg: 58.2039  aux_0.loss_ce: 1.4315  aux_0.acc_seg: 57.4950  aux_1.loss_ce: 1.4586  aux_1.acc_seg: 56.6263  aux_2.loss_ce: 0.1425  aux_2.loss_dice: 0.0314  aux_2.acc_seg: 96.7693
+2025/07/26 04:37:09 - mmengine - INFO - Iter(train) [  203/80000]  lr: 2.8198e-03  eta: 1 day, 15:51:22  time: 1.7562  data_time: 1.4862  memory: 4971  loss: 4.5309  decode.loss_ce: 1.3863  decode.acc_seg: 47.6200  aux_0.loss_ce: 1.4728  aux_0.acc_seg: 45.3193  aux_1.loss_ce: 1.4987  aux_1.acc_seg: 39.3195  aux_2.loss_ce: 0.1419  aux_2.loss_dice: 0.0312  aux_2.acc_seg: 97.2364
+2025/07/26 04:37:11 - mmengine - INFO - Iter(train) [  204/80000]  lr: 2.8288e-03  eta: 1 day, 15:50:37  time: 1.7526  data_time: 1.4824  memory: 4971  loss: 4.5409  decode.loss_ce: 1.3935  decode.acc_seg: 51.7699  aux_0.loss_ce: 1.4718  aux_0.acc_seg: 52.9063  aux_1.loss_ce: 1.5032  aux_1.acc_seg: 52.4046  aux_2.loss_ce: 0.1414  aux_2.loss_dice: 0.0310  aux_2.acc_seg: 97.4394
+2025/07/26 04:37:12 - mmengine - INFO - Iter(train) [  205/80000]  lr: 2.8378e-03  eta: 1 day, 15:49:53  time: 1.7512  data_time: 1.4810  memory: 4971  loss: 4.5446  decode.loss_ce: 1.3944  decode.acc_seg: 53.0778  aux_0.loss_ce: 1.4755  aux_0.acc_seg: 50.3293  aux_1.loss_ce: 1.5021  aux_1.acc_seg: 50.1114  aux_2.loss_ce: 0.1415  aux_2.loss_dice: 0.0311  aux_2.acc_seg: 96.5914
+2025/07/26 04:37:14 - mmengine - INFO - Iter(train) [  206/80000]  lr: 2.8468e-03  eta: 1 day, 15:49:20  time: 1.7519  data_time: 1.4818  memory: 4971  loss: 4.5403  decode.loss_ce: 1.3894  decode.acc_seg: 51.1485  aux_0.loss_ce: 1.4729  aux_0.acc_seg: 50.0323  aux_1.loss_ce: 1.5101  aux_1.acc_seg: 47.6591  aux_2.loss_ce: 0.1379  aux_2.loss_dice: 0.0300  aux_2.acc_seg: 97.6083
+2025/07/26 04:37:16 - mmengine - INFO - Iter(train) [  207/80000]  lr: 2.8559e-03  eta: 1 day, 15:49:54  time: 1.7646  data_time: 1.4945  memory: 4971  loss: 4.5159  decode.loss_ce: 1.3733  decode.acc_seg: 49.4573  aux_0.loss_ce: 1.4663  aux_0.acc_seg: 46.9087  aux_1.loss_ce: 1.5078  aux_1.acc_seg: 47.9811  aux_2.loss_ce: 0.1383  aux_2.loss_dice: 0.0302  aux_2.acc_seg: 96.6722
+2025/07/26 04:37:18 - mmengine - INFO - Iter(train) [  208/80000]  lr: 2.8649e-03  eta: 1 day, 15:50:11  time: 1.7736  data_time: 1.5030  memory: 4971  loss: 4.4010  decode.loss_ce: 1.3420  decode.acc_seg: 56.1829  aux_0.loss_ce: 1.4245  aux_0.acc_seg: 56.0355  aux_1.loss_ce: 1.4640  aux_1.acc_seg: 55.9295  aux_2.loss_ce: 0.1397  aux_2.loss_dice: 0.0307  aux_2.acc_seg: 96.8691
+2025/07/26 04:37:20 - mmengine - INFO - Iter(train) [  209/80000]  lr: 2.8739e-03  eta: 1 day, 15:49:21  time: 1.7625  data_time: 1.4922  memory: 4971  loss: 4.3133  decode.loss_ce: 1.3152  decode.acc_seg: 58.8721  aux_0.loss_ce: 1.3969  aux_0.acc_seg: 56.4257  aux_1.loss_ce: 1.4324  aux_1.acc_seg: 57.7640  aux_2.loss_ce: 0.1385  aux_2.loss_dice: 0.0303  aux_2.acc_seg: 97.6011
+2025/07/26 04:37:21 - mmengine - INFO - Iter(train) [  210/80000]  lr: 2.8829e-03  eta: 1 day, 15:48:22  time: 1.7531  data_time: 1.4825  memory: 4971  loss: 4.3221  decode.loss_ce: 1.3171  decode.acc_seg: 62.5301  aux_0.loss_ce: 1.4005  aux_0.acc_seg: 58.2186  aux_1.loss_ce: 1.4342  aux_1.acc_seg: 60.9503  aux_2.loss_ce: 0.1396  aux_2.loss_dice: 0.0308  aux_2.acc_seg: 96.5356
+2025/07/26 04:37:23 - mmengine - INFO - Iter(train) [  211/80000]  lr: 2.8919e-03  eta: 1 day, 15:48:11  time: 1.7554  data_time: 1.4846  memory: 4971  loss: 4.2754  decode.loss_ce: 1.3010  decode.acc_seg: 59.8077  aux_0.loss_ce: 1.3847  aux_0.acc_seg: 57.5718  aux_1.loss_ce: 1.4179  aux_1.acc_seg: 57.9781  aux_2.loss_ce: 0.1408  aux_2.loss_dice: 0.0311  aux_2.acc_seg: 96.9947
+2025/07/26 04:37:25 - mmengine - INFO - Iter(train) [  212/80000]  lr: 2.9009e-03  eta: 1 day, 15:49:12  time: 1.7593  data_time: 1.4886  memory: 4971  loss: 4.2993  decode.loss_ce: 1.3085  decode.acc_seg: 52.7380  aux_0.loss_ce: 1.3961  aux_0.acc_seg: 46.2243  aux_1.loss_ce: 1.4246  aux_1.acc_seg: 50.7168  aux_2.loss_ce: 0.1394  aux_2.loss_dice: 0.0307  aux_2.acc_seg: 97.1493
+2025/07/26 04:37:27 - mmengine - INFO - Iter(train) [  213/80000]  lr: 2.9099e-03  eta: 1 day, 15:48:37  time: 1.7589  data_time: 1.4877  memory: 4971  loss: 4.2366  decode.loss_ce: 1.2930  decode.acc_seg: 55.4159  aux_0.loss_ce: 1.3714  aux_0.acc_seg: 56.1725  aux_1.loss_ce: 1.4023  aux_1.acc_seg: 54.1254  aux_2.loss_ce: 0.1393  aux_2.loss_dice: 0.0307  aux_2.acc_seg: 97.2693
+2025/07/26 04:37:28 - mmengine - INFO - Iter(train) [  214/80000]  lr: 2.9189e-03  eta: 1 day, 15:48:29  time: 1.7680  data_time: 1.4969  memory: 4971  loss: 4.2253  decode.loss_ce: 1.2806  decode.acc_seg: 60.1814  aux_0.loss_ce: 1.3729  aux_0.acc_seg: 57.9367  aux_1.loss_ce: 1.4030  aux_1.acc_seg: 54.5503  aux_2.loss_ce: 0.1383  aux_2.loss_dice: 0.0305  aux_2.acc_seg: 97.5724
+2025/07/26 04:37:30 - mmengine - INFO - Iter(train) [  215/80000]  lr: 2.9279e-03  eta: 1 day, 15:47:58  time: 1.7709  data_time: 1.4998  memory: 4971  loss: 4.1780  decode.loss_ce: 1.2689  decode.acc_seg: 54.3676  aux_0.loss_ce: 1.3517  aux_0.acc_seg: 50.5406  aux_1.loss_ce: 1.3914  aux_1.acc_seg: 50.2419  aux_2.loss_ce: 0.1362  aux_2.loss_dice: 0.0298  aux_2.acc_seg: 97.3151
+2025/07/26 04:37:32 - mmengine - INFO - Iter(train) [  216/80000]  lr: 2.9369e-03  eta: 1 day, 15:47:24  time: 1.7701  data_time: 1.4991  memory: 4971  loss: 4.2002  decode.loss_ce: 1.2841  decode.acc_seg: 59.3136  aux_0.loss_ce: 1.3566  aux_0.acc_seg: 57.8266  aux_1.loss_ce: 1.3903  aux_1.acc_seg: 56.9169  aux_2.loss_ce: 0.1386  aux_2.loss_dice: 0.0306  aux_2.acc_seg: 96.7632
+2025/07/26 04:37:34 - mmengine - INFO - Iter(train) [  217/80000]  lr: 2.9459e-03  eta: 1 day, 15:46:45  time: 1.7505  data_time: 1.4795  memory: 4971  loss: 4.1612  decode.loss_ce: 1.2791  decode.acc_seg: 60.6633  aux_0.loss_ce: 1.3424  aux_0.acc_seg: 60.3033  aux_1.loss_ce: 1.3732  aux_1.acc_seg: 59.8893  aux_2.loss_ce: 0.1366  aux_2.loss_dice: 0.0298  aux_2.acc_seg: 97.5025
+2025/07/26 04:37:35 - mmengine - INFO - Iter(train) [  218/80000]  lr: 2.9550e-03  eta: 1 day, 15:46:29  time: 1.7416  data_time: 1.4710  memory: 4971  loss: 4.1994  decode.loss_ce: 1.2909  decode.acc_seg: 57.5951  aux_0.loss_ce: 1.3543  aux_0.acc_seg: 55.0644  aux_1.loss_ce: 1.3890  aux_1.acc_seg: 54.3210  aux_2.loss_ce: 0.1356  aux_2.loss_dice: 0.0295  aux_2.acc_seg: 97.2027
+2025/07/26 04:37:37 - mmengine - INFO - Iter(train) [  219/80000]  lr: 2.9640e-03  eta: 1 day, 15:46:34  time: 1.7558  data_time: 1.4851  memory: 4971  loss: 4.2778  decode.loss_ce: 1.3126  decode.acc_seg: 55.4936  aux_0.loss_ce: 1.3821  aux_0.acc_seg: 54.2927  aux_1.loss_ce: 1.4172  aux_1.acc_seg: 55.6275  aux_2.loss_ce: 0.1361  aux_2.loss_dice: 0.0297  aux_2.acc_seg: 97.4002
+2025/07/26 04:37:39 - mmengine - INFO - Iter(train) [  220/80000]  lr: 2.9730e-03  eta: 1 day, 15:45:55  time: 1.7603  data_time: 1.4899  memory: 4971  loss: 4.3991  decode.loss_ce: 1.3553  decode.acc_seg: 46.7273  aux_0.loss_ce: 1.4199  aux_0.acc_seg: 47.8680  aux_1.loss_ce: 1.4601  aux_1.acc_seg: 43.6660  aux_2.loss_ce: 0.1346  aux_2.loss_dice: 0.0291  aux_2.acc_seg: 97.2027
+2025/07/26 04:37:41 - mmengine - INFO - Iter(train) [  221/80000]  lr: 2.9820e-03  eta: 1 day, 15:45:11  time: 1.7509  data_time: 1.4804  memory: 4971  loss: 4.5112  decode.loss_ce: 1.3907  decode.acc_seg: 50.2842  aux_0.loss_ce: 1.4644  aux_0.acc_seg: 48.0917  aux_1.loss_ce: 1.4922  aux_1.acc_seg: 47.7656  aux_2.loss_ce: 0.1348  aux_2.loss_dice: 0.0292  aux_2.acc_seg: 96.8975
+2025/07/26 04:37:42 - mmengine - INFO - Iter(train) [  222/80000]  lr: 2.9910e-03  eta: 1 day, 15:44:23  time: 1.7213  data_time: 1.4509  memory: 4971  loss: 4.4264  decode.loss_ce: 1.3629  decode.acc_seg: 64.1197  aux_0.loss_ce: 1.4299  aux_0.acc_seg: 62.3346  aux_1.loss_ce: 1.4687  aux_1.acc_seg: 62.0017  aux_2.loss_ce: 0.1355  aux_2.loss_dice: 0.0294  aux_2.acc_seg: 96.9382
+2025/07/26 04:37:44 - mmengine - INFO - Iter(train) [  223/80000]  lr: 3.0000e-03  eta: 1 day, 15:44:52  time: 1.7384  data_time: 1.4682  memory: 4971  loss: 4.4326  decode.loss_ce: 1.3607  decode.acc_seg: 52.2394  aux_0.loss_ce: 1.4342  aux_0.acc_seg: 49.1040  aux_1.loss_ce: 1.4709  aux_1.acc_seg: 47.1047  aux_2.loss_ce: 0.1370  aux_2.loss_dice: 0.0298  aux_2.acc_seg: 96.7984
+2025/07/26 04:37:46 - mmengine - INFO - Iter(train) [  224/80000]  lr: 3.0090e-03  eta: 1 day, 15:44:27  time: 1.7333  data_time: 1.4632  memory: 4971  loss: 4.5120  decode.loss_ce: 1.3902  decode.acc_seg: 47.4768  aux_0.loss_ce: 1.4577  aux_0.acc_seg: 45.1186  aux_1.loss_ce: 1.4947  aux_1.acc_seg: 43.1789  aux_2.loss_ce: 0.1390  aux_2.loss_dice: 0.0304  aux_2.acc_seg: 96.9776
+2025/07/26 04:37:48 - mmengine - INFO - Iter(train) [  225/80000]  lr: 3.0180e-03  eta: 1 day, 15:44:56  time: 1.7495  data_time: 1.4794  memory: 4971  loss: 4.4974  decode.loss_ce: 1.3888  decode.acc_seg: 53.1202  aux_0.loss_ce: 1.4542  aux_0.acc_seg: 55.1330  aux_1.loss_ce: 1.4839  aux_1.acc_seg: 54.4864  aux_2.loss_ce: 0.1399  aux_2.loss_dice: 0.0306  aux_2.acc_seg: 97.1698
+2025/07/26 04:37:49 - mmengine - INFO - Iter(train) [  226/80000]  lr: 3.0270e-03  eta: 1 day, 15:44:16  time: 1.7474  data_time: 1.4772  memory: 4971  loss: 4.5398  decode.loss_ce: 1.4041  decode.acc_seg: 46.4314  aux_0.loss_ce: 1.4713  aux_0.acc_seg: 45.9194  aux_1.loss_ce: 1.4960  aux_1.acc_seg: 43.2274  aux_2.loss_ce: 0.1382  aux_2.loss_dice: 0.0301  aux_2.acc_seg: 97.2595
+2025/07/26 04:37:51 - mmengine - INFO - Iter(train) [  227/80000]  lr: 3.0360e-03  eta: 1 day, 15:44:11  time: 1.7562  data_time: 1.4858  memory: 4971  loss: 4.4782  decode.loss_ce: 1.3767  decode.acc_seg: 59.1290  aux_0.loss_ce: 1.4560  aux_0.acc_seg: 58.6775  aux_1.loss_ce: 1.4757  aux_1.acc_seg: 57.3931  aux_2.loss_ce: 0.1393  aux_2.loss_dice: 0.0305  aux_2.acc_seg: 96.9350
+2025/07/26 04:37:53 - mmengine - INFO - Iter(train) [  228/80000]  lr: 3.0450e-03  eta: 1 day, 15:43:58  time: 1.7567  data_time: 1.4862  memory: 4971  loss: 4.4710  decode.loss_ce: 1.3746  decode.acc_seg: 51.6806  aux_0.loss_ce: 1.4553  aux_0.acc_seg: 50.0156  aux_1.loss_ce: 1.4717  aux_1.acc_seg: 50.1931  aux_2.loss_ce: 0.1389  aux_2.loss_dice: 0.0304  aux_2.acc_seg: 97.3344
+2025/07/26 04:37:55 - mmengine - INFO - Iter(train) [  229/80000]  lr: 3.0541e-03  eta: 1 day, 15:43:52  time: 1.7535  data_time: 1.4828  memory: 4971  loss: 4.4913  decode.loss_ce: 1.3834  decode.acc_seg: 52.9267  aux_0.loss_ce: 1.4583  aux_0.acc_seg: 53.0443  aux_1.loss_ce: 1.4804  aux_1.acc_seg: 49.6587  aux_2.loss_ce: 0.1388  aux_2.loss_dice: 0.0304  aux_2.acc_seg: 97.4328
+2025/07/26 04:37:57 - mmengine - INFO - Iter(train) [  230/80000]  lr: 3.0631e-03  eta: 1 day, 15:45:29  time: 1.7922  data_time: 1.5194  memory: 4971  loss: 4.4150  decode.loss_ce: 1.3575  decode.acc_seg: 58.9755  aux_0.loss_ce: 1.4343  aux_0.acc_seg: 55.4482  aux_1.loss_ce: 1.4531  aux_1.acc_seg: 51.5678  aux_2.loss_ce: 0.1395  aux_2.loss_dice: 0.0307  aux_2.acc_seg: 96.7985
+2025/07/26 04:37:59 - mmengine - INFO - Iter(train) [  231/80000]  lr: 3.0721e-03  eta: 1 day, 15:45:46  time: 1.8094  data_time: 1.5367  memory: 4971  loss: 4.3667  decode.loss_ce: 1.3400  decode.acc_seg: 48.6716  aux_0.loss_ce: 1.4087  aux_0.acc_seg: 49.8424  aux_1.loss_ce: 1.4460  aux_1.acc_seg: 46.3468  aux_2.loss_ce: 0.1409  aux_2.loss_dice: 0.0311  aux_2.acc_seg: 96.3869
+2025/07/26 04:38:01 - mmengine - INFO - Iter(train) [  232/80000]  lr: 3.0811e-03  eta: 1 day, 15:46:31  time: 1.8357  data_time: 1.5625  memory: 4971  loss: 4.4422  decode.loss_ce: 1.3639  decode.acc_seg: 53.3896  aux_0.loss_ce: 1.4362  aux_0.acc_seg: 49.1257  aux_1.loss_ce: 1.4717  aux_1.acc_seg: 51.5933  aux_2.loss_ce: 0.1396  aux_2.loss_dice: 0.0308  aux_2.acc_seg: 97.3014
+2025/07/26 04:38:02 - mmengine - INFO - Iter(train) [  233/80000]  lr: 3.0901e-03  eta: 1 day, 15:46:43  time: 1.8314  data_time: 1.5579  memory: 4971  loss: 4.5007  decode.loss_ce: 1.3841  decode.acc_seg: 49.2503  aux_0.loss_ce: 1.4537  aux_0.acc_seg: 48.4278  aux_1.loss_ce: 1.4945  aux_1.acc_seg: 43.9835  aux_2.loss_ce: 0.1380  aux_2.loss_dice: 0.0303  aux_2.acc_seg: 97.2628
